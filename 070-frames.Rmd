@@ -1,0 +1,1144 @@
+# Data Frames {#frames}
+
+```{block2, half-good-programmer, type='leadquote'}
+*Can one be a good data analyst without being a half-good programmer?  The short answer to that is, 'No.' The long answer to that is, ‘No.'*
+
+---Frank Harrell
+```
+
+
+Up to this point we have given a great deal of attention to vectors, and we have always treated them as one-dimensional objects:  a vector has a length, but not a "width."
+
+It is time to begin working in two dimensions.  In this Chapter we will study *matrices*, which are simply vectors that have both length and width.  Matrices are immensely useful for scientific computation in R, but for the most part we will treat them as a warm-up for *data frames*---the two-dimensional R-objects that are especially designed for the storage of data collected in the course of practical data analysis. Once you understand how to construct and manipulate data frames, you will be ready to learn how to visualize and analyze data using R.
+
+\newpage
+
+## Introduction to Matrices
+
+In R, a *matrix* \index{matrix} is actually an atomic vector---it can only hold one type of element---but with two extra attributes:
+
+* a certain number of rows, and
+* a certain number of columns.
+
+One way to create is matrix is to take a vector and *give* it those two extra attributes, via the `matrix()` function. \index{R-functions!matrix()@\texttt{matrix()}} Here is an example:
+
+```{r}
+numbers <- 1:24  # this is an ordinary atomic vector
+numbersMat <- matrix(numbers, nrow = 6, ncol = 4)  # make a matrix
+numbersMat
+```
+
+Of course if you are making a matrix out of 24 numbers and you know that it's going to have 6 rows, then you know it must have 4 columns.  Similarly, if you know the number of columns then the number of rows is determined.  Hence you could have just as well constructed the matrix with just one of the row or column arguments, like this:
+
+```{r eval = F}
+numbersMat <- matrix(numbers, nrow = 6)
+```
+
+Notice that the numbers went down the first column, then down the second, and so on.  If you would rather fill up the matrix row-by-row, then set the `byrow` parameter, which is `FALSE` by default, to `TRUE`:
+
+```{r}
+matrix(numbers, nrow = 6, byrow = TRUE)
+```
+
+Sometimes we like to give names to our rows, or to our columns, or even to both:
+
+```{r}
+rownames(numbersMat) <- letters[1:6]
+colnames(numbersMat) <- LETTERS[1:4]
+numbersMat
+```
+
+Matrices don't have to be numerical.  They can be character or logical matrices as well:
+
+```{r}
+creatures <- c("Dorothy", "Lion", "Scarecrow", "Oz",
+               "Toto", "Boq")
+matrix(creatures, ncol = 2)
+```
+
+If you have to spread out the elements of a matrix into a one-dimensional vector, you can do so:
+
+```{r}
+as.vector(numbersMat)
+```
+
+
+## Matrix Indexing
+
+Matrices are incredibly useful in data analysis, but the primary reason we are talking about them now is to get you used to working in two dimensions.  Let's practice sub-setting with matrices.
+
+We use the sub-setting operator `[` to pick out parts of a matrix.  For example, in order to get the element in the second row and third column of `numbersMat`, ask for:
+
+```{r}
+numbersMat[2,3]
+```
+
+The row and column numbers are called *indices*.
+
+If we want the entire second row, then we could ask for:
+
+```{r}
+numbersMat[2,1:4]
+```
+
+The result is a one-dimensional vector consisting of the elements in the second row of `numbersMat`.  It inherits as its names the column names of `numbersMat`.
+
+Actually, if you want the entire row you don't have to specify which columns you want.  Just leave the spot after the comma empty, like this:
+
+```{r}
+numbersMat[2, ]
+```
+
+What if you want some items on the second row, but only the items in columns 1, 2 and 4?  Then frame your request in terms of a vector of column-indices:
+
+```{r}
+numbersMat[2, c(1, 2, 4)]
+```
+
+You can specify a vector of row-indices along with a vector of column-indices, if you like:
+
+```{r}
+numbersMat[1:2, 1:3]
+```
+
+If the vector has row or column names then you may use them in place of indices to make a selection:
+
+```{r}
+numbersMat[, c("B", "D")]
+```
+
+
+You can use sub-setting to change the values of the elements of a matrix
+
+```{r}
+numbersMat[2,3] <- 0
+numbersMat
+```
+
+You can assign a value to an entire row:
+
+```{r}
+numbersMat[2,] <- 0
+numbersMat
+```
+
+In the code above, the 0 was "recycled" \index{recycling} into each of the four elements of the second row 
+
+You can assign the elements of a vector to corresponding selected elements of a matrix:
+
+```{r}
+numbersMat[2,] <- c(100, 200, 300, 400)
+numbersMat
+```
+
+### To Drop or Not?
+
+Note that when we ask for a single row of `numbersMat` we got a regular one-dimensional vector:
+
+```{r}
+numbersMat[3, ]
+```
+
+The same things happens if we ask for a single column:
+
+```{r}
+numbersMat[ , 2]
+```
+
+We get the second column of `numbersMat`, but as a regular vector.  It's not a "column" anymore.  (Note that it inherits the row names from `numbersMat`.)
+
+When a subset of a matrix comes from only one row or column, R takes the opportunity to "drop" the class of the subset from "matrix" to "vector."  If you would like the subset to stay a vector, set the `drop` parameter, which by default is `TRUE`, to `FALSE`.  Thus the second column of `numbersMat`, kept as a matrix with six rows and one column, is found as follows:
+
+```{r}
+numbersMat[ , 2, drop = FALSE]
+```
+
+In most applications people want the simpler vector structure, so they usually leave `drop` at its default value.
+
+
+## Operations on Matrices
+
+Matrices can be involved in arithmetical and logical operations.
+
+### Arithmetical Operations
+
+The usual arithmetic operations apply to matrices, operating element-wise.  For example, suppose that we have:
+
+```{r}
+mat1 <- matrix(rep(1, 4), nrow = 2)
+mat2 <- matrix(rep(2, 4), nrow = 2)
+```
+
+To get the sum of the above two matrices, R adds their corresponding elements and forms a new matrix out of their sums, thus:
+
+```{r}
+mat1 + mat2
+```
+
+R applies recycling as needed.  For example, suppose we have:
+
+```{r}
+mat <- matrix(1:4, nrow = 2)
+mat
+```
+
+In order to multiply each element of `mat` by 2, we need not create a 2-by-2 matrix of 2's.  We can simply multiply by 2, and R will take care of recycling the 2:
+
+```{r}
+2 * mat
+```
+
+Or we could subtract 3 from each element of `mat`:
+
+```{r}
+mat - 3
+```
+
+### Matrix Multiplication
+
+This section is optional reading, but it may interest you if you know about matrix multiplication in linear algebra.
+
+In order to accomplish matrix multiplication, we have to keep in mind that the regular multiplication operator `*` works element-wise on matrices, as we have already seen.  For matrix multiplication R provides the special operator `%*%`.  For example, consider the following matrices:
+
+```{r}
+a <- matrix(1:6, ncol = 3)
+a
+b <- matrix(c(2, 1, -1), nrow = 3)
+b
+```
+
+Observe that the number of columns of `a` is equal to the number of rows of `b`.  Hence it is possible to form the matrix product `a %*% b`:
+
+```{r}
+a %*% b
+```
+
+As expected, the result is a matrix having as many rows as the rows of `a`and as many columns as the columns of `b`.
+
+It is also interesting to recall how matrix multiplication works when the second matrix has only one column:  The matrix product obtained by multiplying each column of `a` by the element on the corresponding row of `b`, and adding the resulting matrices:
+
+```{r eval = F}
+b[1,1]*a[ ,1, drop = F] + b[2,1, drop = F]*a[ ,2] + b[3,1]*a[ ,3, drop = F]
+```
+
+```{r echo = F}
+suppressWarnings(b[1,1]*a[ ,1, drop = F] + b[2,1, drop = F]*a[ ,2] + b[3,1]*a[ ,3, drop = F])
+```
+
+### Logical Operations
+
+Boolean operations apply to matrices element-wise, just as they do to ordinary vectors.  The result is a matrix of logical values.  For examples, consider the original matrix `numbersMat`:
+
+```{r}
+numbersMat <- matrix(1:24, nrow = 6)
+```
+
+
+Suppose we wish to determine which elements of `numbersMat` are odd.  Then we simply ask whether the remainder of an element after division by 2 is equal to 1:
+
+```{r}
+numbersMat %% 2 == 1
+```
+
+We can select elements from a matrix using a Boolean operators, too:
+
+```{r}
+numbersMat[numbersMat %% 2 == 1]
+```
+
+Note that the result is an ordinary, one-dimensional vector.
+
+## Introduction to Data Frames
+
+R is known as a *domain-specific programming language*, meaning that although it can in principle perform any sort of computation that a human can perform (given enough pencil, paper and time), it was originally designed to perform tasks in a particular area of application.  R's area of application is data analysis and statistics, especially when performed *interactively*---i.e., in a setting where the analyst asks for a relatively small computation, examines the results, modifies his or her requests and asks again, and so on.^[Domain-specific languages (DSLs for short) stand in contrast to general-purpose programming languages that were designed to solve a wide variety of problems.  Examples of important general-purpose languages include C and C++, Java, Python and Ruby.  Although R is by now the one of the most widely-used DSLs in the world, there a number of other important ones, including Matlab, Octave and Julia for scientific computing, Emacs Lisp for the renowned Emacs editor, and SQL for querying databases. JavaScript is an interesting case:  it started out as a DSL for web browsers, but has since expanded to power many web applications and is now being used to develop desktop applications as well.]  Although R can be used effectively for a wide range of programming tasks, data analysis is where it really shines.
+
+The data structures of R reflect its orientation to data analysis.  We have met a data-oriented structure already---the table, which is one of many convenient ways to display the results of data analysis.  For the purpose of organizing data in preparation for analysis, R provides the structure known as the *data frame*\index{data frame}.  A data frame facilitates the storage of related data in one location, in a form that makes the most sense to human users.
+
+A data frame is like a matrix in that it is two-dimensional---it has rows and columns.  Unlike a matrix, though, the elements of a data frame do not have to be all of the same data-type.  Each column of a data frame is a vector---of the same length as all the others---but these vectors may be of different types:  some numerical, some logical, etc.
+
+### Viewing a Data Frame
+
+Let's take a close look at a data frame:  the frame `m111survey`, which is available from the **tigerstats** package [@R-tigerstats].  First let's attach the package itself:
+
+```{r eval = F}
+library(tigerstats)
+```
+
+```{r include = F}
+library(tigerstats)
+```
+
+In the R Studio IDE, we can get a look at the frame in a tab in the Editor pane if we use the `View()` function:
+
+```{r eval = F}
+View(m111survey)
+```
+
+As with many objects provided by a package, we can get more information about it:
+
+```{r eval = F}
+help("m111survey")
+```
+
+From the Help we see that `m111survey` records the results of a survey conducted in a number of sections of an elementary statistics course at Georgetown College.  From the View we see that the frame is arranged in rows and columns.  Each row corresponds to what in data analysis is known as a *case* or an *individual*:  here, each row goes with a student who participated in the survey.  The columns correspond to *variables*:  measurements made on each individual.  For a student on a given row, the values in the columns are the values recorded for that student.  
+
+When you are not working in R Studio, there are still a couple of way so view the frame.  You could print it all out to the console:
+
+```{r eval = F}
+m111survey
+```
+
+You could also use the `head()` function \index{R-functions!head()@\texttt{head()}} to view a specified number of initial rows:
+
+```{r eval = F}
+head(m111survey, n = 6)  # see first six rows
+```
+
+### The Stucture of a Data Frame
+
+Further information about the frame may be obtained with the `str()` function: \index{R-functions!str()@\texttt{str()}}
+
+```{r}
+str(m111survey)
+```
+
+The concept of *structure* extends far beyond the domain of computer programming.^[As an example outside of programming, consider what happens when you read a piece of literature "for structure." You begin by asking:  "What kind of literature is this?  Is it drama, a novel, or something else?"  The answer lets you know what to expect as you read:  if it's a novel, you know to suspend disbelief, whereas if it's a journalistic piece then you know to examine critically whatever it presents as fact.  Next, you might outline the piece.  When you make an outline, you are breaking the piece up into parts, and indicating how the parts relate to each other to advance the plot and/or message of the piece.  Note that in the process of "reading for structure" you are following the pattern of the definition of structure offered above.]  In general the structure of any object consists of:
+
+* the kind of thing that the object is;
+* the parts of the object is made up of;
+* the relationships between these parts---the rules, if you will, for how the parts work together to make the object do what it does.
+
+In the case of `m111survey` the kind of thing this is its *class*: it's a data frame.
+
+```{r}
+class(m111survey)
+```
+
+Next we see the account of the parts of the object and the way in which the parts relate to one another:
+
+```
+## 71 obs. of  12 variables
+```
+
+From this we know that there are 71 individuals in the study.  The data consists of 12 "parts"---the variables---which are related in the sense that they all provide information about the same set of 71 people.  
+
+After that the output of `str()` launches into an account of the structure of each of the parts, for example:
+
+```
+## $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
+```
+
+We are told that the kind of thing that height is: it's a numerical vector (a vector of type `double`, in fact).  Next we are given the beginning of a statement of its parts: the heights of the individuals.  So R is actually giving us the structure of the parts, as well as of the whole `m11survey`.
+
+The variable `fastest` refers to the fastest speed---in miles per hour---that a person has ever driven a car.  Note that it is a vector of type `integer`.  Officially this is a numerical variable, too, but R is calling attention to the fact that the fastest-speed data is being stored as integers rather than as floating-point decimals.
+
+The variables of a data frame are typically associated with the *names* \index{R-functions!names()@\texttt{names()}}of the frame:
+
+```{r}
+names(m111survey)
+```
+
+By means of the names we can isolate a vector in any column, identified in our code in the format `frame$variable`.  For example, to see the first ten elements of the `fastest` variable, we ask for:
+
+```{r}
+m111survey$fastest[1:10]
+```
+
+In order to compute the mean fastest speed our subjects drove their cars, we can ask for:
+
+```{r}
+mean(m111survey$fastest, na.rm = TRUE)
+```
+
+If you want to see the speeds that are at least 150 miles per hour, you could ask for:
+
+```{r}
+m111survey$fastest[m111survey$fastest >= 150]
+```
+
+If you worry that the form `frame$variable` will require an annoying amount of typing---as seems to be the case in the the example above---then you can use the `with()` function: \index{R-functions!with()@\texttt{with()}}
+
+```{r}
+with(m111survey, fastest[fastest >=150])
+```
+
+It's instructive to consider how `with()` works.  If we were to includes the names of the parameters of `with()` explicitly, then the call would have looked like this:
+
+```{r eval = F}
+with(data = m111survey, expr = fastest[fastest >=150])
+```
+
+For the `data` parameter we can supply a data frame or any other R-object that can be used to construct an environment \index{environment}.  In this case `m111survey` provides a miniature environment consisting of the names of its variables. For the `expr` parameter we supply an expression for R to evaluate.  As R evaluates the expression, it encounters names (such as `fastest`).  Now ordinarily R would first search whatever counts as the \index{active environment}active environment---in this case it's the \index{global environment}Global Environment---for the names in the expression, but `with()` forces R to look first within the environment created by the `data` argument.  In our example, R finds `fastest` inside `m111survey` and evaluates the expression on that basis.  If it had not found `fastest` in `m111survey`, R would have moved on to the Global Environment and (probably) would have found nothing, causing it to throw an "object not found" error message.  In R, as in any other programming language, good programming depends very much on paying attention to how the language searches for the objects to which names refer.
+
+### Factors
+
+Some of the variables in `m111survey` are called *factors*; an example is `seat`, which pertains to where one prefers to sit in a classroom:
+
+```{r}
+str(m111survey$seat)
+```
+
+Seating preference is an example of a *categorical* variable:  \index{categorical variable}one whose values are not meaningfully expressed in terms of numbers.  When a categorical variable has a relatively small number of possible values, it can be convenient to store its values in a vector of class `factor`.
+
+The *levels* of  factor variable are its possible values.  In the case of `seat`, these are:  Front, Middle and Back.  As a memory-saving measure, R stores the values in the factor as numbers, where 1 stands for the first level, 2 for the second level, and so on.  But please bear in mind that we are dealing with a categorical variable, so the numbers don't relate to the possible values in any natural way:  they are just storage conventions.
+
+It's possible to create a factor from any type of vector, but most often this is done with a character vector.  Suppose for instance, that eight people are asked for their favorite Wizard of Oz character and they answer:
+
+```{r}
+ozFavs <- c("Glinda", "Toto", "Toto", "Dorothy", "Toto",
+            "Glinda", "Scarecrow", "Dorothy")
+```
+
+We can create a factor variable as follows:
+
+```{r}
+factorFavs <- factor(ozFavs)
+factorFavs
+```
+
+Note that the levels are given in alphabetical order:  this is the default procedure when R creates a factor.  It is possible to ask for a different order, though:
+
+```{r}
+factor(ozFavs, levels = c("Toto", "Scarecrow", "Glinda", "Dorothy"))
+```
+
+In many instances it is appropriate to convert a character vector to a factor, but sometimes this is not such a great idea.  Consider something like your address, or your favorite inspirational quote:  pretty much every person in a study will have a different address or favorite quote than others in the study.  Hence there won't be any memory-storage benefit associated with creating a factor:  the vector of levels---itself a character vector---would require as much storage space as the original character vector itself!  In addition, we will see that the status of a variable as class "factor" can affect how R's statistical and graphical functions deal with it.  It's not a good idea to treat a categorical variable as a factor unless its set of possible values is considered important.
+
+We will think more about how to deal with factor variables later on, when we begin data analysis in earnest.
+
+## Creating Data Frames
+
+There are many ways to create data frames in R.  Here we will introduce just two ways.
+
+### Creation from Vectors
+
+Whenever you have vectors of the same length, you can combine them into a data frame, using the `data.frame()` function: \index{R-functions!data.frame()@\texttt{data.frame()}}
+
+```{r}
+n <- c("Dorothy", "Lion", "Scarecrow")
+h <- c(58, 75, 69)
+a <- c(12, 0.04, 18)
+ozFolk <- data.frame(name = n, height = h, age = a)
+ozFolk
+
+```
+
+Note that at the time of creation you can provide the variables with any names that you like.  If later on you changes your mind about the names, you can always revise them:
+
+```{r}
+names(ozFolk)  
+names(ozFolk)[2] <- "Height"  # "height" was at index 2"
+ozFolk
+```
+
+Let's check the structure of the frame we have made:
+
+```{r}
+str(ozFolk)
+```
+
+Maybe we would prefer that the `name` variable not be a factor.  We have a couple of options to accomplish this.
+
+1. We could coerce `names` to a character variable, and assign it to the data frame:
+
+    ```{r}
+    ozFolk$name <- as.character(ozFolk$name)
+    str(ozFolk)
+    ```
+
+2. We could prevent `names` from being made into a factor at the time of creation:
+
+    ```{r}
+    ozFolk <- data.frame(name = n, height = h, age = a,
+                         stringsAsFactors = FALSE)
+    str(ozFolk)
+    ```
+
+
+### Creation From Other Frames
+
+If two frames have the same number of rows, you may combine their columns to form a new frame with the `cbind()` function:  \index{R-functions!cbind()@\texttt{cbind()}}
+
+```{r}
+ozMore <- data.frame( color = c("blue", "red", "yellow"),
+                      desire = c("Kansas", "courage", "brains"))
+cbind(ozFolk, ozMore)
+```
+
+Similarly if two data frames have the same number *and type* of columns then we can use the `rbind()` function to combine them:  \index{R-functions!rbind()@\texttt{rbind()}}
+
+```{r}
+ozFolk2 <- data.frame(name = c("Toto", "Glinda"),
+                      height = c(12, 66), age = c(3, 246),
+                      stringsAsFactors = FALSE)
+rbind(ozFolk, ozFolk2)
+```
+
+**Note**:  `cbind()` and `rbind()` work for matrices, too.
+
+## Subsetting Data Frames
+
+Our study of sub-setting matrices can be applied to the selection of parts of a data frame.  As with a vector, one or both of the dimensions of the frame can come into play.
+
+We can create a new data frame consisting of any columns we like from the original frame:
+
+```{r}
+df <- m111survey[, c("height", "ideal_ht")]
+head(df)
+```
+
+If we select just one column, then the result is a vector rather than a data frame:
+
+```{r}
+df <- m111survey[, "height"]
+is.vector(df)
+```
+
+If for some reason you want to prevent this, set `drop` to `FALSE`:
+
+```{r}
+df <- m111survey[, "height", drop = F]
+head(df)
+```
+
+
+You may select particular rows, too:
+
+```{r}
+m111survey[10:15, c("height", "ideal_ht")]
+```
+
+You can even select some of the rows at random.  Here is a random sample of size six:
+
+```{r echo = 2:4}
+set.seed(2929)
+n <- nrow(m111survey)
+df <- m111survey[sample(1:n, size = 6, replace = F), ]
+df[c("sex", "seat")]  # show just two columns
+```
+
+Note the function `nrow()` \index{R-functions!nrow()@\texttt{nrow()}} that gives the number of rows of the frame.  When we sample six items without replacement from the vector `1:n`, we are picking six numbers at random from the row-numbers of the vector.  Specifying these six numbers in the selection operator `[` yields the desired random sample of rows.
+
+
+### Boolean Expressions
+
+It is especially common to select rows by the values of a logical vector.  For example, to select the rows where the fast speed ever driven is at least 150 miles per hour, try this:
+
+```{r}
+df <- m111survey[m111survey$fastest >= 150, ]
+df[, c("sex", "fastest")]  # show just two of the variables
+```
+
+When you are selecting rows it can be convenient to use the `subset()` function.  \index{R-functions!subset()@\texttt{subset()}}  The first argument to the function is the frame from which you plan to select, and the second is the Boolean expression by which to select:
+
+```{r}
+df <- subset(m111survey, fastest >= 150)
+df[, c("sex", "fastest")] 
+```
+
+Note that we did not need to type `m111survey$fastest`:  the first argument to `subset()` provides the environment in which to search for names that appear in the Boolean expression.
+
+The Boolean sub-setting expressions can be quite complex:
+
+```{r}
+df <- subset(m111survey, seat == "3_back" & height < 72 & sex == "female")
+df[, c("sex", "height", "seat")]
+```
+
+## Ordering Data Frames
+
+You can reorder as well as select.  For example, the following code selects the first five rows of`m111survey` and then reverses them:
+
+```{r}
+df <- m111survey[, c("height", "ideal_ht")]
+dfRev <- df[5:1, ]
+head(dfRev)
+```
+
+If you want, you can even scramble the rows of the data frame in a random order:
+
+```{r echo = 2:5}
+set.seed(3535)
+n <- nrow(m111survey)
+shuffle <- sample(1:n, size = n, replace = F)
+df <- m111survey[shuffle, ]
+head(df[c("sex", "seat")])  #show just two columns
+```
+
+It is quite common to order the rows of a frame according to the values of a particular variable.  For example, you might want to arrange the rows by `height`,  so that the frame begins with the shortest subject and ends with the tallest.
+
+Accomplishing this task requires a study of R's `order()` \index{R-functions!order()@\texttt{order()}}function.  Consider the following vector:
+
+```{r}
+vec <- c(15, 12, 23, 7)
+```
+
+Call `order()` with this vector as an argument:
+
+```{r}
+order(vec)
+```
+
+`order()` returns the indices of the elements of `vec`, in the following order:
+
+* the index of the smallest element (7, at index 4 of `vec`);
+* the index of the second-smallest element (12, at index 2 of `vec`);
+* the index of the third-smallest element (15, at index 1 of `vec`);
+* the index of the largest element (23, at index 3 of `vec`).
+
+Can you guess the output of the following function-call without looking for the answer underneath?
+
+```{r}
+vec[order(vec)]
+```
+
+Sure enough, the result is `vec` sorted:  from smallest to largest element.
+
+Now the sorting of `vec` could have been accomplished with R's `sort()`function:  \index{R-functions!sort()@\texttt{sort()}}
+
+```{r}
+sort(vec)
+```
+
+The power of `order()` comes with the rearrangement of rows of a data frame.  in order to "sort" the frame from shortest to tallest subject, call:
+
+```{r}
+df <- m111survey[order(m111survey$height), ]
+head(df[, c("sex", "height")])  # to show that it worked
+```
+
+If you want to order the rows from tallest to shortest instead, then use the `decreasing` parameter, which by default is `FALSE`:
+
+```{r}
+df <- m111survey[order(m111survey$height, decreasing = TRUE), ]
+head(df[, c("sex", "height")])  # to show that it worked
+```
+
+Sometimes you want to order by two or more variables.  For example suppose you want to arrange the frame so that the folks preferring to sit in front come first, followed by the people who prefer the middle and ending with the people who prefer the back.  Within these groups you would like people to be arranged from shortest to tallest.  Then call:
+
+```{r}
+ordering <- with(m111survey, order(seat, height))
+df <- m111survey[ordering, ]
+head(df[, c("seat", "height")], n = 10)  # see if it worked
+```
+
+
+## New Variables from Old
+
+Quite often you will want to *transform*  one or more variables in a data frame. Transforming a variable means changing its values in a systematic way.
+
+For example, you might want to measure height in feet rather than inches.  Then you want the following
+
+```{r}
+heightInFeet <- with(m111survey, height/12)  # 12 inches in a foot
+```
+
+If you plan to use this new variable in your analysis later on, it might be a good idea to add it to the data frame:
+
+```{r}
+m111survey$height_ft <- heightInFeet
+```
+
+Another common need is to *recode* the values of a categorical variable.  For example, you might want to divide people into two groups:  those who prefer to sit in the back and those who don't.  This is a good time to use `ifelse()`:
+
+```{r}
+seat2 <- ifelse(m111survey$seat == "3_back", "Back", "Other")
+m111survey$seat2 <- seat2
+```
+
+If you plan to re-code into a variable that involves more than two values, then you might want to look into the `mapvalues()` function from the **plyr** package [@R-plyr]:
+
+```{r}
+seat3 <- plyr::mapvalues(m111survey$seat,
+                from = c("1_front", "2_middle", "3_back"),
+                to = c("Front", "Middle", "Back"))
+str(seat3)
+```
+
+The do-it-yourself approach is to write a loop.  Remember `switch()`? \index{R-functions!switch()@\texttt{switch()}}
+
+```{r}
+seat <- m111survey$seat
+seat3 <- character(length(seat))  # this will be the recoded variable
+for ( i in 1:length(seat) ) {
+  seat3[i] <- switch(as.character(seat[i]),
+                     "1_front" = "Front",
+                     "2_middle" = "Middle",
+                     "3_back" = "Back")
+}
+str(seat3)
+```
+
+The re-coding is done but the result is a character vector and not a factor. We have to make it a factor ourselves:
+
+```{r}
+m111survey$seat3 <- factor(seat3, levels = c("Front", "Middle", "Back"))
+```
+
+This seems like a lot of work!
+
+Another common transformation involves turning a numerical variable into a factor.  For example, we might need to classify people as:
+
+* Tall (height over 70 inches)
+* Medium (65 - 70 inches)
+* Short (less than 65 inches)
+
+The `cut()` function \index{R-functions!cut()@\texttt{cut()}} will be helpful.
+
+```{r}
+minh <- min(m111survey$height, na.rm = T)
+maxh <- max(m111survey$height, na.rm = T)
+heightClass <- cut(m111survey$height,
+                   breaks = c(minh, 65, 70, maxh),
+                   labels = c("Short", "Medium","Tall"),
+                   right = TRUE)
+str(heightClass)
+```
+
+Setting `right = TRUE` indicates that the upper bound of each interval is included in the interval.  Thus, a person with a height of 70 inches is classed as Medium, not Tall.
+
+### Getting Rid of Variables
+
+We have added several variables to `m111survey`.  In order to remove them (or any other variables we don't want) we can assign them the value `NULL`.
+
+```{r}
+names(m111survey)
+m111survey$height_ft <- NULL
+m111survey$seat2 <- NULL
+m111survey$seat3 <- NULL
+names(m111survey)  # the extra variables are gone
+```
+
+## More Graphing
+
+Now that we know a bit about how data can be stored and manipulated in data frames, we can being to analyze data.  In this section we will take a closer look at visualizations of data; our primary tool will be the **ggplot2** package.  In Section \@ref(collatz-conjecture) we began to learn about how **ggplot** constructs a graph; in this section we will build on that knowledge and apply it in the context of data frames.
+
+### One Numerical Variable
+
+Sometimes you want a visual picture of how a numerical variable is distributed.  For example, you might want to know:  what do the fastest speeds ever driven look like, for the students in the `m111survey` data?
+
+We know that we are interested in the variable `fastest` from `m111survey`.  When we construct a plot, we will have two dimensions available:  the x-axis and the y-axis.  We will need to begin by specifying to **ggplot2** what variable we want to study, and on which axis its values should be displayed.  This is accomplished by the `ggplot()` function:
+
+```{r include = F}
+library(ggplot2)
+```
+
+```{r}
+p <- ggplot(data = m111survey, mapping = aes(x = fastest))
+```
+
+Notice the presence of the new parameter `data`, which provides the data set from which the names of variables shall be drawn.  In the `aes()` function, we can refer to `fastest` without having to use the `frame$variable` form.
+
+The result of the call to `ggplot()` is a blank plot, which we have stored as the variable `p`.
+
+We now add a *geom* to `p`:  something that will specify how the values of `fastest` will look when plotted.  For a numerical variable such as `fastest`, density plots are a good choice, and they are specified by the function `geom_density()`:
+
+```{r}
+p <- p + geom_density()
+```
+
+We are ready to check out our plot.  The result appears as Figure \@ref(fig:fastestdensity).
+
+```{r fastestdensity, fig.align = "center", out.width = "60%", fig.cap = "Basic density plot of the fastest speed every driven."}
+p
+```
+
+Recall that the density curve is high where the speeds are crowded together and lower where they are spread out.  Since there are only 71 students in the data set, it's not a bad idea to add a "rug" of the individual speeds to the x-axis.  The `geom_rug()` function calls for the rug as another "shape" that is added on to the plot:
+
+```{r}
+p <- p + geom_rug()
+```
+
+It's always good to label the axes of a plot---providing units if possible---and to add a brief but descriptive title.  This is accomplished by adding labels to the plot with the `labs()` function:
+
+```{r}
+p <- p + labs(x = "Fastest speed ever driven (mph)",
+             title = "Density Plot of the Fastest Speeds Driven by GC Students.")
+```
+
+Let's print out `p` again.  The result is Figure \@ref(fig:fastestdensity2).
+
+
+```{r fastestdensity2, fig.align = "center", out.width = "60%", fig.cap = "Density plot of the fastest speed every driven, with rug and labels."}
+p
+```
+
+Of course the entire plot could be written out in one command:
+
+```{r eval = F}
+ggplot(data = m111survey, mapping = aes(x = fastest)) +
+  geom_density() + geom_rug() +
+  labs(x = "Fastest speed ever driven (mph)",
+             title = "Density Plot of the Fastest Speeds Driven by GC Students.")
+```
+
+Usually, though, it's a good idea to set up a blank plot with the `ggplot()` function and then add to it.  In this way one can reuse the plot-variable, adding different geoms to it, and then stick with the ones you like best.
+
+For example, you might prefer to make a histogram.  Start again with the blank plot:
+
+```{r}
+p <- ggplot(data = m111survey, mapping = aes(x = fastest))
+```
+
+Now see how a histogram would look (the result is Figure \@ref(fig:fastesthistogram).)
+
+```{r eval = F}
+p + geom_histogram() + geom_rug() +
+  labs(x = "Fastest speed ever driven (mph)",
+             title = "Histogram of the Fastest Speeds Driven by GC Students.")
+```
+
+
+```{r fastesthistogram, echo = F, fig.align = "center", out.width = "60%", fig.cap = "Histogram of the fastest speed every driven, with rug and labels.", message=F}
+p + geom_histogram() + geom_rug() +
+  labs(x = "Fastest speed ever driven (mph)",
+             title = "Histogram of the Fastest Speeds Driven by GC Students.")
+```
+
+If you run code yourself, you see a message to the console:
+
+```
+## 	`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+**ggplot2** likes to offer advice: in this case it wants you to select the width of the histogram-rectangles yourself.  This is done with a `stat_bin()` function.  Let's make all of our rectangles 10 mph wide by adding a `binwidth` argument to `geom_histogram()`.  The result is Figure \@ref(fig:fastesthistogram2).
+
+```{r fastesthistogram2, fig.align = "center", out.width = "60%", fig.cap = "Histogram of the fastest speed every driven, now with binwidth = 10."}
+p + geom_histogram(binwidth = 10) + geom_rug() +
+  labs(x = "Fastest speed ever driven (mph)",
+             title = "Histogram of the Fastest Speeds Driven by GC Students.")
+```
+
+
+### Categorical Variables
+
+Beginning with this section we will make only "rough" graphs:  this is the way to operate when you are in the process of analyzing data, trying things out and making discoveries.  A proper title, axis-labels and other refinements can wait until you are polishing your work for publication.
+
+#### One Categorical Variable
+
+In order to study the distribution of a single categorical variable such as `seat`, you can make a table:
+
+```{r}
+with(m111survey, table(seat))
+```
+
+You can see the same thing graphically with a bar chart (Figure \@ref(fig:seatbargraph)).
+
+
+```{r seatbargraph, fig.align = "center", out.width = "60%", fig.cap = "Bar graph of seating preference."}
+ggplot(m111survey, aes(x = seat)) + geom_bar()
+```
+
+So far the values of the values of the variable under study have been shown on the x-axis.  Any time you like you can have them appear along the y-axis, if you add `coord_flip()` (see Figure \@ref(fig:seatbargraph2)):
+
+
+```{r seatbargraph2, fig.align = "center", out.width = "60%", fig.cap = "Bar graph of seating preference, with coordinates flipped."}
+ggplot(m111survey, aes(x = seat)) + geom_bar() + coord_flip()
+```
+
+You might get tired of the dark "fill" in histograms and bar charts.  The color of the fill is up to you, though.  Just set the `fill` parameter to the color of your choice.  See Figure \@ref(fig:seatbargraph3) for the results of the code below.
+
+```{r seatbargraph3, fig.align = "center", out.width = "60%", fig.cap = "Bar graph of seating preference.  The bars have a burlywood fill."}
+ggplot(m111survey, aes(x = seat)) + geom_bar(fill = "burlywood")
+```
+
+
+#### Two Categorical Variables
+
+Quite often one is interested in comparing two groups of people.  For example, do males and females differ in their seating preferences?  One can investigate this question numerically with a table:
+
+```{r}
+with(m111survey, table(sex, seat))
+```
+
+The arguments to `table()` are the two categorical variables of interest.
+
+If we want to look into the matter graphically, then we face a conundrum:  there are two categorical variables, but only one x-axis.  We can assign one of the variables to the x-axis in the call to `aes()`, but how are we to incorporate the other variable?  The solution lies in a second call to `aes()`, supplied as an argument to the desired geom.  The code is shown below, and the results appear as Figure \@ref(fig:sexseat1).
+
+```{r sexseat1, fig.align = "center", out.width = "60%", fig.cap = "Seating preference, by sex."}
+ggplot(m111survey, aes(x = sex)) + geom_bar(aes(fill = seat))
+```
+
+Within each bar, the proportions of fill-colors indicate the distribution of seating preference for each gender.  It is important to note the dramatically different roles played by `fill` in these two code-snippets:
+
+* `geom_bar(fill = "burlywood")`.  In this geom, the fill is assigned to be of burlywood color throughout the geom.
+* `geom_bar(aes(fill = seat))`. Note that here the fill is specified as part of an *aesthetic*, and a categorical variable---not a specific color---is assigned to it.  This causes **ggplot2** to *map* each level of `seat` to a different color.  In this way the variable `seat` makes its presence known in a graph that started out devoted just to the variable `sex`.
+
+Some people don't like the colors "stacked". In that case, you can set `position` to "dodge", as in the code below.  The results appear in Figure \@ref(fig:sexseat2).
+
+```{r sexseat2, fig.align = "center", out.width = "60%", fig.cap = "Seating preference, by sex---no stacking of bars.."}
+ggplot(m111survey, aes(x = sex)) + 
+  geom_bar(aes(fill = seat), position ="dodge")
+```
+
+
+### One Numerical and One Categorical Variable {#onenum-onecat}
+
+Who tends to drive fastest:  people who prefer the Front, the Middle o8r the Back?  Investigating this question involves comparing the speeds of three groups of people; more technically we can say that we are asking about the *relationship between the numerical variable `fastest` and the categorical variable `seat`.
+
+In this case we can assign one variable to the x-axis and the other to the y-axis.:
+
+```{r}
+p <- ggplot(m111survey, aes(x = seat, y = fastest))
+```
+
+We can now add geoms.  We'll make a violin plot---a density curve mirrored against itself---and an individual-value plot, in which the individual speeds appear at the appropriate y-axis level, but with their x-coordinates "jittered" randomly so that identical speeds don't over-plot each other.  The graph appears in Figure \@ref(fig:violinfastestseat).  Where a violin is "thick" data points are crowded closely together.  Where it is "thin", they are more sparse.
+
+
+```{r violinfastestseat, fig.align = "center", out.width = "60%", fig.cap = "Violin plot of fastest speed by seating preference, with individuals plotted as points."}
+p + geom_violin(fill = "burlywood") + geom_jitter()
+```
+
+Another way to handle the question is to group with a call to `aes()` provided to an appropriate geom, as in the code below.  The resulting graph is appears in Figure \@ref(fig:fastestseatgrouping).
+
+```{r fastestseatgrouping, fig.align = "center", out.width = "60%", fig.cap = "Density plots of fastest speed ever driven, for each seating preference."}
+ggplot(m111survey, aes(x = fastest)) + geom_density(aes(color = seat))
+```
+
+
+### Two Numerical Variables
+
+As we have seen in previous chapters, scatter plots are a fine way to visualize the relationship between two numerical variables.  In our call to `aes()` we simply assign one of the variables to the x-axis and the other to the y-axis.  A scatter plot showing the relationship between grade=point average and fastest speed ever driven is shown in Figure \@ref(fig:fastestGPAseatA).
+
+```{r fastestGPAseatA, fig.align = "center", out.width = "60%", fig.cap = "Scatter plot of GPA vs. fastest speed ever driven. Students who drive faster tend to have lower GPAs."}
+p <- ggplot(m111survey, aes(x = fastest, y = GPA))
+p
+```
+
+### Grouping by a Categorical Variable
+
+It is possible to incorporate a third variable into our plot.  As with the bar geoms---or any other geom---this is accomplished by mapping through an aesthetic parameter.  The code below uses the color of the points to represent the levels of the variable `seat`.  The scatter plot itself is shown in Figure \@ref(fig:fastestGPAseat).
+
+
+```{r fastestGPAseat, fig.align = "center", out.width = "60%", fig.cap = "Scatter plot of GPA vs. fastest speed ever driven, with individuals grouped by seating preference."}
+p + geom_point(aes(color = seat), na.rm = T)
+```
+
+Evidently the people who prefer the back tend to drive pretty fast and to have lower grade-point averages!
+
+
+### Application:  U.S. Births
+
+In Section \@ref(idea-data), we made a plot of the number of births in the United States for each day of that year (see Figure \@ref(fig:birthsplotframes)).  We noticed that there appear to be two clouds of points.  What accounts for this phenomenon?  By now we have the R-programming chops to take on this question.
+
+```{r echo = F, birthsplotframes, fig.cap = "Some of the days have significantly fewer births.  What's going on?",fig.align="center", out.width = "60%"}
+ggplot(Births78, aes(x = date, y = births)) + geom_point() +
+  labs(x = "Day of the Year", y = "Number of U.S. Births",
+       title = "Daily U.S. Birth-Numbers in 1978")
+```
+
+To begin with, look at all of the variables available in the data frame `Births78`:
+
+
+```{r}
+str(Births78)
+```
+
+We see that the variable `wday` gives the name of the day of the week, for each of the days in the year.  On a hunch, we make violin plots of the births for each of the days of the week.  The code appears below, and the resulting plot is shown in Figure \@ref(fig:violinbirthswday)
+
+```{r echo = T, violinbirthswday, fig.cap = "Violin plot of births, by day of the week.",fig.align="center", out.width = "60%"}
+ggplot(Births78, aes(x = wday, y = births)) + geom_violin(fill = "burlywood") +
+  geom_jitter()
+```
+
+
+Aha! There are considerably fewer births on the weekend-days---Saturday and Sunday.  Perhaps the *entire* lower cloud of points is composed of weekends.  Let's check this by re-coding the days according to whether or not they are during the week or at the weekend:
+
+
+```{r}
+weekend <- with(Births78, ifelse(wday %in% c("Sat","Sun"),
+                                 "weekend", "weekday"))
+Births78$weekend <- weekend
+```
+
+Note that we have added the new variable to the data frame, so that it will be easy in **ggplot2** to use that variable for grouping, as in the code below.  The results appear in Figure \@ref(fig:birthsplotframesweekend).
+
+
+```{r echo = T, birthsplotframesweekend, fig.cap = "The days with fewer births are almost always weekend-days.",fig.align="center", out.width = "60%"}
+ggplot(Births78, aes(x = date, y = births)) + geom_point(aes(color = weekend)) +
+  labs(x = "Day of the Year", y = "Number of U.S. Births",
+       title = "Daily U.S. Birth-Numbers in 1978")
+```
+
+Well, a *few* of the points in the lower cloud are weekdays.  Is there anything special about them?  To find out, we subset the data frame to examine only those points:
+
+```{r}
+df <- subset(Births78, weekend != "weekend" & births <= 8500)
+df
+```
+
+If you consult a calendar for the year 1978, you will find that every one of the above days was a major holiday.  Apparently doctors prefer not to deliver babies on weekend and holidays.  Scheduled births---induced births or births by non-emergency Cesarean section---are not usually set for weekends or holidays.  Perhaps this accounts for the two clouds we saw in the original scatter plot.
+
+### Learn More
+
+From time to time we will return to **gplot2** and deepen our study of this remarkable graphing system.  If you are impatient to learn more right way, you can explore the package's [documentation site](http://docs.ggplot2.org/current/index.html).  The site teaches the system by way of numerous examples that you can copy and modify.
+
+\newpage
+
+## Glossary {-}
+
+Matrix  \index{matrix}
+
+:  An atomic vector that has two additional attributes:  a number of rows and a number of columns.
+
+Data Frame \index{data frame}
+
+:  A two-dimensional data structure in R in which the columns are atomic vectors that can be of different types.
+
+Case (also called an Individual) \index{case}
+
+:  An individual unit under study.  In a data frame in R, the rows correspond to cases.  
+
+Variable (in Data Analysis)
+
+:  In data analysis, a *variable* is a measurement made on the individuals in a study.
+
+Categorical Variable (in Data Analysis)
+
+:  In data analysis, a *categorical variable* is a variable whose values cannot be expressed meaningfully by numbers.
+
+\newpage
+
+## Exercises {- #frames-exercises}
+
+```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+knitr::include_graphics("images/thinking.png")
+```
+
+```{r echo = F}
+dimSum <- function(mat, dim = c("row", "column")) {
+  dim <- match.arg(dim)
+  if (dim == "column") mat <- t(mat)
+  sums <- numeric(nrow(mat))
+  for ( i in 1:nrow(mat) ) {
+    sums[i] <- sum(mat[i, ])
+  }
+  sums
+}
+
+transpose <- function(mat) {
+  matrix(as.vector(mat), nrow = ncol(mat), byrow = T)
+}
+```
+
+1.  R has a function called `t()` that computes the *transpose* of a given matrix.  This means that it switches around the rows and columns of the matrix, like this:
+
+    ```{r}
+    myMatrix <- matrix(1:24, nrow = 6)
+    myMatrix
+    t(myMatrix)
+    ```
+    
+    Write your own function called `transpose()` that will perform the same task on any given matrix.  The function should take a single parameter called `mat`, the matrix to be transposed.  **Of course you may NOT use `t()` in the code for your function!**
+
+1. R has functions called `rowSums()` and `colSums()` that will respectively sum the rows and the columns of a matrix.  Here is an example:
+
+    ```{r}
+    myMatrix <- matrix(1:24, nrow = 6)
+    rowSums(myMatrix)
+    ```
+    
+    Your task is to write your own function called `dimSum()` that will sum either the rows or the columns of a given matrix.  The function should have two parameters:
+    * `mat`:  the matrix to be summed.
+    * `dim`:  the dimension to sum along, either rows or columns.  The default value should be `c("rows", "columns")`, and you should use [argument-matching](#argument-matching) so that the user doesn't have to spell out all of the possible arguments.
+    
+    **You may NOT use `rowSums()` or `colSums()` in the code for your function.**  A typical example of use should look like this:
+    
+    ```{r}
+    myMatrix <- matrix(1:24, nrow = 6)
+    dimSum(myMatrix, "c")
+    ```
+
+1. The next few exercises pertain to the data frame `CPS85` from the package **mosaicData**.  Learn about it with `help(CPS85)`.  We will use the **ggplot2** graphing package to explore whether men were being paid more than women in 1985.
+
+    Make a density plot of the wages of the people in the study.  As with all plot you make, it should have well-labelled axes (with units if possible).  For a density plot you should label the horizontal axis, but you can let **ggplo2** provide the label for the "density" axis.  As always, provide a descriptive title.  Also provide a "rug" of individual values along the horizontal axis.
+    
+1. Look at the plot you made in the previous exercise:  you will notice that one person made a wage that was much higher than all the rest.  In data analysis, when a value is much higher or lower than the rest of the values we call it an *outlier*.
+
+    Write the code needed to find the age, sex and sector of employment of the person who made this extraoridinarily high wage.  Report the age, sex and sector of this person.
+   
+    Create a new data frame called `cpsSmall` that is the same as `CPC85` execept that it excludes the row corresponding to the outlier-individual.
+   
+1. In order to explore the relationship between wage and sex in the CPS study, make violin plots for the wages of men and women.  (In this exercise and in subsequent exercises, use the `cpsSmall` data frame so as to exclude the outlier.  You can produce the plot by modifying the code for the "fastest speed vs. seating" plot in Section \@ref(onenum-onecat).)  Based on the plot, who tends to earn higher wages:  men or women?
+
+1. Someone might argue that men don't earn higher wages because of sex-discrimination in the workplace, but rather because of some other factor.  For example, it could be that in 1985 women chose to work in low-wage sectors of the economy, whereas men tended to work in higher-wage sectors.  Of course for this explanation to be viable, some sectors of the economy have to pay more on average than other sectors do.  In order to verify whether this is the case, make a violin plot of wage vs. sector of employment.  Use the plot to name a couple of high-wage sectors and a couple of low-wage sectors.
+
+1. From the previous exercise you now know that some sectors of the economy pay more than other sectors.  Hence in order to investigate properly whether there was wage-discrimination in the wrokforce based on sex, we would have to compare the wages of men and women who work in the *same* sector.  To this end it would be nice to have eight separate violin plots, one for each sector.  Each plot would compare the wages of men and women in that sector.  Go to the online **ggplot2** documentation and look up `facet_wrap()`.  Use it to construct a graph that displays all eight plots at once.
+
+    Examine your graph.
+    * Are there any sectors in which it seems that women typically make more than men.  If so, what sectors are they?
+    * On the other hand, are there any sectors where men typically make more than women?  If so, what sectors are they?
+    * Based on your analysis, does it seem plausible that women made less than men simply because they chose lower-paying sectors of employment?
+
+1. The next few exercises pertain to the data frame `imagpop` in the **tigerstats** package.  Learn about it with `help(imagpop)`.
+
+    One of the variables in `imagpop` is `kkardashtemp`, the rating given by each person to the celebrity Kim Kardashian.  Make a density plot of the ratings.  Compute the mean Kim Kardashian raintg for all the people in `imagpop`.  Finally, compute the percentage of people in the population who gave a rating more than 40 but less than 60.
+    
+1. Write a program that repeats the following procedure 100 times:
+    * Randomly select 10 people from the population.
+    * Compute the mean `kkardashtemp` rating for these 10 people.
+    
+    The means should be stored in a numerical vector.  Make a density plot (with rug) of the means, and also compute the percentage of the means that are between 40 and 60.  As always, the plot should have sensible labels and a descriptive title.
+
+1. Use matrices to generalize the simulation in the Appeals Court Paradox (see Section \@ref(appeals-court-paradox))).  Your goal is to write a simulation function called `appealsSimPlus()` that comes with all the options provided in the text, but with additional parameters so that the user can choose:
+    * the number of judges on the court;
+    * the probability for each judge to make a correct decision;
+    * the voting pattern (how many votes each judge gets).
+    
+    A typical call to the functions should look like this:
+
+    ```{r eval = F}
+    appealsSimPlus(reps = 10000, seed = 5252, 
+                   probs = c(0.95, 0.90, 0.90, 0.90, 0.80),
+                   votes = c(2, 1, 1, 1, 0))
+    ```
+    
+    In the above call the court consists of five judges.  The best one decides cases correctly 95\% of the time, three are right 90\% of the time and one is right 80\%of the time.  The voting arrangement is that the best judge gets two votes, the next three get one vote each, and the worst gets no vote. Any voting scheme---even a scheme involving fractional votes---should be allowed so long as the votes add up to the number of judges.
+    
+    **Here is a hint.**  When you write the function it may be helpful to use the fact that `rbinom()` can take a `prob` parameter that is a vector of any length.  Here's an example:
+    
+    
+    ```{r echo=2:3}
+    set.seed(5252)
+    results <- rbinom(6, size = 100, prob = c(0.10, 0.50, 0.90))
+    results
+    ```
+
+    The first and fourth entries simulate a person tossing a fair coin 100 times when she has only a 10\% chance of heads.  The second and fifth entries simulate the same, when the chance of heads is 50\%.  The third and sixth simulate coin-tossing when there is a 90\% chance of heads.
+    
+    If you would like to arrange the results more nicely---say in a matrix where each column gives the results for a different person---you can do so:
+    
+    ```{r}
+    resultsMat <- matrix(results, ncol = 3, byrow = T)
+    resultsMat
+    ```
+    
+    Of course judges don't flip a coin 100 times, they decide one case at a time.  Suppose you have five judges with probabilities as follows:
+    
+    ```{r}
+    probCorrect <- c(0.95, 0.90, 0.90, 0.90, 0.80)
+    ```
+    
+    If you would like to simulate the judges deciding, say, 6 cases, try this:
+
+    ```{r echo = 2:4}
+    set.seed(4848)
+    results <- rbinom(5*6, size = 1, prob= rep(probCorrect, 6))
+    resultsMat <- matrix(results, nrow = 6, byrow = T)
+    resultsMat
+    ```    
+    
+    When it comes to applying the voting pattern to compute the decision in each case, consider matrix multiplication.  For example, suppose that the pattern is:
+    
+    ```{r}
+    votes <- c(2, 1, 1, 1, 0)
+    ```
+    
+    Then make `votes` a one-column matrix and perform matrix multiplication:
+
+    ```{r}
+    correctVotes <- resultsMat %*% matrix(votes, nrow = 5)
+    correctVotes
+    ```
+    
+    Think about how to encapsulate all of this into a nice, general simulation function.

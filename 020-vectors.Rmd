@@ -1,0 +1,1350 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Vectors {#vectors}
+
+```{r vector-of-strings, echo=F, fig.pos='!h', fig.cap = "`rep(yarn, times = 4)`.", out.width = "24%", fig.show="hold"}
+knitr::include_graphics(rep("images/yarn.png",4))
+```
+
+This Chapter gets you started officially with R.  While the theme is *vectors*\index{vector}, the most important data structure in R, we'll learn also about variables and variable names, data types, reserved words, assignment and many of R's basic operators.
+
+\newpage
+
+## What is a Vector?
+
+If you have heard of vectors before in mathematics, you might think of a vector as something that has a magnitude and a direction , and that can be represented by a sequence of numbers. In its notion of a vector, R keeps the idea of a sequence but discards magnitude and direction.  The notion of "numbers" isn't even necessary.
+
+For R, a vector is simply a sequence of elements.  There are two general sort of vectors:
+
+* *atomic* vectors that come in one of six forms called *vector types*;\index{vector type}
+* non-atomic vectors, called *lists*, whose elements can be any sort of R-object at all.
+
+For now, we'll just study atomic vectors.  Let's make a few vectors, as examples.
+
+First of all, we make a vector of numbers using the `c()`\index{R-functions!c()@\texttt{c()}} function:
+
+```{r}
+numVec <- c(23.2, 45, 631, -273, 0, 48.371, 100000,
+            85, 92, -236, 8546, 98774, 0, 0, 1, 3)
+numVec
+```
+
+You can think of `c` as standing for "combine."  `c()` takes its arguments, all of which are separated by commas, and combines them to make a vector.
+
+If you closely examine the above output, you'll notice that R printed out all of the numerical values in the vector the to three decimal places, which happened to be the largest number of decimal places we assigned to any of the numbers that made up `numVec`.  You'll also notice the numbers in brackets at the beginning of the lines.  Each number represent the position within the vector occupied by the first element of the vector that is printed on the line.  The position of an element in a vector is called its *index*\index{index}.  Reporting the indices of leading elements helps you locate particular elements in the output.
+
+### Types of Atomic Vectors
+
+The numbers in `numVec` are what programmers call "double-precision" decimal numbers.  You can verify this for yourself with the `typeof()`\index{R-functions!typeof()@\texttt{typeof()}} function:
+
+```{r}
+typeof(numVec)
+```
+
+The `typeof()` function returns the type of any object in R.  As far as vectors are concerned, there are six possible types, of which we will deal with only four:
+
+* `double`\index{double}
+* `integer`
+* `character`
+* `logical`
+
+Let's look at examples of the other types.  Here is a vector of type `integer`\index{integer}:
+
+```{r}
+intVec <- c(3L, 17L, -22L, 45L)
+intVec
+```
+
+The `L` after each number signifies to R that the number should be stored in memory as an integer, rather than in decimal format.  Officially, the type is `integer`:
+
+```{r}
+typeof(intVec)
+```
+
+You should know that if you left off one or more of the `L`'s, then R would create a vector of type `double`:
+
+```{r}
+numVec2 <- c(3, 17, -22, 45)
+typeof(numVec2)
+```
+
+
+We won't work much with integer-type vectors, but you'll see them out in the wild.
+
+We can also make vectors out of pieces of text called *strings*\index{string}:  these are called *character*\index{character} vectors.  As noted in the previous chapter, we use quotes to delimit strings:
+
+```{r}
+strVec <- c("Brains", "are", "not", "the", "best", 
+            "things", "in", "the", "world", "93.2")
+strVec
+typeof(strVec)
+```
+
+Notice that `"93.2"` makes a string, not a number.
+
+The last type of vectors to consider are the `logical`\index{logical} vectors.  Here is an example:
+
+```{r}
+logVec <- c(TRUE, FALSE, T, T, F, F, FALSE)
+logVec
+```
+
+In order to represent a logical value you can use:
+
+* `TRUE` or `T` to represent truth;
+* `FALSE` or `F` to represent falsity.
+
+You can't represent truth or falsity any other way.  If you try anything else---like the following---you get an error:
+
+```{r eval = F}
+badVec <- c(TRUE, false)
+```
+
+```
+## Error: object 'false' not found
+```
+
+### Coercion
+
+What would happen if you tried to represent falsity with the string `"false"`?
+
+```{r}
+newVector <- c(TRUE, "false")
+newVector
+```
+
+`newVector` is not a logical vector.  Check it out:
+
+```{r}
+typeof(newVector)
+```
+
+
+In order to understand what just happened here, you must recall that all of the elements of an atomic vector have to be of the same type.  If the `c()` function is presented with values of different types, then R follows a set of internal rules to *coerce*\index{coercion} some of the values to a new type in such a way that all resulting values are of the same type.  You don't need to know all of the coercion rules, but it's worth noting that
+
+* `character` beats `double`,
+* which in turn beats `integer`,
+* which in in turn beats `logical`.
+
+The following examples show this:
+
+```{r}
+typeof(c("one", 1, 1L, TRUE))
+typeof(c(1, 1L, TRUE))
+typeof(c(1L, TRUE))
+```
+
+Automatic coercion can be convenient in some circumstances, but in others it can give unexpected results.  It's best to keep track of what types you are dealing with and to exercise caution when combining values to make new vectors.
+
+You can also coerce vectors "manually" with the functions:
+
+* `as.numeric()` \index{R-functions!as.numeric()@\texttt{as.numeric()}};
+* `as.integer()` \index{R-functions!as.integer()@\texttt{as.integer()}};
+* `as.character()` \index{R-functions!as.character()@\texttt{as.character()}};
+* `as.logical()` \index{R-functions!as.logical()@\texttt{as.logical()}}.
+
+Here are some examples:
+
+```{r}
+numVec <- c(3, 2.5, -7.32, 0)
+as.character(numVec)
+as.integer(numVec)
+as.logical(numVec)
+```
+
+Note that in coercion from numerical to logical, the number 0 becomes `FALSE` and all non-zero numbers become `TRUE`.
+
+### Combining Vectors
+
+You can combine vectors you have already created to make new, bigger ones:
+
+```{r}
+numVec1 <- c(5, 3, 10)
+numVec2 <- c(1, 2, 3, 4, 5, 6)
+numCombined <- c(numVec1, numVec2)
+numCombined
+```
+
+You can see here that vectors are different from sets:  they are allowed to repeat the same value in different indices, as we see in the case of the 3's above.
+
+### NA Values \index{NA}
+
+Consider the following vector, which we may think of as recording the heights of people, in inches:
+
+```{r}
+heights <- c(72, 70, 69, 58, NA, 45)
+```
+
+The `NA` in the fifth position of the vector is a special value that may be considered to mean "Not Assigned.""  It's R's way of letting us indicate that a value was not recorded or has gone missing for some reason.
+
+
+### "Everything in R is a Vector"
+
+Some folks say that everything in R is a vector.  That's a bit of an exaggeration but it's remarkably close to the truth.
+
+And yet it seems implausible.  What about the elements of an atomic vector, for instance.  A single element doesn't look at all like a vector:  it's a value, not a *sequence* of values.
+
+Or so we might think.  But really, in R there are no "single values" that can exist by themselves.  Consider, for instance, what we think of as the number 17:
+
+```{r}
+17
+```
+
+
+See the `[1]` in front, in the output above?  It indicates that the line begins with the *first element* of a vector.  So 17 doesn't exist on its own:  it exists a vector of type `double`---a vector of length 1.
+
+Even `NA` is, all along, a vector of length 1
+
+```{r}
+NA
+```
+
+It is of type `logical`:
+
+```{r}
+typeof(NA)
+```
+
+Note that even the type of `NA` evaluates, in R, to a vector:  a character vector of length 1 whose only element is the string "logical"!
+
+### Named Vectors
+
+The elements of a vector can have names, if we like: 
+
+```{r}
+ages <- c(Bettina = 32, Chris = 64, Ramesh = 101)
+ages
+```
+
+Having names doesn't keep the vector from being a vector of type `double`:  it has to be `double` because its elements are `double`.
+
+```{r}
+typeof(ages)
+```
+
+We can names the elements of a vector when we create it with `c()`, or we can name them later on.  One way to do this is with the `names()`\index{R-functions!names()@\texttt{names()}} function:
+
+```{r}
+names(heights) <- c("Scarecrow", "Tinman", "Lion", "Dorothy", "Toto", "Boq")
+heights
+```
+
+### Special Character Vectors
+
+R comes with two handy, predefined character vectors:
+
+```{r}
+letters
+LETTERS
+```
+
+We will make use of them from time to time.\index{R-constants!letters@\texttt{letters}}\index{R-constants!LETTER@\texttt{LETTERS}}
+
+### Length of Vectors
+
+The `length()` function\index{R-functions!length()@\texttt{length()}} tells us how many elements a vector has:
+
+```{r}
+length(heights)
+```
+
+## Constructing Patterned Vectors
+
+Quite often we need to make lengthy vectors that follow simple patterns.  R has a few functions to assist us in these tasks.
+
+### Sequencing
+
+Consider the `seq()`\index{R-functions!seq()@\texttt{seq()}} function:
+
+```{r}
+seq(from = 5, to = 15, by = 1)
+```
+
+The default value of the parameter `by` is 1, so we could get the same thing with:
+
+```{r}
+seq(from = 5, to = 15)
+```
+
+Further reduction in typing may be achieved as long as we remember the order in which R expects the parameters (`from` before `to`, then `step` if supplied):
+
+```{r}
+seq(5, 15)
+```
+
+Some more complex examples:
+
+
+```{r}
+seq(3, 15, 2)
+seq(0, 1, 0.1)
+```
+
+R will go up to the `to` value, but not past it:
+
+```{r}
+seq(3, 16, 2)
+```
+
+Negative steps are fine:
+
+```{r}
+seq(5, -4, -1)
+```
+
+The *colon operator* `:` is a convenient abbreviation for `seq`:\index{R-operators!: (sequencing)}
+
+```{r}
+1:5 # 1 is from, 5 is to
+```
+
+If the `from` number is greater than the `to` number the step for the colon operator is -1:
+
+```{r}
+5:1
+```
+
+### Repeating
+
+With `rep()`\index{R-functions!rep()@\texttt{rep()}} we may repeat a given vector as many times as we like:
+
+```{r}
+rep(3, times = 5)
+```
+
+We can apply `rep()` to a vector of length greater than 1:
+
+```{r}
+vec <- c(7, 3, 4)
+rep(vec, times = 3)
+```
+
+`rep()` applies perfectly well to character-vectors:
+
+```{r}
+rep("Toto", 4)
+```
+
+`rep()` also takes an `each` parameter that determines how many times each element of the given vector will be repeated before the `times` parameter is applied.  This is best illustrated with an example:
+
+```{r}
+vec <- c(7, 3, 4)
+rep(vec, each = 2, times = 3)
+```
+
+If we combine `seq()` and `rep()` we can create fairly complex patterns concisely:
+
+```{r}
+vec <- seq(5, -3, -2)
+rep(vec, each = 2, times = 2)
+```
+
+In order to create 50 10's followed by 50 30's followed by 50 50's I would write:
+
+```{r eval = F}
+rep(seq(10, 50, 20), each = 50)
+```
+
+## Subsetting Vectors
+
+Quite often we need to select one or more elements from a vector.  The *subsetting operator* `[` \index{R-operators![ (subsetting)} allows us to do this.
+
+Recall the vector `heights`:
+
+```{r}
+heights
+```
+
+If we want the fourth element, we ask for it with the subsetting operator like this:
+
+```{r}
+heights[4]
+```
+
+If we want two or more elements, then we specify their indices in a vector.  Thus, to get the first and fifth elements, we might do this:
+
+```{r}
+desired <- c(1,5)
+heights[desired]
+```
+
+We could also ask for them directly:
+
+```{r}
+heights[c(1,5)]
+```
+
+Negative numbers are significant in subsetting:
+
+```{r}
+heights[-2] #select all but second element
+heights[-c(1,3)]  # all but first and third
+```
+
+If you specify a nonexistent index, you get `NA`, the reasonable result:
+
+```{r}
+heights[7]
+```
+
+Patterned vectors are quite useful for subsetting.  If you want the first three elements of `heights`, you don't have to type `heights[c(1,2,3)]`.  Instead you can just say:
+
+```{r}
+heights[1:3]
+```
+
+The following gives the same as `heights`:
+
+```{r}
+heights[1:length(heights)]
+```
+
+If you desire to quickly provide names for a vector, subsetting can help:
+
+```{r}
+vec <- c(23, 14, 82, 33, 33, 45)
+names(vec) <- LETTERS[1:length(vec)]
+vec
+```
+
+If a vector has names we can refers to its elements using the subsetting operator and those names:
+
+```{r}
+heights["Tinman"]
+heights[c("Scarecrow", "Boq")]
+```
+
+Finally, we can use subsetting to modify parts of a vector.  For example, Dorothy's height is reported as:
+
+```{r}
+heights["Dorothy"]
+```
+
+If Dorothy grows two inches, then we can modify her height as follows:
+
+```{r}
+heights["Dorothy"] <- 60
+```
+
+We can replace more than one element, of course.  Thus:
+
+```{r}
+heights[c("Scarecrow", "Boq")] <- c(73, 46)
+```
+
+The subset of indices may be as complex as you like:
+
+```{r}
+vec <- c(3,4,5,6,7,8)
+vec[seq(from = 2, to = 6, by = 2)] <- c(100, 200, 300)
+vec
+```
+
+In the above example, `seq(2,6,2)` identified 2, 4 and 6 as the indices of elements of `vec` that were to be replaced by the corresponding elements of `c(100, 200, 300)`.
+
+We can even use subsetting to rearrange the elements of a vector.  Consider the example below:
+
+```{r}
+inhabitants <- c("Oz", "Toto", "Boq", "Glinda")
+permuted <- inhabitants[c(3,4,1,2)]
+permuted
+```
+
+
+## More on Logical Vectors
+
+Consider the following expression:
+
+```{r}
+13 < 20
+```
+
+We constructed it with the "less-than" operator `<`.  You can think of it as saying that 13 is less than 20, which is a true statement, and sure enough, R *evaluates* the expression `13 < 20` as `TRUE`.
+
+When you think about it, we've seen lots of expressions so far.  Here are just a few of them:
+
+* `sqrt(64)`
+* `heights`
+* `heights[1:3]`
+* `13 < 20`
+
+When we type any one of them into the console, it *evaluates* to a particular value.  In the examples above, the value was always a vector.
+
+Expressions like `13 < 20` that evaluate to a logical vector are often called *Boolean* expressions.^[So-called after George Boole, a nineteenth century British logician.]
+
+### Boolean Operators
+
+Let's look further into Boolean expressions.  Define the following two vectors:
+
+```{r}
+a <- c(10, 13, 17)
+b <- c(8, 15, 12)
+```
+
+Now let's evaluate the expression `a < b`:
+
+```{r}
+a < b
+```
+
+The `<` operator, when applied to vectors, always works *element-wise*; that is, it is applied to corresponding elements of the vectors on either side of it.  R's evaluation of `a < b` involves evaluation of the following three expressions:
+
+* `10 < 8` (evaluates to `FALSE`)
+* `13 < 15`(evaluates to `TRUE`)
+* `17 < 12`(evaluates to `FALSE`)
+
+The result is a logical vector of length 3.
+
+The `<` operator is an example of a *Boolean operator* in R.  Table \@ref(boolean-operators) shows the available Boolean operators.
+\index{R-operators!< (less than)}
+\index{R-operators!> (greater than)}
+\index{R-operators!<= (less than or equal to)}
+\index{R-operators!>= (greater than or equal to)}
+\index{R-operators!== (equals)}
+\index{R-operators!and for vectors}
+\index{R-operators!scalar and}
+\index{R-operators!or for vectors}
+\index{R-operators!scalar or}
+
+```{r echo = F}
+ops <- c("<", ">", "<=", ">=", "==", "&", "|", "&&", "||", "!")
+meanings <- c("less than", "greater than", "less than or equal to",
+              "greater than or equal to", "equal to", "and", "or",
+              "and (scalar version)", "or (scalar version)", "not")
+tab <- cbind(ops, meanings)
+rownames(tab) <- NULL
+colnames(tab) <- c("Operation", "What It Means")
+knitr::kable(tab, caption = "The Boolean Operators")
+```
+
+#### Inequalities
+
+The "numerical-looking operators" (`<`, `<=`, `>`, `>=`) have their usual meanings when one is working with numerical vectors^[A vector is said to be *numerical* if it is of type `integer` or `double`.]  When applied to character vectors they evaluate according to an alphabetical order:
+
+```{r}
+a<- c("Dorothy", "toto", "Boq")
+b <- c("tinman", "Toto", "2017")
+a < b
+```
+
+The reasons for the evaluation above are as follows:
+
+* D comes before t in the alphabet;
+* lowercase t comes before uppercase T, according to R;
+* characters for numbers come before letter-characters, according to R.
+
+#### Equality
+
+The equality (`==`) operator indicates whether the expression being compared evaluate to the same value.  Note that it's made with *two* equal-signs, not one!  It's all about evaluation to the same value, not strict identity.  The following examples will help to clarify this.
+
+```{r}
+a <- c(Dorothy = 1,Toto = 2) # a named vector
+b <- c(Glinda = 1, Tinman = 2)
+a == b
+```
+
+(Note that the resulting logical vector inherits the names of `a`, the vector on the left.).
+
+But `a` and `b` aren't *identical`.  We can see this because R has the function `identical()`  to test for identity:
+
+```{r}
+identical(a, b)
+```
+
+Corresponding elements of `a` and `b` have the same values, but the two vectors don't have the same set of names, so they aren't considered identical.
+
+Here's another way to see that "evaluating to the same  value" is not the same as "identity":
+
+```{r}
+TRUE == 1
+```
+
+When `TRUE (itself of `type `logical`) is being compared with something numerical (type `integer` or `double`) it is *coerced* into the numerical vector 1.  (In the same situation `FALSE` would be coerced to 0.)  But clearly `TRUE` and 1 are not identical:
+
+```{r}
+identical(TRUE, 1)
+```
+
+#### And, Or, Not
+
+We consider an "and" statement to be true when both of its component statements are true; otherwise it is counted as false.  The `&` Boolean operator accords with our thinking:
+
+```{r}
+a <- c(T, T, F, F)
+b <- c(T, F, T, F)
+a & b
+```
+
+In logic and mathematics, an "or" statement is considered to be true when *at least one* of its component statements are true.  (This is sometimes called the "inclusive" use of the term "or.") R accords with this line of thinking:
+
+```{r}
+a <- c(T, T, F, F)
+b <- c(T, F, T, F)
+a | b
+```
+
+The `&&` and `||` operators follow the "and" and "or" logical respectively, but are applied only to the first elements of the vectors being compared:
+
+```{r}
+a <- c(T, T)
+b <- c(F, T)
+a && b
+```
+
+```{r}
+a <- c(T, F)
+b <- c(F, F)
+a || b
+```
+
+These operators will come in handy later on, when we study *conditionals*.
+
+The final Boolean operator is `!`, which works like "not":
+
+```{r}
+a <- c(T, F)
+!a
+e <- c(2, 5, 6)
+f <-  c(3, 1, 2)
+e > f
+!(e > f)
+```
+
+## Vector Recycling \index{recycling}
+Consider the vector
+
+```{r}
+vec <- c(2, 6, 1, 7, 3)
+```
+
+
+Look at what happens when we evaluate the expression:
+
+```{r}
+vec > 4
+```
+
+At first blush this doesn't make any sense:  `vec` has length 5, whereas `4` is a vector of length 1.  How can the two of them be compared?
+
+They cannot, in fact, be compared.  Instead the shorter of the two vectors---the `4`---is *recycled* into the `c(4,4,4,4,4)` a vector of length 5, which may then be compared element-wise with `vec`.  Recycling is a great convenience as it allows us to express an idea clearly and concisely.
+
+Recycling is always performed on the shorter of two vectors.  Consider the example below:
+
+```{r}
+vec2 <- 1:6
+vec2 > c(3,1)
+```
+
+Here, `c(3,1)` was recycled into `c(3,1,3,1,3,1)` prior to being compared with `vec2`.
+
+What happens if the length of the longer vector is not a multiple of the shorter one?  We should look into this:
+
+```{r eval = FALSE}
+vec2 <- 1:7
+vec2 > c(3, 8)
+```
+
+```
+## longer object length is not a multiple of shorter object length
+## [1] FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE
+```
+
+We get a warning, but R tries to do the job for us anyway, recycling the shorter vector to `c(3,8,3,8,3,8,3)` and then performing the comparison.
+
+By the way, if you don't want to see the warning you can put the expression into the `suppressWarnings()`\index{R-functions!suppressWarnings()@\texttt{suppressWarnings()}} function:
+
+```{r}
+suppressWarnings(vec2 > c(3, 8))
+```
+
+
+## Subsetting with Logical Vectors
+
+The subsetting we have seen up to now involves specifying the *indices* of the elements we wold like to select from the original vector.  It is also possible  to say, for each elements, *whether or not it is to be included* in our selection.  This is accomplished by means of logical vectors.
+
+Recall our `heights` vector:
+
+```{r}
+heights
+```
+
+Let's say that we want the heights of Scarecrow, Tinman and Dorothy.  We can use a logical vector to do this:
+
+```{r}
+wanted <- c(T, T, F, T, F, F)
+heights[wanted]
+```
+
+The `T`'s at indices 1, 2, and 4 in `wanted` inform R that we want the heights vector at indices 1, 2 and 4.  The `f`'s say:  "don't include this element!"
+
+Subsetting can be used powerfully along with logical vectors and Boolean operators.
+
+
+
+For example, in order to select those persons whose heights exceed a certain amount, we might say something like this:
+
+```{r}
+#heights of some people:
+people <- c(55, 64, 67, 70, 63, 72)
+tall <- (people >= 70)
+tall
+people[tall]
+```
+
+As you can see, the `tall` vector specifies which elements we would like to select from the `people` vector.
+
+We need not define the `tall` vector along the way.  It is quite common to see something like the following:
+
+```{r}
+people[people >= 70]
+```
+
+I like to pronounce the above as:
+
+>*`people`, where `people` is at least 70*
+
+The word "where" in the above phrase corresponds to the subsetting operator.
+
+You subsetting logical vector need not have been constructed with the original vector in mind.  Consider the following example:
+
+```{r}
+age <- c(23, 21, 22, 25, 63)
+height <- c(68, 67, 71, 70, 69)
+age[height < 70]
+```
+
+Here the selection is done from the `age` vector, using a logical vector that was constructed from `height`---another vector altogether.  It concisely expresses the idea:
+
+>*the ages of people whose height is less than 70*
+
+There is no limit to the complexity of selection.  Consider the following:
+
+```{r}
+age <- c(23, 21, 22, 25, 63)
+height <- c(68, 67, 71, 70, 69)
+likesToto <- c(TRUE, TRUE, FALSE, FALSE, TRUE)
+height[age < 60 & likesToto]
+```
+
+### Counting
+
+Logical subsetting provides a convenient way to *count* the elements of a vector that possess a given property.  For example,to find out how many elements of `people` are less than 70 we could say:
+
+```{r}
+length(people[people < 70])
+```
+
+### Cautions about NA
+
+You should be aware of the effect of `NA`-values on subsetting.
+
+```{r}
+heights
+tall <- (heights > 65)
+tall
+```
+
+Since Toto's height was missing, R can't say whether or not he was more than 65 inches tall.  Hence it assigns `NA` to the Toto-element of the `tall` vector.
+
+When we subset using this vector we get an odd result:
+
+```{r}
+heights[tall]
+```
+
+Since R doesn't know whether or not to select Toto, it records its indecision by including an `NA` in the result. That `NA`, however, is not the `NA` for Toto's height in the vector `heights`, so it can't inherit the "Toto" name.  since it has no name, R presents its name as `<NA>`.
+
+If we try to count the number of tall persons, we get a misleading result:
+
+```{r}
+length(heights[tall])
+```
+
+We would have preferred something like:
+
+>"Three, with another one undecided."
+
+Counting is one those situations in which we might wish to removed `NA` values at the start.  If the vector is small we could remove them by hand, e.g.:
+
+```{r}
+knownHeights <- heights[-5]  # remove Toto
+tall <- (knownHeights > 65)
+length(knownHeights[tall])
+```
+
+For longer vectors the above approach won't be practical.  Instead we may use the `is.na()` function.
+
+```{r}
+is.na(heights)
+```
+
+Then we may select those elements that are *not* `NA`:
+
+```{r}
+knownHeights <- heights[!is.na(heights)]
+knownHeights
+length(knownHeights[knownHeights > 65])
+```
+
+
+### Which, Any, All
+
+There are several functions on logical vectors that are worth keeping in your back pocket:
+
+* `which()`
+* `any()`
+* `all()`
+
+#### `which()` \index{R-functions!which()@\texttt{which()}}
+
+Applied to a logical vector, the `which()` function returns the *indices* of the vector that have the value `TRUE`:
+
+```{r}
+boolVec <- c(T,T,F,T)
+which(boolVec)
+```
+
+Thus if we want to know the indices of `heights` where the heights are at least 65, then we write:
+
+```{r}
+which(heights > 65)
+```
+
+(Recall that height was a named vector.  the logical vector `heights > 65` inherited these names and passed them on to the result of `whihc()`.)
+
+Note also that Toto's `NA` height was ignored by `which()`.
+
+#### `any()` 
+
+Is anyone more than 71 inches tall?  `any()`\index{R-functions!any()@\texttt{any()}} will tell us:
+
+```{r}
+heights
+any(heights > 71)
+```
+
+Yes:  the Scarecrow is more than 71 inches tall.
+
+We can use `any()` along with the equality Boolean operator `==` to  determine whether or not a given value appears a a given vector:
+
+```{r}
+vec <- c("Dorothy", "Tin Man", "Scarecrow", "Glinda")
+any(vec == "Tin Man")
+any(vec == "Wizard")
+```
+
+The above question occurs so frequently that R provides the `%in%`\index{R-functions!%in%@\texttt{\%in\%}} operator as a short-cut:
+
+```{r}
+"Tin Man" %in% vec
+"Wizard" %in% vec
+```
+
+
+
+#### `all()` \index{R-functions!all()@\texttt{all()}}
+
+Is everyone more than 71 inches tall?
+
+```{r}
+all(heights > 71)
+```
+
+#### NA-Caution
+
+Is everyone more than 40 inches tall?
+
+```{r}
+all(heights > 40)
+```
+
+Everyone with a known height is taller than 40 inches, but because Toto's height is `NA` R can't say whether *all* the heights are bigger than 40.
+
+## Basic Arithmetical Operations on Vectors
+
+R provides a number of arithmetical operations on pairs of numerical vectors.  Table \@ref(tab:arithmetical-operators) shows the basic operators.
+\index{R-operators!+ (addition)}
+\index{R-operators!- (subtraction)}
+\index{R-operators!* (multiplication)}
+\index{R-operators!/ (division)}
+\index{R-operators!exponentiation}
+\index{R-operators!\%/\% (quotient)}
+\index{R-operators!\%\% (remainder)}
+```{r arithmetical-operators, echo = F}
+ops <- c("x + y", "x - y", "x * y", "x / y", "x^y", "x %/% y", "x %% y")
+meanings <- c("addition", "subtraction",
+              "multiplication", "division", 
+              "exponentiation (raise x to the power y)",
+              "integer division (quotient after dividing x by y)",
+              "x mod y (remainder after dividing x by y)")
+tab <- cbind(ops, meanings)
+rownames(tab) <- NULL
+colnames(tab) <- c("Operation", "What It Means")
+knitr::kable(tab, caption = "Basic arithmetical operations on vectors.")
+```
+
+The operators are applied element-wise to vectors:
+
+```{r}
+x <- c(10, 15, 20)
+y <- c(3, 4, 5)
+x + y
+x - y
+x * y
+x / y
+x^y
+```
+
+As an illustration, the final result is:
+
+$$10^3, 15^4, 20^5$$
+The "mod" operator `%%` can be quite useful.  Here is an example:  even numbers have a remainder of 0 after division by 2, whereas odd numbers have a remainder of 1.  Hence we may use `%%` to quickly locate the even numbers in a vector, as follows:
+
+```{r}
+vec <- c(2, 7, 9, 12, 15, 24)
+vec[vec %% 2 == 0]
+```
+
+Recycling applies in vector arithmetic (as in most of R):
+
+```{r}
+vec <- c(2, 7, 9, 12, 15, 24)
+2 * vec  # the 2 will be recycled
+vec + 100 # the 100 will be recycled
+vec^3  # the 3 will be recycled
+```
+
+### More Math Functions
+
+You have already met `sqrt()`.  Here are a few more useful math functions involving vectors.
+
+#### Rounding
+
+You can use the `round()` \index{R-functions!round()@\texttt{round()}} function to round off numbers to any desired number of decimal places.
+
+```{r}
+roots <- sqrt(1:5)
+roots # Too much infromation!
+round(roots, digits = 3) # nicer
+```
+
+#### Ceiling and Floor
+
+The `ceiling()` \index{R-functions!ceiling()@\texttt{ceiling()}} function returns the least integer that is greater than or equal to the given number:
+
+```{r}
+vec <- c(-2.9, -1.1, 0.2, 1.35, 3, 4.01)
+ceiling(vec)
+```
+
+The `floor()` \index{R-functions!floor()@\texttt{floor()}} function returns the greatest integer that is less than or equal to the given number:
+
+```{r}
+floor(vec)
+```
+
+#### Vectorization
+
+\index{vectorization}
+
+All of the above operations follow the "vector-in, vector-out" principle---often referred to by R users as *vectorization*---to which R often adheres.  Not only does vectorization permit us to express ideas concisely and in human-readable fashion, but the computations themselves tend to be performed very quickly.
+
+#### Summing and the Mean
+
+There are some functions on vectors that return only a vector of length 1.  Among examples we have met so far are:
+
+* `length()
+* `any()`
+* `all()`
+
+Another very important function that returns a vector of length 1 is `sum()`\index{R-functions!sum()@\texttt{sum()}} :
+
+```{r}
+vecs <- 1:100
+sum(vecs)
+```
+
+In statistics we are often interested in the *mean* of a list of numbers.  The mean is defined as:
+
+$$\frac{\text{sum of the numbers}}{\text{how many numbers there are}}$$
+You can find the mean of a numerical vector as follows:
+
+```{r}
+vec <- c(-3, 4, 17, 23, 51)
+meanVec <- sum(vec)/length(vec)
+```
+
+The way we compute the mean in R looks a great deal like its mathematical definition.  This is one of the great conveniences afforded by vectorization.
+
+You might be interested to know that there is a function in R dedicated to finding the mean.  Unsurprisingly, it is called `mean()`\index{R-functions!mean()@\texttt{mean()}} :
+
+```{r}
+mean(vec)
+```
+
+#### Maximum and Minimum  {#maxmin}
+
+The `max()` \index{R-functions!max()@\texttt{max()}} function delivers the maximum value of the elements of a numerical vector:
+
+```{r}
+max(c(3, 7, 2))
+```
+
+The `min()` \index{R-functions!min()@\texttt{min()}} function delivers the minimum value of a numerical vector:
+
+```{r}
+min(c(3, 7, 2))
+```
+
+You can enter more than one vector in to `min() or `max()`:  the function will combine the vectors and then do its job:
+
+```{r}
+a <- c(5, 6, 10)
+b <- c(2, 3, 12, 15, 1)  # the max of both is 15
+max(a, b)
+```
+
+Both functions yield `NA` when one of the elements is `NA`:
+
+```{r}
+max(3, 7, -2, NA, na.rm = T)
+```
+
+Like `sum()` and mean()`, they respond to the `na.rm` parameter:
+
+```{r}
+max(3, 7, -2, NA, na.rm = T)
+```
+
+The `pmax()` \index{R-functions!pmax()@\texttt{pmax()}} function compares corresponding elements of each input-vector and produces a vector of the maximum values:
+
+```{r}
+a <- c(3, 7, 10)
+b <- c(5, 2, 12)
+pmax(a, b)
+```
+
+There is a `pmin()` \index{R-functions!pmin()@\texttt{pmin()}} function that computes pair-wise minima as well.
+
+### NA and NaN Considerations
+
+What happens when you are doing mathematics on a vector, one of whose values is `NA`?  A vectorizing function will simply pass it along:
+
+```{r}
+vec <- c(1, 2, 3, 4, NA)
+sqrt(vec)
+```
+
+On the other hand a function like `sum()` needs to *know* all of the values.  If one of them is `NA`, it will report their sum as `NA`.
+
+```{r}
+sum(vec)
+```
+
+The same is true for the mean:
+
+```{r}
+mean(vec)
+```
+
+If we want the sum or the mean of the *known* values, we could first remove the `NA` values as demonstrated in previous sections.  We could also make use of the `na.rm` parameter that these functions provide:
+
+```{r}
+sum(vec, na.rm = TRUE)
+mean(vec , na.rm = TRUE)
+```
+
+The results of some arithmetical operations sometimes are not defined.  (Examples:  you can't divide by 0; you can't take the square root of a negative number.)  R reports the results of such operations as `NaN`---"not a number."  R also issues a warning:
+
+```{r}
+sqrt(c(-4, 2, 4))
+```
+
+Keep in mind, though, that the result is a perfectly good vector as far as R is concerned: after the warning R will permit you to use it in further computations:
+
+```{r}
+vec<- sqrt(c(-4, 2, 4))
+vec + 3
+```
+
+
+## Further Notes on Syntax
+
+In the process of learning about R, you have been unconsciously imbibing some of its *syntax*.  The *syntax* \index{syntax} of a computer-programming is the complete set of rules that determine what combinations of symbols are considered to make a well-formed program in the language---something that R can interpret and attempt to execute.
+
+### Syntax Errors vs. Run-time Errors vs. Semantic Errors
+
+For the most part you will learn the syntax informally.  By now, for example, you have probably realized that when you call a function you have to supply a closing parenthesis to match the open parenthesis.  Thus the following is completely fine:
+
+```{r}
+sum(1:5)
+```
+
+On the other hand if you were to type `sum(1:5` alone on a single line in a R script, R Studio's code-checker would show a red warning-circle at that line. Hovering over the circle you would see the message:
+
+>`unmatched opening bracket '('`
+
+If you were to attempt to run the command `sum(1:5` from the script you would get the following error message:
+
+```
+## Error: Incomplete expression: sum(1:5
+```
+
+Such an error is called a *syntax error*.^[R is a bit more forgiving if you type `sum(1:5` directly into the console and press Enter.  Instead of throwing an error, R shows a `+` prompt, hoping for further input that would correctly complete the command.  If you are ever in the situation where you do not know how to complete the command, you may simply press the Escape key (upper left-hand corner of your keyboard):  R will then abort the command and return to a regular prompt.]  \index{errors!syntax} The R Studio IDE can detect most---but not all---syntax errors.
+
+Syntax errors in computer programming are similar to grammatical errors in ordinary language, such as:
+
+* "Mice is scary."  (Number of the subject does not match the number of the verb.)
+* "Mice are."  (Incomplete expression.)
+
+
+A *run-time error* \index{errors!run-time} is an error that occurs when the syntax is correct but R is unable to finish the execution of your code for some other reason.  The following code, for example, is perfectly fine from a syntactical point of view:
+
+```{r eval = F}
+sum("hello")
+```
+
+When run, however, it produces an error:
+
+```
+## Error in sum("hello") : invalid 'type' (character) of argument
+```
+
+Here is another example:
+
+```{r eval = F}
+sum(emeraldCity)
+```
+
+Unless for some reason you have defined the variable `emeraldCity`, an attempt to run the above command will produce the following run-time error:
+
+```
+## Error: object 'emeraldCity' not found
+```
+
+Many run-time errors in computer programming resemble errors in ordinary language where the sentence is grammatically correct by does not *mean* anything, as in:
+
+* "Beelbubs are juicy."  (What's a "beelbub"?)
+
+There is a third type of error, known in the world of programming as a *semantic error*.  \index{errors!semantic} The term "semantics" refers to the meaning of things.  Computer code is said to contain a semantic error when it is syntactically correct and can be executed, but does not deliver the results one knows to expect.
+
+As an example, suppose you have defined, at some point, two variables:
+
+```{r}
+emeraldCity <- 15
+emeraldcity <- 4
+```
+
+Suppose now that---wanting R to compute $15^2$---you run the following code:
+
+```{r}
+emeraldcity^2
+```
+
+You don't get the results you wanted, because you accidentally asked for the square of the wrong number.
+
+Semantic errors are usually the most difficult errors for programmers to detect and repair.
+
+
+### The Assignment Operator
+
+We have been using the assignment operator `<-` \index{R-operators!<- (assignment)}to assign values to variables.  You should be aware that there is another assignment operator that works the other way around:
+
+```{r}
+4 -> emeraldCity
+emeraldCity
+```
+
+Most people don't use it.
+
+A popular alternative to `<-` as an assignment operator is the equals sign `=`:
+
+```{r}
+emeraldCity = 5
+emeraldCity
+```
+
+I myself prefer to stay away from it, as it can be confused with other uses of `=`, such as the setting of values to parameters in functions:
+
+```{r}
+rep("Dorothy", times = 3)
+```
+
+When you have to assign the same value to several values, R allows you to abbreviate a bit.  Consider the following code:
+
+```{r eval = F}
+a <- b <- c <- 5
+```
+
+The above code has the same effect as:
+
+```{r}
+a <- 5
+b <- 5
+c <- 5
+```
+
+
+### Multiple Expressions
+
+R allows you to write more than one expression  on a single line, as long as you separate the expressions with semicolons:
+
+```{r}
+a <- b <- c <- 5
+a; b; c; 2+2; sum(1:5)
+```
+
+
+
+### Variable Names and Reserved Words
+
+Using the assignment operator we have created quite a few variables by now, and we appear to have named them whatever we want.  In fact there are very few limitation on the name of a variable.  According to R's own documentation:^[See `help(make.names)`.]
+
+>"A syntactically valid name consists of letters, numbers and the dot or underline characters and starts with a letter or the dot not followed by a number."
+
+This leaves a lot of room for creativity.  All of the following names are possible for variables:
+
+* `yellowBrickRoad
+* `yellow_brick_road`
+* `yellow.brick.road`
+* `yell23`
+* `y2e3L45Lo3....rOAD`
+* `.yellow`
+
+The following, though, are not valid:
+
+* `.2yellow` (cannot start with dot and then number)
+* `_yellow` (cannot start with `_`)
+
+Most programmers try to devise names for variables that are *descriptive* in the sense that they suggest to a reader of the code the role that played within it by the variable.  In addition they try to stick to a consistent system for variable names that divide naturally into meaningful words.
+
+One popular convention is known as CamelCase\index{CamelCase}.  In this convention each new word-like part of the variable names begins with a capital letter.  (The initial letter, though, is often not capitalized.)  Examples would be:
+
+* `emeraldCity`
+* `isEven`
+
+Another popular convention---sometimes called "snake-case"---is to use lowercase and to separate words with underscores:
+
+* `emerald_city`
+* `is_even
+
+An older convention---one that was popular among some of the original developers of R---was to separate words with dots:
+
+* `emerald.city`
+* `is.even`
+
+This last convention is no longer recommended, as in programming languages other than R the dot is associated syntactically with the calling of a "method" on an "object."^[We will look briefly at R's object-oriented capabilities in Chapter \@ref(oo).]
+
+There is one further restriction on variable-names that we have not yet mentioned:  you are not allowed to use any of R's *reserved words*\index{reserved words}.  These are:
+
+>`if`, `else`, `while`, `repeat`, `function`, `for`, `in`, `next`, `break`,`TRUE`, `FALSE`, `NULL`, `inf`, `NaN`, `NA`, `NA_integer`, `NA_real`, `NA_complex`, `NA_character`
+
+You need not memorize the above list:  You'll gradually learn most of it, and words you don't learn are words that you are unlikely to ever choose as a variable-name on your own.  Besides, reserved words show in in blue in the R Studio editor, and if you manage to use one anyway then R will stop you outright with a clear error message:
+
+```{r eval = F}
+break <- 5
+```
+
+```
+## Error in break <- 5 : invalid (NULL) left side of assignment
+```
+
+One final remark:  variables together with reserved words constitute the part of the R language called *identifiers*.
+
+\newpage
+
+## Glossary {-}
+
+Vector Type
+
+:  any one of the six basic forms the elements in an atomic vector can take.  The four types we will deal encounter the most are:  double, integer, character and logical.
+
+Coercion
+
+:  The process of changing a vector from one type to another.  Sometimes the process takes place automatically, as a convenience to the programmer.
+
+Sub-setting
+
+:  The operation of selecting one or more elements from a vector.
+
+Recycling
+
+:  An automatic process by which R, when given two vectors, repeats elements of the shorter vector until it is as long as the longer vector.  Recycling enables the two resulting vectors to be combined element-wise in operations.
+
+Vectorization
+
+:  R's ability to operate on each element of a vector, producing a new vector of the same length.  Vectorized operations can be expressed concisely and performed very quickly.
+
+Reserved Words
+
+:  Identifiers that are set aside by R for specific programming purposes.  They cannot be used as names of variables.
+
+Syntax
+
+:  The complete set of rules for a computer language that determine what combinations of symbols are considered to make a well-formed program in the language.
+
+Syntax Error
+
+:  A sequence of symbols that contains a violation of one of the rules of syntax.  r is unable to interpret and attempt to execute code that contains a syntax error.
+
+Run-time Error
+
+:  An error that occurs when the computer language's interpreter attempt to execute code but is unable to do so.  A typical cause of a run-time error is the situation when the code calls for the evaluation of a name that has not been bound to an object.
+
+Semantic Error
+
+:  An error in code that is syntactically correct and that can be executed by the computer but which produces unexpected results.
+
+\newpage
+
+
+## Exercises {-}
+
+```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+knitr::include_graphics("images/thinking.png")
+```
+
+1.  Determine the type of each of the following vectors:
+
+    1. `c(3.2, 2L, 4.7, TRUE)`
+    1. `c(as.integer(3.2), 2L, 5L, TRUE)`
+    1. `c(as.integer(3.2), 2L, "5L", TRUE)`
+    
+1. Using a combination of `c()`, `rep()` and `seq()` and other operations, find concise one-line programs to produce each of the following vectors:
+
+    1. all numbers from 4 to 307 that are one more than a multiple of 3;
+    1. the numbers 0.01, 0.02, 0.03, ..., 0.98, 0.99.
+    1. twelve 2's, followed by twelve 4's followed by twelve 6's, ..., followed by twelve 10's, finishing with twelve 12's.
+    1. one 1, followed by two 2's, followed by three 3's, ..., followed by nine 9's, finishing with ten 10's.
+
+1. The following three vectors gives the names, heights and ages of five people, and also say whether or not each person likes Toto:
+
+    ```{r eval = F}
+    person <- c("Akash", "Bee", "Celia", "Devadatta", "Enid")
+    age <- c(23, 21, 22, 25, 63)
+    height <- c(68, 67, 71, 70, 69)
+    likesToto <- c(TRUE, TRUE, FALSE, FALSE, TRUE)
+    ```
+    
+    Use sub-setting with logical vectors to produce vectors of:
+
+    1. the names of all people over the age of 22;
+    1. the names of all people younger than 24 who are also more than 67 inches tall;
+    1.  the names of all people who either don't like Toto or who are over the age of 30;
+    1. the *number* of people who are over the age of 22.
+    
+1. Logical vectors are not numerical vectors, so it would seem that you should not be able to sum their elements.  But:
+
+    ```{r eval = F}
+    sum(likesToto)
+    ```
+    
+    results in the number 2!  What is happening here is that R coerces the logical vector `likeToto` into a numerical vector of 1's and 0's---1 for `TRUE`, 0 for `FALSE---and then sums the resulting vector.  Notice that this gives us the number of people who like Toto. With this idea in mind, use `sum()` along with logical vectors to find:
+    
+    1. the number of people younger than 24 who are also more than 67 inches tall;
+    1. the number of people who either don't like Toto or who are over the age of 30.
+
+

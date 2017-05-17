@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Beginning Computer Science with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="github-repo" content="homerhanumat/r-notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  
+  <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  
+
+<meta name="author" content="Homer White">
+
+
+<meta name="date" content="2017-03-18">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="writing-to-files.html">
+<link rel="next" href="functional.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Beginning Computer Programming with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
+<li class="chapter" data-level="1.2" data-path="idea-tour.html"><a href="idea-tour.html"><i class="fa fa-check"></i><b>1.2</b> A Quick Tour</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="idea-tour.html"><a href="idea-tour.html#idea-arithmetic"><i class="fa fa-check"></i><b>1.2.1</b> Basic Arithmetic</a></li>
+<li class="chapter" data-level="1.2.2" data-path="idea-tour.html"><a href="idea-tour.html#idea-variables"><i class="fa fa-check"></i><b>1.2.2</b> Variables</a></li>
+<li class="chapter" data-level="1.2.3" data-path="idea-tour.html"><a href="idea-tour.html#idea-functions"><i class="fa fa-check"></i><b>1.2.3</b> Functions</a></li>
+<li class="chapter" data-level="1.2.4" data-path="idea-tour.html"><a href="idea-tour.html#idea-data"><i class="fa fa-check"></i><b>1.2.4</b> Data and Graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="idea-debugging.html"><a href="idea-debugging.html"><i class="fa fa-check"></i><b>1.3</b> Debugging</a></li>
+<li class="chapter" data-level="" data-path="idea-glossary.html"><a href="idea-glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="idea-exercises.html"><a href="idea-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html"><i class="fa fa-check"></i><b>2.1</b> What is a Vector?</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#types-of-atomic-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Types of Atomic Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#coercion"><i class="fa fa-check"></i><b>2.1.2</b> Coercion</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#combining-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Combining Vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#na-values"><i class="fa fa-check"></i><b>2.1.4</b> NA Values</a></li>
+<li class="chapter" data-level="2.1.5" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#everything-in-r-is-a-vector"><i class="fa fa-check"></i><b>2.1.5</b> “Everything in R is a Vector”</a></li>
+<li class="chapter" data-level="2.1.6" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#named-vectors"><i class="fa fa-check"></i><b>2.1.6</b> Named Vectors</a></li>
+<li class="chapter" data-level="2.1.7" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#special-character-vectors"><i class="fa fa-check"></i><b>2.1.7</b> Special Character Vectors</a></li>
+<li class="chapter" data-level="2.1.8" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#length-of-vectors"><i class="fa fa-check"></i><b>2.1.8</b> Length of Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html"><i class="fa fa-check"></i><b>2.2</b> Constructing Patterned Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#sequencing"><i class="fa fa-check"></i><b>2.2.1</b> Sequencing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#repeating"><i class="fa fa-check"></i><b>2.2.2</b> Repeating</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="subsetting-vectors.html"><a href="subsetting-vectors.html"><i class="fa fa-check"></i><b>2.3</b> Subsetting Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html"><i class="fa fa-check"></i><b>2.4</b> More on Logical Vectors</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html#boolean-operators"><i class="fa fa-check"></i><b>2.4.1</b> Boolean Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="vector-recycling.html"><a href="vector-recycling.html"><i class="fa fa-check"></i><b>2.5</b> Vector Recycling</a></li>
+<li class="chapter" data-level="2.6" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html"><i class="fa fa-check"></i><b>2.6</b> Subsetting with Logical Vectors</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#counting"><i class="fa fa-check"></i><b>2.6.1</b> Counting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#cautions-about-na"><i class="fa fa-check"></i><b>2.6.2</b> Cautions about NA</a></li>
+<li class="chapter" data-level="2.6.3" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#which-any-all"><i class="fa fa-check"></i><b>2.6.3</b> Which, Any, All</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html"><i class="fa fa-check"></i><b>2.7</b> Basic Arithmetical Operations on Vectors</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#more-useful-math-functions"><i class="fa fa-check"></i><b>2.7.1</b> More Useful Math Functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#na-and-nan-considerations"><i class="fa fa-check"></i><b>2.7.2</b> NA and NaN Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html"><i class="fa fa-check"></i><b>2.8</b> Further Notes on Syntax</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#syntax-errors-vs.run-time-errors"><i class="fa fa-check"></i><b>2.8.1</b> Syntax Errors vs. Run-time Errors</a></li>
+<li class="chapter" data-level="2.8.2" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#the-assignment-operator"><i class="fa fa-check"></i><b>2.8.2</b> The Assignment Operator</a></li>
+<li class="chapter" data-level="2.8.3" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#multiple-expressions"><i class="fa fa-check"></i><b>2.8.3</b> Multiple Expressions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#variable-names-and-reserved-words"><i class="fa fa-check"></i><b>2.8.4</b> Variable Names and Reserved Words</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="motivation-for-functions.html"><a href="motivation-for-functions.html"><i class="fa fa-check"></i><b>3.1</b> Motivation for Functions</a></li>
+<li class="chapter" data-level="3.2" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html"><i class="fa fa-check"></i><b>3.2</b> What a Function Returns</a></li>
+<li class="chapter" data-level="3.3" data-path="arguments-for-functions.html"><a href="arguments-for-functions.html"><i class="fa fa-check"></i><b>3.3</b> Arguments for Functions</a></li>
+<li class="chapter" data-level="3.4" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.4</b> Environments and Scope</a></li>
+<li class="chapter" data-level="3.5" data-path="lexical-scoping.html"><a href="lexical-scoping.html"><i class="fa fa-check"></i><b>3.5</b> Lexical Scoping</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="turtle.html"><a href="turtle.html"><i class="fa fa-check"></i><b>4</b> Turtle Graphics</a><ul>
+<li class="chapter" data-level="4.1" data-path="basic-movements.html"><a href="basic-movements.html"><i class="fa fa-check"></i><b>4.1</b> Basic Movements</a></li>
+<li class="chapter" data-level="4.2" data-path="making-many-movements-an-introduction-to-looping.html"><a href="making-many-movements-an-introduction-to-looping.html"><i class="fa fa-check"></i><b>4.2</b> Making Many Movements: An Introduction to Looping</a></li>
+<li class="chapter" data-level="4.3" data-path="writing-turtle-functions.html"><a href="writing-turtle-functions.html"><i class="fa fa-check"></i><b>4.3</b> Writing Turtle Functions</a></li>
+<li class="chapter" data-level="4.4" data-path="more-complex-turtle-graphs.html"><a href="more-complex-turtle-graphs.html"><i class="fa fa-check"></i><b>4.4</b> More Complex Turtle Graphs</a></li>
+<li class="chapter" data-level="" data-path="glossary-1.html"><a href="glossary-1.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="flow.html"><a href="flow.html"><i class="fa fa-check"></i><b>5</b> Flow-Control</a><ul>
+<li class="chapter" data-level="5.1" data-path="more-on-conditional-statements.html"><a href="more-on-conditional-statements.html"><i class="fa fa-check"></i><b>5.1</b> More on Conditional Statements</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="more-on-conditional-statements.html"><a href="more-on-conditional-statements.html#if-..-else"><i class="fa fa-check"></i><b>5.1.1</b> if .. else</a></li>
+<li class="chapter" data-level="5.1.2" data-path="more-on-conditional-statements.html"><a href="more-on-conditional-statements.html#ifelse"><i class="fa fa-check"></i><b>5.1.2</b> ifelse</a></li>
+<li class="chapter" data-level="5.1.3" data-path="more-on-conditional-statements.html"><a href="more-on-conditional-statements.html#switch"><i class="fa fa-check"></i><b>5.1.3</b> switch</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="more-on-looping.html"><a href="more-on-looping.html"><i class="fa fa-check"></i><b>5.2</b> More on Looping</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="more-on-looping.html"><a href="more-on-looping.html#breaking-out-of-a-loop"><i class="fa fa-check"></i><b>5.2.1</b> breaking out of a loop</a></li>
+<li class="chapter" data-level="5.2.2" data-path="more-on-looping.html"><a href="more-on-looping.html#continuing-with-next"><i class="fa fa-check"></i><b>5.2.2</b> continuing with next</a></li>
+<li class="chapter" data-level="5.2.3" data-path="more-on-looping.html"><a href="more-on-looping.html#while"><i class="fa fa-check"></i><b>5.2.3</b> while</a></li>
+<li class="chapter" data-level="5.2.4" data-path="more-on-looping.html"><a href="more-on-looping.html#repeat"><i class="fa fa-check"></i><b>5.2.4</b> repeat</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>6</b> Lists</a><ul>
+<li class="chapter" data-level="6.1" data-path="just-some-notes.html"><a href="just-some-notes.html"><i class="fa fa-check"></i><b>6.1</b> Just Some Notes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>7</b> Strings</a><ul>
+<li class="chapter" data-level="7.1" data-path="character-vectors-strings.html"><a href="character-vectors-strings.html"><i class="fa fa-check"></i><b>7.1</b> Character Vectors: Strings</a></li>
+<li class="chapter" data-level="7.2" data-path="characters-and-special-characters.html"><a href="characters-and-special-characters.html"><i class="fa fa-check"></i><b>7.2</b> Characters and Special Characters</a></li>
+<li class="chapter" data-level="7.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html"><i class="fa fa-check"></i><b>7.3</b> Basic String Operations</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="basic-string-operations.html"><a href="basic-string-operations.html#is-and-as"><i class="fa fa-check"></i><b>7.3.1</b> Is and As</a></li>
+<li class="chapter" data-level="7.3.2" data-path="basic-string-operations.html"><a href="basic-string-operations.html#number-of-characters"><i class="fa fa-check"></i><b>7.3.2</b> Number of Characters</a></li>
+<li class="chapter" data-level="7.3.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html#substrings-and-trimming"><i class="fa fa-check"></i><b>7.3.3</b> Substrings and Trimming</a></li>
+<li class="chapter" data-level="7.3.4" data-path="basic-string-operations.html"><a href="basic-string-operations.html#changing-cases"><i class="fa fa-check"></i><b>7.3.4</b> Changing Cases</a></li>
+<li class="chapter" data-level="7.3.5" data-path="basic-string-operations.html"><a href="basic-string-operations.html#splitting-strings"><i class="fa fa-check"></i><b>7.3.5</b> Splitting Strings</a></li>
+<li class="chapter" data-level="7.3.6" data-path="basic-string-operations.html"><a href="basic-string-operations.html#pasting-and-joining-strings"><i class="fa fa-check"></i><b>7.3.6</b> Pasting and Joining Strings</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="formatted-printing.html"><a href="formatted-printing.html"><i class="fa fa-check"></i><b>7.4</b> Formatted Printing</a></li>
+<li class="chapter" data-level="" data-path="glossary-2.html"><a href="glossary-2.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regex.html"><a href="regex.html"><i class="fa fa-check"></i><b>8</b> Regular Expressions</a><ul>
+<li class="chapter" data-level="8.1" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="regex-practice-sites.html"><a href="regex-practice-sites.html"><i class="fa fa-check"></i><b>8.2</b> Regex Practice Sites</a></li>
+<li class="chapter" data-level="8.3" data-path="regex-syntax.html"><a href="regex-syntax.html"><i class="fa fa-check"></i><b>8.3</b> Regex Syntax</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="regex-syntax.html"><a href="regex-syntax.html#matching-a-specific-sequence"><i class="fa fa-check"></i><b>8.3.1</b> Matching a Specific Sequence</a></li>
+<li class="chapter" data-level="8.3.2" data-path="regex-syntax.html"><a href="regex-syntax.html#character-classes"><i class="fa fa-check"></i><b>8.3.2</b> Character Classes</a></li>
+<li class="chapter" data-level="8.3.3" data-path="regex-syntax.html"><a href="regex-syntax.html#quantification"><i class="fa fa-check"></i><b>8.3.3</b> Quantification</a></li>
+<li class="chapter" data-level="8.3.4" data-path="regex-syntax.html"><a href="regex-syntax.html#greedy-vs.lazy"><i class="fa fa-check"></i><b>8.3.4</b> Greedy vs. Lazy</a></li>
+<li class="chapter" data-level="8.3.5" data-path="regex-syntax.html"><a href="regex-syntax.html#grouping"><i class="fa fa-check"></i><b>8.3.5</b> Grouping</a></li>
+<li class="chapter" data-level="8.3.6" data-path="regex-syntax.html"><a href="regex-syntax.html#alternation"><i class="fa fa-check"></i><b>8.3.6</b> Alternation</a></li>
+<li class="chapter" data-level="8.3.7" data-path="regex-syntax.html"><a href="regex-syntax.html#anchors"><i class="fa fa-check"></i><b>8.3.7</b> Anchors</a></li>
+<li class="chapter" data-level="8.3.8" data-path="regex-syntax.html"><a href="regex-syntax.html#captures"><i class="fa fa-check"></i><b>8.3.8</b> Captures</a></li>
+<li class="chapter" data-level="8.3.9" data-path="regex-syntax.html"><a href="regex-syntax.html#looking-around"><i class="fa fa-check"></i><b>8.3.9</b> Looking Around</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>8.4</b> Entering a Regex in R</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>8.4.1</b> String to Regex</a></li>
+<li class="chapter" data-level="8.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#substitution"><i class="fa fa-check"></i><b>8.4.2</b> Substitution</a></li>
+<li class="chapter" data-level="8.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>8.4.3</b> A Note on <code>perl</code></a></li>
+<li class="chapter" data-level="8.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>8.4.4</b> Grepping</a></li>
+<li class="chapter" data-level="8.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>8.4.5</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="8.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>8.4.6</b> Regex Modes</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>8.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="" data-path="glossary-3.html"><a href="glossary-3.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="frames.html"><a href="frames.html"><i class="fa fa-check"></i><b>9</b> Data Frames</a></li>
+<li class="chapter" data-level="10" data-path="files.html"><a href="files.html"><i class="fa fa-check"></i><b>10</b> Files</a><ul>
+<li class="chapter" data-level="10.1" data-path="downloading-files.html"><a href="downloading-files.html"><i class="fa fa-check"></i><b>10.1</b> Downloading Files</a></li>
+<li class="chapter" data-level="10.2" data-path="scan.html"><a href="scan.html"><i class="fa fa-check"></i><b>10.2</b> Scan</a></li>
+<li class="chapter" data-level="10.3" data-path="reading-text-files.html"><a href="reading-text-files.html"><i class="fa fa-check"></i><b>10.3</b> Reading Text Files</a></li>
+<li class="chapter" data-level="10.4" data-path="writing-to-files.html"><a href="writing-to-files.html"><i class="fa fa-check"></i><b>10.4</b> Writing to Files</a></li>
+<li class="chapter" data-level="10.5" data-path="application-making-an-lexicon.html"><a href="application-making-an-lexicon.html"><i class="fa fa-check"></i><b>10.5</b> Application: Making an Lexicon</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>11</b> Functional Programming in R</a></li>
+<li class="chapter" data-level="12" data-path="oo.html"><a href="oo.html"><i class="fa fa-check"></i><b>12</b> Object-Oriented Programming in R</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beginning Computer Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="application-making-an-lexicon" class="section level2">
+<h2><span class="header-section-number">10.5</span> Application: Making an Lexicon</h2>
+<p>A <em>lexicon</em> is any list of words—usually the words of a language or of some bodyof texts produced in that language. In this Section we’ll apply our file-handling skills with regular expressions to create a lexicon for L. Frank Bloom’s classic <em>The Wizard of Oz</em>.</p>
+<p>First you need to get hold of the text itself. <em>The Wizrd of Oz</em> has been in the public domain for many years now, and is available from the <a href="https://www.gutenberg.org/">Gutenberg Project</a>. You could look it up there and download it manually, but we’ll practice doing it all within R. This creates a bit of a problem, since the Gutenberg Project does not permit automated file-requests, so I have installed a copy of the file at a URL that you can access:</p>
+<blockquote>
+<p><a href="http://homerhanumat.github.io/r-notes/downloads/oz.txt" class="uri">http://homerhanumat.github.io/r-notes/downloads/oz.txt</a></p>
+</blockquote>
+<p>Go ahead and download the file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if ( !(<span class="kw">file.exists</span>(<span class="st">&quot;downloads/oz.txt&quot;</span>)) ) {
+  <span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;homerhanmat.github.io/r-notes/downloads/oz.txt&quot;</span>,
+              <span class="dt">destfile =</span> <span class="st">&quot;downloads/oz.txt&quot;</span>)
+}</code></pre></div>
+<p>Next, read in the file, line by line:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">oz &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">con =</span> <span class="st">&quot;downloads/oz.txt&quot;</span>)</code></pre></div>
+<p>Examine <code>oz.txt</code> for a bit. If we plan to make a lexicon for the book, then we probably don’t want to include Gutenber’s heder material or their discussion of licensing at the end. We’ll need to cut this material out of <code>oz</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a helper function</span>
+findIndex &lt;-<span class="st"> </span>function(pattern, text) {
+  inText &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">pattern =</span> pattern, <span class="dt">x =</span> text, <span class="dt">perl =</span> T)
+  <span class="kw">which</span>(inText)
+}
+
+<span class="co"># now find lines to start and end at:</span>
+firstLine &lt;-<span class="st"> </span><span class="kw">findIndex</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">*</span><span class="ch">\\</span><span class="st">*</span><span class="ch">\\</span><span class="st">* START OF THIS PROJECT GUTENBERG&quot;</span>, oz) +<span class="st"> </span><span class="dv">1</span>
+lastLine &lt;-<span class="st"> </span><span class="kw">findIndex</span>(<span class="st">&quot;^End of Project Gutenberg&#39;s&quot;</span>, oz)  -<span class="st"> </span><span class="dv">1</span>
+
+<span class="co"># trim oz to the desired text:</span>
+oz2 &lt;-<span class="st"> </span>oz[firstLine:lastLine]</code></pre></div>
+<p>Let us now take a first pass at splitting the text into all of its “words.” Our first thought is that words are the parts of the text that are separated by one or more white-space characters, so we might try this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozwds &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">strsplit</span>(oz2, <span class="dt">split =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s+&quot;</span>, <span class="dt">perl =</span> T))</code></pre></div>
+<p>Next, let’s convert all of the words to lowercase, then make a new word-list with no repeats, then sort that list:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozwds &lt;-<span class="st"> </span><span class="kw">tolower</span>(ozwds)
+ozWords &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(ozwds))</code></pre></div>
+<p>It’s time now to examine our prospective lexicon. Look around a bit in <code>ozWords</code>.</p>
+<ul>
+<li>There are some numbers. We’ll get rid of them.</li>
+<li>There are an awful lot of strings that begin or end with punctuation. This should not be difficult to remove with <code>gsub()</code>.</li>
+<li>There are plenty of contractions, like <code>&quot;aren't&quot;</code>. It seems that these would be OK as word, so we’ll leave them alone.</li>
+<li><p>There are hyphenated words. What should we do with them? In a book for grown-up you’ll find lots of hyphenated words where the components words are meaningful in themselves. That’s because of a grown-up grammar rule that says we should “hyphenate two or more words when they come before a noun they modify and act as a single idea.” This is important: ater all,“short-listed candidates” refers to candidates who appear on our short list, whereas “short listed candidates” appears to refer to short candidates who appear on our list. If this were a grown-up text then I’d want to split on hyphens in order to capture the meaningful word-components. In <em>The Wizard of Oz</em>, though, it seems that hyphenation is used mainly to create interesting new words out nonsense sound-fragments, as in:</p>
+<blockquote>
+<p>So the Wicked Witch took the Golden Cap from her cupboard and placed it upon her head. Then she stood upon her left foot and said slowly:</p>
+</blockquote>
+<blockquote>
+<p>“Ep-pe, pep-pe, kak-ke!”</p>
+</blockquote>
+<blockquote>
+<p>Next she stood upon her right foot and said:</p>
+</blockquote>
+<blockquote>
+<p>“Hil-lo, hol-lo, hel-lo!”</p>
+</blockquote>
+<blockquote>
+<p>After this she stood upon both feet and cried in a loud voice:</p>
+</blockquote>
+<blockquote>
+<p>“Ziz-zy, zuz-zy, zik!”</p>
+</blockquote>
+<p>It seems that we should count these as words in our lexicon.</p></li>
+<li><p>On the other hand, we often find <em>pairs</em> of hyphens that appear to act as the <em>emdash</em> character (—):</p>
+<blockquote>
+<p>The cyclone had set the house down very gently--for a cyclone--in the midst of a country of marvelous beauty.</p>
+</blockquote>
+<p>This causes such strings as “gently--for” and “cyclone--in” to appear in our lexicon. We don’t want that, so we need to split on double-hyphens.</p></li>
+</ul>
+<p>Let’s go back and try the splitting again:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozwds &lt;-<span class="st"> </span><span class="kw">unlist</span>(
+  <span class="kw">strsplit</span>(oz2, 
+           <span class="dt">split =</span> <span class="st">&quot;(?x)     # allow comments in regex!</span>
+<span class="st">                    (-{2,})  # two or more hyphens</span>
+<span class="st">                    |        # or </span>
+<span class="st">                    (</span><span class="ch">\\</span><span class="st">s+)   # one or more white-space</span>
+<span class="st">                   &quot;</span>, 
+           <span class="dt">perl =</span> T))</code></pre></div>
+<p>Now let’s strip off any leading or trailing punctuation. In PCRE2, <code>\p{P}</code> is a shortcut for any punctuation character:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first strip leading punctuation:</span>
+ozwds &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">p{P}+&quot;</span>,
+                <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>,
+                <span class="dt">x =</span> ozwds,
+                <span class="dt">perl =</span> T)
+<span class="co"># then trailing:</span>
+ozwds &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">p{P}+$&quot;</span>,
+                <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>,
+                <span class="dt">x =</span> ozwds,
+                <span class="dt">perl =</span> T)
+<span class="co"># lowercase, remove duplicates, sort:</span>
+ozWords &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(<span class="kw">tolower</span>(ozwds)))</code></pre></div>
+<p>Taking a second look at <code>ozWords</code>, we see that we need to get rid of some numbers and a spurious empty string:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isNumber &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d+&quot;</span>,
+                  <span class="dt">x =</span> ozWords,
+                  <span class="dt">perl =</span> T)
+isEmpty &lt;-<span class="st"> </span>ozWords ==<span class="st"> &quot;&quot;</span>
+validWord &lt;-<span class="st"> </span>!isNumber &amp;<span class="st"> </span>!isEmpty
+ozWords &lt;-<span class="st"> </span>ozWords[validWord]</code></pre></div>
+<p>A final check of <code>ozWords</code> appears not turn up any serious problems. We’ll take it as oour lexicon for <em>The Wizard of Oz</em>.</p>
+<p>For fun, let’s make an index to the book. First, a little helper function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">indexFactory &lt;-<span class="st"> </span>function(lexicon, fn) {
+  index &lt;-<span class="st"> </span><span class="kw">list</span>()
+  fileLines &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">con =</span> fn)
+  for ( i in <span class="kw">seq_len</span>(<span class="kw">length</span>(lexicon)) ) {
+    word &lt;-<span class="st"> </span>lexicon[i]
+    pattern &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;(?i)&quot;</span>, word)
+    hasWord &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">pattern =</span> pattern, <span class="dt">x =</span> fileLines, <span class="dt">perl =</span> T)
+    index[[word]] &lt;-<span class="st"> </span><span class="kw">which</span>(hasWord)
+  }
+  index
+}</code></pre></div>
+<p>Now we call our helper function to create the index:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozIndex &lt;-<span class="st"> </span><span class="kw">indexFactory</span>(ozWords, <span class="st">&quot;downloads/oz.txt&quot;</span>)</code></pre></div>
+<p>We can use the index to look up words in the original text, without having to use rugeular expressions explicitly. First we make a convenience-function for looking up:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozLookup &lt;-<span class="st"> </span>function(word) {
+  
+  fn &lt;-<span class="st"> &quot;downloads/oz.txt&quot;</span>
+  lexicon &lt;-<span class="st"> </span>ozWords
+  index &lt;-<span class="st"> </span>ozIndex
+  
+  file &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">con =</span> fn)
+  if ( !(word %in%<span class="st"> </span>lexicon ) ) {
+    message &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>, word, <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st"> is not in the lexicon!</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    <span class="kw">return</span>(<span class="kw">cat</span>(message))
+  }
+  matchLines &lt;-<span class="st"> </span>index[[word]]
+  number &lt;-<span class="st"> </span><span class="kw">length</span>(matchLines)
+  <span class="kw">cat</span>(<span class="st">&quot;There are &quot;</span>, number, <span class="st">&quot;lines that contain your request.</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
+  hrule &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;-&quot;</span>, <span class="dt">times =</span> <span class="dv">30</span>)
+  for ( i in <span class="dv">1</span>:number ) {
+    lineNum &lt;-<span class="st"> </span>matchLines[i]
+    <span class="kw">cat</span>(hrule, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    <span class="kw">cat</span>(lineNum, <span class="st">&quot;:  &quot;</span>, file[lineNum], <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}</code></pre></div>
+<p>Now we give it a try:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ozLookup</span>(<span class="st">&quot;lolliop&quot;</span>)</code></pre></div>
+<pre><code>## &quot;lolliop&quot; is not in the lexicon!</code></pre>
+<p>And another try:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ozLookup</span>(<span class="st">&quot;humbug&quot;</span>)</code></pre></div>
+<pre><code>## There are  10 lines that contain your request.
+## 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 61 :     16.  The Magic Art of the Great Humbug 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 3421 :   a humbug.&quot; 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 3424 :   it pleased him.  &quot;I am a humbug.&quot; 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 3438 :   &quot;Doesn&#39;t anyone else know you&#39;re a humbug?&quot; asked Dorothy. 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 3472 :   being such a humbug.&quot; 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 3603 :   one I am a humbug.&quot; 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 3607 :   Terrible Humbug,&quot; as she called him, would find a way to send her back 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 3613 :     16.  The Magic Art of the Great Humbug 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 3738 :   they wanted.  &quot;How can I help being a humbug,&quot; he said, &quot;when all these 
+## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## 3802 :   &quot;Yes, of course,&quot; replied Oz.  &quot;I am tired of being such a humbug.  If</code></pre>
+
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="writing-to-files.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functional.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

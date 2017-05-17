@@ -1,0 +1,24 @@
+bookdown::gitbook:
+  css: style.css
+  split_by: section
+  lib_dir: libs
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li><a href="index.html">Beginning Computer Programming with R</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    sharing:
+      github: yes
+      facebook: no
+      twitter: no
+    download:  ["pdf"]
+bookdown::pdf_book:
+  includes:
+    in_header: latex/preamble.tex
+    after_body: latex/after.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Beginning Computer Science with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="github-repo" content="homerhanumat/r-notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  
+  <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  
+
+<meta name="author" content="Homer White">
+
+
+<meta name="date" content="2017-04-04">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="monte-carlo-simulation.html">
+<link rel="next" href="example-will-they-connect.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Beginning Computer Programming with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
+<li class="chapter" data-level="1.2" data-path="idea-tour.html"><a href="idea-tour.html"><i class="fa fa-check"></i><b>1.2</b> A Quick Tour</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="idea-tour.html"><a href="idea-tour.html#idea-arithmetic"><i class="fa fa-check"></i><b>1.2.1</b> Basic Arithmetic</a></li>
+<li class="chapter" data-level="1.2.2" data-path="idea-tour.html"><a href="idea-tour.html#idea-variables"><i class="fa fa-check"></i><b>1.2.2</b> Variables</a></li>
+<li class="chapter" data-level="1.2.3" data-path="idea-tour.html"><a href="idea-tour.html#idea-functions"><i class="fa fa-check"></i><b>1.2.3</b> Functions</a></li>
+<li class="chapter" data-level="1.2.4" data-path="idea-tour.html"><a href="idea-tour.html#idea-data"><i class="fa fa-check"></i><b>1.2.4</b> Data and Graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="idea-debugging.html"><a href="idea-debugging.html"><i class="fa fa-check"></i><b>1.3</b> Debugging</a></li>
+<li class="chapter" data-level="" data-path="idea-glossary.html"><a href="idea-glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="idea-exercises.html"><a href="idea-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html"><i class="fa fa-check"></i><b>2.1</b> What is a Vector?</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#types-of-atomic-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Types of Atomic Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#coercion"><i class="fa fa-check"></i><b>2.1.2</b> Coercion</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#combining-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Combining Vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#na-values"><i class="fa fa-check"></i><b>2.1.4</b> NA Values </a></li>
+<li class="chapter" data-level="2.1.5" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#everything-in-r-is-a-vector"><i class="fa fa-check"></i><b>2.1.5</b> “Everything in R is a Vector”</a></li>
+<li class="chapter" data-level="2.1.6" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#named-vectors"><i class="fa fa-check"></i><b>2.1.6</b> Named Vectors</a></li>
+<li class="chapter" data-level="2.1.7" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#special-character-vectors"><i class="fa fa-check"></i><b>2.1.7</b> Special Character Vectors</a></li>
+<li class="chapter" data-level="2.1.8" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#length-of-vectors"><i class="fa fa-check"></i><b>2.1.8</b> Length of Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html"><i class="fa fa-check"></i><b>2.2</b> Constructing Patterned Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#sequencing"><i class="fa fa-check"></i><b>2.2.1</b> Sequencing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#repeating"><i class="fa fa-check"></i><b>2.2.2</b> Repeating</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="subsetting-vectors.html"><a href="subsetting-vectors.html"><i class="fa fa-check"></i><b>2.3</b> Subsetting Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html"><i class="fa fa-check"></i><b>2.4</b> More on Logical Vectors</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html#boolean-operators"><i class="fa fa-check"></i><b>2.4.1</b> Boolean Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="vector-recycling.html"><a href="vector-recycling.html"><i class="fa fa-check"></i><b>2.5</b> Vector Recycling </a></li>
+<li class="chapter" data-level="2.6" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html"><i class="fa fa-check"></i><b>2.6</b> Subsetting with Logical Vectors</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#counting"><i class="fa fa-check"></i><b>2.6.1</b> Counting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#cautions-about-na"><i class="fa fa-check"></i><b>2.6.2</b> Cautions about NA</a></li>
+<li class="chapter" data-level="2.6.3" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#which-any-all"><i class="fa fa-check"></i><b>2.6.3</b> Which, Any, All</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html"><i class="fa fa-check"></i><b>2.7</b> Basic Arithmetical Operations on Vectors</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#more-math-functions"><i class="fa fa-check"></i><b>2.7.1</b> More Math Functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#na-and-nan-considerations"><i class="fa fa-check"></i><b>2.7.2</b> NA and NaN Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html"><i class="fa fa-check"></i><b>2.8</b> Further Notes on Syntax</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#syntax-errors-vs.run-time-errors"><i class="fa fa-check"></i><b>2.8.1</b> Syntax Errors vs. Run-time Errors</a></li>
+<li class="chapter" data-level="2.8.2" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#the-assignment-operator"><i class="fa fa-check"></i><b>2.8.2</b> The Assignment Operator</a></li>
+<li class="chapter" data-level="2.8.3" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#multiple-expressions"><i class="fa fa-check"></i><b>2.8.3</b> Multiple Expressions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#variable-names-and-reserved-words"><i class="fa fa-check"></i><b>2.8.4</b> Variable Names and Reserved Words</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="motivation-for-functions.html"><a href="motivation-for-functions.html"><i class="fa fa-check"></i><b>3.1</b> Motivation for Functions</a></li>
+<li class="chapter" data-level="3.2" data-path="function-syntax.html"><a href="function-syntax.html"><i class="fa fa-check"></i><b>3.2</b> Function Syntax</a></li>
+<li class="chapter" data-level="3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html"><i class="fa fa-check"></i><b>3.3</b> What a Function Returns</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-final-expression-evaluated"><i class="fa fa-check"></i><b>3.3.1</b> The Final Expression Evaluated</a></li>
+<li class="chapter" data-level="3.3.2" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-return-function"><i class="fa fa-check"></i><b>3.3.2</b> The <code>return()</code> Function</a></li>
+<li class="chapter" data-level="3.3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#writing-a-talky-function"><i class="fa fa-check"></i><b>3.3.3</b> Writing a “Talky” Function</a></li>
+<li class="chapter" data-level="3.3.4" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-print-function"><i class="fa fa-check"></i><b>3.3.4</b> The <code>print()</code> Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="more-about-arguments.html"><a href="more-about-arguments.html"><i class="fa fa-check"></i><b>3.4</b> More About Arguments</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="more-about-arguments.html"><a href="more-about-arguments.html#default-arguments"><i class="fa fa-check"></i><b>3.4.1</b> Default Arguments</a></li>
+<li class="chapter" data-level="3.4.2" data-path="more-about-arguments.html"><a href="more-about-arguments.html#argument-matching"><i class="fa fa-check"></i><b>3.4.2</b> Argument-Matching</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.5</b> Environments and Scope</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="environments-and-scope.html"><a href="environments-and-scope.html#environments-and-searching"><i class="fa fa-check"></i><b>3.5.1</b> Environments and Searching</a></li>
+<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.2</b> Function Environments</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="more-to-learn.html"><a href="more-to-learn.html"><i class="fa fa-check"></i><b>3.6</b> More to Learn</a></li>
+<li class="chapter" data-level="" data-path="glossary-1.html"><a href="glossary-1.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="flow.html"><a href="flow.html"><i class="fa fa-check"></i><b>4</b> Flow-Control</a><ul>
+<li class="chapter" data-level="4.1" data-path="prologue-prompting-the-user.html"><a href="prologue-prompting-the-user.html"><i class="fa fa-check"></i><b>4.1</b> Prologue: Prompting the User</a></li>
+<li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
+<li class="chapter" data-level="4.3.2" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loop-caution"><i class="fa fa-check"></i><b>4.3.2</b> For-Loop Caution</a></li>
+<li class="chapter" data-level="4.3.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#breaking-out-of-a-loop"><i class="fa fa-check"></i><b>4.3.3</b> Breaking Out of a Loop</a></li>
+<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#skipping-ahead-in-a-loop"><i class="fa fa-check"></i><b>4.3.4</b> Skipping Ahead in a Loop</a></li>
+<li class="chapter" data-level="4.3.5" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#repeat"><i class="fa fa-check"></i><b>4.3.5</b> Repeat</a></li>
+<li class="chapter" data-level="4.3.6" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#while"><i class="fa fa-check"></i><b>4.3.6</b> While</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="collatz-conjecture.html"><a href="collatz-conjecture.html"><i class="fa fa-check"></i><b>4.4</b> Application: The Collatz Conjecture</a></li>
+<li class="chapter" data-level="" data-path="glossary-2.html"><a href="glossary-2.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="turtle.html"><a href="turtle.html"><i class="fa fa-check"></i><b>5</b> Turtle Graphics</a><ul>
+<li class="chapter" data-level="5.1" data-path="basic-movements.html"><a href="basic-movements.html"><i class="fa fa-check"></i><b>5.1</b> Basic Movements</a></li>
+<li class="chapter" data-level="5.2" data-path="making-many-movements-an-introduction-to-looping.html"><a href="making-many-movements-an-introduction-to-looping.html"><i class="fa fa-check"></i><b>5.2</b> Making Many Movements: An Introduction to Looping</a></li>
+<li class="chapter" data-level="5.3" data-path="writing-turtle-functions.html"><a href="writing-turtle-functions.html"><i class="fa fa-check"></i><b>5.3</b> Writing Turtle Functions</a></li>
+<li class="chapter" data-level="5.4" data-path="random-moves.html"><a href="random-moves.html"><i class="fa fa-check"></i><b>5.4</b> Random Moves</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="random-moves.html"><a href="random-moves.html#sampling-from-a-vector"><i class="fa fa-check"></i><b>5.4.1</b> Sampling from a Vector</a></li>
+<li class="chapter" data-level="5.4.2" data-path="random-moves.html"><a href="random-moves.html#application-a-bouncing-turtle"><i class="fa fa-check"></i><b>5.4.2</b> Application: a Bouncing Turtle</a></li>
+<li class="chapter" data-level="5.4.3" data-path="random-moves.html"><a href="random-moves.html#uniform-random-numbers"><i class="fa fa-check"></i><b>5.4.3</b> Uniform Random Numbers</a></li>
+<li class="chapter" data-level="5.4.4" data-path="random-moves.html"><a href="random-moves.html#pseudo-randomness-and-setting-a-seed"><i class="fa fa-check"></i><b>5.4.4</b> Pseudo-Randomness and Setting a Seed</a></li>
+<li class="chapter" data-level="5.4.5" data-path="random-moves.html"><a href="random-moves.html#drunken-turtle-intro"><i class="fa fa-check"></i><b>5.4.5</b> Application: a Drunken Turtle</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="more-complex-turtle-graphs.html"><a href="more-complex-turtle-graphs.html"><i class="fa fa-check"></i><b>5.5</b> More Complex Turtle Graphs</a></li>
+<li class="chapter" data-level="" data-path="glossary-3.html"><a href="glossary-3.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>6</b> Simulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability-and-random-variables.html"><a href="probability-and-random-variables.html"><i class="fa fa-check"></i><b>6.1</b> Probability and Random Variables</a></li>
+<li class="chapter" data-level="6.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>6.2</b> Monte Carlo Simulation</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-a-probability"><i class="fa fa-check"></i><b>6.2.1</b> Estimating a Probability</a></li>
+<li class="chapter" data-level="6.2.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-an-expected-value"><i class="fa fa-check"></i><b>6.2.2</b> Estimating an Expected Value</a></li>
+<li class="chapter" data-level="6.2.3" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#the-law-of-large-numbers"><i class="fa fa-check"></i><b>6.2.3</b> The Law of Large Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="example-chance-of-a-triangle.html"><a href="example-chance-of-a-triangle.html"><i class="fa fa-check"></i><b>6.3</b> Example: Chance of a Triangle</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="example-chance-of-a-triangle.html"><a href="example-chance-of-a-triangle.html#setting-a-seed"><i class="fa fa-check"></i><b>6.3.1</b> Setting a Seed</a></li>
+<li class="chapter" data-level="6.3.2" data-path="example-chance-of-a-triangle.html"><a href="example-chance-of-a-triangle.html#program-development"><i class="fa fa-check"></i><b>6.3.2</b> Program Development</a></li>
+<li class="chapter" data-level="6.3.3" data-path="example-chance-of-a-triangle.html"><a href="example-chance-of-a-triangle.html#number-of-repetitions"><i class="fa fa-check"></i><b>6.3.3</b> Number of Repetitions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="example-will-they-connect.html"><a href="example-will-they-connect.html"><i class="fa fa-check"></i><b>6.4</b> Example: Will They Connect?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="example-will-they-connect.html"><a href="example-will-they-connect.html#vectorization-vs.looping"><i class="fa fa-check"></i><b>6.4.1</b> Vectorization vs. Looping</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="appeals-court-paradox.html"><a href="appeals-court-paradox.html"><i class="fa fa-check"></i><b>6.5</b> Example: the Appeals Court Paradox</a></li>
+<li class="chapter" data-level="6.6" data-path="example-how-many-numbers-needed.html"><a href="example-how-many-numbers-needed.html"><i class="fa fa-check"></i><b>6.6</b> Example: How Many Numbers Needed?</a></li>
+<li class="chapter" data-level="6.7" data-path="example-dental-floss.html"><a href="example-dental-floss.html"><i class="fa fa-check"></i><b>6.7</b> Example: Dental Floss</a></li>
+<li class="chapter" data-level="6.8" data-path="drunken-turtle-sim.html"><a href="drunken-turtle-sim.html"><i class="fa fa-check"></i><b>6.8</b> Example: The Drunken Turtle</a></li>
+<li class="chapter" data-level="" data-path="glossary-4.html"><a href="glossary-4.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="frames.html"><a href="frames.html"><i class="fa fa-check"></i><b>7</b> Data Frames</a><ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-matrices.html"><a href="introduction-to-matrices.html"><i class="fa fa-check"></i><b>7.1</b> Introduction to Matrices</a></li>
+<li class="chapter" data-level="7.2" data-path="matrix-indexing.html"><a href="matrix-indexing.html"><i class="fa fa-check"></i><b>7.2</b> Matrix Indexing</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="matrix-indexing.html"><a href="matrix-indexing.html#to-drop-or-not"><i class="fa fa-check"></i><b>7.2.1</b> To Drop or Not?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html"><i class="fa fa-check"></i><b>7.3</b> Operations on Matrices</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#arithmetical-operations"><i class="fa fa-check"></i><b>7.3.1</b> Arithmetical Operations</a></li>
+<li class="chapter" data-level="7.3.2" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>7.3.2</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="7.3.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#logical-operations"><i class="fa fa-check"></i><b>7.3.3</b> Logical Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
+<li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a></li>
+<li class="chapter" data-level="7.6" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html"><i class="fa fa-check"></i><b>7.6</b> Subsetting Data Frames</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html#boolean-expressions"><i class="fa fa-check"></i><b>7.6.1</b> Boolean Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="ordering-data-frames.html"><a href="ordering-data-frames.html"><i class="fa fa-check"></i><b>7.7</b> Ordering Data Frames</a></li>
+<li class="chapter" data-level="7.8" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html"><i class="fa fa-check"></i><b>7.8</b> New Variables from Old</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html#getting-rid-of-variables"><i class="fa fa-check"></i><b>7.8.1</b> Getting Rid of Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="more-graphing.html"><a href="more-graphing.html"><i class="fa fa-check"></i><b>7.9</b> More Graphing</a><ul>
+<li class="chapter" data-level="7.9.1" data-path="more-graphing.html"><a href="more-graphing.html#one-numerical-variable"><i class="fa fa-check"></i><b>7.9.1</b> One Numerical Variable</a></li>
+<li class="chapter" data-level="7.9.2" data-path="more-graphing.html"><a href="more-graphing.html#categorical-variables"><i class="fa fa-check"></i><b>7.9.2</b> Categorical Variables</a></li>
+<li class="chapter" data-level="7.9.3" data-path="more-graphing.html"><a href="more-graphing.html#one-numerical-and-one-categorical-variable"><i class="fa fa-check"></i><b>7.9.3</b> One Numerical and One Categorical Variable</a></li>
+<li class="chapter" data-level="7.9.4" data-path="more-graphing.html"><a href="more-graphing.html#two-numerical-variables"><i class="fa fa-check"></i><b>7.9.4</b> Two Numerical Variables</a></li>
+<li class="chapter" data-level="7.9.5" data-path="more-graphing.html"><a href="more-graphing.html#grouping-by-a-categorical-variable"><i class="fa fa-check"></i><b>7.9.5</b> Grouping by a Categorical Variable</a></li>
+<li class="chapter" data-level="7.9.6" data-path="more-graphing.html"><a href="more-graphing.html#application-u.s.-births"><i class="fa fa-check"></i><b>7.9.6</b> Application: U.S. Births</a></li>
+<li class="chapter" data-level="7.9.7" data-path="more-graphing.html"><a href="more-graphing.html#learn-more"><i class="fa fa-check"></i><b>7.9.7</b> Learn More</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-5.html"><a href="glossary-5.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>8</b> Lists</a><ul>
+<li class="chapter" data-level="8.1" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html"><i class="fa fa-check"></i><b>8.1</b> Introduction to Lists</a></li>
+<li class="chapter" data-level="8.2" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html"><i class="fa fa-check"></i><b>8.2</b> Subsetting and Accessing</a></li>
+<li class="chapter" data-level="8.3" data-path="splitting.html"><a href="splitting.html"><i class="fa fa-check"></i><b>8.3</b> Splitting</a></li>
+<li class="chapter" data-level="8.4" data-path="returning-multiple-values.html"><a href="returning-multiple-values.html"><i class="fa fa-check"></i><b>8.4</b> Returning Multiple Values</a></li>
+<li class="chapter" data-level="8.5" data-path="iterating-over-a-list.html"><a href="iterating-over-a-list.html"><i class="fa fa-check"></i><b>8.5</b> Iterating Over a List</a></li>
+<li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>9</b> Strings</a><ul>
+<li class="chapter" data-level="9.1" data-path="character-vectors-strings.html"><a href="character-vectors-strings.html"><i class="fa fa-check"></i><b>9.1</b> Character Vectors: Strings </a></li>
+<li class="chapter" data-level="9.2" data-path="characters-and-special-characters.html"><a href="characters-and-special-characters.html"><i class="fa fa-check"></i><b>9.2</b> Characters and Special Characters</a></li>
+<li class="chapter" data-level="9.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html"><i class="fa fa-check"></i><b>9.3</b> Basic String Operations</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="basic-string-operations.html"><a href="basic-string-operations.html#is-and-as"><i class="fa fa-check"></i><b>9.3.1</b> Is and As</a></li>
+<li class="chapter" data-level="9.3.2" data-path="basic-string-operations.html"><a href="basic-string-operations.html#number-of-characters"><i class="fa fa-check"></i><b>9.3.2</b> Number of Characters</a></li>
+<li class="chapter" data-level="9.3.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html#substrings-and-trimming"><i class="fa fa-check"></i><b>9.3.3</b> Substrings and Trimming</a></li>
+<li class="chapter" data-level="9.3.4" data-path="basic-string-operations.html"><a href="basic-string-operations.html#changing-cases"><i class="fa fa-check"></i><b>9.3.4</b> Changing Cases</a></li>
+<li class="chapter" data-level="9.3.5" data-path="basic-string-operations.html"><a href="basic-string-operations.html#splitting-strings"><i class="fa fa-check"></i><b>9.3.5</b> Splitting Strings</a></li>
+<li class="chapter" data-level="9.3.6" data-path="basic-string-operations.html"><a href="basic-string-operations.html#pasting-and-joining-strings"><i class="fa fa-check"></i><b>9.3.6</b> Pasting and Joining Strings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="formatted-printing.html"><a href="formatted-printing.html"><i class="fa fa-check"></i><b>9.4</b> Formatted Printing</a></li>
+<li class="chapter" data-level="" data-path="glossary-7.html"><a href="glossary-7.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="regex.html"><a href="regex.html"><i class="fa fa-check"></i><b>10</b> Regular Expressions</a><ul>
+<li class="chapter" data-level="10.1" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
+<li class="chapter" data-level="10.2" data-path="regex-practice-sites.html"><a href="regex-practice-sites.html"><i class="fa fa-check"></i><b>10.2</b> Regex Practice Sites</a></li>
+<li class="chapter" data-level="10.3" data-path="regex-syntax.html"><a href="regex-syntax.html"><i class="fa fa-check"></i><b>10.3</b> Regex Syntax</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="regex-syntax.html"><a href="regex-syntax.html#matching-a-specific-sequence"><i class="fa fa-check"></i><b>10.3.1</b> Matching a Specific Sequence</a></li>
+<li class="chapter" data-level="10.3.2" data-path="regex-syntax.html"><a href="regex-syntax.html#character-classes"><i class="fa fa-check"></i><b>10.3.2</b> Character Classes</a></li>
+<li class="chapter" data-level="10.3.3" data-path="regex-syntax.html"><a href="regex-syntax.html#quantification"><i class="fa fa-check"></i><b>10.3.3</b> Quantification</a></li>
+<li class="chapter" data-level="10.3.4" data-path="regex-syntax.html"><a href="regex-syntax.html#greedy-vs.lazy"><i class="fa fa-check"></i><b>10.3.4</b> Greedy vs. Lazy</a></li>
+<li class="chapter" data-level="10.3.5" data-path="regex-syntax.html"><a href="regex-syntax.html#grouping"><i class="fa fa-check"></i><b>10.3.5</b> Grouping</a></li>
+<li class="chapter" data-level="10.3.6" data-path="regex-syntax.html"><a href="regex-syntax.html#alternation"><i class="fa fa-check"></i><b>10.3.6</b> Alternation</a></li>
+<li class="chapter" data-level="10.3.7" data-path="regex-syntax.html"><a href="regex-syntax.html#anchors"><i class="fa fa-check"></i><b>10.3.7</b> Anchors</a></li>
+<li class="chapter" data-level="10.3.8" data-path="regex-syntax.html"><a href="regex-syntax.html#captures"><i class="fa fa-check"></i><b>10.3.8</b> Captures</a></li>
+<li class="chapter" data-level="10.3.9" data-path="regex-syntax.html"><a href="regex-syntax.html#looking-around"><i class="fa fa-check"></i><b>10.3.9</b> Looking Around</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>10.4</b> Entering a Regex in R</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>10.4.1</b> String to Regex</a></li>
+<li class="chapter" data-level="10.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#substitution"><i class="fa fa-check"></i><b>10.4.2</b> Substitution</a></li>
+<li class="chapter" data-level="10.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>10.4.3</b> A Note on <code>perl</code></a></li>
+<li class="chapter" data-level="10.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>10.4.4</b> Grepping</a></li>
+<li class="chapter" data-level="10.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>10.4.5</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="10.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>10.4.6</b> Regex Modes</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>10.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="" data-path="glossary-8.html"><a href="glossary-8.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="files.html"><a href="files.html"><i class="fa fa-check"></i><b>11</b> Files</a><ul>
+<li class="chapter" data-level="11.1" data-path="downloading-files.html"><a href="downloading-files.html"><i class="fa fa-check"></i><b>11.1</b> Downloading Files</a></li>
+<li class="chapter" data-level="11.2" data-path="reading-text-files-with-readlines.html"><a href="reading-text-files-with-readlines.html"><i class="fa fa-check"></i><b>11.2</b> Reading Text Files with <code>readLines()</code></a></li>
+<li class="chapter" data-level="11.3" data-path="reading-text-files-with-readr.html"><a href="reading-text-files-with-readr.html"><i class="fa fa-check"></i><b>11.3</b> Reading Text Files with <strong>readr</strong></a></li>
+<li class="chapter" data-level="11.4" data-path="writing-to-files.html"><a href="writing-to-files.html"><i class="fa fa-check"></i><b>11.4</b> Writing to Files</a></li>
+<li class="chapter" data-level="11.5" data-path="application-making-a-lexicon.html"><a href="application-making-a-lexicon.html"><i class="fa fa-check"></i><b>11.5</b> Application: Making a Lexicon</a></li>
+<li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>12</b> Functional Programming in R</a></li>
+<li class="chapter" data-level="13" data-path="oo.html"><a href="oo.html"><i class="fa fa-check"></i><b>13</b> Object-Oriented Programming in R</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beginning Computer Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="example-chance-of-a-triangle" class="section level2">
+<h2><span class="header-section-number">6.3</span> Example: Chance of a Triangle</h2>
+<p>In the examples considered so far, intuition or a simple calculation suggests what the exact value of the probability or expected value should be. The true power of the Monte Carlo simulation method shines forth in situations where it is difficult or impossible to compute a value mathematically.</p>
+<p>Let’s revisit an example from Section <a href="making-decisions-conditionals.html#ifelse">4.2.3</a>, where we considered whether or not three segments could be put together to form a triangle. We developed the following function to determine, from the lengths of each segment, whether or not a triangle is possible:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span>function(x, y, z) {
+  (x +<span class="st"> </span>y &gt;<span class="st"> </span>z) &amp;<span class="st"> </span>(x +z &gt;<span class="st"> </span>y) &amp;<span class="st"> </span>(y +<span class="st"> </span>z &gt;<span class="st"> </span>x)
+}</code></pre></div>
+<p>Recall also that this function applied to vectors of any length, so we can use it to decide about many triples of segments at once.</p>
+<p>Let’s now inject some chance variation into the situation. Suppose that you have a stick that if one unit in length: one foot, one meter, one yard—whatever. You plan to break the stick at two randomly selected points. Breaking the stick will yield three pieces. You wonder: what is the chance that these three pieces can form a triangle?</p>
+<p>In an advanced probability course you can show that the probability of a triangle is exactly <span class="math inline">\(1/4\)</span>. Here we would like to estimate the probability with Monte Carlo simulation.</p>
+<p>In order to carry out the simulation, we will need to develop code that produces a pair of break-points, any number of times that we like—let’s think about ten times, to start.</p>
+<p>This is not so difficult if we use the <code>runif()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)  <span class="co"># the first breaks</span>
+y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)  <span class="co"># the second breaks</span></code></pre></div>
+<p>Next we must compute—for each pair of breaks—the lengths of the three segments that are produced. If we knew that the <code>x</code> break was always less than the <code>y</code> break, this would be easy:</p>
+<ul>
+<li>the leftmost piece would be <code>x</code> units long;</li>
+<li>the middle piece would be <code>y</code> minus <code>x</code> units long;</li>
+<li>the rightmost piece would be 1 minus <code>y</code> units long.</li>
+</ul>
+<p>The problem is that a given <code>element</code> of the vector <code>y</code> can easily be less than than corresponding element of the vector <code>x</code>. When that happens, the pieces won’t be as described in the bullet-ed items above.</p>
+<p>We can solve this problem with the <code>pmin()</code> and <code>pmax()</code> functions  that were introduced in Section <a href="basic-arithmetical-operations-on-vectors.html#maxmin">2.7.1.5</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)
+b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)
+side1 &lt;-<span class="st"> </span>a     <span class="co"># leftmost</span>
+side2 &lt;-<span class="st"> </span>b -a  <span class="co"># middle</span>
+side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span>b <span class="co"># rigttmost</span></code></pre></div>
+<p>It is useful to write a helper-function that starts from the breaks, computes the sides, and then decides whether they form a triangle:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">makesTriangle &lt;-<span class="st"> </span>function(x, y) {
+  a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)
+  b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)
+  side1 &lt;-<span class="st"> </span>a
+  side2 &lt;-<span class="st"> </span>b-a
+  side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span>b
+  <span class="kw">isTriangle</span>(<span class="dt">x =</span> side1, <span class="dt">y =</span> side2, <span class="dt">z =</span> side3)
+}</code></pre></div>
+<p>Let’s try it our for our repetitions</p>
+<p>Table <a href="example-chance-of-a-triangle.html#tab:trianglesimstab">6.1</a> shows the results. Based on our ten repetitions, we would estimate the probability of a triangle as <span class="math inline">\(3/10\)</span>.</p>
+<table>
+<caption><span id="tab:trianglesimstab">Table 6.1: </span>Results of ten repetitions of breaking a unit length at two random points to form three segments.</caption>
+<thead>
+<tr class="header">
+<th align="right">x</th>
+<th align="right">y</th>
+<th align="right">side1</th>
+<th align="right">side2</th>
+<th align="right">side3</th>
+<th align="left">triangle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.6469028</td>
+<td align="right">0.7644140</td>
+<td align="right">0.6469028</td>
+<td align="right">0.1175112</td>
+<td align="right">0.2355860</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="right">0.3942258</td>
+<td align="right">0.7438358</td>
+<td align="right">0.3942258</td>
+<td align="right">0.3496100</td>
+<td align="right">0.2561642</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="right">0.6185018</td>
+<td align="right">0.8261657</td>
+<td align="right">0.6185018</td>
+<td align="right">0.2076639</td>
+<td align="right">0.1738343</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="right">0.4768911</td>
+<td align="right">0.4227291</td>
+<td align="right">0.4227291</td>
+<td align="right">0.0541621</td>
+<td align="right">0.5231089</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="right">0.1360972</td>
+<td align="right">0.4092877</td>
+<td align="right">0.1360972</td>
+<td align="right">0.2731905</td>
+<td align="right">0.5907123</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="right">0.0673844</td>
+<td align="right">0.5396926</td>
+<td align="right">0.0673844</td>
+<td align="right">0.4723082</td>
+<td align="right">0.4603074</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="right">0.1291526</td>
+<td align="right">0.9607224</td>
+<td align="right">0.1291526</td>
+<td align="right">0.8315698</td>
+<td align="right">0.0392776</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="right">0.3931179</td>
+<td align="right">0.6535573</td>
+<td align="right">0.3931179</td>
+<td align="right">0.2604394</td>
+<td align="right">0.3464427</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0025827</td>
+<td align="right">0.5467153</td>
+<td align="right">0.0025827</td>
+<td align="right">0.5441326</td>
+<td align="right">0.4532847</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="right">0.6202060</td>
+<td align="right">0.2660636</td>
+<td align="right">0.2660636</td>
+<td align="right">0.3541424</td>
+<td align="right">0.3797940</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+<p>Interestingly, R can compute the proportion of times that a triangle was formed directly from the logical vector <code>triangle</code>. Look at the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(triangle)</code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(triangle)</code></pre></div>
+<pre><code>## [1] 0.4</code></pre>
+<p>When we ask R to add the elements of a logical vector, it coerces the Boolean values to number: <code>TRUE</code> becomes 1 and <code>FALSE</code> becomes 0. Summing the numbers is then equivalent to counting how many times <code>TRUE</code> appeared in <code>triangle</code>. Taking the mean is equivalent to computing the proportion of <code>TRUE</code>s in <code>triangle</code>.</p>
+<p>We would like, of course, to simulate breaking the unit length many times, and we would like to be able to choose easily—without a lot of fuss in coding—the number of repetitions. It makes sense, therefore, to write a simulation function that will do our work for us:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span> ) {
+  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
+  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}</code></pre></div>
+<p>Now that we think about it, it might also be nice to have the option to view a table of the results, along with the estimate of the probability:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span> ) {
+  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
+  if ( table ) {
+    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    <span class="kw">print</span>(<span class="kw">table</span>(triangle))
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}</code></pre></div>
+<p>Let’s give our function a try, using the default of ten thousand repetitions and asking for a table of results:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">triangleSim</span>(<span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Here is a table of the results:
+## triangle
+## FALSE  TRUE 
+##  7466  2534 
+## 
+## The proportion of triangles was 0.2534.</code></pre>
+<p>As we would expect, our estimate of the probability of a triangle is pretty close to the value that is known to experts in probability.</p>
+<div id="setting-a-seed" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Setting a Seed</h3>
+<p>There are further possibilities for refining the simulation function. We know that it can be a good idea to set a seed for R’s random-number generator, when you do this, you still get random-looking results, but they will be the same results no matter how often you call the simulation function. In that way others who have access to your function can “reproduce” the results you got, assuring themselves that you weren’t making anything up. Let;s add a <code>seed</code> parameter to our simulation function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, seed ) {
+  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
+  if ( table ) {
+    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
+    <span class="kw">print</span>(<span class="kw">table</span>(triangle))
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}</code></pre></div>
+<p>This is all very well, but if for some reason you <em>desire</em> to have the function produce different results with every call, you have to come up with the seeds yourself. It would be nice to have the option to call your function without having to provide a seed.</p>
+<p>We would like to force R to provide a seed when it is not given one to use. Such a seed should vary from one call to another in a way that cannot be predicted easily.</p>
+<p>I suggest the use of the <code>Sys.time()</code> function, which gives your computer’s idea of the current time:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.time</span>()</code></pre></div>
+<pre><code>## [1] &quot;2017-04-04 22:40:42 EDT&quot;</code></pre>
+<p>This is not a number, but we can make it a number:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())</code></pre></div>
+<pre><code>## [1] 1491360043</code></pre>
+<p>The result is—on Unix-like computer systems—the number of seconds elapsed since January 1, 1970. It should serve pretty well as a seed. The following code implements a <code>seed</code> parameter in such a way that the system-time is used when the user does not supply a seed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
+  <span class="co"># if user does not provide a seed, set one</span>
+  <span class="co"># using the current time:</span>
+  if ( <span class="kw">is.null</span>(seed) ) {
+    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  }
+  <span class="co"># now we can set the seed:</span>
+  <span class="kw">set.seed</span>(seed)
+  
+  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
+  if ( table ) {
+    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
+    <span class="kw">print</span>(<span class="kw">table</span>(triangle))
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}</code></pre></div>
+<p>As long as you don’t make the very same simulation-function call twice in the same second, you should get different results on different calls.</p>
+</div>
+<div id="program-development" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Program Development</h3>
+<p>Think about how we developed the <code>triangleSim()</code> function.</p>
+<ol style="list-style-type: decimal">
+<li>We began by writing simple code that got us a simulation for a few repetitions.</li>
+<li>When we were sure how to make a simulation work, we <em>encapsulated</em> our code into a function that we could call to perform the simulation for us.</li>
+<li>We though about features that we would like the function to have—user chooses number of repetitions, user chooses whether to see a table, etc.—and implemented these features one by one. This made the function more <em>general</em>, i.e., useful in a wider range of settings.</li>
+</ol>
+<p>The above method of program development is called <em>encapsulation and gneralization</em>. For small projects of the sort that we have on hand, it’s a good way to go about writing a computer program.</p>
+</div>
+<div id="number-of-repetitions" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> Number of Repetitions</h3>
+<p>The Law of Large Numbers says that the more times you repeat the simulation, the better our estimate of the desired probability—or expected value—is liable to be. Let’s use the Stick Splitting Problem to investigate the effect of the choice of repetitions on the accuracy of our estimate of the probability of getting a triangle.</p>
+<p>We will need to run the <code>tringleSim()</code> function several times, with a different choice for <code>reps</code> each time, keeping track of the estimates we obtain each time. In the process we won’t need tables or other output to the console. Let’s rewrite <code>triangleSim()</code> for maximum flexibility, making console output optional and using the invisible return discussed in Section <a href="making-decisions-conditionals.html#invisible-returns">4.2.2</a>.<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>,
+                        <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
+  <span class="co"># if user does not provide a seed, set one</span>
+  <span class="co"># using the current time:</span>
+  if ( <span class="kw">is.null</span>(seed) ) {
+    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  }
+  <span class="co"># now we can set the seed:</span>
+  <span class="kw">set.seed</span>(seed)
+  
+  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
+  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
+  if ( table ) {
+    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
+    <span class="kw">print</span>(<span class="kw">table</span>(triangle))
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+  if ( verbose ) {
+    <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  }
+  <span class="kw">invisible</span>(<span class="kw">mean</span>(triangle))
+}</code></pre></div>
+<p>Next, we make a vector of repetitions, and a vector to hold our estimates:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>)
+estimates &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">length</span>(reps))</code></pre></div>
+<p>Next we loop through <code>reps</code>, performing a complete simulation for each repetition-number and storing our results:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for ( i in <span class="dv">1</span>:<span class="kw">length</span>(reps)) {
+  estimates[i] &lt;-<span class="st"> </span><span class="kw">triangleSim</span>(<span class="dt">reps =</span> reps[i], <span class="dt">seed =</span> <span class="dv">3030</span>,
+                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+}</code></pre></div>
+<p>Let’s have a look at our estimates:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(estimates) &lt;-<span class="st"> </span>reps
+estimates</code></pre></div>
+<pre><code>##      100     1000    10000    1e+05    1e+06 
+## 0.200000 0.245000 0.254700 0.251570 0.249779</code></pre>
+<p>The estimates are indeed getting closer to the theoretical value of <span class="math inline">\(1/4\)</span>.<a href="#fn16" class="footnoteRef" id="fnref16"><sup>16</sup></a></p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="15">
+<li id="fn15"><p>The addition of the invisible return may be thought of as yet another step in the encapsulation-and-generalization process of program development!<a href="example-chance-of-a-triangle.html#fnref15">↩</a></p></li>
+<li id="fn16"><p>Statistical theory tells us that when we use Monte Carlo simulation to estimate a probability or an expected value, then the likely size of the error in the approximation is inversely proportional to the square root of the number of repetitions we use. From this it follows that to cut the likely size of the error in half you should increase the number of repetitions by a factor of 4. If you want the likely size to be one-third as big, increase repetitions by a factor of 9, and so on.<a href="example-chance-of-a-triangle.html#fnref16">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="monte-carlo-simulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="example-will-they-connect.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["r-notes.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

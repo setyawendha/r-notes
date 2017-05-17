@@ -1,0 +1,1464 @@
+# Object-Oriented Programming in R {#oo}
+
+```{block2, oo-example-r6, type='leadquote'}
+
+repeat {
+
+\ \ \ \ coffeeMug$drinkFrom()`
+
+\ \ \ \ workTask$execute()
+  
+\ \ \ \ if ( coffeeMug$empty() ) {
+  
+\ \ \ \ \ \ \ \ if ( coffeePot$empty() ) {
+    
+\ \ \ \ \ \ \ \ \ \ \ \ coffeePot$make()
+      
+\ \ \ \ \ \ \ \ \ \ \ \ coffeeMug$fill()
+      
+\ \ \ \ \ \ \ \ }
+    
+\ \ \ \ }
+  
+\ \ \ \ if ( workTask$done() ) {
+  
+\ \ \ \ \ \ \ \ break
+    
+\ \ \ \ }
+  
+}
+
+
+```
+
+Our journey with R began in the Procedural Programming paradigm.  In the last Chapter we learned about R's extensive support for the more modern paradigm known as Functional Programming.  In the present Chapter we will explore one of the ways in which R supports a third modern programming paradigm:  Object-Oriented Programming.
+
+\newpage
+
+##  The Object-Oriented Programming Paradigm
+
+We started out with Procedural Programming, which draws a distinction between data and procedures.  Data provides out information, and procedures solve problems by manipulating data into new forms.  \index{procedural programming}
+
+Functional Programming puts functions at the center of attention. \index{functional programming} As much as possible, procedures are wrapped up in function calls, and by their status as first-class citizens (data) functions become king.  Everything that happens is a result of function calls on data--where the data can include other functions.
+
+You could say that Object-Oriented Programming \index{object-oriented programming} reverses the point of view, attempting to put objects--conceived as complex forms of data--at the center of attention.
+
+There are two major types of Object-Oriented (OO) Programming:
+
+* **Message-Passing OO** 
+* **Generic-Function OO**
+
+Message-Passing OO \index{message-passing oo}is the type of OO Programming that programmers usually associate with the term "object-oriented", and since it is the type that you will meet most frequently in other languages that support OO-programming we will discuss it first.  Generic-Function OO is actually the older type of OO Programming.  Although it is very important for understanding some aspects of how R works, it is met with less frequently in other major programming languages, so we will defer discussion of it until Section \@ref(generic-function-oo).  Accordingly, the following introductory remarks pertain only to message-passing OO.
+
+Objects in the world about us are indeed complex entities:  they have particular features.  Some of these features they have in virtue of the kind of object that they are, and others are features--*attributes*--that they have on their own, as individuals.  And they can do various things.  Again, some of the things they are do things that they do simply because of the kind of thing they are, and others things they do might be unique to them. \index{attribute}
+
+Consider a typical object:  my dog, for example.  He has various attributes:  his name is Beau, he has four legs, he weighs about 50 pounds, his hair is black.  And he does various things---he has various *methods*, let's say, for making his way through life.  For example, when we are out of the house he lies in the sofa, when we are home he lies on the floor.  He barks.  He eats.  He annoys cats. \index{method}
+
+Some of his attributes and methods Beau has simply in virtue of being the kind of thing that he is.  He is, after all, a dog---a member of the class Dog, let's say---and so like all other dogs he will have four legs and he will be able to bark and to annoy cats. Of course all dogs are animals---members of the more general class Animal, let's say---and all animals eat, so as an animal Beau *inherits* \index{inheritance}the method known as eating.  Of course all animals are material beings---members of the even-more general class Being, let's say---and all beings have a weight, and thus Beau has a weight, but the particular value of that weight---50 pounds---is determined by the way he has lived his life thus far.  Other dogs, animals and material beings a weight, but they won't necessarily have the same weight as Beau.
+
+What emerges from this discussion is an (admittedly oversimplified) view of the world as a collection of complex objects.  These objects hare related to one another in systematic ways--related closely when they are, for instance, both Dogs, and more more distantly, as when one is a Dog and another is a Cat.  And these objects can act on each themselves and each other in various ways, through their methods.
+
+The idea of the Object-Oriented Programming is that since we are so used to viewing the *world* as a collection of objects that are constituted of various attributes and methods and that are related to one another through membership in classes of varying levels of generality, then it might be help us to be able to view a *computer program* similarly---as a collection of objects thus constituted and thus related to one another.
+
+Like many other modern programming languages, R provides considerable support for the Object-Oriented paradigm.  In fact it provides that support in two different formats:
+
+* Reference Classes
+* R6 Classes
+
+Reference Classes are a relatively recent introduction to R.  R6 Classes are a simple and lightweight version of Reference Classes.  They are not a part of the core of R---they are enabled by a contributed R-package---but they are quite useful as an introduction to object-oriented programming.  Accordingly, we will work with them in this Chapter.
+
+The package **R6** [@R-R6] provides access to R6 classes.  You will need to attach it:
+
+```{r eval = F}
+library(R6)
+```
+
+```{r include = F}
+library(R6)
+```
+
+
+## Reference Classes with Package R6
+
+We'll get started by creating a miniature computerized world of objects that is based on characters from the Wizard of Oz.
+
+### Defining a Class
+
+Construction of the object world begins with the definition of classes.  A *class* is simply a general prototype on the basis of which actual objects may be created.
+
+Let's define the class `Person`.  This is accomplished with the `R6Class()` function:  \index{R-functions!R6::R6Class()@\texttt{R6::R6Class()}}
+
+```{r}
+Person <- R6Class(classname = "Person",
+                  public = list(
+                    name = NULL,
+                    age = NULL,
+                    desire = NULL,
+                    initialize = function(name = NA, age = NA, desire = NA) {
+                      self$name <- name
+                      self$age <- age
+                      self$desire <- desire
+                      self$greet()
+                    },
+                    set_age = function(val) {
+                      self$age <- val
+                      cat("Age of ", self$name, " is:  ", val, ".\n", sep = "")
+                    },
+                    set_desire = function(val) {
+                      self$desire <- val
+                      cat("Desire of ", self$name, " is:  ", val, ".\n", sep = "")
+                    },
+                    greet = function() {
+                      cat(paste0("Hello, my name is ", self$name, ".\n"))
+                    }
+                  )
+)
+```
+
+Let's analyze the above code.  The function `R6Class()` has a quite a few parameters, but the two with which we will concern ourselves the most are:
+
+* `classname`:  the name we propose to give to the class;
+* `public`:  a list of members of the class that are "public" in the sense that they can be accessed and used outside of the class.^[`R6Class()` has another parameter called `private`, which takes as value a list of members that can only be accessed within the class by members of the class, not by programmers working outside of the class itself.  In the course of development of very large and complex programs, it can be useful to keep some members private so that programmers don't accidentally change too much about the way objects work.  Since our programs are still on the small side, we won't worry about private members, for now.] Members are of two types:
+    * *attributes*:  \index{attribute}the objects `name`, `age` and `desire`.  Currently these have value `NULL`, but they can be given other values later on.  What makes then attributes, though, is that they will not be given a function as a value.
+    * *methods*:  \index{method}these are members of the class that are functions.  You can think of a "method" as a particular way of performing a common task that could be performed in many different ways. The four methods you see in `Person` are:
+    * `initialize`:  This is a function that will be run whenever a new object of class Person is created.  As we can see from its arguments, it will be possible to give values to the attributes `name`. `age` and `desire`  when this function is called.
+    * `set_age` and `set_desire` are functions that allow a user to set or to change the value of `age` and `desire` for an object of class Person.
+    * `greet`:  a function that will permit an object of class Person to issue a greeting.
+    
+Note the use of the term `self` in the code for the methods of the class.  When a method is called on an object, the term `self` will refer to the object on which the method is being called.  Hence, for example, in the code for `greet` the term `self$name` will evaluate to the name of the person who issues the greeting.
+
+
+### Instantiation:  Initializing Objects
+
+On its own there is not much that a class can *do*.  For anything to happen we need to create a particular individual:  an object of class Person.  Creation of an object having a particular class is called *instantiation*. \index{instantiation}
+
+Every class comes with a method---not mentioned in the definition of the class---called `new()`.  This method, when called on the Class, instantiates an object of the class by running the `initialize()` function.  Let's create a person named Dorothy and store this new object in the variable `dorothy`:
+
+
+
+```{r}
+dorothy <- Person$new(name = "Dorothy", age = 12, 
+                      desire = "Kansas")
+```
+
+Note how the dollar-sign is used to indicate the calling of the `new()` method on the class Person.  Note also that the arguments of `new()` are the arguments of `initialize()`:  that's because the `new()` method actually runs `initialize()` as part of its object-creation process.
+
+We can get a look at `dorothy` by printing her to the console:
+
+```{r}
+dorothy
+```
+
+We get the basic information on Dorothy, including also an indication that she can be cloned (copied).  We'll discuss cloning later.
+
+We can instantiate as many people as we like.  The code below for example, establishes `scarecrow` as a new instance of Person:
+
+```{r}
+scarecrow <- Person$new(name = "Scarecrow", age = 0.038, 
+                      desire = "Brains")
+```
+
+In *The Wizard of Oz*, Scarecrow is only two weeks old when Dorothy meets him, so his age is set at $2/52 = 0.38$ years.
+
+### Getting and Setting Attributes
+
+If we would like to change Dorothy's age, we can do so by calling the `set_age()` method on her:
+
+```{r}
+dorothy$set_age(13)
+```
+
+
+```{r}
+dorothy$age
+```
+
+We can also set Dorothy's age directly, by regular assignment:
+
+```{r}
+dorothy$age <- 14
+```
+
+
+```{r}
+dorothy$age
+```
+
+The effect is the same as when we use `set_age()` except that we don't get a report to the console.
+
+### Calling Methods
+
+We have seen that in order to call a method on an object, you follow the format:
+
+```{r eval = F}
+object$method()
+```
+
+Thus, we can ask `dorothy` to issue a greeting:
+
+```{r}
+dorothy$greet()
+```
+
+In the syntax for calling methods, we see one aspect of "message-passing":  `dorothy$greet()` essentially passes a message to `dorothy`:  "Please call your `greet()` method!"
+
+
+### Holding a Reference, not a Value
+
+\index{reference semantics}
+\index{value semantics}
+
+R6 objects operate by what are known in computer programming as *reference semantics*.  This means that when the assignment operator is used to assign an R6 object to a variable, the new variable holds a *reference* to that object, not a copy of the new object.  This is in contrast *value semantics*, which is the way assignment usually works in R.  In value semantics, R a distinct copy of the value of the assigned object is created, and the new variable refers to that copy.
+
+Below is an example of the familiar value semantics in action:
+
+
+```{r}
+a <- 10
+b <- a
+b <- 20
+a
+```
+
+`b` has been changed to 20, but that change did not affect `a`, which keeps its initial value of 10.
+
+We can use the function `address()` \index{R-functions!pryr::address()@\texttt{pryr::address()}} from the package **pryr** [@R-pryr] to track what is happening behind the scenes.  `address()` will tell us the current location in memory of the value corresponding to a name.  Let's repeat the above process, but use `address()` to see where the values are stored:
+
+```{r}
+a <- 10
+pryr::address(a)
+```
+
+The value 10 is stored in the memory address given above.  Next, let's create `b` by assignment from `a`:
+
+```{r}
+b <- a
+pryr::address(b)
+```
+
+For the moment `b` points to the same place in memory as `a` does, so it will yield 10:
+
+```{r}
+b
+```
+
+We can use `b` for other operations; for example, we can add 30 to it:
+
+```{r}
+b + 30
+```
+
+But for now `b` still points to the same place in memory that `a` does:
+
+```{r}
+pryr::address(b)
+```
+
+But now let's assign a new value to `b`:
+
+```{r}
+b <- 20
+pryr::address(b)
+```
+
+Aha! `b` now points to a **new** location in the computer's memory!  That's because R saw that the assignment operator was going to change the value of `b`.  Since `b` has value semantics, R knows to set aside a new spot in memory to contain the value 20, and to associate the name `b` with that spot.  That way, the new `b` won't interfere with `a`, which points to the same old spot in memory and thus remains 10:
+
+```{r}
+pryr::address(a)
+a
+```
+
+On the other hand, R6 objects have *reference semantics*.  We can see this in action with the following example.  First, let's check on `dorothy`'s age:
+
+
+```{r}
+dorothy$age
+```
+
+Let's now create `dorothy2` by assignment from `dorothy`:
+
+
+```{r}
+dorothy2 <- dorothy
+```
+
+Let's check the memory locations:
+
+```{r}
+c(pryr::address(dorothy), pryr::address(dorothy2))
+```
+
+
+As with `a` and `b`, the two names initially point to the same place in memory.
+
+Now let's change the age of `dorothy2` to 30:
+
+```{r}
+dorothy2$age <- 30
+```
+
+Let's check the age of `dorothy`:
+
+```{r}
+dorothy$age
+```
+
+Whoa!  Changing the age of `dorothy2` changed the age of `dorothy`!  That's because of the reference semantics:  `dorothy2` continues to be associated with the same spot in memory as `dorothy`, *even after* we begin to make changes to it:
+
+```{r}
+c(pryr::address(dorothy), pryr::address(dorothy2))
+```
+
+### Cloning an Object
+
+\index{cloning}
+
+For the sorts of complex objects created by R6 classes, reference semantics can be a useful feature.  But what if we want a new and truly distinct copy of an R6 object? for this we need the `clone()` method that was alluded to earlier:
+
+```{r}
+dorothy2 <- dorothy$clone()
+dorothy2
+```
+
+`dorothy2` looks just like `dorothy`.  However, the name `dorothy2` does not point to the same place in memory:
+
+```{r}
+c(c(pryr::address(dorothy), pryr::address(dorothy2)))
+```
+
+Accordingly, changes to `dorothy2` will no longer result in changes to `dorothy`:
+
+```{r}
+dorothy2$age <- 100
+dorothy$age
+```
+
+
+You should know that if one or more of the members of an object is itself an object with reference semantics (such as an instance of an R6 class), then a copy produced by `clone()` will hold a reference to that same member-object, not a separate copy of the member-object.  In such a case if you still want a totally separate copy, you will have to consult the R6 manual on the topic of "deep cloning."
+
+
+## Inheritance
+
+\index{inheritance}
+
+Earlier we mentioned that in the real world an object may possess a property in virtue of being the particular kind of thing that it is, or it may possess that property in virtue of being a member of some more general class of things.  Thus a dog can eat, not because it is a dog *per se*, but because it is an animal.  You could say that dogs "inherit" the capacity to eat from the class Animal.
+
+Most object-oriented frameworks allow for some type of inheritance between classes, and R6 is no exception.  In the *Wizard of Oz* lions appear to be a special type of person:  after all, they can speak, and they have desires.  Accordingly, we should create a new class Lion that inherits from the class Person:
+
+```{r}
+Lion <- R6Class("Lion",
+                inherit = Person,
+                public = list(
+                  weight = NULL,
+                  set_weight = function(val) {
+                    self$weight <- val
+                    cat(self$name, " has weight:  ", val, ".\n", sep = "")
+                  },
+                  greet = function() {
+                    cat("Grr!  My name is ", self$name, "!", sep = "")
+                    }
+                  )
+                )
+```
+
+The key to inheritance is the new argument in the code above:
+
+>`inherit = Person`
+
+The impact of this additional argument is that any instance of the class Lion will possess by default all of the attributes and methods of class Person, in addition to the new attributes and methods (`weight`, `set_weight`, and `greet`) specified explicitly in the definition of class Lion.  Of these three explicitly-defined members:
+
+* `weight` and `set_weight`were not already in Person, so they are simply added on as members of Lion;^[In the real world any person---not just any lion---has a weight.  By making weight a feature specific to class Lion we are simply indicating that in our program weight is of particular importance to lions, but not to people in general.]
+* `greet` was already a member of Person, but the new specification of `greet` in the definition of Lion *overrides* the old one.  Any instance of class Lion will greet us according to the code for `greet()` given in the definition of Lion.  (Objects that are instances of the class Person, however, will go on greeting us just as they always have done.)
+
+Let's verify all of this by making an instance of class Lion:
+
+```{r}
+cowardlyLion <- Lion$new(name = "Cowardly Lion", 
+                         age = 18, desire = "courage")
+```
+
+Since the definition of class Lion did not specify a new method of initialization---we could have asked for this, but chose not to---the instantiation of a lion won't set its weight.  We will have to do that separately:
+
+
+```{r}
+cowardlyLion$set_weight(350)
+```
+
+
+Inheritance is an very effective way to re-use code and to keep code for a particular function in one place.  Once we have written methods for some class X, those methods will be available to any objects that are instances of classes that inherit from class X.  Hence there is no need to repeat the code in the definition of the inheriting classes.  Later on if we need to modify one of of the class X methods, we need only make the change in class X:  we don't have to worry about changing it in all of the classes that inherit from X.
+
+Let's ask `cowardlyLion` to greet us:
+
+```{r}
+cowardlyLion$greet()
+```
+
+As expected, the greeting includes a growl, since the `greet()` method for class Lion overrides the growl-less `greet()` method that it would have otherwise inherited from class Person.  We also see a fundamental aspect of message-passing OO at work:
+
+>The method used for determining how a particular task is performed is determined by the class of the object that is asked to perform the task.
+
+Here we have the task of greeting, which is common to objects of class Person and to objects of class Lion.  That task may be performed with or without a growl.  Precisely how it is performed---the method that is selected for carrying out the task---depends upon the class of the object that performs the greeting:  an object of class Person will greet you without a growl, whereas an object of class Lion will greet you with a growl.
+
+The common task of greeting may be performed in different ways, depending upon the class of the object involved in the task.  This is an example of what programmers call *polymorphism*.  \index{polymorphism}The term "polymorphism" comes from a Greek word that means "many forms", and it refers to a task being performed differently depending on the class of the object involved.  Polymorphism makes programming a bit easier:  you only have to remember the name of the one common task.  Invoke it on object and you can rest assured that the task will be performed in the way that is right and proper to that object.
+
+## Adding Members to a Class
+
+Sometimes we need to add or to modify a member of a class, after we have defined that class. Every class comes with a `set()` method that allows us to do this.  For example, suppose that we would like our people to have a favorite color:
+
+
+```{r}
+Person$set("public", "color", NA, overwrite = T)
+```
+
+We now see that `color` is now one of the public members of class Person:
+
+```{r}
+Person
+```
+
+In the above call to set, the argument `overwrite = T` was not strictly necessary, since `color` did not previously exist as a member of Person.  If you are developing a program, though, and you find yourself repeatedly running a piece of code that sets a new member for a class, it's useful to have overwriting turned on.
+
+While we are at it. let's write a special `set_color()` method:
+
+
+```{r}
+Person$set("public", "set_color", function(val) {
+  self$color <- val
+  cat(self$name, " has favorite color: ", val, ".\n", sep = "")
+  }, overwrite = T)
+```
+
+You might think that we can now set a favorite color for `dorothy`:
+
+```{r eval = F}
+dorothy$set_color("blue")
+```
+
+```
+Error: attempt to apply non-function
+```
+
+Why did this not work?  It turns out that when you add a new member to a class it is only available to instances of the class that are created **after** the new member is added to that class.  If we create a new instance of Person, the Good Witch Glinda, let's say, then we should be able to give her a favorite color:
+
+```{r}
+glinda <- Person$new("Glinda", "500", "the good of all")
+glinda$set_color("blue")
+```
+
+
+
+## Method Chaining
+
+In this Section we will explore a concise and convenient device for calling multiple methods on an object.  The device is known as *method chaining*. \index{method chaining}.
+
+In order to illustrate method chaining, we'll extend the class Lion a bit, with some new attributes and new methods.  First of all, we'd like to add a data frame consisting of possible animals on which a lion might prey.  The data frame will contain the name of each type of animal, and an associated weight.
+
+
+```{r}
+animal <-  c("zebra", "giraffe", "pig", 
+             "cape buffalo", "antelope", "wildebeast")
+mass <- c(50, 100, 25, 60, 45, 55)
+prey <- data.frame(animal, mass, stringsAsFactors = F)
+```
+
+Let's now add `prey` as a new attribute to class Lion.  We will also add an attribute `eaten`:  a character vector---initially empty---that will contain a record of all the animals that the lion has eaten.
+
+```{r}
+Lion$set("public", "prey", prey, overwrite = T)
+Lion$set("public", "eaten", character(), overwrite = T)
+```
+
+Let us now endow our lions with the capacity to eat a beast of prey, by adding the method `eat()`:
+
+```{r}
+Lion$set("public", "eat", function() {
+  n <- nrow(self$prey)
+  item <- self$prey[sample(1:n, size = 1), ]
+  initLetter <- substr(item$animal, 1, 1)
+  article <- ifelse(initLetter %in% c("a", "e", "i", "o", "u"), "An ", "A ")
+  cat(article, item$animal, " was eaten just now ...\n\n", sep = "")
+  self$eaten <- c(self$eaten, item$animal)
+  self$weight <- self$weight + item$mass
+  return(invisible(self))
+}, overwrite = T)
+```
+
+When it eats an animal---randomly selected from the `prey` data frame---the lion gains the amount of weight that is associated with its unfortunate victim, and the victim is added to the lion's `eaten` attribute.
+
+Note that the `eat()` method returns `self` invisibly.  When the method is called on a lion, that very lion itself is returned as a value, but since it is returned invisibly it won't be printed to the console.  The usefulness of returning `self` will soon become apparent.
+
+Lions enjoy talking about what they have eaten recently, and for some reason they monitor their weight obsessively.  The new method `report()` accounts for these characteristics of lions:
+
+```{r}
+Lion$set("public", "report", function() {
+  n <- length(self$eaten)
+  if ( n >= 1 ) {
+    cat("My name is ", self$name, ".\n", sep = "")
+    cat("My most recent meal consisted of: ", self$eaten[n], ".\n", sep = "")
+  }
+  cat("I now weigh ", self$weight, " pounds.\n", sep = "")
+  return(invisible(self))
+}, overwrite = T)
+```
+
+Note that `report()` also returns the lion invisibly.
+
+Let us now instantiate a new lion named Simba:
+
+```{r}
+simba <- Lion$new(name = "Simba", age = 10, 
+                  desire = "Hakuna Matata")
+simba$set_weight(300)
+```
+
+Having been created after the addition of the `prey` and `eaten` attributes and the `eat()` and `report()` methods, `simba` has access to all of them.  in particular, he can eat a random beast of prey:
+
+
+```{r echo = 2:2}
+set.seed(2020)
+simba$eat()
+```
+
+`simba` has eaten, and he has presumably gained some weight as a result.  Let's see verify this by asking for his report:
+
+```{r}
+simba$report()
+```
+
+Let's now have `simba` eat twice more, and then report.  Because `eat()` and `report()` both return `simba`, we can 
+
+* call `eat()` on `simba,
+* and then immediately call `eat()` on the result,
+* and finally call `report()` on the result of our second call.
+
+All of this can be accomplished in one line of calls, in which the three method-calls are "chained" together with dollar-signs:
+
+```{r}
+simba$eat()$eat()$report()
+```
+
+In object-oriented programming languages you will see method-chaining used quite frequently.
+
+## Application:  Whales in an Ocean
+
+Let's now write a more elaborate program in the object-oriented style.  Our program will simulate the population growth for whales in a ocean. In our model, 
+
+* Whales are mostly solitary:  they move randomly about the ocean, happily feeding upon plankton.
+* When a male and female whale are sufficiently close together the female whale will do a check on the male to see if he is mature enough to mate.  If she herself is fertile, then she will mate with him and a child will be produced.
+* That child will be either male or female, with equal likelihood for either option.
+* After mating, the female will be infertile for a period of time.
+* Whales have a set maximum lifetime.
+* in any given time period, it is possible for a whale to starve, causing it to die before reaches its lifespan.  The probability of starvation is low when the whale population is small (presumably there is plenty of plankton available then) but the starvation-probability increases in direct proportion to the population.
+
+From the above conditions you can see that if the whale population is small then there is low probability of starvation, but on the other hand whales are liable to be spread thinly throughout the ocean.  As a result males and females are relatively unlikely to run across each other, and hence births are less likely to occur.  with a low enough population there is a strong possibility that the whales will die off before they can reproduce.  (This is why biologist worry about some whale populations:  if it is hunted to the point where the population is below a certain critical threshold, then the can go extinct on their own, even if hunting ceases.)  On the other hand, if the whale population grows large then males and female meet frequently, and there are plenty of births.  On the other hand there is a general shortage of food, resulting in high starvation rates.  At some point birth and starvation balance each other out, resulting in a long-term equilibrium population-level.
+
+We will implement our simulation with various objects:
+
+* an ocean
+* whales of two types:
+    * male whales
+    * female whales
+    
+We will begin by defining the class Whale:
+
+
+```{r}
+Whale <- R6Class("Whale",
+                 public = list(
+                   position = NULL,
+                   age = NULL,
+                   lifespan = NULL,
+                   range = NULL,
+                   maturity = NULL,
+                   stepSize = NULL,
+                   initialize = function(position = NA, age = 3,
+                                         lifespan = 40, range = 5,
+                                         maturity = 10, stepSize = 5) {
+                     self$position <- position
+                     self$age <- age
+                     self$lifespan <- lifespan
+                     self$range <- range
+                     self$maturity <- maturity
+                     self$stepSize <- stepSize
+                   }
+                 ))
+```
+
+For whales that are instances of the Whale class:
+
+* `position` will contain the current x and y-coordinate of the whale in a two-dimensional ocean;
+* `age` will give the current age of the whale.
+* `lifespan` is the maximum age that the whale can attain before it dies.
+* `range` is how close the whale has to be to another whale of the opposite sex in order to detect the presence of that whale.
+* `maturity` is the age that the whale must attain in order to be eligible to mate.
+* `stepSize` is the distance that the whale moves in the ocean in a single time-period.
+
+Whales need to be able to move about in the sea.  A whale moves by picking a random direction---any angle between 0 and $2\pi$ radians---and then moving `stepSize` units in that direction.  If the selected motion would take the whale outside the boundaries of the ocean, then R will repeat the motion until the whale lands properly within the boundaries.
+
+The motion of a whale is implemented in the code below for a `move()` method that is added to class Whale:
+
+```{r}
+Whale$set("public",
+          "move",
+          function(dims, r = self$stepSize) {
+            xMax <- dims[1]
+            yMax <- dims[2]
+            repeat {
+              theta <- runif(1, min = 0, max = 2*pi)
+              p <- self$position + r * c(cos(theta), sin(theta))
+              within <- (p[1] > 0 && p[1] < xMax) && (p[2] > 0 && p[2] < yMax)
+              if ( within ) {
+                self$position <- p
+                break
+              }
+            }
+          }, overwrite = T)
+```
+
+Note the parameter `dims` for the move function.  from the code we can tell that it's a vector of length 2.  In fact parameter will contain the x and and y-dimensions (the width and breadth) of our ocean.  It's something that will have to be determined by the ocean itself.  We haven't written the class Ocean yet, so this part of the code will have to remain a bit mysterious, for now.
+
+We need male and female whales, so we create a class for each sex.  Both classes inherit from Whale.  The class Male adds only a `sex` attribute:
+
+
+
+```{r}
+Male <- R6Class("Male",
+                inherit = Whale,
+                public = list(
+                  sex = "male"
+                ))
+```
+
+A female whale is a bit more complex:  in addition to a sex attribute, she needs an attribute that specifies how long she will be infertile after giving birth, and another attribute that enables the program to keep track of the number of time-periods she must wait until she is fertile again:
+
+```{r}
+Female <- R6Class("Female",
+                inherit = Whale,
+                public = list(
+                  sex = "female",
+                  timeToFertility = 0,
+                  infertilityPeriod = 5
+                ))
+```
+
+A female whale also needs a method to determine whether a mature whale is in the vicinity:
+
+
+```{r}
+Female$set("public",
+           "maleNear",
+           function(males, dist) {
+             foundOne <- FALSE
+             for ( male in males ) {
+               near <- dist(male$position, self$position) < self$range
+               mature <- (male$age >= male$maturity)
+               if ( near && mature ) {
+                 foundOne <- TRUE
+                 break
+               }
+             }
+             foundOne
+           }, overwrite = T)
+```
+
+Again, note the parameters `males` and `dist`.  Values for these parameters will be provided by the ocean object.  `males` will be a list of the male whales in the population at the current time, and `dist` will be a function for computing the distance between any two points in the ocean.
+
+A female whale also needs to be able to mate:
+
+```{r}
+Female$set("public",
+           "mate",
+           function() {
+             babySex <- sample(c("female", "male"), size = 1)
+             self$timeToFertility <- self$infertilityPeriod
+             return(babySex)
+           }, overwrite = T)
+```
+
+Now it is time to define the Ocean class.  It's a bit of a mouthful:
+
+```{r}
+Ocean <- R6Class("Ocean",
+                 public = list(
+                   dimensions = NULL,
+                   males = NULL,
+                   females = NULL,
+                   malePop = NULL,
+                   femalePop = NULL,
+                   starveParameter = NULL,
+                   distance = function(a, b) {
+                     sqrt((a[1] - b[1])^2 + (a[2] - b[2])^2)
+                   },
+                   initialize = function(dims = c(100, 100),
+                                         males = 10,
+                                         females = 10,
+                                         starve = 5) {
+                     self$dimensions <- dims
+                     xMax <- dims[1]
+                     yMax <- dims[2]
+                     maleWhales <- replicate(
+                       males, 
+                       Male$new(age = 10, 
+                                position = c(runif(1, 0, xMax),
+                                            runif(1, 0, yMax))))
+                     femaleWhales <- replicate(
+                       females, 
+                       Female$new(age = 10, 
+                                  position = c(runif(1, 0, xMax), 
+                                               runif(1, 0, yMax))))
+                     self$males <- maleWhales
+                     self$females <- femaleWhales
+                     self$malePop <- males
+                     self$femalePop <- females
+                     self$starveParameter <- starve
+                   },
+                   starvationProbability = function(popDensity) {
+                     self$starveParameter * popDensity
+                   }
+                 ))
+```
+
+In an instantiation of the class Ocean:
+
+* `dimensions` will be numerical vector of length 2 that specifies the width and breadth of the ocean.
+* `males` and `females` will be lists that contain respectively the current sets of male whales and female whales.  Note that this implies that an ocean will contain as members other items that are themselves R6 classes.  This is an example of what is called *composition* \index{composition}in object-oriented programming.
+* `malePop` and `femalePop` give respectively the current counts male and females whales.
+* `starveParameter` helps determine the probability that each individual whale will starve within the next time-period.  Note that the method `starvationProbability()` makes the probability of starvation equal product of `starveParameter` and the current density of the population of whales in the ocean.  The bigger this attribute is, the more starvation will occur and the lower the long-term upper limit of the population will be.
+* `distance()` is the method for finding the distance between any two positions in the ocean.  It implements the standard distance-formula from high-school geometry.
+* The initialization function permits the user to determine the dimensions of the ocean, the initial number of male and female whales, and the starvation parameter.   In the instantiation process for an individual ocean the required number of male and female whales are instantiated and are placed randomly in the ocean.
+
+
+We need to add a method that allows an ocean to advance one unit of time.  During that time:
+
+* Each mature and fertile female whale must check for nearby mature males, mate with one if possible, and produce a baby.
+* Any offspring produced must then be added to the ocean's lists of male and female whales.
+* The ocean must then subject each whale to the possibility of starvation within the time-period at hand.
+* All whales that survive must then move.
+* The age of each whale must be increased by one time-unit.  For females, the time remaining until fertility must also be decreased by a unit.
+
+The `advance()` method is implemented and added to Ocean with the code below:
+
+
+```{r}
+Ocean$set("public",
+          "advance",
+          function() {
+            malePop <- self$malePop
+            femalePop <- self$femalePop
+            population <- malePop + femalePop
+            if ( population == 0 ) {
+              return(NULL)
+            }
+            males <- self$males
+            females <- self$females
+            babyMales <- list()
+            babyFemales <- list()
+            if ( malePop > 0 && femalePop > 0 ) {
+              for ( female in females ) {
+                if ( female$age >= female$maturity && 
+                     female$timeToFertility <= 0 && 
+                     female$maleNear(males = males,
+                                     dist = self$distance)) {
+                  outcome <- female$mate()
+                  if ( outcome == "male" ) {
+                    baby <- Male$new(age = 0, position = female$position)
+                    babyMales <- c(babyMales, baby)
+                  } else {
+                    baby <- Female$new(age = 0, position = female$position)
+                    babyFemales <- c(babyFemales, baby)
+                  }
+                }
+              }
+            }
+            
+            # augment the male and female lists if needed:
+            lmb <- length(babyMales); lfb <- length(babyFemales);
+            
+            # throw in the babies:
+            if ( lmb > 0 ) {
+              males <- c(males, babyMales)
+            }
+            if ( lfb > 0 ) {
+              females <- c(females, babyFemales)
+            }
+            
+            # revise population for new births:
+            population <- length(males) + length(females)
+            
+            # starve some of them, maybe:
+            popDen <- population/prod(self$dimensions)
+            starveProb <- self$starvationProbability(popDensity = popDen)
+            maleDead <- logical(length(males))
+            femaleDead <- logical(length(females))
+            # starve some males
+            for ( i in seq_along(maleDead) ) {
+              male <- males[[i]]
+              maleDead[i] <- (runif(1) <= starveProb)
+              male$age <- male$age + 1
+              if ( male$age >= male$lifespan ) maleDead[i] <- TRUE
+              if ( maleDead[i] ) next
+              # if whale is not dead, he should move:
+              male$move(dims = self$dimensions)
+            }
+            # starve some females
+            for ( i in seq_along(femaleDead) ) {
+              female <- females[[i]]
+              femaleDead[i] <- (runif(1) <= starveProb)
+              female$age <- female$age + 1
+              if ( female$age >= female$lifespan ) femaleDead[i] <- TRUE
+              if ( femaleDead[i] ) next
+              if ( female$sex == "female" ) {
+                female$timeToFertility <- female$timeToFertility - 1
+              }
+              # if female is not dead, she should move:
+              female$move(dims = self$dimensions)
+            }
+            
+            # revise male and female whale lists:
+            malePop <- sum(!maleDead)
+            self$malePop <- malePop
+            femalePop <- sum(!femaleDead)
+            self$femalePop <- femalePop
+            if ( malePop > 0 ) {
+              self$males <- males[!maleDead]
+            } else {
+              self$males <- list()
+            }
+            if ( femalePop > 0 ) {
+              self$females <- females[!femaleDead]
+            } else {
+              self$females <- list()
+            }
+          }, overwrite = T)
+```
+
+In simulations we might enjoy looking at a picture of the ocean at any given time moment.  Hence we add a `plot()` method that enables an ocean to produce a graph of the whales within it.  In this graph males will be colored red and females green.  Mature whales will appear as larger than immature whales.  For purposes of speed we use R's base graphics system rather than **ggplot2**.
+
+```{r}
+Ocean$set("public", 
+          "plot",
+          function() {
+            males <- self$males[1:self$malePop]
+            females <- self$females[1:self$femalePop]
+            whales <- c(males, females)
+            if ( length(whales) == 0) {
+              plot(0,0, type = "n", main = "All Gone!")
+              box(lwd = 2)
+              return(NULL)
+            }
+            mat <- sapply(whales, function(x) {
+              c(x$position[1], x$position[2],
+                as.numeric(x$sex == "male"), as.numeric(x$age >= x$maturity))
+              }, simplify = "array")
+            mat <- simplify2array(t(mat))
+            df <- as.data.frame(mat)
+            names(df) <- c("x", "y", "sex", "mature")
+            # males will be red, females green:
+            df$color <- ifelse(df$sex == 1, "red", "green")
+            # mature whales have cex = 3, immature whales cex 0.7
+            df$size <- ifelse(df$mature == 1, 1.3, 0.7)
+            with(df, 
+                 plot(x, y, xlim = c(0, self$dimensions[1]),
+                 ylim = c(0, self$dimensions[1]), pch = 19, xlab = "",
+                 ylab = "", axes = FALSE, col = color, cex = size,
+                 main = paste0("Population = ", nrow(df))))
+            box(lwd = 2)
+          }, overwrite = T)
+```
+
+
+Finally, we write a simulation function.  The function allows the user to specify the number of time-units that the simulation will cover, along with initial numbers of male and female whales.  The user will have an option to "animate" the simulation showing a plot of the ocean after each time-unit.  If the animation option is chosen, then R will use the `Sys.sleep()` function \index{R-functions!Sys.sleep()@\texttt{Sys.sleep()}} to make the computer suspend computations for half a second so that the user can view the plot.  The simulation will cease if all of the whales die prior to end of the allotted time.  Finally, the function uses **ggplot2** to produce a graph of the whale population as a function of time.
+
+```{r}
+library(ggplot2)
+oceanSim <- function(steps = 100, males = 10, females = 10,
+                     animate = TRUE, seed = NULL) {
+  if ( is.null(seed) ) {
+    seed <- as.numeric(Sys.time())
+  }
+  set.seed(seed)
+  ocean <- Ocean$new(dims = c(100, 100), males = males, 
+                     females = females)
+  population <-numeric(steps)
+  for ( i in 1:steps ) {
+    population[i] <- ocean$malePop + ocean$femalePop
+    if ( animate ) ocean$plot()
+    if ( population[i] == 0 ) break
+    ocean$advance()
+    if ( animate ) Sys.sleep(0.5)
+  }
+  pop <- population[1:i]
+  df <- data.frame(time = 1:length(pop),
+                   pop)
+  ggplot(df, aes(x = time, y = pop)) + geom_line() +
+    labs(x = "Time", y = "Whale Population")
+}
+```
+
+
+We are now ready for a simulation.  The results are graphed in Figure \@ref(fig:whalesimgraph).
+
+
+
+```{r whalesimgraph, width.out="60%", fig.cap="Simulated whale population.  Sadly, they all die after about 130 days.", fig.align='center', cache = T}
+oceanSim(steps = 200, males = 15, females = 15,
+         animate = FALSE, seed = 3030)
+```
+
+You should try running the simulation yourself a few times, for differing initial numbers of whales.  If you like you can watch the whales move about by setting `animate` to `TRUE`:
+
+```{r eval = F}
+oceanSim(steps = 200, males = 15, females = 15,
+         animate = TRUE)
+```
+
+The object-oriented approach to simulation is not necessarily the quickest approach:  R6 objects do require a bit more time for computation, as compared to a system that stores relevant information about the population in vectors or in a data frame.  On the other hand the object-oriented approach makes it easy to encode information about each individual whale as it proceeds through time.  In larger applications, an object-oriented approach to programming can result in code that is relatively easy to read and to modify, albeit at some cost in terms of speed.
+
+## Generic-Function OO {#generic-function-oo}
+
+We now turn to the second major type of object-oriented programming that is supported by R, namely:  generic-function OO.
+
+### Motivating Examples
+
+We begin by revisiting the task of *printing* to the console.
+
+Recall that whenever we type the name of an object into the console and press Enter, R interprets the input as a call to the `print()` function.  Consider, for example, printing out some portion of `m111survey` from the **tigerstats** package.
+
+Thus the following two expressions accomplish the same
+
+```{r}
+df <- tigerstats::m111survey[, c("height", "weight_feel")]
+```
+
+If we want to print `df`, either of the following two statements will suffice:
+
+```{r eval = F}
+print(df)
+df         # calls print(df) implicitly
+```
+
+Let's have a look at `df`, using either of the above two commands:
+
+```{}
+##   height   weight_feel
+## 1   76.00 1_underweight
+## 2   74.00 2_about_right
+## 3   64.00 2_about_right
+## 4   62.00 1_underweight
+## 5   72.00 1_underweight
+<further output omitted to save space>
+```
+
+It is tempting to think of the above printout as simply what the object `df` *is*.  But that's not quite right.  In truth, it merely reflects how R chose to *represent* `df` to us in the console.  R was programmed to represent `df` in spreadsheet-format---with variables along columns, individuals along rows, and with handy row-numbers supplied---because users are accustomed to viewing data frames in that way.
+
+Now let's turn `df` into a list:
+
+```{r}
+lst <- as.list(df)
+str(lst)
+```
+
+Now let's print `lst`:
+
+```{r eval = F}
+lst   # same as print(lst)
+```
+
+```
+## $height
+##  [1] 76.00 74.00 64.00 62.00 72.00 70.80 70.00 79.00 59.00 67.00 65.00 62.00
+## [13] 59.00 78.00 69.00 68.00 73.00 73.00 65.00 65.00 66.00 67.75 63.00 66.00
+<further output omitted to save space>
+```
+
+We get the familiar output for a list whose elements are named.  Users don't expect lists to be represented in the console in spreadsheet-style format, even if the elements of the list happen to be vectors that are all of the same length.  They expect a more "neutral" representation, and R delivers one.
+
+Printing to the console is a common task.  It appears, however, that the method by which that task is performed depends on the type of object that is input to the `print()` function.  If your object is a data frame, `print()` behaves one way.  If your object is a list, print does something else.  since the behavior of `print()` depends on the type of object involved in the operation of printing, you could say that it exhibits polymorphism. \index{polymorphism}.
+
+In fact it is the *class* of the object given to print that determines the method that `prints()` employs.  The class of an object in R can be accessed with the `class()` function \index{R-functions!class()@\texttt{class()}}:
+
+```{r}
+class(df)
+class(lst)
+```
+
+How does the class of `df` determine the method used for printing?  To see how this is done, look at the code for the `print()` function:
+
+```{r eval = F}
+print
+```
+
+```
+## function (x, ...) 
+## UseMethod("print")
+## <bytecode: 0x108da3d40>
+## <environment: namespace:base>
+```
+
+The body of the `print()` consists of just one expression:  `UseMethod("print")`.  On the fact of it, this doesn't seem to accomplish anything!  In reality, though, a lot is taking place under the hood.  Let's examine what happens, step-by-step, when we call `print(df)`.
+
+1. The data frame `df` is assigned to the parameter `x` in the `print()` function.
+2. We call `UseMethod("print")`.
+3. From `help(UseMethod)` we learn that `UseMethod()` takes two parameters:
+    * `generic`:  a character string that names task we want to perform.  In this case `generic` has been set to "print".
+    * `object`:  this is an object whose class will determine the method that will be "dispatched", i.e., the method that will be used to print the object to the console.  By default this is the first argument in the enclosing function `print()`, so `object` gets set to the data frame `df`.
+4. Control has now passed to the `UseMethod()` function, which searches for a suitable method for printing an object of class `data.frame`.  It does this by pasting together "print" (the argument to `generic`) and `data.frame` (the class of the object `df` it was given) with a period in between, getting the string "print.data.frame".  A search is now conducted for a function of the name.
+5.  The function `print.data.frame()` will be found.  We can tell because it appears on the list of available "methods" for `print()`.  The `methods()` function \index{R-functions!methods()@\texttt{methods()}} will give us the complete list of available methods, if we like
+
+    ```{r eval = F}
+    methods("print")
+    ```
+    
+    ```
+    ## [1] print,ANY-method                                  
+    ## [2] print,diagonalMatrix-method                       
+    ## [3] print,sparseMatrix-method                         
+    ## [4] print.abbrev*                                     
+    ## [5] print.acf*
+    ## ...
+    ## [87] print.data.frame
+    ## [88] print.data.table   <== Here it is!
+    ## ...
+    ```
+6. R now calls the `print.data.frame()`, passing in `df`.  The data frame is printed to the console.
+7. When `UseMethod()` completes execution, it does not return control to the enclosing function `print()` from which it was called.  The work of printing is done, so R arranges for control to be passed back to whomever called `print()` in the first place.
+
+It is interesting to note that the very act of "printing out" the print function, which we did earlier in order to see the code for the function involved a search for a printing method:
+
+```{r eval = F}
+print      # this is equivalent to print(print)
+```
+
+```
+## function (x, ...) 
+## UseMethod("print")
+## <bytecode: 0x108da3d40>
+## <environment: namespace:base>
+```
+
+In the call `print(print)`, R looked at the class of `print()`, and found that it was of class `function`.  R then searched for a method called `print.function` and found one.  Note that this method give the sort of output to the console that would be helpful to a user:
+
+* the code for the function;
+* the location of the function in memory:  `0x108da3d40`;
+* the environment in which the function was defined (the package **base**).
+
+Things go a little bit differently in the call to `print(lst)`.  The class of `lst` is `list`, but when you search the results of `methods(print)` you won't find a `print.list()` method; accordingly R uses a fall-back method called `print.default()`.  This is why the console-output for lists looks so "neutral."
+
+### Terminology
+
+The `print()` function is an example of a *generic* function. \index{generic function} A generic function is simply a function that performs a common task by *dispatching* its input to a particular method-function that is selected on the basis of the class of the input to the generic function.  Languages that use generic functions are said to support *generic-function OO*. \index{generic-function oo}.
+
+In message-oriented OO, objects own their own methods, and the way a task is performed depends on the class of the object that is invoked to perform the task.  Generic-function OO, which is most commonly found in languages that support functional programming, puts more stress on functions:  the generic function "owns" the methods in the sense that it acts as the central dispatcher, assigning a method function to perform a given task.  In a bit of a reversal to message-passing OO, method selected in generic-function OO depends on the class of the input-object to the generic, not on the generic that was called to perform the task.
+
+We should also mention that R actually has two ways to implement generic-function OO:
+
+* S3 classes;
+* S4 classes.
+
+S3 classes were the first to be implemented, and they are the implementation we describe here.  S4 classes were a later addition.  (They tend to be used by programmers who worry that the rules for formation of S3 classes aren't strict enough.)
+
+### Common Generic Functions
+
+There are three very commonly-use generic functions in R:
+
+* `print()`, which we have examined already;
+* `summary()`; \index{R-functions!summary()@\texttt{summary()}}
+* `plot()`. \index{R-functions!plot()@\texttt{plot()}}
+
+Each of these generics is associated with a large number of method-functions.  This is a great advantage to the casual user of R:  one has to know only three R-commands in order to acquire useful information about a wide variety of R-objects.
+
+It is always a good idea to "try out" generic functions on objects you are using.  You never know if the authors of R, or of a contributed package you have attached, may have written methods that are precisely tailored to that object.
+
+Here are some example of the versatile, polymorphic behavior of the generic function `summary()`:
+
+```{r}
+heights <- df$height # vector of class "numeric"
+summary(heights)
+```
+
+```{r}
+feelings <- df$weight_feel # has class "factor"
+summary(feelings)
+```
+
+```{r}
+summary(df)  # summarizing object of class "data.frame"
+```
+
+```{r}
+summary(lst)
+```
+
+
+It is interesting also to see how `plot()` reacts to various types of input.  See the Figure \@ref(fig:xsquaregraph)
+
+```{r xsquaregraph, width.out="60%", fig.cap="Our vector graphed as a parabola!", fig.align='center'}
+x <- seq(-3,3, by = 0.01)
+plot(x^2)
+```
+
+
+### Writing Your Own Methods
+
+As you advance in your programming skills, you will transition from writing to programs to help you accomplish your own tasks to writing programs that help others---who are not as proficient in programming as you are---get some of *their* work done.  Since casual users of R often become accustomed to generic functions as providers of useful information about just about any R-object, you might find yourself writing methods for one or more of the common generic functions.  In this Section will we will practice the art of method-writing:  we will write some generic functions to report on the results of a simulation.
+
+Recall the problem from Section \@ref(simulation-number-needed) about estimating the expected number of uniform random numbers one must create until their sum exceeds a specified target-number.  Let's rewrite the simulation function so that it returns an object of a special class.  We will then write print and plot methods that permit a user to obtain information about the results of any simulation that was performed.
+
+First of all, let's rewrite `numberNeededSim()`:
+
+```{r}
+numberNeededSim <- function(target = 1, reps = 1000, 
+                            seed = NULL) {
+  
+  #set the seed if none is provided
+  if ( is.null(seed) ) {
+    seed <- as.numeric(Sys.time())
+  }
+  set.seed(seed)
+  
+  numberNeeded <- function(target) {
+    mySum <- 0
+    count <- 0
+    while( mySum < target ) {
+      number <- runif(1)
+      mySum <- mySum + number
+      count <- count + 1
+    }
+    count
+  }
+  
+  needed <- numeric(reps)
+  for (i in 1:reps ) {
+    needed[i] <- numberNeeded(target)
+  }
+  results <- list(target = target, sims = needed)
+  class(results) <- "numNeededSims"
+  results
+}
+```
+
+In the above code you will note that there is no longer a parameter `table` to permit printing of a table to the console.  Also, nothing at all is `cat`-ed to the console.  Instead we return only a list with two named elements:
+* `target`:  the target you want your randomly-generated numbers to sum up to;
+* `sims`:  the number of numbers required to sum to the target, in each repetition of the simulation.
+
+The class of the returned list is set as "numNeededSims".
+
+Next, we write a print-method function.  Its name must be `print.numNeededSims`.  All of the table output and `cat`-ing to the console goes here:
+
+```{r}
+print.numNeededSims <- function(x) {
+  cat("The target was ", x$target, ".\n", sep = "")
+  sims <- x$sims
+  reps <- length(sims)
+  cat("Here is a table of the results, based on ", reps,
+      " simulations.\n\n", sep = "")
+  tab <- prop.table(table(sims))
+  
+  # for sake of pretty output,
+  # remove "sims" variable name from top of table printout
+  colNames <- dimnames(tab)
+  names(colNames) <- NULL
+  dimnames(tab) <- colNames
+  
+  print(tab)
+  cat("\n")
+  cat("The expected number needed is about ", 
+      mean(sims), ".\n", sep = "")
+}
+```
+
+Finally, let's write a plot method.  Its name must be `plot.numNeededSims`.  This method will produce a bar graph of the results of the simulations.  We'll use the **ggplot2** plotting package, so we should stop if the user hasn't installed and attached **ggplot2**.
+
+```{r}
+plot.numNeededSims <- function(x) {
+  if ( !"package:ggplot2" %in% search() ) {
+    cat("Need to load package ggplot2 in order to plot.")
+  }
+  
+  sims <- x$sims
+  # for a good bar-plot, convert numerical vector sims
+  # to a factor with appropriate levels
+  levels <- min(sims):max(sims)
+  sims <- factor(sims, levels = levels)
+  
+  df <- data.frame(sims)
+  plotTitle <- paste0("Results of ", length(sims), " Simulations")
+  # in the code below, scale_x_discrete(drop = f) ensures that
+  # even if there are no values in sims for a particular level it
+  # will still appear in the plot as a zero-height bar
+  ggplot(df, aes(x = sims)) + geom_bar() + scale_x_discrete(drop = F) +
+    labs(x = "Number Needed", title = plotTitle)
+}
+```
+
+Let's give it a try:
+
+```{r numberneededSimgeneric, cache = T}
+numberNeededSim(reps = 10000, seed = 4040)
+```
+
+The print function was called implicitly, so we got useful output to the console.
+
+It's also possible to save the results somewhere, for example:
+
+```{r numberneededSimgeneric2, cache = T}
+results <- numberNeededSim(reps = 10000, seed = 4040)
+str(results)
+```
+
+Then it's possible for the user to recall specific features of the results, for example:
+
+```{r}
+results$target  # get just the target number
+```
+
+If we wanted the printout we could just say:
+
+```{r}
+results
+```
+
+For a plot we can use the `plot()` generic.  The resulting graph appears as Figure \@ref(fig:numberneededgenericplot).
+
+```{r numberneededgenericplot, width.out="60%", fig.cap="Results of the Number-Needed simulation.", fig.align='center'}
+plot(results)
+```
+
+
+### Writing a Generic Function
+
+Generic functions are most useful when they correspond to tasks that are so commonly performed that many methods are written for them, so that users get in the habit of "trying out" the generic on their object.  As a consequence, the vast majority of method-functions are written for currently-existing, very well-known generics like `print()`, `summary()` and `plot()`.  It doesn't make a lot of sense to write generics that will have only a few methods attached to them.  Nevertheless, it's highly instructive to see how generics do their work, so as as example we'll write a new generic, along with a couple of method functions.^[The generic we write is drawn from an example provided in the official *R Languge Definition* (@R-definition), written by the developers of R.]
+
+First let's create some objects with special classes.  Here are two objects of class "cartesianPoint".  Our intention is that they correspond to point on the plane, represented with the standard $x$ and $y$ Cartesian coordinates.
+
+```{r}
+point1 <- list(x = 3, y = 4)
+class(point1) <- "cartesianPoint"
+point2 <- list(x = 2, y = 5)
+class(point2) <- "cartesianPoint"
+```
+
+It is also possible to represent a point on the plan with *polar coordinates*.  The elements of a polar coordinates representation are:
+
+* $r$:  a non-negative real number that the distance from the origin to the point;
+* $\theta$:  the angle measure (in radians) between the positive $x$-axis and ray from the origin to the point.
+
+```{r}
+point3 <- list(r = 2, theta = pi/2)
+point4 <- list(r = 1, theta = pi)
+class(point3) <- "polarPoint"
+class(point4) <- "polarPoint"
+```
+
+In the definition above, `point3` is the point that lies at $\pi/2$ radians (90 degrees) counter-clockwise from the positive $x$-axis.  That means that it lies along the positive $y$-axis.  It is 2 units from the origin, so in Cartesian coordinates it would be written as $(0,2)$.  Similarly, `point4` would be written in Cartesian coordinates as $(-1,0)$, since it lies one unit from the origin along the negative $x$-axis.
+
+Now let us suppose that we would like to find the $x$-coordinate of a point.  For points of class `cartesianPoint` this is pretty simple:
+
+```{r}
+point1$x  # gives x-coordinate
+```
+
+If the point is given in polar coordinates, we must convert it to Cartesian coordinates.  You may recall the conversion formulas from a previous trigonometry class. To get $x$, use:
+
+$$x = r\cos \theta.$$
+To get $y$, use:
+$$x = r\cos \theta.$$
+Thus, to find the $x$-coordinate for `point3`, work as follows:
+
+```{r}
+point3$r * cos(point3$theta)
+```
+The result is 0 (to a tiny bit of round-off error).
+
+We now write a generic function `xpos()` for the $x$-coordinate:
+
+```{r}
+xpos <- function(x) {
+  UseMethod("xpos")
+}
+```
+
+We need to write our method functions, one for each point class:
+
+```{r}
+xpos.cartesianPoint <- function(point) {
+  point$x
+}
+
+xpos.polarPoint <- function(point) {
+  point$r * cos(point$theta)
+}
+```
+
+Now we can feed points of either class into the generic `xpos()` function:
+
+```{r}
+xpos(point2)
+xpos(point4)
+```
+
+\newpage
+
+## Glossary {-}
+
+Object-Oriented Programming \index{object-oriented programming}
+
+:  A programming paradigm in which programs are built around objects, which are complex structures that contain data.
+
+Class \index{class}
+
+:  A general prototype from which individual objects may be created.  The definition of the class specifies the attributes and methods that shall be possessed by any object created from that class.  In addition, the definition of the class includes a function called an *initializer* that governs the creation of individual objects from the class.
+
+Instantiation \index{instantiation}
+
+:  The creation of an individual object as an instance of a class.  The objects gets all of the attributes and methods of the class (except for the initializer function).  Typically the intializer functions allows for determination of the values of some of the object's attributes at the time of instantiation.
+
+Message-Passing OO  \index{message-passing oo}
+
+: A type of object-oriented programming in which a task is performed by passing a message to the object that will perform the task.  The method by which the object performs the task is determined solely by the class of which the object is an instance.
+
+Attribute \index{attribute}
+
+:  A data-field belonging to an object that is not a function.
+
+Method (also called "Method-Function") \index{method}
+
+:  A function that encapsulates a particular way of performing a task.  In message-passing OO, it is a function data-field belonging to an object that as a data-field.  Such a function usually has access to its inputs, to other data from its object, and to the objet itself.  In generic-function OO, it is a function that is accessed through a generic function.
+
+Reference Semantics \index{composition}
+
+:  When an object has *reference semantics*, assignments involving that object create a pointer to the object, rather than creating a copy of the object itself. 
+
+Composition \index{composition}
+
+:  The situation that arises when an object with reference semantics contains one or more other objects with reference semantics as data-fields.
+
+Inheritance \index{inheritance}
+
+:  The situation that arises when a class (known as the *child class*) is defined as being a particular type of some other class (known as the *parent class*).  By default the child class has all of the attributes and methods of the parent class.  The child class may be given additional attributes and methods.
+
+Overriding \index{overriding}
+
+:  When a method defined in a child class has the same name as a method belonging to the parent class, then the child-class method is said to *override* the parent-class method.  When the method is called on an instance of the child class the defining code in the child class, not the parent class, is used to execute the method.
+
+Generic Function \index{generic function}
+
+:  A function that dispatches an input object to one of a number of method-functions, based on the class of the input.
+
+Generic-Function OO \index{generic-function oo}
+
+:  A type of object-oriented programming in which tasks are performed by generic functions.  The method used to perform a particular task is determined by the class of the input object.
+
+Polymorphism  \index{polymorphism}
+
+:  A program exhibits *polymorphism* when a function behaves differently depending either on the type of object to which it belongs or the type of object to which it is applied.
+
+
+\newpage
+
+## Exercises {-}
+
+```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+knitr::include_graphics("images/thinking.png")
+```
+
+```{r echo = F}
+meetupSim <- function(reps = 10000, seed = NULL) {
+  if ( is.null(seed) ) {
+    seed <- as.numeric(Sys.time())
+  }
+  set.seed(seed)
+  anna <- runif(reps, 0, 60)
+  raj <- runif(reps, 0, 60)
+  connect <- (abs(anna - raj) < 10)
+  
+  diffs <- abs(anna - raj)
+  noMeet <- diffs[diffs > 10] - 10
+  
+  results <- list(connect = connect, noMeet = noMeet)
+  class(results) <- c("meetupSims")
+  results
+}
+
+
+print.meetupSims <- function(x) {
+  reps <- length(x$connect)
+  cat("Here is a table of the results, based on ", reps,
+      " simulations.\n\n", sep = "")
+  tab <- prop.table(table(x$connect))
+  
+  # remove "connect" variable name from table printout
+  colNames <- list(c("Did not connect", "Connected"))
+  dimnames(tab) <- colNames
+  
+  print(tab)
+  cat("\n")
+  cat("Summary of how many minutes they missed by:\n\n")
+  print(summary(x$noMeet))
+}
+
+plot.meetupSims <- function(x) {
+  if ( !"package:ggplot2" %in% search() ) {
+    cat("Need to load package ggplot2 in order to plot.")
+  }
+  
+  sims <- x$noMeet
+  
+  df <- data.frame(sims)
+  plotTitle <- paste0("Results of ", length(sims), " Simulations")
+  ggplot(df, aes(x = sims)) + geom_density() +
+    labs(x = "Minutes Missed By", title = plotTitle)
+}
+```
+
+1. Write a new class called Witch that inherits from class Person.  It should have two additional properties:
+    * `shoes`:  Color of slippers worn by an individual witch. The initial value should be NULL.
+    * `region`:  the part of Oz over which an individual witch reigns (e.g., "North", "South", etc.).  The initial value should be NULL.
+    
+    The class should include set-methods for both `shoes` and `region`.  In addition there should be an `initialize()` method that overrides the method already provided with class Person.  This new method should permit the user to set the value of `slippers` and `region`.
+    
+    Create two new witches:
+    * The Wicked Witch of the East.  Her name and desire are up to you, but her slippers should be silver, and of course she should reign over the East.
+    * Glinda, the Good Witch of the North.  Her desire and color of shoes are up to you.
+    
+1. Revisit the class Ocean, and rewrite its `initialize()` method so that you can set the age, time to maturity, range and stepSize individually for each new whale.  You should be able to use it like this:
+
+    ```{r eval = F}
+    maleInfo <- data.frame(age = c(10, 12, 13, 8, 7, 14, 2),
+                                    maturity = rep(10, times = 7),
+                                    range = c(4, 4, 5, 6, 6, 6, 8),
+                                    stepSize = c(3,3,3,4,4,5,6))
+    femaleInfo <- data.frame(age = c(9, 11, 15, 23, 4, 15, 4),
+                                    maturity = rep(8, times = 7),
+                                    range = c(7, 4, 3, 6, 9, 6, 8),
+                                    stepSize = c(3,3,10,2,3,8,5)))
+    ocean <- Ocean$new(dims = c(100, 100), 
+                       males = maleInfo, 
+                       females = femaleInfo)
+    ```
+    
+    Run a simulation, initializing the ocean with ten whales of each sex.  Their specific characteristics are up to you.  Write an R Markdown document that incorporates the appropriate code and includes a discussion of your results.
+
+1. Recall the function `meetupSim()` from Section \@ref(simulation-connect), with which we investigated the probability that Anna and Raj would meet at the Coffee Shop.  Suppose that we are interested not only in the probability that they meet, but also in the distribution of the number of minutes by which the latecomer misses the one who cam early on the occasions when they do not manage to connect.  Revise `meetupSim()` so that it does not print any results to the console, but instead returns a list.  The list should have two elements:
+    * a logical vector indicating, for each repetition of the simulation, whether or not Anna and Raj met;
+    * a numerical vector indicating, for each repetition in which they did not meet, the number of minutes by which the latecomer missed meeting the person who arrived earlier.
+    
+    Make the list have class "meetupSims".  A typical example of use should look like this:
+    
+    ```{r meetupgnefnoo, cache = T}
+    results <- meetupSim(reps = 10000, seed = 3535)
+    str(results)
+    ```
+    
+1. Building on the previous exercise, write a method-function called `print.meetupSims()` that prints the results of a meet-up simulation to the console.  The function should provide a table that gives the proportion of times that Anna and Raj met, and a numerical summary of the simulation results when they did not meet.  (You could use the `summary()` function for this.)  A typical example of use would look like this:
+
+    ```{r}
+    results   # has same effect as print(results)
+    ```
+    
+1. Continuing in the same vein, write a method-function called `plot.meetupSims()` that makes a density plot showing the distribution of the number of minutes by which the latecomer misses the meeting.
+
+1.  Write a generic function called `ypos()` that will return the $y$-coordinate of points of class `cartesianPoint` and  `polarPoint`.  Of course you will need to write the corresponding method functions, as well.
+
+1.  Write a generic function called `norm()` that will return the distance of a point from the origin.  The point could be of class `cartesianPoint` or  `polarPoint`, so you will need to write the corresponding method functions, as well.  (It will be helpful to recall that for a point with Cartesian coordinates $(x,y)$ the distance from the origin is $\sqrt{x^2 + y^2}$.)
+

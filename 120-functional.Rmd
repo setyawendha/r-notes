@@ -1,0 +1,830 @@
+# Functional Programming in R {#functional}
+
+```{block2, simple-when-done, type='leadquote'}
+
+*It was simple, but you know, it’s always simple when you’ve done it.*
+
+---Simone Gabbriellini
+```
+
+In this Chapter we aren't going to cover any fundamentally new R powers.  Instead we'll get acquainted with just one aspect of a computer programming paradigm known as *functional programming*. We will examine a set of R-functions for which functions themselves are supplied as arguments.  These functions allow us to accomplish a great deal of computation in rather concise and expressive code.  Not only are they useful in R itself, but they help you reason abstractly about computation and prepare you for functional programming approaches in other programming languages.
+
+\newpage
+
+## Programming Paradigms
+
+Let us begin by exploring the notion of a *programming paradigm* in general. We will go on in this Chapter to consider will two programming paradigms that for which R provides considerable support.  In the next Chapter we will consider a third programming paradigm that exists in R.
+
+A *programming paradigm* \index{programming paradigm} is a way to describe some of the features of programming languages.  Often a paradigm includes principles concerning the use of these features, or embodies a view that these features have special importance and utility in good programming practice.
+
+### Procedural Programming
+
+One of the older programming paradigms in existence is *procedural prograaming*.  It is supported in many popular languages and is often the first paradigm within which beginners learn to program.  In fact, if one's programming does not progress beyond a rudimentary level, one may never become aware that one is working within the procedural paradigm---or any paradigm at all, for that matter.
+
+Before we define procedural programming, let's illustrate it with an example.  Almost any of the programs we have written so far would do as examples; for specificity, let's consider the following snippet of code that produces from the data frame `m111survey` a new, smaller frame consisting of just the numerical variables:
+
+```{r eval = F}
+library(tigerstats)
+```
+
+```{r include=F}
+library(tigerstats)
+```
+
+
+
+```{r}
+# find the numer of columns in the data frame:
+cols <- length(names(m111survey))
+#set up a logical vector of length equal to the number of columns:
+isNumerical <- logical(cols)
+
+# loop through.  For each variable, say if it is numerical:
+for ( i in seq_along(isNumerical) ) {
+  isNumerical[i] <- if (is.numeric(m111survey[, i])) TRUE else FALSE
+}
+
+# pick the numerical variables from the data frame
+numsm111 <- m111survey[, isNumerical]
+# have a look at the result:
+str(numsm111)
+```
+
+By now there is nothing mysterious about the above code-snippet.  What we want to become conscious of is the *approach* we have taken to the problem of selecting the numerical variables.  In particular, observe that:
+
+* We worked throughout with *data*, some of which, like `m111survey`, was given to us and some of which we created on our own to help solve the problem.  For example, we created the variable `cols`.  Note also the very helpful index-variable `i` in the `for`-loop.  We set up the data structure `isNumerical` in order to hold a set of data (`TRUE`s and `FALSE`s).
+* We relied on various *procedures* to create data and to manipulate that data in order to produce the desired result.  Some of the procedures appeared as special blocks of code---most notably the `for`-loop, but also the `if-else` construct within the loop.  Other procedures took the form of functions.  As we know, a function encapsulates a useful procedure so that it can be easily reused in a wide variety of circumstances, without the user having to know the details of how it works.  We know that `names()` will give us the vector of names of the columns of `m111survey`, that `length()` will tell us how many names, there are, that `is.numeric()` will tell us whether or not a given variable in `m111survey` is a numerical variable, and so on.  The procedures embodies in these functions were written by other folks and we could examine them if we had the time and interest, but for the most part we are content simply to know how to access them.
+
+*Procedural programming* \index{procedural programming}is a paradigm that solves problems with programs that can be broken up into collections of variables, data structures and procedures. In this paradigm, there is a sharp distinction between variables and data structures on the one hand and procedures on the other.  Variables and data structures are *data*---they are the "stuff" that a program manipulates to produce other data, other "stuff."  Procedures do the manipulating, turning stuff into other stuff.
+
+### Functional Programming:  The Ubiquity of Functions in R
+
+Let's a bit more closely at our code snippet.  Notice how prominently functions figure into it, on nearly every line.  In fact, *every* line calls at least one function!  This might seem unbelievable:  after all, consider the line below:
+
+```{r eval = F}
+numsm111 <- m111survey[, isNumerical]
+```
+
+There don't appear to be any functions being called, here!  But in fact **two** functions get called:
+
+1. The so-called *assignment operator* `<-` is actually a function in disguise:  the more official---albeit less readable---form of `variable <- value` is:
+
+    ```{r eval=F}
+    "<-"(variable, value)
+    ```
+    
+    Thus, to assign the value 3 to that variable `a` one could write:
+    
+    ```{r}
+    "<-"(a, 3)
+    a   # check that's really 3
+    ```
+    
+2. The sub-setting operator for vectors `[`, more formally known as *extraction* (see `help(Extract)`) is also a function.  The expression `m111survey[, isNumerical]` is actually the following function-call in disguise:
+
+    ```{r eval=F}
+    "["(m111survey, isNumerical)
+    ```
+    
+Indeed functions are ubiquitous in R.  This is part of the significance of the following well-known remark by a developer of S, the precursor-language of R:
+
+>“To understand computations in R, two slogans are helpful:
+
+>* Everything that exists is an object.
+>* Everything that happens is a function call."
+
+> ---John Chambers
+
+The second second slogan indicates that functions are everywhere in R.  It also corresponds to the first principle of the *functional programming* \index{functional programming}paradigm, namely:
+
+>Computation is regarded as the evaluation of functions.
+
+### Functional Programming:  Functions as First-Class Citizens
+
+So functions are ubiquitous in R.  Another interesting thing about them is that even though they seem to be associated with procedures---after all, they make things happen---they are, nevertheless, also objects.  They are data, or "stuff" if you like.
+
+This may not seem obvious at first.  But look at the following code, where you can ask what type of thing a function is:
+
+```{r}
+typeof(is.numeric)
+```
+
+The so-called "primitive" functions of R---the functions written not in R but in C-code---are "built in" objects. On the other hand, consider this user-defined function:
+
+```{r}
+f <- function(x) x+3
+typeof(f)
+```
+
+Functions other than primitive functions are objects of type "closure."
+
+If a function can be a certain type of thing, then it must be a "thing"---an object, things you can manipulate.  For example, you can put functions in a list:
+
+```{r}
+lst <- list(is.numeric, f)
+lst
+```
+
+Very importantly, you can make functions serve as argument for other functions, and functions can return other functions as their results.  The following example demonstrates both of these possibilities.
+
+```{r}
+cuber <- function(f) {
+  g <- function(x) f(x)^3
+  g
+}
+h <- cuber(abs)
+h(-2)  # returns |-2|^3 = 2^3 = 8
+```
+
+In fact, in R functions can be treated just like any variable.  In computer programming, we say that such functions are *first-class citizens*.
+
+Although it is not often stated as a separate principle of the functional programming paradigm it is true that in languages that provide support for functional programming, the following principle holds true:
+
+>Functions are first-class citizens.
+
+
+### Minimize Side Effects
+
+In the code-snippet under consideration, we note that there are two types of functions:
+
+* functions that return a value;
+* functions that provide output to the console or make a change in the Global Environment.
+
+Example of the first type of function included:
+
+* `length()`
+* `names()`
+* `seq_along()`
+* `is.numeric()`
+* the extraction-function `[()`
+
+A function that produced output to the console was `str()`.
+
+The assignment function `<-()` added `cols`, `isNumerical` and `numsm111` to the Global Environment, and also made changes to `isNumerical` in the course of the `for`-loop.
+
+Of course we have seen examples of functions that do two of these things at once, for example:
+
+```{r}
+myFun <- function(x) {
+  cat("myFun is running!\n")  # output to console
+  x + 3                       # return a value
+}
+myFun(6)
+```
+
+In computer programming, output to the console, along with changes of *state*---changes to the Global Environment or to the file structure of your computer---are called *side-effects*.  Functions that only return values and do not produce side-effects are called *pure* functions. \index{pure function}
+
+A third principle of the functional programming paradigm is:
+
+>Functions should be pure.
+
+Now this principle is difficult to adhere to, and in fact if you were to adhere strictly to it in R then your programs would never "do" anything.  There do exist quite practical programming languages in which all of the functions are pure---and this leads to some very interesting features such as that the order in which operations are evaluated  doesn't affect what the function returns---but these "purely functional" languages manage purity by having other objects besides functions produce the necessary side-effects.  In R we happily let our functions have side-effects:  we certainly want to do some assignment, and print things out to the console from time to time.
+
+One way that R does support the third principle of functional programming is that it makes it easy to avoid having your functions modify the Global Environment.  To see this consider the following example:
+
+```{r eval=F}
+addThree <- function(x) {
+  heavenlyHash <- 5
+  x+3  # returns this value
+}
+result <- addThree(10)
+result
+heavenlyHash
+```
+
+```
+## [1] 13
+## Error: object 'heavenlyHash' not found
+```
+
+This is as we expect:  the variable `a` exists only in the *runtime* environment that is created in the call to `addThree()`.  As soon as the function finishes execution that environment dies, and `a` dies long with it.  In particular, it never became part of the Global Environment.
+
+If you really want you functions to modify the Global Environment---or any environment other than its run-time environment, for that matter---then you have to take special measures.  You could, for example, use the super-assignment operator `<<-`: \index{R-operators!<<- (super-assignment)@\texttt{<<-} (super-assignment)}
+
+```{r}
+addThreeSideEffect <- function(x) {
+  heavenlyHash <<- 5
+  x+3  # returns this value
+}
+result <- addThreeSideEffect(10)
+result
+heavenlyHash
+```
+
+The super-assignment operator looks for the name `heavenlyHash` in the parent environment of the run-time environment,  If if finds `heavenlyHash` there then it changes its value to 5 and stops.  Otherwise it looks in the next parent up, and so on until it reaches the Global Environment, at which point if it doesn't find a `heavenlyHash` it creates one and gives it the value.  In the example above, assuming you ran the function from the console, the parent environment is the Global Environment and the function has made a change to it:  a side-effect.
+
+Except in the case of explicit assignment functions like `<-()`, changes made by functions to the Global Environment can be quite problematic.  After all, we are used to using functions without having to look inside them to see how they do their work.  Even if we once wrote the function ourselves, we may not remember how it works, so if it creates side effects we may not remember that it does, and calling them could interfere with other important work that the program is doing.  (If the program already has `heavenlyHash` in the Global Environment and the we call a function that changes it value, we could be in for big trouble.)  Accordingly, R supports the third principle of functional programming to the extent of making it easy for you to avoid function calls that change your Global Environment.
+
+### Procedures as Higher-Order Function Calls
+
+The last principle of the functional programming paradigms that I'm going to sate isn't really a formal principle:  it's really more an indication of the programming style that prevails in languages where functions are first-class objects and that provide other support for functional programming.  The final principle is:
+
+>As much as possible, procedures should be accomplished by function calls,  In particular, loops should be replaced by calls to higher-order functions.
+
+A higher-order function is simply a functions that takes other functions as arguments. \index{higher-order function}R provides a nice set of higher-order functions, many of which substitute for iterative procedures such as loops.  In subsequent sections we will study the some of the most important higher-order functions, and see how they allow us to express some fairly complex procedures in a concise and readable way.  You will also see how this style really blurs the distinction---so fundamental to procedural programming---between data and procedures.  In functional programming, functions ARE data, and procedures are just function calls.
+
+### Functional Programming:  A Summary
+
+For our purposes, the principles of the functional programming paradigm are as follows:
+
+* Computation consists in the evaluation of functions.
+* Functions are first-class citizens in the language.
+* Functions should only return values; they should not produce side-effects. (At the very least they should not modify the Global Environment unless they are dedicated to assignment in the first place.)
+* As much as possible, procedures should be written in terms of function calls.  in particular, loops should be replaced by calls to higher-order functions.
+
+## `lapply()` and Friends
+
+In the remainder of the Chapter we will study important higher-order functions:   functions that take a function as an argument and apply that function to each element of another data structure.  As we have said previously, such functions often serve as alternatives to loops.
+
+### `lapply()`
+
+Suppose that we want to generate five vectors, each of which consists of ten numbers randomly chosen between 0 and 1.  We accomplish the task with a loop, as follows:
+
+```{r}
+# set up a list of length 10:
+lst <- vector(mode = "list", length = 5)
+for ( i in 1:5 ) {
+  lst[[i]] <- runif(10)
+}
+str(lst)
+```
+
+If we wanted the vectors to have length $1, 4, 9, 16,$ and 25, then we could write:
+
+```{r echo = 2:6}
+set.seed(2020)
+lst <- vector(mode = "list", length = 5)
+for ( i in 1:5 ) {
+  lst[[i]] <- runif(i^2)
+}
+str(lst)
+```
+
+In the first example, the elements in the vector `1:10` didn't matter---we wanted a vector of length ten each time---and in the second case the elements in the `1:10` did matter, in that it determined the length of the new vector produced.  Of course in general we could apply `runif()` to each element of *any* vector at all, like this:
+
+```{r echo = 2:7}
+set.seed(2020)
+vec <- c(5, 7, 8, 2, 9)
+lst <- vector(mode = "list", length = length(vec))
+for ( i in seq_along(vec) ) {
+  lst[[i]] <- runif(vec[i])
+}
+str(lst)
+```
+
+If we can apply `runif()` to each element of a vector, why not apply *an arbitrary function* to each element?  That's what the function `lapply()` \index{R-functions!lapply()@\texttt{lapply()}} will do for us.  The general form of `lapply()` is:
+
+```{r eval = F}
+lapply(X, FUN, ...)
+```
+
+In the template above:
+
+* `X` can be any vector (including the one-dimensional heterogeneous vectors known as lists);
+* `FUN` is a function that is to be applied to each element of `X`.  In the default operation of `lapply()`, each element of `X` becomes in turn the *first* argument of `FUN`.
+* `...` consists of other arguments that are supplied as arguments for the `FUN` function, in case you have to set other parameters of the function in order to get it to perform in the way you would like.
+
+The result is always a list.
+
+With `lapply()` can get the list in our second example as follows:
+
+```{r echo=2:4}
+set.seed(2020)
+vec <- c(5, 7, 8, 2, 9)
+lst <- lapply(X = vec, FUN = runif)
+str(lst)
+```
+
+
+If we had wanted the random numbers to be between---say---4 and 8, then we would supply extra arguments to `runif()` as follows:
+
+```{r echo = 2:4}
+set.seed(2020)
+vec <- c(5, 7, 8, 2, 9)
+lst <- lapply(X = vec, FUN = runif, min = 4, max = 8)
+str(lst)
+```
+
+The default behavior of `lapply()` is that the `X` vector supplies the first argument of `FUN`.  However, if some `...` parameters are supplied then `X` substitutes for the first parameter that is not mentioned in `...`.  In the above example, the `min` and `max`parameters are the second and third parameters for `runif()` so `X` substitutes for the first argument---the one that determines how many random numbers will be generated.  Later on we'll see an example where `X` substitutes for a non-first parameter.
+
+By the way:  most people don't bother to include the names of the `X` and `FUN` parameters when using `lapply()`:
+
+```{r echo = 2:4}
+set.seed(2020)
+vec <- c(5, 7, 8, 2, 9)
+lst <- lapply(vec, runif, min = 4, max = 8)
+str(lst)
+```
+
+If you want to use `lapply()` to get the results of our first example, in which each vector was of length 10, then you have to get around the fact that by default each element in the vector becomes the first argument of `FUN`.  One way to do this is by setting `FUN` to be a function that you write on the spot yourself:
+
+```{r echo=2:3}
+set.seed(2020)
+lst <- lapply(1:5, function(x) runif(10))
+str(lst)
+```
+
+In the code above, `FUN` has been set to an *anonymous* function that returns `runif(10)` no matter what value was supplied to it.  In computer programming a function is called *anonymous* when it is not given a name.  \index{anonymous function}We could have used a regular "named" function, but we would have needed an extra line of code:
+
+```{r eval = F}
+myfun <- function(x) runif(10)
+lst <- lapply(1:5, myFun)
+```
+
+We lied a little bit when we said earlier that `X` was a vector:  `X` could also be what in R is called an *expression*.  We won't get into the topic of exactly what constitutes an expression (see `help(expression)` for more on the topic), but suffice to say that an expression is a combination of object-names and function calls.  In particular---and this is a very common application of `lapply()`---`X` could be the name of a data frame.  For example, suppose that you want to find the number of elements in each column of `mat111survery` that are `NA`.  with `lapply()` this is not difficult:
+
+```{r eval = F}
+library(tigerstats)
+```
+
+```{r include = F}
+library(tigerstats)
+```
+
+
+
+```{r}
+numberNA <- lapply(m111survey, function(x) sum(is.na(x)))
+numberNA[1:2]   # show results just for the first two variables
+```
+
+In code above, the `X` variable in the function is, in turn, each *column* of `mat111survey`.  R "knows" that for a data frame that's probably what we want!
+
+### `sapply()`
+
+`lapply()` always returns a list.  Sometimes you would prefer that the result be something more "compact":  a matrix, perhaps, or even a vector.  In that case you should look into `sapply()`, \index{R-functions!sapply()@\texttt{sapply()}}which you make think of as short for "simplify-apply."
+
+Consider the problem we brought up in the previous section:  finding out how many `NA`s there are in each variable of a data frame.  It would be nice to have the results in a vector rather than a list, and `sapply()` can return a vector in this case:
+
+```{r}
+sapply(m111survey, function(x) sum(is.na(x)), simplify = "vector")
+```
+
+
+`sapply()` resembles `lapply()` in its operation, but takes the additional parameter `simplify` that specifies what the user would like the results to be in the end.  If the parameter is not set, then `sapply()` follow some internal rules to simplify the results "as much as possible."  In some cases, nothing simpler than a list can be obtained, so `sapply()` will end up returning the same things as `lapply()`.  As a rule it is best to specify the result you want.  If `sapply()` can't deliver the desired result then it will give you an error message so you can fix things, whereas if you leave`simplify` unspecified then you'll get the unexpected results without knowing it, which could lead to bugs in your code that are very difficult to diagnose.
+
+Earlier we mentioned that in `lapply()` the `X` parameter substitutes for the first argument of `FUN` that is not covered by the arguments supplied in `...`.  The same goes for `sapply()`.
+
+The following is an example in which---due to what's supplied in `...`, the `X` parameter goes with a non-first parameter of `FUN`.
+
+You may recall an [Exericise](#appeals-exercise) in Chapter \@ref(frames) where you were asked to use vectorization to simulate the decisions of judges in the Appeals Court Paradox.  You can `sapply()` to produce the simulated decisions, too:  as follows:
+
+```{r}
+probs <- c(0.95, 0.90, 0.90, 0.90, 0.80)
+reps <- 10000
+decisions <- sapply(probs, rbinom, n = reps, size = 1, 
+                    simplify = "matrix")
+str(decisions)  # a reps-by-5 matrix
+```
+
+Note that for `rbinom()`:
+
+* `n` is the first parameter;
+* `size` is the second parameter.
+
+Therefore the elements of `probs`---which is the value assigned to the `X` parameter of `sapply()`---substitute for the *third* parameter of `rbinom()`, which is indeed the `prob` parameter that controls the chance of a correct decision.
+
+### `tapply()`
+
+As a motivator for learning about `tapply()`, \index{R-functions!tapply()@\texttt{tapply()}}the next member of the `apply` family, consider the question from Section \@ref(onenum-onecat) about the `m111survey` data:  *Who tends to drive the fastest:  people who prefer to sit in the Front, the Middle, or the Back?*
+
+You will recall that we investigated the this question---a question about the relationship between the numerical variable `fastest` and the factor-variable `seat`---with a graph, which is reproduced here as Figure \@ref(fig:fastestseatviolinagain).  Comparing the relative positions of the violins and looking at the locations of individual values, it appears that folks who prefer to sit in the Back tend to drive faster than front and middle-sitters do, especially since there seems to be a reasonable number of back-sitters who drive quite fast (the back-sitter violin has a long upper "neck").
+
+```{r include = F}
+library(ggplot2)
+library(tigerstats)
+```
+
+
+```{r fastestseatviolinagain, fig.align = "center", out.width = "60%", fig.cap = "It kinds looks like the back-sitters drive faster, on the whole."}
+p <- ggplot(m111survey, aes(x = seat, y = fastest))
+p + geom_violin(fill = "burlywood") + geom_jitter()
+```
+
+It would be nice, though, to be able to base our judgement on something other than mere eye-balling.  Should we not undertake a numerical investigation of our question?
+
+One possible numerical approach is to compare the *mean* fastest speeds of the three groups of students.  We could use the `split()` \index{R-functions!split()@\texttt{split()}}function from Section \@ref(lists-splitting) to split the vector `fastest` into a list of three vectors, one for each value of the factor `seat`.  We can then compute the mean of each vector in the list and display them together for easy comparison.  The following code accomplishes this:
+
+```{r}
+df <- tigerstats::m111survey
+splitSpeeds <- with(df, split(fastest, f = seat))
+means <- sapply(splitSpeeds, FUN = mean, na.rm = T)
+means
+```
+
+Sure enough, the back-sitters have a much higher mean fastest speed!
+
+The `tapply()` function is designed to handle these splitting situations automatically.
+
+```{r}
+with(df, tapply(X = fastest, INDEX = seat, FUN = mean, na.rm = T))
+```
+
+Here's how the interface to `tapply()` works:
+
+* The `X` parameter `tapply()` is the vector you would like to split.
+* The `INDEX` parameter gives the variable you plan to split by.  It should be a factor (or something that R can coerce to a factor) and it must have the same length as `X`.
+* The `FUN` parameter is the function you plan to apply to each of the vectors in the list obtained by the split.
+* You can pass in other arguments that `FUN` will use.  In this case we set `na.rm` to `TRUE` so that the `mean()` function will ignore missing values in any of the vectors of the split.
+
+As it stands, `tapply()` appears to save only a line or two of code-writing.  The real power of `tapply()`, however, lies in the `INDEX` parameter.  `INDEX` need not be a single vector:  it could be a *list* of factors, in which case `tapply()` will split up the elements of `X` into groups determined by all possible combinations of levels of the factors in `INDEX`.  The best way to understand this is with an example:
+
+```{r}
+with(df, tapply(fastest, INDEX = list(sex, seat), FUN = mean, na.rm = T))
+```
+
+`tapply()` has returned a matrix with named rows and columns.  (This resembles a table, hence the letter `t` in the name of the function.)  Each cell of the matrix contains the mean speed for the group of people specified by the row and column names.  From this "table" we can see that for each seating preference males tend to drive faster than females do, on average.
+
+
+### `Map()`
+
+\index{R-functions!Map()@\texttt{Map()}}
+
+The apply-family of functions are quite flexible, but they are subject to the limitation that the arguments specified in `...` apply in the same way in each iteration of the `FUN`, even as the object passed in for `X` provides a *different* value to `FUN` each time.  What if we would like *two or more* parameters to vary?  In that case we should look to the `Map()` function.
+
+Can you figure out what the following code does?  Think about it before reading on in the text.
+
+```{r echo=2:5}
+set.seed(2525)
+reps <- 1:5
+probs <- c(0.20, 0.30, 0.50, 0.70, 0.90)
+sizes <- 5:1 * 1000
+sims <- Map(rbinom, n = reps, size = sizes, prob = probs)
+```
+
+Ready to read on?  The code simulates what might happen if:
+
+* there are five coins;
+* the probability of Heads on each flip, for each coin, is given by the vector `probs`;
+* The first coin is to be flipped 5000 times, the second coin 4000 times, the third coin 3000 times, the fourth coin 2000 times and the last coin 1000 times (as specified by `sizes`), and for each coin the number of Heads will be counted;
+* For the first coin, the 5000 flips happens once, for the second coin the 4000 flips happens twice, ..., and for the fifth coin the 1000 flips happens five times.  (This behavior is determined by `n = reps`.)
+
+In `Map()` the function to be applied is the first argument.  The remaining arguments will become parameters for the function.  They should be vectors of the same length, but if they are not then R will attempt to recycle the shorter ones. The result of `Map()` is always a list:
+
+```{r}
+sims
+```
+
+Here is an application of `Map()` to the simulation problem---Section \@ref(triangle-chance)---of making a triangle out of a randomly-split stick:
+
+```{r}
+isTriangle <- function(x, y, z) {
+  (x + y > z) & (x +z > y) & (y + z > x)
+}
+
+makesTriangle <- function(x, y) {
+  a <- pmin(x, y)
+  b <- pmax(x, y)
+  side1 <- a
+  side2 <- b-a
+  side3 <- 1 - b
+  isTriangle(x = side1, y = side2, z = side3)
+}
+
+mean(simplify2array(
+  Map(makesTriangle, 
+      x = runif(10000), 
+      y = runif(10000))))  # estimate the chance of a triangle
+```
+
+Note the use of the function `simplify2array()` \index{R-functions!simplify2array()@\texttt{simplify2array()}}which turns the list of `TRUE`s and `FALSE`s returned by `Map()` into a logical vector.  The mean of this vector gives the proportion of times in our simulation that a triangle was formed.
+
+### `replicate()`
+
+\index{R-functions!replicate()()@\texttt{replicate()}}
+
+`replicate()` evaluates a given expression a specified number of times.  By default it simplifies the results to an array, if possible:
+
+```{r}
+sims <- replicate(10, runif(5))
+str(sims)
+```
+
+
+
+## `Filter()` and `Reduce()`
+
+\index{R-functions!filter()()@\texttt{filter()}}
+
+R provides support for several "higher-order" functions commonly-used in functional programming languages.  (See `help(funprog)`.)  Within this family of functions we have already met `Map()`.  Another useful member is `Filter()`, which can do sub-setting work in situations when R's usual vector-based sub-setting falls short.
+
+Suppose, for example, that you want to select from `mat111survey` only those variables that are factors.  This can be accomplished as follows:
+
+```{r}
+m111Factors <- Filter(is.factor, m111survey)
+str(m111Factors)
+```
+
+Note that with `Filter()` as well as with `Map()`, the function is the first argument.  This is the case for all members of R's `funprog` family.
+
+Another important member of the `funprog` family is `Reduce()` \index{R-functions!Reduce()()@\texttt{Reduce()}}.  Given a function `f` that takes two inputs and a vector `v`, `Reduce()`:
+
+* applies `f` to elements 1 and 2 of the `v`, getting a result;
+* applies `f` to the result and element 3 of `v`, getting another result;
+* applies `f` to this new result and element 4 of `v`, getting yet another result ...
+* ... and so on until all of the elements of `v` have been exhausted.
+* then `Reduce()` returns the final result in the above series of operations.
+
+For example, suppose that you want to add up the elements of the vector:
+
+```{r}
+vec <- c(3, 1, 4, 6)
+```
+
+Of course you could just use:
+
+```{r}
+sum(vec)
+```
+
+After all, `sum()` has been written to apply to many elements at once.  But what if addition could only be done two numbers at a time?  How might you proceed?  You could:
+
+* add the 3 and 1 of (the first two elements of `vec`), getting 4;
+* then add 4 to 4, the third element of `vec`, getting 8;
+* then add 8 to 6, the final element of `vec`, getting 14;
+* then return 14.
+
+`Reduce()` operates in this way.
+
+```{r}
+Reduce(sum, vec)
+```
+
+Hence a common application of `Reduce` is to take an operation that is defined on only two items and extend it to operate on any number of items.  Consider, for example, the function `intersect()`, \index{R-functions!intersect()()@\texttt{intersect()}}, which will find the intersection of any two vectors of the same type:
+
+```{r}
+vec1 <- c(3, 4, 5, 6)
+vec2 <- c(4, 6, 8, -4)
+intersect(vec1, vec2)
+```
+
+You cannot intersect three or more vectors at once:
+
+```{r eval=F}
+intersect(vec1, vec2, c(4, 7, 9))
+```
+
+```
+## Error in base::intersect(x, y, ...) : unused argument (c(4, 7, 9))
+```
+
+With `Reduce()` you can intersect as many vectors as you like, provided that they are first stored in a list.  
+
+```{r}
+lst <- list(c("Akash", "Bipan", "Chandra", "Devadatta", "Raj"),
+            c("Raj", "Vikram", "Sita", "Akash", "Chandra"),
+            c("Akash", "Raj", "Chandra", "Bipan", "Lila"),
+            c("Akash", "Vikram", "Devadata", "Raj", "Lila"))
+Reduce(intersect, lst)
+```
+
+
+## Functionals vs. Loops
+
+The functions we have studied in this chapter are often called *functionals* or *higher-order* functions because they take a function as an input.  As we pointed out earlier, they deliver results that could have been produced by a writing a loop of some sort.
+
+Once you get used to functionals, you will find that they are often more "expressive" than loops---easier for others to read and to understand, and less prone to bugs.  Also, many of them are optimized by the developers of R to run a bit faster than an ordinary loop written in R.
+
+For example, consider the following list.  It consists of ten thousand vectors, each of which contains 100 randomly-generated numbers.
+
+```{r}
+lst <- lapply(1:10000, function(x) runif(100))
+```
+
+If we want the mean of each vector, we could write a loop:
+
+```{r eval = F}
+means <- numeric(10000)
+for ( i in 1:10000 ) {
+  means[i] <- mean(lst[[i]])
+}
+```
+
+Or we could use `sapply()`:
+
+```{r eval = F}
+means <- sapply(lst, mean)
+```
+
+Comparing the two using `system.time()` \index{R-functions!system.time()@\texttt{system.time()}}, on my machine I got:
+
+```{r eval = F}
+system.time(means <- sapply(lst, mean))
+```
+
+```
+##   user  system elapsed 
+##  1.640   0.009   1.649 
+```
+
+For the loop, I get:
+
+```{r eval = F}
+system.time({
+  means <- numeric(10000)
+  for ( i in 1:10000 ) {
+    means[i] <- mean(lst[[i]])
+  }
+})
+```
+
+```
+##   user  system elapsed 
+##  1.744   0.008   1.752 
+```
+
+The apply-function is a bit faster.  The difference is not too considerable, though.
+
+Remember also that vectorization is *much* faster than looping, and is also usually quite expressive, so don't struggle to take a functional approach when vectorization is possible.  (This advice applies to a number of of examples from this Chapter, in which the desired computations had already been accomplished in earlier chapters by some form of vectorization.)
+
+## Conclusion
+
+In this Chapter we have concentrated on only a single aspect of the Functional Programming paradigm:  exploiting the fact that functions are first-class citizens in R, we studied a number of higher-order functions that can substitute for loops.  There is certainly a great deal more to Functional Programming than the mere avoidance of loops, but we'll end our study at this point.  Familiarity with higher-order functions will stand you in good stead when you begin, in subsequent courses on web programming, to learn the JavaScript language.  JavaScript makes constant use of higher-order functions!
+
+\newpage
+
+## Glossary {-}
+
+Programming Paradigm \index{programming paradigm}
+
+:  A *programming paradigm* is a way to describe some of the features of programming languages.  Often a paradigm includes principles concerning the use of these features, or embodies a view that these features have special importance and utility in good programming practice.
+
+Procedural Programming \index{procedural programming}
+
+:  A programming paradigm that solves problems with programs that can be broken up into collections of variables, data structures and procedures. This paradigm, tends to draw a sharp distinction between variables and data structures on the one hand and procedures on the other.  
+
+Functional Programming \index{functional programming}
+
+:   A programming paradigm that stresses the central role of functions.  Some of its basic principles are:
+
+    * Computation consists in the evaluation of functions.
+    * Functions are first-class citizens in the language.
+    * Functions should only return values; they should not produce side-effects.
+    * As much as possible, procedures should be written in terms of function calls.
+
+Pure Function \index{pure function}
+
+:  A function that does not produce side-effects.
+
+Side Effect \index{side effect}
+
+: A change in the state of the program (i.e., a change in the Global Environment) or any interaction external to the program (i.e., printing to the console).
+
+Higher-Order Function  \index{higher-order function}
+
+:  A function that takes another function as an argument.
+
+Anonymous Function \index{anonymous function}
+
+: A function that does not have a name.
+
+Refactoring \index{refactoring}
+
+:  The act of rewriting computer code so that it performs the same task as before, but in a different way.  (This is usually done to make the code more human-readable or to make it perform the task more quickly.)
+
+\newpage
+
+## Exercises {-}
+
+```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+knitr::include_graphics("images/thinking.png")
+```
+
+```{r echo = F}
+oddMembers <- function(vec) {
+  Filter(function(x) x %% 2 == 1, vec)
+}
+```
+
+1. Use `tapply()` to compare the median fastest speeds of the front-sitters, middle-sitters and back-sitters in the `m111survey` data from the **tigerstats** package.  Which group has the highest median?
+
+1. The 25th percentile of a numerical vector `x` is a number such that about 25\% of the values in `x` are less than that number.  This number is called the *first quartile* of `x`.  The 75th percentile of `x`, also called the *third quartile*, is a number so that about 75\% of the values of `x` are less than that number.
+
+    It follows that about 50\% of the values of `x` lie between its first and third quartiles.  The difference between the two quartiles (third quartile minus first quartile) is called the *interquartile range* (IQR) of `x`.  It's a measure of how "spread out" typical values of `x` are:  the bigger the IQR, the more the spread.
+    
+    Study the function `quantile()` \index{R-functions()!quantile()@\texttt{quantile()}}from the **stats** package.  Notice that you can get the first and third quartiles of `x` with the command
+    
+    ```{r eval = F}
+    quantile(x, probs = c(0.25, 0.75))
+    ```
+    
+    Your task is to use `quantile()` to write a function called `iqRange()` that will return the interquartile range of any given numerical vector.  Then use that function with `tapply()` to get the interquartile ranges for the fastest speeds in the `m111survey` data, where the students are broken into groups according to both seating preference and sex.
+    
+1. This exercise continues the study of sex discrimination in wages that was begun in the [exercises](#frames-exercises) from Chapter \@ref(frames).  In those exercises our approach was graphical, but we would like to check our conclusions with a numerical approach as well.  Working from the `cpsSmall` data frame, use `tappply()` to compare mean wages when the subjects are broken into groups according to both sex and sector of employment.  (This corresponds to the graph with eight violin-plots from the Chapter \@ref(frames) exercises.)
+
+    Examine the "table" you got with `tapply()`.
+    * Are there any sectors in which it seems that women typically make more than men.  If so, what sectors are they?
+    * On the other hand, are there any sectors where men typically make more than women?  If so, what sectors are they?
+    * Based on your analysis, does it seem plausible that women made less than men simply because they chose lower-paying sectors of employment?
+
+1. Explain in words what the following line of code produces when given a vector `y`:
+
+    ```{r eval = F}
+    Map(function(x) x^2, y)
+    ```
+    
+    In the course of our explanation, say whether the result is a vector or a list.
+    
+1. Which do you think works faster for a given numerical vector `y`?  This code:
+
+    ```{r eval = F}
+    Map(function(x) sqrt(x), y)
+    ```
+    
+    Or this code?
+    
+    ```{r eval = F}
+  sqrt(y)
+    ```
+    
+    Justify your answer with a convincing example, using `system.time()`.  What moral do you draw from this?
+    
+1.  Refactor the following code so that it uses `Map()` instead of a loop:
+
+    ```{r eval = F}
+    df <- tigerstats::m111survey
+    keepVariable <- logical(length(names(df)))
+    for ( col in seq_along(keepVariable) ) {
+      var <- df[, col]
+      isNumeric <- is.numeric(var)
+      allThere <- !any(is.na(var))
+      keepVariable[col] <- isNumeric && allThere
+    }
+    newFrame <- df[, keepVariable]
+    head(newFrame)
+    ```
+    
+1.  To *refactor* \index{refactoring}computer code is to rewrite the code so that is does the same thing, but in a different way.  We might refactor code in order to make it more readable by humans, or to make it perform its task more quickly.
+
+    The following function produces a list of vectors of uniform random numbers, where the lower and upper bounds of the numbers are given by the arguments to the parameters `lower` and `upper` respectively, and the number of vectors in the list and the number of random numbers in each vector are given by a vector supplied to the parameter `vecs`.
+    
+    ```{r}
+    randomSims <- function(vecs, lower = 0, upper= 1, seed = NULL) {
+      # set seed if none is provided by the user
+      if ( is.null(seed) ) {
+        seed <- as.numeric(Sys.time())
+      }
+      set.seed(seed)
+      
+      lst <- vector(mode = "list", length = length(vecs))
+      for ( i in seq_along(vecs) ) {
+        lst[[i]] <- runif(vecs[i], min = lower, max = upper)
+      }
+      lst
+    }
+    ```
+    
+    Refactor the code for the `randomSims()` so that it uses `lapply()` instead of a loop.
+    
+1. The following enhanced version of `randomSims()` is even more flexible, as it allows both the upper and lower limits for the randomly-generated numbers to vary with each vector of numbers that is produced.
+
+    ```{r}
+    randomSims2 <- function(vecs, lower = 0, upper= 1, seed = NULL) {
+      # validate input
+      if (!(length(vecs) == length(upper) && length(upper) == length(lower)) ) {
+        return(cat("All vectors entered must have the same length."))
+      }
+      if ( any(upper < lower) ) {
+        return(cat(paste0("Every upper bound must be at least as ",
+                          "big as the corresponding lower bound.")))
+      }
+      # set seed if none is provided by the user
+      if ( is.null(seed) ) {
+        seed <- as.numeric(Sys.time())
+      }
+      set.seed(seed)
+      
+      lst <- vector(mode = "list", length = length(vecs))
+      for ( i in seq_along(vecs) ) {
+        lst[[i]] <- runif(vecs[i], min = lower[i], max = upper[i])
+      }
+      lst
+    }
+    ```
+    
+    Use `Map()` to refactor the code for `randomSims2()` so as to avoid using the loop.
+
+1.  Supposing that `y` is a numerical vector, explain in words what the following code produces:
+
+    ```{r eval = F}
+    Filter(function(x) x >= 4, y)
+    ```
+   
+1.  Write a line of code using the sub-setting operator `[`  produces the same result as the code in the previous problem.
+    
+1. Use `Filter()` to write a function called `oddMembers()` that, given any numerical vector, returns a vector containing the odd numbers of the given vector.  Your function should take a single argument called `vec`, the given vector.  A typical example of use would be as follows:
+
+    ```{r}
+    oddMembers(vec = 1:10)
+    ```
+    
+1. You are given the following list of character vectors:
+
+    ```{r}
+   lst <- list(c("Akash", "Bipan", "Chandra", "Devadatta", "Raj"),
+            c("Raj", "Vikram", "Sita", "Akash", "Chandra"),
+            c("Akash", "Raj", "Chandra", "Bipan", "Lila"),
+            c("Akash", "Vikram", "Devadata", "Raj", "Lila"))
+    ```
+    
+    Use `Reduce()` and the `union()` function to obtain a character vector that is the union of all the vectors in `lst`.

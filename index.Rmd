@@ -1,0 +1,104 @@
+--- 
+title: "Beginning Computer Science with R"
+author: "Homer White"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: homerhanumat/r-notes
+description: "Notes for Computer Science 115 and 215 at Georgetown College, Kentucky.  The language of instruction is R."
+---
+
+# Preface {-}
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'tigerstats', 'knitr', 'rmarkdown', 'readr','pryr',
+  'TurtleGraphics', 'mosaic', 'mosaicData', 'tigerData', 'ggplot2', 'plyr', 
+  'R6', 'devtools', 'bookdown', 'shiny', 'dplyr', 'blogdown'
+), 'packages.bib')
+
+knitr::opts_chunk$set(out.width = '60%', fig.align = 'center')
+```
+
+Welcome to *Beginning Computer Science with R*!  These notes will be your primary source for CSC 115:  Computer Science I, offered at Georgetown College.  They will also carry you part of the way through CSC 215.  A supplementary text, *Hands-On Programming with R* by Garrett Grolemund [@Grolemund2014], will be used in CSC 115 so you should make sure that you have a copy.
+
+For the first semester you won't need a computer of your own:  you can do all of your work on the R Studio Server, which you will access with your College network username and password.  Eventually, though, you will need to learn how to install and maintain professional software development tools on your own machine, so at some point early on in CSC 215 you will install R, R Studio and various other tools on a laptop of your own.  Then you will bring the laptop to class for your daily work.
+
+These Notes are available not only on the web but also as a PDF document that can be downloaded from the website (click the PDF icon, found among the icons at the top of the page).  The PDF is useful when you are working offline, and it also has an index.
+
+Instructional videos on selected topics will be published from time to time on this YouTube Channel:  [https://www.youtube.com/user/GCstats](https://www.youtube.com/user/GCstats), in the CSC playlist.
+
+## The Why of these Notes:  Remarks for Colleagues
+
+There is a plethora of books on R, covering pretty much every domain of application of the language, from ecology to spatial statistics to machine learning and data science.  There are even some books---among the very finest of R-books, in my view---on R as a a programming language.  Why then, write yet another book?
+
+It all has to do with my particular situation.  As Fate and the vagueries of small-college staffing would have it, I find myself preparing to teach the minor in Computer Science at the liberal arts College where for many years I had previously taught mathematics and statistics.  As I considered how to redesign a minor lean enough to be staffed by one not-quite-full-time person (I still handle some mathematics) and at the same offer something of absorbing interest to a reasonable number of undergraduates, I realized that it could not simply be a truncated version of a major:  a year of programming in a strongly-typed, compiled, large-scale programming language such as C++ or Java, followed by algorithms, data structures, compilers and perhaps a bit of theory.  For one thing, I shy away from large-scale languages:  I tend to want my results fast and I want to build something interesting as soon as possible, and for the most part beginning students feel the same way.  About the only thing a minor as a curtailed major would prepare them for is, well, *completion* of the major---which unfortunately we do not have. For another thing, my background simply isn't in Computer Science.  I am by training a mathematician with a specialty in ergodic theory, which could be considered an extreme generalization of probability theory.  Computer programming, with its fetish for the careful organization of information and its stress on practices to manage complexity, simply isn't in my theoretical blood.
+
+On the other hand in my years of teaching and practicing statistics I have gotten to be a half-good programmer by recognizing, through hard experience, the value of learning to program well from the ground up.  I have become increasingly fascinated by the computational aspects of statistics and by the entire computer-based workflow of data analysis---from data collection and data munging to analysis and reporting---and by the paradigm of reproducible research that can be incorporated into nearly every stage of that workflow.  With the tendency of data analysis to move toward the web I'm also seeing the utility of being aware of web design issues as a data analyst, and, as a web designer and developer, of being cognizant of trends in internet-based data collection and data reporting.
+
+Accordingly the minor will have a dual focus:  data analysis and web design, with a bit of back-end web development thrown in to unify the two domains.  Students will undertake a serious study of major scripting languages:  R for data analysis and JavaScript for web programming, both from a fairly systematic programming point of view, with due attention to procedural, object-oriented and (to a lesser extent) functional programming paradigms.
+
+The question is: which language to use in the freshman year?  Some institutions are moving toward JavaScript: in fact Stanford University will pilot JavaScript in several sections of its introductory CS course in the Fall of 2017.  There are certainly considerations in favor of a JavaScript-first approach:  it's a popular language with Node available as an interactive run-time environment and the browser as a environment in which exciting applications can be built quickly.  And whereas R is less widely-used and is still considered a domain-specific language, JavaScript can rightly be said to have made the leap into the ranks of general-purpose programming languages.  R also has the reputation of being a prickly language with a somewhat inconsistent syntax and with documentation that is "expert-friendly" at best.
+
+On the other hand R is designed for one-line interactivity at the console, so it's possible for a beginner to get simple programs working quickly.  The R-ecosystem has also become a lot more user-friendly in recent years.  The [RStudio](https://www.rstudio.com/products/rstudio/) IDE is comparable to top-flight integrated development environments for many other major languages and yet is still relatively lightweight and accessible to beginners.  The Server version of R Studio is especially useful for new programmers, as it saves them from having to deal with installation and other IT issues on their own machines, permitting them to focus on coding.  It's also easy, in a server setting, to make class materials available and to collect and return assignments.  R Markdown is fine platform for producing course notes (this book is written in R Markdown with the excellent **bookdown** package [@R-bookdown]) and slides as well.  Students, too, can use R Markdown to both write and discuss their programs in a single document.  The **blogdown** package [@R-blogdown] permits students to begin writing for the public about technical programming issues---or about anything at all, really, as more than a few of them are taking majors in the Humanities---thus building up an professional resume of online work.  Finally, the **shiny** package [@R-shiny] permits students to build simple interactive web apps for data analysis that can be used by non-coders.  Both **blogdown** and **shiny** prompt students to consider early on---even in the first year, if the pacing is right---concepts of web design, the other primary focus of the minor.
+
+Hence the choice was made to teach a first-year computer science course, to beginning programmers, with R.  As I pointed out earlier, there do exist some excellent books on R as a programming language that do not presume previous experience with R.  One example is Norman Matloff's *The Art of R Programming* [@Matloff2011].  Matloff, however, presumes that the reader either had prior programming experience in some other language or else sufficient computational maturity, acquired perhaps through extensive prior training in the mathematical sciences.  Another great text is Garrett Grolemund's *Hands-on Programming with R* [@Grolemund2014].  Grolemund's book is lively and to-the-point and starts off with excellent motivating examples.  Grolemund is also a master explainer, and he has put considerable effort into visual representation of programming concepts such as element-wise operations on vectors and the enclosure-relationships between environments; for that reason his text is being used as a supplementary textbook for this course.  On the other hand, even though he doesn't assume that the reader has prior coding experience, Grolemund does assume some prior background in data analysis and a strong motivation, on the reader's part, to persevere with nontrivial R-programming issues such as lexical scoping in the hopes of eventual payoffs in programming for data science.  In short, Grolemund also assumes more computational maturity than will be usually be found among beginning programmers at many small liberal arts colleges.
+
+Hence the niche for the notes (or perhaps text-under-development) offered here.  I aim to be a bit more copious and slow-paced than Grolemund and a bit less sophisticated than Matloff.  These notes will also contain a more extensive set of problems, ranging in difficulty from practice exercises to fairly extended projects that students might write up in R Markdown documents.
+
+Experienced programmers and R enthusiasts will be struck by the absence of certain topics.  Programmers will observe that there is no real attention to algorithms (sorting is just `sort()` or `order()`), and although functions receive lots of attention there is no mention of recursion.  In future editions I might cover recursion, as I believe that it is wonderful for the development of thinking skills, but it's not likely that a web developer or data analyst would have the need to write a recursive function.  Time spent on recursion and on various efficient algorithms for sorting and searching may be better spent, in my view, on extended programming projects, Shiny apps and blogging, and introductions to tools of the programmer's trade such as version control and GitHub.  I hope by the end of the first year to have made time for all of these "extra" topics.  R-specific tools such as **dplyr** for data manipulation, the various packages for web scraping and database interface, as well as packages for machine learning, are considered in later courses in the minor that are more specifically concerned with data analysis.
+
+Two of the most fundamental topics in any comprehensive discussion of the R language---lexical scoping and computing on the language---are absent from this book.  Lexical scoping and its implications are mentioned only in a brief footnote.  Partly this is due the fact that most of the elementary applications of lexical scoping mentioned in the literature are related to scientific computing, which won't be a concern for most of my students.  Certainly lexical scoping is important for understanding how R-packages work, but elementary students don't author packages.  As for computing on the language it is true that users are affected by it all the time (e.g., whenever they use functions with a formula interface), but generally one need not perform any computation on the language until one begins writing formula-interface functions for the benefit of casual R-users.
+
+On the other hand I have made some effort to explore programming paradigms other than procedural programming, perhaps in a bit more depth than in other elementary texts that teach with a scripting language.  There is a chapter on functional programming that, although it admittedly does not get far into the functional paradigm, at least does treat extensively of R's support for higher-order functions.  A chapter on object-oriented programming covers not only the generic-function OO that has been with R from the start but also an implementation of message-passing OO (Winston Chang's **R6** package [@R-R6]).  My hope is that these topics will not only sharpen my students' R-programming skills but also prepare them for encounters with the OO-methods and higher-order functions that are ubiquitous in JavaScript.  Finally, there is a pretty serious chapter on regular expressions, because:
+
+* they are useful in data analysis;
+* I have not found a treatment of regular expressions in R that a person without significant prior exposure to them in other languages has a prayer of following;
+* and because if you master regular expressions then you feel like a wizard.
+
+As for the numerous Wizard of Oz-themed examples, I can offer no defense other than haste.  Perhaps a future version will be built around something more suitable---the Harry Potter series, say.
+
+## History of R
+
+The story of R begins at [Bell Labs](https://en.wikipedia.org/wiki/Bell_Labs) in 1975, with the development, by John Chambers and several other colleagues, of the S language for statistical computing.  The language became well-known among statisticians and data analysts, especially in the academic community.
+
+In the early 1990's Ross Ihaka of the University of Auckland in New Zealand was making a study of the Scheme language as described in the classic MIT textbook *Structure and Interpretation of Computer Programs* [@AbelsonSussman], and was impressed with the possibilities of the language for data analysis applications.  Desiring to build a free analysis tool for his graduate students, Ihaka teamed up with his Auckland colleague Robert Gentleman and the two gradually developed a language with an external syntax similar to S but with an underlying engine based heavily upon Scheme.  Because of the similarity with the better-known S---or, by some account, because of the initial letter in the first names of both men---they named their new language "R".
+
+Initially the two men believed that their work on the new language was scarcely more than "playing games" and that it would not be used outside of the University of Auckland.  Eventually, though, the two placed a small announcement of their project on the email list *s-news* and began to draw the interest of other statisticians, including Martin Machler of the Swiss Federal Institute of Technology in Zurich, Switzerland.  Machler saw great potential for R, and in 1995 persuaded Ihaka and Gentleman to release it as "free software" under a [GNU Public License](https://www.gnu.org/licenses/gpl-faq.html#WhatDoesGPLStandFor).  The decision to make R free stimulated further interest in the language and encouraged many experts in statistical computation to become involved in its further development.
+
+The first official public release of R (version 1.0.0) occurred on February 29, 2000.  Since that time R has grown in popularity at an increasing rate, to the point where it is by now one of the world's most widely-used domain-specific computer languages, ranking among the top dozen computer languages overall.
+
+Many people have contributed to the development of R.  As of the composition of this History, the Comprehensive R Archive Network (CRAN) now hosts 10,633 contributed packages, each of which aims to extend the capabilities of R in a specific way.  R is usually the platform in which new statistical techniques are first implemented by the researchers who develop them.  It is widely used in the sciences, business and finance.
+
+## Acknowledgements
+
+I am greatly indebted to:
+
+*Norman Matloff* and *Hadley Wickham* for their excellent foundational books ([@Matloff2011], [@Wickham2014]) on the R language.  *Garrett Grolemund*, for his informal but precise expository style, as exemplified in numerous R Studio webinars and in [@Grolemund2014].
+
+*Allen Downey*, for *Think Python* [@Downey2015].  This book formed my ideas about ordering and selection of topics for computer science at an elementary level, and helped me think about teaching computer science in a way that was as independent as possible from the specific language of instruction.
+
+*Everyone* at R Studio, including Hadley, *Yihui Xie* for R Markdown and the family of R Markdown-related packages, *Joe Cheng* for conceiving and pioneering **shiny**, *Winston Chang* for **shiny** and **R6**, and of course *JJ Allaire* for developing the IDE and calling together the remarkable constellation of developers and evangelists who have contributed so much to the R community and ecosystem.
+
+*Danny Kaplan*, *Nick Horton* and *Randall Pruim* for pioneering the Mosaic Project that has enabled so many faculty to teach undergraduate statistics with R.  I am especially indebted to Danny for curricular inspiration and to Randall for R-programming advice in the incipient stages of my journey as an R-developer.  Nick has been a great encourager of everyone associated with the Mosaic community.
+
+My former colleague *Rebekah Robinson* who, upon learning of Mosaic and R Markdown, insisted that at Georgetown we should figure out how to teach elementary statistics with R.
+
+My colleagues *William Harris* and *Christine Leverenz*, who learned to teach in the R way.
+
+My students, especially *Woody Burchett*, *Luke Garnett*, *Shawn Marcom*, *Jacob Townsend* and *Andrew Giles*, for work with me on various R-related research projects.  Luke has gone on to become a valued colleague at Georgetown.
+
+*Georgetown College*, for granting me the sabbatical time in Spring 2017 to work on these Notes, and on other programming topics prerequisite to teaching Computer Science.
+
+My wife *Mary Lou* and daughters *Clare*, *Catherine* and *Agnes*, for patience and support.  By now they have heard quite enough about programming.
+
+## License
+
+These Notes are licensed under the Creative Commons Attribution-ShareAlike 4.0 International Public License:
+
+>[https://creativecommons.org/licenses/by-sa/4.0/legalcode](https://creativecommons.org/licenses/by-sa/4.0/legalcode).

@@ -1,0 +1,494 @@
+# Lists {#lists}
+
+```{r santa-list, echo=F, fig.pos='!h', out.width = "60%", fig.align = "center"}
+knitr::include_graphics("images/santa-list.jpg")
+```
+
+In this Chapter we will study *lists*, another important data structure in R.
+
+\newpage
+
+## Introduction to Lists
+
+```{r include = F}
+library(tigerstats)
+```
+
+
+So far the vectors that we have met have all been *atomic*, meaning that they can hold only one type of value.  Hence we deal with vectors of type `integer`, or of type `double`, or of type `character`, and so on.
+
+A *list* \index{list} is a special kind of vector.  Like any other vector it is one-dimensional, but unlike an atomic vector it can contain objects of *any* sort:  atomic vectors, functions---even other lists!  We say, therefore, that lists are *heterogeneous* vectors.
+
+The most direct way to create a list is with the function `list()` \index{R-functions!list()@\texttt{list()}}.  Let's make a couple of lists:
+
+```{r}
+lst1 <- list(name = "Dorothy", age = "12")
+df <- data.frame(x = c(10, 20, 30), y = letters[1:3])
+lst2 <- list(vowels = c("a", "e", "i", "o", "u"),
+             myFrame = df)
+lst3 <- list(nums = 10:20,
+             bools = c(T, F, F),
+             george = lst1)
+```
+
+Note that the elements of our three lists are not objects of a single data type.  Note also that `lst3` actually contains `lst2` as one of its elements.
+
+When you call `list()` to create a list, you have the option to assign a name to one or more of the elements.  In the code above we chose, for both of our lists, to assign a name to each element.
+
+Let's print out a list to the console.  We'll choose `lst1`, since it's rather small:
+
+```{r}
+lst1
+```
+
+Note that the name of each elements appears before the element itself is printed out, and that the names are preceded by dollar signs.  This is a hint that you can access a single member of the list in a way similar to the `frame$variable` format for data frames:
+
+```{r}
+lst1$age
+```
+
+
+You can make an empty list, too:
+
+```{r}
+emptyList <- list()
+```
+
+This is useful when you want to build up a list gradually, but you do not yet know what will go into it.
+
+
+## Subsetting and Accessing
+
+You can subset lists in the same way that you subset a vector:  simply use the `[` sub-setting operator.  Let's pick out the first two elements of `lst3`:
+
+```{r}
+lst3[1:2]
+```
+
+We get a new list consisting of the desired two elements.
+
+Suppose we want to pick out just one element form `lst3`:  the numbers, for instance.  We could try this:
+
+```{r}
+justNumbers <- lst3[1]
+justNumbers
+```
+
+Now suppose that we want the third number in the `nums` vector.  You might think this would work fine:
+
+```{r}
+justNumbers[3]
+```
+
+Wait a minute!  The third number in `nums` is 12:  so why are we getting `NA`?
+
+Look carefully again at the printout for `justNumbers`:
+
+```{r}
+justNumbers
+```
+
+The `$nums` give us the clue:  `justNumbers` is not just the vector `nums`---in fact it's not an atomic vector at all.  It is a list whose only element is a vector with the name `nums`.  Another way to see this is to check the length of `justNumbers`:
+
+```{r}
+length(justNumbers)
+```
+
+The fact is that the sub-setting operator `[`, applied to lists, always returns a list.  If you want access to an individual element of a list, then you need to use the double-bracket `[[` operator:
+
+```{r}
+reallyJustNumbers <- lst3[[1]]
+reallyJustNumbers
+```
+
+Of course if an element of a list is named, then you may also use the dollar sign:
+
+```{r}
+lst3$nums
+```
+
+From time to time it's useful to "flatten out" a list into a vector of values of its elements.  This is accomplished by the function `unlist()` \index{R-functions!unlist()@\texttt{unlist()}}:
+
+```{r}
+unlist(lst1)
+```
+
+As the example above shows, you have to exercise caution with `unlist()`.  Since `unlist()` returns an atomic vector, when it encounters values of different types then it has to coerce them to be of the same type.  In the competition between `double` and `character` types, `character` wins, so you end up with a vector of strings.
+
+## Splitting {#lists-splitting}
+
+Sometimes it is useful to split a vector or data frame into pieces according to the value of a variable.  For example, from `m111survey` we might like to have separate data frames for each of the three seating preferences.  We can accomplish this with the `split()` function:  \index{R-functions!split()@\texttt{split()}}
+
+```{r}
+bySeat <- split(m111survey, f = m111survey$seat)
+```
+
+If you run the command `str(bySeat)`, you find that `bySeat` is a list consisting of three data frames:
+
+* `1_front`:  the frame of all subjects who prefer the Front;
+* `2_middle`:  the frame of all subjects who prefer the Middle;
+* `3_back`:  the frame of all subjects who prefer the Back.
+
+Now you can carry on three separate analyses, working with one frame at a time.
+
+There is a pitfall which of you should be aware.  If you try to access any one of the frames by its name, you will get an error:
+
+```{r eval = F}
+bySeat$1_front
+```
+
+```
+## Error: unexpected numeric constant in "bySeat$1"
+```
+
+The reason is that variable names cannot begin with a number!  You have to be content with
+
+```{r eval = F}
+bySeat[[1]]
+```
+
+
+## Returning Multiple Values
+
+Lists combine many different sorts of objects into one object.  This makes them very useful in the context of some functions.
+
+Consider, for example, the drunken-turtle simulation form Section \@ref(drunken-turtle-sim):
+
+```{r eval = F}
+drunkenSim <- function(steps = 1000, reps = 10000, close = 0.5, 
+                       seed = NULL, table = FALSE) {
+  if ( is.null(seed) ) {
+    seed <- Sys.time()
+  }
+  set.seed(seed)
+  
+  # set up returns vedtor to store the number of 
+  # close returns in each repetition:
+  returns <- numeric(reps)
+  
+  for (i in 1:reps) {
+  angle <- runif(steps, 0 , 2*pi)
+  xSteps <- cos(angle)
+  ySteps <- sin(angle)
+  
+  x <- cumsum(xSteps)
+  y <- cumsum(ySteps)
+  
+  dist <- sqrt(x^2 + y^2)
+  closeReturn <- (dist < 0.5)
+  returns[i] <- sum(closeReturn)
+  }
+  
+  if ( table ) {
+    cat("Here is a table of the number of close returns:\n\n")
+    tab <- prop.table(table(returns))
+    print(tab)
+    cat("\n")
+  }
+  cat("The average number of close returns was:  ", 
+      mean(returns), ".", sep = "")
+}
+```
+
+Suppose that we would like to store some of the results of the simulation:
+
+* the vector of the number of close returns on each repetition;
+* the table made from the close-returns vector;
+* the mean number of returns.
+
+Unfortunately a function can only return one object.
+
+The solution to your problem is to make a list of the three objects we want, and then return the list.  We can re-write the function so make all output to the console optional.  The function will make the list and return it invisibly.
+
+
+```{r}
+drunkenSimList <- function(steps = 1000, reps = 10000, close = 0.5, 
+                       seed = NULL, verbose = FALSE) {
+  if ( is.null(seed) ) {
+    seed <- Sys.time()
+  }
+  set.seed(seed)
+  
+  # get the returns:
+  returns <- numeric(reps)
+  for (i in 1:reps) {
+  angle <- runif(steps, 0 , 2*pi)
+  xSteps <- cos(angle)
+  ySteps <- sin(angle)
+  
+  x <- cumsum(xSteps)
+  y <- cumsum(ySteps)
+  
+  dist <- sqrt(x^2 + y^2)
+  closeReturn <- (dist < 0.5)
+  returns[i] <- sum(closeReturn)
+  }
+  # compute the table and the mean:
+  tableReturns <- table(returns)
+  meanReturns <- mean(returns)
+  
+  # handle output to console if user wants it
+  if ( verbose ) {
+    cat("Here is a table of the number of close returns:\n\n")
+    print(prop.table(tableReturns))
+    cat("\n")
+    cat("The average number of close returns was:  ", 
+      meanReturns, ".", sep = "")
+  }
+  
+  # assemble the desired three items into a list
+  # (for conveneince, name the items)
+  results <- list(tableReturns = tableReturns,
+                  meanReturns = meanReturns,
+                  returns = returns)
+  # return the list
+  invisible(results)
+}
+```
+
+Now we can run the function simply to acquire the simulation results for later use:
+
+```{r}
+simResults <- drunkenSimList(seed = 3939)
+```
+
+We can use any of the results at any time and in any way we like:
+
+```{r}
+cat("On the first ten repetitions, the number of close returns were:\n\n\t",
+    simResults$returns[1:10])
+```
+
+## Iterating Over a List
+
+Lists are one-dimensional, so you can loop over them just as you would loop over a atomic vector.  Sometimes this can be quite useful.
+
+Here is a toy example.  We will write a function that, when given a list of vectors, will return a vector consisting of the means of each of the vectors in the list.
+
+```{r}
+means <- function(vecs = list(), ...) {
+  n <- length(vecs)
+  if ( n == 0 ) {
+    stop("Need some vectors to work with!")
+  }
+  results <- numeric()
+  for ( vec in vecs ) {
+    print(vec)
+    results <- c(results, mean(vec, ...))
+  }
+  results
+}
+```
+
+```{r}
+vec1 <- 1:5
+vec2 <- 1:10
+vec3 <- c(1:20, NA)
+means(vecs = list(vec1, vec2, vec3), na.rm = TRUE)
+```
+
+Another possibility---and one that will work a bit more quickly---is to iterate over the indices of the list of vectors:
+
+```{r}
+means2 <- function(vecs = list(), ...) {
+  n <- length(vecs)
+  if ( n == 0 ) {
+    return(cat("Need some vectors to work with!"))
+  }
+  results <- numeric(n)
+  for ( i in 1:n ) {
+    results[i] <- mean(vecs[[i]], ...)
+  }
+  results
+}
+```
+
+```{r}
+means2(vecs = list(vec1, vec2, vec3), na.rm = TRUE)
+```
+
+## A Note on Ellipses
+
+The functions of the previous section contained a mysterious `...` argument in their definitions.  This is known in R as the *ellipsis*  argument, and it signals the possibility that one or more additional arguments may be supplied when the function is actually called.
+
+The following function illustrates the operation of the ellipsis argument:
+
+```{r}
+ellipisDemo <- function(...) {
+  cat("I got the following arguments:\n\n")
+  print(list(...))
+}
+ellipisDemo(x = 3, y = "cat", z = FALSE)
+```
+
+
+At this point in our study of R, `...` is useful in two ways.
+
+### Use #1:  Passing Additional Arguments to Functions "Inside"
+
+Look again at the code for the function `means2()`:
+
+```{r eval = F}
+means2 <- function(vecs = list(), ...) {
+  n <- length(vecs)
+  if ( n == 0 ) {
+    return(cat("Need some vectors to work with!"))
+  }
+  results <- numeric(n)
+  for ( i in 1:n ) {
+    results[i] <- mean(vecs[[i]], ...)
+  }
+  results
+}
+```
+
+We plan to take the mean of some vectors and therefore the `mean()` function will be used in the body of `means2()`.  However we would like the user to be able to decide how `mean()` deals with `NA`-values. When we include the ellipsis argument in the definition of `means2()` we have the option to pass its contents into `mean()`, and we exercise that option in the line:
+
+```{r eval = F}
+results[i] <- mean(vecs[[i]], ...)
+```
+
+Now we can see what happens in the call:
+
+```{r eval = F}
+means2(vecs = list(vec1, vec2, vec3), na.rm = TRUE)
+```
+
+The ellipsis argument will consist of the argument `na.rm = TRUE`, hence the call to mean inside the loop is  equivalent to:
+
+```{r eval = F}
+results[i] <- mean(vecs[[i]], na.rm = TRUE)
+```
+
+Consider, on the other hand, then call:
+
+```{r eval = F}
+means2(vecs = list(vec1, vec2, vec3))
+```
+
+Now the ellipsis is empty.  In this case the code in the loop will be equivalent to:
+
+```{r}
+means2(vecs = list(vec1, vec2, vec3))
+```
+
+As a result, `mean()` will use the default value of `na.rm`, which is `FALSE`.  For any input-vector having `NA`-values, the mean will be computed as `NA`.
+
+
+### Use #2:  Permitting Any Number of Arguments
+
+Another application of the ellipsis argument is in the writing of functions where the number of "primary" arguments is not determined in advance.
+
+We have seen a few R-functions that can deal with any number of arguments.  `cat()` is an example:
+
+```{r}
+cat("argument one,", "argument two,", "and as many more as you like!")
+```
+
+With the ellipsis argument we can do this sort of thing ourselves.  For example, here is a function that takes any number of vectors as arguments and determines whether the vectors are all of the same length:
+
+
+```{r}
+sameLength <- function(...) {
+  vecs <- list(...)
+  numVecs <- length(vecs)
+  if ( numVecs <= 1 ) {
+    return(cat("Need two or more vectors."))
+  }
+  allSame <- TRUE
+  len <- length(vecs[[1]])
+  for ( i in 2:numVecs ) {
+    if ( length(vecs[[i]]) != len ) {
+      allSame <- FALSE
+      break
+    }
+  }
+  allSame 
+}
+```
+
+We can give this function two or more vectors, as follows:
+
+```{r}
+vec1 <- 1:3
+vec2 <- 1:4
+vec3 <- 1:3
+sameLength(vec1, vec2, vec3)
+```
+
+\newpage
+
+## Glossary {-}
+
+List \index{list}
+
+:  A *heterogeneous* vector; that is, a vector whose elements can be any sort of R-object.
+
+\newpage
+
+
+## Exercises {-}
+
+```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+knitr::include_graphics("images/thinking.png")
+```
+
+```{r echo = F}
+goodStats <- function(x, ...) {
+  list(mean = mean(x, ...),
+       sd = sd(x, ...),
+       median = median(x, ...))
+}
+```
+
+1.  We are given the following list:
+
+    ```{r}
+    lst <- list(yabba = letters,
+                dabba = list(x = LETTERS,
+                             y = 1:10),
+                do = tigerstats::m111survey)
+    ```
+    
+    One way to access the letter "b" in the first element of `lst` is as follows:
+    
+    ```{r}
+    lst$yabba[2]
+    ```
+    
+    Another way is:
+    
+    ```{r}
+    lst[[1]][2]
+    ```
+    
+    For each of the following objects, find at least two ways to access it within `lst`:
+    * the vector of letters from "c" to "j";
+    * the capital letter "F";
+    * the vector of numbers from 1 to 10;
+    * the heights of the five tallest individuals in `m111survey`.
+    
+
+1. Write a function called `goodStats()` that, when given a vector of numerical values, computes the mean, median and standard deviation of the values, and returns these values in a list.  The function should take two parameters:
+    * `x`:  the vector of numerical values;
+    * `...`:  the ellipses, which allow the user to pass in additional arguments.
+    
+    The list returned should name each of the three quantities:
+    * the name of the mean should be `mean`;
+    * the name of the standard deviation should be `sd`;
+    * the name of the median should be `median`.
+    
+    Typical examples of use should look like this:
+    
+    ```{r}
+    vec <- 1:5
+    goodStats(x = vec)
+    ```
+    
+    ```{r}
+    vec <- c(3, 7, 9, 11, NA)
+    myStats <- goodStats(x = vec, na.rm = T)
+    myStats$mean
+    ```
+    
+    

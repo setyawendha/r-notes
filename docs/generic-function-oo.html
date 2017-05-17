@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Beginning Computer Science with R</title>
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
+  <meta name="generator" content="bookdown 0.3.20 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="github-repo" content="homerhanumat/r-notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  
+  <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  
+
+<meta name="author" content="Homer White">
+
+
+<meta name="date" content="2017-05-17">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="application-whales-in-an-ocean.html">
+<link rel="next" href="glossary-11.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Beginning Computer Programming with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="the-why-of-these-notes-remarks-for-colleagues.html"><a href="the-why-of-these-notes-remarks-for-colleagues.html"><i class="fa fa-check"></i><b>0.1</b> The Why of these Notes: Remarks for Colleagues</a></li>
+<li class="chapter" data-level="0.2" data-path="history-of-r.html"><a href="history-of-r.html"><i class="fa fa-check"></i><b>0.2</b> History of R</a></li>
+<li class="chapter" data-level="0.3" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.4" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
+<li class="chapter" data-level="1.2" data-path="idea-tour.html"><a href="idea-tour.html"><i class="fa fa-check"></i><b>1.2</b> A Quick Tour</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="idea-tour.html"><a href="idea-tour.html#idea-arithmetic"><i class="fa fa-check"></i><b>1.2.1</b> Basic Arithmetic</a></li>
+<li class="chapter" data-level="1.2.2" data-path="idea-tour.html"><a href="idea-tour.html#read-evaluate-print-loop"><i class="fa fa-check"></i><b>1.2.2</b> Read-Evaluate-Print-Loop</a></li>
+<li class="chapter" data-level="1.2.3" data-path="idea-tour.html"><a href="idea-tour.html#idea-variables"><i class="fa fa-check"></i><b>1.2.3</b> Variables</a></li>
+<li class="chapter" data-level="1.2.4" data-path="idea-tour.html"><a href="idea-tour.html#idea-functions"><i class="fa fa-check"></i><b>1.2.4</b> Functions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="idea-tour.html"><a href="idea-tour.html#idea-data"><i class="fa fa-check"></i><b>1.2.5</b> Data and Graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="idea-debugging.html"><a href="idea-debugging.html"><i class="fa fa-check"></i><b>1.3</b> Debugging</a></li>
+<li class="chapter" data-level="" data-path="idea-glossary.html"><a href="idea-glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="idea-exercises.html"><a href="idea-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html"><i class="fa fa-check"></i><b>2.1</b> What is a Vector?</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#types-of-atomic-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Types of Atomic Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#coercion"><i class="fa fa-check"></i><b>2.1.2</b> Coercion</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#combining-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Combining Vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#na-values"><i class="fa fa-check"></i><b>2.1.4</b> NA Values </a></li>
+<li class="chapter" data-level="2.1.5" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#everything-in-r-is-a-vector"><i class="fa fa-check"></i><b>2.1.5</b> “Everything in R is a Vector”</a></li>
+<li class="chapter" data-level="2.1.6" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#named-vectors"><i class="fa fa-check"></i><b>2.1.6</b> Named Vectors</a></li>
+<li class="chapter" data-level="2.1.7" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#special-character-vectors"><i class="fa fa-check"></i><b>2.1.7</b> Special Character Vectors</a></li>
+<li class="chapter" data-level="2.1.8" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#length-of-vectors"><i class="fa fa-check"></i><b>2.1.8</b> Length of Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html"><i class="fa fa-check"></i><b>2.2</b> Constructing Patterned Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#sequencing"><i class="fa fa-check"></i><b>2.2.1</b> Sequencing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#repeating"><i class="fa fa-check"></i><b>2.2.2</b> Repeating</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="subsetting-vectors.html"><a href="subsetting-vectors.html"><i class="fa fa-check"></i><b>2.3</b> Subsetting Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html"><i class="fa fa-check"></i><b>2.4</b> More on Logical Vectors</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html#boolean-operators"><i class="fa fa-check"></i><b>2.4.1</b> Boolean Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="vector-recycling.html"><a href="vector-recycling.html"><i class="fa fa-check"></i><b>2.5</b> Vector Recycling </a></li>
+<li class="chapter" data-level="2.6" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html"><i class="fa fa-check"></i><b>2.6</b> Subsetting with Logical Vectors</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#counting"><i class="fa fa-check"></i><b>2.6.1</b> Counting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#cautions-about-na"><i class="fa fa-check"></i><b>2.6.2</b> Cautions about NA</a></li>
+<li class="chapter" data-level="2.6.3" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#which-any-all"><i class="fa fa-check"></i><b>2.6.3</b> Which, Any, All</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html"><i class="fa fa-check"></i><b>2.7</b> Basic Arithmetical Operations on Vectors</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#more-math-functions"><i class="fa fa-check"></i><b>2.7.1</b> More Math Functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#na-and-nan-considerations"><i class="fa fa-check"></i><b>2.7.2</b> NA and NaN Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html"><i class="fa fa-check"></i><b>2.8</b> Further Notes on Syntax</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#syntax-errors-vs.run-time-errors-vs.semantic-errors"><i class="fa fa-check"></i><b>2.8.1</b> Syntax Errors vs. Run-time Errors vs. Semantic Errors</a></li>
+<li class="chapter" data-level="2.8.2" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#the-assignment-operator"><i class="fa fa-check"></i><b>2.8.2</b> The Assignment Operator</a></li>
+<li class="chapter" data-level="2.8.3" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#multiple-expressions"><i class="fa fa-check"></i><b>2.8.3</b> Multiple Expressions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#variable-names-and-reserved-words"><i class="fa fa-check"></i><b>2.8.4</b> Variable Names and Reserved Words</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="motivation-for-functions.html"><a href="motivation-for-functions.html"><i class="fa fa-check"></i><b>3.1</b> Motivation for Functions</a></li>
+<li class="chapter" data-level="3.2" data-path="function-syntax.html"><a href="function-syntax.html"><i class="fa fa-check"></i><b>3.2</b> Function Syntax</a></li>
+<li class="chapter" data-level="3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html"><i class="fa fa-check"></i><b>3.3</b> What a Function Returns</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-final-expression-evaluated"><i class="fa fa-check"></i><b>3.3.1</b> The Final Expression Evaluated</a></li>
+<li class="chapter" data-level="3.3.2" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-return-function"><i class="fa fa-check"></i><b>3.3.2</b> The <code>return()</code> Function</a></li>
+<li class="chapter" data-level="3.3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#writing-a-talky-function"><i class="fa fa-check"></i><b>3.3.3</b> Writing a “Talky” Function</a></li>
+<li class="chapter" data-level="3.3.4" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-print-function"><i class="fa fa-check"></i><b>3.3.4</b> The <code>print()</code> Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="more-about-arguments.html"><a href="more-about-arguments.html"><i class="fa fa-check"></i><b>3.4</b> More About Arguments</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="more-about-arguments.html"><a href="more-about-arguments.html#default-arguments"><i class="fa fa-check"></i><b>3.4.1</b> Default Arguments</a></li>
+<li class="chapter" data-level="3.4.2" data-path="more-about-arguments.html"><a href="more-about-arguments.html#argument-matching"><i class="fa fa-check"></i><b>3.4.2</b> Argument-Matching</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.5</b> Environments and Scope</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="environments-and-scope.html"><a href="environments-and-scope.html#environments-and-searching"><i class="fa fa-check"></i><b>3.5.1</b> Environments and Searching</a></li>
+<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.2</b> Function Environments</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="note-on-packages.html"><a href="note-on-packages.html"><i class="fa fa-check"></i><b>3.6</b> A Note on Packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="note-on-packages.html"><a href="note-on-packages.html#installed-packages"><i class="fa fa-check"></i><b>3.6.1</b> Installed Packages</a></li>
+<li class="chapter" data-level="3.6.2" data-path="note-on-packages.html"><a href="note-on-packages.html#learning-about-a-package"><i class="fa fa-check"></i><b>3.6.2</b> Learning About a Package</a></li>
+<li class="chapter" data-level="3.6.3" data-path="note-on-packages.html"><a href="note-on-packages.html#installing-packages"><i class="fa fa-check"></i><b>3.6.3</b> Installing Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="more-to-learn.html"><a href="more-to-learn.html"><i class="fa fa-check"></i><b>3.7</b> More to Learn</a></li>
+<li class="chapter" data-level="" data-path="glossary-1.html"><a href="glossary-1.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="flow.html"><a href="flow.html"><i class="fa fa-check"></i><b>4</b> Flow-Control</a><ul>
+<li class="chapter" data-level="4.1" data-path="prologue-prompting-the-user.html"><a href="prologue-prompting-the-user.html"><i class="fa fa-check"></i><b>4.1</b> Prologue: Prompting the User</a></li>
+<li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
+<li class="chapter" data-level="4.3.2" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loop-caution"><i class="fa fa-check"></i><b>4.3.2</b> For-Loop Caution</a></li>
+<li class="chapter" data-level="4.3.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#breaking-out-of-a-loop"><i class="fa fa-check"></i><b>4.3.3</b> Breaking Out of a Loop</a></li>
+<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#solving-the-empty-vector-problem-in-for-loops-with-seq_along"><i class="fa fa-check"></i><b>4.3.4</b> Solving the Empty-Vector Problem in <code>for</code>-Loops With <code>seq_along()</code></a></li>
+<li class="chapter" data-level="4.3.5" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#skipping-ahead-in-a-loop"><i class="fa fa-check"></i><b>4.3.5</b> Skipping Ahead in a Loop</a></li>
+<li class="chapter" data-level="4.3.6" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#repeat"><i class="fa fa-check"></i><b>4.3.6</b> Repeat</a></li>
+<li class="chapter" data-level="4.3.7" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#while"><i class="fa fa-check"></i><b>4.3.7</b> While</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="collatz-conjecture.html"><a href="collatz-conjecture.html"><i class="fa fa-check"></i><b>4.4</b> Application: The Collatz Conjecture</a></li>
+<li class="chapter" data-level="" data-path="glossary-2.html"><a href="glossary-2.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="turtle.html"><a href="turtle.html"><i class="fa fa-check"></i><b>5</b> Turtle Graphics</a><ul>
+<li class="chapter" data-level="5.1" data-path="basic-movements.html"><a href="basic-movements.html"><i class="fa fa-check"></i><b>5.1</b> Basic Movements</a></li>
+<li class="chapter" data-level="5.2" data-path="making-many-movements-an-introduction-to-looping.html"><a href="making-many-movements-an-introduction-to-looping.html"><i class="fa fa-check"></i><b>5.2</b> Making Many Movements: An Introduction to Looping</a></li>
+<li class="chapter" data-level="5.3" data-path="writing-turtle-functions.html"><a href="writing-turtle-functions.html"><i class="fa fa-check"></i><b>5.3</b> Writing Turtle Functions</a></li>
+<li class="chapter" data-level="5.4" data-path="random-moves.html"><a href="random-moves.html"><i class="fa fa-check"></i><b>5.4</b> Random Moves</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="random-moves.html"><a href="random-moves.html#sampling-from-a-vector"><i class="fa fa-check"></i><b>5.4.1</b> Sampling from a Vector</a></li>
+<li class="chapter" data-level="5.4.2" data-path="random-moves.html"><a href="random-moves.html#application-a-bouncing-turtle"><i class="fa fa-check"></i><b>5.4.2</b> Application: a Bouncing Turtle</a></li>
+<li class="chapter" data-level="5.4.3" data-path="random-moves.html"><a href="random-moves.html#uniform-random-numbers"><i class="fa fa-check"></i><b>5.4.3</b> Uniform Random Numbers</a></li>
+<li class="chapter" data-level="5.4.4" data-path="random-moves.html"><a href="random-moves.html#pseudo-randomness-and-setting-a-seed"><i class="fa fa-check"></i><b>5.4.4</b> Pseudo-Randomness and Setting a Seed</a></li>
+<li class="chapter" data-level="5.4.5" data-path="random-moves.html"><a href="random-moves.html#drunken-turtle-intro"><i class="fa fa-check"></i><b>5.4.5</b> Application: a Drunken Turtle</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="more-complex-turtle-graphs.html"><a href="more-complex-turtle-graphs.html"><i class="fa fa-check"></i><b>5.5</b> More Complex Turtle Graphs</a></li>
+<li class="chapter" data-level="" data-path="glossary-3.html"><a href="glossary-3.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>6</b> Simulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability-and-random-variables.html"><a href="probability-and-random-variables.html"><i class="fa fa-check"></i><b>6.1</b> Probability and Random Variables</a></li>
+<li class="chapter" data-level="6.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>6.2</b> Monte Carlo Simulation</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-a-probability"><i class="fa fa-check"></i><b>6.2.1</b> Estimating a Probability</a></li>
+<li class="chapter" data-level="6.2.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-an-expected-value"><i class="fa fa-check"></i><b>6.2.2</b> Estimating an Expected Value</a></li>
+<li class="chapter" data-level="6.2.3" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#the-law-of-large-numbers"><i class="fa fa-check"></i><b>6.2.3</b> The Law of Large Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="triangle-chance.html"><a href="triangle-chance.html"><i class="fa fa-check"></i><b>6.3</b> Example: Chance of a Triangle</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="triangle-chance.html"><a href="triangle-chance.html#setting-a-seed"><i class="fa fa-check"></i><b>6.3.1</b> Setting a Seed</a></li>
+<li class="chapter" data-level="6.3.2" data-path="triangle-chance.html"><a href="triangle-chance.html#program-development"><i class="fa fa-check"></i><b>6.3.2</b> Program Development</a></li>
+<li class="chapter" data-level="6.3.3" data-path="triangle-chance.html"><a href="triangle-chance.html#number-of-repetitions"><i class="fa fa-check"></i><b>6.3.3</b> Number of Repetitions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="simulation-connect.html"><a href="simulation-connect.html"><i class="fa fa-check"></i><b>6.4</b> Example: Will They Connect?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="simulation-connect.html"><a href="simulation-connect.html#vectorization-vs.looping"><i class="fa fa-check"></i><b>6.4.1</b> Vectorization vs. Looping</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="appeals-court-paradox.html"><a href="appeals-court-paradox.html"><i class="fa fa-check"></i><b>6.5</b> Example: the Appeals Court Paradox</a></li>
+<li class="chapter" data-level="6.6" data-path="simulation-number-needed.html"><a href="simulation-number-needed.html"><i class="fa fa-check"></i><b>6.6</b> Example: How Many Numbers Needed?</a></li>
+<li class="chapter" data-level="6.7" data-path="example-dental-floss.html"><a href="example-dental-floss.html"><i class="fa fa-check"></i><b>6.7</b> Example: Dental Floss</a></li>
+<li class="chapter" data-level="6.8" data-path="drunken-turtle-sim.html"><a href="drunken-turtle-sim.html"><i class="fa fa-check"></i><b>6.8</b> Example: The Drunken Turtle</a></li>
+<li class="chapter" data-level="" data-path="glossary-4.html"><a href="glossary-4.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="frames.html"><a href="frames.html"><i class="fa fa-check"></i><b>7</b> Data Frames</a><ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-matrices.html"><a href="introduction-to-matrices.html"><i class="fa fa-check"></i><b>7.1</b> Introduction to Matrices</a></li>
+<li class="chapter" data-level="7.2" data-path="matrix-indexing.html"><a href="matrix-indexing.html"><i class="fa fa-check"></i><b>7.2</b> Matrix Indexing</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="matrix-indexing.html"><a href="matrix-indexing.html#to-drop-or-not"><i class="fa fa-check"></i><b>7.2.1</b> To Drop or Not?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html"><i class="fa fa-check"></i><b>7.3</b> Operations on Matrices</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#arithmetical-operations"><i class="fa fa-check"></i><b>7.3.1</b> Arithmetical Operations</a></li>
+<li class="chapter" data-level="7.3.2" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>7.3.2</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="7.3.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#logical-operations"><i class="fa fa-check"></i><b>7.3.3</b> Logical Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
+<li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-vectors"><i class="fa fa-check"></i><b>7.5.1</b> Creation from Vectors</a></li>
+<li class="chapter" data-level="7.5.2" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-other-frames"><i class="fa fa-check"></i><b>7.5.2</b> Creation From Other Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html"><i class="fa fa-check"></i><b>7.6</b> Subsetting Data Frames</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html#boolean-expressions"><i class="fa fa-check"></i><b>7.6.1</b> Boolean Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="ordering-data-frames.html"><a href="ordering-data-frames.html"><i class="fa fa-check"></i><b>7.7</b> Ordering Data Frames</a></li>
+<li class="chapter" data-level="7.8" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html"><i class="fa fa-check"></i><b>7.8</b> New Variables from Old</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html#getting-rid-of-variables"><i class="fa fa-check"></i><b>7.8.1</b> Getting Rid of Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="more-graphing.html"><a href="more-graphing.html"><i class="fa fa-check"></i><b>7.9</b> More Graphing</a><ul>
+<li class="chapter" data-level="7.9.1" data-path="more-graphing.html"><a href="more-graphing.html#one-numerical-variable"><i class="fa fa-check"></i><b>7.9.1</b> One Numerical Variable</a></li>
+<li class="chapter" data-level="7.9.2" data-path="more-graphing.html"><a href="more-graphing.html#categorical-variables"><i class="fa fa-check"></i><b>7.9.2</b> Categorical Variables</a></li>
+<li class="chapter" data-level="7.9.3" data-path="more-graphing.html"><a href="more-graphing.html#onenum-onecat"><i class="fa fa-check"></i><b>7.9.3</b> One Numerical and One Categorical Variable</a></li>
+<li class="chapter" data-level="7.9.4" data-path="more-graphing.html"><a href="more-graphing.html#two-numerical-variables"><i class="fa fa-check"></i><b>7.9.4</b> Two Numerical Variables</a></li>
+<li class="chapter" data-level="7.9.5" data-path="more-graphing.html"><a href="more-graphing.html#grouping-by-a-categorical-variable"><i class="fa fa-check"></i><b>7.9.5</b> Grouping by a Categorical Variable</a></li>
+<li class="chapter" data-level="7.9.6" data-path="more-graphing.html"><a href="more-graphing.html#application-u.s.-births"><i class="fa fa-check"></i><b>7.9.6</b> Application: U.S. Births</a></li>
+<li class="chapter" data-level="7.9.7" data-path="more-graphing.html"><a href="more-graphing.html#learn-more"><i class="fa fa-check"></i><b>7.9.7</b> Learn More</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-5.html"><a href="glossary-5.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="frames-exercises.html"><a href="frames-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>8</b> Lists</a><ul>
+<li class="chapter" data-level="8.1" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html"><i class="fa fa-check"></i><b>8.1</b> Introduction to Lists</a></li>
+<li class="chapter" data-level="8.2" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html"><i class="fa fa-check"></i><b>8.2</b> Subsetting and Accessing</a></li>
+<li class="chapter" data-level="8.3" data-path="lists-splitting.html"><a href="lists-splitting.html"><i class="fa fa-check"></i><b>8.3</b> Splitting</a></li>
+<li class="chapter" data-level="8.4" data-path="returning-multiple-values.html"><a href="returning-multiple-values.html"><i class="fa fa-check"></i><b>8.4</b> Returning Multiple Values</a></li>
+<li class="chapter" data-level="8.5" data-path="iterating-over-a-list.html"><a href="iterating-over-a-list.html"><i class="fa fa-check"></i><b>8.5</b> Iterating Over a List</a></li>
+<li class="chapter" data-level="8.6" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html"><i class="fa fa-check"></i><b>8.6</b> A Note on Ellipses</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-1-passing-additional-arguments-to-functions-inside"><i class="fa fa-check"></i><b>8.6.1</b> Use #1: Passing Additional Arguments to Functions “Inside”</a></li>
+<li class="chapter" data-level="8.6.2" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-2-permitting-any-number-of-arguments"><i class="fa fa-check"></i><b>8.6.2</b> Use #2: Permitting Any Number of Arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>9</b> Strings</a><ul>
+<li class="chapter" data-level="9.1" data-path="character-vectors-strings.html"><a href="character-vectors-strings.html"><i class="fa fa-check"></i><b>9.1</b> Character Vectors: Strings</a></li>
+<li class="chapter" data-level="9.2" data-path="characters-and-special-characters.html"><a href="characters-and-special-characters.html"><i class="fa fa-check"></i><b>9.2</b> Characters and Special Characters</a></li>
+<li class="chapter" data-level="9.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html"><i class="fa fa-check"></i><b>9.3</b> Basic String Operations</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="basic-string-operations.html"><a href="basic-string-operations.html#is-and-as"><i class="fa fa-check"></i><b>9.3.1</b> Is and As</a></li>
+<li class="chapter" data-level="9.3.2" data-path="basic-string-operations.html"><a href="basic-string-operations.html#number-of-characters"><i class="fa fa-check"></i><b>9.3.2</b> Number of Characters</a></li>
+<li class="chapter" data-level="9.3.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html#substrings-and-trimming"><i class="fa fa-check"></i><b>9.3.3</b> Substrings and Trimming</a></li>
+<li class="chapter" data-level="9.3.4" data-path="basic-string-operations.html"><a href="basic-string-operations.html#changing-cases"><i class="fa fa-check"></i><b>9.3.4</b> Changing Cases</a></li>
+<li class="chapter" data-level="9.3.5" data-path="basic-string-operations.html"><a href="basic-string-operations.html#splitting-strings"><i class="fa fa-check"></i><b>9.3.5</b> Splitting Strings</a></li>
+<li class="chapter" data-level="9.3.6" data-path="basic-string-operations.html"><a href="basic-string-operations.html#pasting-and-joining-strings"><i class="fa fa-check"></i><b>9.3.6</b> Pasting and Joining Strings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="formatted-printing.html"><a href="formatted-printing.html"><i class="fa fa-check"></i><b>9.4</b> Formatted Printing</a></li>
+<li class="chapter" data-level="" data-path="glossary-7.html"><a href="glossary-7.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="regex.html"><a href="regex.html"><i class="fa fa-check"></i><b>10</b> Regular Expressions</a><ul>
+<li class="chapter" data-level="10.1" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
+<li class="chapter" data-level="10.2" data-path="regex-practice-sites.html"><a href="regex-practice-sites.html"><i class="fa fa-check"></i><b>10.2</b> Regex Practice Sites</a></li>
+<li class="chapter" data-level="10.3" data-path="regex-syntax.html"><a href="regex-syntax.html"><i class="fa fa-check"></i><b>10.3</b> Regex Syntax</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="regex-syntax.html"><a href="regex-syntax.html#matching-a-specific-sequence"><i class="fa fa-check"></i><b>10.3.1</b> Matching a Specific Sequence</a></li>
+<li class="chapter" data-level="10.3.2" data-path="regex-syntax.html"><a href="regex-syntax.html#character-classes"><i class="fa fa-check"></i><b>10.3.2</b> Character Classes</a></li>
+<li class="chapter" data-level="10.3.3" data-path="regex-syntax.html"><a href="regex-syntax.html#quantification"><i class="fa fa-check"></i><b>10.3.3</b> Quantification</a></li>
+<li class="chapter" data-level="10.3.4" data-path="regex-syntax.html"><a href="regex-syntax.html#greedy-vs.lazy"><i class="fa fa-check"></i><b>10.3.4</b> Greedy vs. Lazy</a></li>
+<li class="chapter" data-level="10.3.5" data-path="regex-syntax.html"><a href="regex-syntax.html#grouping"><i class="fa fa-check"></i><b>10.3.5</b> Grouping</a></li>
+<li class="chapter" data-level="10.3.6" data-path="regex-syntax.html"><a href="regex-syntax.html#alternation"><i class="fa fa-check"></i><b>10.3.6</b> Alternation</a></li>
+<li class="chapter" data-level="10.3.7" data-path="regex-syntax.html"><a href="regex-syntax.html#anchors"><i class="fa fa-check"></i><b>10.3.7</b> Anchors</a></li>
+<li class="chapter" data-level="10.3.8" data-path="regex-syntax.html"><a href="regex-syntax.html#regex-captures"><i class="fa fa-check"></i><b>10.3.8</b> Captures</a></li>
+<li class="chapter" data-level="10.3.9" data-path="regex-syntax.html"><a href="regex-syntax.html#looking-around"><i class="fa fa-check"></i><b>10.3.9</b> Looking Around</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>10.4</b> Entering a Regex in R</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>10.4.1</b> String to Regex</a></li>
+<li class="chapter" data-level="10.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-substitution"><i class="fa fa-check"></i><b>10.4.2</b> Substitution</a></li>
+<li class="chapter" data-level="10.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>10.4.3</b> A Note on Perl</a></li>
+<li class="chapter" data-level="10.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>10.4.4</b> Patterned Replacement</a></li>
+<li class="chapter" data-level="10.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>10.4.5</b> Grepping</a></li>
+<li class="chapter" data-level="10.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>10.4.6</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="10.4.7" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>10.4.7</b> Regex Modes</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>10.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="" data-path="glossary-8.html"><a href="glossary-8.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="files.html"><a href="files.html"><i class="fa fa-check"></i><b>11</b> Files</a><ul>
+<li class="chapter" data-level="11.1" data-path="downloading-files.html"><a href="downloading-files.html"><i class="fa fa-check"></i><b>11.1</b> Downloading Files</a></li>
+<li class="chapter" data-level="11.2" data-path="reading-text-files-with-readlines.html"><a href="reading-text-files-with-readlines.html"><i class="fa fa-check"></i><b>11.2</b> Reading Text Files with <code>readLines()</code></a></li>
+<li class="chapter" data-level="11.3" data-path="reading-text-files-with-readr.html"><a href="reading-text-files-with-readr.html"><i class="fa fa-check"></i><b>11.3</b> Reading Text Files with <strong>readr</strong></a></li>
+<li class="chapter" data-level="11.4" data-path="writing-to-files.html"><a href="writing-to-files.html"><i class="fa fa-check"></i><b>11.4</b> Writing to Files</a></li>
+<li class="chapter" data-level="11.5" data-path="application-making-a-lexicon.html"><a href="application-making-a-lexicon.html"><i class="fa fa-check"></i><b>11.5</b> Application: Making a Lexicon</a></li>
+<li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>12</b> Functional Programming in R</a><ul>
+<li class="chapter" data-level="12.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html"><i class="fa fa-check"></i><b>12.1</b> Programming Paradigms</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html#procedural-programming"><i class="fa fa-check"></i><b>12.1.1</b> Procedural Programming</a></li>
+<li class="chapter" data-level="12.1.2" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming-the-ubiquity-of-functions-in-r"><i class="fa fa-check"></i><b>12.1.2</b> Functional Programming: The Ubiquity of Functions in R</a></li>
+<li class="chapter" data-level="12.1.3" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming-functions-as-first-class-citizens"><i class="fa fa-check"></i><b>12.1.3</b> Functional Programming: Functions as First-Class Citizens</a></li>
+<li class="chapter" data-level="12.1.4" data-path="programming-paradigms.html"><a href="programming-paradigms.html#minimize-side-effects"><i class="fa fa-check"></i><b>12.1.4</b> Minimize Side Effects</a></li>
+<li class="chapter" data-level="12.1.5" data-path="programming-paradigms.html"><a href="programming-paradigms.html#procedures-as-higher-order-function-calls"><i class="fa fa-check"></i><b>12.1.5</b> Procedures as Higher-Order Function Calls</a></li>
+<li class="chapter" data-level="12.1.6" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming-a-summary"><i class="fa fa-check"></i><b>12.1.6</b> Functional Programming: A Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html"><i class="fa fa-check"></i><b>12.2</b> <code>lapply()</code> and Friends</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#lapply"><i class="fa fa-check"></i><b>12.2.1</b> <code>lapply()</code></a></li>
+<li class="chapter" data-level="12.2.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#sapply"><i class="fa fa-check"></i><b>12.2.2</b> <code>sapply()</code></a></li>
+<li class="chapter" data-level="12.2.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#tapply"><i class="fa fa-check"></i><b>12.2.3</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="12.2.4" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#map"><i class="fa fa-check"></i><b>12.2.4</b> <code>Map()</code></a></li>
+<li class="chapter" data-level="12.2.5" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#replicate"><i class="fa fa-check"></i><b>12.2.5</b> <code>replicate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="filter-and-reduce.html"><a href="filter-and-reduce.html"><i class="fa fa-check"></i><b>12.3</b> <code>Filter()</code> and <code>Reduce()</code></a></li>
+<li class="chapter" data-level="12.4" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>12.4</b> Functionals vs. Loops</a></li>
+<li class="chapter" data-level="12.5" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>12.5</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="glossary-10.html"><a href="glossary-10.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="oo.html"><a href="oo.html"><i class="fa fa-check"></i><b>13</b> Object-Oriented Programming in R</a><ul>
+<li class="chapter" data-level="13.1" data-path="the-object-oriented-programming-paradigm.html"><a href="the-object-oriented-programming-paradigm.html"><i class="fa fa-check"></i><b>13.1</b> The Object-Oriented Programming Paradigm</a></li>
+<li class="chapter" data-level="13.2" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html"><i class="fa fa-check"></i><b>13.2</b> Reference Classes with Package R6</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#defining-a-class"><i class="fa fa-check"></i><b>13.2.1</b> Defining a Class</a></li>
+<li class="chapter" data-level="13.2.2" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#instantiation-initializing-objects"><i class="fa fa-check"></i><b>13.2.2</b> Instantiation: Initializing Objects</a></li>
+<li class="chapter" data-level="13.2.3" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#getting-and-setting-attributes"><i class="fa fa-check"></i><b>13.2.3</b> Getting and Setting Attributes</a></li>
+<li class="chapter" data-level="13.2.4" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#calling-methods"><i class="fa fa-check"></i><b>13.2.4</b> Calling Methods</a></li>
+<li class="chapter" data-level="13.2.5" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#holding-a-reference-not-a-value"><i class="fa fa-check"></i><b>13.2.5</b> Holding a Reference, not a Value</a></li>
+<li class="chapter" data-level="13.2.6" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#cloning-an-object"><i class="fa fa-check"></i><b>13.2.6</b> Cloning an Object</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="inheritance.html"><a href="inheritance.html"><i class="fa fa-check"></i><b>13.3</b> Inheritance</a></li>
+<li class="chapter" data-level="13.4" data-path="adding-members-to-a-class.html"><a href="adding-members-to-a-class.html"><i class="fa fa-check"></i><b>13.4</b> Adding Members to a Class</a></li>
+<li class="chapter" data-level="13.5" data-path="method-chaining.html"><a href="method-chaining.html"><i class="fa fa-check"></i><b>13.5</b> Method Chaining</a></li>
+<li class="chapter" data-level="13.6" data-path="application-whales-in-an-ocean.html"><a href="application-whales-in-an-ocean.html"><i class="fa fa-check"></i><b>13.6</b> Application: Whales in an Ocean</a></li>
+<li class="chapter" data-level="13.7" data-path="generic-function-oo.html"><a href="generic-function-oo.html"><i class="fa fa-check"></i><b>13.7</b> Generic-Function OO</a><ul>
+<li class="chapter" data-level="13.7.1" data-path="generic-function-oo.html"><a href="generic-function-oo.html#motivating-examples"><i class="fa fa-check"></i><b>13.7.1</b> Motivating Examples</a></li>
+<li class="chapter" data-level="13.7.2" data-path="generic-function-oo.html"><a href="generic-function-oo.html#terminology"><i class="fa fa-check"></i><b>13.7.2</b> Terminology</a></li>
+<li class="chapter" data-level="13.7.3" data-path="generic-function-oo.html"><a href="generic-function-oo.html#common-generic-functions"><i class="fa fa-check"></i><b>13.7.3</b> Common Generic Functions</a></li>
+<li class="chapter" data-level="13.7.4" data-path="generic-function-oo.html"><a href="generic-function-oo.html#writing-your-own-methods"><i class="fa fa-check"></i><b>13.7.4</b> Writing Your Own Methods</a></li>
+<li class="chapter" data-level="13.7.5" data-path="generic-function-oo.html"><a href="generic-function-oo.html#writing-a-generic-function"><i class="fa fa-check"></i><b>13.7.5</b> Writing a Generic Function</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-11.html"><a href="glossary-11.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beginning Computer Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="generic-function-oo" class="section level2">
+<h2><span class="header-section-number">13.7</span> Generic-Function OO</h2>
+<p>We now turn to the second major type of object-oriented programming that is supported by R, namely: generic-function OO.</p>
+<div id="motivating-examples" class="section level3">
+<h3><span class="header-section-number">13.7.1</span> Motivating Examples</h3>
+<p>We begin by revisiting the task of <em>printing</em> to the console.</p>
+<p>Recall that whenever we type the name of an object into the console and press Enter, R interprets the input as a call to the <code>print()</code> function. Consider, for example, printing out some portion of <code>m111survey</code> from the <strong>tigerstats</strong> package.</p>
+<p>Thus the following two expressions accomplish the same</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>tigerstats::m111survey[, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight_feel&quot;</span>)]</code></pre></div>
+<p>If we want to print <code>df</code>, either of the following two statements will suffice:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(df)
+df         <span class="co"># calls print(df) implicitly</span></code></pre></div>
+<p>Let’s have a look at <code>df</code>, using either of the above two commands:</p>
+<pre><code>##   height   weight_feel
+## 1   76.00 1_underweight
+## 2   74.00 2_about_right
+## 3   64.00 2_about_right
+## 4   62.00 1_underweight
+## 5   72.00 1_underweight
+&lt;further output omitted to save space&gt;</code></pre>
+<p>It is tempting to think of the above printout as simply what the object <code>df</code> <em>is</em>. But that’s not quite right. In truth, it merely reflects how R chose to <em>represent</em> <code>df</code> to us in the console. R was programmed to represent <code>df</code> in spreadsheet-format—with variables along columns, individuals along rows, and with handy row-numbers supplied—because users are accustomed to viewing data frames in that way.</p>
+<p>Now let’s turn <code>df</code> into a list:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">as.list</span>(df)
+<span class="kw">str</span>(lst)</code></pre></div>
+<pre><code>## List of 2
+##  $ height     : num [1:71] 76 74 64 62 72 70.8 70 79 59 67 ...
+##  $ weight_feel: Factor w/ 3 levels &quot;1_underweight&quot;,..: 1 2 2 1 1 3 2 2 2 3 ...</code></pre>
+<p>Now let’s print <code>lst</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst   <span class="co"># same as print(lst)</span></code></pre></div>
+<pre><code>## $height
+##  [1] 76.00 74.00 64.00 62.00 72.00 70.80 70.00 79.00 59.00 67.00 65.00 62.00
+## [13] 59.00 78.00 69.00 68.00 73.00 73.00 65.00 65.00 66.00 67.75 63.00 66.00
+&lt;further output omitted to save space&gt;</code></pre>
+<p>We get the familiar output for a list whose elements are named. Users don’t expect lists to be represented in the console in spreadsheet-style format, even if the elements of the list happen to be vectors that are all of the same length. They expect a more “neutral” representation, and R delivers one.</p>
+<p>Printing to the console is a common task. It appears, however, that the method by which that task is performed depends on the type of object that is input to the <code>print()</code> function. If your object is a data frame, <code>print()</code> behaves one way. If your object is a list, print does something else. since the behavior of <code>print()</code> depends on the type of object involved in the operation of printing, you could say that it exhibits polymorphism. .</p>
+<p>In fact it is the <em>class</em> of the object given to print that determines the method that <code>prints()</code> employs. The class of an object in R can be accessed with the <code>class()</code> function :</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(df)</code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(lst)</code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<p>How does the class of <code>df</code> determine the method used for printing? To see how this is done, look at the code for the <code>print()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print</code></pre></div>
+<pre><code>## function (x, ...) 
+## UseMethod(&quot;print&quot;)
+## &lt;bytecode: 0x108da3d40&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
+<p>The body of the <code>print()</code> consists of just one expression: <code>UseMethod(&quot;print&quot;)</code>. On the fact of it, this doesn’t seem to accomplish anything! In reality, though, a lot is taking place under the hood. Let’s examine what happens, step-by-step, when we call <code>print(df)</code>.</p>
+<ol style="list-style-type: decimal">
+<li>The data frame <code>df</code> is assigned to the parameter <code>x</code> in the <code>print()</code> function.</li>
+<li>We call <code>UseMethod(&quot;print&quot;)</code>.</li>
+<li>From <code>help(UseMethod)</code> we learn that <code>UseMethod()</code> takes two parameters:
+<ul>
+<li><code>generic</code>: a character string that names task we want to perform. In this case <code>generic</code> has been set to “print”.</li>
+<li><code>object</code>: this is an object whose class will determine the method that will be “dispatched”, i.e., the method that will be used to print the object to the console. By default this is the first argument in the enclosing function <code>print()</code>, so <code>object</code> gets set to the data frame <code>df</code>.</li>
+</ul></li>
+<li>Control has now passed to the <code>UseMethod()</code> function, which searches for a suitable method for printing an object of class <code>data.frame</code>. It does this by pasting together “print” (the argument to <code>generic</code>) and <code>data.frame</code> (the class of the object <code>df</code> it was given) with a period in between, getting the string “print.data.frame”. A search is now conducted for a function of the name.</li>
+<li><p>The function <code>print.data.frame()</code> will be found. We can tell because it appears on the list of available “methods” for <code>print()</code>. The <code>methods()</code> function  will give us the complete list of available methods, if we like</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">methods</span>(<span class="st">&quot;print&quot;</span>)</code></pre></div>
+<pre><code>## [1] print,ANY-method                                  
+## [2] print,diagonalMatrix-method                       
+## [3] print,sparseMatrix-method                         
+## [4] print.abbrev*                                     
+## [5] print.acf*
+## ...
+## [87] print.data.frame
+## [88] print.data.table   &lt;== Here it is!
+## ...</code></pre></li>
+<li>R now calls the <code>print.data.frame()</code>, passing in <code>df</code>. The data frame is printed to the console.</li>
+<li><p>When <code>UseMethod()</code> completes execution, it does not return control to the enclosing function <code>print()</code> from which it was called. The work of printing is done, so R arranges for control to be passed back to whomever called <code>print()</code> in the first place.</p></li>
+</ol>
+<p>It is interesting to note that the very act of “printing out” the print function, which we did earlier in order to see the code for the function involved a search for a printing method:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print      <span class="co"># this is equivalent to print(print)</span></code></pre></div>
+<pre><code>## function (x, ...) 
+## UseMethod(&quot;print&quot;)
+## &lt;bytecode: 0x108da3d40&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
+<p>In the call <code>print(print)</code>, R looked at the class of <code>print()</code>, and found that it was of class <code>function</code>. R then searched for a method called <code>print.function</code> and found one. Note that this method give the sort of output to the console that would be helpful to a user:</p>
+<ul>
+<li>the code for the function;</li>
+<li>the location of the function in memory: <code>0x108da3d40</code>;</li>
+<li>the environment in which the function was defined (the package <strong>base</strong>).</li>
+</ul>
+<p>Things go a little bit differently in the call to <code>print(lst)</code>. The class of <code>lst</code> is <code>list</code>, but when you search the results of <code>methods(print)</code> you won’t find a <code>print.list()</code> method; accordingly R uses a fall-back method called <code>print.default()</code>. This is why the console-output for lists looks so “neutral.”</p>
+</div>
+<div id="terminology" class="section level3">
+<h3><span class="header-section-number">13.7.2</span> Terminology</h3>
+<p>The <code>print()</code> function is an example of a <em>generic</em> function.  A generic function is simply a function that performs a common task by <em>dispatching</em> its input to a particular method-function that is selected on the basis of the class of the input to the generic function. Languages that use generic functions are said to support <em>generic-function OO</em>. .</p>
+<p>In message-oriented OO, objects own their own methods, and the way a task is performed depends on the class of the object that is invoked to perform the task. Generic-function OO, which is most commonly found in languages that support functional programming, puts more stress on functions: the generic function “owns” the methods in the sense that it acts as the central dispatcher, assigning a method function to perform a given task. In a bit of a reversal to message-passing OO, method selected in generic-function OO depends on the class of the input-object to the generic, not on the generic that was called to perform the task.</p>
+<p>We should also mention that R actually has two ways to implement generic-function OO:</p>
+<ul>
+<li>S3 classes;</li>
+<li>S4 classes.</li>
+</ul>
+<p>S3 classes were the first to be implemented, and they are the implementation we describe here. S4 classes were a later addition. (They tend to be used by programmers who worry that the rules for formation of S3 classes aren’t strict enough.)</p>
+</div>
+<div id="common-generic-functions" class="section level3">
+<h3><span class="header-section-number">13.7.3</span> Common Generic Functions</h3>
+<p>There are three very commonly-use generic functions in R:</p>
+<ul>
+<li><code>print()</code>, which we have examined already;</li>
+<li><code>summary()</code>; </li>
+<li><code>plot()</code>. </li>
+</ul>
+<p>Each of these generics is associated with a large number of method-functions. This is a great advantage to the casual user of R: one has to know only three R-commands in order to acquire useful information about a wide variety of R-objects.</p>
+<p>It is always a good idea to “try out” generic functions on objects you are using. You never know if the authors of R, or of a contributed package you have attached, may have written methods that are precisely tailored to that object.</p>
+<p>Here are some example of the versatile, polymorphic behavior of the generic function <code>summary()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span>df$height <span class="co"># vector of class &quot;numeric&quot;</span>
+<span class="kw">summary</span>(heights)</code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   51.00   65.00   68.00   67.99   71.75   79.00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">feelings &lt;-<span class="st"> </span>df$weight_feel <span class="co"># has class &quot;factor&quot;</span>
+<span class="kw">summary</span>(feelings)</code></pre></div>
+<pre><code>## 1_underweight 2_about_right  3_overweight 
+##             9            25            37</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)  <span class="co"># summarizing object of class &quot;data.frame&quot;</span></code></pre></div>
+<pre><code>##      height             weight_feel
+##  Min.   :51.00   1_underweight: 9  
+##  1st Qu.:65.00   2_about_right:25  
+##  Median :68.00   3_overweight :37  
+##  Mean   :67.99                     
+##  3rd Qu.:71.75                     
+##  Max.   :79.00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lst)</code></pre></div>
+<pre><code>##             Length Class  Mode   
+## height      71     -none- numeric
+## weight_feel 71     factor numeric</code></pre>
+<p>It is interesting also to see how <code>plot()</code> reacts to various types of input. See the Figure <a href="generic-function-oo.html#fig:xsquaregraph">13.2</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">3</span>,<span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
+<span class="kw">plot</span>(x^<span class="dv">2</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:xsquaregraph"></span>
+<img src="r-notes_files/figure-html/xsquaregraph-1.png" alt="Our vector graphed as a parabola!" width="60%" />
+<p class="caption">
+Figure 13.2: Our vector graphed as a parabola!
+</p>
+</div>
+</div>
+<div id="writing-your-own-methods" class="section level3">
+<h3><span class="header-section-number">13.7.4</span> Writing Your Own Methods</h3>
+<p>As you advance in your programming skills, you will transition from writing to programs to help you accomplish your own tasks to writing programs that help others—who are not as proficient in programming as you are—get some of <em>their</em> work done. Since casual users of R often become accustomed to generic functions as providers of useful information about just about any R-object, you might find yourself writing methods for one or more of the common generic functions. In this Section will we will practice the art of method-writing: we will write some generic functions to report on the results of a simulation.</p>
+<p>Recall the problem from Section <a href="simulation-number-needed.html#simulation-number-needed">6.6</a> about estimating the expected number of uniform random numbers one must create until their sum exceeds a specified target-number. Let’s rewrite the simulation function so that it returns an object of a special class. We will then write print and plot methods that permit a user to obtain information about the results of any simulation that was performed.</p>
+<p>First of all, let’s rewrite <code>numberNeededSim()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeededSim &lt;-<span class="st"> </span>function(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>, 
+                            <span class="dt">seed =</span> <span class="ot">NULL</span>) {
+  
+  <span class="co">#set the seed if none is provided</span>
+  if ( <span class="kw">is.null</span>(seed) ) {
+    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  }
+  <span class="kw">set.seed</span>(seed)
+  
+  numberNeeded &lt;-<span class="st"> </span>function(target) {
+    mySum &lt;-<span class="st"> </span><span class="dv">0</span>
+    count &lt;-<span class="st"> </span><span class="dv">0</span>
+    while( mySum &lt;<span class="st"> </span>target ) {
+      number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)
+      mySum &lt;-<span class="st"> </span>mySum +<span class="st"> </span>number
+      count &lt;-<span class="st"> </span>count +<span class="st"> </span><span class="dv">1</span>
+    }
+    count
+  }
+  
+  needed &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
+  for (i in <span class="dv">1</span>:reps ) {
+    needed[i] &lt;-<span class="st"> </span><span class="kw">numberNeeded</span>(target)
+  }
+  results &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">target =</span> target, <span class="dt">sims =</span> needed)
+  <span class="kw">class</span>(results) &lt;-<span class="st"> &quot;numNeededSims&quot;</span>
+  results
+}</code></pre></div>
+<p>In the above code you will note that there is no longer a parameter <code>table</code> to permit printing of a table to the console. Also, nothing at all is <code>cat</code>-ed to the console. Instead we return only a list with two named elements: * <code>target</code>: the target you want your randomly-generated numbers to sum up to; * <code>sims</code>: the number of numbers required to sum to the target, in each repetition of the simulation.</p>
+<p>The class of the returned list is set as “numNeededSims”.</p>
+<p>Next, we write a print-method function. Its name must be <code>print.numNeededSims</code>. All of the table output and <code>cat</code>-ing to the console goes here:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.numNeededSims &lt;-<span class="st"> </span>function(x) {
+  <span class="kw">cat</span>(<span class="st">&quot;The target was &quot;</span>, x$target, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  sims &lt;-<span class="st"> </span>x$sims
+  reps &lt;-<span class="st"> </span><span class="kw">length</span>(sims)
+  <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results, based on &quot;</span>, reps,
+      <span class="st">&quot; simulations.</span><span class="ch">\n\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(sims))
+  
+  <span class="co"># for sake of pretty output,</span>
+  <span class="co"># remove &quot;sims&quot; variable name from top of table printout</span>
+  colNames &lt;-<span class="st"> </span><span class="kw">dimnames</span>(tab)
+  <span class="kw">names</span>(colNames) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+  <span class="kw">dimnames</span>(tab) &lt;-<span class="st"> </span>colNames
+  
+  <span class="kw">print</span>(tab)
+  <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot;The expected number needed is about &quot;</span>, 
+      <span class="kw">mean</span>(sims), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}</code></pre></div>
+<p>Finally, let’s write a plot method. Its name must be <code>plot.numNeededSims</code>. This method will produce a bar graph of the results of the simulations. We’ll use the <strong>ggplot2</strong> plotting package, so we should stop if the user hasn’t installed and attached <strong>ggplot2</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot.numNeededSims &lt;-<span class="st"> </span>function(x) {
+  if ( !<span class="st">&quot;package:ggplot2&quot;</span> %in%<span class="st"> </span><span class="kw">search</span>() ) {
+    <span class="kw">cat</span>(<span class="st">&quot;Need to load package ggplot2 in order to plot.&quot;</span>)
+  }
+  
+  sims &lt;-<span class="st"> </span>x$sims
+  <span class="co"># for a good bar-plot, convert numerical vector sims</span>
+  <span class="co"># to a factor with appropriate levels</span>
+  levels &lt;-<span class="st"> </span><span class="kw">min</span>(sims):<span class="kw">max</span>(sims)
+  sims &lt;-<span class="st"> </span><span class="kw">factor</span>(sims, <span class="dt">levels =</span> levels)
+  
+  df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(sims)
+  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Results of &quot;</span>, <span class="kw">length</span>(sims), <span class="st">&quot; Simulations&quot;</span>)
+  <span class="co"># in the code below, scale_x_discrete(drop = f) ensures that</span>
+  <span class="co"># even if there are no values in sims for a particular level it</span>
+  <span class="co"># will still appear in the plot as a zero-height bar</span>
+  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> sims)) +<span class="st"> </span><span class="kw">geom_bar</span>() +<span class="st"> </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> F) +
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Number Needed&quot;</span>, <span class="dt">title =</span> plotTitle)
+}</code></pre></div>
+<p>Let’s give it a try:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">numberNeededSim</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>)</code></pre></div>
+<pre><code>## The target was 1.
+## Here is a table of the results, based on 10000 simulations.
+## 
+##      2      3      4      5      6      7 
+## 0.4974 0.3354 0.1253 0.0339 0.0068 0.0012 
+## 
+## The expected number needed is about 2.7209.</code></pre>
+<p>The print function was called implicitly, so we got useful output to the console.</p>
+<p>It’s also possible to save the results somewhere, for example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw">numberNeededSim</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>)
+<span class="kw">str</span>(results)</code></pre></div>
+<pre><code>## List of 2
+##  $ target: num 1
+##  $ sims  : num [1:10000] 3 2 2 2 3 3 4 2 2 5 ...
+##  - attr(*, &quot;class&quot;)= chr &quot;numNeededSims&quot;</code></pre>
+<p>Then it’s possible for the user to recall specific features of the results, for example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$target  <span class="co"># get just the target number</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>If we wanted the printout we could just say:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results</code></pre></div>
+<pre><code>## The target was 1.
+## Here is a table of the results, based on 10000 simulations.
+## 
+##      2      3      4      5      6      7 
+## 0.4974 0.3354 0.1253 0.0339 0.0068 0.0012 
+## 
+## The expected number needed is about 2.7209.</code></pre>
+<p>For a plot we can use the <code>plot()</code> generic. The resulting graph appears as Figure <a href="generic-function-oo.html#fig:numberneededgenericplot">13.3</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(results)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:numberneededgenericplot"></span>
+<img src="r-notes_files/figure-html/numberneededgenericplot-1.png" alt="Results of the Number-Needed simulation." width="60%" />
+<p class="caption">
+Figure 13.3: Results of the Number-Needed simulation.
+</p>
+</div>
+</div>
+<div id="writing-a-generic-function" class="section level3">
+<h3><span class="header-section-number">13.7.5</span> Writing a Generic Function</h3>
+<p>Generic functions are most useful when they correspond to tasks that are so commonly performed that many methods are written for them, so that users get in the habit of “trying out” the generic on their object. As a consequence, the vast majority of method-functions are written for currently-existing, very well-known generics like <code>print()</code>, <code>summary()</code> and <code>plot()</code>. It doesn’t make a lot of sense to write generics that will have only a few methods attached to them. Nevertheless, it’s highly instructive to see how generics do their work, so as as example we’ll write a new generic, along with a couple of method functions.<a href="#fn39" class="footnoteRef" id="fnref39"><sup>39</sup></a></p>
+<p>First let’s create some objects with special classes. Here are two objects of class “cartesianPoint”. Our intention is that they correspond to point on the plane, represented with the standard <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> Cartesian coordinates.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">4</span>)
+<span class="kw">class</span>(point1) &lt;-<span class="st"> &quot;cartesianPoint&quot;</span>
+point2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="dv">5</span>)
+<span class="kw">class</span>(point2) &lt;-<span class="st"> &quot;cartesianPoint&quot;</span></code></pre></div>
+<p>It is also possible to represent a point on the plan with <em>polar coordinates</em>. The elements of a polar coordinates representation are:</p>
+<ul>
+<li><span class="math inline">\(r\)</span>: a non-negative real number that the distance from the origin to the point;</li>
+<li><span class="math inline">\(\theta\)</span>: the angle measure (in radians) between the positive <span class="math inline">\(x\)</span>-axis and ray from the origin to the point.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">r =</span> <span class="dv">2</span>, <span class="dt">theta =</span> pi/<span class="dv">2</span>)
+point4 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">r =</span> <span class="dv">1</span>, <span class="dt">theta =</span> pi)
+<span class="kw">class</span>(point3) &lt;-<span class="st"> &quot;polarPoint&quot;</span>
+<span class="kw">class</span>(point4) &lt;-<span class="st"> &quot;polarPoint&quot;</span></code></pre></div>
+<p>In the definition above, <code>point3</code> is the point that lies at <span class="math inline">\(\pi/2\)</span> radians (90 degrees) counter-clockwise from the positive <span class="math inline">\(x\)</span>-axis. That means that it lies along the positive <span class="math inline">\(y\)</span>-axis. It is 2 units from the origin, so in Cartesian coordinates it would be written as <span class="math inline">\((0,2)\)</span>. Similarly, <code>point4</code> would be written in Cartesian coordinates as <span class="math inline">\((-1,0)\)</span>, since it lies one unit from the origin along the negative <span class="math inline">\(x\)</span>-axis.</p>
+<p>Now let us suppose that we would like to find the <span class="math inline">\(x\)</span>-coordinate of a point. For points of class <code>cartesianPoint</code> this is pretty simple:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point1$x  <span class="co"># gives x-coordinate</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>If the point is given in polar coordinates, we must convert it to Cartesian coordinates. You may recall the conversion formulas from a previous trigonometry class. To get <span class="math inline">\(x\)</span>, use:</p>
+<p><span class="math display">\[x = r\cos \theta.\]</span> To get <span class="math inline">\(y\)</span>, use: <span class="math display">\[x = r\cos \theta.\]</span> Thus, to find the <span class="math inline">\(x\)</span>-coordinate for <code>point3</code>, work as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point3$r *<span class="st"> </span><span class="kw">cos</span>(point3$theta)</code></pre></div>
+<pre><code>## [1] 1.224647e-16</code></pre>
+<p>The result is 0 (to a tiny bit of round-off error).</p>
+<p>We now write a generic function <code>xpos()</code> for the <span class="math inline">\(x\)</span>-coordinate:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xpos &lt;-<span class="st"> </span>function(x) {
+  <span class="kw">UseMethod</span>(<span class="st">&quot;xpos&quot;</span>)
+}</code></pre></div>
+<p>We need to write our method functions, one for each point class:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xpos.cartesianPoint &lt;-<span class="st"> </span>function(point) {
+  point$x
+}
+
+xpos.polarPoint &lt;-<span class="st"> </span>function(point) {
+  point$r *<span class="st"> </span><span class="kw">cos</span>(point$theta)
+}</code></pre></div>
+<p>Now we can feed points of either class into the generic <code>xpos()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xpos</span>(point2)</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xpos</span>(point4)</code></pre></div>
+<pre><code>## [1] -1</code></pre>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="39">
+<li id="fn39"><p>The generic we write is drawn from an example provided in the official <em>R Languge Definition</em> (<span class="citation">R Core Team (<a href="#ref-R-definition">2017</a>)</span>), written by the developers of R.<a href="generic-function-oo.html#fnref39">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="application-whales-in-an-ocean.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="glossary-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["r-notes.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,534 @@
+# Our First Computer Programs {#idea}
+
+```{r beginning-journey, echo=F, fig.pos='!h', fig.cap = "The Yellow Brick Road, by Jorge Cruz.  [clipartfest.com](https://clipartfest.com/).", out.width = "70%", fig.align = "center"}
+knitr::include_graphics("images/yellow_brick_road.png")
+```
+
+\newpage
+
+
+## Hello, World!
+
+Let's write our very first computer program.  \index{computer program} Type the following code into the console and press **Enter**:
+
+```{r eval=FALSE}
+cat("Hello, World!")
+```
+
+In the console you should see the following output:
+
+```{r echo=FALSE}
+cat("Hello, World!")
+```
+
+That's it---you just wrote a *computer program*.  A computer program is simply a sequence of instructions tha perform a specific task when they are *executed* (carried out) by the computer.  In the above example, there was only one instruction in the sequence:  it was the command to reproduce the *string* \index{string} "Hello, World" in the console exactly as it is.  The name of that command is `cat()`.
+
+Let's try another small program.  
+
+Type the following code into the console and press **Enter**:
+
+```{r eval=FALSE}
+cat(2+2)
+```
+
+In the console you should see the following output:
+
+```{r echo=FALSE}
+cat(2+2)
+```
+
+We have been using the `cat()` \index{R-functions!cat()@\texttt{cat()}}function so far.  Actually you can can get output without it.  For example, suppose you type:
+
+```{r eval=FALSE}
+"Hello, World!"
+```
+
+Then in the console you see:
+
+```{r echo=FALSE}
+"Hello World"
+```
+
+There are quote-marks around the text:  that's not so pretty, but we still get the basic output.
+
+Similarly, you can try:
+
+```{r}
+2+2
+```
+
+Notice that when we don't use `cat()` the output begins with a strange `[1]`.  In the next chapter we'll learn why this happens; for now, just ignore it.
+
+## A Quick Tour {#idea-tour}
+
+We now embark on a tour of some of R's basic capabilities.  In later chapters we will examine in detail the programming concepts that underlie the features we explore now.
+
+### Basic Arithmetic {#idea-arithmetic}
+
+R can be treated like a calculator.  You can:
+
+* add numbers (`+`)
+* subtract numbers (`-`)
+* multiply numbers (`*`)
+* divide numbers (`/`)
+* raise a number to a power (`^`)
+
+Just as on a graphing calculator, parentheses can be used to clarify the order of operations.
+
+Here are some examples:
+
+To get $\frac{27-10}{3}$, use:
+
+```{r}
+(27-3)/10
+```
+
+
+
+To get $3^2 + 4^2$ try:
+
+```{r}
+3^2+4^2
+```
+
+Sometimes you'll want to take roots.  As with a calculator, you can accomplish this by raising your number to a fractional power.  So if you want $\sqrt[3]{64}$ then you could try:
+
+```{r}
+64^{1/3}
+```
+
+If you would like square roots then you can either raise your number to the $1/2$-power or you could use R's special square-root function:
+
+```{r}
+sqrt(64)
+```
+
+One way or another, you can evaluate quite complex mathematical expressions.  For example, to get $\sqrt{3^2 + 4^2}$ simply type:
+
+```{r}
+sqrt(3^2+4^2)
+```
+
+### Read-Evaluate-Print-Loop
+
+So far you have been using R in what computer scientists call *interactive mode*.  This means that you type something in at the console; R immedidately reads what you type and evaluates it, and prints the resulting value to the console for you to see.  Then you type something else, and so on. This back-and-forth process is often called the *Read-Evaluate-Print-Loop*, or REPL \index{REPL} for short.  R is one of several computer languages that make it easy for you to see the results of its computations in the console.  That's because it was originally designed for use by statisticians and data analysts, who often want to run a small procedure, check on the results and then try a new or related procedure and check on the results ... until their analysis is complete.  From our point of view as beginning programmers, though, the REPL makes it easy to see what R is doing and to get immediate feedback on the very simple programs that we are now writing.
+
+### Variables {#idea-variables}
+
+Quite often you will want to use the same value several different times.  You can so this by creating a *variable* \index{variables} with the *assignment operator* `<-`. \index{R-operators!<- (assignment)}
+
+```{r}
+a <- 10
+```
+
+The previous statement puts the value 10 in the computer's memory and causes the name `a` to refer to it.  If you ask R to show you `a`, you'll get that value:
+
+```{r}
+a
+```
+
+Now you can use `a` as much as you like:
+
+```{r}
+a + 23
+sqrt(a)
+```
+
+Later on if you want to make `a` point to a different value, you can do so:
+
+```{r}
+a <- 4
+a + 23
+```
+
+You can choose variable-names that are descriptive.  Let's write some code to introduce creatures of various types.  A creatuee should give his or her name, say what type of creature he or she is, and name a favorite food.
+
+```{r}
+creatureType <-"Munchkin"
+creatureName <- "Boq"
+creatureFood <- "corn"
+```
+
+Next, let's combine these items into a greeting:
+
+```{r}
+paste("Hello, I am a ",
+      creatureType,
+      ". My name is ",
+      creatureName,
+      ".  I like to eat ",
+      creatureFood,
+      ".",
+      sep = "")
+```
+
+We see that `paste()` \index{R-functions!paste()@\texttt{paste()}}function puts strings together.  The `sep = ""` argument at the end specifies that no space is to be inserted between the strings when they combined.
+
+Another thing we notice in the previous code is that R can ignore white space:  we were able to separate parts of the command to different lines.  This helps prevent our lines from being too long, and allows us to arrange the code so that it's easy to read.
+
+Spaces do matter inside a string, though:
+
+```{r}
+kalidah <- "Teddy"
+kalidah
+```
+
+```{r}
+kalidah2 <- "Ted  dy"
+kalidah2
+```
+
+You must also be careful not to insert spaces within the name of any object:
+
+```{r eval= FALSE}
+kali dah2
+```
+
+```{r}
+## Error: unexpected symbol in "kali dah2"
+```
+
+R got confused by the unexpected space:  it knows about the name `kalidah2`, but `kali dah2` means nothing.
+
+Getting back to the Oz-creatures:  it would be nice if a creatures's greeting could be split over several lines.  This is possible if you use the special string "\\n", which produces a newline.  Just incorporate it into your message, as follows:
+
+```{r}
+paste("Hello, I am a ",
+      creatureType,
+      ".\nMy name is ",
+      creatureName,
+      ".\nI like to eat ",
+      creatureFood,
+      ".",
+      sep = "")
+```
+
+That doesn't look like an improvement at all!  but what if we were to `cat()` it?
+
+```{r}
+message <- paste("Hello, I am a ",
+                 creatureType,
+                 ".\nMy name is ",
+                 creatureName,
+                 ".\nI like to eat ",
+                 creatureFood,
+                 ".",
+                 sep = "")
+cat(message)
+```
+
+That's much nicer.
+
+That last example showed that you  can use variables together with functions to create new variables.  Here is another example:
+
+```{r}
+a <- 10
+b <- 27
+mySum <- a + b
+mySum
+```
+
+
+### Functions {#idea-functions}
+
+Let's say that we want to introduce George the Quadling.  We might try:
+
+```{r}
+creatureName <- "George"
+creatureType <- "Quadling"
+creatureFood <- "cookies"
+cat(message)
+```
+
+Hmm, that didn't go so well:  we got Boq instead.  The problem is that the variable`message` was created using the original values of `creatureName`, `creatureType` and `creatureFood`, not the new values that we are interested in.  To do it right we should have re-made `message`, as follows:
+
+```{r}
+creatureName <- "George"
+creatureType <- "Quadling"
+creatureFood <- "cookies"
+message <- paste("Hello, I am a ",
+                 creatureType,
+                 ".  \nMy name is ",
+                 creatureName,
+                 ".\nI like to eat ",
+                 creatureFood,
+                 ".",
+                 sep = "")
+cat(message)
+```
+
+That's great, but it seems that every time we introduce a new creature we have to type a lot of code.  It would be much better if we could find a way to re-use code, rather than repeating it.
+
+*Functions* allow us to re-use code.  Let's define a function to do introductions:
+
+```{r}
+intro <- function(name, type, food) {
+  message <- paste("Hello, I am a ",
+                 type,
+                 ".  \nMy name is ",
+                 name,
+                 ".\nI like to eat ",
+                 food,
+                 ".",
+                 sep = '')
+  cat(message)
+}
+```
+
+In the console nothing happens.  We only created the function `intro()`, we haven't *called* it yet.  Let's call `intro`:
+
+```{r}
+intro(name = "Frederick", type = "Winkie", food = "macaroni")
+```
+
+R allows you to be lazy:  you can omit the *parameter* `name`, `type` and `food`, so long as you indicate what their values should be, in the correct order:
+
+```{r}
+intro("Frederick", "Winkie", "macaroni")
+```
+
+
+### Data and Graphics {#idea-data}
+
+R was created for statisticians, so it has many features that are helpful in data analysis.  Let's take a quick look at a data set from a *contributed R package*, the package **mosaicData** [@R-mosaicData].
+
+First, we'll *attach* the package, \index{R-functions!library()@\texttt{library()}} so R can find all of the goodies it contains:
+
+```{r eval = FALSE}
+library(mosaicData)
+```
+
+```{r include = FALSE}
+library(mosaicData)
+```
+
+Package **mosaicData** contains a number of interesting datasets that are useful in the teaching of statistics.  Let's look into one of them---`Births78`---using R's `help()` function:
+
+```{r eval=FALSE}
+help("Births78")
+```
+
+We learn that `Births78` is a *data frame* containing information on the number of births each day, during the year 1978.  (A data frame is one of R's most important *data structures*.  We'll learn more about them in Chapter \@ref(frames).)  The frame has 365 rows, one for each day in the year, and four columns.  Each column contains the values of a variable recorded for each day:
+
+* the calendar `date` of that day;
+* `births`:  the number of children born in the United States on that day;
+* `dayofyear`:  the number of the day within the year 1978 (1 being January 1, 2 being January 2, and so on);
+* `wday`:  the day of week for that day (Sunday, Monday, etc.).
+
+We can view the first few row of the data frame using R's `head()`\index{R-functions!head()@\texttt{head()}} function:
+
+```{r}
+head(Births78, n = 10)
+```
+
+We might wonder whether the number of births varies with the time of year.  One way to investigate this question is to make a *scatterplot*, where the days of the year (numbered 1 through 365) are on the horizontal axis and the number of births for each day are on the vertical axis.  Figure \@ref(fig:birthsplot) shows such a plot.^[The plot is made with the **ggplot2** graphics package [@R-ggplot2].  Graphing will not be a major focus of the course at first, but we will return from time to time, to the subject of graphing in **ggplot2** as our need for graphs dictates.]
+
+```{r include = F}
+library(ggplot2)
+```
+
+
+
+```{r echo = F, birthsplot, fig.cap = "A simple scatterplot with R's ggplot2 graphics system.",fig.align="center", out.width = "60%"}
+p <- ggplot(Births78, aes(x = date, y = births)) + geom_point() +
+  labs(x = "Day of the Year", y = "Number of U.S. Births",
+       title = "Birth-Numbers Vary Seasonally")
+p
+```
+
+Clearly the number of births varies seasonally: more babies are born in late summer and early fall, whereas spring births are not as frequent.  But there is something mysterious about the plot:  Why do there are appear to be two clearly separated groups of days, one with considerably more births than the other?  What is going on here?  As we learn to program in R, we will gradually acquire the skills needed to answer this and many other intriguing questions.
+
+
+## Debugging {#idea-debugging}
+
+It's easy to make mistakes when you program---even when you are very experienced!  Incorrect computer code is said to have a *bug*, and the art of finding bugs and correcting them is called *debugging*. \index{debugging}
+
+Consider the following code:
+
+```{r eval=FALSE}
+scarecrowQuote <- "It is such an uncomfortable feeling to know one is a fool."
+paste("The Scarecrow says: ", scarecrowquote)
+```
+
+When we run it we get the following error message in the console:
+
+```
+## Error in paste("The Scarecrow says: ", scarecrowquote) : 
+##  object 'scarecrowquote' not found
+```
+
+R's error messages are often quite mysterious---they are intended to be maximally useful to experienced R programmers---but it's always a good idea to read them anyway.  In this case the message clearly tells us the problem:  R cannot find the object `scarecrowquote` on its search path.  This prompt us to look more closely at the name `scarecrow`, and sooner or later we will realize that we have a misspelling:  the variable that was actually defined was `scarecrowQuote`, with a capital Q.
+
+The correct code is:
+
+```{r}
+scarecrowQuote <- "It is such an uncomfortable feeling to know one is a fool."
+paste("The Scarecrow says: ", scarecrowQuote)
+```
+
+
+```{block2, r-case-sensitive, type='rmdimportant'}
+Always bear in mind that R is case-sensitive!
+```
+
+Here's another buggy bit of code:
+
+```{r eval=FALSE}
+SermonMountComment <- paste("Oh, it's "blessed are the meek."",
+                     "\nI'm glad they are getting something:\n",
+                     "they have a hell of a time.")
+cat(SermonMountComment)
+```
+
+The idea is to produce:
+
+```
+## Oh, it's "blessed are the meek.
+## I'm glad they are getting something:
+##  they have a hell of a time.
+```
+
+But when we run the code we get the following result instead:
+
+```
+> rm(SermonMountComment)
+> SermonMountComment <- paste("Oh, it's "blessed are the meek."",
+Error: unexpected symbol in "SermonMountComment <- paste("Oh, it's "blessed"
+>                             "\nI'm glad they are getting something: ",
+Error: unexpected ',' in "                            "\nI'm glad they are getting something: ","
+>                             "they have a hell of a time.")
+Error: unexpected ')' in "                            "they have a hell of a time.")"
+> cat(SermonMountComment)
+Error in cat(SermonMountComment) : object 'SermonMountComment' not found
+```
+
+This can be a bit more difficult to read.  The problems appear to start near the beginning of the construction of the string `SermonMountComment`.
+
+After looking at it a while we focus on the first string argument to the `paste()` function:
+
+>`"Oh, it's "blessed are the meek.""`
+
+We see that this string has quotes within quotes.  Now R uses quotes as *delimiters* \index{delimiter} for strings:  that is, quote-marks indicate where a string begins and where it ends.  Hence from R's point of view, the first string consists of just:  `"Oh, it's "`.  But then there is no comma to separate this string from the next string argument that the `paste()` functions expects.  Instead R sees the `b` in `blessed`; that's an *unexpected symbol*.  Things go downhill from there.
+
+There are a couple of ways to correct the problem.  One approach is to use single quotes inside any string that is delimited with double quotes, thus:
+
+```{r}
+SermonMountComment <- paste("Oh, it's 'blessed are the meek.'",
+                     "\nI'm glad they are getting something:\n",
+                     "they have a hell of a time.")
+cat(SermonMountComment)
+```
+
+On the other hand if you really want those double-quotes inside the string, you can *escape* their special meaning as string-delimiter by prepending a backslash (`\`) to them, thus:
+
+```{r}
+SermonMountComment <- paste("Oh, it's \"blessed are the meek.\"",
+                     "\nI'm glad they are getting something:\n",
+                     "they have a hell of a time.")
+cat(SermonMountComment)
+```
+
+There are a number of special characters that are formed by "escaping" the usual meaning of some other character.  Some common examples are:
+
+* `\n`:  produces a newline instead of `n`
+* `\t`:  produces a tab-space instead of `t`
+* `\"`:  produces an actual quote-mark, instead of beginning or ending a string.
+
+Strings are a tricky topic in any computer programming language:  in fact we will devote all of Chapter \@ref(strings) to them.
+
+\newpage
+
+## Glossary { - #idea-glossary}
+
+Computer Program \index{computer program}
+
+:  a sequence of instructions that performs a specific task when executed by a computer.
+
+String
+
+:  a value in a computer program that constitutes text (as opposed to numbers of some other type of data).
+
+Interactive Mode \index{interactive mode}
+
+:  a type of engagment between a human and a computer in which the computer prompts the humand for data and/or commands and may respond with output that the human can read and/or interpret.
+
+Read-Evaluate-Print Loop \index{REPL}
+
+:  an interactive cycle in which the R-interpreter reads an expression from the console, evaluates it, and prints out the value to the console.
+
+Data Structure \index{data structure}
+
+:   a particular way of organizing information in an computer program so that it can be used efficiently.
+
+Delimiter
+
+:  a character in a programing languages that is used to mark the beginning and/or end of a value.
+
+
+\newpage
+
+## Exercises { - #idea-exercises}
+
+```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+knitr::include_graphics("images/thinking.png")
+```
+
+1.  Write a program that modifies the function `intro()` (see Section \@ref(idea-functions)) so that the person who introduces him or herself states a favorite sport.  For example, the result of the following function call:
+
+    ```{r eval = F}
+    intro(name = "Bettina", type = "human", sport = "lacrosse")
+    ```
+
+    should be:
+
+    ```{r echo = F}
+   intro <- function(name, type, sport) {
+     message <- paste("Hello, I am a ",
+                 type,
+                 ".  \nMy name is ",
+                 name,
+                 ".\nMy favorite sport is ",
+                 sport,
+                 ".",
+                 sep = '')
+    cat(message)
+   }
+   intro(name = "Bettina", type = "human", sport = "lacrosse")
+    ```
+
+
+1. Write a program to produce the following output to the console:
+
+  
+    ```{r echo = F}
+    catFun <- function() {
+      cat("*\n")
+    cat("**\n")
+    cat("***\n")
+    cat("**\n")
+    cat("*\n")
+    }
+    catFun()
+    ```
+
+
+
+1.  Suppose we want to `cat` "Hello, World" to the console, and we enter:
+
+    ```{r eval = F}
+    cat(Hello, World!)
+    ```
+
+    What does R say?  What did we do wrong?
+    
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Beginning Computer Science with R</title>
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
+  <meta name="generator" content="bookdown 0.3.20 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="github-repo" content="homerhanumat/r-notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  
+  <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  
+
+<meta name="author" content="Homer White">
+
+
+<meta name="date" content="2017-05-17">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="regex-practice-sites.html">
+<link rel="next" href="entering-a-regex-in-r.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Beginning Computer Programming with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="the-why-of-these-notes-remarks-for-colleagues.html"><a href="the-why-of-these-notes-remarks-for-colleagues.html"><i class="fa fa-check"></i><b>0.1</b> The Why of these Notes: Remarks for Colleagues</a></li>
+<li class="chapter" data-level="0.2" data-path="history-of-r.html"><a href="history-of-r.html"><i class="fa fa-check"></i><b>0.2</b> History of R</a></li>
+<li class="chapter" data-level="0.3" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.4" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
+<li class="chapter" data-level="1.2" data-path="idea-tour.html"><a href="idea-tour.html"><i class="fa fa-check"></i><b>1.2</b> A Quick Tour</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="idea-tour.html"><a href="idea-tour.html#idea-arithmetic"><i class="fa fa-check"></i><b>1.2.1</b> Basic Arithmetic</a></li>
+<li class="chapter" data-level="1.2.2" data-path="idea-tour.html"><a href="idea-tour.html#read-evaluate-print-loop"><i class="fa fa-check"></i><b>1.2.2</b> Read-Evaluate-Print-Loop</a></li>
+<li class="chapter" data-level="1.2.3" data-path="idea-tour.html"><a href="idea-tour.html#idea-variables"><i class="fa fa-check"></i><b>1.2.3</b> Variables</a></li>
+<li class="chapter" data-level="1.2.4" data-path="idea-tour.html"><a href="idea-tour.html#idea-functions"><i class="fa fa-check"></i><b>1.2.4</b> Functions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="idea-tour.html"><a href="idea-tour.html#idea-data"><i class="fa fa-check"></i><b>1.2.5</b> Data and Graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="idea-debugging.html"><a href="idea-debugging.html"><i class="fa fa-check"></i><b>1.3</b> Debugging</a></li>
+<li class="chapter" data-level="" data-path="idea-glossary.html"><a href="idea-glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="idea-exercises.html"><a href="idea-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html"><i class="fa fa-check"></i><b>2.1</b> What is a Vector?</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#types-of-atomic-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Types of Atomic Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#coercion"><i class="fa fa-check"></i><b>2.1.2</b> Coercion</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#combining-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Combining Vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#na-values"><i class="fa fa-check"></i><b>2.1.4</b> NA Values </a></li>
+<li class="chapter" data-level="2.1.5" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#everything-in-r-is-a-vector"><i class="fa fa-check"></i><b>2.1.5</b> “Everything in R is a Vector”</a></li>
+<li class="chapter" data-level="2.1.6" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#named-vectors"><i class="fa fa-check"></i><b>2.1.6</b> Named Vectors</a></li>
+<li class="chapter" data-level="2.1.7" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#special-character-vectors"><i class="fa fa-check"></i><b>2.1.7</b> Special Character Vectors</a></li>
+<li class="chapter" data-level="2.1.8" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#length-of-vectors"><i class="fa fa-check"></i><b>2.1.8</b> Length of Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html"><i class="fa fa-check"></i><b>2.2</b> Constructing Patterned Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#sequencing"><i class="fa fa-check"></i><b>2.2.1</b> Sequencing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#repeating"><i class="fa fa-check"></i><b>2.2.2</b> Repeating</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="subsetting-vectors.html"><a href="subsetting-vectors.html"><i class="fa fa-check"></i><b>2.3</b> Subsetting Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html"><i class="fa fa-check"></i><b>2.4</b> More on Logical Vectors</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html#boolean-operators"><i class="fa fa-check"></i><b>2.4.1</b> Boolean Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="vector-recycling.html"><a href="vector-recycling.html"><i class="fa fa-check"></i><b>2.5</b> Vector Recycling </a></li>
+<li class="chapter" data-level="2.6" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html"><i class="fa fa-check"></i><b>2.6</b> Subsetting with Logical Vectors</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#counting"><i class="fa fa-check"></i><b>2.6.1</b> Counting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#cautions-about-na"><i class="fa fa-check"></i><b>2.6.2</b> Cautions about NA</a></li>
+<li class="chapter" data-level="2.6.3" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#which-any-all"><i class="fa fa-check"></i><b>2.6.3</b> Which, Any, All</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html"><i class="fa fa-check"></i><b>2.7</b> Basic Arithmetical Operations on Vectors</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#more-math-functions"><i class="fa fa-check"></i><b>2.7.1</b> More Math Functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#na-and-nan-considerations"><i class="fa fa-check"></i><b>2.7.2</b> NA and NaN Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html"><i class="fa fa-check"></i><b>2.8</b> Further Notes on Syntax</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#syntax-errors-vs.run-time-errors-vs.semantic-errors"><i class="fa fa-check"></i><b>2.8.1</b> Syntax Errors vs. Run-time Errors vs. Semantic Errors</a></li>
+<li class="chapter" data-level="2.8.2" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#the-assignment-operator"><i class="fa fa-check"></i><b>2.8.2</b> The Assignment Operator</a></li>
+<li class="chapter" data-level="2.8.3" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#multiple-expressions"><i class="fa fa-check"></i><b>2.8.3</b> Multiple Expressions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#variable-names-and-reserved-words"><i class="fa fa-check"></i><b>2.8.4</b> Variable Names and Reserved Words</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="motivation-for-functions.html"><a href="motivation-for-functions.html"><i class="fa fa-check"></i><b>3.1</b> Motivation for Functions</a></li>
+<li class="chapter" data-level="3.2" data-path="function-syntax.html"><a href="function-syntax.html"><i class="fa fa-check"></i><b>3.2</b> Function Syntax</a></li>
+<li class="chapter" data-level="3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html"><i class="fa fa-check"></i><b>3.3</b> What a Function Returns</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-final-expression-evaluated"><i class="fa fa-check"></i><b>3.3.1</b> The Final Expression Evaluated</a></li>
+<li class="chapter" data-level="3.3.2" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-return-function"><i class="fa fa-check"></i><b>3.3.2</b> The <code>return()</code> Function</a></li>
+<li class="chapter" data-level="3.3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#writing-a-talky-function"><i class="fa fa-check"></i><b>3.3.3</b> Writing a “Talky” Function</a></li>
+<li class="chapter" data-level="3.3.4" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-print-function"><i class="fa fa-check"></i><b>3.3.4</b> The <code>print()</code> Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="more-about-arguments.html"><a href="more-about-arguments.html"><i class="fa fa-check"></i><b>3.4</b> More About Arguments</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="more-about-arguments.html"><a href="more-about-arguments.html#default-arguments"><i class="fa fa-check"></i><b>3.4.1</b> Default Arguments</a></li>
+<li class="chapter" data-level="3.4.2" data-path="more-about-arguments.html"><a href="more-about-arguments.html#argument-matching"><i class="fa fa-check"></i><b>3.4.2</b> Argument-Matching</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.5</b> Environments and Scope</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="environments-and-scope.html"><a href="environments-and-scope.html#environments-and-searching"><i class="fa fa-check"></i><b>3.5.1</b> Environments and Searching</a></li>
+<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.2</b> Function Environments</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="note-on-packages.html"><a href="note-on-packages.html"><i class="fa fa-check"></i><b>3.6</b> A Note on Packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="note-on-packages.html"><a href="note-on-packages.html#installed-packages"><i class="fa fa-check"></i><b>3.6.1</b> Installed Packages</a></li>
+<li class="chapter" data-level="3.6.2" data-path="note-on-packages.html"><a href="note-on-packages.html#learning-about-a-package"><i class="fa fa-check"></i><b>3.6.2</b> Learning About a Package</a></li>
+<li class="chapter" data-level="3.6.3" data-path="note-on-packages.html"><a href="note-on-packages.html#installing-packages"><i class="fa fa-check"></i><b>3.6.3</b> Installing Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="more-to-learn.html"><a href="more-to-learn.html"><i class="fa fa-check"></i><b>3.7</b> More to Learn</a></li>
+<li class="chapter" data-level="" data-path="glossary-1.html"><a href="glossary-1.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="flow.html"><a href="flow.html"><i class="fa fa-check"></i><b>4</b> Flow-Control</a><ul>
+<li class="chapter" data-level="4.1" data-path="prologue-prompting-the-user.html"><a href="prologue-prompting-the-user.html"><i class="fa fa-check"></i><b>4.1</b> Prologue: Prompting the User</a></li>
+<li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
+<li class="chapter" data-level="4.3.2" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loop-caution"><i class="fa fa-check"></i><b>4.3.2</b> For-Loop Caution</a></li>
+<li class="chapter" data-level="4.3.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#breaking-out-of-a-loop"><i class="fa fa-check"></i><b>4.3.3</b> Breaking Out of a Loop</a></li>
+<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#solving-the-empty-vector-problem-in-for-loops-with-seq_along"><i class="fa fa-check"></i><b>4.3.4</b> Solving the Empty-Vector Problem in <code>for</code>-Loops With <code>seq_along()</code></a></li>
+<li class="chapter" data-level="4.3.5" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#skipping-ahead-in-a-loop"><i class="fa fa-check"></i><b>4.3.5</b> Skipping Ahead in a Loop</a></li>
+<li class="chapter" data-level="4.3.6" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#repeat"><i class="fa fa-check"></i><b>4.3.6</b> Repeat</a></li>
+<li class="chapter" data-level="4.3.7" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#while"><i class="fa fa-check"></i><b>4.3.7</b> While</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="collatz-conjecture.html"><a href="collatz-conjecture.html"><i class="fa fa-check"></i><b>4.4</b> Application: The Collatz Conjecture</a></li>
+<li class="chapter" data-level="" data-path="glossary-2.html"><a href="glossary-2.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="turtle.html"><a href="turtle.html"><i class="fa fa-check"></i><b>5</b> Turtle Graphics</a><ul>
+<li class="chapter" data-level="5.1" data-path="basic-movements.html"><a href="basic-movements.html"><i class="fa fa-check"></i><b>5.1</b> Basic Movements</a></li>
+<li class="chapter" data-level="5.2" data-path="making-many-movements-an-introduction-to-looping.html"><a href="making-many-movements-an-introduction-to-looping.html"><i class="fa fa-check"></i><b>5.2</b> Making Many Movements: An Introduction to Looping</a></li>
+<li class="chapter" data-level="5.3" data-path="writing-turtle-functions.html"><a href="writing-turtle-functions.html"><i class="fa fa-check"></i><b>5.3</b> Writing Turtle Functions</a></li>
+<li class="chapter" data-level="5.4" data-path="random-moves.html"><a href="random-moves.html"><i class="fa fa-check"></i><b>5.4</b> Random Moves</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="random-moves.html"><a href="random-moves.html#sampling-from-a-vector"><i class="fa fa-check"></i><b>5.4.1</b> Sampling from a Vector</a></li>
+<li class="chapter" data-level="5.4.2" data-path="random-moves.html"><a href="random-moves.html#application-a-bouncing-turtle"><i class="fa fa-check"></i><b>5.4.2</b> Application: a Bouncing Turtle</a></li>
+<li class="chapter" data-level="5.4.3" data-path="random-moves.html"><a href="random-moves.html#uniform-random-numbers"><i class="fa fa-check"></i><b>5.4.3</b> Uniform Random Numbers</a></li>
+<li class="chapter" data-level="5.4.4" data-path="random-moves.html"><a href="random-moves.html#pseudo-randomness-and-setting-a-seed"><i class="fa fa-check"></i><b>5.4.4</b> Pseudo-Randomness and Setting a Seed</a></li>
+<li class="chapter" data-level="5.4.5" data-path="random-moves.html"><a href="random-moves.html#drunken-turtle-intro"><i class="fa fa-check"></i><b>5.4.5</b> Application: a Drunken Turtle</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="more-complex-turtle-graphs.html"><a href="more-complex-turtle-graphs.html"><i class="fa fa-check"></i><b>5.5</b> More Complex Turtle Graphs</a></li>
+<li class="chapter" data-level="" data-path="glossary-3.html"><a href="glossary-3.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>6</b> Simulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability-and-random-variables.html"><a href="probability-and-random-variables.html"><i class="fa fa-check"></i><b>6.1</b> Probability and Random Variables</a></li>
+<li class="chapter" data-level="6.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>6.2</b> Monte Carlo Simulation</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-a-probability"><i class="fa fa-check"></i><b>6.2.1</b> Estimating a Probability</a></li>
+<li class="chapter" data-level="6.2.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-an-expected-value"><i class="fa fa-check"></i><b>6.2.2</b> Estimating an Expected Value</a></li>
+<li class="chapter" data-level="6.2.3" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#the-law-of-large-numbers"><i class="fa fa-check"></i><b>6.2.3</b> The Law of Large Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="triangle-chance.html"><a href="triangle-chance.html"><i class="fa fa-check"></i><b>6.3</b> Example: Chance of a Triangle</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="triangle-chance.html"><a href="triangle-chance.html#setting-a-seed"><i class="fa fa-check"></i><b>6.3.1</b> Setting a Seed</a></li>
+<li class="chapter" data-level="6.3.2" data-path="triangle-chance.html"><a href="triangle-chance.html#program-development"><i class="fa fa-check"></i><b>6.3.2</b> Program Development</a></li>
+<li class="chapter" data-level="6.3.3" data-path="triangle-chance.html"><a href="triangle-chance.html#number-of-repetitions"><i class="fa fa-check"></i><b>6.3.3</b> Number of Repetitions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="simulation-connect.html"><a href="simulation-connect.html"><i class="fa fa-check"></i><b>6.4</b> Example: Will They Connect?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="simulation-connect.html"><a href="simulation-connect.html#vectorization-vs.looping"><i class="fa fa-check"></i><b>6.4.1</b> Vectorization vs. Looping</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="appeals-court-paradox.html"><a href="appeals-court-paradox.html"><i class="fa fa-check"></i><b>6.5</b> Example: the Appeals Court Paradox</a></li>
+<li class="chapter" data-level="6.6" data-path="simulation-number-needed.html"><a href="simulation-number-needed.html"><i class="fa fa-check"></i><b>6.6</b> Example: How Many Numbers Needed?</a></li>
+<li class="chapter" data-level="6.7" data-path="example-dental-floss.html"><a href="example-dental-floss.html"><i class="fa fa-check"></i><b>6.7</b> Example: Dental Floss</a></li>
+<li class="chapter" data-level="6.8" data-path="drunken-turtle-sim.html"><a href="drunken-turtle-sim.html"><i class="fa fa-check"></i><b>6.8</b> Example: The Drunken Turtle</a></li>
+<li class="chapter" data-level="" data-path="glossary-4.html"><a href="glossary-4.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="frames.html"><a href="frames.html"><i class="fa fa-check"></i><b>7</b> Data Frames</a><ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-matrices.html"><a href="introduction-to-matrices.html"><i class="fa fa-check"></i><b>7.1</b> Introduction to Matrices</a></li>
+<li class="chapter" data-level="7.2" data-path="matrix-indexing.html"><a href="matrix-indexing.html"><i class="fa fa-check"></i><b>7.2</b> Matrix Indexing</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="matrix-indexing.html"><a href="matrix-indexing.html#to-drop-or-not"><i class="fa fa-check"></i><b>7.2.1</b> To Drop or Not?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html"><i class="fa fa-check"></i><b>7.3</b> Operations on Matrices</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#arithmetical-operations"><i class="fa fa-check"></i><b>7.3.1</b> Arithmetical Operations</a></li>
+<li class="chapter" data-level="7.3.2" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>7.3.2</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="7.3.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#logical-operations"><i class="fa fa-check"></i><b>7.3.3</b> Logical Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
+<li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-vectors"><i class="fa fa-check"></i><b>7.5.1</b> Creation from Vectors</a></li>
+<li class="chapter" data-level="7.5.2" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-other-frames"><i class="fa fa-check"></i><b>7.5.2</b> Creation From Other Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html"><i class="fa fa-check"></i><b>7.6</b> Subsetting Data Frames</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html#boolean-expressions"><i class="fa fa-check"></i><b>7.6.1</b> Boolean Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="ordering-data-frames.html"><a href="ordering-data-frames.html"><i class="fa fa-check"></i><b>7.7</b> Ordering Data Frames</a></li>
+<li class="chapter" data-level="7.8" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html"><i class="fa fa-check"></i><b>7.8</b> New Variables from Old</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html#getting-rid-of-variables"><i class="fa fa-check"></i><b>7.8.1</b> Getting Rid of Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="more-graphing.html"><a href="more-graphing.html"><i class="fa fa-check"></i><b>7.9</b> More Graphing</a><ul>
+<li class="chapter" data-level="7.9.1" data-path="more-graphing.html"><a href="more-graphing.html#one-numerical-variable"><i class="fa fa-check"></i><b>7.9.1</b> One Numerical Variable</a></li>
+<li class="chapter" data-level="7.9.2" data-path="more-graphing.html"><a href="more-graphing.html#categorical-variables"><i class="fa fa-check"></i><b>7.9.2</b> Categorical Variables</a></li>
+<li class="chapter" data-level="7.9.3" data-path="more-graphing.html"><a href="more-graphing.html#onenum-onecat"><i class="fa fa-check"></i><b>7.9.3</b> One Numerical and One Categorical Variable</a></li>
+<li class="chapter" data-level="7.9.4" data-path="more-graphing.html"><a href="more-graphing.html#two-numerical-variables"><i class="fa fa-check"></i><b>7.9.4</b> Two Numerical Variables</a></li>
+<li class="chapter" data-level="7.9.5" data-path="more-graphing.html"><a href="more-graphing.html#grouping-by-a-categorical-variable"><i class="fa fa-check"></i><b>7.9.5</b> Grouping by a Categorical Variable</a></li>
+<li class="chapter" data-level="7.9.6" data-path="more-graphing.html"><a href="more-graphing.html#application-u.s.-births"><i class="fa fa-check"></i><b>7.9.6</b> Application: U.S. Births</a></li>
+<li class="chapter" data-level="7.9.7" data-path="more-graphing.html"><a href="more-graphing.html#learn-more"><i class="fa fa-check"></i><b>7.9.7</b> Learn More</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-5.html"><a href="glossary-5.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="frames-exercises.html"><a href="frames-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>8</b> Lists</a><ul>
+<li class="chapter" data-level="8.1" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html"><i class="fa fa-check"></i><b>8.1</b> Introduction to Lists</a></li>
+<li class="chapter" data-level="8.2" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html"><i class="fa fa-check"></i><b>8.2</b> Subsetting and Accessing</a></li>
+<li class="chapter" data-level="8.3" data-path="lists-splitting.html"><a href="lists-splitting.html"><i class="fa fa-check"></i><b>8.3</b> Splitting</a></li>
+<li class="chapter" data-level="8.4" data-path="returning-multiple-values.html"><a href="returning-multiple-values.html"><i class="fa fa-check"></i><b>8.4</b> Returning Multiple Values</a></li>
+<li class="chapter" data-level="8.5" data-path="iterating-over-a-list.html"><a href="iterating-over-a-list.html"><i class="fa fa-check"></i><b>8.5</b> Iterating Over a List</a></li>
+<li class="chapter" data-level="8.6" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html"><i class="fa fa-check"></i><b>8.6</b> A Note on Ellipses</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-1-passing-additional-arguments-to-functions-inside"><i class="fa fa-check"></i><b>8.6.1</b> Use #1: Passing Additional Arguments to Functions “Inside”</a></li>
+<li class="chapter" data-level="8.6.2" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-2-permitting-any-number-of-arguments"><i class="fa fa-check"></i><b>8.6.2</b> Use #2: Permitting Any Number of Arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>9</b> Strings</a><ul>
+<li class="chapter" data-level="9.1" data-path="character-vectors-strings.html"><a href="character-vectors-strings.html"><i class="fa fa-check"></i><b>9.1</b> Character Vectors: Strings</a></li>
+<li class="chapter" data-level="9.2" data-path="characters-and-special-characters.html"><a href="characters-and-special-characters.html"><i class="fa fa-check"></i><b>9.2</b> Characters and Special Characters</a></li>
+<li class="chapter" data-level="9.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html"><i class="fa fa-check"></i><b>9.3</b> Basic String Operations</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="basic-string-operations.html"><a href="basic-string-operations.html#is-and-as"><i class="fa fa-check"></i><b>9.3.1</b> Is and As</a></li>
+<li class="chapter" data-level="9.3.2" data-path="basic-string-operations.html"><a href="basic-string-operations.html#number-of-characters"><i class="fa fa-check"></i><b>9.3.2</b> Number of Characters</a></li>
+<li class="chapter" data-level="9.3.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html#substrings-and-trimming"><i class="fa fa-check"></i><b>9.3.3</b> Substrings and Trimming</a></li>
+<li class="chapter" data-level="9.3.4" data-path="basic-string-operations.html"><a href="basic-string-operations.html#changing-cases"><i class="fa fa-check"></i><b>9.3.4</b> Changing Cases</a></li>
+<li class="chapter" data-level="9.3.5" data-path="basic-string-operations.html"><a href="basic-string-operations.html#splitting-strings"><i class="fa fa-check"></i><b>9.3.5</b> Splitting Strings</a></li>
+<li class="chapter" data-level="9.3.6" data-path="basic-string-operations.html"><a href="basic-string-operations.html#pasting-and-joining-strings"><i class="fa fa-check"></i><b>9.3.6</b> Pasting and Joining Strings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="formatted-printing.html"><a href="formatted-printing.html"><i class="fa fa-check"></i><b>9.4</b> Formatted Printing</a></li>
+<li class="chapter" data-level="" data-path="glossary-7.html"><a href="glossary-7.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="regex.html"><a href="regex.html"><i class="fa fa-check"></i><b>10</b> Regular Expressions</a><ul>
+<li class="chapter" data-level="10.1" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
+<li class="chapter" data-level="10.2" data-path="regex-practice-sites.html"><a href="regex-practice-sites.html"><i class="fa fa-check"></i><b>10.2</b> Regex Practice Sites</a></li>
+<li class="chapter" data-level="10.3" data-path="regex-syntax.html"><a href="regex-syntax.html"><i class="fa fa-check"></i><b>10.3</b> Regex Syntax</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="regex-syntax.html"><a href="regex-syntax.html#matching-a-specific-sequence"><i class="fa fa-check"></i><b>10.3.1</b> Matching a Specific Sequence</a></li>
+<li class="chapter" data-level="10.3.2" data-path="regex-syntax.html"><a href="regex-syntax.html#character-classes"><i class="fa fa-check"></i><b>10.3.2</b> Character Classes</a></li>
+<li class="chapter" data-level="10.3.3" data-path="regex-syntax.html"><a href="regex-syntax.html#quantification"><i class="fa fa-check"></i><b>10.3.3</b> Quantification</a></li>
+<li class="chapter" data-level="10.3.4" data-path="regex-syntax.html"><a href="regex-syntax.html#greedy-vs.lazy"><i class="fa fa-check"></i><b>10.3.4</b> Greedy vs. Lazy</a></li>
+<li class="chapter" data-level="10.3.5" data-path="regex-syntax.html"><a href="regex-syntax.html#grouping"><i class="fa fa-check"></i><b>10.3.5</b> Grouping</a></li>
+<li class="chapter" data-level="10.3.6" data-path="regex-syntax.html"><a href="regex-syntax.html#alternation"><i class="fa fa-check"></i><b>10.3.6</b> Alternation</a></li>
+<li class="chapter" data-level="10.3.7" data-path="regex-syntax.html"><a href="regex-syntax.html#anchors"><i class="fa fa-check"></i><b>10.3.7</b> Anchors</a></li>
+<li class="chapter" data-level="10.3.8" data-path="regex-syntax.html"><a href="regex-syntax.html#regex-captures"><i class="fa fa-check"></i><b>10.3.8</b> Captures</a></li>
+<li class="chapter" data-level="10.3.9" data-path="regex-syntax.html"><a href="regex-syntax.html#looking-around"><i class="fa fa-check"></i><b>10.3.9</b> Looking Around</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>10.4</b> Entering a Regex in R</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>10.4.1</b> String to Regex</a></li>
+<li class="chapter" data-level="10.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-substitution"><i class="fa fa-check"></i><b>10.4.2</b> Substitution</a></li>
+<li class="chapter" data-level="10.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>10.4.3</b> A Note on Perl</a></li>
+<li class="chapter" data-level="10.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>10.4.4</b> Patterned Replacement</a></li>
+<li class="chapter" data-level="10.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>10.4.5</b> Grepping</a></li>
+<li class="chapter" data-level="10.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>10.4.6</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="10.4.7" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>10.4.7</b> Regex Modes</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>10.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="" data-path="glossary-8.html"><a href="glossary-8.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="files.html"><a href="files.html"><i class="fa fa-check"></i><b>11</b> Files</a><ul>
+<li class="chapter" data-level="11.1" data-path="downloading-files.html"><a href="downloading-files.html"><i class="fa fa-check"></i><b>11.1</b> Downloading Files</a></li>
+<li class="chapter" data-level="11.2" data-path="reading-text-files-with-readlines.html"><a href="reading-text-files-with-readlines.html"><i class="fa fa-check"></i><b>11.2</b> Reading Text Files with <code>readLines()</code></a></li>
+<li class="chapter" data-level="11.3" data-path="reading-text-files-with-readr.html"><a href="reading-text-files-with-readr.html"><i class="fa fa-check"></i><b>11.3</b> Reading Text Files with <strong>readr</strong></a></li>
+<li class="chapter" data-level="11.4" data-path="writing-to-files.html"><a href="writing-to-files.html"><i class="fa fa-check"></i><b>11.4</b> Writing to Files</a></li>
+<li class="chapter" data-level="11.5" data-path="application-making-a-lexicon.html"><a href="application-making-a-lexicon.html"><i class="fa fa-check"></i><b>11.5</b> Application: Making a Lexicon</a></li>
+<li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>12</b> Functional Programming in R</a><ul>
+<li class="chapter" data-level="12.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html"><i class="fa fa-check"></i><b>12.1</b> Programming Paradigms</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html#procedural-programming"><i class="fa fa-check"></i><b>12.1.1</b> Procedural Programming</a></li>
+<li class="chapter" data-level="12.1.2" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming-the-ubiquity-of-functions-in-r"><i class="fa fa-check"></i><b>12.1.2</b> Functional Programming: The Ubiquity of Functions in R</a></li>
+<li class="chapter" data-level="12.1.3" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming-functions-as-first-class-citizens"><i class="fa fa-check"></i><b>12.1.3</b> Functional Programming: Functions as First-Class Citizens</a></li>
+<li class="chapter" data-level="12.1.4" data-path="programming-paradigms.html"><a href="programming-paradigms.html#minimize-side-effects"><i class="fa fa-check"></i><b>12.1.4</b> Minimize Side Effects</a></li>
+<li class="chapter" data-level="12.1.5" data-path="programming-paradigms.html"><a href="programming-paradigms.html#procedures-as-higher-order-function-calls"><i class="fa fa-check"></i><b>12.1.5</b> Procedures as Higher-Order Function Calls</a></li>
+<li class="chapter" data-level="12.1.6" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming-a-summary"><i class="fa fa-check"></i><b>12.1.6</b> Functional Programming: A Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html"><i class="fa fa-check"></i><b>12.2</b> <code>lapply()</code> and Friends</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#lapply"><i class="fa fa-check"></i><b>12.2.1</b> <code>lapply()</code></a></li>
+<li class="chapter" data-level="12.2.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#sapply"><i class="fa fa-check"></i><b>12.2.2</b> <code>sapply()</code></a></li>
+<li class="chapter" data-level="12.2.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#tapply"><i class="fa fa-check"></i><b>12.2.3</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="12.2.4" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#map"><i class="fa fa-check"></i><b>12.2.4</b> <code>Map()</code></a></li>
+<li class="chapter" data-level="12.2.5" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#replicate"><i class="fa fa-check"></i><b>12.2.5</b> <code>replicate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="filter-and-reduce.html"><a href="filter-and-reduce.html"><i class="fa fa-check"></i><b>12.3</b> <code>Filter()</code> and <code>Reduce()</code></a></li>
+<li class="chapter" data-level="12.4" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>12.4</b> Functionals vs. Loops</a></li>
+<li class="chapter" data-level="12.5" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>12.5</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="glossary-10.html"><a href="glossary-10.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="oo.html"><a href="oo.html"><i class="fa fa-check"></i><b>13</b> Object-Oriented Programming in R</a><ul>
+<li class="chapter" data-level="13.1" data-path="the-object-oriented-programming-paradigm.html"><a href="the-object-oriented-programming-paradigm.html"><i class="fa fa-check"></i><b>13.1</b> The Object-Oriented Programming Paradigm</a></li>
+<li class="chapter" data-level="13.2" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html"><i class="fa fa-check"></i><b>13.2</b> Reference Classes with Package R6</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#defining-a-class"><i class="fa fa-check"></i><b>13.2.1</b> Defining a Class</a></li>
+<li class="chapter" data-level="13.2.2" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#instantiation-initializing-objects"><i class="fa fa-check"></i><b>13.2.2</b> Instantiation: Initializing Objects</a></li>
+<li class="chapter" data-level="13.2.3" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#getting-and-setting-attributes"><i class="fa fa-check"></i><b>13.2.3</b> Getting and Setting Attributes</a></li>
+<li class="chapter" data-level="13.2.4" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#calling-methods"><i class="fa fa-check"></i><b>13.2.4</b> Calling Methods</a></li>
+<li class="chapter" data-level="13.2.5" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#holding-a-reference-not-a-value"><i class="fa fa-check"></i><b>13.2.5</b> Holding a Reference, not a Value</a></li>
+<li class="chapter" data-level="13.2.6" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#cloning-an-object"><i class="fa fa-check"></i><b>13.2.6</b> Cloning an Object</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="inheritance.html"><a href="inheritance.html"><i class="fa fa-check"></i><b>13.3</b> Inheritance</a></li>
+<li class="chapter" data-level="13.4" data-path="adding-members-to-a-class.html"><a href="adding-members-to-a-class.html"><i class="fa fa-check"></i><b>13.4</b> Adding Members to a Class</a></li>
+<li class="chapter" data-level="13.5" data-path="method-chaining.html"><a href="method-chaining.html"><i class="fa fa-check"></i><b>13.5</b> Method Chaining</a></li>
+<li class="chapter" data-level="13.6" data-path="application-whales-in-an-ocean.html"><a href="application-whales-in-an-ocean.html"><i class="fa fa-check"></i><b>13.6</b> Application: Whales in an Ocean</a></li>
+<li class="chapter" data-level="13.7" data-path="generic-function-oo.html"><a href="generic-function-oo.html"><i class="fa fa-check"></i><b>13.7</b> Generic-Function OO</a><ul>
+<li class="chapter" data-level="13.7.1" data-path="generic-function-oo.html"><a href="generic-function-oo.html#motivating-examples"><i class="fa fa-check"></i><b>13.7.1</b> Motivating Examples</a></li>
+<li class="chapter" data-level="13.7.2" data-path="generic-function-oo.html"><a href="generic-function-oo.html#terminology"><i class="fa fa-check"></i><b>13.7.2</b> Terminology</a></li>
+<li class="chapter" data-level="13.7.3" data-path="generic-function-oo.html"><a href="generic-function-oo.html#common-generic-functions"><i class="fa fa-check"></i><b>13.7.3</b> Common Generic Functions</a></li>
+<li class="chapter" data-level="13.7.4" data-path="generic-function-oo.html"><a href="generic-function-oo.html#writing-your-own-methods"><i class="fa fa-check"></i><b>13.7.4</b> Writing Your Own Methods</a></li>
+<li class="chapter" data-level="13.7.5" data-path="generic-function-oo.html"><a href="generic-function-oo.html#writing-a-generic-function"><i class="fa fa-check"></i><b>13.7.5</b> Writing a Generic Function</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-11.html"><a href="glossary-11.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beginning Computer Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regex-syntax" class="section level2">
+<h2><span class="header-section-number">10.3</span> Regex Syntax</h2>
+<p>Let’s start learning the syntax.</p>
+<div id="matching-a-specific-sequence" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> Matching a Specific Sequence</h3>
+<p>If you are searching for occurrences of one specific sequence of characters, the regular expression to use is just that sequence of characters.</p>
+<p>For example, if your regex is <code>bet</code>, then you’ll get a match whenever the characters “b”, “e”, and “t” occur consecutively in the text you are searching.</p>
+<p>In the sample text below, the matches are in italics:</p>
+<blockquote>
+<p>I <em>bet</em> you are reading <em>bet</em>ween the lines. Better to read the lines themselves.</p>
+</blockquote>
+<p>We didn’t match “Bet” in “Better” because “B” is uppercase.</p>
+<p>The characters “b”, “e” and “t” in the regex “bet” are examples of <em>literal characters</em>. This means that they stand for exactly what they are: the “b” in the expression matches a “b” in the text we are searching, the “e” in the expression matches an “e” in text, and so on.</p>
+<p>There are a lot of exceptions to our specific-sequence rule. We’ll get to them soon.</p>
+</div>
+<div id="character-classes" class="section level3">
+<h3><span class="header-section-number">10.3.2</span> Character Classes</h3>
+<p>Suppose you want to match either “bet” or “Bet”? One way to do this is to use a <em>character class</em>. A character class  consists of a set of characters surrounded by square brackets, and it tells the regex engine to match any one of the characters in the class.</p>
+<p>Consider, for example, the regex <code>[Bb]et</code>. It consists of the character class <code>[Bb]</code> followed by the pair of literal characters <code>et</code>. It matches:</p>
+<blockquote>
+<p>I <em>bet</em> you are reading <em>bet</em>ween the lines. <em>Bet</em>ter to read the lines themselves.</p>
+</blockquote>
+<p>Another example: <code>t[aeiou]</code> matches any two-character sequence in which “t” is followed by a lowercase vowel:</p>
+<blockquote>
+<p>Get thee <em>to</em> a nunnery.</p>
+</blockquote>
+<div id="ranges" class="section level4">
+<h4><span class="header-section-number">10.3.2.1</span> Ranges</h4>
+<p>You can match a <em>range</em>  of characters. Inside a character class:</p>
+<ul>
+<li><code>a-z</code> represents all lowercase letters from a to z;</li>
+<li><code>A-Z</code> represents all of the uppercase letters;</li>
+<li><code>0-9</code> represents all of the decimal digits: 0, 1, 2, …, 9.</li>
+<li>Other ranges are possible, e.g.:
+<ul>
+<li><code>c-f</code> denotes the lowercase letters from c to f;</li>
+<li><code>0-3</code> denotes 9, 1, 2 and 3.</li>
+</ul></li>
+</ul>
+<p>Thus, in order to match any letter followed by two digits, you could use <code>[a-zA-Z][0-9][0-9]</code>:</p>
+<blockquote>
+<p>Your room number is <em>B43</em>, not C4 or #39.</p>
+</blockquote>
+</div>
+<div id="the-need-to-escape" class="section level4">
+<h4><span class="header-section-number">10.3.2.2</span> The Need to Escape</h4>
+<p>Perhaps now you can spot the problem with the sequence-specific rule: what happens if one of the characters in the sequence is, say ‘[’ or ’]’? These characters are examples of <em>metacharacters</em>,  which means that in the syntax of regular expressions they don’t mach themselves but instead have a special role. In the case of square-brackets, that role is to delimit character classes.</p>
+<p>If you want your pattern to include a metacharacter you will have to escape it with the backslash. Thus, the correct way to match the string “[aardvark]” would be with the regular expression: <code>\[aardvark]\]</code>:</p>
+<blockquote>
+<p>The <em>[aardvark]</em> appears early in the dictionary.</p>
+</blockquote>
+<p>Actually, you only need to escape a metacharacter when it acts <em>in its role as metacharacter</em>. For example, if you want to match “b-b”, you are fine to use <code>b-b</code>. Because the expression contains no square brackets, it’s not possible for the hyphen to act in its special role to set ranges, so it does not have to be escaped.</p>
+<p>Inside of square brackets it can matter whether you escape the hyphen. Thus:</p>
+<ul>
+<li><code>[a-c]</code> matches a, b, and c;</li>
+<li><code>[a\-c]</code> matches a, -, and c (but not b);</li>
+<li><code>[a-]</code> matches a and - (the machine can tell that the hyphen was not being used in a range);</li>
+<li><code>[a\-]</code> also matches just a and -, not a,  and -. (Apparently the regex syntax takes into account the fact that some folks will worry that they might have to escape the hyphen).</li>
+</ul>
+<p>Of course since the backslash plays a role in escaping metacharacters, it too acts as a metacharacter at times. Hence if you want to match a backslash you’ll have to escape <em>it</em>! How? By preceding the blackslash with a backslash! Thus:</p>
+<ul>
+<li><code>a\\b</code> matches “a\b”;</li>
+<li><code>a\\\\b</code> matches “a\\b”.</li>
+</ul>
+<p>On the other hand:</p>
+<ul>
+<li><code>a\tb</code> matches a followed by a tab followed by b, because in this case the machine recognizes <code>\t</code> as the control character for a tab;</li>
+<li><code>a\ab</code> matches a followed by the bell-alert followed by b, and so on for other control characters.</li>
+</ul>
+<p>But keep the following in mind:</p>
+<ul>
+<li><code>a\eb</code> is incorrect regex syntax: <code>\e</code> is not recognized as one of the control characters.</li>
+<li>And yet <code>a\wb</code> is <em>correct</em> regex syntax! (It turns out that the token <code>\w</code> is a recognized character class <em>shortcut</em> that means the same as <code>[a-zA-Z0-9]</code>. We’ll get to the shortcuts soon.)</li>
+</ul>
+</div>
+<div id="named-character-classes" class="section level4">
+<h4><span class="header-section-number">10.3.2.3</span> Named Character Classes</h4>
+<p>Some character classes occur so commonly that they have been granted special names. Table <a href="regex-syntax.html#tab:character-class-names">10.1</a> gives a few that are worth remembering.</p>
+<table>
+<caption><span id="tab:character-class-names">Table 10.1: </span>A few character classes worth remembering.</caption>
+<thead>
+<tr class="header">
+<th align="left">Class Name</th>
+<th align="left">Represents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">[:alpha:]</td>
+<td align="left">a-zA-Z</td>
+</tr>
+<tr class="even">
+<td align="left">[:alnum:]</td>
+<td align="left">a-zA-Z0-9</td>
+</tr>
+<tr class="odd">
+<td align="left">[:word:]</td>
+<td align="left">a-zA-Z0-9_ (note the underscore)</td>
+</tr>
+<tr class="even">
+<td align="left">[:space:]</td>
+<td align="left">white space</td>
+</tr>
+<tr class="odd">
+<td align="left">[:lower:]</td>
+<td align="left">a-z</td>
+</tr>
+<tr class="even">
+<td align="left">[:upper:]</td>
+<td align="left">A-Z</td>
+</tr>
+</tbody>
+</table>
+<p>Here’s how you would use character class names in a regular expression:</p>
+<ul>
+<li><code>t[[:alnum:]]t</code> matches t followed by any alphanumeric character followed by t. (The double brackets are needed since, according to the rules, <code>t[:alnum:]t</code> would match t followed by any one of :, a, l, n, u or m, followed by t.)</li>
+</ul>
+</div>
+<div id="character-class-shortcuts" class="section level4">
+<h4><span class="header-section-number">10.3.2.4</span> Character Class Shortcuts</h4>
+<p>Some character classes are so very common that they merit extra-short shortcuts: most of these shortcuts begin with a backslash. We’ll call them <em>character class shortcuts</em>.  Some of the most common character class shortcuts are shown in Table <a href="regex-syntax.html#tab:character-types">10.2</a></p>
+<table>
+<caption><span id="tab:character-types">Table 10.2: </span>A few character class shortcuts worth remembering.</caption>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="left">Represents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">\d</td>
+<td align="left">any decimal digit (0-9)</td>
+</tr>
+<tr class="even">
+<td align="left">\D</td>
+<td align="left">anything not a decimal digit</td>
+</tr>
+<tr class="odd">
+<td align="left">\s</td>
+<td align="left">any white space character</td>
+</tr>
+<tr class="even">
+<td align="left">\S</td>
+<td align="left">anything not a white space character</td>
+</tr>
+<tr class="odd">
+<td align="left">\w</td>
+<td align="left">any word character (same as [word])</td>
+</tr>
+<tr class="even">
+<td align="left">\W</td>
+<td align="left">anything not a word character</td>
+</tr>
+<tr class="odd">
+<td align="left">.</td>
+<td align="left">any character except newline</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>.</code> requires special care: if you are searching for a literal dot, you’ll have to escape it with a backslash. Thus <code>32\.456</code> matches “32.456”, whereas <code>32.456</code> matches “32a456”, 32b456“, and so on.</p>
+</div>
+<div id="negation-in-a-character-class" class="section level4">
+<h4><span class="header-section-number">10.3.2.5</span> Negation in a Character Class</h4>
+<p>Suppose you would like to match any sequence of three characters of this form:</p>
+<ul>
+<li>t</li>
+<li>any character EXCEPT e, x and z</li>
+<li>t</li>
+</ul>
+<p>You can accomplish this by negating within a character class: the regex to use is <code>t[^exz]t</code>. Here the caret <code>^</code> functions as a metacharacter, indicating that any character except the others in the class are permitted. In order to function as a negation, the <code>^</code> must appear immediately after the opening bracket. If it appears elsewhere in the class, then it’s a literal: it just stands for itself. (Outside of a character class the <code>^</code> functions as an <em>anchor</em>—we’ll get to these soon—and as such has to be escaped if you want to act as a literal.)</p>
+<p>As another example, <code>t[^a-z]t</code> matches t followed by any character expect a lowercase letter, followed by t.</p>
+<p>Negating within a particular class of characters can be tricky. For example, suppose you are looking for 3-character sequences that consists of t, any letter except e or E, and then t. Rather than trying to use a <code>^</code> it’s easiest to work with ranges: <code>t[a-df-zA-DF-Z]t</code>.</p>
+</div>
+</div>
+<div id="quantification" class="section level3">
+<h3><span class="header-section-number">10.3.3</span> Quantification</h3>
+<p>Suppose you want to match phone numbers, where the area code is included and the groups of digits are separated by hyphens, as in: 202-456-1111. Taking advantage of the character class shortcut for digits, you could use the following <code>regex</code>:</p>
+<blockquote>
+<p><code>\d\d\d-\d\d\d-\d\d\d\d</code></p>
+</blockquote>
+<p>But that’s a bit difficult to read. And what if you wanted to match sequences like the following (which has 10 digits in succession)?</p>
+<blockquote>
+<p>A2356737821</p>
+</blockquote>
+<p>This is where <em>quantifiers</em>  come in. In regular expression syntax a token of the form <code>{n}</code> indicates that we are looking for n consecutive copies of whatever token precedes the <code>{n}</code>. Thus we can write the phone-number regex more concisely and more legibly as:</p>
+<blockquote>
+<p><code>\d{3}-\d{3}-\d{4}</code></p>
+</blockquote>
+<p>Note that the curly braces <code>{</code> and <code>}</code> may now function as metacharacters, and as such may have to be escaped if you are looking for them specifically, Thus if you want to search for occurrences of “t{3}b”, you’ll need the regex <code>t\{3\}b</code>. On the other hand if you want to match “t{swim}b” then it’s fine to use the regex <code>t{swim}b</code>: the machine sees here that the braces don’t play a role in quantification.</p>
+<p>Quantifiers are quite flexible. Within a quantifier you can use a comma to indicate a range of permissible number of copies of the preceding expression:</p>
+<ul>
+<li>`t{3,5}1 matches 3, 4 or 5 t’s in succession: ttt, tttt, or ttttt;</li>
+<li><code>t{3,}</code> matches three or more t’s in succession: ttt, tttt, ttttt, … .</li>
+</ul>
+<p>Because quantification is so often required, regular expression syntax provides shortcuts for special cases:</p>
+<ul>
+<li><code>t*</code> matches 0 or more t’s;</li>
+<li><code>t+</code> matches one or more t’s;</li>
+<li><code>t?</code> matches 0 or 1 t.</li>
+</ul>
+<p>An example: to match the beginning of a URL, use <code>https?://</code>:</p>
+<blockquote>
+<p>The URL <em><a href="https://*example.org" class="uri">https://*example.org</a> provides authentication of the site, whereas you should not pay with a credit card on </em><a href="http://*flybynight.com" class="uri">http://*flybynight.com</a>, On the other hand htto://example,org is not a valid URL—it’s probably a typo.</p>
+</blockquote>
+<p>Note that these shortcuts introduce new metacharacters: <code>*</code>, <code>+</code> and <code>?</code>. You’ll probably need to escape them when you want to search for them as literals outside of a character class.</p>
+</div>
+<div id="greedy-vs.lazy" class="section level3">
+<h3><span class="header-section-number">10.3.4</span> Greedy vs. Lazy</h3>
+<p>When it comes to the open-ended quantifiers (<code>{n,}</code> or the shortcuts <code>*</code> and <code>+</code>), the default behavior is to make the longest match possible. This is known as <em>greedy</em>  behavior. Consider the matches reported in the following text for <code>b{3,}</code></p>
+<blockquote>
+<p>b bb <em>bbb</em> <em>bbbb</em> <em>bbbbb</em></p>
+</blockquote>
+<p>It is possible, however, to tell a quantifier to be <em>lazy</em>,  meaning that it should give the shortest possible matches. The way to do this is to append a <code>?</code> to the quantifier. Applied to the same text above the regex <code>b{3,}?</code> with the lazy quantifier reports a different set of (sometimes shorter) matches:</p>
+<blockquote>
+<p>b bb <em>bbb</em> <em>bbb</em>b <em>bbb</em>bb</p>
+</blockquote>
+</div>
+<div id="grouping" class="section level3">
+<h3><span class="header-section-number">10.3.5</span> Grouping</h3>
+<p> A quantifier refers to the shortest meaningful item immediately preceding it. Look at these examples:</p>
+<ul>
+<li><code>ab+</code> matches a followed by 1 or more b’s;</li>
+<li><code>a\d+</code> matches a followed by 1 or more digits;</li>
+<li><code>a[^bc]+</code> matches a followed by 1 or more occurrence of anything other than b or c;</li>
+</ul>
+<p>In the examples above, any match begins with a. If we want to get “a” into the scope of the quantifier, we have to group it with the item immediately preceding the quantifier. Grouping is accomplished with parentheses. Consider these examples:</p>
+<ul>
+<li><code>(ab)+</code> matches one or more occurrences of “ab” in succession;</li>
+<li><code>(a\d{2,})+</code> matches one or more occurrence of a followed by at least two digits. Thus it matches “a23” and “a23a773”. It won’t match “a2a3”. It will match only the “a23” in “a23a6” and it will match only the “a567” in “a4a567”.</li>
+</ul>
+<p>Grouping is a great help in constructing highly complex patterns. Bear in mind that the grouping symbols <code>(</code> and <code>)</code> function as metacharacters and will have to be escaped outside of character classes when you are searching for them as literals. Inside of character classes they function only as literals. Thus:</p>
+<ul>
+<li><code>[(ab)*]</code> matches any one of the following characters: (, a, b, ) and *.</li>
+<li><code>\(yes\)</code> matches “(yes)”.</li>
+</ul>
+</div>
+<div id="alternation" class="section level3">
+<h3><span class="header-section-number">10.3.6</span> Alternation</h3>
+<p> In regex syntax the symbol <code>|</code> (the vertical “pipe”) functions as a metacharacter meaning “or”. Thus:</p>
+<ul>
+<li><code>a|b</code> matches a and it matches b;</li>
+<li><code>bed|bath</code> matches “bed” and it matches “bath”;</li>
+<li><code>a|b|c</code> matches any one of a, b and c;</li>
+<li><code>(aa|bb)+</code> matches one or more occurrence of aa or bb. Thus it matches “aa”, “bb”, “aaaa”, “aabb”, “bbaa”, “bbbb” and so on.</li>
+<li><code>(a(a|b)b)+</code> matches “aab”, “abb”, “aabaab”, “aababb”, and so on.</li>
+</ul>
+<p>Use of the pipe-symbol is known as <em>alternation</em>.</p>
+<p>In most implementations of regular expressions alternation works rather slowly, so use character classes instead whenever you can. For example, <code>[a-e]</code> is preferred over <code>a|b|c|d|e</code>.</p>
+</div>
+<div id="anchors" class="section level3">
+<h3><span class="header-section-number">10.3.7</span> Anchors</h3>
+<p>Sometimes we are interested in patterns that occur in specific places in text, such as:</p>
+<ul>
+<li>at the beginning of a string;</li>
+<li>at the end of a string</li>
+<li>at the beginning or end of a word.</li>
+</ul>
+<p><em>Anchors</em> help us accomplish this. The most important anchors to remember are:</p>
+<ul>
+<li><code>^</code>, which indicates (in technical terms, <em>asserts</em>) the beginning of a string;</li>
+<li><code>$</code>, which asserts the end of a string;<a href="#fn31" class="footnoteRef" id="fnref31"><sup>31</sup></a></li>
+<li><code>\b</code>, which asserts the presence of any type word-boundary (a space, tab, comma, semicolon, etc.).</li>
+</ul>
+<p>Here are some examples:</p>
+<ul>
+<li><p>For <code>^Hello</code>:</p>
+<blockquote>
+<p><em>Hello</em> got matched, but not the next Hello.</p>
+</blockquote></li>
+<li><p>For <code>Hello$</code>:</p>
+<blockquote>
+<p>Hello did not get matched, but there is a match for the next <em>Hello</em></p>
+</blockquote></li>
+</ul>
+<p>One thing that’s important to keep in mind about anchors is that they are <em>assertions</em>. This means that they don’t actually count for characters in a match; they merely assert the presence of something: the beginning or end of a string, the boundary of a a word, etc. Thus, there are six tokens in the regular expression <code>^Hello</code>, but only five characters—the letters in “Hello”—are involved in a match. The<code>^</code> merely asserts that a match must not only involve the given characters but must also occur at the beginning the string.</p>
+<p>What does <code>^Hello$</code> match? The rules would say that the string must start with H, continue on with e, l, l and then o, and end there, so you might think that the only possible string containing a match of <code>^Hello$</code> is the string “Hello” itself.</p>
+<p>But that’s not quite right:</p>
+<ul>
+<li>Go your online regex practice site (<a href="https://regex101.com/">Regular Expression 101</a>).</li>
+<li>Enter the regex <code>hello$</code>.</li>
+<li>Then at the “Set Regex Options” flag (right after the “/g”), ask to enter multiline mode.</li>
+<li>You should now see “/gm” at the end.</li>
+<li>In the test-text field, enter “I say hello”, press Return, and continue on the next line with “Again I say hello”.</li>
+<li>You’ll see that both hello’s match.</li>
+</ul>
+<p>The reason for this is that in multiline mode <code>$</code> stands for the end of each line, not just the <em>absolute end</em>  of the string. From time to time you may deal with strings that run over multiple lines, so remember that if you want your ending anchors to represent end-of-line rather than the absolute end of the string, you’ll need to ask R to enter multiline mode. (Later on in the Chapter we’ll discuss some common modes and how to enter them in R.</p>
+<p>The word-boundary anchor <code>\b</code> is quite useful. Consider the regex <code>bed</code> applied to the string below:</p>
+<blockquote>
+<p><em>bed</em> <em>bed</em>time pertur<em>bed</em></p>
+</blockquote>
+<p>There are three matches! With the regex <code>\bbed</code> there are just two matches:</p>
+<blockquote>
+<p><em>bed</em> <em>bed</em>time pertur<em>bed</em></p>
+</blockquote>
+<p>With the regex <code>\bbed\b</code> the only match is with the actual word “bed”:</p>
+<blockquote>
+<p><em>bed</em> bedtime perturbed</p>
+</blockquote>
+<p>Note that the beginning and the end of a string count as word-boundaries!</p>
+</div>
+<div id="regex-captures" class="section level3">
+<h3><span class="header-section-number">10.3.8</span> Captures</h3>
+<p> How would you detect whether a particular instance of a pattern is repeated? For instance, suppose you are looking for occurrences of a word repeated immediately after itself with only a space in between, for example:</p>
+<ul>
+<li>“<em>bye bye</em> birdie”</li>
+<li>“she said <em>night night</em>”</li>
+</ul>
+<p>The regex <code>\b\w+\b</code> (word boundary followed by one or more word characters followed by a word boundary) will match words like “bye” and “night”, but if you simply repeated the pattern, say: <code>\b\w+\b \b\w+\b</code>, then you match strings that don’t exhibit repetition, such as “bye hello” and day night“.</p>
+<p>What you want is for the first part of the regex to state your pattern—a word of one or more characters—then the space, and then something that represents <em>exactly the match</em> that occurs for the first pattern.</p>
+<p>A <em>capture</em> accomplishes this. The regex you want is:</p>
+<blockquote>
+<p><code>\b(\w+) \1\b</code></p>
+</blockquote>
+<p>See what it matches in the phrase below:</p>
+<blockquote>
+<p>now it is time for <em>bed bed</em>, yes it is bed bedtime</p>
+</blockquote>
+<p>Here’s how the regex works:</p>
+<ul>
+<li>The leading <code>\b</code> requires the presence of a word-boundary, which is satisfied by the presence, in the string, of the space between “for” and “bed bed”. The second “bed bed” is also OK at this point, due to the space between “is” and the first “bed”.</li>
+<li><code>\w+</code> matches the first “bed”, and the parentheses make it a group. By default the regex captures the contents of whatever portion of the string matches a group, and remembers those contents for later use.</li>
+<li>The ` ` matches the space between the two “bed” strings.</li>
+<li>The <code>\1</code> is a <em>back-reference</em>: it represents precisely what was matched in the earlier group. For the regex as a whole to produce a match, <code>\1</code> has to see an exact repetition of whatever string matched the first parenthesis-group in the regex, so it has to see “bed”. At this point both occurrences of “bed bed”&quot; are still in the running to be matches for the entire regex.</li>
+<li>The final <code>\b</code> asserts a word-boundary. This is satisfied by the comma after the first “bed bed”, but not by the “t” after the second “bed bed”. Thus only the first “bed bed” matches the regular expression as a whole.</li>
+</ul>
+<p>Back-references are denoted <code>\1</code>, <code>\2</code>, and so on, and you can use several of them in the same regex. For example, if you want to match expressions such as “big boat big boat” then use:</p>
+<blockquote>
+<p><code>\b(\w+) (\w+) \1 \2\b</code></p>
+</blockquote>
+<p>Think about how the above regex works:</p>
+<ul>
+<li>To start, it requires the presence of a word-boundary.</li>
+<li>It sets up a capture-group consisting of one or more word characters. Since this is the first set of parentheses, the group can be referenced later on by <code>\1</code>.</li>
+<li>It then sets up a second capture-group that may be referenced later on by <code>\2</code>.</li>
+<li>We then must see a space …</li>
+<li>… followed by the contents of the first group …</li>
+<li>… followed by the contents of the second group …</li>
+<li>… at a word-boundary.</li>
+</ul>
+<p>If you want to match a palindrome<a href="#fn32" class="footnoteRef" id="fnref32"><sup>32</sup></a>consisting of five characters (“abcba”, “x444x”, etc.) then use:</p>
+<blockquote>
+<p><code>\b(\w)(\w)\w\2\1\b</code></p>
+</blockquote>
+</div>
+<div id="looking-around" class="section level3">
+<h3><span class="header-section-number">10.3.9</span> Looking Around</h3>
+<p>Suppose that you have a string containing a number of words involving “bed”, and you would like to find all of the instances in which “bed”, except for the word “bedtime”. With the tools we have so far this is a difficult task. Fortunately there are <em>look-aheads</em>  to simplify our work.</p>
+<p>The regex <code>\bbed(?!time\b)</code> will do the job. Here’s how it works:</p>
+<ul>
+<li>It begins by asserting a word-boundary.</li>
+<li>It continues with the characters to match “bed”.</li>
+<li>It concludes the a look-ahead group. The parentheses mark out the group. The initial <code>?</code> indicates that we plan to look ahead. The <code>!</code> may be thought of as “not equals”; it means that if we find the pattern that follows the <code>!</code> we will not have a match.</li>
+</ul>
+<p>Note the matches in the text below:</p>
+<blockquote>
+<p>bedtime <em>bed</em>rock <em>bed</em>rocking <em>bed</em>sheets <em>bed</em>ding embedding</p>
+</blockquote>
+<p>Note that only “bed” is included in the match. Just like the anchor <code>\b</code>, the look-ahead is an assertion: it does not add any characters to the match.</p>
+<p>If we want only the occurrences of bed where the word begins in “bed” and ends in either “rock” and “time”, then we could use the regex:</p>
+<blockquote>
+<p><code>\bbed(?=rock\b|time\b)</code></p>
+</blockquote>
+<p>Note the matches in the following text:</p>
+<blockquote>
+<p><em>bed</em>time <em>bed</em>rock bedrocking bedsheets bedding embedding</p>
+</blockquote>
+<p>Of course we could locate the same occurrences with <code>\bbed(rock|time)\b</code>, but the matches would be the entire words, not just the “bed” portion.</p>
+<p>There are four types of look-around groups: </p>
+<ul>
+<li><em>Positive look-ahead</em>: regex1<code>(?=regex2)</code>. Match when you find an instance of <code>regex2</code> right after an instance of <code>regex1</code>.</li>
+<li><em>Negative look-ahead</em>: <code>regex1(?!regex)</code>. Match EXCEPT when you find an instance of <code>regex2</code> right after an instance of <code>regex1</code>.</li>
+<li><em>Positive look-behind</em>: <code>(?&lt;=regex2)regex1</code>. Match when you find an instance of <code>regex2</code> right before an instance of <code>regex1</code>.</li>
+<li><em>Negative look-behind</em>: <code>(?&lt;!regex2)regex1</code>. Match EXCEPT when you find an instance of <code>regex2</code> right before an instance of <code>regex1</code>.</li>
+</ul>
+<p>The <code>regex2</code> expression in look-aheads can be any regex at all. For look-behinds, though, there are some important limitations. The precise restrictions differ from one flavor of regular expressions to another, but roughly the rule is that the machine has to be able to figure out in advance how many characters it might have to look behind. A group like <code>(?&lt;=time\w*sheets)</code>, for instance, would not be permitted, as the quantifier <code>*</code> allows matching strings of arbitrary length.</p>
+<p>We have not come near to exhausting the syntax of regular expressions. Readers who would like to delve into the subject more deeply should next consult online tutorials on the topics of non-capture groups, conditionals and more. However, we now have enough background to express some fairly complex patterns quite concisely, so it is now time to learn how to work with them in R.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="31">
+<li id="fn31"><p>Well, actually it asserts the end of the string when we are not in “multiline mode.” In multiline mode it asserts the end of a line within a multiline string. This will be explained shortly.<a href="regex-syntax.html#fnref31">↩</a></p></li>
+<li id="fn32"><p>Recall that a <em>palindrome</em> is a word that is the same when spelled backwards.<a href="regex-syntax.html#fnref32">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regex-practice-sites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="entering-a-regex-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["r-notes.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,986 @@
+# Regular Expressions {#regex}
+
+```{r xkcd-regular-expressions, fig.pos='!h', echo=F, fig.cap="Regular Expressions, by xkcd.", out.width="60%", fig.align="center"}
+knitr::include_graphics("images/xkcd-regex-save-day.png")
+```
+
+In this Chapter we introduce  the concept of *regular expressions*, a powerful tool that enables you to search for complex patterns in text.
+
+\newpage
+
+## Motivation
+
+Suppose you wish to determine how many times the string "ab" appears within some given string.  You could write a function to perform this task.
+
+```{r}
+occurrences <- function(string) {
+  count <- 0
+  for (i in 1:nchar(string)) {
+    stringPart <- substr(string, i, i+1)
+    if ( stringPart == "ab" ) {
+      count <- count +1
+    }
+  }
+  count
+}
+```
+
+Let's try it out:
+
+```{r}
+occurrences("yabbadabbadoo!")
+```
+
+This looks right, as there are indeed exactly two occurrences of "ab":  one at beginning at the second character and another beginning at the seventh character.
+
+Suppose instead that we are interested in counting occurrences, in some arbitrary given string, of any of the following three strings in some arbitrary given string:
+
+* "ab"
+* "Ab"
+* "foo"
+
+How might we handle this task?  Again we could write a function.  This time we will generalize it a bit, allowing the user to input, along with the string to be searched, a vector of the sub-strings of interest.
+
+```{r}
+# function to count occurrence of substrings in string.
+# substrings are given as patterns
+occurrences2 <- function(string, patterns) {
+  count <- 0
+  for (i in 1:nchar(string)) {
+    for (j in 1:length(patterns)) {
+      pattern <- patterns[j]
+      len <- nchar(pattern)
+      stringPart <- substr(string, i, i + len - 1)
+      if ( stringPart == pattern ) {
+        count <- count +1
+      }
+    }
+  }
+  count
+}
+```
+
+We try out our function on the string "This Labrador is a fool, Abba.", which matches each of our patterns exactly once, for a total of three matches,
+
+```{r}
+occurrences2("This Labrador is a fool, Abba.",
+           patterns = c("ab", "Ab", "foo"))
+```
+
+Well, and good, but ... the coding is beginning to get a bit complex.  What if we were searching instead for, say, sub-strings that resemble a phone number with an area code, i.e., strings of the form:
+
+>ddd-ddd-dddd
+
+(Here the d's represent digits from 0 to 9.)
+
+There are $10^{10}$ patterns of interest!^[10 digits in a phone number, each of which could be chose in 10 different ways.  This results in $10^{10}$, or ten billion possibilities.]  How would we go about describing them all to R?
+
+Fortunately, regular expressions are there to help us out.  A *regular expression* \index{regular expression} is defined as a sequence of characters that represents a pattern that might or might not be present in any given string.  A computer will rely on a *regular expression engine*---a \index{regular expression engine}specific implementation of a system of regular expressions---to use a given regular expression to search in text for matches to the pattern that the expression represents.
+
+In practice, regular expressions are like a miniature programming language within a programming language.  They are a feature of most major programming languages, including R.  With regular expressions we can describe complex string-patterns concisely, and can perform rapid searches for these patterns in a given body of text.
+
+The rules for regular expressions vary a bit from one language to another, but the general idea is essentially the same for all of them.  In the remainder of this Chapter we'll learn enough of the principles of regular expressions to describe basic, useful patterns, and we'll also study R functions that make use of them.
+
+First of all, here's a quick example to show the power of regular expressions.  The work done by `occurences2()` may also be done in one line with the `gregexpr()` \index{R-functions!gregexpr()@\texttt{gregexpr()}} function, as follows:
+
+```{r}
+gregexpr(pattern = "[Aa]b|foo",
+         text = "This Labrador is a fool, Abba.")
+```
+
+We must learn to interpret output like this.  The `str()` function will be helpful, here:
+
+```{r}
+str(gregexpr(pattern = "[Aa]b|foo",
+             text = "This Labrador is a fool, Abba."))
+```
+
+We see that the result is a list with only one item in it.  That item is a vector consisting of three numbers:  7, 20 and 26.  Looking back at the text-string, we see that:
+
+* "ab" was present beginning at position 7;
+* "foo" was present beginning at position 20;
+* "Ab" was present beginning at position 26.
+
+The vector also has two attributes.  The "useBytes" attribute will not concern us; our interest lies in the "match.length" attribute, which is yet another vector that gives the number of characters in the matching sub-strings.
+
+R provides the convenient `regmatches()` \index{R-functions!regmatches()@\texttt{regmatches()}} function, which uses the beginning match position and the match lengths to fetch the matching sub-strings themselves:
+
+```{r}
+results <- gregexpr(pattern = "[Aa]b|foo",
+                    text = "This Labrador is a fool, Abba.")
+regmatches("This Labrador is a fool, Abba.", m = results)
+```
+
+`gregexpr` is short for "global regular expression".  It searches the entire`text` string for all possible matches.  There is lazier function `regexpr()` \index{R-functions!regexpr()@\texttt{regexpr()}}that stops after the first match (if any).
+
+What should still be mysterious is the value given to `pattern` in the call to `gregexpr()`, namely the string "[Aa]b|foo".  This is the regular expression!  It tells R to look for sub-strings that EITHER:
+
+* start with either "A" or "a", and are then followed by a "b", OR
+* consist of "foo"
+
+Clearly it is high time that we learn a bit of regular-expression syntax.
+
+## Regex Practice Sites
+
+As we introduce regex syntax in the next few sections, it's a good idea to try them out yourself and to come up with your own variations.  The easiest way to do this is not to work directly in R; instead, consider using an online regex practice site.  I especially recommend [Regular Expressions 101](https://regex101.com/).^[If you go on to learn JavaScript, you might want to switch to [RegExr](http://regexr.com/), which I think has a very nice documentation interface.]  Keep the regex flavor set at **pcre**, as this is the variant of regular expression syntax that is closest to the one implemented in R.
+
+Bear in mind also that as we learn regex syntax, we'll focus on the standard, language-independent syntax itself.  There are some differences between this standard syntax and the way in which you would actually enter a regex pattern in R.
+
+## Regex Syntax
+
+Let's start learning the syntax.
+
+### Matching a Specific Sequence
+
+If you are searching for occurrences of one specific sequence of characters, the regular expression to use is just that sequence of characters.
+
+For example, if your regex is `bet`, then you'll get a match whenever the characters "b", "e", and "t" occur consecutively in the text you are searching.
+
+In the sample text below, the matches are in italics:
+
+>I *bet* you are reading *bet*ween the lines.  Better to read the lines themselves.
+
+We didn't match "Bet" in "Better" because "B" is uppercase.
+
+The characters "b", "e" and "t" in the regex "bet" are examples of *literal characters*.  \index{literal characters}This means that they stand for exactly what they are:  the "b" in the expression matches a "b" in the text we are searching, the "e" in the expression matches an "e" in text, and so on.
+
+There are a lot of exceptions to our specific-sequence rule.  We'll get to them soon.
+
+### Character Classes
+
+Suppose you want to match either "bet" or "Bet"?  One way to do this is to use a *character class*.  A character class \index{character class} consists of a set of characters surrounded by square brackets, and it tells the regex engine to match any one of the characters in the class.
+
+Consider, for example, the regex `[Bb]et`.  It consists of the character class `[Bb]` followed by the pair of literal characters `et`.  It matches:
+
+>I *bet* you are reading *bet*ween the lines.  *Bet*ter to read the lines themselves.
+
+Another example:  `t[aeiou]` matches any two-character sequence in which "t" is followed by a lowercase vowel:
+
+>Get thee *to* a nunnery.
+
+#### Ranges
+
+You can match a *range* \index{character range} of characters.  Inside a character class:
+
+* `a-z` represents all lowercase letters from a to z;
+* `A-Z` represents all of the uppercase letters;
+* `0-9` represents all of the decimal digits:  0, 1, 2, ..., 9.
+* Other ranges are possible, e.g.:
+    * `c-f` denotes the lowercase letters from c to f;
+    * `0-3` denotes 9, 1, 2 and 3.
+    
+Thus, in order to match any letter followed by two digits, you could use `[a-zA-Z][0-9][0-9]`:
+
+>Your room number is *B43*, not C4 or #39.
+
+#### The Need to Escape
+
+Perhaps now you can spot the problem with the sequence-specific rule: what happens if one of the characters in the sequence is, say '[' or ']'? These characters are examples of *metacharacters*, \index{metacharacter} which means that in the syntax of regular expressions they don't mach themselves but instead have a special role.  In the case of square-brackets, that role is to delimit character classes.
+
+If you want your pattern to include a metacharacter you will have to escape it with the backslash.  Thus, the correct way to match the string "[aardvark]" would be with the regular expression:  `\[aardvark]\]`:
+
+>The *[aardvark]* appears early in the dictionary.
+
+Actually, you only need to escape a metacharacter when it acts *in its role as metacharacter*.  For example, if you want to match "b-b", you are fine to use `b-b`.  Because the expression contains no square brackets, it's not possible for the hyphen to act in its special role to set ranges, so it does not have to be escaped.
+
+Inside of square brackets it can matter whether you escape the hyphen.  Thus:
+
+* `[a-c]` matches a, b, and c;
+* `[a\-c]` matches a, -, and c (but not b);
+* `[a-]` matches a and - (the machine can tell that the hyphen was not being used in a range);
+* `[a\-]` also matches just a and -, not a, \ and -.  (Apparently the regex syntax takes into account the fact that some folks will worry that they might have to escape the hyphen).
+
+Of course since the backslash plays a role in escaping metacharacters, it too acts as a metacharacter at times.  Hence if you want to match a backslash you'll have to escape *it*!  How?  By preceding the blackslash with a backslash!  Thus:
+
+* `a\\b` matches "a\\b";
+* `a\\\\b` matches "a\\\\b".
+
+On the other hand:
+
+* `a\tb` matches a followed by a tab followed by b, because in this case the machine recognizes `\t` as the control character for a tab;
+* `a\ab` matches a followed by the bell-alert followed by b, and so on for other control characters.
+
+But keep the following in mind:
+
+* `a\eb` is incorrect regex syntax:  `\e` is not recognized as one of the control characters.
+* And yet `a\wb` is *correct* regex syntax!  (It turns out that the token `\w` is a recognized character class *shortcut* that means the same as `[a-zA-Z0-9]`.  We'll get to the shortcuts soon.)
+
+#### Named Character Classes
+
+Some character classes occur so commonly that they have been granted special names.  Table \@ref(tab:character-class-names) gives a few that are worth remembering.
+
+```{r character-class-names, echo=F}
+name <- c("[:alpha:]", "[:alnum:]", "[:word:]", "[:space:]", "[:lower:]", "[:upper:]")
+meanings <- c("a-zA-Z", "a-zA-Z0-9", "a-zA-Z0-9_ (note the underscore)",
+              "white space", "a-z", "A-Z")
+tab <- cbind(name, meanings)
+rownames(tab) <- NULL
+colnames(tab) <- c("Class Name", "Represents")
+knitr::kable(tab, caption = "A few character classes worth remembering.")
+```
+
+Here's how you would use character class names in a regular expression:
+
+* `t[[:alnum:]]t` matches t followed by any alphanumeric character followed by t.  (The double brackets are needed since, according to the rules,  `t[:alnum:]t` would match t followed by any one of :, a, l, n, u or m, followed by t.)
+
+#### Character Class Shortcuts
+
+Some character classes are so very common that they merit extra-short shortcuts:   most of these shortcuts begin with a backslash.  We'll call them *character class shortcuts*.  \index{character class shortcut} Some of the most common character class shortcuts are shown in Table \@ref(tab:character-types)
+
+
+```{r character-types, echo=F}
+types <- c("\\\\d", "\\\\D", "\\\\s", "\\\\S", "\\\\w", "\\\\W", ".")
+meanings <- c("any decimal digit (0-9)",
+              "anything not a decimal digit",
+              "any white space character",
+              "anything not a white space character",
+              "any word character (same as [word])",
+              "anything not a word character",
+              "any character except newline")
+tab <- cbind(types, meanings)
+rownames(tab) <- NULL
+colnames(tab) <- c("Type", "Represents")
+knitr::kable(tab, caption = "A few character class shortcuts worth remembering.")
+```
+
+The `.` requires special care:  if you are searching for a literal dot, you'll have to escape it with a backslash.  Thus `32\.456` matches "32.456", whereas `32.456` matches "32a456", 32b456", and so on.
+
+#### Negation in a Character Class
+
+Suppose you would like to match any sequence of three characters of this form:
+
+* t
+* any character EXCEPT e, x and z
+* t
+
+You can accomplish this by negating within a character class:  the regex to use is `t[^exz]t`.  Here the caret `^` functions as a metacharacter, indicating that any character except the others in the class are permitted.  In order to function as a negation, the `^` must appear immediately after the opening bracket.  If it appears elsewhere in the class, then it's a literal:  it just stands for itself.  (Outside of a character class the `^` functions as an *anchor*---we'll get to these soon---and as such has to be escaped if you want to act as a literal.)
+
+As another example, `t[^a-z]t` matches t followed by any character expect a lowercase letter, followed by t.
+
+Negating within a particular class of characters can be tricky.  For example, suppose you are looking for 3-character sequences that consists of t, any letter except e or E, and then t.  Rather than trying to use a `^` it's easiest to work with ranges:  `t[a-df-zA-DF-Z]t`.
+
+### Quantification
+
+Suppose you want to match phone numbers, where the area code is included and the groups of digits are separated by hyphens, as in: 202-456-1111.  Taking advantage of the character class shortcut for digits, you could use the following `regex`:
+
+>`\d\d\d-\d\d\d-\d\d\d\d`
+
+But that's a bit difficult to read.  And what if you wanted to match sequences like the following (which has 10 digits in succession)?
+
+>A2356737821
+
+This is where *quantifiers* \index{quantifier} come in.  In regular expression syntax a token of the form `{n}` indicates that we are looking for n consecutive copies of whatever token precedes the `{n}`.  Thus we can write the phone-number regex more concisely and more legibly as:
+
+>`\d{3}-\d{3}-\d{4}`
+
+Note that the curly braces `{` and `}` may now function as metacharacters, and as such may have to be escaped if you are looking for them specifically,  Thus if you want to search for occurrences of "t{3}b", you'll need the regex `t\{3\}b`.  On the other hand if you want to match "t{swim}b" then it's fine to use the regex `t{swim}b`: the machine sees here that the braces don't play a role in quantification.
+
+Quantifiers are quite flexible.  Within a quantifier you can use a comma to indicate a range of permissible number of copies of the preceding expression:
+
+* `t{3,5}1 matches 3, 4 or 5 t's in succession:  ttt, tttt, or ttttt;
+* `t{3,}` matches three or more t's in succession: ttt, tttt, ttttt, ... .
+
+Because quantification is so often required, regular expression syntax provides shortcuts for special cases:
+
+* `t*` matches 0 or more t's;
+* `t+` matches one or more t's;
+* `t?` matches 0 or 1 t.
+
+An example:  to match the beginning of a URL, use `https?://`:
+
+>The URL *https://*example.org provides authentication of the site, whereas you should not pay with a credit card on *http://*flybynight.com,  On the other hand htto://example,org is not a valid URL---it's probably a typo.
+
+Note that these shortcuts introduce new metacharacters:  `*`, `+` and `?`.  You'll probably need to escape them when you want to search for them as literals outside of a character class.
+
+### Greedy vs. Lazy
+
+When it comes to the open-ended quantifiers (`{n,}` or the shortcuts `*` and `+`), the default behavior is to make the longest match possible.  This is known as *greedy* \index{greedy} behavior.  Consider the matches reported in the following text for `b{3,}`
+
+>b bb *bbb* *bbbb* *bbbbb*
+
+It is possible, however, to tell a quantifier to be *lazy*, \index{lazy} meaning that it should give the shortest possible matches.  The way to do this is to append a `?` to the quantifier.  Applied to the same text above the regex `b{3,}?` with the lazy quantifier reports a different set of (sometimes shorter) matches:
+
+>b bb *bbb* *bbb*b *bbb*bb
+
+### Grouping
+\index{grouping}
+A quantifier refers to the shortest meaningful item immediately preceding it.  Look at these examples:
+
+* `ab+` matches a followed by 1 or more b's;
+* `a\d+` matches a followed by 1 or more digits;
+* `a[^bc]+` matches a followed by 1 or more occurrence of anything other than b or c;
+
+In the examples above, any match begins with a.  If we want to get "a" into the scope of the quantifier, we have to group it with the item immediately preceding the quantifier.  Grouping is accomplished with parentheses.  Consider these examples:
+
+* `(ab)+` matches one or more occurrences of "ab" in succession;
+* `(a\d{2,})+` matches one or more occurrence of a followed by at least two digits.  Thus it matches "a23" and "a23a773".  It won't match "a2a3".  It will match only the "a23" in "a23a6" and it will match only the "a567" in "a4a567".
+
+Grouping is a great help in constructing highly complex patterns.  Bear in mind that the grouping symbols `(` and `)` function as metacharacters and will have to be escaped outside of character classes when you are searching for them as literals.  Inside of character classes they function only as literals.  Thus:
+
+* `[(ab)*]` matches any one of the following characters:  (, a, b, ) and *.
+* `\(yes\)` matches "(yes)".
+
+### Alternation
+\index{alternation}
+In regex syntax the symbol `|` (the vertical "pipe") functions as a metacharacter meaning "or".  Thus:
+
+* `a|b` matches a and it matches b;
+* `bed|bath` matches "bed" and it matches "bath";
+* `a|b|c` matches any one of a, b and c;
+* `(aa|bb)+` matches one or more occurrence of aa or bb.  Thus it matches "aa", "bb", "aaaa", "aabb", "bbaa", "bbbb" and so on.
+* `(a(a|b)b)+` matches "aab", "abb", "aabaab", "aababb", and so on.
+
+Use of the pipe-symbol is known as *alternation*.
+
+In most implementations of regular expressions alternation works rather slowly, so use character classes instead whenever you can.  For example, `[a-e]` is preferred over `a|b|c|d|e`.
+
+### Anchors
+
+Sometimes we are interested in patterns that occur in specific places in text, such as:
+
+* at the beginning of a string;
+* at the end of a string
+* at the beginning or end of a word.
+
+*Anchors* \index{anchor}help us accomplish this.  The most important anchors to remember are:
+
+* `^`, which indicates (in technical terms, *asserts*) the beginning of a string;
+* `$`, which asserts the end of a string;^[Well, actually it asserts the end of the string when we are not in "multiline mode."  In multiline mode it asserts the end of a line within a multiline string.  This will be explained shortly.]
+* `\b`, which asserts the presence of any type word-boundary (a space, tab, comma, semicolon, etc.).
+
+Here are some examples:
+
+* For `^Hello`:
+
+    >*Hello* got matched, but not the next Hello.
+* For `Hello$`:
+
+    >Hello did not get matched, but there is a match for the next *Hello*
+
+One thing that's important to keep in mind about anchors is that they are *assertions*.  \index{assertion}This means that they don't actually count for characters in a match; they merely assert the presence of something:  the beginning or end of a string, the boundary of a a word, etc.  Thus, there are six tokens in the regular expression `^Hello`, but only five characters---the letters in "Hello"---are involved in a match.  The`^` merely asserts that a match must not only involve the given characters but must also occur at the beginning the string. 
+
+What does `^Hello$` match?  The rules would say that the string must start with H, continue on with e, l, l and then o, and end there, so you might think that the only possible string containing a match of `^Hello$` is the string "Hello" itself.
+
+But that's not quite right:
+
+* Go your online regex practice site ([Regular Expression 101](https://regex101.com/)).
+* Enter the regex `hello$`.
+* Then at the "Set Regex Options" flag (right after the "/g"), ask to enter multiline mode.
+* You should now see "/gm" at the end.
+* In the test-text field, enter "I say hello", press Return, and continue on the next line with "Again I say hello".
+* You'll see that both hello's match.
+
+The reason for this is that in multiline mode `$` stands for the end of each line, not just the *absolute end* \index{absolute end} of the string.  From time to time you may deal with strings that run over multiple lines, so remember that if you want your ending anchors to represent end-of-line rather than the absolute end of the string, you'll need to ask R to enter multiline mode.  (Later on in the Chapter we'll discuss some common modes and how to enter them in R.
+
+The word-boundary anchor `\b` is quite useful.  Consider the regex `bed` applied to the string below:
+
+>*bed* *bed*time pertur*bed*
+
+There are three matches!  With the regex `\bbed` there are just two matches:
+
+>*bed* *bed*time pertur*bed*
+
+With the regex `\bbed\b` the only match is with the actual word "bed":
+
+>*bed* bedtime perturbed
+
+Note that the beginning and the end of a string count as word-boundaries!
+
+
+### Captures  {#regex-captures}
+\index{capture}
+How would you detect whether a particular instance of a pattern is repeated?  For instance, suppose you are looking for occurrences of a word repeated immediately after itself with only a space in between, for example:
+
+* "*bye bye* birdie"
+* "she said *night night*"
+
+The regex `\b\w+\b` (word boundary followed by one or more word characters followed by a word boundary) will match words like "bye" and "night", but if you simply repeated the pattern, say:  `\b\w+\b \b\w+\b`, then you match strings that don't exhibit repetition, such as "bye hello" and day night".
+
+What you want is for the first part of the regex to state your pattern---a word of one or more characters---then the space, and then something that represents *exactly the match* that occurs for the first pattern.
+
+A *capture* accomplishes this.  The regex you want is:
+
+>`\b(\w+) \1\b`
+
+See what it matches in the phrase below:
+
+>now it is time for *bed bed*, yes it is bed bedtime
+
+Here's how the regex works:
+
+* The leading `\b` requires the presence of a word-boundary, which is satisfied by the presence, in the string, of the space between "for" and "bed bed".  The second "bed bed" is also OK at this point, due to the space between "is" and the first "bed".
+* `\w+` matches the first "bed", and the parentheses make it a group.  By default the regex captures the contents of whatever portion of the string matches a group, and remembers those contents for later use.
+* The ` ` matches the space between the two "bed" strings.
+* The `\1` is a *back-reference*:  \index{back-reference}it represents precisely what was matched in the earlier group.  For the regex as a whole to produce a match, `\1` has to see an exact repetition of whatever string matched the first parenthesis-group in the regex, so it has to see "bed".  At this point both occurrences of "bed bed"" are still in the running to be matches for the entire regex.
+* The final `\b` asserts a word-boundary.  This is satisfied by the comma after the first "bed bed", but not by the "t" after the second "bed bed".  Thus only the first "bed bed" matches the regular expression as a whole.
+
+Back-references are denoted `\1`, `\2`, and so on, and you can use several of them in the same regex.  For example, if you want to match expressions such as "big boat big boat" then use:
+
+>`\b(\w+) (\w+) \1 \2\b`
+
+Think about how the above regex works:
+
+* To start, it requires the presence of a word-boundary.
+* It sets up a capture-group consisting of one or more word characters.  Since this is the first set of parentheses, the group can be referenced later on by `\1`.
+* It then sets up a second capture-group that may be referenced later on by `\2`.
+* We then must see a space ...
+* ... followed by the contents of the first group ...
+* ... followed by the contents of the second group ...
+* ... at a word-boundary.
+
+If you want to match a palindrome^[Recall that a *palindrome* is a word that is the same when spelled backwards.]consisting of five characters ("abcba", "x444x", etc.) then use:
+
+>`\b(\w)(\w)\w\2\1\b`
+
+### Looking Around
+
+Suppose that you have a string containing a number of words involving "bed", and you would like to find all of the instances in which "bed", except for the word "bedtime".  With the tools we have so far this is a difficult task.  Fortunately there are *look-aheads* \index{look-ahead} to simplify our work.
+
+The regex `\bbed(?!time\b)` will do the job.  Here's how it works:
+
+* It begins by asserting a word-boundary.
+* It continues with the characters to match "bed".
+* It concludes the a look-ahead group.  The parentheses mark out the group.  The initial `?` indicates that we plan to look ahead. The `!` may be thought of as "not equals"; it means that if we find the pattern that follows the `!` we will not have a match.
+
+Note the matches in the text below:
+
+>bedtime *bed*rock *bed*rocking *bed*sheets *bed*ding embedding
+
+Note that only "bed" is included in the match.  Just like the anchor `\b`, the look-ahead is an assertion:  it does not add any characters to the match.
+
+If we want only the occurrences of bed where the word begins in "bed" and ends in either "rock" and "time", then we could use the regex:
+
+>`\bbed(?=rock\b|time\b)`
+
+Note the matches in the following text:
+
+>*bed*time *bed*rock bedrocking bedsheets bedding embedding
+
+Of course we could locate the same occurrences with `\bbed(rock|time)\b`, but the matches would be the entire words, not just the "bed" portion.
+
+There are four types of look-around groups: \index{look-behind}
+
+* *Positive look-ahead*:  regex1`(?=regex2)`.  Match when you find an instance of `regex2` right after an instance of `regex1`.
+* *Negative look-ahead*:  `regex1(?!regex)`. Match EXCEPT when you find an instance of `regex2` right after an instance of `regex1`.
+* *Positive look-behind*:  `(?<=regex2)regex1`.  Match when you find an instance of `regex2` right before an instance of `regex1`.
+* *Negative look-behind*:  `(?<!regex2)regex1`.  Match EXCEPT when you find an instance of `regex2` right before an instance of `regex1`.
+
+The `regex2` expression in look-aheads can be any regex at all.  For look-behinds, though, there are some important limitations.  The precise restrictions differ from one flavor of regular expressions to another, but roughly the rule is that the machine has to be able to figure out in advance how many characters it might have to look behind.  A group like `(?<=time\w*sheets)`, for instance,  would not be permitted, as the quantifier `*` allows matching strings of arbitrary length.
+
+We have not come near to exhausting the syntax of regular expressions. Readers who would like to delve into the subject more deeply should next consult online tutorials on the topics of non-capture groups, conditionals and more.  However, we now have enough background to express some fairly complex patterns quite concisely, so it is now time to learn how to work with them in R.
+
+## Entering a Regex in R
+
+We now return to the R-language and consider how to apply regular expressions within it.
+
+### String to Regex
+
+Regular expressions actually play a role in one of the functions you already know, namely the function `strsplit()`.  Recall that you can use the `split` parameter to specify the sub-string that separates the strings you want to split up.  It works like this:
+
+```{r}
+myString <- "hello there Mary Poppins"
+# split on the spaces, then unlist:
+unlist(strsplit(myString, split = " "))
+```
+
+The task of splitting would appear to a quite challenging if the words are separated in more complex ways, with any amount of white-space.  Consider, for example:
+
+```{r}
+myString <- "hello\t\tthere\n\nMary  \t Poppins"
+cat(myString)
+```
+
+But really it's not any more difficult, because the `split` parameter actually takes the string it is given and converts it to a regular expression, splitting on anything that matches.  Watch this:
+
+```{r}
+myString <- "hello\t\tthere\n\nMary  \t Poppins"
+unlist(strsplit(myString, split = "\\s+"))
+```
+
+We can almost see how this works.  Recall from the last section that the regex `\s` is a character class shortcut for any white-space character, so `\s+` stands for one or more white-spaces in succession:  precisely the mixtures of tab, spaces and newlines that separated the words in our string.  `strsplit()` must be splitting on matches to the regex `\s+`.
+
+So why did we set `split = "\\s+"`?  What's with the extra backslash?
+
+The reason is that the argument passed with `split` is a string, not a regular expression object.  It starts out life, as if were, as a string, and R converts it to a regular expression, then hands the regex over to its regular expression engine to locate the matches in `myString` that in turn determine how `myString` is to be split up.  Since in R's string-world "\\s" is not a recognized character in the way that newline ("\\n"), tab ("\\t") and other control-characters are, R won't accept "\\s+" as a valid string.  Try it for your self:
+
+```{r eval=F}
+strsplit(myString, split = "\s+")
+```
+
+```
+## Error: '\s' is an unrecognized escape in character string starting ""\s"
+```
+
+It follows that when you enter regular expressions as strings in R, you'll have to remember to escape the backslashed tokens that are used in a regular expression.  Table \@ref(tab:regex-string-escape-examples) gives several examples of this.
+
+```{r regex-string-escape-examples, echo=F}
+regex <- c("\\\\s+", "find\\\\.dot", "^\\\\w*\\\\d{1,3}$")
+strForm <- c("\"\\\\\\\\s+\"", 
+             "\"find\\\\\\\\.dot \"", 
+             "\"^\\\\\\\\w*\\\\\\\\d{1,3}$\"")
+tab <- cbind(regex, strForm)
+rownames(tab) <- NULL
+colnames(tab) <- c("Regular Expression", "Entered as String")
+knitr::kable(tab, caption = "Examples of entry of regular expressions as strings, in R.")
+```
+
+Keeping in mind the need for an occasional additional escape, it should not be too difficult for you to enter regular expressions in R.
+
+### Substitution {#regex-substitution}
+
+One of the most useful applications of regular expressions is in substitution.  Suppose that we have a vector of dates:
+
+```{r}
+dates <- c("3 - 14 - 1963", "4/13/ 2005",
+           "12-1-1997", "11 / 11 / 1918")
+```
+
+It seems that the folks who entered the dates were not consistent in how to format them.  In order to make analysis easier, it wold be better if all the dates had exactly the same format.  With the function `gsub()` \index{R-functions!gsub()@\texttt{gsub()}}and regular expressions, this is not difficult:
+
+```{r}
+tidyDates <- gsub(pattern = "[- /]+",
+                  replacement = "/",
+                  x = dates)
+tidyDates
+```
+
+Here:
+
+* `pattern` is the regex that for the type of sub-string we want to replace;
+* `replacment` is what we want to replace matches of the pattern with;
+* `x` is the text in which the substitution occurs.
+
+The "g" in `gsub()` stands for "global":  we want to replace *all* occurrences of the pattern with the replacement text.  There is also a `sub()` \index{R-functions!sub()@\texttt{sub()}}function that performs replacement only with the *first* match (if any) that it finds:
+
+```{r}
+replaceFirst <- sub(pattern = "[- /]+",
+                  replacement = "/",
+                  x = dates)
+replaceFirst
+```
+
+In our application, that's certainly NOT what we need. However, in cases where you happen to know that there will be at most one match, `sub()` gets the job done faster than `gsub()`, which is forced to search through the entire string.
+
+
+### A Note on Perl
+
+R has access to a two different regular expression engines:
+
+* POSIX 1003.2 extended regular expressions, and
+* PCRE2.
+
+POSIX 1003.2 is the default engine.  "PCRE2" stands for Version 2 of the engine known as Perl-Compatible Regular Expressions.^[Perl is a scripting language that is known for its regular expression engine and for its text-processing capabilities in general.  See the [PCRE2 Syntax Page](http://www.pcre.org/current/doc/html/pcre2syntax.html) for the official description of how PCRE2 works.] It's not what R uses by default but it more closely resembles regex engines found in other major languages and is therefore the better one to use if you rely heavily on web tutorials for learning complex regular expressions.  In any of R's regex functions you can access this engine with the argument:
+
+>`perl = TRUE`
+
+From here on out we'll use it, simply as a matter of caution.
+
+### Patterned Replacement
+
+In the dates example from Section \@ref(regex-substitution) the replacement string (the argument for the parameter `replacement`) was constant:  no matter what sort of match we found for the pattern `[- /]+`, we replaced it with  the string "/".  It is important to note, however, that if we set `perl` to `TRUE` then the argument provided for `replacement` can vary depending on the match found.  In particular:
+* It can include the back-references `\1`, `\2`, ..., `\9`.
+* It can include special tokens for case-conversion:
+    * `\U` converts the rest of the replacement to upper-case (or ceases conversion when `\E` or `\L` occurs).
+    * `\L` converts the rest of the replacement to lower-case (or ceases conversion when `\E` or `\U` occurs).
+    * `\E` signals the end of any case-conversion that is in effect.
+    
+Let's look at an example.  Here is a function that, given a string,  will capitalize all of the vowels that it finds:
+
+```{r}
+capVowels <- function(str) {
+  gsub(pattern = "([aeiou])", replacement = "\\U\\1\\E", x = str, perl = T)
+}
+capVowels("Far and away the best!")
+```
+
+Note that the pattern `[aeiou]` for vowels had to be enclosed in parentheses so that it could be captured and referred to by the back-reference `\1`.  Also note that, since R converts the replacement string into a pattern, extra backslash escapes are required, just as in regular expressions.
+
+Here is another function that searches for repeated words and encloses each pair in asterisks:
+
+```{r}
+starRepeats <- function(str) {
+  gsub(pattern = "(\\b(\\w+) \\2\\b)", replacement = "*\\1*", x = str, perl = T)
+}
+starRepeats("I have a boo boo on my knee knee.")
+```
+
+The above substitution is tricky, and merits step-by-step analysis:
+
+* In order to get a repeated word, you would start with the regex 
+    >`\b(\w+) \1\b`.
+* In order to enter the regex into R as a string, you would need some escapes:
+    >`\\b(\\w+) \\1\\b`
+* You need to wrap the whole expression in parentheses in order to capture it and refer to it in the replacement expression:
+    >`(\\b(\\w+) \\1\\b)`
+* But now you have a problem:  the back-reference `\1` applies to the *first* captured expression, which is the expression determined by the first opening parenthesis encountered.  Hence it refers to the whole expression, which doesn't make sense.  We want to refer to the first word in the pair (the `(\\w+)`) so we need to back-reference it with `\2`:
+    >`(\\b(\\w+) \\2\\b)`
+* Meanwhile, in the replacement string, we want to refer to the entire repeated-word pair, so we refer to it with `\1`.
+* And of course we have to do the extra backslash escaping, so the replacement string ends up as:
+    >`*\\1*`
+    
+Whew!
+
+### Grepping
+
+If you have many strings---in a character-vector, say---and you want to know which of them contain a match to a particular pattern, then you want to use `grep()`. \index{R-functions!grep()@\texttt{grep()}}^[`grep` can be thought of as short for:  "Global search for Regular Expression and Print".]
+
+Consider, for example, the vector of strings:
+
+```{r}
+sentences <- c("My name is Tom, Sir",
+               "And I'm Tulip!",
+               "Whereas my name is Lester.")
+```
+
+If we would like to find the strings that contain a word beginning with capital T, we could proceed as follows:
+
+```{r}
+grep(pattern = "\\bT\\w*\\b", x = sentences, perl = T)
+```
+
+`grep()` returns a vector consisting of the indices of the vector `sentences` where the string contains at least one word beginning with "T".
+
+A related function is `grepl()`: \index{R-functions!grepl()@\texttt{grepl()}}
+
+```{r}
+grepl(pattern = "\\bT\\w*\\b", x = sentences, perl = T)
+```
+
+`grepl()` returns a logical vector with `TRUE` where `sentences` has a capital-T word, `FALSE` otherwise.  We can get a look at the T-word-containing sentences themselves as follows:
+
+```{r}
+hasTWord <- grepl(pattern = "\\bT\\w*\\b", x = sentences, perl = T)
+sentences[hasTWord]
+```
+
+### More Information with `gregexpr()`
+\index{R-functions!gregexpr()@\texttt{gregexpr()}} \index{R-functions!regexpr()@\texttt{regexpr()}}
+If you require more information about the matches within each string you are processing, then you'll want to use either `gregexpr() or `regexpr()`.
+
+We started our regular-expression journey with `gregexpr()`, but let's check in on it once more, this time looking for capital-T words in `sentences`:
+
+```{r}
+matchInfo <- gregexpr(pattern = "\\bT\\w*\\b", text = sentences, perl = T)
+str(matchInfo)
+```
+
+From `str()` we see that `matchInfo` is a list of length three, one for each string in `sentences`.  Each vector gives the starting-positions of matches in the string to which it corresponds.  Since the third string contains no match the value of of the vector is set to -1.
+
+Don't forget the convenience-function `regmatches()`, which permits us to recover the matches themselves: \index{R-functions!regmatches()@\texttt{regmatches()}}
+
+```{r}
+capTNames <- regmatches(x = sentences, m = matchInfo)
+capTNames
+```
+
+If we require any particular match, we can locate it easily:
+
+```{r}
+capTNames[[2]][1]
+```
+
+### Regex Modes
+\index{mode (regular expressions)}
+If you have been practicing consistently with an online regex site, you will have noticed by now that a regex can be accompanied by various options.  In most implementations these will appear as letters after the closing regex delimiter, like this:
+
+>`/regex/gm`
+
+Some of the most popular options are:
+
+* `g`:  "global", looking for all possible matches in the string;
+* `i`:  "case-insensitive" mode, so that letter-characters in the regex match both their upper and lower-case versions;
+* `m`:  "multiline" mode, so that the anchors `^` and `$` are attached to newlines *within* the string rather than to the absolute beginning and end of the string;
+* `x`:  "whitespace" mode, where whitespaces in the regex are ignored unless they are escaped (useful for lining out the regex and inserting comments to explain its operation).
+
+Since R has both global and non-global versions of regex functions you probably will not bother with `g`, but the various *modes* can sometimes be useful.
+
+If you would like to set modes to apply to your entire regex, insert it (or them) like this at the beginning of the expression:
+
+>`(?im)t[aeiou]{1,3}$`
+
+In the example above, we are in both case-insensitive and multiline mode, and we are looking for t or T followed by 1, 2 or 3 vowels (upper or lower) at the end of any line in a (possibly) multiline string.
+
+Following is an example of the mode to ignore white-space:
+
+```{r}
+myPattern <-  "(?x)        # Ignore whitespace in regex!
+               \\b         # Begin the word.
+               [tT]        # Upper or lower T to start,
+               \\w+        # then at least one word-char,
+               (?<!s)\\b   # but not ending in s.
+              "
+myString <- "the tars temper Tanzania"
+m <- gregexpr(myPattern, myString, perl = TRUE)
+regmatches(myString, m)
+```
+
+Since R knows to ignore material after `#` in any line, it does not pass the comments to the regex engine; it only passes the regex with the whitespace.  Due to the presence of `(?x)` at the very beginning of the regex, the regex engine knows to ignore white-space throughout.
+
+
+## Application:  Amazon Book Reviews
+
+The R-package **tigerData** [@R-tigerData] contains the data set `reviews`, a collection of user-reviews on [Amazon](https://www.amazon.com) for seven bestsellers.  Learn more about the data set as follows:
+
+```{r eval = FALSE}
+library(tigerData)
+help(reviews)
+```
+
+```{r include = F}
+library(tigerData)
+```
+
+Each row of the data frame contains:
+
+* the 1-5 rating that the reviewer assigned to the book
+* a URL fragment that locates the review online;
+* the summary-title of the review;
+* the content of the review itself.
+
+Let's focus on reviews for *Hunger Games* series.  The following code creates a new data frame that contains only those reviews:
+
+```{r}
+hunger <- subset(reviews, book == "hunger")
+```
+
+That's still a lot of reviews!  We can tell by asking for the number of rows in the `hunger` data frame:\index{R-functions!nrow()@\texttt{nrow()}}
+
+```{r}
+nrow(hunger)
+```
+
+We are looking at 24,027 reviews---some of which, by the way, are quite long.
+
+Explore the plain-text of some of the reviews.  For example, the text of the second review can be viewed with:
+
+```{r eval = F}
+hunger$content[2]
+```
+
+```
+## A single long string.  We will show just the first few characters:
+## [1] "\"<span class=\"\"a-size-base review-text\"\">Clearly ...
+```
+
+Perusing this review, we come upon the following passage:
+
+
+>There is a certain strain of book that can hypnotize you into believing that you are in another time and place roughly 2.3 seconds after you put that book down. \<a class=\\"\\"a-link-normal\\"\\" href=\"\"/Life-As-We-Knew-It/dp/0152061541\\"\\"\>Life As We Knew It</a> by Susan Beth Pfeffer could convince me that there were simply not enough canned goods in my home.
+
+The author has linked to another book sold on Amazon, Susan Beth Pfeffer's *Life As We Knew It*.  The Amazon.com URL for the book is found by prepending the company's domain to the URL-fragment seen in the excerpt above, resulting in the link:
+
+>[http://www.amazon.com/Life-As-We-Knew-It/dp/0152061541](http://www.amazon.com/Life-As-We-Knew-It/dp/0152061541)
+
+We might be curious to know what other books on Amazon our reviewers link to when they are discussing the *Hunger Games*. Regular expressions can help us to extract the links from the mass of text in `hunger$content`.
+
+All of the Amazon links are generated for the user by the computer, so they will all have the same format.  Hence we can use a look-behind and a look-ahead to construct a regex will be matched by any URL-fragment within such an anchor:
+
+>(?<=\<a class=\\"\\"a-link-normal\\"\\" href=\\"\\"/)(.+?)(?=\\"\\"\>)
+
+Checking carefully, we see that none of the tokens require extra escaping:  we can use this text as our pattern in regex function in R:
+
+```{r}
+linkPattern <- "(?<=<a class=\"\"a-link-normal\"\" href=\"\"/)(.+?)(?=\"\">)"
+```
+
+We now construct a list of character-vectors containing the links (if any) in each review:
+
+```{r anchor-links, cache = T}
+links <- list()
+for (i in 1:nrow(hunger)) {
+  text <- reviews$content[i]
+  m <- gregexpr(linkPattern, text = text, perl=T)
+  links[[i]] <- unlist(regmatches(text, m))
+}
+```
+
+If we are interested in *how many* books each reviewer links to, we can make a vector of these links:
+
+```{r number-links, cache = T}
+numberOfLinks <- numeric()
+for (i in 1:nrow(hunger)) {
+  numberOfLinks[i] <- length(links[[i]])
+}
+```
+
+
+We can tabulate the link-numbers with R's `table()` function:
+
+```{r}
+table(numberOfLinks)
+```
+
+A better-looking table appears in Table \@ref(tab:tabulated-link-numbers).
+
+```{r tabulated-link-numbers, echo=F}
+tab <- table(numberOfLinks)
+numbers <- names(tab)
+tab2 <- cbind(as.numeric(numbers), tab)
+rownames(tab2) <- NULL
+colnames(tab2) <- c("Number of Links", "Reviews")
+knitr::kable(tab2, caption="Table showing number of links made by reviewers of the Hunger Games series.")
+```
+
+Most of the reviewers didn't link at all, but 173 of them did provide at least one link.  One reviewer linked to nine books!  Here they are:
+
+```{r}
+unlist(links[numberOfLinks == 9])
+```
+
+As we learn more about R's data-analysis functions we'll be able to explore a wide variety of interesting questions about the attitudes and practices of Amazon reviewers.  This will involve plowing through a lot more text, but now that we know regular expressions we are sure to "save the day"!
+
+\newpage
+
+
+## Glossary {-}
+
+Regular Expression \index{regular expression}
+
+:  A sequence of characters that represents a pattern.
+
+Regular Expression Engine \index{regular expression engine}
+
+:  A specific implementation of regular expressions used by a specific programming language.
+
+Literal Character \index{literal character}
+
+:  A character in a regular expression that matches itself.
+
+Character Class \index{character class}
+
+:  A set of characters enclosed in brackets.  It matches any one of the characters in the set.
+
+Metacharacter (also called "Special Character") \index{metacharacter}
+
+:  A character in a regular expression that does not match itself, but instead has a special role in specifying the overall pattern.
+
+\newpage
+
+
+## Exercises {-}
+
+```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+knitr::include_graphics("images/thinking.png")
+```
+
+```{r echo = F}
+findMister <- function(str) {
+  #mister <- "((\\w+)\\b)(?<=Mr\\.\\b)"
+  mister <- "(?<=Mister )\\w+\\b"
+  results <- gregexpr(pattern = mister, text = str, perl = T)
+  unlist(regmatches(x = str, m = results))
+}
+findMr <- function(str) {
+  #mister <- "((\\w+)\\b)(?<=Mr\\.\\b)"
+  mister <- "(?<=Mr\\. )\\w+\\b"
+  results <- gregexpr(pattern = mister, text = str, perl = T)
+  unlist(regmatches(x = str, m = results))
+}
+findTitled <- function(str) {
+  pattern <- "(?<=Mr\\. |Mrs\\. |Ms\\. |Mister |Missus |Miss )\\w+\\b"
+  results <- gregexpr(pattern, text = str, perl = T)
+  unlist(regmatches(x = str, m = results))
+}
+capRepeats <- function(str) {
+  gsub(pattern = "(\\b(\\w+)\\s+\\2\\b)", replacement = "\\U\\1\\E", x = str, perl = T)
+}
+longWord <- function(strs) {
+  indices <- grep("\\b\\w{8,}\\b", strs, perl = T)
+  strs[indices]
+}
+longWord2 <- function(strs) {
+  results <- gregexpr("\\b\\w{8,}\\b", strs, perl = T)
+  regmatches(x = strs, m = results)
+}
+phoneNumber <- function(strs) {
+  pattern <- "(?x)      # ignore whitespace in regex
+              \\d{3}    # area code
+              ([\\.-])  # . or hyphen (capture for back-reference)
+              \\d{3}    # first three digits
+              \\1       # same separator as before
+              \\d{4}    # four-digit extension
+              "
+  grepl(pattern, strs, perl = T)
+}
+```
+
+1. Write a function called `findMister()` that, when given any string, will return a character vector of all words following the string "Mister", with exactly one space in between.  The function should take a single argument called `str`, the string to search.  A typical example of use is as follows:
+
+    ```{r}
+    text <- "Here are Mister Tom, MisterJerry, Mister Mister, and Mister\tJoe."
+    findMister(text)
+    ```
+    
+1. Write a function called `findMr()` that, when given any string, will return a character vector of all words following the string "Mr.", with exactly one space in between.  The function should take a single argument called `str`, the string to search.  A typical example of use is as follows:
+
+    ```{r}
+    text <- "Here are Mr. Tom, Mr Jerry, Mr. Mister, and Mr.\tJoe."
+    findMr(text)
+    ```
+
+1.  For each of the following expressions, write a regular expression to test whether any of the sub-string(s) described occur in a given string.  The regular expression should match any of the sub-strings described, and should not match any other sub-string.  Try to make the regular expression as short as possible.  Write the regular expression as a string that could be used in one of R's regex functions (i.e. extra backslash escapes as needed).  The first item is done for you, as an example.
+    * *box* and *bat*.  Regex string:  `"b[oa]t"`.  (This is the one to submit, because it's shorter than other alternatives such as`"box|bat"`).
+    * *cart* and *cars* and *carp*.
+    * *slick* ans *sick*
+    * Any word ending in *ity* (such as *velocity* and *ferocity*).  Be sure to pay attention to word-boundaries.  You should match *velocity* but not * velocity* or *velocity;*.
+    * A whole number consisting of more than six digits.
+    * A word that is between 3 and 6 characters long.  Pay attention to word-boundaries.
+    * One or more whitespace characters, followed by a hyphen or a semicolon or a colon.
+
+1. Write a function called `findTitled()` that, when given any string, will return a character vector of all words following any one of these titles:
+    * "Mr."
+    * "Mister"
+    * "Missus"
+    * "Mrs."
+    * "Miss"
+    * "Ms."
+
+    There should be exactly one space between the title and the following word.  The function should take a single argument called `str`, the string to search.  A typical example of use is as follows:
+
+    ```{r}
+    text <- "Here are Mr. Tom, Ms. Thatcher, Miss Ellen, and Helen."
+    findTitled(text)
+    ```
+    
+1. Write a function called `capRepeats()` that, when given a string, searches for all repeated-word pairs (with at least one character of whitespace in between) and replaces them with the same pair where all letters are capitalized.  The function should take a single argument called `str`, the string to be searched.  A typical example of use would be as follows:
+
+    ```{r}
+    capRepeats("I have a boo boo on my knee    \tknee!")
+    ```
+    
+1. Use `grep()` or `grepl()` to write a function called `longWord()` that, when given a character vector of strings, returns a vector consisting of the strings that contain a word at least eight characters long.  The function should take a single argument called `strs`.  An example of use would be:
+
+    ```{r}
+    myText <- c("Very short words.", "Got a gargantuan word.", "More short words!")
+    longWord(strs = myText)
+    ```
+    
+1.  Write a function called `longWord2()` that, when given a character vector of strings, returns a list of character vectors, where each vector consists of the words in the corresponding string that are at least eight characters long.  The function should take a single argument called `strs`.  An example of use would be:
+
+    ```{r}
+    myText <- c("Very short words.", "Got a gargantuan word.", "More short words!")
+    longWord2(strs = myText)
+    ```
+    
+1.  Write a function called `phoneNumber()` that, when given a vector of strings returns a logical vector indicating which of the strings contain a a valid phone number.  For our purposes a valid phone number shall be any string of the form
+
+    >xxx-xxx-xxxx
+    
+    or
+    
+    >xxx.xxx.xxx
+    
+    Thus, 502-863-8111 is valid and so is 502.863.8111, but not 502-863.8111.
+    
+    In the code for the function, specify the pattern using `(?x)` so you can ignore whitespace and leave detailed comments for each portion of the regular expression.
+    
+    The function should take a single parameter called `strs`.  A typical example of use would be:
+    
+    ```{r}
+    sentences <- c("Ted's number is 606-255-3143.",
+                   "Rhonda's number is 403-28-1259.",
+                   "Lydia's number is 502.255.3921.",
+                   "Raj's number is 502.367-4432.")
+    phoneNumber(strs = sentences)
+    ```
+    

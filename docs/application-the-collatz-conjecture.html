@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Beginning Computer Science with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="github-repo" content="homerhanumat/r-notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  
+  <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  
+
+<meta name="author" content="Homer White">
+
+
+<meta name="date" content="2017-04-01">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="repeating-things-looping.html">
+<link rel="next" href="glossary-2.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Beginning Computer Programming with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
+<li class="chapter" data-level="1.2" data-path="idea-tour.html"><a href="idea-tour.html"><i class="fa fa-check"></i><b>1.2</b> A Quick Tour</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="idea-tour.html"><a href="idea-tour.html#idea-arithmetic"><i class="fa fa-check"></i><b>1.2.1</b> Basic Arithmetic</a></li>
+<li class="chapter" data-level="1.2.2" data-path="idea-tour.html"><a href="idea-tour.html#idea-variables"><i class="fa fa-check"></i><b>1.2.2</b> Variables</a></li>
+<li class="chapter" data-level="1.2.3" data-path="idea-tour.html"><a href="idea-tour.html#idea-functions"><i class="fa fa-check"></i><b>1.2.3</b> Functions</a></li>
+<li class="chapter" data-level="1.2.4" data-path="idea-tour.html"><a href="idea-tour.html#idea-data"><i class="fa fa-check"></i><b>1.2.4</b> Data and Graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="idea-debugging.html"><a href="idea-debugging.html"><i class="fa fa-check"></i><b>1.3</b> Debugging</a></li>
+<li class="chapter" data-level="" data-path="idea-glossary.html"><a href="idea-glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="idea-exercises.html"><a href="idea-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html"><i class="fa fa-check"></i><b>2.1</b> What is a Vector?</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#types-of-atomic-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Types of Atomic Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#coercion"><i class="fa fa-check"></i><b>2.1.2</b> Coercion</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#combining-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Combining Vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#na-values"><i class="fa fa-check"></i><b>2.1.4</b> NA Values </a></li>
+<li class="chapter" data-level="2.1.5" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#everything-in-r-is-a-vector"><i class="fa fa-check"></i><b>2.1.5</b> “Everything in R is a Vector”</a></li>
+<li class="chapter" data-level="2.1.6" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#named-vectors"><i class="fa fa-check"></i><b>2.1.6</b> Named Vectors</a></li>
+<li class="chapter" data-level="2.1.7" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#special-character-vectors"><i class="fa fa-check"></i><b>2.1.7</b> Special Character Vectors</a></li>
+<li class="chapter" data-level="2.1.8" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#length-of-vectors"><i class="fa fa-check"></i><b>2.1.8</b> Length of Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html"><i class="fa fa-check"></i><b>2.2</b> Constructing Patterned Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#sequencing"><i class="fa fa-check"></i><b>2.2.1</b> Sequencing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#repeating"><i class="fa fa-check"></i><b>2.2.2</b> Repeating</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="subsetting-vectors.html"><a href="subsetting-vectors.html"><i class="fa fa-check"></i><b>2.3</b> Subsetting Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html"><i class="fa fa-check"></i><b>2.4</b> More on Logical Vectors</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html#boolean-operators"><i class="fa fa-check"></i><b>2.4.1</b> Boolean Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="vector-recycling.html"><a href="vector-recycling.html"><i class="fa fa-check"></i><b>2.5</b> Vector Recycling </a></li>
+<li class="chapter" data-level="2.6" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html"><i class="fa fa-check"></i><b>2.6</b> Subsetting with Logical Vectors</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#counting"><i class="fa fa-check"></i><b>2.6.1</b> Counting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#cautions-about-na"><i class="fa fa-check"></i><b>2.6.2</b> Cautions about NA</a></li>
+<li class="chapter" data-level="2.6.3" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#which-any-all"><i class="fa fa-check"></i><b>2.6.3</b> Which, Any, All</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html"><i class="fa fa-check"></i><b>2.7</b> Basic Arithmetical Operations on Vectors</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#more-math-functions"><i class="fa fa-check"></i><b>2.7.1</b> More Math Functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#na-and-nan-considerations"><i class="fa fa-check"></i><b>2.7.2</b> NA and NaN Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html"><i class="fa fa-check"></i><b>2.8</b> Further Notes on Syntax</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#syntax-errors-vs.run-time-errors"><i class="fa fa-check"></i><b>2.8.1</b> Syntax Errors vs. Run-time Errors</a></li>
+<li class="chapter" data-level="2.8.2" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#the-assignment-operator"><i class="fa fa-check"></i><b>2.8.2</b> The Assignment Operator</a></li>
+<li class="chapter" data-level="2.8.3" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#multiple-expressions"><i class="fa fa-check"></i><b>2.8.3</b> Multiple Expressions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#variable-names-and-reserved-words"><i class="fa fa-check"></i><b>2.8.4</b> Variable Names and Reserved Words</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="motivation-for-functions.html"><a href="motivation-for-functions.html"><i class="fa fa-check"></i><b>3.1</b> Motivation for Functions</a></li>
+<li class="chapter" data-level="3.2" data-path="function-syntax.html"><a href="function-syntax.html"><i class="fa fa-check"></i><b>3.2</b> Function Syntax</a></li>
+<li class="chapter" data-level="3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html"><i class="fa fa-check"></i><b>3.3</b> What a Function Returns</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-final-expression-evaluated"><i class="fa fa-check"></i><b>3.3.1</b> The Final Expression Evaluated</a></li>
+<li class="chapter" data-level="3.3.2" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-return-function"><i class="fa fa-check"></i><b>3.3.2</b> The <code>return()</code> Function</a></li>
+<li class="chapter" data-level="3.3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#writing-a-talky-function"><i class="fa fa-check"></i><b>3.3.3</b> Writing a “Talky” Function</a></li>
+<li class="chapter" data-level="3.3.4" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-print-function"><i class="fa fa-check"></i><b>3.3.4</b> The <code>print()</code> Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="more-about-arguments.html"><a href="more-about-arguments.html"><i class="fa fa-check"></i><b>3.4</b> More About Arguments</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="more-about-arguments.html"><a href="more-about-arguments.html#default-arguments"><i class="fa fa-check"></i><b>3.4.1</b> Default Arguments</a></li>
+<li class="chapter" data-level="3.4.2" data-path="more-about-arguments.html"><a href="more-about-arguments.html#argument-matching"><i class="fa fa-check"></i><b>3.4.2</b> Argument-Matching</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.5</b> Environments and Scope</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="environments-and-scope.html"><a href="environments-and-scope.html#environments-and-searching"><i class="fa fa-check"></i><b>3.5.1</b> Environments and Searching</a></li>
+<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.2</b> Function Environments</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="more-to-learn.html"><a href="more-to-learn.html"><i class="fa fa-check"></i><b>3.6</b> More to Learn</a></li>
+<li class="chapter" data-level="" data-path="glossary-1.html"><a href="glossary-1.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="flow.html"><a href="flow.html"><i class="fa fa-check"></i><b>4</b> Flow-Control</a><ul>
+<li class="chapter" data-level="4.1" data-path="prologue-prompting-the-user.html"><a href="prologue-prompting-the-user.html"><i class="fa fa-check"></i><b>4.1</b> Prologue: Prompting the User</a></li>
+<li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
+<li class="chapter" data-level="4.3.2" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loop-caution"><i class="fa fa-check"></i><b>4.3.2</b> For-Loop Caution</a></li>
+<li class="chapter" data-level="4.3.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#breaking-out-of-a-loop"><i class="fa fa-check"></i><b>4.3.3</b> Breaking Out of a Loop</a></li>
+<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#skipping-ahead-in-a-loop"><i class="fa fa-check"></i><b>4.3.4</b> Skipping Ahead in a Loop</a></li>
+<li class="chapter" data-level="4.3.5" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#repeat"><i class="fa fa-check"></i><b>4.3.5</b> Repeat</a></li>
+<li class="chapter" data-level="4.3.6" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#while"><i class="fa fa-check"></i><b>4.3.6</b> While</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="application-the-collatz-conjecture.html"><a href="application-the-collatz-conjecture.html"><i class="fa fa-check"></i><b>4.4</b> Application: The Collatz Conjecture</a></li>
+<li class="chapter" data-level="" data-path="glossary-2.html"><a href="glossary-2.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="turtle.html"><a href="turtle.html"><i class="fa fa-check"></i><b>5</b> Turtle Graphics</a><ul>
+<li class="chapter" data-level="5.1" data-path="basic-movements.html"><a href="basic-movements.html"><i class="fa fa-check"></i><b>5.1</b> Basic Movements</a></li>
+<li class="chapter" data-level="5.2" data-path="making-many-movements-an-introduction-to-looping.html"><a href="making-many-movements-an-introduction-to-looping.html"><i class="fa fa-check"></i><b>5.2</b> Making Many Movements: An Introduction to Looping</a></li>
+<li class="chapter" data-level="5.3" data-path="writing-turtle-functions.html"><a href="writing-turtle-functions.html"><i class="fa fa-check"></i><b>5.3</b> Writing Turtle Functions</a></li>
+<li class="chapter" data-level="5.4" data-path="random-moves.html"><a href="random-moves.html"><i class="fa fa-check"></i><b>5.4</b> Random Moves</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="random-moves.html"><a href="random-moves.html#sampling-from-a-vector"><i class="fa fa-check"></i><b>5.4.1</b> Sampling from a Vector</a></li>
+<li class="chapter" data-level="5.4.2" data-path="random-moves.html"><a href="random-moves.html#application-a-bouncing-turtle"><i class="fa fa-check"></i><b>5.4.2</b> Application: a Bouncing Turtle</a></li>
+<li class="chapter" data-level="5.4.3" data-path="random-moves.html"><a href="random-moves.html#uniform-random-numbers"><i class="fa fa-check"></i><b>5.4.3</b> Uniform Random Numbers</a></li>
+<li class="chapter" data-level="5.4.4" data-path="random-moves.html"><a href="random-moves.html#pseudo-randomness-and-setting-a-seed"><i class="fa fa-check"></i><b>5.4.4</b> Pseudo-Randomness and Setting a Seed</a></li>
+<li class="chapter" data-level="5.4.5" data-path="random-moves.html"><a href="random-moves.html#drunken-turtle-intro"><i class="fa fa-check"></i><b>5.4.5</b> Application: a Drunken Turtle</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="more-complex-turtle-graphs.html"><a href="more-complex-turtle-graphs.html"><i class="fa fa-check"></i><b>5.5</b> More Complex Turtle Graphs</a></li>
+<li class="chapter" data-level="" data-path="glossary-3.html"><a href="glossary-3.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>6</b> Simulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability-and-random-variables.html"><a href="probability-and-random-variables.html"><i class="fa fa-check"></i><b>6.1</b> Probability and Random Variables</a></li>
+<li class="chapter" data-level="6.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>6.2</b> Monte Carlo Simulation</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-a-probability"><i class="fa fa-check"></i><b>6.2.1</b> Estimating a Probability</a></li>
+<li class="chapter" data-level="6.2.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-an-expected-value"><i class="fa fa-check"></i><b>6.2.2</b> Estimating an Expected Value</a></li>
+<li class="chapter" data-level="6.2.3" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#the-law-of-large-numbers"><i class="fa fa-check"></i><b>6.2.3</b> The Law of Large Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="example-chance-of-a-triangle.html"><a href="example-chance-of-a-triangle.html"><i class="fa fa-check"></i><b>6.3</b> Example: Chance of a Triangle</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="example-chance-of-a-triangle.html"><a href="example-chance-of-a-triangle.html#setting-a-seed"><i class="fa fa-check"></i><b>6.3.1</b> Setting a Seed</a></li>
+<li class="chapter" data-level="6.3.2" data-path="example-chance-of-a-triangle.html"><a href="example-chance-of-a-triangle.html#program-development"><i class="fa fa-check"></i><b>6.3.2</b> Program Development</a></li>
+<li class="chapter" data-level="6.3.3" data-path="example-chance-of-a-triangle.html"><a href="example-chance-of-a-triangle.html#number-of-repetitions"><i class="fa fa-check"></i><b>6.3.3</b> Number of Repetitions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="example-will-they-connect.html"><a href="example-will-they-connect.html"><i class="fa fa-check"></i><b>6.4</b> Example: Will They Connect?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="example-will-they-connect.html"><a href="example-will-they-connect.html#vectorization-vs.looping"><i class="fa fa-check"></i><b>6.4.1</b> Vectorization vs. Looping</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="appeals-court-paradox.html"><a href="appeals-court-paradox.html"><i class="fa fa-check"></i><b>6.5</b> Example: the Appeals Court Paradox</a></li>
+<li class="chapter" data-level="6.6" data-path="example-how-many-numbers-needed.html"><a href="example-how-many-numbers-needed.html"><i class="fa fa-check"></i><b>6.6</b> Example: How Many Numbers Needed?</a></li>
+<li class="chapter" data-level="6.7" data-path="example-dental-floss.html"><a href="example-dental-floss.html"><i class="fa fa-check"></i><b>6.7</b> Example: Dental Floss</a></li>
+<li class="chapter" data-level="6.8" data-path="example-the-drunken-turtle.html"><a href="example-the-drunken-turtle.html"><i class="fa fa-check"></i><b>6.8</b> Example: The Drunken Turtle</a></li>
+<li class="chapter" data-level="" data-path="glossary-4.html"><a href="glossary-4.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="frames.html"><a href="frames.html"><i class="fa fa-check"></i><b>7</b> Data Frames</a><ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-matrices.html"><a href="introduction-to-matrices.html"><i class="fa fa-check"></i><b>7.1</b> Introduction to Matrices</a></li>
+<li class="chapter" data-level="7.2" data-path="matrix-indexing.html"><a href="matrix-indexing.html"><i class="fa fa-check"></i><b>7.2</b> Matrix Indexing</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="matrix-indexing.html"><a href="matrix-indexing.html#to-drop-or-not"><i class="fa fa-check"></i><b>7.2.1</b> To Drop or Not?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html"><i class="fa fa-check"></i><b>7.3</b> Operations on Matrices</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#arithmetical-operations"><i class="fa fa-check"></i><b>7.3.1</b> Arithmetical Operations</a></li>
+<li class="chapter" data-level="7.3.2" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>7.3.2</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="7.3.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#logical-operations"><i class="fa fa-check"></i><b>7.3.3</b> Logical Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
+<li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a></li>
+<li class="chapter" data-level="7.6" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html"><i class="fa fa-check"></i><b>7.6</b> Subsetting Data Frames</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html#boolean-expressions"><i class="fa fa-check"></i><b>7.6.1</b> Boolean Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="ordering-data-frames.html"><a href="ordering-data-frames.html"><i class="fa fa-check"></i><b>7.7</b> Ordering Data Frames</a></li>
+<li class="chapter" data-level="7.8" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html"><i class="fa fa-check"></i><b>7.8</b> New Variables from Old</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html#getting-rid-of-variables"><i class="fa fa-check"></i><b>7.8.1</b> Getting Rid of Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="more-graphing.html"><a href="more-graphing.html"><i class="fa fa-check"></i><b>7.9</b> More Graphing</a></li>
+<li class="chapter" data-level="" data-path="glossary-5.html"><a href="glossary-5.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>8</b> Lists</a><ul>
+<li class="chapter" data-level="8.1" data-path="just-some-notes.html"><a href="just-some-notes.html"><i class="fa fa-check"></i><b>8.1</b> Just Some Notes</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>9</b> Strings</a><ul>
+<li class="chapter" data-level="9.1" data-path="character-vectors-strings.html"><a href="character-vectors-strings.html"><i class="fa fa-check"></i><b>9.1</b> Character Vectors: Strings </a></li>
+<li class="chapter" data-level="9.2" data-path="characters-and-special-characters.html"><a href="characters-and-special-characters.html"><i class="fa fa-check"></i><b>9.2</b> Characters and Special Characters</a></li>
+<li class="chapter" data-level="9.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html"><i class="fa fa-check"></i><b>9.3</b> Basic String Operations</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="basic-string-operations.html"><a href="basic-string-operations.html#is-and-as"><i class="fa fa-check"></i><b>9.3.1</b> Is and As</a></li>
+<li class="chapter" data-level="9.3.2" data-path="basic-string-operations.html"><a href="basic-string-operations.html#number-of-characters"><i class="fa fa-check"></i><b>9.3.2</b> Number of Characters</a></li>
+<li class="chapter" data-level="9.3.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html#substrings-and-trimming"><i class="fa fa-check"></i><b>9.3.3</b> Substrings and Trimming</a></li>
+<li class="chapter" data-level="9.3.4" data-path="basic-string-operations.html"><a href="basic-string-operations.html#changing-cases"><i class="fa fa-check"></i><b>9.3.4</b> Changing Cases</a></li>
+<li class="chapter" data-level="9.3.5" data-path="basic-string-operations.html"><a href="basic-string-operations.html#splitting-strings"><i class="fa fa-check"></i><b>9.3.5</b> Splitting Strings</a></li>
+<li class="chapter" data-level="9.3.6" data-path="basic-string-operations.html"><a href="basic-string-operations.html#pasting-and-joining-strings"><i class="fa fa-check"></i><b>9.3.6</b> Pasting and Joining Strings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="formatted-printing.html"><a href="formatted-printing.html"><i class="fa fa-check"></i><b>9.4</b> Formatted Printing</a></li>
+<li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="regex.html"><a href="regex.html"><i class="fa fa-check"></i><b>10</b> Regular Expressions</a><ul>
+<li class="chapter" data-level="10.1" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
+<li class="chapter" data-level="10.2" data-path="regex-practice-sites.html"><a href="regex-practice-sites.html"><i class="fa fa-check"></i><b>10.2</b> Regex Practice Sites</a></li>
+<li class="chapter" data-level="10.3" data-path="regex-syntax.html"><a href="regex-syntax.html"><i class="fa fa-check"></i><b>10.3</b> Regex Syntax</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="regex-syntax.html"><a href="regex-syntax.html#matching-a-specific-sequence"><i class="fa fa-check"></i><b>10.3.1</b> Matching a Specific Sequence</a></li>
+<li class="chapter" data-level="10.3.2" data-path="regex-syntax.html"><a href="regex-syntax.html#character-classes"><i class="fa fa-check"></i><b>10.3.2</b> Character Classes</a></li>
+<li class="chapter" data-level="10.3.3" data-path="regex-syntax.html"><a href="regex-syntax.html#quantification"><i class="fa fa-check"></i><b>10.3.3</b> Quantification</a></li>
+<li class="chapter" data-level="10.3.4" data-path="regex-syntax.html"><a href="regex-syntax.html#greedy-vs.lazy"><i class="fa fa-check"></i><b>10.3.4</b> Greedy vs. Lazy</a></li>
+<li class="chapter" data-level="10.3.5" data-path="regex-syntax.html"><a href="regex-syntax.html#grouping"><i class="fa fa-check"></i><b>10.3.5</b> Grouping</a></li>
+<li class="chapter" data-level="10.3.6" data-path="regex-syntax.html"><a href="regex-syntax.html#alternation"><i class="fa fa-check"></i><b>10.3.6</b> Alternation</a></li>
+<li class="chapter" data-level="10.3.7" data-path="regex-syntax.html"><a href="regex-syntax.html#anchors"><i class="fa fa-check"></i><b>10.3.7</b> Anchors</a></li>
+<li class="chapter" data-level="10.3.8" data-path="regex-syntax.html"><a href="regex-syntax.html#captures"><i class="fa fa-check"></i><b>10.3.8</b> Captures</a></li>
+<li class="chapter" data-level="10.3.9" data-path="regex-syntax.html"><a href="regex-syntax.html#looking-around"><i class="fa fa-check"></i><b>10.3.9</b> Looking Around</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>10.4</b> Entering a Regex in R</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>10.4.1</b> String to Regex</a></li>
+<li class="chapter" data-level="10.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#substitution"><i class="fa fa-check"></i><b>10.4.2</b> Substitution</a></li>
+<li class="chapter" data-level="10.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>10.4.3</b> A Note on <code>perl</code></a></li>
+<li class="chapter" data-level="10.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>10.4.4</b> Grepping</a></li>
+<li class="chapter" data-level="10.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>10.4.5</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="10.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>10.4.6</b> Regex Modes</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>10.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="" data-path="glossary-7.html"><a href="glossary-7.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="files.html"><a href="files.html"><i class="fa fa-check"></i><b>11</b> Files</a><ul>
+<li class="chapter" data-level="11.1" data-path="downloading-files.html"><a href="downloading-files.html"><i class="fa fa-check"></i><b>11.1</b> Downloading Files</a></li>
+<li class="chapter" data-level="11.2" data-path="scan.html"><a href="scan.html"><i class="fa fa-check"></i><b>11.2</b> Scan</a></li>
+<li class="chapter" data-level="11.3" data-path="reading-text-files.html"><a href="reading-text-files.html"><i class="fa fa-check"></i><b>11.3</b> Reading Text Files</a></li>
+<li class="chapter" data-level="11.4" data-path="writing-to-files.html"><a href="writing-to-files.html"><i class="fa fa-check"></i><b>11.4</b> Writing to Files</a></li>
+<li class="chapter" data-level="11.5" data-path="application-making-a-lexicon.html"><a href="application-making-a-lexicon.html"><i class="fa fa-check"></i><b>11.5</b> Application: Making a Lexicon</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>12</b> Functional Programming in R</a></li>
+<li class="chapter" data-level="13" data-path="oo.html"><a href="oo.html"><i class="fa fa-check"></i><b>13</b> Object-Oriented Programming in R</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beginning Computer Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="application-the-collatz-conjecture" class="section level2">
+<h2><span class="header-section-number">4.4</span> Application: The Collatz Conjecture</h2>
+<p>Take any positive integer greater than 1. Apply the following rule, which we will call the Collatz Rule:</p>
+<ul>
+<li>If the integer is even, divide it by 2;</li>
+<li>if the integer is odd, multiply it by 3 and add 1.</li>
+</ul>
+<p>Now apply the rule to the resulting number, then apply the rule again to the number you get from that, and so on.</p>
+<p>For example, start with 13. We proceed as follows:</p>
+<ul>
+<li>13 is odd, so compute <span class="math inline">\(3 \times 13 + 1 - 40\)</span>.</li>
+<li>40 is even, so compute <span class="math inline">\(40/2 = 20\)</span>.</li>
+<li>20 is even, so compute <span class="math inline">\(20/2 = 10\)</span>.</li>
+<li>10 is even, so compute <span class="math inline">\(10/2 = 5\)</span>.</li>
+<li>5 is odd, so compute <span class="math inline">\(3 \times 5+ 1 = 16\)</span></li>
+<li>16 is even, so compute <span class="math inline">\(16/2 = 8\)</span>.</li>
+<li>8 is even, so compute <span class="math inline">\(8/2 = 4\)</span>.</li>
+<li>4 is even, so compute <span class="math inline">\(4/2 = 2\)</span>.</li>
+<li>2 is even, so compute <span class="math inline">\(2/2 = 1\)</span>.</li>
+<li>1 is odd, so compute <span class="math inline">\(3 \times 1 + 1 = 4\)</span>.</li>
+<li>4 is even, so compute <span class="math inline">\(4/2 = 2\)</span>.</li>
+<li>2 is even, so compute <span class="math inline">\(2/2 = 1\)</span>.</li>
+</ul>
+<p>If we keep going, then we will cycle forever:</p>
+<p><span class="math display">\[4, 2, 1, 4, 2, 1, \ldots\]</span> In mathematics the <em>Collatz Conjecture</em> is the conjecture that for <em>any</em> initial positive number, every Collatz Sequence (the sequence formed by repeated application of the Collatz Rule) eventually contains a 1, after which it must cycle forever. No matter how large a number we begin with, we have always found that it returns to 1, but mathematicians do not know if this will be so for <em>any</em> initial number.</p>
+<p>A sequence of Collatz numbers can bounce around quite remarkably before descending to 1. Our goal in this section is to write a function called <code>collatz()</code> that will compute the Collatz sequence for any given initial number and draw a graph of the sequence as well.</p>
+<p>First, let’s make a function just for the Collatz Rule itself:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">collatzRule &lt;-<span class="st"> </span>function(m) {
+  if ( m %%<span class="st"> </span><span class="dv">2</span> ==<span class="st"> </span><span class="dv">0</span>) {
+    <span class="kw">return</span>(m/<span class="dv">2</span>)
+  } else {
+    <span class="kw">return</span>(<span class="dv">3</span>*m +<span class="st"> </span><span class="dv">1</span>)
+  }
+}</code></pre></div>
+<p>(Recall that <code>m %% 2</code> is the remainder of <code>m</code> after it is divided by 2. If this is 0, then <code>m</code> is even.)</p>
+<p>Next let’s try to get a function going that will print out Collatz numbers:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span>function(n) {
+  <span class="co"># n is the initial number</span>
+  while ( n &gt;<span class="st"> </span><span class="dv">1</span> ) {
+    <span class="kw">cat</span>(n, <span class="st">&quot; &quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+    <span class="co"># get the next number and call it n:</span>
+    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
+  }
+}</code></pre></div>
+<p>Let’s try it out:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">13</span>)</code></pre></div>
+<pre><code>## 13 40 20 10 5 16 8 4 2</code></pre>
+<p>So far, so good, but if we are going to graph the numbers, then we should store them in a vector. The problem is that we don’t know how long the vector needs to be.</p>
+<p>One possible solution is to add to the vector as we go, like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span>function(n) {
+  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>()
+  while ( n &gt;<span class="st"> </span><span class="dv">1</span> ) {
+    <span class="co"># stick n onto the end of numbers:</span>
+    numbers &lt;-<span class="st"> </span><span class="kw">c</span>(numbers, n)
+    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
+  }
+  <span class="kw">print</span>(numbers)
+}</code></pre></div>
+<p>Try it out:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">13</span>)</code></pre></div>
+<pre><code>## [1] 13 40 20 10  5 16  8  4  2</code></pre>
+<p>This looks good. There are two problems, though, if the Collatz sequence happens to go on for a very long time.</p>
+<ul>
+<li><p><strong>Computation Time</strong>: the user doesn’t know when the sequence will end—if ever!—so she won’t know whether a delay in production of the output is due to a long sequence or a problem with the program itself. as the sequence gets longer, the computation-time is made even longer by the way the following line of code works:</p>
+<pre><code>numbers &lt;- c(numbers, n)</code></pre>
+<p>R cannot actually “stick” a new element onto the end of a vector. What it actually does is to move to a new place in memory and create an entirely new vector consisting of all the elements of <code>numbers</code> followed by the number <code>n</code>. R then assigns the name <code>numbers</code> to this value, freeing up the old place in memory where the previous <code>numbers</code> vector lived, but when a vector is very long copying can take a long time.</p></li>
+<li><p><strong>Memory Problems</strong> Once the <code>numbers</code> vector gets long enough it will use all of the memory in the computer that is available to R. R will crash.</p></li>
+</ul>
+<p>In order to get around this problem, we should impose a limit on the number of Collatz numbers that we will compute. We’ll set the limit at 10,000. The user can change the limit, but should exercise caution in doing so. Also, we’ll initialize out numbers vector to have a length set to this limit. We can then assign values to elements of an already existing vector: this is much faster than copying entire vectors from scratch.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span>function(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
+  <span class="co"># collatz number swill go in this vector</span>
+  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)
+  <span class="co"># keep count of how many numbers we have made:</span>
+  counter &lt;-<span class="st"> </span><span class="dv">0</span>
+  while ( n &gt;<span class="st"> </span><span class="dv">1</span> &amp;<span class="st"> </span>counter &lt;<span class="st"> </span>limit) {
+    <span class="co"># need to make a new number</span>
+    counter &lt;-<span class="st"> </span>counter +<span class="st"> </span><span class="dv">1</span>
+    <span class="co"># put the current number into the vector</span>
+    numbers[counter] &lt;-<span class="st"> </span>n
+    <span class="co"># make next Collatz number</span>
+    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
+  }
+  <span class="co"># find how many Collatz numbers we made:</span>
+  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)
+  <span class="co"># print them out:</span>
+  <span class="kw">print</span>(numbers[<span class="dv">1</span>:howMany])
+}</code></pre></div>
+<p>Again let’s try it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">257</span>)</code></pre></div>
+<pre><code>##   [1]  257  772  386  193  580  290  145  436  218  109  328  164   82   41
+##  [15]  124   62   31   94   47  142   71  214  107  322  161  484  242  121
+##  [29]  364  182   91  274  137  412  206  103  310  155  466  233  700  350
+##  [43]  175  526  263  790  395 1186  593 1780  890  445 1336  668  334  167
+##  [57]  502  251  754  377 1132  566  283  850  425 1276  638  319  958  479
+##  [71] 1438  719 2158 1079 3238 1619 4858 2429 7288 3644 1822  911 2734 1367
+##  [85] 4102 2051 6154 3077 9232 4616 2308 1154  577 1732  866  433 1300  650
+##  [99]  325  976  488  244  122   61  184   92   46   23   70   35  106   53
+## [113]  160   80   40   20   10    5   16    8    4    2</code></pre>
+<p>Things are working pretty well, but it since the sequence of numbers might get pretty long, maybe we should only print out the length of the sequence, and leave it to the reader to say whether the sequence itself should be shown.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span>function(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
+  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)
+  counter &lt;-<span class="st"> </span><span class="dv">0</span>
+  while ( n &gt;<span class="st"> </span><span class="dv">1</span> &amp;<span class="st"> </span>counter &lt;<span class="st"> </span>limit) {
+    counter &lt;-<span class="st"> </span>counter +<span class="st"> </span><span class="dv">1</span>
+    numbers[counter] &lt;-<span class="st"> </span>n
+    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
+  }
+  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)
+  <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)
+  if ( show ==<span class="st"> &quot;y&quot;</span> ) {
+    <span class="kw">print</span>(numbers[<span class="dv">1</span>:howMany])
+  }
+}</code></pre></div>
+<p>Next let’s think about the plot. We’ll use the plotting system in the <strong>ggplot2</strong> package <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2016</a>)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
+<p>Later on we will make a serious study of plotting with <strong>ggplot2</strong>, but for now let’s just get the basic idea of plotting a set of points. First, let’s get a small set of points to plot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
+yvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>)</code></pre></div>
+<p><code>xvals</code> contains the x-coordinates of our points, and <code>yvals</code> contains the corresponding y-coordinates.</p>
+<p>we set up a plot as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals))</code></pre></div>
+<p>The <code>ggplot()</code> function sets up a basic 2-dimensional grid. The <code>mapping</code> parameter explains how data will be “mapped” to particular positions on the plot. In this case it has been set to:</p>
+<pre><code>aes(x = xvals, y = yvals)</code></pre>
+<p><code>aes</code> is short for “aesthetics” which has to do with how somethings <em>looks</em>. The expression means that <code>xvals</code> will be located on the x-axis and <code>yvals</code> will be located on the y-axis of the plot.</p>
+<p>Note that the entire plot has been assigned to the variable <code>p</code>. If we want to see the plot we could print p out (see Figure <a href="application-the-collatz-conjecture.html#fig:blank-ggplot">4.2</a>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:blank-ggplot"></span>
+<img src="r-notes_files/figure-html/blank-ggplot-1.png" alt="A ggplot2 plot without geoms." width="50%" />
+<p class="caption">
+Figure 4.2: A ggplot2 plot without geoms.
+</p>
+</div>
+<p>The plot is blank! Why is this? Well, although <code>ggplot()</code> has been told what values are to be represented on the plot and where they might go, it has not yet been told how they should be shaped: it has not been told their <em>geometry</em>, you might say. We can add a geometry to <code>p</code> to get a picture (see Figure <a href="application-the-collatz-conjecture.html#fig:pointsggplot">4.3</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p +<span class="st"> </span><span class="kw">geom_point</span>())</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pointsggplot"></span>
+<img src="r-notes_files/figure-html/pointsggplot-1.png" alt="A ggplot2 plot with the point geom." width="50%" />
+<p class="caption">
+Figure 4.3: A ggplot2 plot with the point geom.
+</p>
+</div>
+<p>The geometry determines a lot about the look of the plot. In order to have the points connected by lines we could add <code>geom_line()</code> (see Figure <a href="application-the-collatz-conjecture.html#fig:pointslinesggplot">4.4</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p +<span class="st"> </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_line</span>())</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pointslinesggplot"></span>
+<img src="r-notes_files/figure-html/pointslinesggplot-1.png" alt="A ggplot2 plot with point and line geoms." width="50%" />
+<p class="caption">
+Figure 4.4: A ggplot2 plot with point and line geoms.
+</p>
+</div>
+<p>We’ll choose a scatterplot with connecting lines for our graph of the sequence. With a little more work we can get nice labels for the x and y-axes, and a title for the graph. Our <code>collatz()</code> function now looks like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span>function(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
+  <span class="co"># record initial numer because will change n</span>
+  initial &lt;-<span class="st"> </span>n  
+  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)
+  counter &lt;-<span class="st"> </span><span class="dv">0</span>
+  while ( n &gt;<span class="st"> </span><span class="dv">1</span> &amp;<span class="st"> </span>counter &lt;<span class="st"> </span>limit) {
+    counter &lt;-<span class="st"> </span>counter +<span class="st"> </span><span class="dv">1</span>
+    numbers[counter] &lt;-<span class="st"> </span>n
+    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
+  }
+  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)
+  <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)
+  if ( show ==<span class="st"> &quot;y&quot;</span> ) {
+    <span class="kw">print</span>(numbers[<span class="dv">1</span>:howMany])
+  }
+  <span class="co"># use initial value to make plot title:</span>
+  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Collatz Sequence for n = &quot;</span>, initial)
+  <span class="co"># make the plot</span>
+  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> number[<span class="dv">1</span>:howMany])) +
+<span class="st">    </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_line</span>() +
+<span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Collatz Value at Step&quot;</span>,
+          <span class="dt">title =</span> plotTitle)
+  <span class="co"># print it to the Plot Window</span>
+  <span class="kw">print</span>(p)
+}</code></pre></div>
+<p>Try this version a few times, like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">257</span>)</code></pre></div>
+<p>It’s quite remarkable how much the sequence can rise and fall before hitting 1.</p>
+<p>One final consideration is validation of user-input. we don’t want the user to get strange errors if she fails to enter a number worth looking at—a whole number that is greater than 1.</p>
+<p>One possible approach is to attempt to coerce the user’s input into an integer, using the <code>as.integer()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="fl">3.6</span>) <span class="co"># will round to nearest integer</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;4&quot;</span>) <span class="co"># will convert string to number 4</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;4.3&quot;</span>) <span class="co"># will convert AND round</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;hello&quot;</span>) <span class="co"># cannot convert to integer</span></code></pre></div>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>In the last example, the result is <code>NA</code>, and a cryptic warning was issued. In order to keep the warning from the user, we should wrap any call to <code>as.integer()</code> in the suppressWarnings()` function.</p>
+<p>Let’s try out a piece of code that implements validation:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span>-<span class="dv">2</span>
+n &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
+isValid &lt;-<span class="st"> </span>!<span class="kw">is.na</span>(n) &amp;&amp;<span class="st"> </span>n &gt;<span class="st"> </span><span class="dv">1</span>
+  if (!isValid ) {
+    <span class="kw">stop</span>(<span class="st">&quot;Need an integer bigger than 1.  Try again.&quot;</span>)
+  }</code></pre></div>
+<pre><code>## Error: Need an integer bigger than 1.  Try again.</code></pre>
+<p>The <code>stop()</code> function throws a true error that prevents any further code from being executed, but allows us to write a custom, friendly error-message. The goal of validation is for the user to receive clear and helpful error messages, rather than obscure, technical messages from the depths of R.</p>
+<p>The final version of the <code>collatz()</code> function appears below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span>function(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
+  <span class="co"># record initial numer because will change n</span>
+  initial &lt;-<span class="st"> </span>n 
+  <span class="co"># validation:</span>
+  n &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
+  isValid &lt;-<span class="st"> </span>!<span class="kw">is.na</span>(n) &amp;&amp;<span class="st"> </span>n &gt;<span class="st"> </span><span class="dv">1</span>
+  if (!isValid ) {
+    <span class="kw">stop</span>(<span class="st">&quot;Need an integer bigger than 1.  Try again.&quot;</span>)
+  }
+  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)
+  counter &lt;-<span class="st"> </span><span class="dv">0</span>
+  while ( n &gt;<span class="st"> </span><span class="dv">1</span> &amp;<span class="st"> </span>counter &lt;<span class="st"> </span>limit) {
+    counter &lt;-<span class="st"> </span>counter +<span class="st"> </span><span class="dv">1</span>
+    numbers[counter] &lt;-<span class="st"> </span>n
+    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
+  }
+  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)
+  <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)
+  if ( show ==<span class="st"> &quot;y&quot;</span> ) {
+    <span class="kw">print</span>(numbers[<span class="dv">1</span>:howMany])
+  }
+  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Collatz Sequence for n = &quot;</span>, initial)
+  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> number[<span class="dv">1</span>:howMany])) +
+<span class="st">    </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_line</span>() +
+<span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Collatz Value at Step&quot;</span>,
+          <span class="dt">title =</span> plotTitle)
+  <span class="kw">print</span>(p)
+}</code></pre></div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-ggplot2">
+<p>Wickham, Hadley, and Winston Chang. 2016. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="repeating-things-looping.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="glossary-2.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["r-notes.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

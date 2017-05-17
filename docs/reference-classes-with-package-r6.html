@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Beginning Computer Science with R</title>
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
+  <meta name="generator" content="bookdown 0.3.20 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="github-repo" content="homerhanumat/r-notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  
+  <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  
+
+<meta name="author" content="Homer White">
+
+
+<meta name="date" content="2017-05-17">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="the-object-oriented-programming-paradigm.html">
+<link rel="next" href="inheritance.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Beginning Computer Programming with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="the-why-of-these-notes-remarks-for-colleagues.html"><a href="the-why-of-these-notes-remarks-for-colleagues.html"><i class="fa fa-check"></i><b>0.1</b> The Why of these Notes: Remarks for Colleagues</a></li>
+<li class="chapter" data-level="0.2" data-path="history-of-r.html"><a href="history-of-r.html"><i class="fa fa-check"></i><b>0.2</b> History of R</a></li>
+<li class="chapter" data-level="0.3" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.4" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
+<li class="chapter" data-level="1.2" data-path="idea-tour.html"><a href="idea-tour.html"><i class="fa fa-check"></i><b>1.2</b> A Quick Tour</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="idea-tour.html"><a href="idea-tour.html#idea-arithmetic"><i class="fa fa-check"></i><b>1.2.1</b> Basic Arithmetic</a></li>
+<li class="chapter" data-level="1.2.2" data-path="idea-tour.html"><a href="idea-tour.html#read-evaluate-print-loop"><i class="fa fa-check"></i><b>1.2.2</b> Read-Evaluate-Print-Loop</a></li>
+<li class="chapter" data-level="1.2.3" data-path="idea-tour.html"><a href="idea-tour.html#idea-variables"><i class="fa fa-check"></i><b>1.2.3</b> Variables</a></li>
+<li class="chapter" data-level="1.2.4" data-path="idea-tour.html"><a href="idea-tour.html#idea-functions"><i class="fa fa-check"></i><b>1.2.4</b> Functions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="idea-tour.html"><a href="idea-tour.html#idea-data"><i class="fa fa-check"></i><b>1.2.5</b> Data and Graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="idea-debugging.html"><a href="idea-debugging.html"><i class="fa fa-check"></i><b>1.3</b> Debugging</a></li>
+<li class="chapter" data-level="" data-path="idea-glossary.html"><a href="idea-glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="idea-exercises.html"><a href="idea-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html"><i class="fa fa-check"></i><b>2.1</b> What is a Vector?</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#types-of-atomic-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Types of Atomic Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#coercion"><i class="fa fa-check"></i><b>2.1.2</b> Coercion</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#combining-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Combining Vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#na-values"><i class="fa fa-check"></i><b>2.1.4</b> NA Values </a></li>
+<li class="chapter" data-level="2.1.5" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#everything-in-r-is-a-vector"><i class="fa fa-check"></i><b>2.1.5</b> “Everything in R is a Vector”</a></li>
+<li class="chapter" data-level="2.1.6" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#named-vectors"><i class="fa fa-check"></i><b>2.1.6</b> Named Vectors</a></li>
+<li class="chapter" data-level="2.1.7" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#special-character-vectors"><i class="fa fa-check"></i><b>2.1.7</b> Special Character Vectors</a></li>
+<li class="chapter" data-level="2.1.8" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#length-of-vectors"><i class="fa fa-check"></i><b>2.1.8</b> Length of Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html"><i class="fa fa-check"></i><b>2.2</b> Constructing Patterned Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#sequencing"><i class="fa fa-check"></i><b>2.2.1</b> Sequencing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#repeating"><i class="fa fa-check"></i><b>2.2.2</b> Repeating</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="subsetting-vectors.html"><a href="subsetting-vectors.html"><i class="fa fa-check"></i><b>2.3</b> Subsetting Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html"><i class="fa fa-check"></i><b>2.4</b> More on Logical Vectors</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html#boolean-operators"><i class="fa fa-check"></i><b>2.4.1</b> Boolean Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="vector-recycling.html"><a href="vector-recycling.html"><i class="fa fa-check"></i><b>2.5</b> Vector Recycling </a></li>
+<li class="chapter" data-level="2.6" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html"><i class="fa fa-check"></i><b>2.6</b> Subsetting with Logical Vectors</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#counting"><i class="fa fa-check"></i><b>2.6.1</b> Counting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#cautions-about-na"><i class="fa fa-check"></i><b>2.6.2</b> Cautions about NA</a></li>
+<li class="chapter" data-level="2.6.3" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#which-any-all"><i class="fa fa-check"></i><b>2.6.3</b> Which, Any, All</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html"><i class="fa fa-check"></i><b>2.7</b> Basic Arithmetical Operations on Vectors</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#more-math-functions"><i class="fa fa-check"></i><b>2.7.1</b> More Math Functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#na-and-nan-considerations"><i class="fa fa-check"></i><b>2.7.2</b> NA and NaN Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html"><i class="fa fa-check"></i><b>2.8</b> Further Notes on Syntax</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#syntax-errors-vs.run-time-errors-vs.semantic-errors"><i class="fa fa-check"></i><b>2.8.1</b> Syntax Errors vs. Run-time Errors vs. Semantic Errors</a></li>
+<li class="chapter" data-level="2.8.2" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#the-assignment-operator"><i class="fa fa-check"></i><b>2.8.2</b> The Assignment Operator</a></li>
+<li class="chapter" data-level="2.8.3" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#multiple-expressions"><i class="fa fa-check"></i><b>2.8.3</b> Multiple Expressions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#variable-names-and-reserved-words"><i class="fa fa-check"></i><b>2.8.4</b> Variable Names and Reserved Words</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="motivation-for-functions.html"><a href="motivation-for-functions.html"><i class="fa fa-check"></i><b>3.1</b> Motivation for Functions</a></li>
+<li class="chapter" data-level="3.2" data-path="function-syntax.html"><a href="function-syntax.html"><i class="fa fa-check"></i><b>3.2</b> Function Syntax</a></li>
+<li class="chapter" data-level="3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html"><i class="fa fa-check"></i><b>3.3</b> What a Function Returns</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-final-expression-evaluated"><i class="fa fa-check"></i><b>3.3.1</b> The Final Expression Evaluated</a></li>
+<li class="chapter" data-level="3.3.2" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-return-function"><i class="fa fa-check"></i><b>3.3.2</b> The <code>return()</code> Function</a></li>
+<li class="chapter" data-level="3.3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#writing-a-talky-function"><i class="fa fa-check"></i><b>3.3.3</b> Writing a “Talky” Function</a></li>
+<li class="chapter" data-level="3.3.4" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-print-function"><i class="fa fa-check"></i><b>3.3.4</b> The <code>print()</code> Function</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="more-about-arguments.html"><a href="more-about-arguments.html"><i class="fa fa-check"></i><b>3.4</b> More About Arguments</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="more-about-arguments.html"><a href="more-about-arguments.html#default-arguments"><i class="fa fa-check"></i><b>3.4.1</b> Default Arguments</a></li>
+<li class="chapter" data-level="3.4.2" data-path="more-about-arguments.html"><a href="more-about-arguments.html#argument-matching"><i class="fa fa-check"></i><b>3.4.2</b> Argument-Matching</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.5</b> Environments and Scope</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="environments-and-scope.html"><a href="environments-and-scope.html#environments-and-searching"><i class="fa fa-check"></i><b>3.5.1</b> Environments and Searching</a></li>
+<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.2</b> Function Environments</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="note-on-packages.html"><a href="note-on-packages.html"><i class="fa fa-check"></i><b>3.6</b> A Note on Packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="note-on-packages.html"><a href="note-on-packages.html#installed-packages"><i class="fa fa-check"></i><b>3.6.1</b> Installed Packages</a></li>
+<li class="chapter" data-level="3.6.2" data-path="note-on-packages.html"><a href="note-on-packages.html#learning-about-a-package"><i class="fa fa-check"></i><b>3.6.2</b> Learning About a Package</a></li>
+<li class="chapter" data-level="3.6.3" data-path="note-on-packages.html"><a href="note-on-packages.html#installing-packages"><i class="fa fa-check"></i><b>3.6.3</b> Installing Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="more-to-learn.html"><a href="more-to-learn.html"><i class="fa fa-check"></i><b>3.7</b> More to Learn</a></li>
+<li class="chapter" data-level="" data-path="glossary-1.html"><a href="glossary-1.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="flow.html"><a href="flow.html"><i class="fa fa-check"></i><b>4</b> Flow-Control</a><ul>
+<li class="chapter" data-level="4.1" data-path="prologue-prompting-the-user.html"><a href="prologue-prompting-the-user.html"><i class="fa fa-check"></i><b>4.1</b> Prologue: Prompting the User</a></li>
+<li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
+<li class="chapter" data-level="4.3.2" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loop-caution"><i class="fa fa-check"></i><b>4.3.2</b> For-Loop Caution</a></li>
+<li class="chapter" data-level="4.3.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#breaking-out-of-a-loop"><i class="fa fa-check"></i><b>4.3.3</b> Breaking Out of a Loop</a></li>
+<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#solving-the-empty-vector-problem-in-for-loops-with-seq_along"><i class="fa fa-check"></i><b>4.3.4</b> Solving the Empty-Vector Problem in <code>for</code>-Loops With <code>seq_along()</code></a></li>
+<li class="chapter" data-level="4.3.5" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#skipping-ahead-in-a-loop"><i class="fa fa-check"></i><b>4.3.5</b> Skipping Ahead in a Loop</a></li>
+<li class="chapter" data-level="4.3.6" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#repeat"><i class="fa fa-check"></i><b>4.3.6</b> Repeat</a></li>
+<li class="chapter" data-level="4.3.7" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#while"><i class="fa fa-check"></i><b>4.3.7</b> While</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="collatz-conjecture.html"><a href="collatz-conjecture.html"><i class="fa fa-check"></i><b>4.4</b> Application: The Collatz Conjecture</a></li>
+<li class="chapter" data-level="" data-path="glossary-2.html"><a href="glossary-2.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="turtle.html"><a href="turtle.html"><i class="fa fa-check"></i><b>5</b> Turtle Graphics</a><ul>
+<li class="chapter" data-level="5.1" data-path="basic-movements.html"><a href="basic-movements.html"><i class="fa fa-check"></i><b>5.1</b> Basic Movements</a></li>
+<li class="chapter" data-level="5.2" data-path="making-many-movements-an-introduction-to-looping.html"><a href="making-many-movements-an-introduction-to-looping.html"><i class="fa fa-check"></i><b>5.2</b> Making Many Movements: An Introduction to Looping</a></li>
+<li class="chapter" data-level="5.3" data-path="writing-turtle-functions.html"><a href="writing-turtle-functions.html"><i class="fa fa-check"></i><b>5.3</b> Writing Turtle Functions</a></li>
+<li class="chapter" data-level="5.4" data-path="random-moves.html"><a href="random-moves.html"><i class="fa fa-check"></i><b>5.4</b> Random Moves</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="random-moves.html"><a href="random-moves.html#sampling-from-a-vector"><i class="fa fa-check"></i><b>5.4.1</b> Sampling from a Vector</a></li>
+<li class="chapter" data-level="5.4.2" data-path="random-moves.html"><a href="random-moves.html#application-a-bouncing-turtle"><i class="fa fa-check"></i><b>5.4.2</b> Application: a Bouncing Turtle</a></li>
+<li class="chapter" data-level="5.4.3" data-path="random-moves.html"><a href="random-moves.html#uniform-random-numbers"><i class="fa fa-check"></i><b>5.4.3</b> Uniform Random Numbers</a></li>
+<li class="chapter" data-level="5.4.4" data-path="random-moves.html"><a href="random-moves.html#pseudo-randomness-and-setting-a-seed"><i class="fa fa-check"></i><b>5.4.4</b> Pseudo-Randomness and Setting a Seed</a></li>
+<li class="chapter" data-level="5.4.5" data-path="random-moves.html"><a href="random-moves.html#drunken-turtle-intro"><i class="fa fa-check"></i><b>5.4.5</b> Application: a Drunken Turtle</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="more-complex-turtle-graphs.html"><a href="more-complex-turtle-graphs.html"><i class="fa fa-check"></i><b>5.5</b> More Complex Turtle Graphs</a></li>
+<li class="chapter" data-level="" data-path="glossary-3.html"><a href="glossary-3.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>6</b> Simulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability-and-random-variables.html"><a href="probability-and-random-variables.html"><i class="fa fa-check"></i><b>6.1</b> Probability and Random Variables</a></li>
+<li class="chapter" data-level="6.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>6.2</b> Monte Carlo Simulation</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-a-probability"><i class="fa fa-check"></i><b>6.2.1</b> Estimating a Probability</a></li>
+<li class="chapter" data-level="6.2.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-an-expected-value"><i class="fa fa-check"></i><b>6.2.2</b> Estimating an Expected Value</a></li>
+<li class="chapter" data-level="6.2.3" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#the-law-of-large-numbers"><i class="fa fa-check"></i><b>6.2.3</b> The Law of Large Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="triangle-chance.html"><a href="triangle-chance.html"><i class="fa fa-check"></i><b>6.3</b> Example: Chance of a Triangle</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="triangle-chance.html"><a href="triangle-chance.html#setting-a-seed"><i class="fa fa-check"></i><b>6.3.1</b> Setting a Seed</a></li>
+<li class="chapter" data-level="6.3.2" data-path="triangle-chance.html"><a href="triangle-chance.html#program-development"><i class="fa fa-check"></i><b>6.3.2</b> Program Development</a></li>
+<li class="chapter" data-level="6.3.3" data-path="triangle-chance.html"><a href="triangle-chance.html#number-of-repetitions"><i class="fa fa-check"></i><b>6.3.3</b> Number of Repetitions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="simulation-connect.html"><a href="simulation-connect.html"><i class="fa fa-check"></i><b>6.4</b> Example: Will They Connect?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="simulation-connect.html"><a href="simulation-connect.html#vectorization-vs.looping"><i class="fa fa-check"></i><b>6.4.1</b> Vectorization vs. Looping</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="appeals-court-paradox.html"><a href="appeals-court-paradox.html"><i class="fa fa-check"></i><b>6.5</b> Example: the Appeals Court Paradox</a></li>
+<li class="chapter" data-level="6.6" data-path="simulation-number-needed.html"><a href="simulation-number-needed.html"><i class="fa fa-check"></i><b>6.6</b> Example: How Many Numbers Needed?</a></li>
+<li class="chapter" data-level="6.7" data-path="example-dental-floss.html"><a href="example-dental-floss.html"><i class="fa fa-check"></i><b>6.7</b> Example: Dental Floss</a></li>
+<li class="chapter" data-level="6.8" data-path="drunken-turtle-sim.html"><a href="drunken-turtle-sim.html"><i class="fa fa-check"></i><b>6.8</b> Example: The Drunken Turtle</a></li>
+<li class="chapter" data-level="" data-path="glossary-4.html"><a href="glossary-4.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="frames.html"><a href="frames.html"><i class="fa fa-check"></i><b>7</b> Data Frames</a><ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-matrices.html"><a href="introduction-to-matrices.html"><i class="fa fa-check"></i><b>7.1</b> Introduction to Matrices</a></li>
+<li class="chapter" data-level="7.2" data-path="matrix-indexing.html"><a href="matrix-indexing.html"><i class="fa fa-check"></i><b>7.2</b> Matrix Indexing</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="matrix-indexing.html"><a href="matrix-indexing.html#to-drop-or-not"><i class="fa fa-check"></i><b>7.2.1</b> To Drop or Not?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html"><i class="fa fa-check"></i><b>7.3</b> Operations on Matrices</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#arithmetical-operations"><i class="fa fa-check"></i><b>7.3.1</b> Arithmetical Operations</a></li>
+<li class="chapter" data-level="7.3.2" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>7.3.2</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="7.3.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#logical-operations"><i class="fa fa-check"></i><b>7.3.3</b> Logical Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
+<li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-vectors"><i class="fa fa-check"></i><b>7.5.1</b> Creation from Vectors</a></li>
+<li class="chapter" data-level="7.5.2" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-other-frames"><i class="fa fa-check"></i><b>7.5.2</b> Creation From Other Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html"><i class="fa fa-check"></i><b>7.6</b> Subsetting Data Frames</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html#boolean-expressions"><i class="fa fa-check"></i><b>7.6.1</b> Boolean Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="ordering-data-frames.html"><a href="ordering-data-frames.html"><i class="fa fa-check"></i><b>7.7</b> Ordering Data Frames</a></li>
+<li class="chapter" data-level="7.8" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html"><i class="fa fa-check"></i><b>7.8</b> New Variables from Old</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html#getting-rid-of-variables"><i class="fa fa-check"></i><b>7.8.1</b> Getting Rid of Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="more-graphing.html"><a href="more-graphing.html"><i class="fa fa-check"></i><b>7.9</b> More Graphing</a><ul>
+<li class="chapter" data-level="7.9.1" data-path="more-graphing.html"><a href="more-graphing.html#one-numerical-variable"><i class="fa fa-check"></i><b>7.9.1</b> One Numerical Variable</a></li>
+<li class="chapter" data-level="7.9.2" data-path="more-graphing.html"><a href="more-graphing.html#categorical-variables"><i class="fa fa-check"></i><b>7.9.2</b> Categorical Variables</a></li>
+<li class="chapter" data-level="7.9.3" data-path="more-graphing.html"><a href="more-graphing.html#onenum-onecat"><i class="fa fa-check"></i><b>7.9.3</b> One Numerical and One Categorical Variable</a></li>
+<li class="chapter" data-level="7.9.4" data-path="more-graphing.html"><a href="more-graphing.html#two-numerical-variables"><i class="fa fa-check"></i><b>7.9.4</b> Two Numerical Variables</a></li>
+<li class="chapter" data-level="7.9.5" data-path="more-graphing.html"><a href="more-graphing.html#grouping-by-a-categorical-variable"><i class="fa fa-check"></i><b>7.9.5</b> Grouping by a Categorical Variable</a></li>
+<li class="chapter" data-level="7.9.6" data-path="more-graphing.html"><a href="more-graphing.html#application-u.s.-births"><i class="fa fa-check"></i><b>7.9.6</b> Application: U.S. Births</a></li>
+<li class="chapter" data-level="7.9.7" data-path="more-graphing.html"><a href="more-graphing.html#learn-more"><i class="fa fa-check"></i><b>7.9.7</b> Learn More</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-5.html"><a href="glossary-5.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="frames-exercises.html"><a href="frames-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>8</b> Lists</a><ul>
+<li class="chapter" data-level="8.1" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html"><i class="fa fa-check"></i><b>8.1</b> Introduction to Lists</a></li>
+<li class="chapter" data-level="8.2" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html"><i class="fa fa-check"></i><b>8.2</b> Subsetting and Accessing</a></li>
+<li class="chapter" data-level="8.3" data-path="lists-splitting.html"><a href="lists-splitting.html"><i class="fa fa-check"></i><b>8.3</b> Splitting</a></li>
+<li class="chapter" data-level="8.4" data-path="returning-multiple-values.html"><a href="returning-multiple-values.html"><i class="fa fa-check"></i><b>8.4</b> Returning Multiple Values</a></li>
+<li class="chapter" data-level="8.5" data-path="iterating-over-a-list.html"><a href="iterating-over-a-list.html"><i class="fa fa-check"></i><b>8.5</b> Iterating Over a List</a></li>
+<li class="chapter" data-level="8.6" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html"><i class="fa fa-check"></i><b>8.6</b> A Note on Ellipses</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-1-passing-additional-arguments-to-functions-inside"><i class="fa fa-check"></i><b>8.6.1</b> Use #1: Passing Additional Arguments to Functions “Inside”</a></li>
+<li class="chapter" data-level="8.6.2" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-2-permitting-any-number-of-arguments"><i class="fa fa-check"></i><b>8.6.2</b> Use #2: Permitting Any Number of Arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>9</b> Strings</a><ul>
+<li class="chapter" data-level="9.1" data-path="character-vectors-strings.html"><a href="character-vectors-strings.html"><i class="fa fa-check"></i><b>9.1</b> Character Vectors: Strings</a></li>
+<li class="chapter" data-level="9.2" data-path="characters-and-special-characters.html"><a href="characters-and-special-characters.html"><i class="fa fa-check"></i><b>9.2</b> Characters and Special Characters</a></li>
+<li class="chapter" data-level="9.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html"><i class="fa fa-check"></i><b>9.3</b> Basic String Operations</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="basic-string-operations.html"><a href="basic-string-operations.html#is-and-as"><i class="fa fa-check"></i><b>9.3.1</b> Is and As</a></li>
+<li class="chapter" data-level="9.3.2" data-path="basic-string-operations.html"><a href="basic-string-operations.html#number-of-characters"><i class="fa fa-check"></i><b>9.3.2</b> Number of Characters</a></li>
+<li class="chapter" data-level="9.3.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html#substrings-and-trimming"><i class="fa fa-check"></i><b>9.3.3</b> Substrings and Trimming</a></li>
+<li class="chapter" data-level="9.3.4" data-path="basic-string-operations.html"><a href="basic-string-operations.html#changing-cases"><i class="fa fa-check"></i><b>9.3.4</b> Changing Cases</a></li>
+<li class="chapter" data-level="9.3.5" data-path="basic-string-operations.html"><a href="basic-string-operations.html#splitting-strings"><i class="fa fa-check"></i><b>9.3.5</b> Splitting Strings</a></li>
+<li class="chapter" data-level="9.3.6" data-path="basic-string-operations.html"><a href="basic-string-operations.html#pasting-and-joining-strings"><i class="fa fa-check"></i><b>9.3.6</b> Pasting and Joining Strings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="formatted-printing.html"><a href="formatted-printing.html"><i class="fa fa-check"></i><b>9.4</b> Formatted Printing</a></li>
+<li class="chapter" data-level="" data-path="glossary-7.html"><a href="glossary-7.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="regex.html"><a href="regex.html"><i class="fa fa-check"></i><b>10</b> Regular Expressions</a><ul>
+<li class="chapter" data-level="10.1" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
+<li class="chapter" data-level="10.2" data-path="regex-practice-sites.html"><a href="regex-practice-sites.html"><i class="fa fa-check"></i><b>10.2</b> Regex Practice Sites</a></li>
+<li class="chapter" data-level="10.3" data-path="regex-syntax.html"><a href="regex-syntax.html"><i class="fa fa-check"></i><b>10.3</b> Regex Syntax</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="regex-syntax.html"><a href="regex-syntax.html#matching-a-specific-sequence"><i class="fa fa-check"></i><b>10.3.1</b> Matching a Specific Sequence</a></li>
+<li class="chapter" data-level="10.3.2" data-path="regex-syntax.html"><a href="regex-syntax.html#character-classes"><i class="fa fa-check"></i><b>10.3.2</b> Character Classes</a></li>
+<li class="chapter" data-level="10.3.3" data-path="regex-syntax.html"><a href="regex-syntax.html#quantification"><i class="fa fa-check"></i><b>10.3.3</b> Quantification</a></li>
+<li class="chapter" data-level="10.3.4" data-path="regex-syntax.html"><a href="regex-syntax.html#greedy-vs.lazy"><i class="fa fa-check"></i><b>10.3.4</b> Greedy vs. Lazy</a></li>
+<li class="chapter" data-level="10.3.5" data-path="regex-syntax.html"><a href="regex-syntax.html#grouping"><i class="fa fa-check"></i><b>10.3.5</b> Grouping</a></li>
+<li class="chapter" data-level="10.3.6" data-path="regex-syntax.html"><a href="regex-syntax.html#alternation"><i class="fa fa-check"></i><b>10.3.6</b> Alternation</a></li>
+<li class="chapter" data-level="10.3.7" data-path="regex-syntax.html"><a href="regex-syntax.html#anchors"><i class="fa fa-check"></i><b>10.3.7</b> Anchors</a></li>
+<li class="chapter" data-level="10.3.8" data-path="regex-syntax.html"><a href="regex-syntax.html#regex-captures"><i class="fa fa-check"></i><b>10.3.8</b> Captures</a></li>
+<li class="chapter" data-level="10.3.9" data-path="regex-syntax.html"><a href="regex-syntax.html#looking-around"><i class="fa fa-check"></i><b>10.3.9</b> Looking Around</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>10.4</b> Entering a Regex in R</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>10.4.1</b> String to Regex</a></li>
+<li class="chapter" data-level="10.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-substitution"><i class="fa fa-check"></i><b>10.4.2</b> Substitution</a></li>
+<li class="chapter" data-level="10.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>10.4.3</b> A Note on Perl</a></li>
+<li class="chapter" data-level="10.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>10.4.4</b> Patterned Replacement</a></li>
+<li class="chapter" data-level="10.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>10.4.5</b> Grepping</a></li>
+<li class="chapter" data-level="10.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>10.4.6</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="10.4.7" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>10.4.7</b> Regex Modes</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>10.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="" data-path="glossary-8.html"><a href="glossary-8.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="files.html"><a href="files.html"><i class="fa fa-check"></i><b>11</b> Files</a><ul>
+<li class="chapter" data-level="11.1" data-path="downloading-files.html"><a href="downloading-files.html"><i class="fa fa-check"></i><b>11.1</b> Downloading Files</a></li>
+<li class="chapter" data-level="11.2" data-path="reading-text-files-with-readlines.html"><a href="reading-text-files-with-readlines.html"><i class="fa fa-check"></i><b>11.2</b> Reading Text Files with <code>readLines()</code></a></li>
+<li class="chapter" data-level="11.3" data-path="reading-text-files-with-readr.html"><a href="reading-text-files-with-readr.html"><i class="fa fa-check"></i><b>11.3</b> Reading Text Files with <strong>readr</strong></a></li>
+<li class="chapter" data-level="11.4" data-path="writing-to-files.html"><a href="writing-to-files.html"><i class="fa fa-check"></i><b>11.4</b> Writing to Files</a></li>
+<li class="chapter" data-level="11.5" data-path="application-making-a-lexicon.html"><a href="application-making-a-lexicon.html"><i class="fa fa-check"></i><b>11.5</b> Application: Making a Lexicon</a></li>
+<li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>12</b> Functional Programming in R</a><ul>
+<li class="chapter" data-level="12.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html"><i class="fa fa-check"></i><b>12.1</b> Programming Paradigms</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html#procedural-programming"><i class="fa fa-check"></i><b>12.1.1</b> Procedural Programming</a></li>
+<li class="chapter" data-level="12.1.2" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming-the-ubiquity-of-functions-in-r"><i class="fa fa-check"></i><b>12.1.2</b> Functional Programming: The Ubiquity of Functions in R</a></li>
+<li class="chapter" data-level="12.1.3" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming-functions-as-first-class-citizens"><i class="fa fa-check"></i><b>12.1.3</b> Functional Programming: Functions as First-Class Citizens</a></li>
+<li class="chapter" data-level="12.1.4" data-path="programming-paradigms.html"><a href="programming-paradigms.html#minimize-side-effects"><i class="fa fa-check"></i><b>12.1.4</b> Minimize Side Effects</a></li>
+<li class="chapter" data-level="12.1.5" data-path="programming-paradigms.html"><a href="programming-paradigms.html#procedures-as-higher-order-function-calls"><i class="fa fa-check"></i><b>12.1.5</b> Procedures as Higher-Order Function Calls</a></li>
+<li class="chapter" data-level="12.1.6" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming-a-summary"><i class="fa fa-check"></i><b>12.1.6</b> Functional Programming: A Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html"><i class="fa fa-check"></i><b>12.2</b> <code>lapply()</code> and Friends</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#lapply"><i class="fa fa-check"></i><b>12.2.1</b> <code>lapply()</code></a></li>
+<li class="chapter" data-level="12.2.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#sapply"><i class="fa fa-check"></i><b>12.2.2</b> <code>sapply()</code></a></li>
+<li class="chapter" data-level="12.2.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#tapply"><i class="fa fa-check"></i><b>12.2.3</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="12.2.4" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#map"><i class="fa fa-check"></i><b>12.2.4</b> <code>Map()</code></a></li>
+<li class="chapter" data-level="12.2.5" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#replicate"><i class="fa fa-check"></i><b>12.2.5</b> <code>replicate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="filter-and-reduce.html"><a href="filter-and-reduce.html"><i class="fa fa-check"></i><b>12.3</b> <code>Filter()</code> and <code>Reduce()</code></a></li>
+<li class="chapter" data-level="12.4" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>12.4</b> Functionals vs. Loops</a></li>
+<li class="chapter" data-level="12.5" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>12.5</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="glossary-10.html"><a href="glossary-10.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="oo.html"><a href="oo.html"><i class="fa fa-check"></i><b>13</b> Object-Oriented Programming in R</a><ul>
+<li class="chapter" data-level="13.1" data-path="the-object-oriented-programming-paradigm.html"><a href="the-object-oriented-programming-paradigm.html"><i class="fa fa-check"></i><b>13.1</b> The Object-Oriented Programming Paradigm</a></li>
+<li class="chapter" data-level="13.2" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html"><i class="fa fa-check"></i><b>13.2</b> Reference Classes with Package R6</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#defining-a-class"><i class="fa fa-check"></i><b>13.2.1</b> Defining a Class</a></li>
+<li class="chapter" data-level="13.2.2" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#instantiation-initializing-objects"><i class="fa fa-check"></i><b>13.2.2</b> Instantiation: Initializing Objects</a></li>
+<li class="chapter" data-level="13.2.3" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#getting-and-setting-attributes"><i class="fa fa-check"></i><b>13.2.3</b> Getting and Setting Attributes</a></li>
+<li class="chapter" data-level="13.2.4" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#calling-methods"><i class="fa fa-check"></i><b>13.2.4</b> Calling Methods</a></li>
+<li class="chapter" data-level="13.2.5" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#holding-a-reference-not-a-value"><i class="fa fa-check"></i><b>13.2.5</b> Holding a Reference, not a Value</a></li>
+<li class="chapter" data-level="13.2.6" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#cloning-an-object"><i class="fa fa-check"></i><b>13.2.6</b> Cloning an Object</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="inheritance.html"><a href="inheritance.html"><i class="fa fa-check"></i><b>13.3</b> Inheritance</a></li>
+<li class="chapter" data-level="13.4" data-path="adding-members-to-a-class.html"><a href="adding-members-to-a-class.html"><i class="fa fa-check"></i><b>13.4</b> Adding Members to a Class</a></li>
+<li class="chapter" data-level="13.5" data-path="method-chaining.html"><a href="method-chaining.html"><i class="fa fa-check"></i><b>13.5</b> Method Chaining</a></li>
+<li class="chapter" data-level="13.6" data-path="application-whales-in-an-ocean.html"><a href="application-whales-in-an-ocean.html"><i class="fa fa-check"></i><b>13.6</b> Application: Whales in an Ocean</a></li>
+<li class="chapter" data-level="13.7" data-path="generic-function-oo.html"><a href="generic-function-oo.html"><i class="fa fa-check"></i><b>13.7</b> Generic-Function OO</a><ul>
+<li class="chapter" data-level="13.7.1" data-path="generic-function-oo.html"><a href="generic-function-oo.html#motivating-examples"><i class="fa fa-check"></i><b>13.7.1</b> Motivating Examples</a></li>
+<li class="chapter" data-level="13.7.2" data-path="generic-function-oo.html"><a href="generic-function-oo.html#terminology"><i class="fa fa-check"></i><b>13.7.2</b> Terminology</a></li>
+<li class="chapter" data-level="13.7.3" data-path="generic-function-oo.html"><a href="generic-function-oo.html#common-generic-functions"><i class="fa fa-check"></i><b>13.7.3</b> Common Generic Functions</a></li>
+<li class="chapter" data-level="13.7.4" data-path="generic-function-oo.html"><a href="generic-function-oo.html#writing-your-own-methods"><i class="fa fa-check"></i><b>13.7.4</b> Writing Your Own Methods</a></li>
+<li class="chapter" data-level="13.7.5" data-path="generic-function-oo.html"><a href="generic-function-oo.html#writing-a-generic-function"><i class="fa fa-check"></i><b>13.7.5</b> Writing a Generic Function</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-11.html"><a href="glossary-11.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beginning Computer Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reference-classes-with-package-r6" class="section level2">
+<h2><span class="header-section-number">13.2</span> Reference Classes with Package R6</h2>
+<p>We’ll get started by creating a miniature computerized world of objects that is based on characters from the Wizard of Oz.</p>
+<div id="defining-a-class" class="section level3">
+<h3><span class="header-section-number">13.2.1</span> Defining a Class</h3>
+<p>Construction of the object world begins with the definition of classes. A <em>class</em> is simply a general prototype on the basis of which actual objects may be created.</p>
+<p>Let’s define the class <code>Person</code>. This is accomplished with the <code>R6Class()</code> function: </p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="dt">classname =</span> <span class="st">&quot;Person&quot;</span>,
+                  <span class="dt">public =</span> <span class="kw">list</span>(
+                    <span class="dt">name =</span> <span class="ot">NULL</span>,
+                    <span class="dt">age =</span> <span class="ot">NULL</span>,
+                    <span class="dt">desire =</span> <span class="ot">NULL</span>,
+                    <span class="dt">initialize =</span> function(<span class="dt">name =</span> <span class="ot">NA</span>, <span class="dt">age =</span> <span class="ot">NA</span>, <span class="dt">desire =</span> <span class="ot">NA</span>) {
+                      self$name &lt;-<span class="st"> </span>name
+                      self$age &lt;-<span class="st"> </span>age
+                      self$desire &lt;-<span class="st"> </span>desire
+                      self$<span class="kw">greet</span>()
+                    },
+                    <span class="dt">set_age =</span> function(val) {
+                      self$age &lt;-<span class="st"> </span>val
+                      <span class="kw">cat</span>(<span class="st">&quot;Age of &quot;</span>, self$name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+                    },
+                    <span class="dt">set_desire =</span> function(val) {
+                      self$desire &lt;-<span class="st"> </span>val
+                      <span class="kw">cat</span>(<span class="st">&quot;Desire of &quot;</span>, self$name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+                    },
+                    <span class="dt">greet =</span> function() {
+                      <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;Hello, my name is &quot;</span>, self$name, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>))
+                    }
+                  )
+)</code></pre></div>
+<p>Let’s analyze the above code. The function <code>R6Class()</code> has a quite a few parameters, but the two with which we will concern ourselves the most are:</p>
+<ul>
+<li><code>classname</code>: the name we propose to give to the class;</li>
+<li><code>public</code>: a list of members of the class that are “public” in the sense that they can be accessed and used outside of the class.<a href="#fn37" class="footnoteRef" id="fnref37"><sup>37</sup></a> Members are of two types:
+<ul>
+<li><em>attributes</em>: the objects <code>name</code>, <code>age</code> and <code>desire</code>. Currently these have value <code>NULL</code>, but they can be given other values later on. What makes then attributes, though, is that they will not be given a function as a value.</li>
+<li><em>methods</em>: these are members of the class that are functions. You can think of a “method” as a particular way of performing a common task that could be performed in many different ways. The four methods you see in <code>Person</code> are:</li>
+<li><code>initialize</code>: This is a function that will be run whenever a new object of class Person is created. As we can see from its arguments, it will be possible to give values to the attributes <code>name</code>. <code>age</code> and <code>desire</code> when this function is called.</li>
+<li><code>set_age</code> and <code>set_desire</code> are functions that allow a user to set or to change the value of <code>age</code> and <code>desire</code> for an object of class Person.</li>
+<li><code>greet</code>: a function that will permit an object of class Person to issue a greeting.</li>
+</ul></li>
+</ul>
+<p>Note the use of the term <code>self</code> in the code for the methods of the class. When a method is called on an object, the term <code>self</code> will refer to the object on which the method is being called. Hence, for example, in the code for <code>greet</code> the term <code>self$name</code> will evaluate to the name of the person who issues the greeting.</p>
+</div>
+<div id="instantiation-initializing-objects" class="section level3">
+<h3><span class="header-section-number">13.2.2</span> Instantiation: Initializing Objects</h3>
+<p>On its own there is not much that a class can <em>do</em>. For anything to happen we need to create a particular individual: an object of class Person. Creation of an object having a particular class is called <em>instantiation</em>. </p>
+<p>Every class comes with a method—not mentioned in the definition of the class—called <code>new()</code>. This method, when called on the Class, instantiates an object of the class by running the <code>initialize()</code> function. Let’s create a person named Dorothy and store this new object in the variable <code>dorothy</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy &lt;-<span class="st"> </span>Person$<span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="dv">12</span>, 
+                      <span class="dt">desire =</span> <span class="st">&quot;Kansas&quot;</span>)</code></pre></div>
+<pre><code>## Hello, my name is Dorothy.</code></pre>
+<p>Note how the dollar-sign is used to indicate the calling of the <code>new()</code> method on the class Person. Note also that the arguments of <code>new()</code> are the arguments of <code>initialize()</code>: that’s because the <code>new()</code> method actually runs <code>initialize()</code> as part of its object-creation process.</p>
+<p>We can get a look at <code>dorothy</code> by printing her to the console:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy</code></pre></div>
+<pre><code>## &lt;Person&gt;
+##   Public:
+##     age: 12
+##     clone: function (deep = FALSE) 
+##     desire: Kansas
+##     greet: function () 
+##     initialize: function (name = NA, age = NA, desire = NA) 
+##     name: Dorothy
+##     set_age: function (val) 
+##     set_desire: function (val)</code></pre>
+<p>We get the basic information on Dorothy, including also an indication that she can be cloned (copied). We’ll discuss cloning later.</p>
+<p>We can instantiate as many people as we like. The code below for example, establishes <code>scarecrow</code> as a new instance of Person:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scarecrow &lt;-<span class="st"> </span>Person$<span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Scarecrow&quot;</span>, <span class="dt">age =</span> <span class="fl">0.038</span>, 
+                      <span class="dt">desire =</span> <span class="st">&quot;Brains&quot;</span>)</code></pre></div>
+<pre><code>## Hello, my name is Scarecrow.</code></pre>
+<p>In <em>The Wizard of Oz</em>, Scarecrow is only two weeks old when Dorothy meets him, so his age is set at <span class="math inline">\(2/52 = 0.38\)</span> years.</p>
+</div>
+<div id="getting-and-setting-attributes" class="section level3">
+<h3><span class="header-section-number">13.2.3</span> Getting and Setting Attributes</h3>
+<p>If we would like to change Dorothy’s age, we can do so by calling the <code>set_age()</code> method on her:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$<span class="kw">set_age</span>(<span class="dv">13</span>)</code></pre></div>
+<pre><code>## Age of Dorothy is:  13.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age</code></pre></div>
+<pre><code>## [1] 13</code></pre>
+<p>We can also set Dorothy’s age directly, by regular assignment:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age &lt;-<span class="st"> </span><span class="dv">14</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age</code></pre></div>
+<pre><code>## [1] 14</code></pre>
+<p>The effect is the same as when we use <code>set_age()</code> except that we don’t get a report to the console.</p>
+</div>
+<div id="calling-methods" class="section level3">
+<h3><span class="header-section-number">13.2.4</span> Calling Methods</h3>
+<p>We have seen that in order to call a method on an object, you follow the format:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">object$<span class="kw">method</span>()</code></pre></div>
+<p>Thus, we can ask <code>dorothy</code> to issue a greeting:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$<span class="kw">greet</span>()</code></pre></div>
+<pre><code>## Hello, my name is Dorothy.</code></pre>
+<p>In the syntax for calling methods, we see one aspect of “message-passing”: <code>dorothy$greet()</code> essentially passes a message to <code>dorothy</code>: “Please call your <code>greet()</code> method!”</p>
+</div>
+<div id="holding-a-reference-not-a-value" class="section level3">
+<h3><span class="header-section-number">13.2.5</span> Holding a Reference, not a Value</h3>
+<p> </p>
+<p>R6 objects operate by what are known in computer programming as <em>reference semantics</em>. This means that when the assignment operator is used to assign an R6 object to a variable, the new variable holds a <em>reference</em> to that object, not a copy of the new object. This is in contrast <em>value semantics</em>, which is the way assignment usually works in R. In value semantics, R a distinct copy of the value of the assigned object is created, and the new variable refers to that copy.</p>
+<p>Below is an example of the familiar value semantics in action:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span>
+b &lt;-<span class="st"> </span>a
+b &lt;-<span class="st"> </span><span class="dv">20</span>
+a</code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p><code>b</code> has been changed to 20, but that change did not affect <code>a</code>, which keeps its initial value of 10.</p>
+<p>We can use the function <code>address()</code>  from the package <strong>pryr</strong> <span class="citation">(Wickham <a href="#ref-R-pryr">2015</a>)</span> to track what is happening behind the scenes. <code>address()</code> will tell us the current location in memory of the value corresponding to a name. Let’s repeat the above process, but use <code>address()</code> to see where the values are stored:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span>
+pryr::<span class="kw">address</span>(a)</code></pre></div>
+<pre><code>## [1] &quot;0x119c18658&quot;</code></pre>
+<p>The value 10 is stored in the memory address given above. Next, let’s create <code>b</code> by assignment from <code>a</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span>a
+pryr::<span class="kw">address</span>(b)</code></pre></div>
+<pre><code>## [1] &quot;0x119c18658&quot;</code></pre>
+<p>For the moment <code>b</code> points to the same place in memory as <code>a</code> does, so it will yield 10:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b</code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p>We can use <code>b</code> for other operations; for example, we can add 30 to it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b +<span class="st"> </span><span class="dv">30</span></code></pre></div>
+<pre><code>## [1] 40</code></pre>
+<p>But for now <code>b</code> still points to the same place in memory that <code>a</code> does:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pryr::<span class="kw">address</span>(b)</code></pre></div>
+<pre><code>## [1] &quot;0x119c18658&quot;</code></pre>
+<p>But now let’s assign a new value to <code>b</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span><span class="dv">20</span>
+pryr::<span class="kw">address</span>(b)</code></pre></div>
+<pre><code>## [1] &quot;0x1156dca68&quot;</code></pre>
+<p>Aha! <code>b</code> now points to a <strong>new</strong> location in the computer’s memory! That’s because R saw that the assignment operator was going to change the value of <code>b</code>. Since <code>b</code> has value semantics, R knows to set aside a new spot in memory to contain the value 20, and to associate the name <code>b</code> with that spot. That way, the new <code>b</code> won’t interfere with <code>a</code>, which points to the same old spot in memory and thus remains 10:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pryr::<span class="kw">address</span>(a)</code></pre></div>
+<pre><code>## [1] &quot;0x119c18658&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a</code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p>On the other hand, R6 objects have <em>reference semantics</em>. We can see this in action with the following example. First, let’s check on <code>dorothy</code>’s age:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age</code></pre></div>
+<pre><code>## [1] 14</code></pre>
+<p>Let’s now create <code>dorothy2</code> by assignment from <code>dorothy</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2 &lt;-<span class="st"> </span>dorothy</code></pre></div>
+<p>Let’s check the memory locations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(pryr::<span class="kw">address</span>(dorothy), pryr::<span class="kw">address</span>(dorothy2))</code></pre></div>
+<pre><code>## [1] &quot;0x1239a8428&quot; &quot;0x1239a8428&quot;</code></pre>
+<p>As with <code>a</code> and <code>b</code>, the two names initially point to the same place in memory.</p>
+<p>Now let’s change the age of <code>dorothy2</code> to 30:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2$age &lt;-<span class="st"> </span><span class="dv">30</span></code></pre></div>
+<p>Let’s check the age of <code>dorothy</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age</code></pre></div>
+<pre><code>## [1] 30</code></pre>
+<p>Whoa! Changing the age of <code>dorothy2</code> changed the age of <code>dorothy</code>! That’s because of the reference semantics: <code>dorothy2</code> continues to be associated with the same spot in memory as <code>dorothy</code>, <em>even after</em> we begin to make changes to it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(pryr::<span class="kw">address</span>(dorothy), pryr::<span class="kw">address</span>(dorothy2))</code></pre></div>
+<pre><code>## [1] &quot;0x1239a8428&quot; &quot;0x1239a8428&quot;</code></pre>
+</div>
+<div id="cloning-an-object" class="section level3">
+<h3><span class="header-section-number">13.2.6</span> Cloning an Object</h3>
+<p></p>
+<p>For the sorts of complex objects created by R6 classes, reference semantics can be a useful feature. But what if we want a new and truly distinct copy of an R6 object? for this we need the <code>clone()</code> method that was alluded to earlier:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2 &lt;-<span class="st"> </span>dorothy$<span class="kw">clone</span>()
+dorothy2</code></pre></div>
+<pre><code>## &lt;Person&gt;
+##   Public:
+##     age: 30
+##     clone: function (deep = FALSE) 
+##     desire: Kansas
+##     greet: function () 
+##     initialize: function (name = NA, age = NA, desire = NA) 
+##     name: Dorothy
+##     set_age: function (val) 
+##     set_desire: function (val)</code></pre>
+<p><code>dorothy2</code> looks just like <code>dorothy</code>. However, the name <code>dorothy2</code> does not point to the same place in memory:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="kw">c</span>(pryr::<span class="kw">address</span>(dorothy), pryr::<span class="kw">address</span>(dorothy2)))</code></pre></div>
+<pre><code>## [1] &quot;0x1239a8428&quot; &quot;0x119e85808&quot;</code></pre>
+<p>Accordingly, changes to <code>dorothy2</code> will no longer result in changes to <code>dorothy</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2$age &lt;-<span class="st"> </span><span class="dv">100</span>
+dorothy$age</code></pre></div>
+<pre><code>## [1] 30</code></pre>
+<p>You should know that if one or more of the members of an object is itself an object with reference semantics (such as an instance of an R6 class), then a copy produced by <code>clone()</code> will hold a reference to that same member-object, not a separate copy of the member-object. In such a case if you still want a totally separate copy, you will have to consult the R6 manual on the topic of “deep cloning.”</p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-pryr">
+<p>Wickham, Hadley. 2015. <em>Pryr: Tools for Computing on the Language</em>. <a href="https://CRAN.R-project.org/package=pryr" class="uri">https://CRAN.R-project.org/package=pryr</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="37">
+<li id="fn37"><p><code>R6Class()</code> has another parameter called <code>private</code>, which takes as value a list of members that can only be accessed within the class by members of the class, not by programmers working outside of the class itself. In the course of development of very large and complex programs, it can be useful to keep some members private so that programmers don’t accidentally change too much about the way objects work. Since our programs are still on the small side, we won’t worry about private members, for now.<a href="reference-classes-with-package-r6.html#fnref37">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-object-oriented-programming-paradigm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="inheritance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["r-notes.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

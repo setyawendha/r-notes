@@ -1,0 +1,1200 @@
+# Flow-Control {#flow}
+
+```{r flow-loop, echo=F, fig.pos='!h', fig.cap = "Foxtrot, October 3, 2003.  Used with permission.",  out.width = "95%", fig.align = "center"}
+knitr::include_graphics("images/foxtrot-loop.jpg")
+```
+
+In the above scene from the comic-strip *Foxtrot*, young Jason has tried to attempted to short-cut his "write-on-the-blackboard" punishment via some code in the C-language that would print out his assigned sentence 500 times.  This is an example of *flow control.*  \index{flow control}
+
+Flow control encompasses the tools in a programming language that allow the computer to make decisions and to repeat tasks.  In this Chapter we will learn how flow control is implemented in R.
+
+\newpage
+
+## Prologue:  Prompting the User
+
+Before we get started in flow control itself, let's address the question of how we might extract information from someone who runs our our code.
+
+Up to this point any information that we want to process has to be entered into the code itself.  For example, if we want to print out a name to the console, we have to provide that name in the code, like this:
+
+```{r}
+person <- "Dorothy"
+cat("Hello, ", person, "!\n", sep = "")
+```
+
+We can get any printout we like as long as we assign the desired string to `person`---but we have to do that *in the code itself*.  But what if we don't know the name of the person whom we want to greet?  How can we be assured of printing out the correct name?
+
+The `readline()` \index{R-functions!readline()@\texttt{readline()}}function will be helpful, here.  It reads input directly from the console and produces a character vector (of length one) that we may use as we like.  Thus
+
+```{r eval = F}
+person <- readline(prompt = "What is your name?  ")
+cat("Hello, ", person, "!\n", sep = "")
+```
+
+```
+## What is your name?  Cowardly Lion
+## Hello, Cowardly Lion!
+```
+
+Note that the input obtained from `readline()` is always a character vector of length one---a single string---so if you plan to use it as a number then you need to convert it to a number.  The `as.numeric()` \index{R-functions!as.numeric()@\texttt{as.numeric()}}function will do this for you:
+
+```{r eval = F}
+number <- readline("Give me a number, and I'll add 10 to it:  ")
+cat("The sum is:  ", as.numeric(number) +10)
+```
+
+```
+## Give me a number, and I'll add 10 to it:  15
+## The sum is:  25
+```
+
+## Making Decisions:  Conditionals
+
+We are now ready to begin addressing flow control itself.  We'll begin by looking at the various facilities R has for making decisions.
+
+### If Statements {#if-statements}
+
+Let's design a simple guessing-game for the user:
+
+* The computer will pick randomly a whole number between 1 and 4.
+* The user will then be asked to guess the number.
+* If the user is correct, then the computer will congratulate the user.
+
+```{r eval = F}
+number <- sample(1:4, size = 1)
+guess <- as.numeric(readline("Guess the number (1-4):  "))
+if ( guess == number ) {
+  cat("Congratulations!  You are correct.")
+}
+```
+
+The `sample()` \index{R-functions!sample()@\texttt{sample()}}function randomly picks a value from the vector that is is given.  The `size` parameters specifies how many numbers to pick. (This time we only want one number.)
+
+Flow control enters the picture with the reserved word `if`\index{if@\texttt{if}}.  Immediately after `if` is a Boolean expression enclosed in parentheses.  This expression is often called the *condition*.  \index{condition}If the condition evaluates to `TRUE`, then the body of the `if` statement---the code enclosed in the brackets---will be executed.  On the other hand if the condition evaluates to `FALSE`, then R skips past the bracketed code.^[Actually you don't need the brackets if you plan to put only one expression in them.  Many people keep the brackets, though, for the sake of clarity.]
+
+The code above congratulates the a lucky guesser, but it has nothing at all to say to someone who did not guess correctly.  The way to provide an alternative is through the addition of the `else` reserved-word\index{if ... else@\texttt{if ... else}}:
+
+```{r eval = F}
+number <- sample(1:4, size = 1)
+guess <- as.numeric(readline("Guess the number (1-4):  "))
+if ( guess == number ) {
+  cat("Congratulations!  You are correct.")
+} else {
+  cat("Sorry, the correct number was ", number, ".\n", sep = "")
+  cat("Better luck next time!")
+}
+```
+
+An `if-else`can be followed by any number of `if-else`'s, setting up a chain of alternative responses:
+
+```{r eval = F}
+number <- sample(1:4, size = 1)
+guess <- as.numeric(readline("Guess the number (1-4):  "))
+if ( guess == number ) {
+  cat("Congratulations!  You are correct.")
+} else if ( abs(guess - number) == 1 ){
+  cat("You were close!\n")
+  cat("The correct number was ", number, ".\n", sep = "")
+} else {
+  cat("You were way off.\n")
+  cat("The correct number was ", number, ".\n", sep = "")
+}
+```
+
+### Application:  Invisible Returns  {#invisible-returns}
+
+
+Let's think again about the $\pi$-computing function from Section \@ref(default-arguments):
+
+```{r eval = F}
+madhavaPI <- function(n = 1000000) {
+  k <- 1:n
+  terms <- (-1)^(k+1)*4/(2*k-1)
+  sum(terms)
+}
+```
+
+Suppose we decide to use `if` to write in a "talky" option:
+
+```{r}
+madhavaPI <- function(n = 1000000, verbose = FALSE) {
+  k <- 1:n
+  terms <- (-1)^(k+1)*4/(2*k-1)
+  approx <- sum(terms)
+  if ( verbose) {
+    cat("Madhava's approximation is:  ", approx, ".\n", sep = "")
+    cat("This is based on ", n, " terms.\n", sep = "")
+  }
+  approx
+}
+```
+
+Try it out:
+
+```{r}
+madhavaPI(n = 1000, verbose = TRUE)
+```
+
+It's a bit awkward that the approximation gets printed out at the end:  after the message on the console, the user doesn't need to see it.  But if we were to remove the final `approx` expression, then the function would not return an approximation that could be used for further computations.
+
+The solution to this dilemma is R's `invisible()` function. \index{R-functions!invisible()@\texttt{invisible()}} 
+
+```{r}
+madhavaPI <- function(n = 1000000, verbose = FALSE) {
+  k <- 1:n
+  terms <- (-1)^(k+1)*4/(2*k-1)
+  approx <- sum(terms)
+  if ( verbose) {
+    cat("Madhava's approximation is:  ", approx, ".\n", sep = "")
+    cat("This is based on ", n, " terms.\n", sep = "")
+  }
+  invisible(approx)
+}
+```
+
+
+If you wrap an expression in `invisible()`, then it won't be printed out to the console:
+
+```{r}
+madhavaPI(n = 1000, verbose = TRUE)
+```
+
+Nevertheless it is still returned, as we can see from the following code, in which the approximation is computed without any output to the console and stored in the variable `p` for use later on in a `cat()` statement.
+
+```{r}
+p <- madhavaPI() # verbose is FALSE by default
+cat("Pi plus 10 is about ", p + 10, ".", sep = "")
+```
+
+
+### Ifelse {#ifelse}
+
+The `ifelse()` \index{R-functions!ifelse()@\texttt{ifelse()}}function is a special form of the if-else construct that is used to make assignments, and is especially handy in the context of vectorization.
+
+Suppose that you have a lot of heights:
+
+```{r}
+height <- c(69, 67, 70, 72, 65, 63, 75, 70)
+```
+
+You would like to classify each person as either "tall" or "short", depending on whether they are respectively more or less than 71 inches in height.  `ifelse()` makes quick work of it:
+
+```{r}
+heightClass <- ifelse(test = height > 70, 
+                      yes = "tall", no = "short")
+heightClass
+```
+
+Note that `ifelse()` takes three parameters:
+
+* `test`: the condition you want to evaluate;
+* `yes`:  the value that gets assigned when `test` is true;
+* `no`:  the value assigned when `test` is false;
+
+Most programmers don't name the parameters.  This is fine---just remember to keep the test-yes-no order:
+
+```{r}
+ifelse(height > 70, "tall", "short")
+```
+
+Here's another example of the power of `ifelese()`.  If a triangle has three sides of length $x$, $y$ and $z$, then the sum of any two sides must be greater than the remaining side:
+
+$$\begin{aligned}
+x + y &> z, \\
+x + z &> y, \\
+y + z &> x.
+\end{aligned}$$
+This fact is known as the *Triangle Inequality*.  It works the other way around, too:  if three positive numbers are such that the sum of any two exceeds the third, then three line segments having those numbers as lengths could be arranged into a triangle.
+
+We can write a function that, when given three lengths, determines whether or not they can make a triangle:
+
+```{r}
+isTriangle <- function(x, y, z) {
+  (x + y > z) & (x +z > y) & (y + z > x)
+}
+```
+
+`isTriangle()` simply evaluates a Boolean expression involving `x`, `y` and `z`.  It will return `TRUE` when the three quantities satisfy the Triangle Inequality; otherwise, it returns `FALSE`.  Let's try it out:
+
+```{r}
+isTriangle(x = 3, y = 4, z = 5)
+```
+
+Recall that Boolean expressions can involve vectors of any length.  So suppose that we are would like to know which of the following six triples of numbers could be the side-lengths of a triangle:
+
+$$(2,4,5),(4.7,1,3.8),(5.2,8,12),\\
+(6, 6, 13), (6, 6, 11), (9, 3.5, 6.2)$$
+We could enter the triples one at a time into `isTriangle()`.  On the other hand we could arrange the sides into three vectors of length six each:
+
+```{r}
+a <- c(2, 4.7, 5.2, 6, 6, 9)
+b <- c(4, 1, 2.8, 6, 6, 3.5)
+c <- c(5, 3.8, 12, 13, 11, 6.2)
+```
+
+Then we can decide about all six triples at once:
+
+```{r}
+isTriangle(x = a, y = b, z = c)
+```
+
+We could also use `ifelse()` to create a new character-vector that expresses our results verbally:
+
+```{r}
+triangle <- ifelse(isTriangle(a, b, c), "triangle", "not")
+triangle
+```
+
+
+### Switch
+
+If you have to make a decision involving two or more alternatives you can use a chain of `if ... else` constructions.  When the alternatives involve no more than the assignment of a value to a variable, you might also consider using the `switch()`\index{R-functions!switch()@\texttt{switch()}} function.
+
+For example, suppose that you have days of the week expressed as numbers.  Maybe it's like this:
+
+* 1 stands for Sunday
+* 2 for Monday
+* 3 for Wednesday
+* and so on.
+
+If you would like to convert a day-number to the right day name, then you could write a function like this:
+
+```{r}
+dayWord <- function(dayNumber) {
+  switch(dayNumber,
+         "Sunday",
+         "Monday",
+         "Tuesday",
+         "Wednesday",
+         "Thursday",
+         "Friday",
+         "Saturday")
+}
+dayWord(3)
+```
+
+In `switch()` above, the first argument after `dayNumber`  is what goes with 1, the second argument is what goes with 2, and so on.
+
+When the item you want to convert is a string rather than a number, then the `switch()` function works a little bit differently.  Suppose, for instance, that you want to *abbreviate* the names of the weekdays.  You might write an abbreviation-function as follows:
+
+```{r}
+abbrDay <- function(day) {
+  switch(day,
+         Monday = "Mon",
+         Tuesday = "Tue",
+         Wednesday = "Wed",
+         Thursday = "Th",
+         Friday = "Fri",
+         Saturday = "Sat")
+}
+abbrDay("Wednesday")
+```
+
+In the above call to `switch()`, the weekday names you want to abbreviate appear as the names of named character-vectors, each of length one.  The value of each vector is what the its name will be converted to.
+
+When you are converting strings you have the option to provide a default conversion for values that don't fit into the pattern you have in mind.  All you have to do is to provide the default value as an additional argument.  (It should NOT have a name.)  Thus:
+
+```{r}
+abbrDay <- function(day) {
+  switch(day,
+         Monday = "Mon",
+         Tuesday = "Tue",
+         Wednesday = "Wed",
+         Thursday = "Th",
+         Friday = "Fri",
+         Saturday = "Sat",
+         "not a weekday!")
+}
+abbrDay("Wednesday")
+abbrDay("Neptune")
+```
+
+
+## Repeating Things:  Looping
+
+We have looked a bit into the aspect of flow control that pertains to making decisions.  Let us now turn to the R-constructs that make the computer repeat actions.
+
+
+### For Loops
+
+\index{for}
+
+The reserved word `for` \index{for@\texttt{for}}is used to make R repeat an action a specified number of times.
+
+We begin with an very simple example:
+
+```{r}
+for ( i in 1:4 ) {
+  cat("Hello, Dorothy!\n")
+}
+```
+
+Here's how the loop works.  Recall that the vector `1:4` is simply the sequence of integers from 1 to 4:
+
+```{r}
+1:4
+```
+
+When R sees the code `(i in 1:4)` it knows that it will have to go four times through the body of the loop.
+
+```{r eval=FALSE}
+cat("Hello, Dorothy!\n")
+```
+
+(The *body* of a loop is what's contained in the brackets after `for(i in 1:4)`).  At the start of the loop, the *index variable*\index{index variable} `i` is set to 1.  After the body is executed the first time, R sets `i` to 2, then executes the body again.  Then R sets `i` to 3 and executes the body yet again.  Then R sets `i` to 4, and executes the body for the final time.  The result is four lines printed out to the console.
+
+The more you need to repeat a particular pattern, the more it makes sense to write your code with a loop.
+
+The general for of a loop is:
+
+```{r eval = F}
+for ( var in seq ) {
+  expression
+  another expression
+  ...
+  final expression
+}
+```
+
+`var` is the index variable, and it can be any permitted name for a variable, and `seq` can be any vector.  As R traverses the loop, the value of the index variable `var` becomes each element of the vector `seq` in turn.  With every change in the value of `var`, the code in the brackets is executed.
+
+Ti *iterate* is do do a thing again and again.  The vector `seq` is is sometimes called an *iterable*, since it is "iterated over."  It contains the values that the index variable will assume, one by one, as the loop is repeated. \index{iterable}
+
+It's important to realize that the index variable can have *any* valid name, and the sequence can be any type of vector at all---not just a sequence of consecutive whole numbers beginning with 1.  This level of generality permits a for-loop to automate a wide variety of tasks, and for its code to be written in a way that evokes the operations being performed.
+
+For example, here is a loop to print out the some greetings;
+
+```{r}
+people <- c("Dorothy", "Tin Man", "Scarecrow", "Lion")
+for ( person in people ) {
+  cat("Hello, ", person, "!\n", sep = "")
+}
+```
+
+Or perhaps you want to abbreviate a vector-ful of weekday-names:
+
+```{r}
+weekdays <- c("Saturday", "Monday", "Friday", "Saturday")
+for ( day in weekdays ) {
+  print(abbrDay(day))
+}
+```
+
+Quite often you will want to store the results of your trips through the loop.  Let's do this for our abbreviated weekdays:
+
+```{r}
+weekdays <- c("Saturday", "Monday", "Friday", "Saturday")
+abbrDays <- character(length(weekdays))
+```
+
+We used the `character()` function \index{R-functions!character()@\texttt{character()}} to create the character vector `abbrDays`.  We specified that the number of elements in `abbrDays` shall be the same as the number of elements in `weekdays`.  Right now `abbrDays` isn't very interesting, as all of its elements are empty strings:
+
+```{r}
+abbrDays
+```
+
+We will now write a for-loop to fill it up with abbreviations:
+
+```{r}
+for ( i in 1:length(weekdays) ) {
+  abbrDays[i] <- abbrDay(weekdays[i])
+}
+```
+
+Now each of the four elements of `abbrDays` contains the abbreviation for the corresponding element of `weekdays`:
+
+```{r}
+abbrDays
+```
+
+### For-Loop Caution
+
+You might need to exercise some caution in your choice name for the index variable.  If you are already using it as the name for a variable in the same environment, then you will overwrite that variable, as demonstrated by the following code:
+
+```{r}
+day <- "Thursday"
+cat("Today is ", day, ".\n", sep = "")
+weekdays <- c("Saturday", "Monday", "Friday", "Saturday")
+abbrDays <- character(length(weekdays))
+for ( day in weekdays ) {
+  print(day)
+}
+cat("Today is ", day, ".\n", sep = "")
+```
+
+Of course, that won't happen if the for-loop is inside of a function and your variable is outside of it.
+
+```{r}
+day <- "Thursday"
+cat("Today is ", day, ".\n", sep = "")
+weekdays <- c("Saturday", "Monday", "Friday", "Saturday")
+listDays <- function(days) {
+  for ( day in days )    {
+    print(day)
+  }
+}
+listDays(weekdays)
+cat("Today is still ", day, ".\n", sep = "")
+```
+
+
+### Breaking Out of a Loop
+
+Sometimes you finish the task of interest before you are done with the loop.  If this is a possibility for you then you may arrange to break out of the loop with the `break`\index{break@\texttt{break}} reserved-word.  
+
+Suppose for example that you want a function that searches through a vector for a given element, updating the user along the way as to the progress of the search.  You can try something like this:
+
+```{r}
+# function to find index of element in vector.
+# returns -1 if elem is not in vector
+verboseSearch <- function(elem, vec) {
+  
+  # The following logical keeps track of whether
+  # we have found the element.
+  # We have not yet begun the search so start it
+  # at FALSE.
+  found <- FALSE
+  
+  # validate input:
+  if ( length(vec) == 0 ) {
+    cat("The vector empty.  No way does it contain ", 
+        elem, ".", sep = "")
+    return(-1)
+  }
+  
+  # check the elements of vector:
+  for ( i in 1: length(vec) ) {
+    if ( vec[i] == elem ) {
+      # record that we found the element:
+      found <- TRUE
+      break
+    } else {
+      # report no match at this index:
+      cat("Checked index ", i, 
+          " in the vector.  No match there ...\n", sep = "")
+    }
+  }
+  
+  if ( found ) {
+    # report success:
+    cat("Found ", elem, " at index ", i, ".", sep = "")
+    return(i)
+  } else {
+    # report failure:
+    cat(elem, " is not in the vector.", sep = "")
+    return(-1)
+  }
+}
+```
+
+Note the initial check on the length of the vector.  This is actually important.  If a user were to enter an empty vector, then it length would be 0.  Then in the loop the sequence would be `1:0`, which is the vector with elements 1 and 0.  But look at what happens when you ask for any element of a zero-length vector:
+
+```{r}
+emptyVec <- character(0)
+emptyVec[1]  # You get NA
+```
+
+Then check out what happens if you compare an `NA` to a string:
+
+```{r}
+NA == "Scarecrow"
+```
+
+Now look at what happens in an `if` statement where the condition is `NA`:
+
+```{r eval = F}
+if ( NA ) {
+  cat("We are in the bracket!\n")
+}
+```
+
+```
+## Error in if (NA) { : missing value where TRUE/FALSE needed
+```
+
+Checking that the input vector has positive length is an example of *validating* \index{validation} input.  When you write functions for other people to use you will find that it's important to validate their input instead of allowing R to throw obscure error messages at them.
+
+Let's see our function in action:
+
+```{r}
+people <- c("Dorothy", "Tin Man", "Scarecrow", "Lion")
+scarecrowPlace <- verboseSearch("Scarecrow", people)
+```
+
+### Solving the Empty-Vector Problem in `for`-Loops With `seq_along()`
+
+In the previous section we considered a possible problem with `for`-loops of the following form:
+
+```{r eval = F}
+for ( i in 1:length(vec) ) {
+  ## do something ...
+}
+```
+
+In the above loop `vec` could be thought of as a "loop-defining" vector:  its length determines the sequence of values 1, 2, 3 ... for the index `i`.  This sequence of values is supposed to end at the length of `vec`.
+
+The problem is that if `vec` happens to be an empty vector then we probably don't want to enter the loop at all.  However, the length of an empty vector is 0, and so the vector `1:length(vec)` actually works out to be a vector with two elements:
+
+```{r eval = F}
+c(1,0)
+```
+
+Hence R will go through the loop twice:  once when `i` is 1, and again when `i` is 0.  Depending on what the loop does, very unexpected results could be produced.
+
+In the previous section we dealt with the problem by writing an `if`-statement that provides the proper response when `vec` is empty.  In many circumstances however, all we need to do is to make sure that the loop is skipped when the vector is empty.
+
+A handy way to ensure skipping is to use the function `seq_along()` \index{R-functions!seq_along()@\texttt{seq\_along()}}. Given any non-empty vector, `seq_along()` produces a sequence-vector that begins with 1 and ends with the length of the vector, thus:
+
+```{r}
+vec <- c("a", "d", "f")
+seq_along(vec)
+```
+
+On the other hand, if the vector is empty, then `seq_long()` returns an empty numeric vector:
+
+```{r}
+vec <- character()
+seq_along(vec)
+```
+
+Now consider the loop inside the following function:
+
+```{r echo}
+loopy <- function(vec) {
+  for ( i in seq_along(vec) ) {
+    cat("This time i is ", i, ".\n", sep = "")
+  }
+}
+```
+
+Given a non-empty vector, it goes through the loop a number of times equal to the length of the vector:
+
+```{r}
+loopy(c("a", "d", "f"))
+```
+
+On the other hand, when given an empty vector the function does not enter the loop at all:
+
+```{r}
+loopy(character())  # no output to console!
+```
+
+When you are writing a program that is complex enough that you don't know whether the loop-defining vector might be empty, it is good practice to use `seq_along()` as a safeguard.
+
+
+
+### Skipping Ahead in a Loop
+
+Depending on what happens within a loop, you might sometimes wish to skip the remaining code within the loop and proceed to the next iteration.  R provides the reserved-word `next` \index{next@\texttt{next}} for this purpose.  Here is a simple example:
+
+```{r}
+vec <- c("a","e", "e", "i", "o", "u", "e", "z")
+# shout ahoy when you see the specified element
+verboseAhoy <- function(elem, vec) {
+  if (length(vec) > 0) {
+    for ( i in 1: length(vec) ) {
+      if ( vec[i] != elem) next
+      cat("Ahoy! ", elem, " at index ", i, "!\n", sep = "")
+    }
+  }
+  
+}
+verboseAhoy("e", vec)
+```
+
+When the `vec[i] == elem` condition is true, R immediately skips the rest of the loop, increments the value of the index variable `i`, and runs through the loop again.
+
+You can always accomplish the skipping without using `next` explicitly, but it's nice to have on hand.
+
+### Repeat
+
+For-loops are pretty wonderful, but they are best used in circumstances when you know how many times you will need to loop.  When you need to repeat a block of code until a certain condition occurs, then the `repeat` \index{repeat@\texttt{repeat}}reserved-word might be a good choice.
+
+For example, suppose you want to play the number-guessing game with the user, but let her keep guessing until either she gives up or gets the correct answer.  Here's an implementation using `repeat`:
+
+```{r eval = F}
+n <- 20
+number <- sample(1:n, size = 1)
+cat("I'm thinking of a whole number from 1 to ", n, ".\n", sep = "")
+repeat {
+  guess <- readline("What's your guess? (Enter q to quit.)  ")
+  if ( guess == "q"  ) {
+    cat("Bye!\n")
+    break
+  } else if ( guess == number ) {
+    cat("You are correct!  Thanks for playing!")
+    break
+  }
+  # If we get here, the guess was not correct:
+  # loop will repeat!
+}
+```
+
+The game works well enough, but if you give it a try, you are sure to find it a bit fatiguing.  It wold be nice to give the user a hint after an incorrect guess.  Let's revise the game to tell the reader whether her guess was high or low.  While we are at it, let's cast the game into the form of a function.
+
+```{r eval = F}
+numberGuess <- function(n) {
+  number <- sample(1:n, size = 1)
+  cat("I'm thinking of a whole number from 1 to ", n, ".\n", sep = "")
+  repeat {
+    guess <- readline("What's your guess? (Enter q to quit.)  ")
+    if (guess == "q") {
+      cat("Bye!\n")
+      break
+    } else if (guess == number) {
+      cat("You are correct!  Thanks for playing!")
+      break
+    }
+    # If we get to this point the guess was not correct.
+    # Issue hint:
+    hint <- ifelse(guess > number, "high", "low")
+    cat("Your guess was ", hint, ".  Keep at it!\n", sep = "")
+    # Repeat loop
+  }
+}
+```
+
+A typical game:
+
+```
+> numberGuess(100)
+I'm thinking of a whole number from 1 to 100.
+What's your guess? (Enter q to quit.)  50
+Your guess was high.  Keep at it!
+What's your guess? (Enter q to quit.)  25
+Your guess was high.  Keep at it!
+What's your guess? (Enter q to quit.)  12
+Your guess was low.  Keep at it!
+What's your guess? (Enter q to quit.)  18
+Your guess was low.  Keep at it!
+What's your guess? (Enter q to quit.)  22
+Your guess was high.  Keep at it!
+What's your guess? (Enter q to quit.)  20
+You are correct!  Thanks for playing!
+```
+
+### While
+
+The reserved word `while` \index{while@\texttt{while}}constructs a loop that runs as long as a specified condition is true.  Unlike `repeat`, which launches directly into the loop, the condition for `while` is evaluated prior to the body of the loop.  If the condition is false at the beginning, the code in the body of the loop is never executed.
+
+`verboseSearch()` could be re-written with `while`:
+
+```{r eval = F}
+verboseSearch <- function(elem, vec) {
+  found <- FALSE
+  if ( length(vec) == 0 ) {
+    cat("The vector empty.  No way does it contain ", 
+        elem, ".", sep = "")
+    return(-1)
+  }
+  # index of vec (start looking at 1):
+  i <- 1
+  while ( !found & i <= length(vec) ) {
+    if ( vec[i] == elem ) {
+      found <- TRUE
+      break
+    }
+    cat("No match at position ", i, " ...\n")
+    i <- i + 1
+  }
+
+  if ( found ) {
+    # report success:
+    cat("Found ", elem, " at index ", i, ".", sep = "")
+    return(i)
+  } else {
+    # report failure:
+    cat(elem, " is not in the vector.", sep = "")
+    return(-1)
+  }
+}
+```
+
+## Application:  The Collatz Conjecture  {#collatz-conjecture}
+
+Take any positive integer greater than 1.  Apply the following rule, which we will call the Collatz Rule:
+
+* If the integer is even, divide it by 2;
+* if the integer is odd, multiply it by 3 and add 1.
+
+Now apply the rule to the resulting number, then apply the rule again to the number you get from that, and so on.
+
+For example, start with 13.  We proceed as follows:
+
+* 13 is odd, so compute $3 \times 13 + 1 - 40$.
+* 40 is even, so compute $40/2 = 20$.
+* 20 is even, so compute $20/2 = 10$.
+* 10 is even, so compute $10/2 = 5$.
+* 5 is odd, so compute $3 \times 5+ 1 = 16$
+* 16 is even, so compute $16/2 = 8$.
+* 8 is even, so compute $8/2 = 4$.
+* 4 is even, so compute $4/2 = 2$.
+* 2 is even, so compute $2/2 = 1$.
+* 1 is odd, so compute $3 \times 1 + 1 = 4$.
+* 4 is even, so compute $4/2 = 2$.
+* 2 is even, so compute $2/2 = 1$.
+
+If we keep going, then we will cycle forever:
+
+$$4, 2, 1, 4, 2, 1, \ldots$$
+In mathematics the *Collatz Conjecture* is the conjecture that for *any* initial positive number, every Collatz Sequence (the sequence formed by repeated application of the Collatz Rule) eventually contains a 1, after which it must cycle forever.  No matter how large a number we begin with, we have always found that it returns to 1, but mathematicians do not know if this will be so for *any* initial number.
+
+A sequence of Collatz numbers can bounce around quite remarkably before descending to 1.  Our goal in this section is to write a function called `collatz()` that will compute the Collatz sequence for any given initial number and draw a graph of the sequence as well.
+
+First, let's make a function just for the Collatz Rule itself:
+
+```{r}
+collatzRule <- function(m) {
+  if ( m %% 2 == 0) {
+    return(m/2)
+  } else {
+    return(3*m + 1)
+  }
+}
+```
+
+(Recall that `m %% 2` is the remainder of `m` after it is divided by 2.  If this is 0, then `m` is even.)
+
+Next let's try to get a function going that will print out Collatz numbers:
+
+```{r}
+collatz <- function(n) {
+  # n is the initial number
+  while ( n > 1 ) {
+    cat(n, " ", sep = "")
+    # get the next number and call it n:
+    n <- collatzRule(n)
+  }
+}
+```
+
+Let's try it out:
+
+```{r}
+collatz(13)
+```
+
+So far, so good, but if we are going to graph the numbers, then we should store them in a vector.  The problem is that we don't know how long the vector needs to be.
+
+One possible solution is to add to the vector as we go, like this:
+
+```{r}
+collatz <- function(n) {
+  numbers <- numeric()
+  while ( n > 1 ) {
+    # stick n onto the end of numbers:
+    numbers <- c(numbers, n)
+    n <- collatzRule(n)
+  }
+  print(numbers)
+}
+```
+
+Try it out:
+
+```{r}
+collatz(13)
+```
+
+
+This looks good.  There are two problems, though, if the Collatz sequence happens to go on for a very long time.
+
+* **Computation Time**:  the user doesn't know when the sequence will end---if ever!---so she won't know whether a delay in production of the output is due to a long sequence or a problem with the program itself.  as the sequence gets longer, the computation-time is made even longer by the way the following line of code works:
+
+    ```
+    numbers <- c(numbers, n)
+    ```
+R cannot actually "stick" a new element onto the end of a vector.  What it actually does is to move to a new place in memory and create an entirely new vector consisting of all the elements of `numbers` followed by the number `n`.  R then assigns the name `numbers` to this value, freeing up the old place in memory where the previous `numbers` vector lived, but when a vector is very long copying can take a long time.
+
+* **Memory Problems**  Once the `numbers` vector gets long enough it will use all of the memory in the computer that is available to R.  R will crash.
+
+In order to get around this problem, we should impose a limit on the number of Collatz numbers that we will compute.  We'll set the limit at 10,000.  The user can change the limit, but should exercise caution in doing so.  Also, we'll initialize our `numbers` vector to have a length set to this limit.  We can then assign values to elements of an *already existing* vector:  this is much faster than copying entire vectors from scratch.
+
+```{r}
+collatz <- function(n, limit = 10000) {
+  # collatz number swill go in this vector
+  numbers <- numeric(limit)
+  # keep count of how many numbers we have made:
+  counter <- 0
+  while ( n > 1 & counter < limit) {
+    # need to make a new number
+    counter <- counter + 1
+    # put the current number into the vector
+    numbers[counter] <- n
+    # make next Collatz number
+    n <- collatzRule(n)
+  }
+  # find how many Collatz numbers we made:
+  howMany <- min(counter, limit)
+  # print them out:
+  print(numbers[1:howMany])
+}
+```
+
+Again let's try it:
+
+```{r}
+collatz(257)
+```
+
+Things are working pretty well, but since the sequence of numbers might get pretty long, perhaps we should only print out the length of the sequence, and leave it to the reader to say whether the sequence itself should be shown.
+
+```{r}
+collatz <- function(n, limit = 10000) {
+  numbers <- numeric(limit)
+  counter <- 0
+  while ( n > 1 & counter < limit) {
+    counter <- counter + 1
+    numbers[counter] <- n
+    n <- collatzRule(n)
+  }
+  howMany <- min(counter, limit)
+  cat("The Collatz sequence has ", howMany, " elements.\n", sep = "")
+  show <- readline("Do you want to see it (y/n)?  ")
+  if ( show == "y" ) {
+    print(numbers[1:howMany])
+  }
+}
+```
+
+Next let's think about the plot.  We'll use the plotting system in the **ggplot2** package [@R-ggplot2].
+
+```{r eval = F}
+library(ggplot2)
+```
+
+
+```{r include=F}
+library(ggplot2)
+```
+
+Later on we will make a serious study of plotting with **ggplot2**, but for now let's just get the basic idea of plotting a set of points.  First, let's get a small set of points to plot:
+
+```{r}
+xvals <- c(1, 2, 3, 4, 5)
+yvals <- c(3, 7, 2, 4, 3)
+```
+
+`xvals` contains the x-coordinates of our points, and `yvals` contains the corresponding y-coordinates.
+
+We set up a plot as follows:
+
+```{r}
+p <- ggplot(mapping = aes(x = xvals, y = yvals))
+```
+
+The `ggplot()`\index{R-functions!ggplot()@\texttt{ggplot()}} function sets up a basic two-dimensional grid.  The `mapping` parameter explains how data will be "mapped" to particular positions on the plot.  In this case it has been set to:
+
+```
+aes(x = xvals, y = yvals)
+```
+
+`aes` is short for "aesthetics", which has to do with how somethings *looks*.  The expression means that `xvals` will be located on the x-axis and `yvals` will be located on the y-axis of the plot.
+
+Note that the entire plot has been assigned to the variable `p`.  If we want to see the plot we could print p out (see Figure \@ref(fig:blank-ggplot)):
+
+```{r blank-ggplot, out.width = "50%", fig.align="center", fig.cap = "A ggplot2 plot without geoms."}
+print(p)
+```
+
+
+The plot is blank!  Why is this?  Well, although `ggplot()` has been told what values are to be represented on the plot and where they might go, it has not yet been told how they should be shaped:  it has not been told their *geometry*, you might say.  We can add a geometry to `p` to get a picture (see Figure \@ref(fig:pointsggplot):
+
+```{r pointsggplot, out.width = "50%", fig.align="center", fig.cap = "A ggplot2 plot with the point geom."}
+print(p + geom_point())
+```
+
+The geometry determines a lot about the look of the plot.  In order to have the points connected by lines we could add `geom_line()` (see Figure \@ref(fig:pointslinesggplot):
+
+```{r pointslinesggplot, out.width = "50%", fig.align="center", fig.cap = "A ggplot2 plot with point and line geoms."}
+print(p + geom_point() + geom_line())
+```
+
+We'll choose a scatterplot with connecting lines for our graph of the sequence.  With a little more work we can get nice labels for the x and y-axes, and a title for the graph.  Our `collatz()` function now looks like:
+
+```{r}
+collatz <- function(n, limit = 10000) {
+  # record initial numer because will change n
+  initial <- n  
+  numbers <- numeric(limit)
+  counter <- 0
+  while ( n > 1 & counter < limit) {
+    counter <- counter + 1
+    numbers[counter] <- n
+    n <- collatzRule(n)
+  }
+  howMany <- min(counter, limit)
+  cat("The Collatz sequence has ", howMany, " elements.\n", sep = "")
+  show <- readline("Do you want to see it (y/n)?  ")
+  if ( show == "y" ) {
+    print(numbers[1:howMany])
+  }
+  # use initial value to make plot title:
+  plotTitle <- paste0("Collatz Sequence for n = ", initial)
+  # make the plot
+  p <- ggplot(mapping = aes(x = steps, y = number[1:howMany])) +
+    geom_point() + geom_line() +
+    labs( x = "Step", y = "Collatz Value at Step",
+          title = plotTitle)
+  # print it to the Plot Window
+  print(p)
+}
+```
+
+Try this version a few times, like so:
+
+```{r eval = F}
+collatz(257)
+```
+
+It's quite remarkable how much the sequence can rise and fall before hitting 1.
+
+One final consideration is validation\index{validation} of user-input.  we don't want the user to get strange errors if she fails to enter a number worth looking at---a whole number that is greater than 1.
+
+One possible approach is to attempt to coerce the user's input into an integer, using the `as.integer()` function:\index{R-functions!as.integer()@\texttt{as.integer()}}
+
+```{r}
+as.integer(3.6) # will round to nearest integer
+as.integer("4") # will convert string to number 4
+as.integer("4.3") # will convert AND round
+as.integer("hello") # cannot convert to integer
+```
+In the last example, the result is `NA`, and a cryptic warning was issued.  In order to keep the warning from the user, we should wrap any call to `as.integer()` in the suppressWarnings()` function.
+
+Let's try out a piece of code that implements validation:
+
+```{r eval = F}
+n <- -2
+n <- suppressWarnings(as.integer(n))
+isValid <- !is.na(n) && n > 1
+  if (!isValid ) {
+    stop("Need an integer bigger than 1.  Try again.")
+  }
+```
+
+```
+## Error: Need an integer bigger than 1.  Try again.
+```
+
+The `stop()` \index{R-functions!stop()@\texttt{stop()}}function throws a true error that prevents any further code from being executed, but allows us to write a custom, friendly error-message.  The goal of validation is for the user to receive clear and helpful error messages, rather than obscure, technical messages from the depths of R.
+
+The final version of the `collatz()` function appears below.
+
+
+```{r}
+collatz <- function(n, limit = 10000) {
+  # record initial numer because will change n
+  initial <- n 
+  # validation:
+  n <- suppressWarnings(as.integer(n))
+  isValid <- !is.na(n) && n > 1
+  if (!isValid ) {
+    stop("Need an integer bigger than 1.  Try again.")
+  }
+  numbers <- numeric(limit)
+  counter <- 0
+  while ( n > 1 & counter < limit) {
+    counter <- counter + 1
+    numbers[counter] <- n
+    n <- collatzRule(n)
+  }
+  howMany <- min(counter, limit)
+  cat("The Collatz sequence has ", howMany, " elements.\n", sep = "")
+  show <- readline("Do you want to see it (y/n)?  ")
+  if ( show == "y" ) {
+    print(numbers[1:howMany])
+  }
+  plotTitle <- paste0("Collatz Sequence for n = ", initial)
+  p <- ggplot(mapping = aes(x = steps, y = number[1:howMany])) +
+    geom_point() + geom_line() +
+    labs( x = "Step", y = "Collatz Value at Step",
+          title = plotTitle)
+  print(p)
+}
+```
+
+\newpage
+
+## Glossary {-}
+
+Flow Control \index{flow control}
+
+:  The collection of devices within a programming language that allow the computer to make decisions and to repeat tasks.
+
+Condition \index{condition}
+
+:  A Boolean expression that commences an `if` or `while` statement.  If the condition evaluates to `TRUE`, then the code in the body of the statement will be executed.  Otherwise the code will be ignored.
+
+Index Variable \index{index variable}
+
+:  The variable in a `for` loop that takes on each of the values of the iterable in succession.
+
+Iterable \index{iterable}
+
+:  The vector that provides the sequence of values for the index variable in a `for` loop.
+
+Validation \index{validation}
+
+:  The process of checking user input and rejecting it---usually with helpful suggestions---if it is not of the correct form.
+
+\newpage
+
+## Exercises {-}
+
+```{r thinking-flow-control, fig.pos='!h', echo=F, out.width = "50%", fig.align = "center"}
+knitr::include_graphics("images/thinking.png")
+```
+
+```{r echo = F}
+madhavaPI <- function(n) {
+  # make a vector of all of the k's we need:
+  k <- 1:n
+  # make a vector of the first n terms of the sum:
+  terms <- (-1)^(k+1)*4/(2*k-1)
+  # return the sum of the terms:
+  sum(terms)
+}
+madhavaGraph <- function(n = 10) {
+  # validate input:
+  if ( n <= 0 ) {
+    return(cat("You need to enter a positive integer.  Try again!"))
+  }
+  approx <- numeric(n)
+  for ( i in 1:n ) {
+    approx[i] <- madhavaPI(i)
+  }
+  plotTitle <- paste0("The first ", n, " Madhava approximations to pi.")
+  p <- ggplot(mapping = aes(x = 1:n, y = approx)) +
+    geom_point() + geom_line() +
+    labs( x = "k", y = "Approximation using first k terms",
+          title = plotTitle)
+  print(p)
+}
+```
+
+
+1.  The *absolute value* of a number $x$ is defined to be the number $x$ itself if $x \ge 0$, whereas it is opposite of $x$ if $x < 0$.  Thus:
+    * the absolute value of 3 is 3;
+    * the absolute value of -3 is -(-3), which is 3;
+    * the absolute value of -5.7 is -(-5.7), which is 5.7
+    * the absolute value of 0 is 0.
+
+    The absolute value is important enough that R provides the `abs()`\index{R-functions!abs()@\texttt{abs()}} function to compute it.  Thus:
+    
+    ```{r}
+    abs(-3.7)
+    ```
+    
+    Write a function called `absolute()` that computes the absolute value of any given number `x`.  Your code should make no reference to R's `abs()`.
+    
+    **Small Bonus**:  Write the function so that it follows the vector-in, vector-out principle, that is:  when it is given a vector of numbers it returns the vector of their absolute values, like this:
+    
+    ```{r echo=2:3}
+    absolute <- function(x) ifelse(x >= 0, x, -x)
+    vec <- c(-3, 5, -2.7)
+    absolute(vec)
+    ```
+    
+1.  Write a function called `pattern()` that, when given any character $x$ and any positive number $n$, will print the following pattern to the console:
+
+    * a line with just one $x$,
+    * another line with two $x$'s,
+    * another line with three $x$'s,
+    * and so on until ...
+    * a line with $n$ $x$'s, and then
+    * another line with $n-1$ $x$'s,
+    * and so on until ...
+    * a line with just one $x$.
+
+    Thus when the character is `*` and `n` is 5, the output would look like this:
+    
+    ```
+    ## *
+    ## **
+    ## ***
+    ## ****
+    ## *****
+    ## ****
+    ## ***
+    ## **
+    ## *
+    ```
+    
+    The function should take two arguments:
+    
+    * `char`:  the character to repeat.  The default value should be `"*"`.
+    * `n`:  the number of characters in the longest, middle line.  The default value should be 3.
+
+1.  Write a function called `beerTune()` that prints out the complete lyrics to the song *Ninety-Nine Bottles of Beer on the Wall*.  You'll recall that the song goes like this:
+
+    >99 bottles of beer on the wall,
+    
+    >99 bottles of beer!
+    
+    >Take one down and pass it around:
+    
+    >98 bottles of beer on the wall.
+    
+    >98 bottles of beer on the wall,
+    
+    >98 bottles of beer!
+    
+    >Take one down and pass it around:
+    
+    > ...
+    
+    >1 bottle of beer on the wall.
+    
+    >1 bottle of beer!
+    
+    >Take it down and pass it around:
+    
+    >No more bottles of beer on the wall.
+    
+    Make sure to get the lyrics exactly right.  For example, it's "1 bottle", not "1 bottles".
+    
+1.  Recall the function `madhavaPI()` from Section \@ref(default-arguments).  Use this function to write a function called `madhavaGraph()` that will do the following:  given a number $n$, the function uses **ggplot2** to produce a line graph of the first $n$ approximations to $\pi$ using the initial terms of the Madhava series.  The plot should be a line graph similar to the one produced by the `collatz()` functions from this Chapter.  The function should take a single argument `n`, whose default value is 10.  It should validate the input:  if the number entered is not at least 1, then the function should throw an error and explain to the user that the he/she must enter a positive number.
+
+   Here is an example of how the function should work:
+   
+    ```{r eval = F}
+    madhavaGraph(n = -3)
+    ```
+    
+    ```
+    ## You need to enter a positive integer.  Try again!
+    ```
+   
+   Here is another example:
+
+    ```{r eval = F}
+    madhavaGraph(n = 20)
+    ```
+    
+    The output should be as in Figure \@ref(fig:madhavaGraph).
+    
+    ```{r madhavaGraph, out.width = "50%", fig.cap = "This is how the output of the madhavaGraph function should look.", echo = F, fig.align="center"}
+    madhavaGraph(n = 20)
+    ```
+
+1.  **The Subtraction Game.**  In this game there are two players, A and B, and a pile of $n$ pebbles.  The players take turns removing pebbles from the pile.  On each turn , a player can take either one or two pebbles.  The players who takes the last pebble wins the game.
+
+    It turns out that one of the players has a winning strategy.  If the initial number of pebbles is a multiple of 3, then player who goes second has a winning strategy, whereas if the initial number of pebbles is not a multiple of 3 then the player who goes second has the winning strategy.
+    
+    The idea for the winning strategy comes from the following observations:
+    * If there are 3 pebbles left and it's the other player's turn, then you will win.  Why?  Because after the other player removes pebbles there will be either 1 or 2 pebbles left.  In either case you will be able to take the last pebble.
+    * If there are 6 pebbles left and it's the other player's turn, then you will win.  Why?  Because after the other player removes pebbles there will be either 4 or 5 pebbles left.  In either case on your turn you will be able to reduce the number of pebbles to 3.  The game is now in the state of the previous bullet item, where we know that you will win.
+    * If there are 9 pebbles left and it's the other player's turn, then you will win.  Why?  Because after the other player removes pebbles there will be either 7 or 8 pebbles left.  In either case on your turn you will be able to reduce the number of pebbles to 6.  The game is now in the state of the previous bullet item, where we know that you will win.
+    * And so on, for 12 left, 15 left, 18 left, etc.
+    
+    As long as the number of pebbles left is a multiple of 3 and it's the other player's turn, you will win!
+    
+    In this problem you task is to write a function called `subtraction()` will play the Subtraction Game with a user.  The function should take two parameters:
+    * `n`:  the number of pebbles to begin with.  The default value should be 12.
+    * `userFirst`:  a logical parameter that indicates whether the user or the computer plays first.  The default value should be `TRUE`, meaning that the user goes first.
+    
+    Each time the computer plays it should announce how many pebbles it removed, and how many are left.  When there are no pebbles left the computer should say who won and quit the function.
+    
+    The function should play optimally for the computer:
+    * if at the outset the computer has a winning strategy, then the computer should follow it and win.
+    * if at the outset the user has a winning strategy then the computer watch for opportunities to win if the user departs from her winning strategy.
+    

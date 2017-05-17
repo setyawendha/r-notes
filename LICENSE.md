@@ -1,0 +1,3 @@
+This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International Public License:
+
+>[https://creativecommons.org/licenses/by-sa/4.0/legalcode](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
