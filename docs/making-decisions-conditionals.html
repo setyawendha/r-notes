@@ -201,7 +201,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
 <li class="chapter" data-level="4.3.2" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loop-caution"><i class="fa fa-check"></i><b>4.3.2</b> For-Loop Caution</a></li>
 <li class="chapter" data-level="4.3.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#breaking-out-of-a-loop"><i class="fa fa-check"></i><b>4.3.3</b> Breaking Out of a Loop</a></li>
-<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#solving-the-empty-vector-problem-in-for-loops-with-seq_along"><i class="fa fa-check"></i><b>4.3.4</b> Solving the Empty-Vector Problem in <code>for</code>-Loops With <code>seq_along()</code></a></li>
+<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#solving-the-empty-vector-problem-in-for-loops-with-seq_along"><i class="fa fa-check"></i><b>4.3.4</b> Solving the Empty-Vector Problem in <code>for</code>-Loops with <code>seq_along()</code></a></li>
 <li class="chapter" data-level="4.3.5" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#skipping-ahead-in-a-loop"><i class="fa fa-check"></i><b>4.3.5</b> Skipping Ahead in a Loop</a></li>
 <li class="chapter" data-level="4.3.6" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#repeat"><i class="fa fa-check"></i><b>4.3.6</b> Repeat</a></li>
 <li class="chapter" data-level="4.3.7" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#while"><i class="fa fa-check"></i><b>4.3.7</b> While</a></li>
@@ -432,7 +432,7 @@ guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span cla
 if ( guess ==<span class="st"> </span>number ) {
   <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)
 }</code></pre></div>
-<p>The <code>sample()</code> function randomly picks a value from the vector that is is given. The <code>size</code> parameters specifies how many numbers to pick. (This time we only want one number.)</p>
+<p>The <code>sample()</code> function randomly picks a value from the vector that is is given. The <code>size</code> parameter specifies how many numbers to pick. (This time we only want one number.)</p>
 <p>Flow control enters the picture with the reserved word <code>if</code>. Immediately after <code>if</code> is a Boolean expression enclosed in parentheses. This expression is often called the <em>condition</em>. If the condition evaluates to <code>TRUE</code>, then the body of the <code>if</code> statement—the code enclosed in the brackets—will be executed. On the other hand if the condition evaluates to <code>FALSE</code>, then R skips past the bracketed code.<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a></p>
 <p>The code above congratulates the a lucky guesser, but it has nothing at all to say to someone who did not guess correctly. The way to provide an alternative is through the addition of the <code>else</code> reserved-word:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
@@ -464,7 +464,7 @@ if ( guess ==<span class="st"> </span>number ) {
   terms &lt;-<span class="st"> </span>(-<span class="dv">1</span>)^(k<span class="dv">+1</span>)*<span class="dv">4</span>/(<span class="dv">2</span>*k<span class="dv">-1</span>)
   <span class="kw">sum</span>(terms)
 }</code></pre></div>
-<p>Suppose we decide to use <code>if</code> to write in a “talky” option:</p>
+<p>We could use <code>if</code> to write in a “talky” option:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">1000000</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
   k &lt;-<span class="st"> </span><span class="dv">1</span>:n
   terms &lt;-<span class="st"> </span>(-<span class="dv">1</span>)^(k<span class="dv">+1</span>)*<span class="dv">4</span>/(<span class="dv">2</span>*k<span class="dv">-1</span>)

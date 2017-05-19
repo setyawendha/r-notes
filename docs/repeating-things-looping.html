@@ -201,7 +201,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
 <li class="chapter" data-level="4.3.2" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loop-caution"><i class="fa fa-check"></i><b>4.3.2</b> For-Loop Caution</a></li>
 <li class="chapter" data-level="4.3.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#breaking-out-of-a-loop"><i class="fa fa-check"></i><b>4.3.3</b> Breaking Out of a Loop</a></li>
-<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#solving-the-empty-vector-problem-in-for-loops-with-seq_along"><i class="fa fa-check"></i><b>4.3.4</b> Solving the Empty-Vector Problem in <code>for</code>-Loops With <code>seq_along()</code></a></li>
+<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#solving-the-empty-vector-problem-in-for-loops-with-seq_along"><i class="fa fa-check"></i><b>4.3.4</b> Solving the Empty-Vector Problem in <code>for</code>-Loops with <code>seq_along()</code></a></li>
 <li class="chapter" data-level="4.3.5" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#skipping-ahead-in-a-loop"><i class="fa fa-check"></i><b>4.3.5</b> Skipping Ahead in a Loop</a></li>
 <li class="chapter" data-level="4.3.6" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#repeat"><i class="fa fa-check"></i><b>4.3.6</b> Repeat</a></li>
 <li class="chapter" data-level="4.3.7" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#while"><i class="fa fa-check"></i><b>4.3.7</b> While</a></li>
@@ -446,9 +446,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   final expression
 }</code></pre></div>
 <p><code>var</code> is the index variable, and it can be any permitted name for a variable, and <code>seq</code> can be any vector. As R traverses the loop, the value of the index variable <code>var</code> becomes each element of the vector <code>seq</code> in turn. With every change in the value of <code>var</code>, the code in the brackets is executed.</p>
-<p>Ti <em>iterate</em> is do do a thing again and again. The vector <code>seq</code> is is sometimes called an <em>iterable</em>, since it is “iterated over.” It contains the values that the index variable will assume, one by one, as the loop is repeated. </p>
+<p>To <em>iterate</em> is to do a thing again and again. The vector <code>seq</code> is sometimes called an <em>iterable</em>, since it is “iterated over.” It contains the values that the index variable will assume, one by one, as the loop is repeated. </p>
 <p>It’s important to realize that the index variable can have <em>any</em> valid name, and the sequence can be any type of vector at all—not just a sequence of consecutive whole numbers beginning with 1. This level of generality permits a for-loop to automate a wide variety of tasks, and for its code to be written in a way that evokes the operations being performed.</p>
-<p>For example, here is a loop to print out the some greetings;</p>
+<p>For example, here is a loop to print out some greetings;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Tin Man&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Lion&quot;</span>)
 for ( person in people ) {
   <span class="kw">cat</span>(<span class="st">&quot;Hello, &quot;</span>, person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
@@ -517,7 +517,7 @@ listDays &lt;-<span class="st"> </span>function(days) {
 </div>
 <div id="breaking-out-of-a-loop" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> Breaking Out of a Loop</h3>
-<p>Sometimes you finish the task of interest before you are done with the loop. If this is a possibility for you then you may arrange to break out of the loop with the <code>break</code> reserved-word.</p>
+<p>Sometimes you finish the task at hand before you are done with the loop. If this is a possibility for you then you may arrange to break out of the loop with the <code>break</code> reserved-word.</p>
 <p>Suppose for example that you want a function that searches through a vector for a given element, updating the user along the way as to the progress of the search. You can try something like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># function to find index of element in vector.</span>
 <span class="co"># returns -1 if elem is not in vector</span>
@@ -551,15 +551,21 @@ verboseSearch &lt;-<span class="st"> </span>function(elem, vec) {
   
   if ( found ) {
     <span class="co"># report success:</span>
-    <span class="kw">cat</span>(<span class="st">&quot;Found &quot;</span>, elem, <span class="st">&quot; at index &quot;</span>, i, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+    <span class="kw">cat</span>(<span class="st">&quot;Found &quot;</span>, elem, <span class="st">&quot; at index &quot;</span>, i, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">return</span>(i)
   } else {
     <span class="co"># report failure:</span>
-    <span class="kw">cat</span>(elem, <span class="st">&quot; is not in the vector.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+    <span class="kw">cat</span>(elem, <span class="st">&quot; is not in the vector.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">return</span>(-<span class="dv">1</span>)
   }
 }</code></pre></div>
-<p>Note the initial check on the length of the vector. This is actually important. If a user were to enter an empty vector, then it length would be 0. Then in the loop the sequence would be <code>1:0</code>, which is the vector with elements 1 and 0. But look at what happens when you ask for any element of a zero-length vector:</p>
+<p>Let’s see our function in action:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Tin Man&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Lion&quot;</span>)
+scarecrowPlace &lt;-<span class="st"> </span><span class="kw">verboseSearch</span>(<span class="st">&quot;Scarecrow&quot;</span>, people)</code></pre></div>
+<pre><code>## Checked index 1 in the vector.  No match there ...
+## Checked index 2 in the vector.  No match there ...
+## Found Scarecrow at index 3.</code></pre>
+<p>In the code for <code>verboseSearch()</code> you will notice that there is an initial check on the length of the vector. This is actually important. If a user were to enter an empty vector, then it length would be 0. Then in the loop the sequence would be <code>1:0</code>, which is the vector with elements 1 and 0. But look at what happens when you ask for any element of a zero-length vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emptyVec &lt;-<span class="st"> </span><span class="kw">character</span>(<span class="dv">0</span>)
 emptyVec[<span class="dv">1</span>]  <span class="co"># You get NA</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
@@ -572,15 +578,9 @@ emptyVec[<span class="dv">1</span>]  <span class="co"># You get NA</span></code>
 }</code></pre></div>
 <pre><code>## Error in if (NA) { : missing value where TRUE/FALSE needed</code></pre>
 <p>Checking that the input vector has positive length is an example of <em>validating</em>  input. When you write functions for other people to use you will find that it’s important to validate their input instead of allowing R to throw obscure error messages at them.</p>
-<p>Let’s see our function in action:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Tin Man&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Lion&quot;</span>)
-scarecrowPlace &lt;-<span class="st"> </span><span class="kw">verboseSearch</span>(<span class="st">&quot;Scarecrow&quot;</span>, people)</code></pre></div>
-<pre><code>## Checked index 1 in the vector.  No match there ...
-## Checked index 2 in the vector.  No match there ...
-## Found Scarecrow at index 3.</code></pre>
 </div>
 <div id="solving-the-empty-vector-problem-in-for-loops-with-seq_along" class="section level3">
-<h3><span class="header-section-number">4.3.4</span> Solving the Empty-Vector Problem in <code>for</code>-Loops With <code>seq_along()</code></h3>
+<h3><span class="header-section-number">4.3.4</span> Solving the Empty-Vector Problem in <code>for</code>-Loops with <code>seq_along()</code></h3>
 <p>In the previous section we considered a possible problem with <code>for</code>-loops of the following form:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for ( i in <span class="dv">1</span>:<span class="kw">length</span>(vec) ) {
   ## do something ...
@@ -713,11 +713,11 @@ You are correct!  Thanks for playing!</code></pre>
 
   if ( found ) {
     <span class="co"># report success:</span>
-    <span class="kw">cat</span>(<span class="st">&quot;Found &quot;</span>, elem, <span class="st">&quot; at index &quot;</span>, i, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+    <span class="kw">cat</span>(<span class="st">&quot;Found &quot;</span>, elem, <span class="st">&quot; at index &quot;</span>, i, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">return</span>(i)
   } else {
     <span class="co"># report failure:</span>
-    <span class="kw">cat</span>(elem, <span class="st">&quot; is not in the vector.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+    <span class="kw">cat</span>(elem, <span class="st">&quot; is not in the vector.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">return</span>(-<span class="dv">1</span>)
   }
 }</code></pre></div>

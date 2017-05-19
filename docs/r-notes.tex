@@ -5460,7 +5460,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x103f7e1c0>
+## <bytecode: 0x10cb19b80>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -6197,12 +6197,13 @@ will learn how flow control is implemented in R.
 \section{Prologue: Prompting the
 User}\label{prologue-prompting-the-user}
 
-Before we get started in flow control itself, let's address the question
-of how we might extract information from someone who runs our our code.
+Before we get started with flow control itself, let's address the
+question of how we might extract information from someone who runs our
+our code.
 
-Up to this point any information that we want to process has to be
-entered into the code itself. For example, if we want to print out a
-name to the console, we have to provide that name in the code, like
+Up to this point any information that we have wanted to process has had
+to be entered into the code itself. For example, if we want to print out
+a name to the console, we have to provide that name in the code, like
 this:
 
 \begin{Shaded}
@@ -6289,7 +6290,7 @@ Let's design a simple guessing-game for the user:
 
 The \texttt{sample()}
 \index{R-functions!sample()@\texttt{sample()}}function randomly picks a
-value from the vector that is is given. The \texttt{size} parameters
+value from the vector that is is given. The \texttt{size} parameter
 specifies how many numbers to pick. (This time we only want one number.)
 
 Flow control enters the picture with the reserved word
@@ -6355,7 +6356,7 @@ Let's think again about the \(\pi\)-computing function from Section
 \end{Highlighting}
 \end{Shaded}
 
-Suppose we decide to use \texttt{if} to write in a ``talky'' option:
+We could use \texttt{if} to write in a ``talky'' option:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6777,8 +6778,8 @@ the value of the index variable \texttt{var} becomes each element of the
 vector \texttt{seq} in turn. With every change in the value of
 \texttt{var}, the code in the brackets is executed.
 
-Ti \emph{iterate} is do do a thing again and again. The vector
-\texttt{seq} is is sometimes called an \emph{iterable}, since it is
+To \emph{iterate} is to do a thing again and again. The vector
+\texttt{seq} is sometimes called an \emph{iterable}, since it is
 ``iterated over.'' It contains the values that the index variable will
 assume, one by one, as the loop is repeated. \index{iterable}
 
@@ -6789,7 +6790,7 @@ generality permits a for-loop to automate a wide variety of tasks, and
 for its code to be written in a way that evokes the operations being
 performed.
 
-For example, here is a loop to print out the some greetings;
+For example, here is a loop to print out some greetings;
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6965,9 +6966,9 @@ your variable is outside of it.
 
 \subsection{Breaking Out of a Loop}\label{breaking-out-of-a-loop}
 
-Sometimes you finish the task of interest before you are done with the
-loop. If this is a possibility for you then you may arrange to break out
-of the loop with the \texttt{break}\index{break@\texttt{break}}
+Sometimes you finish the task at hand before you are done with the loop.
+If this is a possibility for you then you may arrange to break out of
+the loop with the \texttt{break}\index{break@\texttt{break}}
 reserved-word.
 
 Suppose for example that you want a function that searches through a
@@ -7008,18 +7009,34 @@ progress of the search. You can try something like this:
   
   \NormalTok{if ( found ) \{}
     \CommentTok{# report success:}
-    \KeywordTok{cat}\NormalTok{(}\StringTok{"Found "}\NormalTok{, elem, }\StringTok{" at index "}\NormalTok{, i, }\StringTok{"."}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"Found "}\NormalTok{, elem, }\StringTok{" at index "}\NormalTok{, i, }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
     \KeywordTok{return}\NormalTok{(i)}
   \NormalTok{\} else \{}
     \CommentTok{# report failure:}
-    \KeywordTok{cat}\NormalTok{(elem, }\StringTok{" is not in the vector."}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+    \KeywordTok{cat}\NormalTok{(elem, }\StringTok{" is not in the vector.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
     \KeywordTok{return}\NormalTok{(-}\DecValTok{1}\NormalTok{)}
   \NormalTok{\}}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
-Note the initial check on the length of the vector. This is actually
+Let's see our function in action:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{people <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Dorothy"}\NormalTok{, }\StringTok{"Tin Man"}\NormalTok{, }\StringTok{"Scarecrow"}\NormalTok{, }\StringTok{"Lion"}\NormalTok{)}
+\NormalTok{scarecrowPlace <-}\StringTok{ }\KeywordTok{verboseSearch}\NormalTok{(}\StringTok{"Scarecrow"}\NormalTok{, people)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Checked index 1 in the vector.  No match there ...
+## Checked index 2 in the vector.  No match there ...
+## Found Scarecrow at index 3.
+\end{verbatim}
+
+In the code for \texttt{verboseSearch()} you will notice that there is
+an initial check on the length of the vector. This is actually
 important. If a user were to enter an empty vector, then it length would
 be 0. Then in the loop the sequence would be \texttt{1:0}, which is the
 vector with elements 1 and 0. But look at what happens when you ask for
@@ -7068,24 +7085,9 @@ Checking that the input vector has positive length is an example of
 other people to use you will find that it's important to validate their
 input instead of allowing R to throw obscure error messages at them.
 
-Let's see our function in action:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{people <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Dorothy"}\NormalTok{, }\StringTok{"Tin Man"}\NormalTok{, }\StringTok{"Scarecrow"}\NormalTok{, }\StringTok{"Lion"}\NormalTok{)}
-\NormalTok{scarecrowPlace <-}\StringTok{ }\KeywordTok{verboseSearch}\NormalTok{(}\StringTok{"Scarecrow"}\NormalTok{, people)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Checked index 1 in the vector.  No match there ...
-## Checked index 2 in the vector.  No match there ...
-## Found Scarecrow at index 3.
-\end{verbatim}
-
 \subsection{\texorpdfstring{Solving the Empty-Vector Problem in
-\texttt{for}-Loops With
-\texttt{seq\_along()}}{Solving the Empty-Vector Problem in for-Loops With seq\_along()}}\label{solving-the-empty-vector-problem-in-for-loops-with-seq_along}
+\texttt{for}-Loops with
+\texttt{seq\_along()}}{Solving the Empty-Vector Problem in for-Loops with seq\_along()}}\label{solving-the-empty-vector-problem-in-for-loops-with-seq_along}
 
 In the previous section we considered a possible problem with
 \texttt{for}-loops of the following form:
@@ -7345,11 +7347,11 @@ never executed.
 
   \NormalTok{if ( found ) \{}
     \CommentTok{# report success:}
-    \KeywordTok{cat}\NormalTok{(}\StringTok{"Found "}\NormalTok{, elem, }\StringTok{" at index "}\NormalTok{, i, }\StringTok{"."}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"Found "}\NormalTok{, elem, }\StringTok{" at index "}\NormalTok{, i, }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
     \KeywordTok{return}\NormalTok{(i)}
   \NormalTok{\} else \{}
     \CommentTok{# report failure:}
-    \KeywordTok{cat}\NormalTok{(elem, }\StringTok{" is not in the vector."}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+    \KeywordTok{cat}\NormalTok{(elem, }\StringTok{" is not in the vector.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
     \KeywordTok{return}\NormalTok{(-}\DecValTok{1}\NormalTok{)}
   \NormalTok{\}}
 \NormalTok{\}}
@@ -7377,7 +7379,7 @@ For example, start with 13. We proceed as follows:
 \begin{itemize}
 \tightlist
 \item
-  13 is odd, so compute \(3 \times 13 + 1 - 40\).
+  13 is odd, so compute \(3 \times 13 + 1 = 40\).
 \item
   40 is even, so compute \(40/2 = 20\).
 \item
@@ -9840,7 +9842,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-05-19 09:03:07 EDT"
+## [1] "2017-05-19 12:58:51 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9852,7 +9854,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1495198987
+## [1] 1495213131
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -21010,7 +21012,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1279db368"
+## [1] "0x13bf3ec18"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21024,7 +21026,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1279db368"
+## [1] "0x13bf3ec18"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21063,7 +21065,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1279db368"
+## [1] "0x13bf3ec18"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21076,7 +21078,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x125637f78"
+## [1] "0x1267bd608"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21094,7 +21096,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1279db368"
+## [1] "0x13bf3ec18"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21138,7 +21140,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1214335f8" "0x1214335f8"
+## [1] "0x139155d18" "0x139155d18"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21177,7 +21179,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1214335f8" "0x1214335f8"
+## [1] "0x139155d18" "0x139155d18"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21219,7 +21221,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1214335f8" "0x1188f81f0"
+## [1] "0x139155d18" "0x102609f90"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

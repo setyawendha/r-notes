@@ -12,9 +12,9 @@ Flow control encompasses the tools in a programming language that allow the comp
 
 ## Prologue:  Prompting the User
 
-Before we get started in flow control itself, let's address the question of how we might extract information from someone who runs our our code.
+Before we get started with flow control itself, let's address the question of how we might extract information from someone who runs our our code.
 
-Up to this point any information that we want to process has to be entered into the code itself.  For example, if we want to print out a name to the console, we have to provide that name in the code, like this:
+Up to this point any information that we have wanted to process has had to be entered into the code itself.  For example, if we want to print out a name to the console, we have to provide that name in the code, like this:
 
 ```{r}
 person <- "Dorothy"
@@ -67,7 +67,7 @@ if ( guess == number ) {
 }
 ```
 
-The `sample()` \index{R-functions!sample()@\texttt{sample()}}function randomly picks a value from the vector that is is given.  The `size` parameters specifies how many numbers to pick. (This time we only want one number.)
+The `sample()` \index{R-functions!sample()@\texttt{sample()}}function randomly picks a value from the vector that is is given.  The `size` parameter specifies how many numbers to pick. (This time we only want one number.)
 
 Flow control enters the picture with the reserved word `if`\index{if@\texttt{if}}.  Immediately after `if` is a Boolean expression enclosed in parentheses.  This expression is often called the *condition*.  \index{condition}If the condition evaluates to `TRUE`, then the body of the `if` statement---the code enclosed in the brackets---will be executed.  On the other hand if the condition evaluates to `FALSE`, then R skips past the bracketed code.^[Actually you don't need the brackets if you plan to put only one expression in them.  Many people keep the brackets, though, for the sake of clarity.]
 
@@ -113,7 +113,7 @@ madhavaPI <- function(n = 1000000) {
 }
 ```
 
-Suppose we decide to use `if` to write in a "talky" option:
+We could use `if` to write in a "talky" option:
 
 ```{r}
 madhavaPI <- function(n = 1000000, verbose = FALSE) {
@@ -357,11 +357,11 @@ for ( var in seq ) {
 
 `var` is the index variable, and it can be any permitted name for a variable, and `seq` can be any vector.  As R traverses the loop, the value of the index variable `var` becomes each element of the vector `seq` in turn.  With every change in the value of `var`, the code in the brackets is executed.
 
-Ti *iterate* is do do a thing again and again.  The vector `seq` is is sometimes called an *iterable*, since it is "iterated over."  It contains the values that the index variable will assume, one by one, as the loop is repeated. \index{iterable}
+To *iterate* is to do a thing again and again.  The vector `seq` is sometimes called an *iterable*, since it is "iterated over."  It contains the values that the index variable will assume, one by one, as the loop is repeated. \index{iterable}
 
 It's important to realize that the index variable can have *any* valid name, and the sequence can be any type of vector at all---not just a sequence of consecutive whole numbers beginning with 1.  This level of generality permits a for-loop to automate a wide variety of tasks, and for its code to be written in a way that evokes the operations being performed.
 
-For example, here is a loop to print out the some greetings;
+For example, here is a loop to print out some greetings;
 
 ```{r}
 people <- c("Dorothy", "Tin Man", "Scarecrow", "Lion")
@@ -439,7 +439,7 @@ cat("Today is still ", day, ".\n", sep = "")
 
 ### Breaking Out of a Loop
 
-Sometimes you finish the task of interest before you are done with the loop.  If this is a possibility for you then you may arrange to break out of the loop with the `break`\index{break@\texttt{break}} reserved-word.  
+Sometimes you finish the task at hand before you are done with the loop.  If this is a possibility for you then you may arrange to break out of the loop with the `break`\index{break@\texttt{break}} reserved-word.  
 
 Suppose for example that you want a function that searches through a vector for a given element, updating the user along the way as to the progress of the search.  You can try something like this:
 
@@ -476,17 +476,26 @@ verboseSearch <- function(elem, vec) {
   
   if ( found ) {
     # report success:
-    cat("Found ", elem, " at index ", i, ".", sep = "")
+    cat("Found ", elem, " at index ", i, ".\n", sep = "")
     return(i)
   } else {
     # report failure:
-    cat(elem, " is not in the vector.", sep = "")
+    cat(elem, " is not in the vector.\n", sep = "")
     return(-1)
   }
 }
 ```
 
-Note the initial check on the length of the vector.  This is actually important.  If a user were to enter an empty vector, then it length would be 0.  Then in the loop the sequence would be `1:0`, which is the vector with elements 1 and 0.  But look at what happens when you ask for any element of a zero-length vector:
+Let's see our function in action:
+
+```{r}
+people <- c("Dorothy", "Tin Man", "Scarecrow", "Lion")
+scarecrowPlace <- verboseSearch("Scarecrow", people)
+```
+
+
+
+In the code for `verboseSearch()` you will notice that there is an initial check on the length of the vector.  This is actually important.  If a user were to enter an empty vector, then it length would be 0.  Then in the loop the sequence would be `1:0`, which is the vector with elements 1 and 0.  But look at what happens when you ask for any element of a zero-length vector:
 
 ```{r}
 emptyVec <- character(0)
@@ -513,14 +522,9 @@ if ( NA ) {
 
 Checking that the input vector has positive length is an example of *validating* \index{validation} input.  When you write functions for other people to use you will find that it's important to validate their input instead of allowing R to throw obscure error messages at them.
 
-Let's see our function in action:
 
-```{r}
-people <- c("Dorothy", "Tin Man", "Scarecrow", "Lion")
-scarecrowPlace <- verboseSearch("Scarecrow", people)
-```
 
-### Solving the Empty-Vector Problem in `for`-Loops With `seq_along()`
+### Solving the Empty-Vector Problem in `for`-Loops with `seq_along()`
 
 In the previous section we considered a possible problem with `for`-loops of the following form:
 
@@ -699,11 +703,11 @@ verboseSearch <- function(elem, vec) {
 
   if ( found ) {
     # report success:
-    cat("Found ", elem, " at index ", i, ".", sep = "")
+    cat("Found ", elem, " at index ", i, ".\n", sep = "")
     return(i)
   } else {
     # report failure:
-    cat(elem, " is not in the vector.", sep = "")
+    cat(elem, " is not in the vector.\n", sep = "")
     return(-1)
   }
 }
@@ -720,7 +724,7 @@ Now apply the rule to the resulting number, then apply the rule again to the num
 
 For example, start with 13.  We proceed as follows:
 
-* 13 is odd, so compute $3 \times 13 + 1 - 40$.
+* 13 is odd, so compute $3 \times 13 + 1 = 40$.
 * 40 is even, so compute $40/2 = 20$.
 * 20 is even, so compute $20/2 = 10$.
 * 10 is even, so compute $10/2 = 5$.
