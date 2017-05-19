@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-17">
+<meta name="date" content="2017-05-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -107,7 +107,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="0.1" data-path="the-why-of-these-notes-remarks-for-colleagues.html"><a href="the-why-of-these-notes-remarks-for-colleagues.html"><i class="fa fa-check"></i><b>0.1</b> The Why of these Notes: Remarks for Colleagues</a></li>
 <li class="chapter" data-level="0.2" data-path="history-of-r.html"><a href="history-of-r.html"><i class="fa fa-check"></i><b>0.2</b> History of R</a></li>
 <li class="chapter" data-level="0.3" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
-<li class="chapter" data-level="0.4" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
+<li class="chapter" data-level="0.4" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html"><i class="fa fa-check"></i><b>0.4</b> Miscellaneous Information</a><ul>
+<li class="chapter" data-level="0.4.1" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#typographical-conventions"><i class="fa fa-check"></i><b>0.4.1</b> Typographical Conventions</a></li>
+<li class="chapter" data-level="0.4.2" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#license"><i class="fa fa-check"></i><b>0.4.2</b> License</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
 <li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
@@ -511,14 +514,14 @@ a &lt;<span class="st"> </span>b</code></pre></div>
 </div>
 <div id="equality" class="section level4">
 <h4><span class="header-section-number">2.4.1.2</span> Equality</h4>
-<p>The equality (<code>==</code>) operator indicates whether the expression being compared evaluate to the same value. Note that it’s made with <em>two</em> equal-signs, not one! It’s all about evaluation to the same value, not strict identity. The following examples will help to clarify this.</p>
+<p>The equality (<code>==</code>) operator indicates whether the expressions being compared evaluate to the same value. Note that it’s made with <em>two</em> equal-signs, not one! It’s all about evaluation to the same value, not strict identity. The following examples will help to clarify this.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Dorothy =</span> <span class="dv">1</span>,<span class="dt">Toto =</span> <span class="dv">2</span>) <span class="co"># a named vector</span>
 b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Glinda =</span> <span class="dv">1</span>, <span class="dt">Tinman =</span> <span class="dv">2</span>)
 a ==<span class="st"> </span>b</code></pre></div>
 <pre><code>## Dorothy    Toto 
 ##    TRUE    TRUE</code></pre>
 <p>(Note that the resulting logical vector inherits the names of <code>a</code>, the vector on the left.).</p>
-<p>But <code>a</code> and <code>b</code> aren’t *identical<code>.  We can see this because R has the function</code>identical()` to test for identity:</p>
+<p>But <code>a</code> and <code>b</code> aren’t <em>identical</em>. We can see this because R has the function <code>identical()</code> to test for identity:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(a, b)</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>Corresponding elements of <code>a</code> and <code>b</code> have the same values, but the two vectors don’t have the same set of names, so they aren’t considered identical.</p>
@@ -541,7 +544,7 @@ a &amp;<span class="st"> </span>b</code></pre></div>
 b &lt;-<span class="st"> </span><span class="kw">c</span>(T, F, T, F)
 a |<span class="st"> </span>b</code></pre></div>
 <pre><code>## [1]  TRUE  TRUE  TRUE FALSE</code></pre>
-<p>The <code>&amp;&amp;</code> and <code>||</code> operators follow the “and” and “or” logical respectively, but are applied only to the first elements of the vectors being compared:</p>
+<p>The <code>&amp;&amp;</code> and <code>||</code> operators follow the “and” and “or” logic respectively, but are applied only to the first elements of the vectors being compared:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, T)
 b &lt;-<span class="st"> </span><span class="kw">c</span>(F, T)
 a &amp;&amp;<span class="st"> </span>b</code></pre></div>

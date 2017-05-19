@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-05-17}
+  \date{2017-05-18}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -574,7 +574,35 @@ My wife \emph{Mary Lou} and daughters \emph{Clare}, \emph{Catherine} and
 \emph{Agnes}, for patience and support. By now they have heard quite
 enough about programming.
 
-\section{License}\label{license}
+\section{Miscellaneous Information}\label{miscellaneous-information}
+
+\subsection{Typographical Conventions}\label{typographical-conventions}
+
+Computer code, whether within a line of text or as displayed text,
+appears like this: \texttt{code\ snippet}.
+
+Identifiers are represented as is (e.g., \texttt{variableName},
+if\texttt{,}else\texttt{,}while\texttt{,\ etc.)\ except\ for\ the\ names\ of\ functions,\ whihc\ are\ followed\ by\ a\ pair\ of\ parentheses\ in\ order\ to\ stress\ their\ status\ as\ functions.\ \ Thus\ we\ write}length()\texttt{for\ the}length`-function.
+
+Displayed text representing output to the console appears with double
+hash-tags at the beginning of each line, thus:
+
+\begin{verbatim}
+## R is free software and comes with ABSOLUTELY NO WARRANTY.
+## You are welcome to redistribute it under certain conditions.
+## Type 'license()' or 'licence()' for distribution details.
+\end{verbatim}
+
+The hashtags themsevles are not present in the output itself.
+
+Names of R-package are in boldface, thus: package \textbf{devtools}.
+
+Terms are italicized when they are first introduced, e.g.: ``R follows a
+set of internal rules to \emph{coerce} some of the values to a new type
+in such a way that all resulting values are of the same type.''
+Italicization can also indicate emphasis.
+
+\subsection{License}\label{license}
 
 These Notes are licensed under the Creative Commons
 Attribution-ShareAlike 4.0 International Public License:
@@ -1358,23 +1386,23 @@ we will devote all of Chapter \ref{strings} to them.
 
 \begin{description}
 \item[Computer Program \index{computer program}]
-a sequence of instructions that performs a specific task when executed
+A sequence of instructions that performs a specific task when executed
 by a computer.
 \item[String]
-a value in a computer program that constitutes text (as opposed to
+A value in a computer program that constitutes text (as opposed to
 numbers of some other type of data).
 \item[Interactive Mode \index{interactive mode}]
-a type of engagment between a human and a computer in which the computer
+A type of engagment between a human and a computer in which the computer
 prompts the humand for data and/or commands and may respond with output
 that the human can read and/or interpret.
 \item[Read-Evaluate-Print Loop \index{REPL}]
-an interactive cycle in which the R-interpreter reads an expression from
+An interactive cycle in which the R-interpreter reads an expression from
 the console, evaluates it, and prints out the value to the console.
 \item[Data Structure \index{data structure}]
-a particular way of organizing information in an computer program so
+A particular way of organizing information in an computer program so
 that it can be used efficiently.
 \item[Delimiter]
-a character in a programing languages that is used to mark the beginning
+A character in a programing languages that is used to mark the beginning
 and/or end of a value.
 \end{description}
 
@@ -1442,7 +1470,7 @@ and/or end of a value.
 
 This Chapter gets you started officially with R. While the theme is
 \emph{vectors}\index{vector}, the most important data structure in R,
-we'll learn also about variables and variable names, data types,
+we'll learn also about variables and variable names, vector types,
 reserved words, assignment and many of R's basic operators.
 
 \newpage
@@ -1450,7 +1478,7 @@ reserved words, assignment and many of R's basic operators.
 \section{What is a Vector?}\label{what-is-a-vector}
 
 If you have heard of vectors before in mathematics, you might think of a
-vector as something that has a magnitude and a direction , and that can
+vector as something that has a magnitude and a direction, and that can
 be represented by a sequence of numbers. In its notion of a vector, R
 keeps the idea of a sequence but discards magnitude and direction. The
 notion of ``numbers'' isn't even necessary.
@@ -1468,10 +1496,10 @@ sort of vectors:
   sort of R-object at all.
 \end{itemize}
 
-For now, we'll just study atomic vectors. Let's make a few vectors, as
+For now we'll just study atomic vectors. Let's make a few vectors, as
 examples.
 
-First of all, we make a vector of numbers using the
+We can make a vector of numbers using the
 \texttt{c()}\index{R-functions!c()@\texttt{c()}} function:
 
 \begin{Shaded}
@@ -1493,21 +1521,20 @@ takes its arguments, all of which are separated by commas, and combines
 them to make a vector.
 
 If you closely examine the above output, you'll notice that R printed
-out all of the numerical values in the vector the to three decimal
-places, which happened to be the largest number of decimal places we
-assigned to any of the numbers that made up \texttt{numVec}. You'll also
-notice the numbers in brackets at the beginning of the lines. Each
-number represent the position within the vector occupied by the first
-element of the vector that is printed on the line. The position of an
-element in a vector is called its \emph{index}\index{index}. Reporting
-the indices of leading elements helps you locate particular elements in
-the output.
+out all of the numerical values in the vector to three decimal places,
+which happened to be the largest number of decimal places we assigned to
+any of the numbers that made up \texttt{numVec}. You'll also notice the
+numbers in brackets at the beginning of the lines. Each number
+represents the position within the vector occupied by the first element
+of the vector that is printed on the line. The position of an element in
+a vector is called its \emph{index}\index{index}. Reporting the indices
+of leading elements helps you locate particular elements in the output.
 
 \subsection{Types of Atomic Vectors}\label{types-of-atomic-vectors}
 
 The numbers in \texttt{numVec} are what programmers call
-``double-precision'' decimal numbers. You can verify this for yourself
-with the \texttt{typeof()}\index{R-functions!typeof()@\texttt{typeof()}}
+\emph{double-precision} numbers. You can verify this for yourself with
+the \texttt{typeof()}\index{R-functions!typeof()@\texttt{typeof()}}
 function:
 
 \begin{Shaded}
@@ -1551,8 +1578,8 @@ Let's look at examples of the other types. Here is a vector of type
 \end{verbatim}
 
 The \texttt{L} after each number signifies to R that the number should
-be stored in memory as an integer, rather than in decimal format.
-Officially, the type is \texttt{integer}:
+be stored in memory as an integer, rather than in double-precision
+format. Officially, the type is \texttt{integer}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1831,7 +1858,7 @@ Some folks say that everything in R is a vector. That's a bit of an
 exaggeration but it's remarkably close to the truth.
 
 And yet it seems implausible. What about the elements of an atomic
-vector, for instance. A single element doesn't look at all like a
+vector, for instance? A single element doesn't look at all like a
 vector: it's a value, not a \emph{sequence} of values.
 
 Or so we might think. But really, in R there are no ``single values''
@@ -2009,7 +2036,7 @@ same thing with:
 
 Further reduction in typing may be achieved as long as we remember the
 order in which R expects the parameters (\texttt{from} before
-\texttt{to}, then \texttt{step} if supplied):
+\texttt{to}, then \texttt{by} if supplied):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2163,8 +2190,8 @@ complex patterns concisely:
 ##  [1]  5  5  3  3  1  1 -1 -1 -3 -3  5  5  3  3  1  1 -1 -1 -3 -3
 \end{verbatim}
 
-In order to create 50 10's followed by 50 30's followed by 50 50's I
-would write:
+In order to create fifty 10's followed by fifty 30's followed by fifty
+50's I would write:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2315,7 +2342,7 @@ help:
 ## 23 14 82 33 33 45
 \end{verbatim}
 
-If a vector has names we can refers to its elements using the subsetting
+If a vector has names we can refer to its elements using the subsetting
 operator and those names:
 
 \begin{Shaded}
@@ -2562,7 +2589,7 @@ The reasons for the evaluation above are as follows:
 
 \subsubsection{Equality}\label{equality}
 
-The equality (\texttt{==}) operator indicates whether the expression
+The equality (\texttt{==}) operator indicates whether the expressions
 being compared evaluate to the same value. Note that it's made with
 \emph{two} equal-signs, not one! It's all about evaluation to the same
 value, not strict identity. The following examples will help to clarify
@@ -2584,9 +2611,8 @@ this.
 (Note that the resulting logical vector inherits the names of
 \texttt{a}, the vector on the left.).
 
-But \texttt{a} and \texttt{b} aren't
-*identical\texttt{.\ \ We\ can\ see\ this\ because\ R\ has\ the\ function}identical()`
-to test for identity:
+But \texttt{a} and \texttt{b} aren't \emph{identical}. We can see this
+because R has the function \texttt{identical()} to test for identity:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2667,8 +2693,8 @@ with this line of thinking:
 \end{verbatim}
 
 The \texttt{\&\&} and \texttt{\textbar{}\textbar{}} operators follow the
-``and'' and ``or'' logical respectively, but are applied only to the
-first elements of the vectors being compared:
+``and'' and ``or'' logic respectively, but are applied only to the first
+elements of the vectors being compared:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2761,9 +2787,9 @@ compared?
 
 They cannot, in fact, be compared. Instead the shorter of the two
 vectors---the \texttt{4}---is \emph{recycled} into the
-\texttt{c(4,4,4,4,4)} a vector of length 5, which may then be compared
-element-wise with \texttt{vec}. Recycling is a great convenience as it
-allows us to express an idea clearly and concisely.
+\texttt{c(4,4,4,4,4)} a vector of length five, which may then be
+compared element-wise with \texttt{vec}. Recycling is a great
+convenience as it allows us to express an idea clearly and concisely.
 
 Recycling is always performed on the shorter of two vectors. Consider
 the example below:
@@ -2820,8 +2846,8 @@ function:
 Vectors}\label{subsetting-with-logical-vectors}
 
 The subsetting we have seen up to now involves specifying the
-\emph{indices} of the elements we wold like to select from the original
-vector. It is also possible to say, for each elements, \emph{whether or
+\emph{indices} of the elements we would like to select from the original
+vector. It is also possible to say, for each element, \emph{whether or
 not it is to be included} in our selection. This is accomplished by
 means of logical vectors.
 
@@ -2854,7 +2880,7 @@ can use a logical vector to do this:
 \end{verbatim}
 
 The \texttt{T}'s at indices 1, 2, and 4 in \texttt{wanted} inform R that
-we want the heights vector at indices 1, 2 and 4. The \texttt{f}'s say:
+we want the heights vector at indices 1, 2 and 4. The \texttt{F}'s say:
 ``don't include this element!''
 
 Subsetting can be used powerfully along with logical vectors and Boolean
@@ -2911,7 +2937,7 @@ I like to pronounce the above as:
 The word ``where'' in the above phrase corresponds to the subsetting
 operator.
 
-You subsetting logical vector need not have been constructed with the
+Your subsetting logical vector need not have been constructed with the
 original vector in mind. Consider the following example:
 
 \begin{Shaded}
@@ -2953,7 +2979,7 @@ following:
 \subsection{Counting}\label{counting}
 
 Logical subsetting provides a convenient way to \emph{count} the
-elements of a vector that possess a given property. For example,to find
+elements of a vector that possess a given property. For example, to find
 out how many elements of \texttt{people} are less than 70 we could say:
 
 \begin{Shaded}
@@ -3013,7 +3039,7 @@ When we subset using this vector we get an odd result:
 Since R doesn't know whether or not to select Toto, it records its
 indecision by including an \texttt{NA} in the result. That \texttt{NA},
 however, is not the \texttt{NA} for Toto's height in the vector
-\texttt{heights}, so it can't inherit the ``Toto'' name. since it has no
+\texttt{heights}, so it can't inherit the ``Toto'' name. Since it has no
 name, R presents its name as \texttt{\textless{}NA\textgreater{}}.
 
 If we try to count the number of tall persons, we get a misleading
@@ -3035,7 +3061,7 @@ We would have preferred something like:
 ``Three, with another one undecided.''
 \end{quote}
 
-Counting is one those situations in which we might wish to removed
+Counting is one those situations in which we might wish to remove
 \texttt{NA} values at the start. If the vector is small we could remove
 them by hand, e.g.:
 
@@ -3135,7 +3161,7 @@ heights are at least 65, then we write:
 ##         1         2         3
 \end{verbatim}
 
-(Recall that height was a named vector. the logical vector
+(Recall that height was a named vector. The logical vector
 \texttt{heights\ \textgreater{}\ 65} inherited these names and passed
 them on to the result of \texttt{whihc()}.)
 
@@ -3344,7 +3370,7 @@ The operators are applied element-wise to vectors:
 
 As an illustration, the final result is:
 
-\[10^3, 15^4, 20^5\] The ``mod'' operator \texttt{\%\%} can be quite
+\[10^3, 15^4, 20^5.\] The ``mod'' operator \texttt{\%\%} can be quite
 useful. Here is an example: even numbers have a remainder of 0 after
 division by 2, whereas odd numbers have a remainder of 1. Hence we may
 use \texttt{\%\%} to quickly locate the even numbers in a vector, as
@@ -3408,7 +3434,7 @@ numbers to any desired number of decimal places.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{roots <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\NormalTok{:}\DecValTok{5}\NormalTok{)}
-\NormalTok{roots }\CommentTok{# Too much infromation!}
+\NormalTok{roots }\CommentTok{# Too much information!}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3475,7 +3501,7 @@ There are some functions on vectors that return only a vector of length
 \begin{itemize}
 \tightlist
 \item
-  `length()
+  \texttt{length()}
 \item
   \texttt{any()}
 \item
@@ -3510,8 +3536,7 @@ You can find the mean of a numerical vector as follows:
 \end{Shaded}
 
 The way we compute the mean in R looks a great deal like its
-mathematical definition. This is one of the great conveniences afforded
-by vectorization.
+mathematical definition.
 
 You might be interested to know that there is a function in R dedicated
 to finding the mean. Unsurprisingly, it is called
@@ -3575,12 +3600,12 @@ Both functions yield \texttt{NA} when one of the elements is
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{max}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{, -}\DecValTok{2}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DataTypeTok{na.rm =} \NormalTok{T)}
+\KeywordTok{max}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{, -}\DecValTok{2}\NormalTok{, }\OtherTok{NA}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 7
+## [1] NA
 \end{verbatim}
 
 Like \texttt{sum()} and mean()\texttt{,\ they\ respond\ to\ the}na.rm`
@@ -3702,7 +3727,7 @@ negative number.) R reports the results of such operations as
 \end{verbatim}
 
 Keep in mind, though, that the result is a perfectly good vector as far
-as R is concerned: after the warning R will permit you to use it in
+as R is concerned. After the warning R will permit you to use it in
 further computations:
 
 \begin{Shaded}
@@ -3985,7 +4010,7 @@ possible for variables:
 \begin{itemize}
 \tightlist
 \item
-  `yellowBrickRoad
+  \texttt{yellowBrickRoad}
 \item
   \texttt{yellow\_brick\_road}
 \item
@@ -4010,7 +4035,7 @@ The following, though, are not valid:
 
 Most programmers try to devise names for variables that are
 \emph{descriptive} in the sense that they suggest to a reader of the
-code the role that played within it by the variable. In addition they
+code the role that is played within it by the variable. In addition they
 try to stick to a consistent system for variable names that divide
 naturally into meaningful words.
 
@@ -4035,7 +4060,7 @@ lowercase and to separate words with underscores:
 \item
   \texttt{emerald\_city}
 \item
-  `is\_even
+  \texttt{is\_even}
 \end{itemize}
 
 An older convention---one that was popular among some of the original
@@ -4092,9 +4117,9 @@ part of the R language called \emph{identifiers}.
 
 \begin{description}
 \item[Vector Type]
-any one of the six basic forms the elements in an atomic vector can
-take. The four types we will deal encounter the most are: double,
-integer, character and logical.
+Any one of the six basic forms the elements in an atomic vector can
+take. The four types we will encounter the most are: double, integer,
+character and logical.
 \item[Coercion]
 The process of changing a vector from one type to another. Sometimes the
 process takes place automatically, as a convenience to the programmer.
@@ -4118,13 +4143,13 @@ combinations of symbols are considered to make a well-formed program in
 the language.
 \item[Syntax Error]
 A sequence of symbols that contains a violation of one of the rules of
-syntax. r is unable to interpret and attempt to execute code that
+syntax. R is unable to interpret and attempt to execute code that
 contains a syntax error.
 \item[Run-time Error]
-An error that occurs when the computer language's interpreter attempt to
-execute code but is unable to do so. A typical cause of a run-time error
-is the situation when the code calls for the evaluation of a name that
-has not been bound to an object.
+An error that occurs when the computer language's interpreter attempts
+to execute code but is unable to do so. A typical cause of a run-time
+error is the situation when the code calls for the evaluation of a name
+that has not been bound to an object.
 \item[Semantic Error]
 An error in code that is syntactically correct and that can be executed
 by the computer but which produces unexpected results.
@@ -4212,9 +4237,10 @@ by the computer but which produces unexpected results.
 
   results in the number 2! What is happening here is that R coerces the
   logical vector \texttt{likeToto} into a numerical vector of 1's and
-  0's---1 for \texttt{TRUE}, 0 for
-  \texttt{FALSE-\/-\/-and\ then\ sums\ the\ resulting\ vector.\ \ Notice\ that\ this\ gives\ us\ the\ number\ of\ people\ who\ like\ Toto.\ With\ this\ idea\ in\ mind,\ use}sum()`
-  along with logical vectors to find:
+  0's---1 for \texttt{TRUE}, 0 for \texttt{FALSE}---and then sums the
+  resulting vector. Notice that this gives us the number of people who
+  like Toto. With this idea in mind, use \texttt{sum()} along with
+  logical vectors to find:
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
@@ -5434,7 +5460,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10e085840>
+## <bytecode: 0x10e57f0e0>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9798,7 +9824,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-05-17 18:58:30 EDT"
+## [1] "2017-05-18 22:58:02 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9810,7 +9836,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1495061910
+## [1] 1495162682
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -20968,7 +20994,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b751da8"
+## [1] "0x13987b498"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -20982,7 +21008,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b751da8"
+## [1] "0x13987b498"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21021,7 +21047,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b751da8"
+## [1] "0x13987b498"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21034,7 +21060,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12302b888"
+## [1] "0x13b7a5878"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21052,7 +21078,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b751da8"
+## [1] "0x13987b498"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21096,7 +21122,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12496e2a0" "0x12496e2a0"
+## [1] "0x13d0d7cd8" "0x13d0d7cd8"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21135,7 +21161,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12496e2a0" "0x12496e2a0"
+## [1] "0x13d0d7cd8" "0x13d0d7cd8"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21177,7 +21203,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12496e2a0" "0x12c5f4708"
+## [1] "0x13d0d7cd8" "0x11576db10"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

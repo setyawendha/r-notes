@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-17">
+<meta name="date" content="2017-05-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -107,7 +107,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="0.1" data-path="the-why-of-these-notes-remarks-for-colleagues.html"><a href="the-why-of-these-notes-remarks-for-colleagues.html"><i class="fa fa-check"></i><b>0.1</b> The Why of these Notes: Remarks for Colleagues</a></li>
 <li class="chapter" data-level="0.2" data-path="history-of-r.html"><a href="history-of-r.html"><i class="fa fa-check"></i><b>0.2</b> History of R</a></li>
 <li class="chapter" data-level="0.3" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
-<li class="chapter" data-level="0.4" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
+<li class="chapter" data-level="0.4" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html"><i class="fa fa-check"></i><b>0.4</b> Miscellaneous Information</a><ul>
+<li class="chapter" data-level="0.4.1" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#typographical-conventions"><i class="fa fa-check"></i><b>0.4.1</b> Typographical Conventions</a></li>
+<li class="chapter" data-level="0.4.2" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#license"><i class="fa fa-check"></i><b>0.4.2</b> License</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
 <li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
@@ -415,7 +418,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="subsetting-with-logical-vectors" class="section level2">
 <h2><span class="header-section-number">2.6</span> Subsetting with Logical Vectors</h2>
-<p>The subsetting we have seen up to now involves specifying the <em>indices</em> of the elements we wold like to select from the original vector. It is also possible to say, for each elements, <em>whether or not it is to be included</em> in our selection. This is accomplished by means of logical vectors.</p>
+<p>The subsetting we have seen up to now involves specifying the <em>indices</em> of the elements we would like to select from the original vector. It is also possible to say, for each element, <em>whether or not it is to be included</em> in our selection. This is accomplished by means of logical vectors.</p>
 <p>Recall our <code>heights</code> vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights</code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
@@ -425,7 +428,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 heights[wanted]</code></pre></div>
 <pre><code>## Scarecrow    Tinman   Dorothy 
 ##        73        70        60</code></pre>
-<p>The <code>T</code>’s at indices 1, 2, and 4 in <code>wanted</code> inform R that we want the heights vector at indices 1, 2 and 4. The <code>f</code>’s say: “don’t include this element!”</p>
+<p>The <code>T</code>’s at indices 1, 2, and 4 in <code>wanted</code> inform R that we want the heights vector at indices 1, 2 and 4. The <code>F</code>’s say: “don’t include this element!”</p>
 <p>Subsetting can be used powerfully along with logical vectors and Boolean operators.</p>
 <p>For example, in order to select those persons whose heights exceed a certain amount, we might say something like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#heights of some people:</span>
@@ -444,7 +447,7 @@ tall</code></pre></div>
 <p><em><code>people</code>, where <code>people</code> is at least 70</em></p>
 </blockquote>
 <p>The word “where” in the above phrase corresponds to the subsetting operator.</p>
-<p>You subsetting logical vector need not have been constructed with the original vector in mind. Consider the following example:</p>
+<p>Your subsetting logical vector need not have been constructed with the original vector in mind. Consider the following example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">63</span>)
 height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">68</span>, <span class="dv">67</span>, <span class="dv">71</span>, <span class="dv">70</span>, <span class="dv">69</span>)
 age[height &lt;<span class="st"> </span><span class="dv">70</span>]</code></pre></div>
@@ -461,7 +464,7 @@ height[age &lt;<span class="st"> </span><span class="dv">60</span> &amp;<span cl
 <pre><code>## [1] 68 67</code></pre>
 <div id="counting" class="section level3">
 <h3><span class="header-section-number">2.6.1</span> Counting</h3>
-<p>Logical subsetting provides a convenient way to <em>count</em> the elements of a vector that possess a given property. For example,to find out how many elements of <code>people</code> are less than 70 we could say:</p>
+<p>Logical subsetting provides a convenient way to <em>count</em> the elements of a vector that possess a given property. For example, to find out how many elements of <code>people</code> are less than 70 we could say:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(people[people &lt;<span class="st"> </span><span class="dv">70</span>])</code></pre></div>
 <pre><code>## [1] 4</code></pre>
 </div>
@@ -480,7 +483,7 @@ tall</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[tall]</code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion      &lt;NA&gt; 
 ##        73        70        69        NA</code></pre>
-<p>Since R doesn’t know whether or not to select Toto, it records its indecision by including an <code>NA</code> in the result. That <code>NA</code>, however, is not the <code>NA</code> for Toto’s height in the vector <code>heights</code>, so it can’t inherit the “Toto” name. since it has no name, R presents its name as <code>&lt;NA&gt;</code>.</p>
+<p>Since R doesn’t know whether or not to select Toto, it records its indecision by including an <code>NA</code> in the result. That <code>NA</code>, however, is not the <code>NA</code> for Toto’s height in the vector <code>heights</code>, so it can’t inherit the “Toto” name. Since it has no name, R presents its name as <code>&lt;NA&gt;</code>.</p>
 <p>If we try to count the number of tall persons, we get a misleading result:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(heights[tall])</code></pre></div>
 <pre><code>## [1] 4</code></pre>
@@ -488,7 +491,7 @@ tall</code></pre></div>
 <blockquote>
 <p>“Three, with another one undecided.”</p>
 </blockquote>
-<p>Counting is one those situations in which we might wish to removed <code>NA</code> values at the start. If the vector is small we could remove them by hand, e.g.:</p>
+<p>Counting is one those situations in which we might wish to remove <code>NA</code> values at the start. If the vector is small we could remove them by hand, e.g.:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knownHeights &lt;-<span class="st"> </span>heights[-<span class="dv">5</span>]  <span class="co"># remove Toto</span>
 tall &lt;-<span class="st"> </span>(knownHeights &gt;<span class="st"> </span><span class="dv">65</span>)
 <span class="kw">length</span>(knownHeights[tall])</code></pre></div>
@@ -523,7 +526,7 @@ knownHeights</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(heights &gt;<span class="st"> </span><span class="dv">65</span>)</code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion 
 ##         1         2         3</code></pre>
-<p>(Recall that height was a named vector. the logical vector <code>heights &gt; 65</code> inherited these names and passed them on to the result of <code>whihc()</code>.)</p>
+<p>(Recall that height was a named vector. The logical vector <code>heights &gt; 65</code> inherited these names and passed them on to the result of <code>whihc()</code>.)</p>
 <p>Note also that Toto’s <code>NA</code> height was ignored by <code>which()</code>.</p>
 </div>
 <div id="any" class="section level4">

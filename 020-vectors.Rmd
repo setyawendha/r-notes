@@ -9,22 +9,22 @@ output:
 knitr::include_graphics(rep("images/yarn.png",4))
 ```
 
-This Chapter gets you started officially with R.  While the theme is *vectors*\index{vector}, the most important data structure in R, we'll learn also about variables and variable names, data types, reserved words, assignment and many of R's basic operators.
+This Chapter gets you started officially with R.  While the theme is *vectors*\index{vector}, the most important data structure in R, we'll learn also about variables and variable names, vector types, reserved words, assignment and many of R's basic operators.
 
 \newpage
 
 ## What is a Vector?
 
-If you have heard of vectors before in mathematics, you might think of a vector as something that has a magnitude and a direction , and that can be represented by a sequence of numbers. In its notion of a vector, R keeps the idea of a sequence but discards magnitude and direction.  The notion of "numbers" isn't even necessary.
+If you have heard of vectors before in mathematics, you might think of a vector as something that has a magnitude and a direction, and that can be represented by a sequence of numbers. In its notion of a vector, R keeps the idea of a sequence but discards magnitude and direction.  The notion of "numbers" isn't even necessary.
 
 For R, a vector is simply a sequence of elements.  There are two general sort of vectors:
 
 * *atomic* vectors that come in one of six forms called *vector types*;\index{vector type}
 * non-atomic vectors, called *lists*, whose elements can be any sort of R-object at all.
 
-For now, we'll just study atomic vectors.  Let's make a few vectors, as examples.
+For now we'll just study atomic vectors.  Let's make a few vectors, as examples.
 
-First of all, we make a vector of numbers using the `c()`\index{R-functions!c()@\texttt{c()}} function:
+We can make a vector of numbers using the `c()`\index{R-functions!c()@\texttt{c()}} function:
 
 ```{r}
 numVec <- c(23.2, 45, 631, -273, 0, 48.371, 100000,
@@ -34,11 +34,11 @@ numVec
 
 You can think of `c` as standing for "combine."  `c()` takes its arguments, all of which are separated by commas, and combines them to make a vector.
 
-If you closely examine the above output, you'll notice that R printed out all of the numerical values in the vector the to three decimal places, which happened to be the largest number of decimal places we assigned to any of the numbers that made up `numVec`.  You'll also notice the numbers in brackets at the beginning of the lines.  Each number represent the position within the vector occupied by the first element of the vector that is printed on the line.  The position of an element in a vector is called its *index*\index{index}.  Reporting the indices of leading elements helps you locate particular elements in the output.
+If you closely examine the above output, you'll notice that R printed out all of the numerical values in the vector to three decimal places, which happened to be the largest number of decimal places we assigned to any of the numbers that made up `numVec`.  You'll also notice the numbers in brackets at the beginning of the lines.  Each number represents the position within the vector occupied by the first element of the vector that is printed on the line.  The position of an element in a vector is called its *index*\index{index}.  Reporting the indices of leading elements helps you locate particular elements in the output.
 
 ### Types of Atomic Vectors
 
-The numbers in `numVec` are what programmers call "double-precision" decimal numbers.  You can verify this for yourself with the `typeof()`\index{R-functions!typeof()@\texttt{typeof()}} function:
+The numbers in `numVec` are what programmers call *double-precision* numbers.  You can verify this for yourself with the `typeof()`\index{R-functions!typeof()@\texttt{typeof()}} function:
 
 ```{r}
 typeof(numVec)
@@ -58,7 +58,7 @@ intVec <- c(3L, 17L, -22L, 45L)
 intVec
 ```
 
-The `L` after each number signifies to R that the number should be stored in memory as an integer, rather than in decimal format.  Officially, the type is `integer`:
+The `L` after each number signifies to R that the number should be stored in memory as an integer, rather than in double-precision format.  Officially, the type is `integer`:
 
 ```{r}
 typeof(intVec)
@@ -185,7 +185,7 @@ The `NA` in the fifth position of the vector is a special value that may be cons
 
 Some folks say that everything in R is a vector.  That's a bit of an exaggeration but it's remarkably close to the truth.
 
-And yet it seems implausible.  What about the elements of an atomic vector, for instance.  A single element doesn't look at all like a vector:  it's a value, not a *sequence* of values.
+And yet it seems implausible.  What about the elements of an atomic vector, for instance?  A single element doesn't look at all like a vector:  it's a value, not a *sequence* of values.
 
 Or so we might think.  But really, in R there are no "single values" that can exist by themselves.  Consider, for instance, what we think of as the number 17:
 
@@ -269,7 +269,7 @@ The default value of the parameter `by` is 1, so we could get the same thing wit
 seq(from = 5, to = 15)
 ```
 
-Further reduction in typing may be achieved as long as we remember the order in which R expects the parameters (`from` before `to`, then `step` if supplied):
+Further reduction in typing may be achieved as long as we remember the order in which R expects the parameters (`from` before `to`, then `by` if supplied):
 
 ```{r}
 seq(5, 15)
@@ -342,7 +342,7 @@ vec <- seq(5, -3, -2)
 rep(vec, each = 2, times = 2)
 ```
 
-In order to create 50 10's followed by 50 30's followed by 50 50's I would write:
+In order to create fifty 10's followed by fifty 30's followed by fifty 50's I would write:
 
 ```{r eval = F}
 rep(seq(10, 50, 20), each = 50)
@@ -410,7 +410,7 @@ names(vec) <- LETTERS[1:length(vec)]
 vec
 ```
 
-If a vector has names we can refers to its elements using the subsetting operator and those names:
+If a vector has names we can refer to its elements using the subsetting operator and those names:
 
 ```{r}
 heights["Tinman"]
@@ -538,7 +538,7 @@ The reasons for the evaluation above are as follows:
 
 #### Equality
 
-The equality (`==`) operator indicates whether the expression being compared evaluate to the same value.  Note that it's made with *two* equal-signs, not one!  It's all about evaluation to the same value, not strict identity.  The following examples will help to clarify this.
+The equality (`==`) operator indicates whether the expressions being compared evaluate to the same value.  Note that it's made with *two* equal-signs, not one!  It's all about evaluation to the same value, not strict identity.  The following examples will help to clarify this.
 
 ```{r}
 a <- c(Dorothy = 1,Toto = 2) # a named vector
@@ -548,7 +548,7 @@ a == b
 
 (Note that the resulting logical vector inherits the names of `a`, the vector on the left.).
 
-But `a` and `b` aren't *identical`.  We can see this because R has the function `identical()`  to test for identity:
+But `a` and `b` aren't *identical*.  We can see this because R has the function `identical()`  to test for identity:
 
 ```{r}
 identical(a, b)
@@ -586,7 +586,7 @@ b <- c(T, F, T, F)
 a | b
 ```
 
-The `&&` and `||` operators follow the "and" and "or" logical respectively, but are applied only to the first elements of the vectors being compared:
+The `&&` and `||` operators follow the "and" and "or" logic respectively, but are applied only to the first elements of the vectors being compared:
 
 ```{r}
 a <- c(T, T)
@@ -629,7 +629,7 @@ vec > 4
 
 At first blush this doesn't make any sense:  `vec` has length 5, whereas `4` is a vector of length 1.  How can the two of them be compared?
 
-They cannot, in fact, be compared.  Instead the shorter of the two vectors---the `4`---is *recycled* into the `c(4,4,4,4,4)` a vector of length 5, which may then be compared element-wise with `vec`.  Recycling is a great convenience as it allows us to express an idea clearly and concisely.
+They cannot, in fact, be compared.  Instead the shorter of the two vectors---the `4`---is *recycled* into the `c(4,4,4,4,4)` a vector of length five, which may then be compared element-wise with `vec`.  Recycling is a great convenience as it allows us to express an idea clearly and concisely.
 
 Recycling is always performed on the shorter of two vectors.  Consider the example below:
 
@@ -663,7 +663,7 @@ suppressWarnings(vec2 > c(3, 8))
 
 ## Subsetting with Logical Vectors
 
-The subsetting we have seen up to now involves specifying the *indices* of the elements we wold like to select from the original vector.  It is also possible  to say, for each elements, *whether or not it is to be included* in our selection.  This is accomplished by means of logical vectors.
+The subsetting we have seen up to now involves specifying the *indices* of the elements we would like to select from the original vector.  It is also possible  to say, for each element, *whether or not it is to be included* in our selection.  This is accomplished by means of logical vectors.
 
 Recall our `heights` vector:
 
@@ -678,7 +678,7 @@ wanted <- c(T, T, F, T, F, F)
 heights[wanted]
 ```
 
-The `T`'s at indices 1, 2, and 4 in `wanted` inform R that we want the heights vector at indices 1, 2 and 4.  The `f`'s say:  "don't include this element!"
+The `T`'s at indices 1, 2, and 4 in `wanted` inform R that we want the heights vector at indices 1, 2 and 4.  The `F`'s say:  "don't include this element!"
 
 Subsetting can be used powerfully along with logical vectors and Boolean operators.
 
@@ -708,7 +708,7 @@ I like to pronounce the above as:
 
 The word "where" in the above phrase corresponds to the subsetting operator.
 
-You subsetting logical vector need not have been constructed with the original vector in mind.  Consider the following example:
+Your subsetting logical vector need not have been constructed with the original vector in mind.  Consider the following example:
 
 ```{r}
 age <- c(23, 21, 22, 25, 63)
@@ -731,7 +731,7 @@ height[age < 60 & likesToto]
 
 ### Counting
 
-Logical subsetting provides a convenient way to *count* the elements of a vector that possess a given property.  For example,to find out how many elements of `people` are less than 70 we could say:
+Logical subsetting provides a convenient way to *count* the elements of a vector that possess a given property.  For example, to find out how many elements of `people` are less than 70 we could say:
 
 ```{r}
 length(people[people < 70])
@@ -755,7 +755,7 @@ When we subset using this vector we get an odd result:
 heights[tall]
 ```
 
-Since R doesn't know whether or not to select Toto, it records its indecision by including an `NA` in the result. That `NA`, however, is not the `NA` for Toto's height in the vector `heights`, so it can't inherit the "Toto" name.  since it has no name, R presents its name as `<NA>`.
+Since R doesn't know whether or not to select Toto, it records its indecision by including an `NA` in the result. That `NA`, however, is not the `NA` for Toto's height in the vector `heights`, so it can't inherit the "Toto" name.  Since it has no name, R presents its name as `<NA>`.
 
 If we try to count the number of tall persons, we get a misleading result:
 
@@ -767,7 +767,7 @@ We would have preferred something like:
 
 >"Three, with another one undecided."
 
-Counting is one those situations in which we might wish to removed `NA` values at the start.  If the vector is small we could remove them by hand, e.g.:
+Counting is one those situations in which we might wish to remove `NA` values at the start.  If the vector is small we could remove them by hand, e.g.:
 
 ```{r}
 knownHeights <- heights[-5]  # remove Toto
@@ -813,7 +813,7 @@ Thus if we want to know the indices of `heights` where the heights are at least 
 which(heights > 65)
 ```
 
-(Recall that height was a named vector.  the logical vector `heights > 65` inherited these names and passed them on to the result of `whihc()`.)
+(Recall that height was a named vector.  The logical vector `heights > 65` inherited these names and passed them on to the result of `whihc()`.)
 
 Note also that Toto's `NA` height was ignored by `which()`.
 
@@ -900,7 +900,7 @@ x^y
 
 As an illustration, the final result is:
 
-$$10^3, 15^4, 20^5$$
+$$10^3, 15^4, 20^5.$$
 The "mod" operator `%%` can be quite useful.  Here is an example:  even numbers have a remainder of 0 after division by 2, whereas odd numbers have a remainder of 1.  Hence we may use `%%` to quickly locate the even numbers in a vector, as follows:
 
 ```{r}
@@ -927,7 +927,7 @@ You can use the `round()` \index{R-functions!round()@\texttt{round()}} function 
 
 ```{r}
 roots <- sqrt(1:5)
-roots # Too much infromation!
+roots # Too much information!
 round(roots, digits = 3) # nicer
 ```
 
@@ -956,7 +956,7 @@ All of the above operations follow the "vector-in, vector-out" principle---often
 
 There are some functions on vectors that return only a vector of length 1.  Among examples we have met so far are:
 
-* `length()
+* `length()`
 * `any()`
 * `all()`
 
@@ -977,7 +977,7 @@ vec <- c(-3, 4, 17, 23, 51)
 meanVec <- sum(vec)/length(vec)
 ```
 
-The way we compute the mean in R looks a great deal like its mathematical definition.  This is one of the great conveniences afforded by vectorization.
+The way we compute the mean in R looks a great deal like its mathematical definition.
 
 You might be interested to know that there is a function in R dedicated to finding the mean.  Unsurprisingly, it is called `mean()`\index{R-functions!mean()@\texttt{mean()}} :
 
@@ -1010,7 +1010,7 @@ max(a, b)
 Both functions yield `NA` when one of the elements is `NA`:
 
 ```{r}
-max(3, 7, -2, NA, na.rm = T)
+max(3, 7, -2, NA)
 ```
 
 Like `sum()` and mean()`, they respond to the `na.rm` parameter:
@@ -1063,7 +1063,7 @@ The results of some arithmetical operations sometimes are not defined.  (Example
 sqrt(c(-4, 2, 4))
 ```
 
-Keep in mind, though, that the result is a perfectly good vector as far as R is concerned: after the warning R will permit you to use it in further computations:
+Keep in mind, though, that the result is a perfectly good vector as far as R is concerned.  After the warning R will permit you to use it in further computations:
 
 ```{r}
 vec<- sqrt(c(-4, 2, 4))
@@ -1207,7 +1207,7 @@ Using the assignment operator we have created quite a few variables by now, and 
 
 This leaves a lot of room for creativity.  All of the following names are possible for variables:
 
-* `yellowBrickRoad
+* `yellowBrickRoad`
 * `yellow_brick_road`
 * `yellow.brick.road`
 * `yell23`
@@ -1219,7 +1219,7 @@ The following, though, are not valid:
 * `.2yellow` (cannot start with dot and then number)
 * `_yellow` (cannot start with `_`)
 
-Most programmers try to devise names for variables that are *descriptive* in the sense that they suggest to a reader of the code the role that played within it by the variable.  In addition they try to stick to a consistent system for variable names that divide naturally into meaningful words.
+Most programmers try to devise names for variables that are *descriptive* in the sense that they suggest to a reader of the code the role that is played within it by the variable.  In addition they try to stick to a consistent system for variable names that divide naturally into meaningful words.
 
 One popular convention is known as CamelCase\index{CamelCase}.  In this convention each new word-like part of the variable names begins with a capital letter.  (The initial letter, though, is often not capitalized.)  Examples would be:
 
@@ -1229,7 +1229,7 @@ One popular convention is known as CamelCase\index{CamelCase}.  In this conventi
 Another popular convention---sometimes called "snake-case"---is to use lowercase and to separate words with underscores:
 
 * `emerald_city`
-* `is_even
+* `is_even`
 
 An older convention---one that was popular among some of the original developers of R---was to separate words with dots:
 
@@ -1260,7 +1260,7 @@ One final remark:  variables together with reserved words constitute the part of
 
 Vector Type
 
-:  any one of the six basic forms the elements in an atomic vector can take.  The four types we will deal encounter the most are:  double, integer, character and logical.
+:  Any one of the six basic forms the elements in an atomic vector can take.  The four types we will encounter the most are:  double, integer, character and logical.
 
 Coercion
 
@@ -1288,11 +1288,11 @@ Syntax
 
 Syntax Error
 
-:  A sequence of symbols that contains a violation of one of the rules of syntax.  r is unable to interpret and attempt to execute code that contains a syntax error.
+:  A sequence of symbols that contains a violation of one of the rules of syntax.  R is unable to interpret and attempt to execute code that contains a syntax error.
 
 Run-time Error
 
-:  An error that occurs when the computer language's interpreter attempt to execute code but is unable to do so.  A typical cause of a run-time error is the situation when the code calls for the evaluation of a name that has not been bound to an object.
+:  An error that occurs when the computer language's interpreter attempts to execute code but is unable to do so.  A typical cause of a run-time error is the situation when the code calls for the evaluation of a name that has not been bound to an object.
 
 Semantic Error
 
@@ -1342,7 +1342,7 @@ knitr::include_graphics("images/thinking.png")
     sum(likesToto)
     ```
     
-    results in the number 2!  What is happening here is that R coerces the logical vector `likeToto` into a numerical vector of 1's and 0's---1 for `TRUE`, 0 for `FALSE---and then sums the resulting vector.  Notice that this gives us the number of people who like Toto. With this idea in mind, use `sum()` along with logical vectors to find:
+    results in the number 2!  What is happening here is that R coerces the logical vector `likeToto` into a numerical vector of 1's and 0's---1 for `TRUE`, 0 for `FALSE`---and then sums the resulting vector.  Notice that this gives us the number of people who like Toto. With this idea in mind, use `sum()` along with logical vectors to find:
     
     1. the number of people younger than 24 who are also more than 67 inches tall;
     1. the number of people who either don't like Toto or who are over the age of 30.

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="example-dental-floss.html">
-<link rel="next" href="glossary-4.html">
+<link rel="prev" href="acknowledgements.html">
+<link rel="next" href="idea.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -416,263 +416,37 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="drunken-turtle-sim" class="section level2">
-<h2><span class="header-section-number">6.8</span> Example: The Drunken Turtle</h2>
-<p>Let us return to the scenario of the Drunken Turtle that was introduced in Section <a href="random-moves.html#drunken-turtle-intro">5.4.5</a>. At each step the turtle would turn by a random angle—any angle between 0 and 360 degrees with equal likelihood—and then move forward by a fixed number of units. We wondered whether the turtle would simply wander away from its starting point or perhaps eventually loop back close to its starting point.</p>
-<p>In this section we will construct a simulation that sheds light on our question. We will imagine that the turtle starts at the origin on the <span class="math inline">\(xy\)</span>-plane and takes a large but fixed number of steps—one thousand steps, say—each of a fixed length of one unit, but each of which is preceded by a drunken turn through a random angle. We will concern ourselves with the random variable <span class="math inline">\(X\)</span>, defined as follows:</p>
+<div id="miscellaneous-information" class="section level2">
+<h2><span class="header-section-number">0.4</span> Miscellaneous Information</h2>
+<div id="typographical-conventions" class="section level3">
+<h3><span class="header-section-number">0.4.1</span> Typographical Conventions</h3>
+<p>Computer code, whether within a line of text or as displayed text, appears like this: <code>code snippet</code>.</p>
+<p>Identifiers are represented as is (e.g., <code>variableName</code>, if<code>,</code>else<code>,</code>while<code>, etc.) except for the names of functions, whihc are followed by a pair of parentheses in order to stress their status as functions.  Thus we write</code>length()<code>for the</code>length`-function.</p>
+<p>Displayed text representing output to the console appears with double hash-tags at the beginning of each line, thus:</p>
+<pre><code>## R is free software and comes with ABSOLUTELY NO WARRANTY.
+## You are welcome to redistribute it under certain conditions.
+## Type &#39;license()&#39; or &#39;licence()&#39; for distribution details.</code></pre>
+<p>The hashtags themsevles are not present in the output itself.</p>
+<p>Names of R-package are in boldface, thus: package <strong>devtools</strong>.</p>
+<p>Terms are italicized when they are first introduced, e.g.: “R follows a set of internal rules to <em>coerce</em> some of the values to a new type in such a way that all resulting values are of the same type.” Italicization can also indicate emphasis.</p>
+</div>
+<div id="license" class="section level3">
+<h3><span class="header-section-number">0.4.2</span> License</h3>
+<p>These Notes are licensed under the Creative Commons Attribution-ShareAlike 4.0 International Public License:</p>
 <blockquote>
-<p><span class="math inline">\(X\)</span> = the number of times in the turtle returns to within <span class="math inline">\(1/2\)</span> of a unit of the origin, during its first 1000 steps.</p>
+<p><a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode" class="uri">https://creativecommons.org/licenses/by-sa/4.0/legalcode</a>.</p>
 </blockquote>
-<p>(Apparently we consider a “close return” to be anything within half a unit of the origin.)</p>
-<p>In particular, we would like to know the distribution of <span class="math inline">\(X\)</span>: what is the chance that the turtle does not make a close return during the first thousand steps? what’s the chance of making only one close return? Two close returns? And so on … . we would also like to estimate the expected value of <span class="math inline">\(X\)</span>: the average number of close returns in the first 1000 steps.</p>
-<p>We will next consider how to code a simulation. Obviously we will need a way to record the turtle’s position at each step. In order to accomplish this we will have to apply the unit-circle trigonometry you learned in high school.</p>
-<p>Instead of measuring angles in degrees, we will work in radians: by default R does trigonometry that way. Recall that 360 degrees is <span class="math inline">\(2 \pi\)</span> radians; hence the way to determine the angle of a turn by the drunken turtle is with the following call to <code>runif()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>*pi)</code></pre></div>
-<pre><code>## [1] 2.746987</code></pre>
-<p>If we want a thousand drunken turn-angles, then we can get them all in a vector, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>*pi)</code></pre></div>
-<p>So much for the turning angles. But in order to decide at each step whether the turtle has made a close return, we have to know the coordinates of the turtle after each step. This is where unit-circle trigonometry comes in handy. Recall that if a right triangle has a hypotenuse of length 1 (the length of a turtle step) and if one of the angles of the triangle is <span class="math inline">\(\alpha\)</span>, then the side adjacent to <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(\cos(\alpha)\)</span> and the side opposite is <span class="math inline">\(\sin(\alpha)\)</span>. The situation is illustrated in Figure <a href="drunken-turtle-sim.html#fig:right-triangle">6.4</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:right-triangle"></span>
-<img src="images/righttriangle.png" alt="Sides of a right triangle with hypotenuse 1, in terms of the angle shown." width="75%" />
-<p class="caption">
-Figure 6.4: Sides of a right triangle with hypotenuse 1, in terms of the angle shown.
-</p>
-</div>
-<p>From this principle it follows that if the turtle turns a random angle of <span class="math inline">\(a_1\)</span> radians for its first step, then after it takes the one-unit step it will be at the point <span class="math inline">\((\cos(a_1), \sin(a_2))\)</span>.</p>
-<p>For the second step, the turtle begins by turning another random angle, say <span class="math inline">\(a_2\)</span> radians. It then takes another one-unit step. This second step forms the hypotenuse of a second right triangle (see Figure <a href="drunken-turtle-sim.html#fig:two-steps">6.5</a>). The horizontal and verticals sides of this right triangle must be <span class="math inline">\(\cos(a_2)\)</span> and <span class="math inline">\(\sin(a_2)\)</span> respectively. when the turtle complete the second step, it has added these values to its previous <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates, so that it is now at the point:</p>
-<p><span class="math display">\[(\cos(a_1) + \cos(a_2), \sin(a_1) +\sin(a_2)).\]</span> We now see the idea: in order to record the position of the turtle at the end of each step, we simply need to:</p>
-<ul>
-<li>take the cosine of all the turning-angles;</li>
-<li>take the sine of all the turning-angles;</li>
-<li>sum the cosines to get the <span class="math inline">\(x\)</span>-coordinate;</li>
-<li>sum the sines to get the <span class="math inline">\(y\)</span>-coordinate.</li>
-</ul>
-<div class="figure" style="text-align: center"><span id="fig:two-steps"></span>
-<img src="images/twosteps.png" alt="The first two steps by the Drunken Turtle.  Turtle turns by $a_1$ radians for Step One, then by $a_2$ radians for Step Two." width="75%" />
-<p class="caption">
-Figure 6.5: The first two steps by the Drunken Turtle. Turtle turns by <span class="math inline">\(a_1\)</span> radians for Step One, then by <span class="math inline">\(a_2\)</span> radians for Step Two.
-</p>
-</div>
-<p>Let’s put this idea into practice, for just the first ten steps. First, get the turning angles, the sines and the cosines:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">0</span> , <span class="dv">2</span>*pi)
-xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
-ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</code></pre></div>
-<p>Next, we need to add the <code>xSteps</code> together. If we do a sum, we would get the <span class="math inline">\(x\)</span>-coordinate after the tenth step:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(xSteps)</code></pre></div>
-<pre><code>## [1] -1.370258</code></pre>
-<p>(Apparently some of the cosines were negative, meaning that some of the turning angles were between 90 and 270 degrees.)</p>
-<p>We need the <span class="math inline">\(x\)</span>-coordinates after all of the previous steps, as well. This can be accomplished by R’s <code>cumsum()</code> function.  You may think of <code>cumsum</code> as short for “cumulative sum”. Given a vector of <code>vec</code> numbers, <code>cumsum(vec)</code> returns a vector of the same length, where for every index <code>i</code>, <code>cumsum(vec)[i]</code> is <code>sum(vec)[i]</code>. This is made clear in the following example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)
-<span class="kw">cumsum</span>(vec)</code></pre></div>
-<pre><code>## [1] 1 2 3 4 5</code></pre>
-<p>Accordingly, we can get the <span class="math inline">\(x\)</span>-coordinates of the first ten steps like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
-x</code></pre></div>
-<pre><code>##  [1] -0.6034165 -1.3905805 -2.1259607 -3.1154380 -2.4593130 -1.5476110
-##  [7] -0.8591924 -1.6420445 -0.6421761 -1.3702583</code></pre>
-<p>Similarly we can get the first ten <span class="math inline">\(y\)</span>-coordinates:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)</code></pre></div>
-<p>Using the distance formula, we can compute the distance of each point from the origin as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x^<span class="dv">2</span> +<span class="st"> </span>y^<span class="dv">2</span>)</code></pre></div>
-<p>The following logical vector will then record, at each each step, whether or not the turtle has made a close return:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">closeReturn &lt;-<span class="st"> </span>(dist &lt;<span class="st"> </span><span class="fl">0.5</span>)</code></pre></div>
-<p>The results are shown in Table <a href="drunken-turtle-sim.html#tab:tensteptab">6.3</a>.</p>
-<table>
-<caption><span id="tab:tensteptab">Table 6.3: </span>Record of the turtle’s first ten steps. It has not yet made a close return.</caption>
-<thead>
-<tr class="header">
-<th align="right">angle</th>
-<th align="right">xSteps</th>
-<th align="right">ySteps</th>
-<th align="right">x</th>
-<th align="right">y</th>
-<th align="right">dist</th>
-<th align="left">closeReturn</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">4.0646104</td>
-<td align="right">-0.6034165</td>
-<td align="right">-0.7974262</td>
-<td align="right">-0.6034165</td>
-<td align="right">-0.7974262</td>
-<td align="right">1.000000</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="right">2.4769935</td>
-<td align="right">-0.7871641</td>
-<td align="right">0.6167437</td>
-<td align="right">-1.3905805</td>
-<td align="right">-0.1806826</td>
-<td align="right">1.402270</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="right">3.8861615</td>
-<td align="right">-0.7353801</td>
-<td align="right">-0.6776548</td>
-<td align="right">-2.1259607</td>
-<td align="right">-0.8583374</td>
-<td align="right">2.292695</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="right">2.9963954</td>
-<td align="right">-0.9894774</td>
-<td align="right">0.1446876</td>
-<td align="right">-3.1154380</td>
-<td align="right">-0.7136497</td>
-<td align="right">3.196131</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="right">0.8551238</td>
-<td align="right">0.6561251</td>
-<td align="right">0.7546522</td>
-<td align="right">-2.4593130</td>
-<td align="right">0.0410024</td>
-<td align="right">2.459655</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="right">0.4233886</td>
-<td align="right">0.9117020</td>
-<td align="right">0.4108522</td>
-<td align="right">-1.5476110</td>
-<td align="right">0.4518546</td>
-<td align="right">1.612226</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="right">0.8114898</td>
-<td align="right">0.6884186</td>
-<td align="right">0.7253136</td>
-<td align="right">-0.8591924</td>
-<td align="right">1.1771682</td>
-<td align="right">1.457373</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="right">2.4700328</td>
-<td align="right">-0.7828521</td>
-<td align="right">0.6222079</td>
-<td align="right">-1.6420445</td>
-<td align="right">1.7993761</td>
-<td align="right">2.435993</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="right">0.0162276</td>
-<td align="right">0.9998683</td>
-<td align="right">0.0162269</td>
-<td align="right">-0.6421761</td>
-<td align="right">1.8156030</td>
-<td align="right">1.925826</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="right">3.8968689</td>
-<td align="right">-0.7280822</td>
-<td align="right">-0.6854899</td>
-<td align="right">-1.3702583</td>
-<td align="right">1.1301131</td>
-<td align="right">1.776165</td>
-<td align="left">FALSE</td>
-</tr>
-</tbody>
-</table>
-<p>It remains only to package our code into a simulation function. We will allow the user to specify the fixed initial number of steps (it does not have to be 1000), and also to determine what distance counts as a “close return.”</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span>function(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
-                       <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {
-  if ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
-  }
-  <span class="kw">set.seed</span>(seed)
-  
-  <span class="co"># set up returns vedtor to store the number of </span>
-  <span class="co"># close returns in each repetition:</span>
-  returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  
-  for (i in <span class="dv">1</span>:reps) {
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span>*pi)
-  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
-  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
-  
-  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
-  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
-  
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x^<span class="dv">2</span> +<span class="st"> </span>y^<span class="dv">2</span>)
-  closeReturn &lt;-<span class="st"> </span>(dist &lt;<span class="st"> </span><span class="fl">0.5</span>)
-  returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)
-  }
-  
-  if ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(returns))
-    <span class="kw">print</span>(tab)
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The average number of close returns was:  &quot;</span>, 
-      <span class="kw">mean</span>(returns), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre></div>
-<p>Let’s try it out:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">drunkenSim</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, 
-           <span class="dt">close =</span> <span class="fl">0.5</span>, <span class="dt">seed =</span> <span class="dv">3535</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## Here is a table of the number of close returns:
-## 
-## returns
-##      0      1      2      3      4      5      6      7      8      9 
-## 0.3881 0.2290 0.1517 0.0908 0.0572 0.0335 0.0227 0.0107 0.0064 0.0048 
-##     10     11     12     13     14     15     16     17 
-## 0.0018 0.0012 0.0008 0.0007 0.0003 0.0001 0.0001 0.0001 
-## 
-## The average number of close returns was:  1.5655.</code></pre>
-<p>Notice that 38.81% of the time the turtle did not make a close return at all during the first thousand steps. On the other hand it is possible, though not at all likely, for the turtle to make quite a few close returns.<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a></p>
-<p>It is interesting to look specifically at the distances from the origin. The following function draws a graph of the distance from the origin for the specified number of turtle steps:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim2 &lt;-<span class="st"> </span>function(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  if ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
-  }
-  <span class="kw">set.seed</span>(seed)
-  
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span>*pi)
-  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
-  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
-  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
-  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x^<span class="dv">2</span> +<span class="st"> </span>y^<span class="dv">2</span>)
-  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;First &quot;</span>, steps, <span class="st">&quot; Steps of the Drunken Turtle&quot;</span>)
-  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>:steps, <span class="dt">y=</span>dist)) +<span class="st"> </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Distance From Origin&quot;</span>,
-         <span class="dt">title =</span> plotTitle)
-  <span class="kw">print</span>(p)
-}</code></pre></div>
-<p>Let’s try it out! The results appear in Figure <a href="drunken-turtle-sim.html#fig:drunken-turtle-steps">6.6</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">drunkenSim2</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="dv">2525</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:drunken-turtle-steps"></span>
-<img src="r-notes_files/figure-html/drunken-turtle-steps-1.png" alt="Line plot of the Turtle's distance from the origin, as a function of how many steps the turtle has taken." width="60%" />
-<p class="caption">
-Figure 6.6: Line plot of the Turtle’s distance from the origin, as a function of how many steps the turtle has taken.
-</p>
-</div>
-<p>It appears that the turtle might have returned close to the origin a couple of times, for the most part it seems to be wandering further and further away. In the mathematical field known as <em>stochastic processes</em>, it has been shown that if the turtle is allowed to go on forever then it will certainly make a close return <em>infinitely many times</em>. These returns, though, will tend to be spaced further and further apart as time goes on, and our graph suggests that this is so.</p>
 
 </div>
-<div class="footnotes">
-<hr />
-<ol start="23">
-<li id="fn23"><p>Note that these proportions depend heavily on how we define “close”. If the cut-off had been lower than <span class="math inline">\(1/2\)</span>, then we would have seen fewer close returns.<a href="drunken-turtle-sim.html#fnref23">↩</a></p></li>
-</ol>
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="example-dental-floss.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="glossary-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="acknowledgements.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="idea.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

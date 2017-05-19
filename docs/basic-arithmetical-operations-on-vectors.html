@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-17">
+<meta name="date" content="2017-05-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -107,7 +107,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="0.1" data-path="the-why-of-these-notes-remarks-for-colleagues.html"><a href="the-why-of-these-notes-remarks-for-colleagues.html"><i class="fa fa-check"></i><b>0.1</b> The Why of these Notes: Remarks for Colleagues</a></li>
 <li class="chapter" data-level="0.2" data-path="history-of-r.html"><a href="history-of-r.html"><i class="fa fa-check"></i><b>0.2</b> History of R</a></li>
 <li class="chapter" data-level="0.3" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
-<li class="chapter" data-level="0.4" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
+<li class="chapter" data-level="0.4" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html"><i class="fa fa-check"></i><b>0.4</b> Miscellaneous Information</a><ul>
+<li class="chapter" data-level="0.4.1" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#typographical-conventions"><i class="fa fa-check"></i><b>0.4.1</b> Typographical Conventions</a></li>
+<li class="chapter" data-level="0.4.2" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#license"><i class="fa fa-check"></i><b>0.4.2</b> License</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
 <li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
@@ -469,7 +472,7 @@ x +<span class="st"> </span>y</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x^y</code></pre></div>
 <pre><code>## [1]    1000   50625 3200000</code></pre>
 <p>As an illustration, the final result is:</p>
-<p><span class="math display">\[10^3, 15^4, 20^5\]</span> The “mod” operator <code>%%</code> can be quite useful. Here is an example: even numbers have a remainder of 0 after division by 2, whereas odd numbers have a remainder of 1. Hence we may use <code>%%</code> to quickly locate the even numbers in a vector, as follows:</p>
+<p><span class="math display">\[10^3, 15^4, 20^5.\]</span> The “mod” operator <code>%%</code> can be quite useful. Here is an example: even numbers have a remainder of 0 after division by 2, whereas odd numbers have a remainder of 1. Hence we may use <code>%%</code> to quickly locate the even numbers in a vector, as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">24</span>)
 vec[vec %%<span class="st"> </span><span class="dv">2</span> ==<span class="st"> </span><span class="dv">0</span>]</code></pre></div>
 <pre><code>## [1]  2 12 24</code></pre>
@@ -488,7 +491,7 @@ vec[vec %%<span class="st"> </span><span class="dv">2</span> ==<span class="st">
 <h4><span class="header-section-number">2.7.1.1</span> Rounding</h4>
 <p>You can use the <code>round()</code>  function to round off numbers to any desired number of decimal places.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">roots &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">1</span>:<span class="dv">5</span>)
-roots <span class="co"># Too much infromation!</span></code></pre></div>
+roots <span class="co"># Too much information!</span></code></pre></div>
 <pre><code>## [1] 1.000000 1.414214 1.732051 2.000000 2.236068</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(roots, <span class="dt">digits =</span> <span class="dv">3</span>) <span class="co"># nicer</span></code></pre></div>
 <pre><code>## [1] 1.000 1.414 1.732 2.000 2.236</code></pre>
@@ -512,7 +515,7 @@ roots <span class="co"># Too much infromation!</span></code></pre></div>
 <h4><span class="header-section-number">2.7.1.4</span> Summing and the Mean</h4>
 <p>There are some functions on vectors that return only a vector of length 1. Among examples we have met so far are:</p>
 <ul>
-<li>`length()</li>
+<li><code>length()</code></li>
 <li><code>any()</code></li>
 <li><code>all()</code></li>
 </ul>
@@ -524,7 +527,7 @@ roots <span class="co"># Too much infromation!</span></code></pre></div>
 <p><span class="math display">\[\frac{\text{sum of the numbers}}{\text{how many numbers there are}}\]</span> You can find the mean of a numerical vector as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(-<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">17</span>, <span class="dv">23</span>, <span class="dv">51</span>)
 meanVec &lt;-<span class="st"> </span><span class="kw">sum</span>(vec)/<span class="kw">length</span>(vec)</code></pre></div>
-<p>The way we compute the mean in R looks a great deal like its mathematical definition. This is one of the great conveniences afforded by vectorization.</p>
+<p>The way we compute the mean in R looks a great deal like its mathematical definition.</p>
 <p>You might be interested to know that there is a function in R dedicated to finding the mean. Unsurprisingly, it is called <code>mean()</code> :</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(vec)</code></pre></div>
 <pre><code>## [1] 18.4</code></pre>
@@ -543,8 +546,8 @@ b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</sp
 <span class="kw">max</span>(a, b)</code></pre></div>
 <pre><code>## [1] 15</code></pre>
 <p>Both functions yield <code>NA</code> when one of the elements is <code>NA</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">3</span>, <span class="dv">7</span>, -<span class="dv">2</span>, <span class="ot">NA</span>, <span class="dt">na.rm =</span> T)</code></pre></div>
-<pre><code>## [1] 7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">3</span>, <span class="dv">7</span>, -<span class="dv">2</span>, <span class="ot">NA</span>)</code></pre></div>
+<pre><code>## [1] NA</code></pre>
 <p>Like <code>sum()</code> and mean()<code>, they respond to the</code>na.rm` parameter:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">3</span>, <span class="dv">7</span>, -<span class="dv">2</span>, <span class="ot">NA</span>, <span class="dt">na.rm =</span> T)</code></pre></div>
 <pre><code>## [1] 7</code></pre>
@@ -577,7 +580,7 @@ b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</sp
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">c</span>(-<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>))</code></pre></div>
 <pre><code>## Warning in sqrt(c(-4, 2, 4)): NaNs produced</code></pre>
 <pre><code>## [1]      NaN 1.414214 2.000000</code></pre>
-<p>Keep in mind, though, that the result is a perfectly good vector as far as R is concerned: after the warning R will permit you to use it in further computations:</p>
+<p>Keep in mind, though, that the result is a perfectly good vector as far as R is concerned. After the warning R will permit you to use it in further computations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec&lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">c</span>(-<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>))</code></pre></div>
 <pre><code>## Warning in sqrt(c(-4, 2, 4)): NaNs produced</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec +<span class="st"> </span><span class="dv">3</span></code></pre></div>
