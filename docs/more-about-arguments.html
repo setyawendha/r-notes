@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-18">
+<meta name="date" content="2017-05-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -420,7 +420,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">3.4</span> More About Arguments</h2>
 <div id="default-arguments" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> Default Arguments</h3>
-<p>Sometime around the year 1400CE, the South Indian mathematician Madhava discovered toe following infinite-series formula for <span class="math inline">\(\pi\)</span>, the ratio of the circumference to the diameter of a circle:</p>
+<p>Sometime around the year 1400CE, the South Indian mathematician Madhava discovered the following infinite-series formula for <span class="math inline">\(\pi\)</span>, the ratio of the circumference to the diameter of a circle:</p>
 <p><span class="math display">\[\pi = \frac{4}{1} - \frac{4}{3} + \frac{4}{5} - \frac{4}{7} +\frac{4}{9} - \cdots\]</span> The numerator of each fraction is always 4. The denominators are the odd numbers 1, 3, 5, and so on. The fractions alternate between positive and negative. The idea is that the further you go out in the series, the closer the sum of the fractions will be to <span class="math inline">\(\pi\)</span>. No matter how close you want to get to <span class="math inline">\(\pi\)</span>, you can get that close by adding up sufficiently many of the fractions.</p>
 <p>In mathematics courses we learn to write the sum like this:</p>
 <p><span class="math display">\[\pi = \sum_{k=1}^{k=\infty} (-1)^{k+1}\frac{4}{2k-1}.\]</span> Here’s how the mathematical notation works:</p>
@@ -431,7 +431,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>If we let <span class="math inline">\(k=1\)</span>, then the expression becomes <span class="math display">\[(-1)^2\frac{4}{2 \cdot 1 -1} = \frac{4}{1} = 4,\]</span> the first term in the series.</li>
 <li>If we let <span class="math inline">\(k=2\)</span>, then the expression becomes <span class="math display">\[(-1)^3\frac{4}{2 \cdot 2 -1} = -\frac{4}{3}\]</span> the second term in the series.</li>
 <li>If we let <span class="math inline">\(k=3\)</span>, then the expression becomes <span class="math display">\[(-1)^4\frac{4}{2 \cdot 3 -1} = \frac{4}{5}\]</span> the third term in the series.</li>
-<li>The <span class="math inline">\(k = \infty\)</span> above the sum-sign says that we are to keep on going like this, increasing <span class="math inline">\(k\)</span> by 1 every times without stopping.</li>
+<li>The <span class="math inline">\(k = \infty\)</span> above the sum-sign says that we are to keep on going like this, increasing <span class="math inline">\(k\)</span> by 1 every time, without stopping.</li>
 <li>In this way we get the entire infinite series.</li>
 </ul>
 <p>What Madhava discovered was that if you <em>do</em> stop after some large number of terms, then the sum of the terms you have constructed will be close to <span class="math inline">\(\pi\)</span>. The more terms you add up before stopping, the closer to <span class="math inline">\(\pi\)</span> you will get.</p>
@@ -446,8 +446,8 @@ madhavaPI &lt;-<span class="st"> </span>function(n) {
   <span class="co"># return the sum of the terms:</span>
   <span class="kw">sum</span>(terms)
 }</code></pre></div>
-<p>R’s vectorization capabilities makes it easy to write the code; in fact, the code is essentially a copy of the sum-formula.</p>
-<p>Note also the presence—for the first time—of <em>comments</em> in the code above. Anything that appears on a line after the pound-sign <code>#</code> will be ignored by R. We therefore use the <code>#</code>-sign to insert ordinary-language comments into our code in order to explain to others (and to ourselves when we look at the code much later) what we are doing and why we are doing it.</p>
+<p>R’s vectorization capabilities make it easy to write the code; in fact, the code is essentially a copy of the sum-formula.</p>
+<p>Note also the presence of <em>comments</em> in the code above. Anything that appears on a line after the pound-sign <code>#</code> will be ignored by R. We therefore use the <code>#</code>-sign to insert ordinary-language comments into our code in order to explain to others (and to ourselves when we look at the code much later) what we are doing and why we are doing it.</p>
 <p>Let’s try it out by adding the first million terms of the series:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>(<span class="dv">1000000</span>)</code></pre></div>
 <pre><code>## [1] 3.141592</code></pre>
@@ -501,7 +501,7 @@ favColorReport &lt;-<span class="st"> </span>function(<span class="dt">inhabitan
 <p>The key to this behavior is two-fold:</p>
 <ul>
 <li>The vector <code>inhabitants</code> was set as the “default value” of the parameter <code>inhabitant</code>.</li>
-<li>We called the <code>match.arg()</code> function, which found that element of <code>inhabitants</code> that matched what the user actually submitted for the parameter <code>inhabitant</code>. This element was them assigned to <code>x</code> and we used <code>x</code> to report the desired color.</li>
+<li>We called the <code>match.arg()</code> function, which found the element of <code>inhabitants</code> that matched what the user actually submitted for the parameter <code>inhabitant</code>. This element was then assigned to <code>x</code>, and we used <code>x</code> to report the desired color.</li>
 </ul>
 <p>Sometimes when you look at R-help you’ll see the default value for a parameter set as a vector—usually a character-vector, as in our example. Most likely what is going on is that somewhere inside the function R will attempt to match the argument you provide with one of the elements of that “default” vector. When a function is written in this way, the possible parameters can have quite long names but the user doesn’t have to type them in all the way, as long as the user types enough characters to pick out uniquely an element of the default vector.</p>
 <p>The matching is done by exact match of initial characters. For example, it won’t do for me to enter:</p>

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-18">
+<meta name="date" content="2017-05-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -420,7 +420,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">3.5</span> Environments and Scope</h2>
 <div id="environments-and-searching" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> Environments and Searching</h3>
-<p>In R an <em>environment</em> is particular kind of data structure that helps the computer connect names to a value. An environment can be thought of as a bag of names—names for vectors, functions, and all sorts of objects—along with a way (provided automatically by the computer) of getting from each name to the value that it represents. The process that the computer follows in order to connect a name to a value is called <em>scoping</em>. In R, as in many other computer languages, environments are what makes scoping possible. In other words, environments are how R figures out what the names in any piece of code <em>mean</em>.</p>
+<p>In R an <em>environment</em> is a particular kind of data structure that helps the computer connect names to a value. An environment can be thought of as a bag of names—names for vectors, functions, and all sorts of objects—along with a way (provided automatically by the computer) of getting from each name to the value that it represents. The process that the computer follows in order to connect a name to a value is called <em>scoping</em>. In R, as in many other computer languages, environments are what makes scoping possible. In other words, environments are how R figures out what the names in any piece of code <em>mean</em>.</p>
 <p>R has a considerable number of environments—and environments can be created and destroyed throughout the course of an R session—but at any moment only one of them is <em>active</em>. The <em>active environment</em> is the first environment that R will examine when it needs to look up a name in an expression.</p>
 <p>The most familiar environment is the <em>Global Environment</em>—the one that is active when you are using R from the console. The names in the Global Environment, along with descriptions of the objects to which they refer, are shown in the <strong>Environment</strong> panel in the R Studio IDE. Alternatively, you see the names in the Global Environment by using the <code>ls()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre></div>
@@ -444,7 +444,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>it found the name `quadlingColor on its search path;</li>
 <li>it found the name <code>cat</code> on its search path (and found that it referred to the <code>cat()</code> function)</li>
 </ul>
-<p>You can tell where R found these <a href="things:\index%7BR-functions!find" class="uri">things:\index{R-functions!find</a>()@}</p>
+<p>You can tell where R found these things: </p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;quadlingColor&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;.GlobalEnv&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;cat&quot;</span>)</code></pre></div>
@@ -468,7 +468,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## &lt;bytecode: 0x10e57f0e0&gt;
+## &lt;bytecode: 0x103f7e1c0&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>I got the definition of the <code>cat()</code> function, all the way up in package <strong>base</strong>.</p>
 <p>Now try:</p>
@@ -478,17 +478,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>I got an error! That’s because the only reference R could find for <code>cat</code> was to the function <code>cat()</code> in package <strong>base</strong>, and since a function isn’t a vector you can’t repeat it.<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a></p>
 <p>Next, define a variable named <code>cat</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat &lt;-<span class="st"> &quot;Pippin&quot;</span></code></pre></div>
+<p>At this point, we the identifier <code>cat</code> appears in at least two environments:</p>
+<ul>
+<li>in the Global Environment, where is refers to the string “Pippin”;</li>
+<li>in the environment associated with package <strong>base</strong>, where is refers to the <code>cat()</code>-function.</li>
+</ul>
+<p>We can verify the above assertions with <code>find()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;cat&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;.GlobalEnv&quot;   &quot;package:base&quot;</code></pre>
 <p>Now try:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(cat, <span class="dt">times =</span> <span class="dv">3</span>)</code></pre></div>
 <pre><code>## [1] &quot;Pippin&quot; &quot;Pippin&quot; &quot;Pippin&quot;</code></pre>
 <p>This time it worked! The reason is that R found a character-vector named <code>cat</code> in the Global Environment.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;cat&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;.GlobalEnv&quot;   &quot;package:base&quot;</code></pre>
 <p>Now try:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(cat, <span class="st">&quot;is a cat</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
 <pre><code>## Pippin is a cat</code></pre>
-<p>Wait a minute: why did this work? Doesn’t the Global Environment come before package <strong>base</strong> in the search path? Yes it does, but since the first occurrence of <code>cat</code> was followed by an open parenthesis R know to expect that it referred to a function. Hence it kept looking up the search path for a function with the name <code>cat</code>, eventually finding our familiar <code>cat()</code> function in <strong>base</strong>.</p>
-<p>Well, then, consider happens if we do this:</p>
+<p>Wait a minute: why did this work? Doesn’t the Global Environment come before package <strong>base</strong> in the search path? Yes it does, but since the first occurrence of <code>cat</code> was followed by an open parenthesis R know to expect that it referred to a function. Hence it kept looking along the search path for a function with the name <code>cat</code>, eventually finding our familiar <code>cat()</code> function in <strong>base</strong>.</p>
+<p>Well then, consider happens if we do this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat &lt;-<span class="st"> </span>function(...) {
   <span class="st">&quot;Meow!&quot;</span>
 }</code></pre></div>
@@ -496,8 +502,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Now try again:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(cat, <span class="st">&quot;is a cat</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Meow!&quot;</code></pre>
-<p>Since the <code>cat()</code> we defined is a function in the Global Environment—which comes before <strong>base</strong> in the search path—R uses our <code>cat()</code> instead of the **base<em>’s <code>cat()</code>. R programmers say that the <strong>base</strong> version of cat has been </em>masked*.</p>
-<p>If I want to keep my <code>cat()</code> and still use the <strong>base</strong> version of<code>cat()</code> as well, I can do that to be sure of getting a particular package’s version of a function, put the name of the package and then two semicolons before the function-name, like this:</p>
+<p>Since the <code>cat()</code> we defined is a function in the Global Environment—which comes before <strong>base</strong> in the search path—R uses our <code>cat()</code> instead of the <strong>base</strong>’s <code>cat()</code>. R programmers say that the <strong>base</strong> version of cat has been <em>masked</em>.</p>
+<p>If I want to keep my <code>cat()</code> and still use the <strong>base</strong> version of<code>cat()</code> as well, I can do that. In order to be sure of getting a particular package’s version of a function, put the name of the package and then two semicolons before the function-name, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base::<span class="kw">cat</span>(<span class="st">&quot;This is the good ol&#39; cat() we have been missing!&quot;</span>)</code></pre></div>
 <pre><code>## This is the good ol&#39; cat() we have been missing!</code></pre>
 <p>But we don’t like our <code>cat()</code> so very much: let’s remove it:</p>
@@ -509,18 +515,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Let’s summarize what we have learned so far:</p>
 <ul>
 <li>An environment is a collection of names associated with objects.</li>
-<li>The Global Environment is the environment that is active when we are working form the console.</li>
+<li>The Global Environment is the environment that is active when we are working from the console.</li>
 <li>When R needs to look up a name, it consults a search path.</li>
 <li>When we are in the Global Environment the search path starts there, and continues to:
 <ul>
-<li>the last package loaded (the parent environment)</li>
-<li>the package before that (the “grandparent environment”)</li>
+<li>the last package loaded (the parent environment),</li>
+<li>the package before that (the “grandparent environment”),</li>
 <li>and so on …</li>
-<li>… up to package <strong>base</strong></li>
+<li>… up to package <strong>base</strong>.</li>
 </ul></li>
 <li>the first object of the right type having the given name that is found along the search path is the object to which R will associate the name.</li>
 </ul>
-<p>Just as the Global Environment is a child of the last package loaded, so the Global Environment can have children of its own. In fact a child-environment is created whenever we define a function in the Global Environment.</p>
+<p>Just as the Global Environment is a child of the last package loaded, so the Global Environment can have children of its own. In fact a child-environment is created whenever we define a function in the Global Environment and then run it.</p>
 <p>Consider the following code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span>
 b &lt;-<span class="st"> </span><span class="dv">4</span>

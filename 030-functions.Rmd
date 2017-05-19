@@ -109,7 +109,7 @@ Let's consider the advantages of writing functions:
 * The more generally the functions solves the problem, the varied are the situations in which the function may be re-used.
 * If we have to change our our approach to the problem---because our original solution was flawed or if there is a need to add new features to our solution, or for any other reason---then we only have to implement the necessary change in the definition of our function, rather than in the many places in the program where the function is actually used.
 
-There is a well-known principle in computer programming called DRY, which is an acronym for *"Don't Repeat Yourself."*  \index{DRY}Computer code is said to be DRY when general solutions are defined in one place but are usable in many places, and when information needed in many places is defined authoritatively in one place.  As a rule, DRY code is easy to read, debug, develop and maintain.  The more you get into the habit of expressing solutions to problems in terms of functions, the more "drier" your code will be.
+There is a well-known principle in computer programming called DRY, which is an acronym for *"Don't Repeat Yourself."*  \index{DRY}Computer code is said to be DRY when general solutions are defined in one place but are usable in many places, and when information needed in many places is defined authoritatively in one place.  As a rule, DRY code is easy to develop, debug, read and maintain.  The more you get into the habit of expressing solutions to problems in terms of functions, the "drier" your code will be.
 
 ## Function Syntax
 
@@ -122,11 +122,11 @@ functionName <- function(parameter, parameter, ...) {
 ```
 
 
-`fucntionName` is the variable that will refer to the function you define.  Like any other variable, it can contain letters, numbers, the dot and the underscore character, but is not permitted to begin with the dot followed by a number.
+`fucntionName` is the variable that will refer to the function you define.  Like any other identifier, it can contain letters, numbers, the dot and the underscore character, but is not permitted to begin with the dot followed by a number.
 
-After the `function` reserved word we see a pair of matching parentheses.  The contain the *parameters*\index{parameter} of the function, which will be passed into the function as variables referred to by the parameter names.
+After the `function` reserved word we see a pair of matching parentheses.  They contain the *parameters*\index{parameter} of the function, which will be passed into the function as variables referred to by the parameter names.
 
-The *body* \index{body of a function} of the function consists of one or more expressions that do the work of the function.  Note that the body is enclosed with curly braces.  This is only necessary, tough, if the body consists of more than one expression. If the body had only one expression then that expression could appear without the braces, like this:
+The *body* \index{body of a function} of the function consists of one or more expressions that do the work of the function.  Note that the body is enclosed with curly braces.  This is only necessary, though, if the body consists of more than one expression. If the body had only one expression then that expression could appear without the braces, like this:
 
 ```{r}
 add3 <- function(x) x+3
@@ -178,7 +178,7 @@ manyCat("Hello", 4, 7)
 ## Error in manyCat("Hello", 4, 7) : unused argument (7)
 ```
 
-You will have noticed by now that parentheses are essential when using a function. What would happen if we asked typed just the function's name itself rather than trying in a call?  Give it a try:
+You will have noticed by now that parentheses are essential when using a function. What would happen if we typed just the function's name itself?  Give it a try:
 
 ```{r}
 manyCat
@@ -355,7 +355,7 @@ At this point we don't use `print()` explicitly very much---we just rely on R to
 
 ### Default Arguments {#default-arguments}
 
-Sometime around the year 1400CE, the South Indian mathematician Madhava discovered toe following infinite-series formula for $\pi$, the ratio of the circumference to the diameter of a circle:
+Sometime around the year 1400CE, the South Indian mathematician Madhava discovered the following infinite-series formula for $\pi$, the ratio of the circumference to the diameter of a circle:
 
 $$\pi = \frac{4}{1} - \frac{4}{3} + \frac{4}{5} - \frac{4}{7} +\frac{4}{9} - \cdots$$
 The numerator of each fraction is always 4.  The denominators are the odd numbers 1, 3, 5, and so on.  The fractions alternate between positive and negative.  The idea is that the further you go out in the series, the closer the sum of the fractions will be to $\pi$. No matter how close you want to get to $\pi$, you can get that close by adding up sufficiently many of the fractions.
@@ -377,7 +377,7 @@ $$(-1)^3\frac{4}{2 \cdot 2 -1} = -\frac{4}{3}$$
 * If we let $k=3$, then the expression becomes
 $$(-1)^4\frac{4}{2 \cdot 3 -1} = \frac{4}{5}$$
     the third term in the series.
-* The $k = \infty$ above the sum-sign says that we are to keep on going like this, increasing $k$ by 1 every times without stopping.
+* The $k = \infty$ above the sum-sign says that we are to keep on going like this, increasing $k$ by 1 every time, without stopping.
 * In this way we get the entire infinite series.
 
 What Madhava discovered was that if you *do* stop after some large number of terms, then the sum of the terms you have constructed will be close to $\pi$.  The more terms you add up before stopping, the closer to $\pi$ you will get.
@@ -397,9 +397,9 @@ madhavaPI <- function(n) {
 }
 ```
 
-R's vectorization capabilities makes it easy to write the code; in fact, the code is essentially a copy of the sum-formula.
+R's vectorization capabilities make it easy to write the code; in fact, the code is essentially a copy of the sum-formula.
 
-Note also the presence---for the first time---of *comments* in the code above.  Anything that appears on a line after the pound-sign `#` will be ignored by R.  We therefore use the `#`-sign to insert ordinary-language comments into our code in order to explain to others (and to ourselves when we look at the code much later) what we are doing and why we are doing it.
+Note also the presence of *comments* in the code above.  Anything that appears on a line after the pound-sign `#` will be ignored by R.  We therefore use the `#`-sign to insert ordinary-language comments into our code in order to explain to others (and to ourselves when we look at the code much later) what we are doing and why we are doing it.
 
 Let's try it out by adding the first million terms of the series:
 
@@ -481,7 +481,7 @@ favColorReport("Gil")
 The key to this behavior is two-fold:
 
 * The vector `inhabitants` was set as the "default value" of the parameter `inhabitant`.
-* We called the `match.arg()`\index{R-functions!match.arg()@\texttt{match.arg()}} function, which found that element of `inhabitants` that matched what the user actually submitted for the parameter `inhabitant`.  This element was them assigned to `x` and we used `x` to report the desired color.
+* We called the `match.arg()`\index{R-functions!match.arg()@\texttt{match.arg()}} function, which found the element of `inhabitants` that matched what the user actually submitted for the parameter `inhabitant`.  This element was then assigned to `x`, and we used `x` to report the desired color.
 
 Sometimes when you look at R-help you'll see the default value for a parameter set as a vector---usually a character-vector, as in our example.  Most likely what is going on is that somewhere inside the function R will attempt to match the argument you provide with one of the elements of that "default" vector.  When a function is written in this way, the possible parameters can have quite long names but the user doesn't have to type them in all the way, as long as the user types enough characters to pick out uniquely an element of the default vector.
 
@@ -507,7 +507,7 @@ favColorReport()  # defaults to "Munchkin"
 
 ### Environments and Searching
 
-In R an *environment* is particular kind of data structure that helps the computer connect names to a value.  An environment can be thought of as a bag of names---names for vectors, functions, and all sorts of objects---along with a way (provided automatically by the computer) of getting from each name to the value that it represents. The process that the computer follows in order to connect a name to a value is called *scoping*.\index{scoping}  In R, as in many other computer languages, environments are what makes scoping possible.  In other words, environments are how R figures out what the names in any piece of code *mean*.
+In R an *environment* is a particular kind of data structure that helps the computer connect names to a value.  An environment can be thought of as a bag of names---names for vectors, functions, and all sorts of objects---along with a way (provided automatically by the computer) of getting from each name to the value that it represents. The process that the computer follows in order to connect a name to a value is called *scoping*.\index{scoping}  In R, as in many other computer languages, environments are what makes scoping possible.  In other words, environments are how R figures out what the names in any piece of code *mean*.
 
 R has a considerable number of environments---and environments can be created and destroyed throughout the course of an R session---but at any moment only one of them is *active*.  The *active environment* is \index{active environment}the first environment that R will examine when it needs to look up a name in an expression.
 
@@ -550,7 +550,7 @@ R was able to complete your request because:
 * it found the name `quadlingColor on its search path;
 * it found the name `cat` on its search path (and found that it referred to the `cat()` function)
 
-You can tell where R found these things:\index{R-functions!find()@\texttt{find())}}
+You can tell where R found these things: \index{R-functions!find()@\texttt{find()}}
 
 ```{r}
 find("quadlingColor")
@@ -586,13 +586,12 @@ Next, define a variable named `cat`:
 cat <- "Pippin"
 ```
 
-Now try:
+At this point, we the identifier `cat` appears in at least two environments:
 
-```{r}
-rep(cat, times = 3)
-```
+* in the Global Environment, where is refers to the string "Pippin";
+* in the environment associated with package **base**, where is refers to the `cat()`-function.
 
-This time it worked!  The reason is that R found a character-vector named `cat` in the Global Environment.
+We can verify the above assertions with `find()`:
 
 ```{r}
 find("cat")
@@ -601,12 +600,20 @@ find("cat")
 Now try:
 
 ```{r}
+rep(cat, times = 3)
+```
+
+This time it worked!  The reason is that R found a character-vector named `cat` in the Global Environment.
+
+Now try:
+
+```{r}
 cat(cat, "is a cat\n")
 ```
 
-Wait a minute:  why did this work?  Doesn't the Global Environment come before package **base** in the search path?  Yes it does, but since the first occurrence of `cat` was followed by an open parenthesis R know to expect that it referred to a function.  Hence it kept looking up the search path for a function with the name `cat`, eventually finding our familiar `cat()` function in **base**.
+Wait a minute:  why did this work?  Doesn't the Global Environment come before package **base** in the search path?  Yes it does, but since the first occurrence of `cat` was followed by an open parenthesis R know to expect that it referred to a function.  Hence it kept looking along the search path for a function with the name `cat`, eventually finding our familiar `cat()` function in **base**.
 
-Well, then, consider happens if we do this:
+Well then, consider happens if we do this:
 
 ```{r}
 cat <- function(...) {
@@ -622,9 +629,9 @@ Now try again:
 cat(cat, "is a cat\n")
 ```
 
-Since the `cat()` we defined is a function in the Global Environment---which comes before **base** in the search path---R uses our `cat()` instead of the **base*'s `cat()`.  R programmers say that the **base** version of cat has been *masked*.
+Since the `cat()` we defined is a function in the Global Environment---which comes before **base** in the search path---R uses our `cat()` instead of the **base**'s `cat()`.  R programmers say that the **base** version of cat has been *masked*.
 
-If I want to keep my `cat()` and still use the **base** version of`cat()` as well, I can do that to be sure of getting a particular package's version of a function, put the name of the package and then two semicolons before the function-name, like this:
+If I want to keep my `cat()` and still use the **base** version of`cat()` as well, I can do that.  In order to be sure of getting a particular package's version of a function, put the name of the package and then two semicolons before the function-name, like this:
 
 ```{r}
 base::cat("This is the good ol' cat() we have been missing!")
@@ -645,16 +652,16 @@ The vector `cat` is removed as well by the previous command.
 Let's summarize what we have learned so far:
 
 * An environment is a collection of names associated with objects.
-* The Global Environment is the environment that is active when we are working form the console.
+* The Global Environment is the environment that is active when we are working from the console.
 * When R needs to look up a name, it consults a search path.
 * When we are in the Global Environment the search path starts there, and continues to:
-    * the last package loaded (the parent environment)
-    * the package before that (the "grandparent environment")
+    * the last package loaded (the parent environment),
+    * the package before that (the "grandparent environment"),
     * and so on ...
-    * ... up to package **base**
+    * ... up to package **base**.
 * the first object of the right type having the given name that is found along the search path is the object to which R will associate the name.
 
-Just as the Global Environment is a child of the last package loaded, so the Global Environment can have children of its own.  In fact a child-environment is created whenever we define a function in the Global Environment.
+Just as the Global Environment is a child of the last package loaded, so the Global Environment can have children of its own.  In fact a child-environment is created whenever we define a function in the Global Environment and then run it.
 
 Consider the following code:
 
@@ -762,7 +769,7 @@ install.packages("<name of package here>")
 
 The package will be downloaded from the Comprehensive R Archive Network (CRAN) and installed in in your Home directory.
 
-As long as we are working on the R Studio server, it's a good idea to refrain from installing any packages on your own, unless they are packages that we don't use in class and that you simply want to explore on your own.  That's because when you install your own packages on the Server they go into a special directory in your Home folder and become part of your "User Library".  Packages that are installed by a system administrator for general use are in the "System Library."  If a package is in your User Library and in the System Library, when you ask to attach it you will get the version that it is your User Library.  Now packages are updated from time to time, so it may happen that the version you have in your User Library will be different from the one in the System Library.  If that is the case then your package might not work the same way for you as it does for the instructor and for other students:  that can be confusing.
+As long as we are working on the R Studio server, it's a good idea to refrain from installing packages yourself, unless they are packages that we don't use in class and that you simply want to explore on your own.  That's because when you install your own packages on the Server they go into a special directory in your Home folder and become part of your "User Library".  Packages that are installed by a system administrator for general use are in the "System Library."  If a package is in your User Library and in the System Library, when you ask to attach it you will get the version that it is your User Library.  Now packages are updated from time to time, so it may happen that the version you have in your User Library will be different from the one in the System Library.  If that is the case then your package might not work the same way for you as it does for the instructor and for other students:  that can be confusing.
 
 Eventually, though, you will install R and R Studio on your own computer, and then you will have to install many packages on your own.
 
@@ -802,7 +809,7 @@ Parameters of a Function \index{parameter}
 
 Argument \index{argument}
 
-: An argument for a function is a value that is assigned to one the parameters of the function.  (Sometimes arguments are called an *actual arguments* in order to distinguish then from parameters that are often called *formal arguments*.)
+: An argument for a function is a value that is assigned to one of the parameters of the function.  (Sometimes arguments are called an *actual arguments* in order to distinguish then from parameters that are often called *formal arguments*.)
 
 >"It’s useful to distinguish between the formal arguments and the actual arguments of a function. The formal arguments are a property of the function, whereas the actual or calling arguments can vary each time you call the function."
 

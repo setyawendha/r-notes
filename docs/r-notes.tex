@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-05-18}
+  \date{2017-05-19}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -4510,9 +4510,9 @@ which is an acronym for \emph{``Don't Repeat Yourself.''}
 \index{DRY}Computer code is said to be DRY when general solutions are
 defined in one place but are usable in many places, and when information
 needed in many places is defined authoritatively in one place. As a
-rule, DRY code is easy to read, debug, develop and maintain. The more
+rule, DRY code is easy to develop, debug, read and maintain. The more
 you get into the habit of expressing solutions to problems in terms of
-functions, the more ``drier'' your code will be.
+functions, the ``drier'' your code will be.
 
 \section{Function Syntax}\label{function-syntax}
 
@@ -4528,18 +4528,18 @@ functions. The general form of a function definition is as follows:
 \end{Shaded}
 
 \texttt{fucntionName} is the variable that will refer to the function
-you define. Like any other variable, it can contain letters, numbers,
+you define. Like any other identifier, it can contain letters, numbers,
 the dot and the underscore character, but is not permitted to begin with
 the dot followed by a number.
 
 After the \texttt{function} reserved word we see a pair of matching
-parentheses. The contain the \emph{parameters}\index{parameter} of the
+parentheses. They contain the \emph{parameters}\index{parameter} of the
 function, which will be passed into the function as variables referred
 to by the parameter names.
 
 The \emph{body} \index{body of a function} of the function consists of
 one or more expressions that do the work of the function. Note that the
-body is enclosed with curly braces. This is only necessary, tough, if
+body is enclosed with curly braces. This is only necessary, though, if
 the body consists of more than one expression. If the body had only one
 expression then that expression could appear without the braces, like
 this:
@@ -4634,8 +4634,8 @@ error;
 \end{verbatim}
 
 You will have noticed by now that parentheses are essential when using a
-function. What would happen if we asked typed just the function's name
-itself rather than trying in a call? Give it a try:
+function. What would happen if we typed just the function's name itself?
+Give it a try:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4981,7 +4981,7 @@ the console. Later on we will find that it has other uses.\footnote{R is
 \subsection{Default Arguments}\label{default-arguments}
 
 Sometime around the year 1400CE, the South Indian mathematician Madhava
-discovered toe following infinite-series formula for \(\pi\), the ratio
+discovered the following infinite-series formula for \(\pi\), the ratio
 of the circumference to the diameter of a circle:
 
 \[\pi = \frac{4}{1} - \frac{4}{3} + \frac{4}{5} - \frac{4}{7} +\frac{4}{9} - \cdots\]
@@ -5022,7 +5022,7 @@ mathematical notation works:
   series.
 \item
   The \(k = \infty\) above the sum-sign says that we are to keep on
-  going like this, increasing \(k\) by 1 every times without stopping.
+  going like this, increasing \(k\) by 1 every time, without stopping.
 \item
   In this way we get the entire infinite series.
 \end{itemize}
@@ -5050,15 +5050,15 @@ the series, where \(n\) can be any value we choose.
 \end{Highlighting}
 \end{Shaded}
 
-R's vectorization capabilities makes it easy to write the code; in fact,
+R's vectorization capabilities make it easy to write the code; in fact,
 the code is essentially a copy of the sum-formula.
 
-Note also the presence---for the first time---of \emph{comments} in the
-code above. Anything that appears on a line after the pound-sign
-\texttt{\#} will be ignored by R. We therefore use the \texttt{\#}-sign
-to insert ordinary-language comments into our code in order to explain
-to others (and to ourselves when we look at the code much later) what we
-are doing and why we are doing it.
+Note also the presence of \emph{comments} in the code above. Anything
+that appears on a line after the pound-sign \texttt{\#} will be ignored
+by R. We therefore use the \texttt{\#}-sign to insert ordinary-language
+comments into our code in order to explain to others (and to ourselves
+when we look at the code much later) what we are doing and why we are
+doing it.
 
 Let's try it out by adding the first million terms of the series:
 
@@ -5243,9 +5243,9 @@ The key to this behavior is two-fold:
 \item
   We called the
   \texttt{match.arg()}\index{R-functions!match.arg()@\texttt{match.arg()}}
-  function, which found that element of \texttt{inhabitants} that
-  matched what the user actually submitted for the parameter
-  \texttt{inhabitant}. This element was them assigned to \texttt{x} and
+  function, which found the element of \texttt{inhabitants} that matched
+  what the user actually submitted for the parameter
+  \texttt{inhabitant}. This element was then assigned to \texttt{x}, and
   we used \texttt{x} to report the desired color.
 \end{itemize}
 
@@ -5290,7 +5290,7 @@ parameter. Its first element does, however, serve as the default value:
 \subsection{Environments and
 Searching}\label{environments-and-searching}
 
-In R an \emph{environment} is particular kind of data structure that
+In R an \emph{environment} is a particular kind of data structure that
 helps the computer connect names to a value. An environment can be
 thought of as a bag of names---names for vectors, functions, and all
 sorts of objects---along with a way (provided automatically by the
@@ -5407,8 +5407,8 @@ R was able to complete your request because:
   referred to the \texttt{cat()} function)
 \end{itemize}
 
-You can tell where R found these
-\url{things:/index\%7BR-functions!find}()@\texttt{find())}\}
+You can tell where R found these things:
+\index{R-functions!find()@\texttt{find()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5460,7 +5460,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10e57f0e0>
+## <bytecode: 0x103f7e1c0>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -5493,6 +5493,30 @@ Next, define a variable named \texttt{cat}:
 \end{Highlighting}
 \end{Shaded}
 
+At this point, we the identifier \texttt{cat} appears in at least two
+environments:
+
+\begin{itemize}
+\tightlist
+\item
+  in the Global Environment, where is refers to the string ``Pippin'';
+\item
+  in the environment associated with package \textbf{base}, where is
+  refers to the \texttt{cat()}-function.
+\end{itemize}
+
+We can verify the above assertions with \texttt{find()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{find}\NormalTok{(}\StringTok{"cat"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] ".GlobalEnv"   "package:base"
+\end{verbatim}
+
 Now try:
 
 \begin{Shaded}
@@ -5507,16 +5531,6 @@ Now try:
 
 This time it worked! The reason is that R found a character-vector named
 \texttt{cat} in the Global Environment.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{find}\NormalTok{(}\StringTok{"cat"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] ".GlobalEnv"   "package:base"
-\end{verbatim}
 
 Now try:
 
@@ -5534,10 +5548,11 @@ Wait a minute: why did this work? Doesn't the Global Environment come
 before package \textbf{base} in the search path? Yes it does, but since
 the first occurrence of \texttt{cat} was followed by an open parenthesis
 R know to expect that it referred to a function. Hence it kept looking
-up the search path for a function with the name \texttt{cat}, eventually
-finding our familiar \texttt{cat()} function in \textbf{base}.
+along the search path for a function with the name \texttt{cat},
+eventually finding our familiar \texttt{cat()} function in
+\textbf{base}.
 
-Well, then, consider happens if we do this:
+Well then, consider happens if we do this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5566,13 +5581,14 @@ Now try again:
 
 Since the \texttt{cat()} we defined is a function in the Global
 Environment---which comes before \textbf{base} in the search path---R
-uses our \texttt{cat()} instead of the **base\emph{'s \texttt{cat()}. R
-programmers say that the \textbf{base} version of cat has been }masked*.
+uses our \texttt{cat()} instead of the \textbf{base}'s \texttt{cat()}. R
+programmers say that the \textbf{base} version of cat has been
+\emph{masked}.
 
 If I want to keep my \texttt{cat()} and still use the \textbf{base}
-version of\texttt{cat()} as well, I can do that to be sure of getting a
-particular package's version of a function, put the name of the package
-and then two semicolons before the function-name, like this:
+version of\texttt{cat()} as well, I can do that. In order to be sure of
+getting a particular package's version of a function, put the name of
+the package and then two semicolons before the function-name, like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5604,7 +5620,7 @@ Let's summarize what we have learned so far:
   An environment is a collection of names associated with objects.
 \item
   The Global Environment is the environment that is active when we are
-  working form the console.
+  working from the console.
 \item
   When R needs to look up a name, it consults a search path.
 \item
@@ -5614,13 +5630,13 @@ Let's summarize what we have learned so far:
   \begin{itemize}
   \tightlist
   \item
-    the last package loaded (the parent environment)
+    the last package loaded (the parent environment),
   \item
-    the package before that (the ``grandparent environment'')
+    the package before that (the ``grandparent environment''),
   \item
     and so on \ldots{}
   \item
-    \ldots{} up to package \textbf{base}
+    \ldots{} up to package \textbf{base}.
   \end{itemize}
 \item
   the first object of the right type having the given name that is found
@@ -5631,7 +5647,7 @@ Let's summarize what we have learned so far:
 Just as the Global Environment is a child of the last package loaded, so
 the Global Environment can have children of its own. In fact a
 child-environment is created whenever we define a function in the Global
-Environment.
+Environment and then run it.
 
 Consider the following code:
 
@@ -5856,19 +5872,19 @@ The package will be downloaded from the Comprehensive R Archive Network
 (CRAN) and installed in in your Home directory.
 
 As long as we are working on the R Studio server, it's a good idea to
-refrain from installing any packages on your own, unless they are
-packages that we don't use in class and that you simply want to explore
-on your own. That's because when you install your own packages on the
-Server they go into a special directory in your Home folder and become
-part of your ``User Library''. Packages that are installed by a system
-administrator for general use are in the ``System Library.'' If a
-package is in your User Library and in the System Library, when you ask
-to attach it you will get the version that it is your User Library. Now
-packages are updated from time to time, so it may happen that the
-version you have in your User Library will be different from the one in
-the System Library. If that is the case then your package might not work
-the same way for you as it does for the instructor and for other
-students: that can be confusing.
+refrain from installing packages yourself, unless they are packages that
+we don't use in class and that you simply want to explore on your own.
+That's because when you install your own packages on the Server they go
+into a special directory in your Home folder and become part of your
+``User Library''. Packages that are installed by a system administrator
+for general use are in the ``System Library.'' If a package is in your
+User Library and in the System Library, when you ask to attach it you
+will get the version that it is your User Library. Now packages are
+updated from time to time, so it may happen that the version you have in
+your User Library will be different from the one in the System Library.
+If that is the case then your package might not work the same way for
+you as it does for the instructor and for other students: that can be
+confusing.
 
 Eventually, though, you will install R and R Studio on your own
 computer, and then you will have to install many packages on your own.
@@ -5950,7 +5966,7 @@ the function) are the names that will be used in the body of the
 function to refer to the actual arguments supplied to the function when
 it is called.
 \item[Argument \index{argument}]
-An argument for a function is a value that is assigned to one the
+An argument for a function is a value that is assigned to one of the
 parameters of the function. (Sometimes arguments are called an
 \emph{actual arguments} in order to distinguish then from parameters
 that are often called \emph{formal arguments}.)
@@ -9824,7 +9840,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-05-18 22:58:02 EDT"
+## [1] "2017-05-19 09:03:07 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9836,7 +9852,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1495162682
+## [1] 1495198987
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -20994,7 +21010,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13987b498"
+## [1] "0x1279db368"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21008,7 +21024,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13987b498"
+## [1] "0x1279db368"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21047,7 +21063,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13987b498"
+## [1] "0x1279db368"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21060,7 +21076,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b7a5878"
+## [1] "0x125637f78"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21078,7 +21094,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13987b498"
+## [1] "0x1279db368"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21122,7 +21138,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13d0d7cd8" "0x13d0d7cd8"
+## [1] "0x1214335f8" "0x1214335f8"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21161,7 +21177,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13d0d7cd8" "0x13d0d7cd8"
+## [1] "0x1214335f8" "0x1214335f8"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21203,7 +21219,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13d0d7cd8" "0x11576db10"
+## [1] "0x1214335f8" "0x1188f81f0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
