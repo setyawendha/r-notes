@@ -5460,7 +5460,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10e2f1e60>
+## <bytecode: 0x10d00b958>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9638,10 +9638,10 @@ was always less than the \texttt{y} break, this would be easy:
   the rightmost piece would be 1 minus \texttt{y} units long.
 \end{itemize}
 
-The problem is that a given \texttt{element} of the vector \texttt{y}
-can easily be less than than corresponding element of the vector
-\texttt{x}. When that happens, the pieces won't be as described in the
-bullet-ed items above.
+The problem is that a given element of the vector \texttt{y} can easily
+be less than than corresponding element of the vector \texttt{x}. When
+that happens, the pieces won't be as described in the bullet-ed items
+above.
 
 We can solve this problem with the \texttt{pmin()} and \texttt{pmax()}
 functions \index{R-functions!pmin()@\texttt{pmin()}}
@@ -9736,7 +9736,7 @@ following code:
 \end{verbatim}
 
 When we ask R to add the elements of a logical vector, it coerces the
-Boolean values to number: \texttt{TRUE} becomes 1 and \texttt{FALSE}
+Boolean values to numbers: \texttt{TRUE} becomes 1 and \texttt{FALSE}
 becomes 0. Summing the numbers is then equivalent to counting how many
 times \texttt{TRUE} appeared in \texttt{triangle}. Taking the mean is
 equivalent to computing the proportion of \texttt{TRUE}s in
@@ -9846,7 +9846,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-05-19 14:20:19 EDT"
+## [1] "2017-05-19 22:42:30 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9858,7 +9858,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1495218020
+## [1] 1495248150
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -9916,8 +9916,8 @@ Think about how we developed the \texttt{triangleSim()} function.
 \end{enumerate}
 
 The above method of program development is called \emph{encapsulation
-and genralization}. For small projects of the sort that we have on hand,
-it's a good way to go about writing a computer program.
+and generalization}. For small projects of the sort that we have on
+hand, it's a good way to go about writing a computer program.
 \index{encapsulation and generalization}
 
 \subsection{Number of Repetitions}\label{number-of-repetitions}
@@ -9930,10 +9930,10 @@ of our estimate of the probability of getting a triangle.
 
 We will need to run the \texttt{tringleSim()} function several times,
 with a different choice for \texttt{reps} each time, keeping track of
-the estimates we obtain each time. In the process we won't need tables
-or other output to the console. Let's rewrite \texttt{triangleSim()} for
-maximum flexibility, making console output optional and using the
-invisible return discussed in Section \ref{invisible-returns}.\footnote{The
+the estimates we obtain. In the process we won't need tables or other
+output to the console. Let's rewrite \texttt{triangleSim()} for maximum
+flexibility, making console output optional and using the invisible
+return discussed in Section \ref{invisible-returns}.\footnote{The
   addition of the invisible return may be thought of as yet another step
   in the encapsulation-and-generalization process of program
   development!}
@@ -10018,7 +10018,7 @@ Anna and Raj make a date for coffee tomorrow at the local Coffee Shop.
 After making the date, both of them forget the exact time they agreed to
 meet: they can only remember that it was to be sometime between 10 and
 11am. Each person, independently of the other, randomly picks a time
-between 3 and 4 to arrive. If Anna arrives and Raj is not there, she
+between 10 and 11 to arrive. If Anna arrives and Raj is not there, she
 will wait up to ten minutes for him, but will leave if he does not show
 within that time period. Raj is similarly disposed: he will wait ten
 minutes---but no more---for Anna. What is the chance that they meet?
@@ -10166,7 +10166,7 @@ each case before the court, each of the justices, independently of the
 others, makes a decision for either one or the other of the two opposing
 parties. Assume also for the sake of simplicity that there is always one
 side that is ``in the right''. It follows that each judge is making a
-decision that is is either correct or incorrect. The judges then report
+decision that is either correct or incorrect. The judges then report
 their decisions to one another, and the decision of the court is
 determined by majority vote. To be precise: whichever side gets three or
 more votes is the side that wins.
@@ -10252,7 +10252,7 @@ In order to simulate flipping a fair coin 100 times, you could ask for:
 
 It seems that we got 52 heads!
 
-If you want to go through the above process 20 times instead of just
+If you want to go through the above process twenty times instead of just
 doing it once, you could ask for:
 
 \begin{Shaded}
@@ -10265,9 +10265,8 @@ doing it once, you could ask for:
 ##  [1] 52 49 45 57 53 60 46 53 50 54 59 47 42 45 41 56 47 57 56 49
 \end{verbatim}
 
-Nothing in \texttt{rbinom()} says that it addresses only with
-coin-flipping. In general it serves as a model for any situation in
-which:
+Nothing in \texttt{rbinom()} says that it addresses only coin-flipping.
+In general it serves as a model for any situation in which:
 
 \begin{itemize}
 \tightlist
@@ -10280,7 +10279,12 @@ which:
   decide the case correctly or you don't);
 \item
   the chance of the Success outcome is the same, on any trial (e.g., the
-  coin always has the same chance of coming up heads, etc.)
+  coin always has the same chance of coming up heads, for \emph{any}
+  case Judge A has a 95\% chance of being right);
+\item
+  the outcome of any trial is independent of the outcome of all other
+  trials (e.g., making the first free throw does not increase or
+  decrease one's chances of making the next free throw, etc.)
 \item
   you are counting up the number of successes in your trials.
 \end{itemize}
@@ -10297,7 +10301,7 @@ case. Suppose for example, that there are twenty cases. We would like to
 know, for each judge and each case, whether or not the judge was correct
 
 Suppose we were to watch Judge A making 20 decisions, recording each
-time whether he was correct or not. In order to simulate the results
+time whether she was correct or not. In order to simulate the results
 with R, we could ask for:
 
 \begin{Shaded}
@@ -10322,8 +10326,8 @@ Note that the following call would be incorrect:
 \end{Shaded}
 
 This would give us a \emph{count} of the number of times Judge A was
-correct, but it would not tell us which of the cases he judged correctly
-and which he judged incorrectly.
+correct, but it would not tell us which of the cases she judged
+correctly and which she judged incorrectly.
 
 Assuming that the court hears 20 cases, we would like to simulate the
 decision of each judge in each case. We could store the results in
@@ -10594,18 +10598,18 @@ Carlo simulation:
   On each repetition, we recorded whether or not the event occurred.
 \item
   After we finished all of the repetitions, we computed the proportion
-  of those repetition in which the event \emph{did} occur.
+  of those repetitions in which the event \emph{did} occur.
 \item
   This proportion served as our estimate of the probability for the
-  event to occur. The more.
+  event to occur.
 \item
   We know that the more repetitions we arrange for, the closer our
   estimate is liable to be to the actual probability for the event to
   occur.
 \end{itemize}
 
-Let us now switch gears and take up the task of estimating the expected
-value of a random variable.
+Let us now switch gears and take up the task of estimating the
+\emph{expected value} of a random variable.
 
 Recall that a random variable is a number whose value is the result of
 some chance process. The expected value of the random variable is the
@@ -10880,19 +10884,19 @@ the one of the boxes is exhausted.
 
 I would also like to get some idea of the distribution of \(X\)---the
 chance for it to assume each of its possible values. Unlike the previous
-example, however, \(X\) is what we call a \emph{continuous} random
-variable: \index{continuous random variable}it can assume any of the
-values in a \emph{range of real numbers}. After all, the amount left in
-the ``other'' box could be anything from 0 to 150 feet: it could be
-3.5633 fee or 5.21887 feet, or any real number at all, so long as it's
-between 0 and 150. Although any real number value---3.5633 feet, for
-instance---is \emph{possible}, it seems that the chance of \(X\) being
-\emph{exactly} 3.5633 is vanishingly small, and the same goes for any of
-the possible real numbers values for \(X\). Hence it seems that the
-distribution of \(X\) cannot be described well with a table of the
-values that we actually get in a simulation: indeed, we are highly
-unlikely to get any value more than once in the course of our
-simulation.
+``Number of Numbers'' example, however, \(X\) is what we call a
+\emph{continuous} random variable: \index{continuous random variable}it
+can assume any of the values in a \emph{range of real numbers}. After
+all, the amount left in the ``other'' box could be anything from 0 to
+150 feet: it could be 3.5633 feet or 5.21887 feet, or any real number at
+all, so long as it's between 0 and 150. Although any real number
+value---3.5633 feet, for instance---is \emph{possible}, it seems that
+the chance of \(X\) being \emph{exactly} 3.5633 is vanishingly small,
+and the same goes for any of the possible real numbers value for \(X\).
+Hence it seems that the distribution of \(X\) cannot be described well
+with a table of the values that we actually get in a simulation: indeed,
+we are highly unlikely to get any value more than once in the course of
+our simulation.
 
 One way to visualize the distribution of a continuous random variable is
 to make a \emph{density plot} of a large, representative sample of its
@@ -10910,7 +10914,8 @@ We have just asked R to produce 100 numbers chosen randomly from a
 \emph{normal} distribution. The \texttt{mean} parameter sets what the
 values should be ``on average'', and the \texttt{sd} parameter indicates
 how much they should typically differ from that average value. The
-bigger the \texttt{sd}, the more the likely difference.
+bigger the \texttt{sd}, the bigger the difference between the mean and
+value actually obtained is liable to be.
 
 Let's get a look at the first ten values in the vector \texttt{x}:
 
@@ -10963,7 +10968,7 @@ crowded together, and lower where the values are spread apart. The scale
 on the y-axis has been chosen carefully so that the area under the
 density curve between any two numbers \(a\) and \(b\) on the axis gives
 an estimate of the chance that the normal random variable would produce
-a value between \(a\) and \(b\). in this way the density curve gives us
+a value between \(a\) and \(b\). In this way the density curve gives us
 a visual sense of the distribution of the random variable: it seems
 rather likely to be between 67 and 73 (most of the area under the curve
 occurs there) and rather unlikely to be greater than 76, and so on.
@@ -11060,7 +11065,7 @@ implementation of a simulation function:
 \end{Highlighting}
 \end{Shaded}
 
-Let's give it try with 10,000 repetitions.
+Let's give it a try with 10,000 repetitions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -11113,8 +11118,8 @@ unit of the origin.)
 
 In particular, we would like to know the distribution of \(X\): what is
 the chance that the turtle does not make a close return during the first
-thousand steps? what's the chance of making only one close return? Two
-close returns? And so on \ldots{} . we would also like to estimate the
+thousand steps? What's the chance of making only one close return? Two
+close returns? And so on \ldots{} . We would also like to estimate the
 expected value of \(X\): the average number of close returns in the
 first 1000 steps.
 
@@ -11173,8 +11178,8 @@ step it will be at the point \((\cos(a_1), \sin(a_2))\).
 For the second step, the turtle begins by turning another random angle,
 say \(a_2\) radians. It then takes another one-unit step. This second
 step forms the hypotenuse of a second right triangle (see Figure
-\ref{fig:two-steps}). The horizontal and verticals sides of this right
-triangle must be \(\cos(a_2)\) and \(\sin(a_2)\) respectively. when the
+\ref{fig:two-steps}). The horizontal and vertical sides of this right
+triangle must be \(\cos(a_2)\) and \(\sin(a_2)\) respectively. When the
 turtle complete the second step, it has added these values to its
 previous \(x\) and \(y\) coordinates, so that it is now at the point:
 
@@ -11233,10 +11238,11 @@ turning angles were between 90 and 270 degrees.)
 We need the \(x\)-coordinates after all of the previous steps, as well.
 This can be accomplished by R's \texttt{cumsum()} function.
 \index{R-functions!cumsum()@\texttt{cumsum()}} You may think of
-\texttt{cumsum} as short for ``cumulative sum''. Given a vector of
-\texttt{vec} numbers, \texttt{cumsum(vec)} returns a vector of the same
-length, where for every index \texttt{i}, \texttt{cumsum(vec){[}i{]}} is
-\texttt{sum(vec){[}i{]}}. This is made clear in the following example:
+\texttt{cumsum} as short for ``cumulative sum''. Given a vector
+\texttt{vec} of numbers, \texttt{cumsum(vec)} returns a vector of the
+same length, where for every index \texttt{i},
+\texttt{cumsum(vec){[}i{]}} is \texttt{sum(vec{[}1:i{]})}. This is made
+clear in the following example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -11439,13 +11445,14 @@ Let's try it out! The results appear in Figure
 \caption{Line plot of the Turtle's distance from the origin, as a function of how many steps the turtle has taken.}\label{fig:drunken-turtle-steps}
 \end{figure}
 
-It appears that the turtle might have returned close to the origin a
-couple of times, for the most part it seems to be wandering further and
-further away. In the mathematical field known as \emph{stochastic
-processes}, it has been shown that if the turtle is allowed to go on
-forever then it will certainly make a close return \emph{infinitely many
-times}. These returns, though, will tend to be spaced further and
-further apart as time goes on, and our graph suggests that this is so.
+It appears that although the turtle might have returned close to the
+origin a couple of times, for the most part it seems to be wandering
+further and further away. In the mathematical field known as
+\emph{stochastic processes}, it has been shown that if the turtle is
+allowed to go on forever then it will certainly make a close return
+\emph{infinitely many times}. These returns, though, will tend to be
+spaced further and further apart as time goes on, and our graph suggests
+that this is so.
 
 \newpage
 
@@ -11523,9 +11530,16 @@ until the program possesses all desired features.
   Reconsider the meeting of Anna and Raj. Suppose that they still plan
   to meet during the same one-hour period, but that Anna is willing to
   wait \(a\) minutes and Raj is willing to wait \(r\) minutes, where
-  \(a\) and \(r\) could differ. Modify the
-  meetupSim()\texttt{function\ so\ that\ it\ accepts\ two\ additional\ parameters:\ *}a\texttt{:\ \ the\ time\ Anna\ is\ willing\ to\ wait;\ *}r`:
-  the time Raj is willing to wait;
+  \(a\) and \(r\) could differ. Modify the \texttt{meetupSim()} function
+  so that it accepts two additional parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{a}: the time Anna is willing to wait;
+  \item
+    \texttt{r}: the time Raj is willing to wait;
+  \end{itemize}
 
   Apply the function with ten thousand repetitions (and a simple seed
   that you report) in order to estimate the probability of a meeting,
@@ -11539,14 +11553,14 @@ until the program possesses all desired features.
   expected value of the number of matches remaining in the other box at
   that time? Write a simulation function to estimate the answer. Your
   function should have at least a \texttt{reps} and a \texttt{seed}
-  parameter. Apply the function with ten thousand repetitions--and with
+  parameter. Apply the function with ten thousand repetitions---and with
   a simple seed that you report---in order to estimate the expected
   value.
 \item
   Refer back to the \texttt{numberNeededSim()} function. Modify it so
   that it returns the estimated expected value invisibly, and has an
-  option to turn the \texttt{cat()} report to the console. Write a
-  program that computes estimated expected number-needed for the
+  option to turn off the \texttt{cat()} report to the console. Write a
+  program that computes the estimated expected number needed, for the
   following targets:
 
 \begin{Shaded}
@@ -11563,14 +11577,14 @@ until the program possesses all desired features.
   number of numbers needed, when the target is a real number between 0
   and 1.
 \item
-  A gambler starts with 10 dollars, and repeatedly plays a game. If he
-  wins the game he gets a dollars and if he loses the game he loses a
-  dollar. He has a 45 percent chance of winning the game. Write a
-  function to simulate the gambler repeatedly playing the game until her
-  money runs out. The function should keep track of how much money she
-  has left after each play, so that it can produce a line graph (similar
-  to the one in the section on the Drunken Turtle) of the money left
-  after each play. Write the function so that it has
+  A gambler starts with 10 dollars, and repeatedly plays a game. If she
+  wins the game he gets one dollar and if she loses the game he
+  losesonea dollar. She has a 45 percent chance of winning the game.
+  Write a function to simulate the gambler repeatedly playing the game
+  until her money runs out. The function should keep track of how much
+  money she has left after each play, so that it can produce a line
+  graph (similar to the one in the section on the Drunken Turtle) of the
+  money left after each play. Write the function so that it has
 
   \begin{itemize}
   \tightlist
@@ -21016,7 +21030,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1212ed698"
+## [1] "0x1158178c8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21030,7 +21044,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1212ed698"
+## [1] "0x1158178c8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21069,7 +21083,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1212ed698"
+## [1] "0x1158178c8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21082,7 +21096,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1258dadb8"
+## [1] "0x103d353c8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21100,7 +21114,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1212ed698"
+## [1] "0x1158178c8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21144,7 +21158,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122b308a8" "0x122b308a8"
+## [1] "0x11e9c0e00" "0x11e9c0e00"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21183,7 +21197,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122b308a8" "0x122b308a8"
+## [1] "0x11e9c0e00" "0x11e9c0e00"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21225,7 +21239,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122b308a8" "0x11e5a7838"
+## [1] "0x11e9c0e00" "0x10ddaf950"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

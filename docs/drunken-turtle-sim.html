@@ -424,7 +424,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><span class="math inline">\(X\)</span> = the number of times in the turtle returns to within <span class="math inline">\(1/2\)</span> of a unit of the origin, during its first 1000 steps.</p>
 </blockquote>
 <p>(Apparently we consider a “close return” to be anything within half a unit of the origin.)</p>
-<p>In particular, we would like to know the distribution of <span class="math inline">\(X\)</span>: what is the chance that the turtle does not make a close return during the first thousand steps? what’s the chance of making only one close return? Two close returns? And so on … . we would also like to estimate the expected value of <span class="math inline">\(X\)</span>: the average number of close returns in the first 1000 steps.</p>
+<p>In particular, we would like to know the distribution of <span class="math inline">\(X\)</span>: what is the chance that the turtle does not make a close return during the first thousand steps? What’s the chance of making only one close return? Two close returns? And so on … . We would also like to estimate the expected value of <span class="math inline">\(X\)</span>: the average number of close returns in the first 1000 steps.</p>
 <p>We will next consider how to code a simulation. Obviously we will need a way to record the turtle’s position at each step. In order to accomplish this we will have to apply the unit-circle trigonometry you learned in high school.</p>
 <p>Instead of measuring angles in degrees, we will work in radians: by default R does trigonometry that way. Recall that 360 degrees is <span class="math inline">\(2 \pi\)</span> radians; hence the way to determine the angle of a turn by the drunken turtle is with the following call to <code>runif()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>*pi)</code></pre></div>
@@ -439,7 +439,7 @@ Figure 6.4: Sides of a right triangle with hypotenuse 1, in terms of the angle s
 </p>
 </div>
 <p>From this principle it follows that if the turtle turns a random angle of <span class="math inline">\(a_1\)</span> radians for its first step, then after it takes the one-unit step it will be at the point <span class="math inline">\((\cos(a_1), \sin(a_2))\)</span>.</p>
-<p>For the second step, the turtle begins by turning another random angle, say <span class="math inline">\(a_2\)</span> radians. It then takes another one-unit step. This second step forms the hypotenuse of a second right triangle (see Figure <a href="drunken-turtle-sim.html#fig:two-steps">6.5</a>). The horizontal and verticals sides of this right triangle must be <span class="math inline">\(\cos(a_2)\)</span> and <span class="math inline">\(\sin(a_2)\)</span> respectively. when the turtle complete the second step, it has added these values to its previous <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates, so that it is now at the point:</p>
+<p>For the second step, the turtle begins by turning another random angle, say <span class="math inline">\(a_2\)</span> radians. It then takes another one-unit step. This second step forms the hypotenuse of a second right triangle (see Figure <a href="drunken-turtle-sim.html#fig:two-steps">6.5</a>). The horizontal and vertical sides of this right triangle must be <span class="math inline">\(\cos(a_2)\)</span> and <span class="math inline">\(\sin(a_2)\)</span> respectively. When the turtle complete the second step, it has added these values to its previous <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates, so that it is now at the point:</p>
 <p><span class="math display">\[(\cos(a_1) + \cos(a_2), \sin(a_1) +\sin(a_2)).\]</span> We now see the idea: in order to record the position of the turtle at the end of each step, we simply need to:</p>
 <ul>
 <li>take the cosine of all the turning-angles;</li>
@@ -461,7 +461,7 @@ ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</code></
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(xSteps)</code></pre></div>
 <pre><code>## [1] -1.370258</code></pre>
 <p>(Apparently some of the cosines were negative, meaning that some of the turning angles were between 90 and 270 degrees.)</p>
-<p>We need the <span class="math inline">\(x\)</span>-coordinates after all of the previous steps, as well. This can be accomplished by R’s <code>cumsum()</code> function.  You may think of <code>cumsum</code> as short for “cumulative sum”. Given a vector of <code>vec</code> numbers, <code>cumsum(vec)</code> returns a vector of the same length, where for every index <code>i</code>, <code>cumsum(vec)[i]</code> is <code>sum(vec)[i]</code>. This is made clear in the following example:</p>
+<p>We need the <span class="math inline">\(x\)</span>-coordinates after all of the previous steps, as well. This can be accomplished by R’s <code>cumsum()</code> function.  You may think of <code>cumsum</code> as short for “cumulative sum”. Given a vector <code>vec</code> of numbers, <code>cumsum(vec)</code> returns a vector of the same length, where for every index <code>i</code>, <code>cumsum(vec)[i]</code> is <code>sum(vec[1:i])</code>. This is made clear in the following example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)
 <span class="kw">cumsum</span>(vec)</code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
@@ -657,7 +657,7 @@ x</code></pre></div>
 Figure 6.6: Line plot of the Turtle’s distance from the origin, as a function of how many steps the turtle has taken.
 </p>
 </div>
-<p>It appears that the turtle might have returned close to the origin a couple of times, for the most part it seems to be wandering further and further away. In the mathematical field known as <em>stochastic processes</em>, it has been shown that if the turtle is allowed to go on forever then it will certainly make a close return <em>infinitely many times</em>. These returns, though, will tend to be spaced further and further apart as time goes on, and our graph suggests that this is so.</p>
+<p>It appears that although the turtle might have returned close to the origin a couple of times, for the most part it seems to be wandering further and further away. In the mathematical field known as <em>stochastic processes</em>, it has been shown that if the turtle is allowed to go on forever then it will certainly make a close return <em>infinitely many times</em>. These returns, though, will tend to be spaced further and further apart as time goes on, and our graph suggests that this is so.</p>
 
 </div>
 <div class="footnotes">

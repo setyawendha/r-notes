@@ -419,7 +419,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="appeals-court-paradox" class="section level2">
 <h2><span class="header-section-number">6.5</span> Example: the Appeals Court Paradox</h2>
 <p>The following example is discussed in <span class="citation">(J.Nahin <a href="#ref-Nahin2008">2008</a>)</span>.</p>
-<p>An appeals court generally consists of an odd number of justices, so the court will not be hampered with tie-votes and will thus always be able to render a decision for any case brought before it. Let’s imagine an appeals court that has five members. Let us further imagine that for each case before the court, each of the justices, independently of the others, makes a decision for either one or the other of the two opposing parties. Assume also for the sake of simplicity that there is always one side that is “in the right”. It follows that each judge is making a decision that is is either correct or incorrect. The judges then report their decisions to one another, and the decision of the court is determined by majority vote. To be precise: whichever side gets three or more votes is the side that wins.</p>
+<p>An appeals court generally consists of an odd number of justices, so the court will not be hampered with tie-votes and will thus always be able to render a decision for any case brought before it. Let’s imagine an appeals court that has five members. Let us further imagine that for each case before the court, each of the justices, independently of the others, makes a decision for either one or the other of the two opposing parties. Assume also for the sake of simplicity that there is always one side that is “in the right”. It follows that each judge is making a decision that is either correct or incorrect. The judges then report their decisions to one another, and the decision of the court is determined by majority vote. To be precise: whichever side gets three or more votes is the side that wins.</p>
 <p>Although all of the members of the court are pretty sharp, they differ somewhat in their legal abilities:</p>
 <ul>
 <li>In any case that comes before her, Judge A has a 95% chance to decide correctly.</li>
@@ -446,25 +446,26 @@ number &lt;<span class="st"> </span><span class="fl">0.95</span></code></pre></d
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre></div>
 <pre><code>## [1] 52</code></pre>
 <p>It seems that we got 52 heads!</p>
-<p>If you want to go through the above process 20 times instead of just doing it once, you could ask for:</p>
+<p>If you want to go through the above process twenty times instead of just doing it once, you could ask for:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre></div>
 <pre><code>##  [1] 52 49 45 57 53 60 46 53 50 54 59 47 42 45 41 56 47 57 56 49</code></pre>
-<p>Nothing in <code>rbinom()</code> says that it addresses only with coin-flipping. In general it serves as a model for any situation in which:</p>
+<p>Nothing in <code>rbinom()</code> says that it addresses only coin-flipping. In general it serves as a model for any situation in which:</p>
 <ul>
 <li>there is a fixed number of trials (e.g., flip of a coin, taking a free-throw shot, deciding about a court case);</li>
 <li>each trial has two possible outcomes, often termed Success or Failure (e.g., coins lands heads or tails, you make the shot or you don’t, you decide the case correctly or you don’t);</li>
-<li>the chance of the Success outcome is the same, on any trial (e.g., the coin always has the same chance of coming up heads, etc.)</li>
+<li>the chance of the Success outcome is the same, on any trial (e.g., the coin always has the same chance of coming up heads, for <em>any</em> case Judge A has a 95% chance of being right);</li>
+<li>the outcome of any trial is independent of the outcome of all other trials (e.g., making the first free throw does not increase or decrease one’s chances of making the next free throw, etc.)</li>
 <li>you are counting up the number of successes in your trials.</li>
 </ul>
 <p>In such a situation the count of the number of successes is called a <em>binomial</em> random variable.<a href="#fn20" class="footnoteRef" id="fnref20"><sup>20</sup></a> The <code>size</code> parameter in <code>rbinom()</code> gives the fixed number of trials. The <code>prob</code> parameter specifies the chance of success on each trial.</p>
 <p>In this example we would like to simulate each judge deciding about each case. Suppose for example, that there are twenty cases. We would like to know, for each judge and each case, whether or not the judge was correct</p>
-<p>Suppose we were to watch Judge A making 20 decisions, recording each time whether he was correct or not. In order to simulate the results with R, we could ask for:</p>
+<p>Suppose we were to watch Judge A making 20 decisions, recording each time whether she was correct or not. In order to simulate the results with R, we could ask for:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1</code></pre>
 <p>In the above results, each 1 stands for a correct decision and the 0 stands for an incorrect decision.</p>
 <p>Note that the following call would be incorrect:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</code></pre></div>
-<p>This would give us a <em>count</em> of the number of times Judge A was correct, but it would not tell us which of the cases he judged correctly and which he judged incorrectly.</p>
+<p>This would give us a <em>count</em> of the number of times Judge A was correct, but it would not tell us which of the cases she judged correctly and which she judged incorrectly.</p>
 <p>Assuming that the court hears 20 cases, we would like to simulate the decision of each judge in each case. We could store the results in variables, as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)  <span class="co"># Judge A</span>
 b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.94</span>)  <span class="co"># Judge B</span>

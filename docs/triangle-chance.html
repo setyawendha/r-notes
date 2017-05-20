@@ -436,7 +436,7 @@ y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1
 <li>the middle piece would be <code>y</code> minus <code>x</code> units long;</li>
 <li>the rightmost piece would be 1 minus <code>y</code> units long.</li>
 </ul>
-<p>The problem is that a given <code>element</code> of the vector <code>y</code> can easily be less than than corresponding element of the vector <code>x</code>. When that happens, the pieces won’t be as described in the bullet-ed items above.</p>
+<p>The problem is that a given element of the vector <code>y</code> can easily be less than than corresponding element of the vector <code>x</code>. When that happens, the pieces won’t be as described in the bullet-ed items above.</p>
 <p>We can solve this problem with the <code>pmin()</code> and <code>pmax()</code> functions  that were introduced in Section <a href="basic-arithmetical-operations-on-vectors.html#maxmin">2.7.1.5</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)
 b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)
@@ -554,7 +554,7 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
 <pre><code>## [1] 4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(triangle)</code></pre></div>
 <pre><code>## [1] 0.4</code></pre>
-<p>When we ask R to add the elements of a logical vector, it coerces the Boolean values to number: <code>TRUE</code> becomes 1 and <code>FALSE</code> becomes 0. Summing the numbers is then equivalent to counting how many times <code>TRUE</code> appeared in <code>triangle</code>. Taking the mean is equivalent to computing the proportion of <code>TRUE</code>s in <code>triangle</code>.</p>
+<p>When we ask R to add the elements of a logical vector, it coerces the Boolean values to numbers: <code>TRUE</code> becomes 1 and <code>FALSE</code> becomes 0. Summing the numbers is then equivalent to counting how many times <code>TRUE</code> appeared in <code>triangle</code>. Taking the mean is equivalent to computing the proportion of <code>TRUE</code>s in <code>triangle</code>.</p>
 <p>We would like, of course, to simulate breaking the unit length many times, and we would like to be able to choose easily—without a lot of fuss in coding—the number of repetitions. It makes sense, therefore, to write a simulation function that will do our work for us:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span> ) {
   cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
@@ -601,10 +601,10 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
 <p>We would like to force R to provide a seed when it is not given one to use. Such a seed should vary from one call to another in a way that cannot be predicted easily.</p>
 <p>I suggest the use of the <code>Sys.time()</code> function, which gives your computer’s idea of the current time:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.time</span>()</code></pre></div>
-<pre><code>## [1] &quot;2017-05-19 14:19:36 EDT&quot;</code></pre>
+<pre><code>## [1] &quot;2017-05-19 22:41:44 EDT&quot;</code></pre>
 <p>This is not a number, but we can make it a number:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())</code></pre></div>
-<pre><code>## [1] 1495217976</code></pre>
+<pre><code>## [1] 1495248104</code></pre>
 <p>The result is—on Unix-like computer systems—the number of seconds elapsed since January 1, 1970. It should serve pretty well as a seed. The following code implements a <code>seed</code> parameter in such a way that the system-time is used when the user does not supply a seed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   <span class="co"># if user does not provide a seed, set one</span>
@@ -635,12 +635,12 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
 <li>When we were sure how to make a simulation work, we <em>encapsulated</em> our code into a function that we could call to perform the simulation for us.</li>
 <li>We though about features that we would like the function to have—user chooses number of repetitions, user chooses whether to see a table, etc.—and implemented these features one by one. This made the function more <em>general</em>, i.e., useful in a wider range of settings.</li>
 </ol>
-<p>The above method of program development is called <em>encapsulation and genralization</em>. For small projects of the sort that we have on hand, it’s a good way to go about writing a computer program. </p>
+<p>The above method of program development is called <em>encapsulation and generalization</em>. For small projects of the sort that we have on hand, it’s a good way to go about writing a computer program. </p>
 </div>
 <div id="number-of-repetitions" class="section level3">
 <h3><span class="header-section-number">6.3.3</span> Number of Repetitions</h3>
 <p>The Law of Large Numbers says that the more times you repeat the simulation, the better our estimate of the desired probability—or expected value—is liable to be. Let’s use the Stick-Splitting Problem to investigate the effect of the choice of repetitions on the accuracy of our estimate of the probability of getting a triangle.</p>
-<p>We will need to run the <code>tringleSim()</code> function several times, with a different choice for <code>reps</code> each time, keeping track of the estimates we obtain each time. In the process we won’t need tables or other output to the console. Let’s rewrite <code>triangleSim()</code> for maximum flexibility, making console output optional and using the invisible return discussed in Section <a href="making-decisions-conditionals.html#invisible-returns">4.2.2</a>.<a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a></p>
+<p>We will need to run the <code>tringleSim()</code> function several times, with a different choice for <code>reps</code> each time, keeping track of the estimates we obtain. In the process we won’t need tables or other output to the console. Let’s rewrite <code>triangleSim()</code> for maximum flexibility, making console output optional and using the invisible return discussed in Section <a href="making-decisions-conditionals.html#invisible-returns">4.2.2</a>.<a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>,
                         <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
   <span class="co"># if user does not provide a seed, set one</span>
