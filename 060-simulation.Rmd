@@ -192,7 +192,7 @@ Next we must compute---for each pair of breaks---the lengths of the three segmen
 * the middle piece would be `y` minus `x` units long;
 * the rightmost piece would be 1 minus `y` units long.
 
-The problem is that a given `element` of the vector `y` can easily be less than than corresponding element of the vector `x`. When that happens, the pieces won't be as described in the bullet-ed items above.
+The problem is that a given element of the vector `y` can easily be less than than corresponding element of the vector `x`. When that happens, the pieces won't be as described in the bullet-ed items above.
 
 We can solve this problem with the `pmin()` and `pmax()` functions \index{R-functions!pmin()@\texttt{pmin()}} \index{R-functions!pmax()@\texttt{pmax()}}that were introduced in Section \@ref(maxmin):
 
@@ -241,7 +241,7 @@ sum(triangle)
 mean(triangle)
 ```
 
-When we ask R to add the elements of a logical vector, it coerces the Boolean values to number:  `TRUE` becomes 1 and `FALSE` becomes 0.  Summing the numbers is then equivalent to counting how many times `TRUE` appeared in `triangle`.  Taking the mean is equivalent to computing the proportion of `TRUE`s in `triangle`.
+When we ask R to add the elements of a logical vector, it coerces the Boolean values to numbers:  `TRUE` becomes 1 and `FALSE` becomes 0.  Summing the numbers is then equivalent to counting how many times `TRUE` appeared in `triangle`.  Taking the mean is equivalent to computing the proportion of `TRUE`s in `triangle`.
 
 We would like, of course, to simulate breaking the unit length many times, and we would like to be able to choose easily---without a lot of fuss in coding---the number of repetitions.  It makes sense, therefore, to write a simulation function that will do our work for us:
 
@@ -350,14 +350,14 @@ Think about how we developed the `triangleSim()` function.
 2. When we were sure how to make a simulation work, we *encapsulated* our code into a function that we could call to perform the simulation for us.
 3. We though about features that we would like the function to have---user chooses number of repetitions, user chooses whether to see a table, etc.---and implemented these features one by one.  This made the function more *general*, i.e., useful in a wider range of settings.
 
-The above method of program development is called *encapsulation and genralization*.  For small projects of the sort that we have on hand, it's a good way to go about writing a computer program. \index{encapsulation and generalization}
+The above method of program development is called *encapsulation and generalization*.  For small projects of the sort that we have on hand, it's a good way to go about writing a computer program. \index{encapsulation and generalization}
 
 
 ### Number of Repetitions
 
 The Law of Large Numbers says that the more times you repeat the simulation, the better our estimate of the desired probability---or expected value---is liable to be.  Let's use the Stick-Splitting Problem to investigate the effect of the choice of repetitions on the accuracy of our estimate of the probability of getting a triangle.
 
-We will need to run the `tringleSim()` function several times, with a different choice for `reps` each time, keeping track of the estimates we obtain each time.  In the process we won't need tables or other output to the console.  Let's rewrite `triangleSim()` for maximum flexibility, making console output optional and using the invisible return discussed in Section \@ref(invisible-returns).^[The addition of the invisible return may be thought of as yet another step in the encapsulation-and-generalization process of program development!]
+We will need to run the `tringleSim()` function several times, with a different choice for `reps` each time, keeping track of the estimates we obtain.  In the process we won't need tables or other output to the console.  Let's rewrite `triangleSim()` for maximum flexibility, making console output optional and using the invisible return discussed in Section \@ref(invisible-returns).^[The addition of the invisible return may be thought of as yet another step in the encapsulation-and-generalization process of program development!]
 
 ```{r}
 triangleSim <- function(reps = 10000, table = FALSE, seed = NULL,
@@ -413,7 +413,7 @@ The estimates are indeed getting closer to the theoretical value of $1/4$.^[Stat
 
 ## Example:  Will They Connect? {#simulation-connect}
 
-Anna and Raj make a date for coffee tomorrow at the local Coffee Shop.  After making the date, both of them forget the exact time they agreed to meet:  they can only remember that it was to be sometime between 10 and 11am.  Each person, independently of the other, randomly picks a time between 3 and 4 to arrive.  If Anna arrives and Raj is not there, she will wait up to ten minutes for him, but will leave if he does not show within that time period.  Raj is similarly disposed: he will wait ten minutes---but no more---for Anna.  What is the chance that they meet?
+Anna and Raj make a date for coffee tomorrow at the local Coffee Shop.  After making the date, both of them forget the exact time they agreed to meet:  they can only remember that it was to be sometime between 10 and 11am.  Each person, independently of the other, randomly picks a time between 10 and 11 to arrive.  If Anna arrives and Raj is not there, she will wait up to ten minutes for him, but will leave if he does not show within that time period.  Raj is similarly disposed: he will wait ten minutes---but no more---for Anna.  What is the chance that they meet?
 
 The key to designing a simulation procedure is to realize that Anna and Raj will connect if and only if the difference between their arrival times is less than 10 minutes.  It doesn't matter who arrived first, so long as the *difference* is less than 10.  This means that we want to check on the *absolute value* of Anna's arrival time minus Raj's arrival time.  The following code implements this idea:
 
@@ -509,7 +509,7 @@ When performance is an issue, prefer vectorization to looping as much as possibl
 
 The following example is discussed in [@Nahin2008].
 
-An appeals court generally consists of an odd number of justices, so the court will not be hampered with tie-votes and will thus always be able to render a decision for any case brought before it.  Let's imagine an appeals court that has five members.  Let us further imagine that for each case before the court, each of the justices, independently of the others, makes a decision for either one or the other of the two opposing parties.  Assume also for the sake of simplicity that there is always one side that is "in the right".  It follows that each judge is making a decision that is is either correct or incorrect.  The judges then report their decisions to one another, and the decision of the court is determined by majority vote.  To be precise:  whichever side gets three or more votes is the side that wins.
+An appeals court generally consists of an odd number of justices, so the court will not be hampered with tie-votes and will thus always be able to render a decision for any case brought before it.  Let's imagine an appeals court that has five members.  Let us further imagine that for each case before the court, each of the justices, independently of the others, makes a decision for either one or the other of the two opposing parties.  Assume also for the sake of simplicity that there is always one side that is "in the right".  It follows that each judge is making a decision that is either correct or incorrect.  The judges then report their decisions to one another, and the decision of the court is determined by majority vote.  To be precise:  whichever side gets three or more votes is the side that wins.
 
 Although all of the members of the court are pretty sharp, they differ somewhat in their legal abilities:
 
@@ -554,25 +554,26 @@ rbinom(n = 1, size = 100, prob = 0.5)
 
 It seems that we got 52 heads!
 
-If you want to go through the above process 20 times instead of just doing it once, you could ask for:
+If you want to go through the above process twenty times instead of just doing it once, you could ask for:
 
 ```{r echo=2:2}
 set.seed(2020)
 rbinom(n = 20, size = 100, prob = 0.5)
 ```
 
-Nothing in `rbinom()` says that it addresses only with coin-flipping.  In general it serves as a model for any situation in which:
+Nothing in `rbinom()` says that it addresses only coin-flipping.  In general it serves as a model for any situation in which:
 
 * there is a fixed number of trials (e.g., flip of a coin, taking a free-throw shot, deciding about a court case);
 * each trial has two possible outcomes, often termed Success or Failure (e.g., coins lands heads or tails, you make the shot or you don't, you decide the case correctly or you don't);
-* the chance of the Success outcome is the same, on any trial (e.g., the coin always has the same chance of coming up heads, etc.)
+* the chance of the Success outcome is the same, on any trial (e.g., the coin always has the same chance of coming up heads, for *any* case Judge A has a 95\% chance of being right);
+* the outcome of any trial is independent of the outcome of all other trials (e.g., making the first free throw does not increase or decrease one's chances of making the next free throw, etc.)
 * you are counting up the number of successes in your trials.
 
 In such a situation the count of the number of successes is called a *binomial* random variable.^["Binomial" is borrowed from a Greek words whose literal meaning is "two names"---corresponding to the two possible outcomes of a trial.] The `size` parameter in `rbinom()` gives the fixed number of trials.  The `prob` parameter specifies the chance of success on each trial.
 
 In this example we would like to simulate each judge deciding about each case.  Suppose for example, that there are twenty cases.  We would like to know, for each judge and each case, whether or not the judge was correct
 
-Suppose we were to watch Judge A making 20 decisions, recording each time whether he was correct or not.  In order to simulate the results with R, we could ask for:
+Suppose we were to watch Judge A making 20 decisions, recording each time whether she was correct or not.  In order to simulate the results with R, we could ask for:
 
 ```{r echo=2:2}
 set.seed(2020)
@@ -587,7 +588,7 @@ Note that the following call would be incorrect:
 rbinom(n = 1, size = 20, prob = 0.95)
 ```
 
-This would give us a *count* of the number of times Judge A was correct, but it would not tell us which of the cases he judged correctly and which he judged incorrectly.
+This would give us a *count* of the number of times Judge A was correct, but it would not tell us which of the cases she judged correctly and which she judged incorrectly.
 
 
 Assuming that the court hears 20 cases, we would like to simulate the decision of each judge in each case.  We could store the results in variables, as follows:
@@ -745,11 +746,11 @@ So far our examples have involved estimating a probability:  the chance for a pa
 
 * We repeated the chance process a very large number of times
 * On each repetition, we recorded whether or not the event occurred.
-* After we finished all of the repetitions, we computed the proportion of those repetition in which the event *did* occur.
-* This proportion served as our estimate of the probability for the event to occur.  The more.
+* After we finished all of the repetitions, we computed the proportion of those repetitions in which the event *did* occur.
+* This proportion served as our estimate of the probability for the event to occur.
 * We know that the more repetitions we arrange for, the closer our estimate is liable to be to the actual probability for the event to occur.
 
-Let us now switch gears and take up the task of estimating the expected value of a random variable.
+Let us now switch gears and take up the task of estimating the *expected value* of a random variable.
 
 Recall that a random variable is a number whose value is the result of some chance process.  The expected value of the random variable is the *average*---the mean---of its values over many, many repetitions of that chance process.
 
@@ -893,7 +894,7 @@ Let's make the following assumptions:
     
 There are several interesting questions we could ask concerning this situation.  In this example, let's focus on finding the expected value of $X$, the amount of floss left in the *other* box when I discover the one of the boxes is exhausted.
 
-I would also like to get some idea of the distribution of $X$---the chance for it to assume each of its possible values.  Unlike the previous example, however, $X$ is what we call a *continuous* random variable:  \index{continuous random variable}it can assume any of the values in a *range of real numbers*.  After all, the amount left in the "other" box could be anything from 0 to 150 feet:  it could be 3.5633 fee or 5.21887 feet, or any real number at all, so long as it's between 0 and 150.  Although any real number value---3.5633 feet, for instance---is *possible*, it seems that the chance of $X$ being *exactly* 3.5633 is vanishingly small, and the same goes for any of the possible real numbers values for $X$.  Hence it seems that the distribution of $X$ cannot be described well with a table of the values that we actually get in a simulation:  indeed, we are highly unlikely to get any value more than once in the course of our simulation.
+I would also like to get some idea of the distribution of $X$---the chance for it to assume each of its possible values.  Unlike the previous "Number of Numbers" example, however, $X$ is what we call a *continuous* random variable:  \index{continuous random variable}it can assume any of the values in a *range of real numbers*.  After all, the amount left in the "other" box could be anything from 0 to 150 feet:  it could be 3.5633 feet or 5.21887 feet, or any real number at all, so long as it's between 0 and 150.  Although any real number value---3.5633 feet, for instance---is *possible*, it seems that the chance of $X$ being *exactly* 3.5633 is vanishingly small, and the same goes for any of the possible real numbers value for $X$.  Hence it seems that the distribution of $X$ cannot be described well with a table of the values that we actually get in a simulation:  indeed, we are highly unlikely to get any value more than once in the course of our simulation.
 
 One way to visualize the distribution of a continuous random variable is to make a *density plot* of a large, representative sample of its values.  Let's practice making a density plot for a random variable that R provides for us:  a so-called *normal* random variable.  Try this code:
 
@@ -902,7 +903,7 @@ set.seed(2020)
 x <- rnorm(100, mean = 70, sd = 3)
 ```
 
-We have just asked R to produce 100 numbers chosen randomly from a *normal* distribution.  The `mean` parameter sets what the values should be "on average", and the `sd` parameter indicates how much they should typically differ from that average value.  The bigger the `sd`, the more the likely difference.
+We have just asked R to produce 100 numbers chosen randomly from a *normal* distribution.  The `mean` parameter sets what the values should be "on average", and the `sd` parameter indicates how much they should typically differ from that average value.  The bigger the `sd`, the bigger the difference between the mean and value actually obtained is liable to be.
 
 Let's get a look at the first ten values in the vector `x`:
 
@@ -929,7 +930,7 @@ p <- ggplot(mapping = aes(x = x)) + geom_density() + geom_rug() +
 p
 ```
 
-The `geom_density()` part of the plotting-command produces the curve.  The `geom_rug()` part produces tick-marks along the horizontal axis, each of which is located at a particular value in the vector `x`.  You can see that the curve is higher where values are crowded together, and lower where the values are spread apart.  The scale on the y-axis has been chosen carefully so that the area under the density curve between any two numbers $a$ and $b$ on the axis gives an estimate of the chance that the normal random variable would produce a value between $a$ and $b$.  in this way the density curve gives us a visual sense of the distribution of the random variable:  it seems rather likely to be between 67 and 73 (most of the area under the curve occurs there) and rather unlikely to be greater than 76, and so on. 
+The `geom_density()` part of the plotting-command produces the curve.  The `geom_rug()` part produces tick-marks along the horizontal axis, each of which is located at a particular value in the vector `x`.  You can see that the curve is higher where values are crowded together, and lower where the values are spread apart.  The scale on the y-axis has been chosen carefully so that the area under the density curve between any two numbers $a$ and $b$ on the axis gives an estimate of the chance that the normal random variable would produce a value between $a$ and $b$.  In this way the density curve gives us a visual sense of the distribution of the random variable:  it seems rather likely to be between 67 and 73 (most of the area under the curve occurs there) and rather unlikely to be greater than 76, and so on. 
 
 We are now ready to simulate the dental-floss scenario.  Since we have worked through the encapsulation-and-generalization development process a number of times by now, we will simply show a final-form implementation of a simulation function:
 
@@ -1018,7 +1019,7 @@ flossSim <- function(len = 150, min = 1,
 }      # end flossSim
 ```
 
-Let's give it try with 10,000 repetitions.
+Let's give it a try with 10,000 repetitions.
 
 ```{r dentalflosssim, cache=T, width.out="60%", fig.cap="Density plot of the results of a dental-floss simulation.", fig.align="center"}
 flossSim(reps = 10000, graph = TRUE, seed = 3535)
@@ -1036,7 +1037,7 @@ In this section we will construct a simulation that sheds light on our question.
 
 (Apparently we consider a "close return" to be anything within half a unit of the origin.)
 
-In particular, we would like to know the distribution of $X$:  what is the chance that the turtle does not make a close return during the first thousand steps?  what's the chance of making only one close return?  Two close returns?  And so on ... .  we would also like to estimate the expected value of $X$:  the average number of close returns in the first 1000 steps.
+In particular, we would like to know the distribution of $X$:  what is the chance that the turtle does not make a close return during the first thousand steps?  What's the chance of making only one close return?  Two close returns?  And so on ... .  We would also like to estimate the expected value of $X$:  the average number of close returns in the first 1000 steps.
 
 We will next consider how to code a simulation.  Obviously we will need a way to record the turtle's position at each step.  In order to accomplish this we will have to apply the unit-circle trigonometry you learned in high school.
 
@@ -1061,7 +1062,7 @@ knitr::include_graphics("images/righttriangle.png")
 
 From this principle it follows that if the turtle turns a random angle of $a_1$ radians for its first step, then after it takes the one-unit step it will be at the point $(\cos(a_1), \sin(a_2))$.
 
-For the second step, the turtle begins by turning another random angle, say $a_2$ radians.  It then takes another one-unit step.  This second step forms the hypotenuse of a second right triangle (see Figure \@ref(fig:two-steps)).  The horizontal and verticals sides of this right triangle must be $\cos(a_2)$ and $\sin(a_2)$ respectively.  when the turtle complete the second step, it has added these values to its previous $x$ and $y$ coordinates, so that it is now at the point:
+For the second step, the turtle begins by turning another random angle, say $a_2$ radians.  It then takes another one-unit step.  This second step forms the hypotenuse of a second right triangle (see Figure \@ref(fig:two-steps)).  The horizontal and vertical sides of this right triangle must be $\cos(a_2)$ and $\sin(a_2)$ respectively.  When the turtle complete the second step, it has added these values to its previous $x$ and $y$ coordinates, so that it is now at the point:
 
 $$(\cos(a_1) + \cos(a_2), \sin(a_1) +\sin(a_2)).$$
 We now see the idea:  in order to record the position of the turtle at the end of each step, we simply need to:
@@ -1093,7 +1094,7 @@ sum(xSteps)
 
 (Apparently some of the cosines were negative, meaning that some of the turning angles were between 90 and 270 degrees.)
 
-We need the $x$-coordinates after all of the previous steps, as well.  This can be accomplished by R's `cumsum()` function. \index{R-functions!cumsum()@\texttt{cumsum()}} You may think of `cumsum` as short for "cumulative sum".  Given a vector of `vec` numbers, `cumsum(vec)` returns a vector of the same length, where for every index `i`, `cumsum(vec)[i]` is `sum(vec)[i]`.   This is made clear in the following example:
+We need the $x$-coordinates after all of the previous steps, as well.  This can be accomplished by R's `cumsum()` function. \index{R-functions!cumsum()@\texttt{cumsum()}} You may think of `cumsum` as short for "cumulative sum".  Given a vector `vec` of numbers, `cumsum(vec)` returns a vector of the same length, where for every index `i`, `cumsum(vec)[i]` is `sum(vec[1:i])`.   This is made clear in the following example:
 
 ```{r}
 vec <- c(1, 1, 1, 1, 1)
@@ -1206,7 +1207,7 @@ Let's try it out!  The results appear in Figure \@ref(fig:drunken-turtle-steps)
 drunkenSim2(steps = 1000, seed = 2525)
 ```
 
-It appears that the turtle might have returned close to the origin a couple of times, for the most part it seems to be wandering further and further away.  In the mathematical field known as *stochastic processes*, it has been shown that if the turtle is allowed to go on forever then it will certainly make a close return *infinitely many times*.  These returns, though, will tend to be spaced further and further apart as time goes on, and our graph suggests that this is so.
+It appears that although the turtle might have returned close to the origin a couple of times, for the most part it seems to be wandering further and further away.  In the mathematical field known as *stochastic processes*, it has been shown that if the turtle is allowed to go on forever then it will certainly make a close return *infinitely many times*.  These returns, though, will tend to be spaced further and further apart as time goes on, and our graph suggests that this is so.
 
 
 \newpage
@@ -1255,15 +1256,15 @@ knitr::include_graphics("images/thinking.png")
     
     Try both functions with ten thousand reps and with simple starting seeds.  Report the seeds you used for each function, and the estimated expected values for each game.  Use your results to decide which game is the better choice.
     
-1. Reconsider the meeting of Anna and Raj.  Suppose that they still plan to meet during the same one-hour period, but that Anna is willing to wait $a$ minutes and Raj is willing to wait $r$ minutes, where $a$ and $r$ could differ.  Modify the meetupSim()` function so that it accepts two additional parameters:
+1. Reconsider the meeting of Anna and Raj.  Suppose that they still plan to meet during the same one-hour period, but that Anna is willing to wait $a$ minutes and Raj is willing to wait $r$ minutes, where $a$ and $r$ could differ.  Modify the `meetupSim()` function so that it accepts two additional parameters:
     * `a`:  the time Anna is willing to wait;
     * `r`:  the time Raj is willing to wait;
     
     Apply the function with ten thousand repetitions (and a simple seed that you report) in order to estimate the probability of a meeting, assuming that Anna is willing to wait 13 minutes and Raj is willing to wait 7 minutes.
     
-1.  A pipe-smoker has two boxes of matches in his pocket.  Both boxes contain 40 matches.  Every time he lights his pipe, the smoker reaches into his pocket and randomly picks one of the boxes, pulling a match from the box.  Eventually one of the boxes runs out.  What is the expected value of the number of matches remaining in the other box at that time?  Write a simulation function to estimate the answer.  Your function should have at least a `reps` and a `seed` parameter.  Apply the function with ten thousand repetitions--and with a simple seed that you report---in order to estimate the expected value.  
+1.  A pipe-smoker has two boxes of matches in his pocket.  Both boxes contain 40 matches.  Every time he lights his pipe, the smoker reaches into his pocket and randomly picks one of the boxes, pulling a match from the box.  Eventually one of the boxes runs out.  What is the expected value of the number of matches remaining in the other box at that time?  Write a simulation function to estimate the answer.  Your function should have at least a `reps` and a `seed` parameter.  Apply the function with ten thousand repetitions---and with a simple seed that you report---in order to estimate the expected value.  
 
-1.  Refer back to the `numberNeededSim()` function.  Modify it so that it returns the estimated expected value invisibly, and has an option to turn the `cat()` report to the console.  Write a program that computes estimated expected number-needed for the following targets:
+1.  Refer back to the `numberNeededSim()` function.  Modify it so that it returns the estimated expected value invisibly, and has an option to turn off the `cat()` report to the console.  Write a program that computes the estimated expected number needed, for the following targets:
 
     ```{r eval = FALSE}
     targets <- seq(0.05, 0.95, by = 0.05)
@@ -1271,7 +1272,7 @@ knitr::include_graphics("images/thinking.png")
     
     Each estimate should be based on ten thousand repetitions.  Start with a simple seed that you report.  Report the estimated expected values for all of the required targets.  Compare these estimates with `exp(targets)` (the number $e$ raised to the power of each of the targets.)  Formulate a conjecture about the value of the expected number of numbers needed, when the target is a real number between 0 and 1.
     
-1.  A gambler starts with 10 dollars, and repeatedly plays a game.  If he wins the game he gets a dollars and if he loses the game he loses a dollar.  He has a 45 percent chance of winning the game.  Write a function to simulate the gambler repeatedly playing the game until her money runs out.  The function should keep track of how much money she has left after each play, so that it can produce a line graph (similar to the one in the section on the Drunken Turtle) of the money left after each play.  Write the function so that it has
+1.  A gambler starts with 10 dollars, and repeatedly plays a game.  If he wins the game he gets one dollar and if he loses the game he losesonea dollar.  He has a 45 percent chance of winning the game.  Write a function to simulate the gambler repeatedly playing the game until her money runs out.  The function should keep track of how much money she has left after each play, so that it can produce a line graph (similar to the one in the section on the Drunken Turtle) of the money left after each play.  Write the function so that it has
     * a `start` parameter for the initial amount of money the gambler has;
     * a `seed` parameter`
     * a `p` parameter for the chance of winning, so that the user can enter any chance less than or equal to 0.5.  (The function should stop the user if the user enters more than 0.5.)
