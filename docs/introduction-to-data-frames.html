@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-19">
+<meta name="date" content="2017-05-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -466,7 +466,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>From this we know that there are 71 individuals in the study. The data consists of 12 “parts”—the variables—which are related in the sense that they all provide information about the same set of 71 people.</p>
 <p>After that the output of <code>str()</code> launches into an account of the structure of each of the parts, for example:</p>
 <pre><code>## $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...</code></pre>
-<p>We are told that the kind of thing that height is: it’s a numerical vector (a vector of type <code>double</code>, in fact). Next we are given the beginning of a statement of its parts: the heights of the individuals. So R is actually giving us the structure of the parts, as well as of the whole <code>m11survey</code>.</p>
+<p>We are told the kind of thing that height is: it’s a numerical vector (a vector of type <code>double</code>, in fact). Next we are given the beginning of a statement of its parts: the heights of the individuals. So R is actually giving us the structure of the parts, as well as of the whole <code>m11survey</code>.</p>
 <p>The variable <code>fastest</code> refers to the fastest speed—in miles per hour—that a person has ever driven a car. Note that it is a vector of type <code>integer</code>. Officially this is a numerical variable, too, but R is calling attention to the fact that the fastest-speed data is being stored as integers rather than as floating-point decimals.</p>
 <p>The variables of a data frame are typically associated with the <em>names</em> of the frame:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(m111survey)</code></pre></div>
@@ -488,7 +488,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 160 190</code></pre>
 <p>It’s instructive to consider how <code>with()</code> works. If we were to includes the names of the parameters of <code>with()</code> explicitly, then the call would have looked like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="dt">data =</span> m111survey, <span class="dt">expr =</span> fastest[fastest &gt;=<span class="dv">150</span>])</code></pre></div>
-<p>For the <code>data</code> parameter we can supply a data frame or any other R-object that can be used to construct an environment . In this case <code>m111survey</code> provides a miniature environment consisting of the names of its variables. For the <code>expr</code> parameter we supply an expression for R to evaluate. As R evaluates the expression, it encounters names (such as <code>fastest</code>). Now ordinarily R would first search whatever counts as the active environment—in this case it’s the Global Environment—for the names in the expression, but <code>with()</code> forces R to look first within the environment created by the <code>data</code> argument. In our example, R finds <code>fastest</code> inside <code>m111survey</code> and evaluates the expression on that basis. If it had not found <code>fastest</code> in <code>m111survey</code>, R would have moved on to the Global Environment and (probably) would have found nothing, causing it to throw an “object not found” error message. In R, as in any other programming language, good programming depends very much on paying attention to how the language searches for the objects to which names refer.</p>
+<p>For the <code>data</code> parameter we can supply a data frame or any other R-object that can be used to construct an environment . In this case <code>m111survey</code> provides a miniature environment consisting of the names of its variables. For the <code>expr</code> parameter we supply an expression for R to evaluate. As R evaluates the expression, it encounters names (such as <code>fastest</code>). Now ordinarily R would first search whatever counts as the active environment—in this case it’s the Global Environment—for the names in the expression, but <code>with()</code> forces R to look first within the environment created by the <code>data</code> argument. In our example, R finds <code>fastest</code> inside <code>m111survey</code> and evaluates the expression on that basis. If it had not found <code>fastest</code> in <code>m111survey</code>, R would have moved on to the Global Environment and then the rest of the usual search path and (probably) would have found nothing, causing it to throw an “object not found” error message. In R, as in any other programming language, good programming depends very much on paying attention to how the language searches for the objects to which names refer.</p>
 </div>
 <div id="factors" class="section level3">
 <h3><span class="header-section-number">7.4.3</span> Factors</h3>

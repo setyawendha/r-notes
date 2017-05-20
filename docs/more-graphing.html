@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-19">
+<meta name="date" content="2017-05-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -440,7 +440,7 @@ Figure 7.1: Basic density plot of the fastest speed every driven.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p +<span class="st"> </span><span class="kw">geom_rug</span>()</code></pre></div>
 <p>It’s always good to label the axes of a plot—providing units if possible—and to add a brief but descriptive title. This is accomplished by adding labels to the plot with the <code>labs()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p +<span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
-             <span class="dt">title =</span> <span class="st">&quot;Density Plot of the Fastest Speeds Driven by GC Students.&quot;</span>)</code></pre></div>
+             <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph.&quot;</span>)</code></pre></div>
 <p>Let’s print out <code>p</code> again. The result is Figure <a href="more-graphing.html#fig:fastestdensity2">7.2</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastestdensity2"></span>
@@ -453,14 +453,14 @@ Figure 7.2: Density plot of the fastest speed every driven, with rug and labels.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> m111survey, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> fastest)) +
 <span class="st">  </span><span class="kw">geom_density</span>() +<span class="st"> </span><span class="kw">geom_rug</span>() +
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
-             <span class="dt">title =</span> <span class="st">&quot;Density Plot of the Fastest Speeds Driven by GC Students.&quot;</span>)</code></pre></div>
+             <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph&quot;</span>)</code></pre></div>
 <p>Usually, though, it’s a good idea to set up a blank plot with the <code>ggplot()</code> function and then add to it. In this way one can reuse the plot-variable, adding different geoms to it, and then stick with the ones you like best.</p>
 <p>For example, you might prefer to make a histogram. Start again with the blank plot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> m111survey, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> fastest))</code></pre></div>
 <p>Now see how a histogram would look (the result is Figure <a href="more-graphing.html#fig:fastesthistogram">7.3</a>.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_histogram</span>() +<span class="st"> </span><span class="kw">geom_rug</span>() +
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
-             <span class="dt">title =</span> <span class="st">&quot;Histogram of the Fastest Speeds Driven by GC Students.&quot;</span>)</code></pre></div>
+             <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastesthistogram"></span>
 <img src="r-notes_files/figure-html/fastesthistogram-1.png" alt="Histogram of the fastest speed every driven, with rug and labels." width="60%" />
 <p class="caption">
@@ -472,7 +472,7 @@ Figure 7.3: Histogram of the fastest speed every driven, with rug and labels.
 <p><strong>ggplot2</strong> likes to offer advice: in this case it wants you to select the width of the histogram-rectangles yourself. This is done with a <code>stat_bin()</code> function. Let’s make all of our rectangles 10 mph wide by adding a <code>binwidth</code> argument to <code>geom_histogram()</code>. The result is Figure <a href="more-graphing.html#fig:fastesthistogram2">7.4</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>) +<span class="st"> </span><span class="kw">geom_rug</span>() +
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
-             <span class="dt">title =</span> <span class="st">&quot;Histogram of the Fastest Speeds Driven by GC Students.&quot;</span>)</code></pre></div>
+             <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastesthistogram2"></span>
 <img src="r-notes_files/figure-html/fastesthistogram2-1.png" alt="Histogram of the fastest speed every driven, now with binwidth = 10." width="60%" />
 <p class="caption">
@@ -550,7 +550,7 @@ Figure 7.9: Seating preference, by sex—no stacking of bars..
 </div>
 <div id="onenum-onecat" class="section level3">
 <h3><span class="header-section-number">7.9.3</span> One Numerical and One Categorical Variable</h3>
-<p>Who tends to drive fastest: people who prefer the Front, the Middle o8r the Back? Investigating this question involves comparing the speeds of three groups of people; more technically we can say that we are asking about the *relationship between the numerical variable <code>fastest</code> and the categorical variable <code>seat</code>.</p>
+<p>Who tends to drive fastest: people who prefer the Front, the Middle or the Back? Investigating this question involves comparing the speeds of three groups of people; more technically we can say that we are asking about the <em>relationship</em> between the numerical variable <code>fastest</code> and the categorical variable <code>seat</code>.</p>
 <p>In this case we can assign one variable to the x-axis and the other to the y-axis.:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat, <span class="dt">y =</span> fastest))</code></pre></div>
 <p>We can now add geoms. We’ll make a violin plot—a density curve mirrored against itself—and an individual-value plot, in which the individual speeds appear at the appropriate y-axis level, but with their x-coordinates “jittered” randomly so that identical speeds don’t over-plot each other. The graph appears in Figure <a href="more-graphing.html#fig:violinfastestseat">7.10</a>. Where a violin is “thick” data points are crowded closely together. Where it is “thin”, they are more sparse.</p>
@@ -573,7 +573,7 @@ Figure 7.11: Density plots of fastest speed ever driven, for each seating prefer
 <div id="two-numerical-variables" class="section level3">
 <h3><span class="header-section-number">7.9.4</span> Two Numerical Variables</h3>
 <p>As we have seen in previous chapters, scatter plots are a fine way to visualize the relationship between two numerical variables. In our call to <code>aes()</code> we simply assign one of the variables to the x-axis and the other to the y-axis. A scatter plot showing the relationship between grade=point average and fastest speed ever driven is shown in Figure <a href="more-graphing.html#fig:fastestGPAseatA">7.12</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> fastest, <span class="dt">y =</span> GPA))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> fastest, <span class="dt">y =</span> GPA)) +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">na.rm =</span> T)
 p</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastestGPAseatA"></span>
 <img src="r-notes_files/figure-html/fastestGPAseatA-1.png" alt="Scatter plot of GPA vs. fastest speed ever driven. Students who drive faster tend to have lower GPAs." width="60%" />

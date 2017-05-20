@@ -215,7 +215,7 @@ a %*% b
 
 As expected, the result is a matrix having as many rows as the rows of `a`and as many columns as the columns of `b`.
 
-It is also interesting to recall how matrix multiplication works when the second matrix has only one column:  The matrix product obtained by multiplying each column of `a` by the element on the corresponding row of `b`, and adding the resulting matrices:
+It is also interesting to recall how matrix multiplication works when the second matrix has only one column.  The product is obtained by multiplying each column of `a` by the element on the corresponding row of `b`, and adding the resulting matrices:
 
 ```{r eval = F}
 b[1,1]*a[ ,1, drop = F] + b[2,1, drop = F]*a[ ,2] + b[3,1]*a[ ,3, drop = F]
@@ -328,7 +328,7 @@ After that the output of `str()` launches into an account of the structure of ea
 ## $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
 ```
 
-We are told that the kind of thing that height is: it's a numerical vector (a vector of type `double`, in fact).  Next we are given the beginning of a statement of its parts: the heights of the individuals.  So R is actually giving us the structure of the parts, as well as of the whole `m11survey`.
+We are told the kind of thing that height is: it's a numerical vector (a vector of type `double`, in fact).  Next we are given the beginning of a statement of its parts: the heights of the individuals.  So R is actually giving us the structure of the parts, as well as of the whole `m11survey`.
 
 The variable `fastest` refers to the fastest speed---in miles per hour---that a person has ever driven a car.  Note that it is a vector of type `integer`.  Officially this is a numerical variable, too, but R is calling attention to the fact that the fastest-speed data is being stored as integers rather than as floating-point decimals.
 
@@ -368,7 +368,7 @@ It's instructive to consider how `with()` works.  If we were to includes the nam
 with(data = m111survey, expr = fastest[fastest >=150])
 ```
 
-For the `data` parameter we can supply a data frame or any other R-object that can be used to construct an environment \index{environment}.  In this case `m111survey` provides a miniature environment consisting of the names of its variables. For the `expr` parameter we supply an expression for R to evaluate.  As R evaluates the expression, it encounters names (such as `fastest`).  Now ordinarily R would first search whatever counts as the \index{active environment}active environment---in this case it's the \index{global environment}Global Environment---for the names in the expression, but `with()` forces R to look first within the environment created by the `data` argument.  In our example, R finds `fastest` inside `m111survey` and evaluates the expression on that basis.  If it had not found `fastest` in `m111survey`, R would have moved on to the Global Environment and (probably) would have found nothing, causing it to throw an "object not found" error message.  In R, as in any other programming language, good programming depends very much on paying attention to how the language searches for the objects to which names refer.
+For the `data` parameter we can supply a data frame or any other R-object that can be used to construct an environment \index{environment}.  In this case `m111survey` provides a miniature environment consisting of the names of its variables. For the `expr` parameter we supply an expression for R to evaluate.  As R evaluates the expression, it encounters names (such as `fastest`).  Now ordinarily R would first search whatever counts as the \index{active environment}active environment---in this case it's the \index{global environment}Global Environment---for the names in the expression, but `with()` forces R to look first within the environment created by the `data` argument.  In our example, R finds `fastest` inside `m111survey` and evaluates the expression on that basis.  If it had not found `fastest` in `m111survey`, R would have moved on to the Global Environment and then the rest of the usual search path and (probably) would have found nothing, causing it to throw an "object not found" error message.  In R, as in any other programming language, good programming depends very much on paying attention to how the language searches for the objects to which names refer.
 
 ### Factors
 
@@ -423,7 +423,7 @@ ozFolk
 
 ```
 
-Note that at the time of creation you can provide the variables with any names that you like.  If later on you changes your mind about the names, you can always revise them:
+Note that at the time of creation you can provide the variables with any names that you like.  If later on you change your mind about the names, you can always revise them:
 
 ```{r}
 names(ozFolk)  
@@ -600,7 +600,7 @@ Now the sorting of `vec` could have been accomplished with R's `sort()`function:
 sort(vec)
 ```
 
-The power of `order()` comes with the rearrangement of rows of a data frame.  in order to "sort" the frame from shortest to tallest subject, call:
+The power of `order()` comes with the rearrangement of rows of a data frame.  In order to "sort" the frame from shortest to tallest subject, call:
 
 ```{r}
 df <- m111survey[order(m111survey$height), ]
@@ -753,7 +753,7 @@ It's always good to label the axes of a plot---providing units if possible---and
 
 ```{r}
 p <- p + labs(x = "Fastest speed ever driven (mph)",
-             title = "Density Plot of the Fastest Speeds Driven by GC Students.")
+             title = "For most students the fastest speed is around 100 mph.")
 ```
 
 Let's print out `p` again.  The result is Figure \@ref(fig:fastestdensity2).
@@ -769,7 +769,7 @@ Of course the entire plot could be written out in one command:
 ggplot(data = m111survey, mapping = aes(x = fastest)) +
   geom_density() + geom_rug() +
   labs(x = "Fastest speed ever driven (mph)",
-             title = "Density Plot of the Fastest Speeds Driven by GC Students.")
+             title = "For most students the fastest speed is around 100 mph")
 ```
 
 Usually, though, it's a good idea to set up a blank plot with the `ggplot()` function and then add to it.  In this way one can reuse the plot-variable, adding different geoms to it, and then stick with the ones you like best.
@@ -785,14 +785,14 @@ Now see how a histogram would look (the result is Figure \@ref(fig:fastesthistog
 ```{r eval = F}
 p + geom_histogram() + geom_rug() +
   labs(x = "Fastest speed ever driven (mph)",
-             title = "Histogram of the Fastest Speeds Driven by GC Students.")
+             title = "For most students the fastest speed is around 100 mph")
 ```
 
 
 ```{r fastesthistogram, echo = F, fig.align = "center", out.width = "60%", fig.cap = "Histogram of the fastest speed every driven, with rug and labels.", message=F}
 p + geom_histogram() + geom_rug() +
   labs(x = "Fastest speed ever driven (mph)",
-             title = "Histogram of the Fastest Speeds Driven by GC Students.")
+             title = "For most students the fastest speed is around 100 mph")
 ```
 
 If you run code yourself, you see a message to the console:
@@ -806,7 +806,7 @@ If you run code yourself, you see a message to the console:
 ```{r fastesthistogram2, fig.align = "center", out.width = "60%", fig.cap = "Histogram of the fastest speed every driven, now with binwidth = 10."}
 p + geom_histogram(binwidth = 10) + geom_rug() +
   labs(x = "Fastest speed ever driven (mph)",
-             title = "Histogram of the Fastest Speeds Driven by GC Students.")
+             title = "For most students the fastest speed is around 100 mph")
 ```
 
 
@@ -874,7 +874,7 @@ ggplot(m111survey, aes(x = sex)) +
 
 ### One Numerical and One Categorical Variable {#onenum-onecat}
 
-Who tends to drive fastest:  people who prefer the Front, the Middle o8r the Back?  Investigating this question involves comparing the speeds of three groups of people; more technically we can say that we are asking about the *relationship between the numerical variable `fastest` and the categorical variable `seat`.
+Who tends to drive fastest:  people who prefer the Front, the Middle or the Back?  Investigating this question involves comparing the speeds of three groups of people; more technically we can say that we are asking about the *relationship* between the numerical variable `fastest` and the categorical variable `seat`.
 
 In this case we can assign one variable to the x-axis and the other to the y-axis.:
 
@@ -901,7 +901,7 @@ ggplot(m111survey, aes(x = fastest)) + geom_density(aes(color = seat))
 As we have seen in previous chapters, scatter plots are a fine way to visualize the relationship between two numerical variables.  In our call to `aes()` we simply assign one of the variables to the x-axis and the other to the y-axis.  A scatter plot showing the relationship between grade=point average and fastest speed ever driven is shown in Figure \@ref(fig:fastestGPAseatA).
 
 ```{r fastestGPAseatA, fig.align = "center", out.width = "60%", fig.cap = "Scatter plot of GPA vs. fastest speed ever driven. Students who drive faster tend to have lower GPAs."}
-p <- ggplot(m111survey, aes(x = fastest, y = GPA))
+p <- ggplot(m111survey, aes(x = fastest, y = GPA)) + geom_point(na.rm = T)
 p
 ```
 

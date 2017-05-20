@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-05-19}
+  \date{2017-05-20}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5460,7 +5460,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10d00b958>
+## <bytecode: 0x10e3f9040>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9846,7 +9846,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-05-19 22:42:30 EDT"
+## [1] "2017-05-20 07:49:29 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9858,7 +9858,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1495248150
+## [1] 1495280969
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -12105,7 +12105,7 @@ As expected, the result is a matrix having as many rows as the rows of
 \texttt{a}and as many columns as the columns of \texttt{b}.
 
 It is also interesting to recall how matrix multiplication works when
-the second matrix has only one column: The matrix product obtained by
+the second matrix has only one column. The product is obtained by
 multiplying each column of \texttt{a} by the element on the
 corresponding row of \texttt{b}, and adding the resulting matrices:
 
@@ -12349,11 +12349,11 @@ structure of each of the parts, for example:
 ## $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
 \end{verbatim}
 
-We are told that the kind of thing that height is: it's a numerical
-vector (a vector of type \texttt{double}, in fact). Next we are given
-the beginning of a statement of its parts: the heights of the
-individuals. So R is actually giving us the structure of the parts, as
-well as of the whole \texttt{m11survey}.
+We are told the kind of thing that height is: it's a numerical vector (a
+vector of type \texttt{double}, in fact). Next we are given the
+beginning of a statement of its parts: the heights of the individuals.
+So R is actually giving us the structure of the parts, as well as of the
+whole \texttt{m11survey}.
 
 The variable \texttt{fastest} refers to the fastest speed---in miles per
 hour---that a person has ever driven a car. Note that it is a vector of
@@ -12456,10 +12456,11 @@ environment created by the \texttt{data} argument. In our example, R
 finds \texttt{fastest} inside \texttt{m111survey} and evaluates the
 expression on that basis. If it had not found \texttt{fastest} in
 \texttt{m111survey}, R would have moved on to the Global Environment and
-(probably) would have found nothing, causing it to throw an ``object not
-found'' error message. In R, as in any other programming language, good
-programming depends very much on paying attention to how the language
-searches for the objects to which names refer.
+then the rest of the usual search path and (probably) would have found
+nothing, causing it to throw an ``object not found'' error message. In
+R, as in any other programming language, good programming depends very
+much on paying attention to how the language searches for the objects to
+which names refer.
 
 \subsection{Factors}\label{factors}
 
@@ -12579,7 +12580,7 @@ a data frame, using the \texttt{data.frame()} function:
 \end{verbatim}
 
 Note that at the time of creation you can provide the variables with any
-names that you like. If later on you changes your mind about the names,
+names that you like. If later on you change your mind about the names,
 you can always revise them:
 
 \begin{Shaded}
@@ -12995,7 +12996,7 @@ Now the sorting of \texttt{vec} could have been accomplished with R's
 \end{verbatim}
 
 The power of \texttt{order()} comes with the rearrangement of rows of a
-data frame. in order to ``sort'' the frame from shortest to tallest
+data frame. In order to ``sort'' the frame from shortest to tallest
 subject, call:
 
 \begin{Shaded}
@@ -13307,7 +13308,7 @@ function:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{p <-}\StringTok{ }\NormalTok{p +}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Fastest speed ever driven (mph)"}\NormalTok{,}
-             \DataTypeTok{title =} \StringTok{"Density Plot of the Fastest Speeds Driven by GC Students."}\NormalTok{)}
+             \DataTypeTok{title =} \StringTok{"For most students the fastest speed is around 100 mph."}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -13336,7 +13337,7 @@ Of course the entire plot could be written out in one command:
 \KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \NormalTok{m111survey, }\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \NormalTok{fastest)) +}
 \StringTok{  }\KeywordTok{geom_density}\NormalTok{() +}\StringTok{ }\KeywordTok{geom_rug}\NormalTok{() +}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Fastest speed ever driven (mph)"}\NormalTok{,}
-             \DataTypeTok{title =} \StringTok{"Density Plot of the Fastest Speeds Driven by GC Students."}\NormalTok{)}
+             \DataTypeTok{title =} \StringTok{"For most students the fastest speed is around 100 mph"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -13361,7 +13362,7 @@ Now see how a histogram would look (the result is Figure
 \begin{Highlighting}[]
 \NormalTok{p +}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{() +}\StringTok{ }\KeywordTok{geom_rug}\NormalTok{() +}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Fastest speed ever driven (mph)"}\NormalTok{,}
-             \DataTypeTok{title =} \StringTok{"Histogram of the Fastest Speeds Driven by GC Students."}\NormalTok{)}
+             \DataTypeTok{title =} \StringTok{"For most students the fastest speed is around 100 mph"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -13391,7 +13392,7 @@ wide by adding a \texttt{binwidth} argument to
 \begin{Highlighting}[]
 \NormalTok{p +}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{10}\NormalTok{) +}\StringTok{ }\KeywordTok{geom_rug}\NormalTok{() +}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Fastest speed ever driven (mph)"}\NormalTok{,}
-             \DataTypeTok{title =} \StringTok{"Histogram of the Fastest Speeds Driven by GC Students."}\NormalTok{)}
+             \DataTypeTok{title =} \StringTok{"For most students the fastest speed is around 100 mph"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -13575,11 +13576,11 @@ in Figure \ref{fig:sexseat2}.
 \subsection{One Numerical and One Categorical
 Variable}\label{onenum-onecat}
 
-Who tends to drive fastest: people who prefer the Front, the Middle o8r
+Who tends to drive fastest: people who prefer the Front, the Middle or
 the Back? Investigating this question involves comparing the speeds of
 three groups of people; more technically we can say that we are asking
-about the *relationship between the numerical variable \texttt{fastest}
-and the categorical variable \texttt{seat}.
+about the \emph{relationship} between the numerical variable
+\texttt{fastest} and the categorical variable \texttt{seat}.
 
 In this case we can assign one variable to the x-axis and the other to
 the y-axis.:
@@ -13643,7 +13644,7 @@ Figure \ref{fig:fastestGPAseatA}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(m111survey, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \NormalTok{fastest, }\DataTypeTok{y =} \NormalTok{GPA))}
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(m111survey, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \NormalTok{fastest, }\DataTypeTok{y =} \NormalTok{GPA)) +}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{na.rm =} \NormalTok{T)}
 \NormalTok{p}
 \end{Highlighting}
 \end{Shaded}
@@ -21030,7 +21031,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1158178c8"
+## [1] "0x10edd7608"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21044,7 +21045,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1158178c8"
+## [1] "0x10edd7608"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21083,7 +21084,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1158178c8"
+## [1] "0x10edd7608"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21096,7 +21097,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x103d353c8"
+## [1] "0x119022048"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21114,7 +21115,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1158178c8"
+## [1] "0x10edd7608"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21158,7 +21159,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e9c0e00" "0x11e9c0e00"
+## [1] "0x11b339d78" "0x11b339d78"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21197,7 +21198,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e9c0e00" "0x11e9c0e00"
+## [1] "0x11b339d78" "0x11b339d78"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21239,7 +21240,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e9c0e00" "0x10ddaf950"
+## [1] "0x11b339d78" "0x1234a1788"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
