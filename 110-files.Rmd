@@ -6,13 +6,13 @@ knitr::include_graphics("images/wizardoz.jpg")
 
 \newpage
 
-Most computer programming tasks involve the processing or analysis of data, and unless we are doing a simulation, that data has not created within the program that is supposed to process it.  This Chapter covers some basic techniques for importing data into R, saving it for future use, and exporting it for use by others.
+Most computer programming tasks involve the processing or analysis of data, and unless we are doing a simulation, that data has not been created within the program that is supposed to process it.  This Chapter covers some basic techniques for importing data into R, saving it for future use, and exporting it for use by others.
 
 ## Downloading Files
 
 First we'll deal with the situation in which the data we want is in a file somewhere on the Internet.  We will download the file to our computer.
 
-It's a good idea to keep one's work organized.  Since we are planning to begin downloading data files, we might as well create a directory dedicated to them.  It's easy to use the R Studio IDE to create the directory, but we might as well learn how the same task could be accomplished with an R-command.  We will use the function `dir.create()`. \index{R-functions!dir.create()@\texttt{dir.create()}}
+It's a good idea to keep one's work organized.  Since we plan to begin downloading data files, we might as well create a directory dedicated to them.  It's easy to use the R Studio IDE to create the directory, but we might as well learn how the same task could be accomplished with an R-command.  We will use the function `dir.create()`. \index{R-functions!dir.create()@\texttt{dir.create()}}
 
 ```{r eval = F}
 dir.create("downloads")
@@ -20,12 +20,12 @@ dir.create("downloads")
 
 We are ready to begin downloading.  Let's begin with a file^[This file is a compressed version of `words.txt` file used in *Think Python* [@Downey2015].] at the URL:
 
->https://homerhanumat.github,io/r-notes/downloads/words.zip
+>https://homerhanumat.github.io/r-notes/downloads/words.zip
 
 The relevant function is `download.file()`:
 
 ```{r eval = F}
-download.file(url = "https://homerhanumat.github,io/r-notes/downloads/words.zip",
+download.file(url = "https://homerhanumat.github.io/r-notes/downloads/words.zip",
               destfile = "downloads/words.zip")
 ```
 
@@ -60,7 +60,7 @@ Let's transfer the contents of `words.txt` to a character vector in R.  The func
 words <- readLines(con = "downloads/words.txt")
 ```
 
-`readLines()` is similar to `readline()`, which we have used in the past to get a single line of input from the user.  `readLines()` can also read from the console---this is called *standard input*---but it can also make a *connection*^[A *connection*, also known to R-programmers as a "generalized file", is any one of a wide range of interfaces that can be established with the world outside of the R-session for the purpose of sending or receiving data.  One can make a connection with files stored locally on one;s computer, with URL addresses on the internet, databases, and so on.] with any file.  In the code above, we set the connection to be the file `words.txt`.  By default `readLines()` reads the file one line line at a time as a string, creating a character vector along the way.  The resulting character vector is named `words`.
+`readLines()` is similar to `readline()`, which we have used in the past to get a single line of input from the user.  `readLines()` can also read from the console---this is called *standard input*---but it can also make a *connection*^[A *connection*, also known to R-programmers as a "generalized file", is any one of a wide range of interfaces that can be established with the world outside of the R-session for the purpose of sending or receiving data.  One can make a connection with files stored locally on one's computer, with URL addresses on the internet, with databases, and so on.] with any file.  In the code above, we set the connection to be the file `words.txt`.  By default `readLines()` reads the file one line line at a time as a string, creating a character vector along the way.  The resulting character vector is named `words`.
 
 Let's look at words to see if it came out the way we expected.  The `head()` function \index{R-functions!head()@\texttt{head()}} works not only on data frames but also on vectors:
 
@@ -90,7 +90,7 @@ library(readr)
 library(readr)
 ```
 
-Let's practice reading in a file from the Internet:  the URL is:
+Let's practice reading in a file from the Internet.  The URL is:
 
 >https://homerhanumat.github.io/r-notes/downloads/alcGDP.csv
 
@@ -179,7 +179,7 @@ You may now transmit the file to your colleague.
 
 ## Application:  Making a Lexicon
 
-A *lexicon* is any list of words---usually the words of a language or of some body of texts produced in that language.  In this Section we'll apply our file-handling skills with regular expressions to create a lexicon for L. Frank Bloom's classic *The Wizard of Oz*.
+A *lexicon* is any list of words---usually the words of a language or of some body of texts produced in that language.  In this Section we'll combine our file-handling skills with regular expressions to create a lexicon for L. Frank Bloom's classic *The Wizard of Oz*.
 
 First you need to get hold of the text itself.  *The Wizrd of Oz* has been in the public domain for many years now, and is available from the [Gutenberg Project](https://www.gutenberg.org/).  You could look it up there and download it manually, but we'll practice doing it all within R.  This creates a bit of a problem, since the Gutenberg Project does not permit automated file-requests, so I have installed a copy of the file at a URL that you can access:
 
@@ -240,8 +240,8 @@ It's time now to examine our prospective lexicon.  Look around a bit in `ozWords
 
 * There are some numbers.  We'll get rid of them.
 * There are an awful lot of strings that begin or end with punctuation.  This should not be difficult to remove with `gsub()`.
-* There are plenty of contractions, like `"aren't"`.  It seems that these would be OK as word, so we'll leave them alone.
-* There are hyphenated words.  What should we do with them?  In a book for grown-up you'll find lots of hyphenated words where the components words are meaningful in themselves.  That's because of a grown-up grammar rule that says we should "hyphenate two or more words when they come before a noun they modify and act as a single idea."  This is important:  after all,"short-listed candidates" refers to candidates who appear on our short list, whereas "short listed candidates" appears to refer to short candidates who appear on our list.  If this were a grown-up text then I'd want to split on hyphens in order to capture the meaningful word-components.  In *The Wizard of Oz*, though, it seems that hyphenation is used mainly to create interesting new words out nonsense sound-fragments, as in:
+* There are plenty of contractions, like `"aren't"`.  It seems reasonable to count these as words, so we'll leave them alone.
+* There are hyphenated words.  What should we do with them?  In a book for grown-ups you'll find lots of hyphenated words where the components words are meaningful in themselves.  That's because of a grown-up grammar rule that says we should "hyphenate two or more words when they come before a noun they modify and act as a single idea."  This is important:  after all,"short-listed candidates" refers to candidates who appear on our short list, whereas "short listed candidates" appears to refer to short candidates who appear on our list.  If this were a grown-up text then I'd want to split on hyphens in order to capture the meaningful word-components.  In *The Wizard of Oz*, though, it seems that hyphenation is used mainly to create interesting new words out nonsense sound-fragments, as in:
 
     > So the Wicked Witch took the Golden Cap from her cupboard and placed it
 upon her head.  Then she stood upon her left foot and said slowly:
@@ -256,7 +256,7 @@ upon her head.  Then she stood upon her left foot and said slowly:
 
     > "Ziz-zy, zuz-zy, zik!"
  
-    It seems that we should count these as words in our lexicon.
+    It would seem that (for example) "zuz-zy" should count as a word, but its parts "zuz" and "zy" should not count as words.
     
 * On the other hand, we often find *pairs* of hyphens that appear to act as the *emdash* character (&mdash;):
 
@@ -337,7 +337,7 @@ Now we call our helper function to create the index:
 ozIndex <- indexFactory(ozWords, "downloads/oz.txt")
 ```
 
-We can use the index to look up words in the original text, without having to use regular expressions explicitly.  First we make a convenience-function for looking up:
+We can use the index to look up words in the original text, without having to use regular expressions explicitly.  First we make a convenience-function for looking up words::
 
 ```{r}
 ozLookup <- function(word) {
@@ -394,7 +394,7 @@ Connection (also called a "Generalized File") \index{connection}
 knitr::include_graphics("images/thinking.png")
 ```
 
-1. The word "caracara" is in `words`.  Note that it in this word a sequence of four letters is immediately repeated.  Write a that uses a regular expression to find all of the words in `words` that contain a doublet like this:  specifically, a sequence of *four or more* letters that immediately repeated. (The repeated sequence need NOT make up the entire word, as in the case of "caracara.")  The program should `cat()` the words to the console, one per line.
+1. The word "caracara" is in `words`.  Note that it in this word a sequence of four letters is immediately repeated.  Write a that uses a regular expression to find all of the words in `words` that contain a doublet like this:  specifically, a sequence of *four or more* letters that are immediately repeated. (The repeated sequence need NOT make up the entire word, as in the case of "caracara.")  The program should `cat()` the words to the console, one per line.
 
 1.  Write a program that uses a regular expression to find all of the words in `words` that contain a "q" that is not immediately followed by a "u".  The program should `cat()` the words to the console, one per line.
 
@@ -408,7 +408,7 @@ knitr::include_graphics("images/thinking.png")
     
     Your mission is to create a lexicon for Austin's novel.  Follow the pattern of the work done in the text to make a lexicon for *The Wizard of Oz*.  You will have to make different choices, though, about what constitutes a "word".  For example, Austin's prose is complex and "grown-up"in comparison to the prose of *Oz*, so the parts of hyphenated words probably constitute valid words in and of themselves. Austin has a habit of concealing certain place-names with dashes; occasionally in letters to each other Austin's characters will refer to a person by an initial.  Should initials and sequences of dashes count as words? And what about "12th" as in "the 12th of December"?  As you examine the text and your initial word list you will have to make decisions about these and other matters.
     
-    Write a report in R Markdown in which you create the lexicon.  Include the code for all of your work---beginning from the file-download---so that a person who runs all of the code in the document will create the very same lexicon you made.  as you develop the lexicon, explain your code and the rationale for your choices about what counts as a "word" in Austin's novel.
+    Write a report in R Markdown in which you create the lexicon.  Include the code for all of your work---beginning from the file-download---so that a person who runs all of the code in the document will create the very same lexicon you made.  As you develop the lexicon, explain your code and the rationale for your choices about what counts as a "word" in Austin's novel.
     
     Conclude the report with a data frame of the twenty most common words in Austin's novel that are more than eight letters long.  The frame should have two variables:  one for the words and another for the number of occurrences.  The frame should be sorted so that the words appear in decreasing order of frequency (i.e., most common word comes first). 
 

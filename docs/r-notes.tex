@@ -5344,18 +5344,17 @@ number of other environments:
 
 \begin{verbatim}
 ##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:readr"          "package:clisymbols"    
-##  [5] "package:bookdown"       "package:tigerData"     
-##  [7] "package:tigerstats"     "package:abd"           
-##  [9] "package:mosaic"         "package:Matrix"        
-## [11] "package:dplyr"          "package:lattice"       
-## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:ggplot2"       
-## [17] "package:mosaicData"     "tools:rstudio"         
-## [19] "package:stats"          "package:graphics"      
-## [21] "package:grDevices"      "package:utils"         
-## [23] "package:datasets"       "package:methods"       
-## [25] "Autoloads"              "package:base"
+##  [3] "package:readr"          "package:tigerData"     
+##  [5] "package:tigerstats"     "package:abd"           
+##  [7] "package:mosaic"         "package:Matrix"        
+##  [9] "package:dplyr"          "package:lattice"       
+## [11] "package:nlme"           "package:TurtleGraphics"
+## [13] "package:grid"           "package:ggplot2"       
+## [15] "package:mosaicData"     "tools:rstudio"         
+## [17] "package:stats"          "package:graphics"      
+## [19] "package:grDevices"      "package:utils"         
+## [21] "package:datasets"       "package:methods"       
+## [23] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5461,7 +5460,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10ea9b758>
+## <bytecode: 0x10e036840>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9847,7 +9846,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-05-21 07:58:47 EDT"
+## [1] "2017-05-21 13:19:36 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9859,7 +9858,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1495367928
+## [1] 1495387176
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -18505,10 +18504,10 @@ instead has a special role in specifying the overall pattern.
 \newpage
 
 Most computer programming tasks involve the processing or analysis of
-data, and unless we are doing a simulation, that data has not created
-within the program that is supposed to process it. This Chapter covers
-some basic techniques for importing data into R, saving it for future
-use, and exporting it for use by others.
+data, and unless we are doing a simulation, that data has not been
+created within the program that is supposed to process it. This Chapter
+covers some basic techniques for importing data into R, saving it for
+future use, and exporting it for use by others.
 
 \section{Downloading Files}\label{downloading-files}
 
@@ -18516,12 +18515,11 @@ First we'll deal with the situation in which the data we want is in a
 file somewhere on the Internet. We will download the file to our
 computer.
 
-It's a good idea to keep one's work organized. Since we are planning to
-begin downloading data files, we might as well create a directory
-dedicated to them. It's easy to use the R Studio IDE to create the
-directory, but we might as well learn how the same task could be
-accomplished with an R-command. We will use the function
-\texttt{dir.create()}.
+It's a good idea to keep one's work organized. Since we plan to begin
+downloading data files, we might as well create a directory dedicated to
+them. It's easy to use the R Studio IDE to create the directory, but we
+might as well learn how the same task could be accomplished with an
+R-command. We will use the function \texttt{dir.create()}.
 \index{R-functions!dir.create()@\texttt{dir.create()}}
 
 \begin{Shaded}
@@ -18535,14 +18533,14 @@ We are ready to begin downloading. Let's begin with a file\footnote{This
   \emph{Think Python} \citep{Downey2015}.} at the URL:
 
 \begin{quote}
-\url{https://homerhanumat.github,io/r-notes/downloads/words.zip}
+\url{https://homerhanumat.github.io/r-notes/downloads/words.zip}
 \end{quote}
 
 The relevant function is \texttt{download.file()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://homerhanumat.github,io/r-notes/downloads/words.zip"}\NormalTok{,}
+\KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://homerhanumat.github.io/r-notes/downloads/words.zip"}\NormalTok{,}
               \DataTypeTok{destfile =} \StringTok{"downloads/words.zip"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -18597,12 +18595,12 @@ used in the past to get a single line of input from the user.
   R-programmers as a ``generalized file'', is any one of a wide range of
   interfaces that can be established with the world outside of the
   R-session for the purpose of sending or receiving data. One can make a
-  connection with files stored locally on one;s computer, with URL
-  addresses on the internet, databases, and so on.} with any file. In
-the code above, we set the connection to be the file \texttt{words.txt}.
-By default \texttt{readLines()} reads the file one line line at a time
-as a string, creating a character vector along the way. The resulting
-character vector is named \texttt{words}.
+  connection with files stored locally on one's computer, with URL
+  addresses on the internet, with databases, and so on.} with any file.
+In the code above, we set the connection to be the file
+\texttt{words.txt}. By default \texttt{readLines()} reads the file one
+line line at a time as a string, creating a character vector along the
+way. The resulting character vector is named \texttt{words}.
 
 Let's look at words to see if it came out the way we expected. The
 \texttt{head()} function \index{R-functions!head()@\texttt{head()}}
@@ -18649,7 +18647,7 @@ convenient---and most popular---is the set of functions in the
 \end{Highlighting}
 \end{Shaded}
 
-Let's practice reading in a file from the Internet: the URL is:
+Let's practice reading in a file from the Internet. The URL is:
 
 \begin{quote}
 \url{https://homerhanumat.github.io/r-notes/downloads/alcGDP.csv}
@@ -18802,8 +18800,8 @@ Lexicon}\label{application-making-a-lexicon}
 
 A \emph{lexicon} is any list of words---usually the words of a language
 or of some body of texts produced in that language. In this Section
-we'll apply our file-handling skills with regular expressions to create
-a lexicon for L. Frank Bloom's classic \emph{The Wizard of Oz}.
+we'll combine our file-handling skills with regular expressions to
+create a lexicon for L. Frank Bloom's classic \emph{The Wizard of Oz}.
 
 First you need to get hold of the text itself. \emph{The Wizrd of Oz}
 has been in the public domain for many years now, and is available from
@@ -18901,11 +18899,11 @@ It's time now to examine our prospective lexicon. Look around a bit in
   This should not be difficult to remove with \texttt{gsub()}.
 \item
   There are plenty of contractions, like
-  \texttt{"aren\textquotesingle{}t"}. It seems that these would be OK as
-  word, so we'll leave them alone.
+  \texttt{"aren\textquotesingle{}t"}. It seems reasonable to count these
+  as words, so we'll leave them alone.
 \item
   There are hyphenated words. What should we do with them? In a book for
-  grown-up you'll find lots of hyphenated words where the components
+  grown-ups you'll find lots of hyphenated words where the components
   words are meaningful in themselves. That's because of a grown-up
   grammar rule that says we should ``hyphenate two or more words when
   they come before a noun they modify and act as a single idea.'' This
@@ -18942,7 +18940,8 @@ It's time now to examine our prospective lexicon. Look around a bit in
   ``Ziz-zy, zuz-zy, zik!''
   \end{quote}
 
-  It seems that we should count these as words in our lexicon.
+  It would seem that (for example) ``zuz-zy'' should count as a word,
+  but its parts ``zuz'' and ``zy'' should not count as words.
 \item
   On the other hand, we often find \emph{pairs} of hyphens that appear
   to act as the \emph{emdash} character (---):
@@ -19046,7 +19045,7 @@ Now we call our helper function to create the index:
 
 We can use the index to look up words in the original text, without
 having to use regular expressions explicitly. First we make a
-convenience-function for looking up:
+convenience-function for looking up words::
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -19145,8 +19144,8 @@ sending or receiving data.
   a sequence of four letters is immediately repeated. Write a that uses
   a regular expression to find all of the words in \texttt{words} that
   contain a doublet like this: specifically, a sequence of \emph{four or
-  more} letters that immediately repeated. (The repeated sequence need
-  NOT make up the entire word, as in the case of ``caracara.'') The
+  more} letters that are immediately repeated. (The repeated sequence
+  need NOT make up the entire word, as in the case of ``caracara.'') The
   program should \texttt{cat()} the words to the console, one per line.
 \item
   Write a program that uses a regular expression to find all of the
@@ -19190,7 +19189,7 @@ sending or receiving data.
   Write a report in R Markdown in which you create the lexicon. Include
   the code for all of your work---beginning from the file-download---so
   that a person who runs all of the code in the document will create the
-  very same lexicon you made. as you develop the lexicon, explain your
+  very same lexicon you made. As you develop the lexicon, explain your
   code and the rationale for your choices about what counts as a
   ``word'' in Austin's novel.
 
@@ -19227,8 +19226,8 @@ other programming languages.
 
 Let us begin by exploring the notion of a \emph{programming paradigm} in
 general. We will go on in this Chapter to consider will two programming
-paradigms that for which R provides considerable support. In the next
-Chapter we will consider a third programming paradigm that exists in R.
+paradigms for which R provides considerable support. In the next Chapter
+we will consider a third programming paradigm that exists in R.
 
 A \emph{programming paradigm} \index{programming paradigm} is a way to
 describe some of the features of programming languages. Often a paradigm
@@ -19314,7 +19313,7 @@ that:
   that \texttt{length()} will tell us how many names, there are, that
   \texttt{is.numeric()} will tell us whether or not a given variable in
   \texttt{m111survey} is a numerical variable, and so on. The procedures
-  embodies in these functions were written by other folks and we could
+  embodied in these functions were written by other folks and we could
   examine them if we had the time and interest, but for the most part we
   are content simply to know how to access them.
 \end{itemize}
@@ -19328,8 +19327,14 @@ data structures are \emph{data}---they are the ``stuff'' that a program
 manipulates to produce other data, other ``stuff.'' Procedures do the
 manipulating, turning stuff into other stuff.
 
-\subsection{Functional Programming: The Ubiquity of Functions in
-R}\label{functional-programming-the-ubiquity-of-functions-in-r}
+\section{The Functional Programming
+Paradigm}\label{the-functional-programming-paradigm}
+
+Let us now turn to the second of the two major programming paradigms
+that we study in this Chapter: Functional Programming.
+
+\subsection{The Ubiquity of Functions in
+R}\label{the-ubiquity-of-functions-in-r}
 
 Let's a bit more closely at our code snippet. Notice how prominently
 functions figure into it, on nearly every line. In fact, \emph{every}
@@ -19364,7 +19369,7 @@ There don't appear to be any functions being called, here! But in fact
 \begin{Shaded}
 \begin{Highlighting}[]
 \StringTok{"<-"}\NormalTok{(a, }\DecValTok{3}\NormalTok{)}
-\NormalTok{a   }\CommentTok{# check that's really 3}
+\NormalTok{a   }\CommentTok{# check that a is really 3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -19406,16 +19411,16 @@ precursor-language of R:
 ---John Chambers
 \end{quote}
 
-The second second slogan indicates that functions are everywhere in R.
-It also corresponds to the first principle of the \emph{functional
-programming} \index{functional programming}paradigm, namely:
+The second slogan indicates that functions are everywhere in R. It also
+corresponds to the first principle of the \emph{functional programming}
+\index{functional programming}paradigm, namely:
 
 \begin{quote}
 Computation is regarded as the evaluation of functions.
 \end{quote}
 
-\subsection{Functional Programming: Functions as First-Class
-Citizens}\label{functional-programming-functions-as-first-class-citizens}
+\subsection{Functions as First-Class
+Citizens}\label{functions-as-first-class-citizens}
 
 So functions are ubiquitous in R. Another interesting thing about them
 is that even though they seem to be associated with procedures---after
@@ -19451,11 +19456,19 @@ consider this user-defined function:
 \end{verbatim}
 
 Functions other than primitive functions are objects of type
-``closure.''
+``closure.''\footnote{The term ``closure'' comes from the fact that
+  every function we define in R consists of three elements: its formal
+  arguments, its body, and a pointer to its enclosing environment.
+  (Recall that in R the enclosing environment is the environment that
+  was active at the time the function was defined, and that it is the
+  second place---after the run-time environment---where R consult when
+  looking up names during the execution of the function.) Due to the
+  importance of its enclosing environment a function gets the name
+  ``closure.''}
 
 If a function can be a certain type of thing, then it must be a
-``thing''---an object, things you can manipulate. For example, you can
-put functions in a list:
+``thing''---an object, something you can manipulate. For example, you
+can put functions in a list:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -19532,12 +19545,12 @@ Example of the first type of function included:
 \item
   \texttt{is.numeric()}
 \item
-  the extraction-function \texttt{{[}()}
+  the extraction-function \texttt{"{[}"()}
 \end{itemize}
 
 A function that produced output to the console was \texttt{str()}.
 
-The assignment function \texttt{\textless{}-()} added \texttt{cols},
+The assignment function \texttt{"\textless{}-"()} added \texttt{cols},
 \texttt{isNumerical} and \texttt{numsm111} to the Global Environment,
 and also made changes to \texttt{isNumerical} in the course of the
 \texttt{for}-loop.
@@ -19608,11 +19621,11 @@ example:
 ## Error: object 'heavenlyHash' not found
 \end{verbatim}
 
-This is as we expect: the variable \texttt{a} exists only in the
-\emph{runtime} environment that is created in the call to
+This is as we expect: the variable \texttt{heavenlyHash} exists only in
+the run-time environment that is created in the call to
 \texttt{addThree()}. As soon as the function finishes execution that
-environment dies, and \texttt{a} dies long with it. In particular, it
-never became part of the Global Environment.
+environment dies, and \texttt{heavenlyHash} dies long with it. In
+particular, it never becomes part of the Global Environment.
 
 If you really want you functions to modify the Global Environment---or
 any environment other than its run-time environment, for that
@@ -19656,7 +19669,7 @@ parent environment is the Global Environment and the function has made a
 change to it: a side-effect.
 
 Except in the case of explicit assignment functions like
-\texttt{\textless{}-()}, changes made by functions to the Global
+\texttt{"\textless{}-"()}, changes made by functions to the Global
 Environment can be quite problematic. After all, we are used to using
 functions without having to look inside them to see how they do their
 work. Even if we once wrote the function ourselves, we may not remember
@@ -19672,8 +19685,8 @@ Environment.
 \subsection{Procedures as Higher-Order Function
 Calls}\label{procedures-as-higher-order-function-calls}
 
-The last principle of the functional programming paradigms that I'm
-going to sate isn't really a formal principle: it's really more an
+The last principle of the functional programming paradigms that we will
+state here isn't really a formal principle: it is really more an
 indication of the programming style that prevails in languages where
 functions are first-class objects and that provide other support for
 functional programming. The final principle is:
@@ -19684,7 +19697,7 @@ calls, In particular, loops should be replaced by calls to higher-order
 functions.
 \end{quote}
 
-A higher-order function is simply a functions that takes other functions
+A higher-order function is simply a function that takes other functions
 as arguments. \index{higher-order function}R provides a nice set of
 higher-order functions, many of which substitute for iterative
 procedures such as loops. In subsequent sections we will study the some
@@ -19714,7 +19727,7 @@ are as follows:
   place.)
 \item
   As much as possible, procedures should be written in terms of function
-  calls. in particular, loops should be replaced by calls to
+  calls. In particular, loops should be replaced by calls to
   higher-order functions.
 \end{itemize}
 
@@ -19834,7 +19847,7 @@ In the template above:
 
 The result is always a list.
 
-With \texttt{lapply()} can get the list in our second example as
+With \texttt{lapply()} we can get the list in our second example as
 follows:
 
 \begin{Shaded}
@@ -19880,8 +19893,8 @@ supplies the first argument of \texttt{FUN}. However, if some
 first parameter that is not mentioned in \texttt{...}. In the above
 example, the \texttt{min} and \texttt{max}parameters are the second and
 third parameters for \texttt{runif()} so \texttt{X} substitutes for the
-first argument---the one that determines how many random numbers will be
-generated. Later on we'll see an example where \texttt{X} substitutes
+first parameter---the one that determines how many random numbers will
+be generated. Later on we'll see an example where \texttt{X} substitutes
 for a non-first parameter.
 
 By the way: most people don't bother to include the names of the
@@ -20026,10 +20039,10 @@ The following is an example in which---due to what's supplied in
 \texttt{...}, the \texttt{X} parameter goes with a non-first parameter
 of \texttt{FUN}.
 
-You may recall an \protect\hyperlink{appeals-exercise}{Exericise} in
-Chapter \ref{frames} where you were asked to use vectorization to
-simulate the decisions of judges in the Appeals Court Paradox. You can
-\texttt{sapply()} to produce the simulated decisions, too: as follows:
+You may recall an Exercise in Chapter \ref{frames} where you were asked
+to use vectorization to simulate the decisions of judges in the Appeals
+Court Paradox. You can \texttt{sapply()} to produce the simulated
+decisions, too: as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -20069,15 +20082,15 @@ As a motivator for learning about \texttt{tapply()},
 to drive the fastest: people who prefer to sit in the Front, the Middle,
 or the Back?}
 
-You will recall that we investigated the this question---a question
-about the relationship between the numerical variable \texttt{fastest}
-and the factor-variable \texttt{seat}---with a graph, which is
-reproduced here as Figure \ref{fig:fastestseatviolinagain}. Comparing
-the relative positions of the violins and looking at the locations of
-individual values, it appears that folks who prefer to sit in the Back
-tend to drive faster than front and middle-sitters do, especially since
-there seems to be a reasonable number of back-sitters who drive quite
-fast (the back-sitter violin has a long upper ``neck'').
+You will recall that we investigated this question---a question about
+the relationship between the numerical variable \texttt{fastest} and the
+factor-variable \texttt{seat}---with a graph, which is reproduced here
+as Figure \ref{fig:fastestseatviolinagain}. Comparing the relative
+positions of the violins and looking at the locations of individual
+values, it appears that folks who prefer to sit in the Back tend to
+drive faster than front and middle-sitters do, especially since there
+seems to be a reasonable number of back-sitters who drive quite fast
+(the back-sitter violin has a long upper ``neck'').
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -20663,14 +20676,14 @@ more human-readable or to make it perform the task more quickly.)
   according to both seating preference and sex.
 \item
   This exercise continues the study of sex discrimination in wages that
-  was begun in the \protect\hyperlink{frames-exercises}{exercises} from
+  was begun in the \protect\hyperlink{frames-exercises}{Exercises} from
   Chapter \ref{frames}. In those exercises our approach was graphical,
   but we would like to check our conclusions with a numerical approach
   as well. Working from the \texttt{cpsSmall} data frame, use
   \texttt{tappply()} to compare mean wages when the subjects are broken
   into groups according to both sex and sector of employment. (This
   corresponds to the graph with eight violin-plots from the Chapter
-  \ref{frames} exercises.)
+  \ref{frames} Exercises.)
 
   Examine the ``table'' you got with \texttt{tapply()}.
 
@@ -20697,7 +20710,7 @@ more human-readable or to make it perform the task more quickly.)
 \end{Highlighting}
 \end{Shaded}
 
-  In the course of our explanation, say whether the result is a vector
+  In the course of your explanation, say whether the result is a vector
   or a list.
 \item
   Which do you think works faster for a given numerical vector
@@ -20720,6 +20733,11 @@ more human-readable or to make it perform the task more quickly.)
   Justify your answer with a convincing example, using
   \texttt{system.time()}. What moral do you draw from this?
 \item
+  To \emph{refactor} \index{refactoring}computer code is to rewrite the
+  code so that is does the same thing, but in a different way. We might
+  refactor code in order to make it more readable by humans, or to make
+  it perform its task more quickly.
+
   Refactor the following code so that it uses \texttt{Map()} instead of
   a loop:
 
@@ -20738,11 +20756,6 @@ more human-readable or to make it perform the task more quickly.)
 \end{Highlighting}
 \end{Shaded}
 \item
-  To \emph{refactor} \index{refactoring}computer code is to rewrite the
-  code so that is does the same thing, but in a different way. We might
-  refactor code in order to make it more readable by humans, or to make
-  it perform its task more quickly.
-
   The following function produces a list of vectors of uniform random
   numbers, where the lower and upper bounds of the numbers are given by
   the arguments to the parameters \texttt{lower} and \texttt{upper}
@@ -20768,7 +20781,7 @@ more human-readable or to make it perform the task more quickly.)
 \end{Highlighting}
 \end{Shaded}
 
-  Refactor the code for the \texttt{randomSims()} so that it uses
+  Refactor the code for \texttt{randomSims()} so that it uses
   \texttt{lapply()} instead of a loop.
 \item
   The following enhanced version of \texttt{randomSims()} is even more
@@ -21293,7 +21306,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1043d4ff8"
+## [1] "0x13b072728"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21307,7 +21320,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1043d4ff8"
+## [1] "0x13b072728"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21346,7 +21359,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1043d4ff8"
+## [1] "0x13b072728"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21359,7 +21372,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1078b1ab8"
+## [1] "0x123224f48"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21377,7 +21390,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1043d4ff8"
+## [1] "0x13b072728"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21421,7 +21434,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120090d20" "0x120090d20"
+## [1] "0x124362c00" "0x124362c00"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21460,7 +21473,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120090d20" "0x120090d20"
+## [1] "0x124362c00" "0x124362c00"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21502,7 +21515,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120090d20" "0x12ee30030"
+## [1] "0x124362c00" "0x10dce7710"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

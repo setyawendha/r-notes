@@ -13,7 +13,7 @@ In this Chapter we aren't going to cover any fundamentally new R powers.  Instea
 
 ## Programming Paradigms
 
-Let us begin by exploring the notion of a *programming paradigm* in general. We will go on in this Chapter to consider will two programming paradigms that for which R provides considerable support.  In the next Chapter we will consider a third programming paradigm that exists in R.
+Let us begin by exploring the notion of a *programming paradigm* in general. We will go on in this Chapter to consider will two programming paradigms for which R provides considerable support.  In the next Chapter we will consider a third programming paradigm that exists in R.
 
 A *programming paradigm* \index{programming paradigm} is a way to describe some of the features of programming languages.  Often a paradigm includes principles concerning the use of these features, or embodies a view that these features have special importance and utility in good programming practice.
 
@@ -53,11 +53,15 @@ str(numsm111)
 By now there is nothing mysterious about the above code-snippet.  What we want to become conscious of is the *approach* we have taken to the problem of selecting the numerical variables.  In particular, observe that:
 
 * We worked throughout with *data*, some of which, like `m111survey`, was given to us and some of which we created on our own to help solve the problem.  For example, we created the variable `cols`.  Note also the very helpful index-variable `i` in the `for`-loop.  We set up the data structure `isNumerical` in order to hold a set of data (`TRUE`s and `FALSE`s).
-* We relied on various *procedures* to create data and to manipulate that data in order to produce the desired result.  Some of the procedures appeared as special blocks of code---most notably the `for`-loop, but also the `if-else` construct within the loop.  Other procedures took the form of functions.  As we know, a function encapsulates a useful procedure so that it can be easily reused in a wide variety of circumstances, without the user having to know the details of how it works.  We know that `names()` will give us the vector of names of the columns of `m111survey`, that `length()` will tell us how many names, there are, that `is.numeric()` will tell us whether or not a given variable in `m111survey` is a numerical variable, and so on.  The procedures embodies in these functions were written by other folks and we could examine them if we had the time and interest, but for the most part we are content simply to know how to access them.
+* We relied on various *procedures* to create data and to manipulate that data in order to produce the desired result.  Some of the procedures appeared as special blocks of code---most notably the `for`-loop, but also the `if-else` construct within the loop.  Other procedures took the form of functions.  As we know, a function encapsulates a useful procedure so that it can be easily reused in a wide variety of circumstances, without the user having to know the details of how it works.  We know that `names()` will give us the vector of names of the columns of `m111survey`, that `length()` will tell us how many names, there are, that `is.numeric()` will tell us whether or not a given variable in `m111survey` is a numerical variable, and so on.  The procedures embodied in these functions were written by other folks and we could examine them if we had the time and interest, but for the most part we are content simply to know how to access them.
 
 *Procedural programming* \index{procedural programming}is a paradigm that solves problems with programs that can be broken up into collections of variables, data structures and procedures. In this paradigm, there is a sharp distinction between variables and data structures on the one hand and procedures on the other.  Variables and data structures are *data*---they are the "stuff" that a program manipulates to produce other data, other "stuff."  Procedures do the manipulating, turning stuff into other stuff.
 
-### Functional Programming:  The Ubiquity of Functions in R
+## The Functional Programming Paradigm
+
+Let us now turn to the second of the two major programming paradigms that we study in this Chapter:  Functional Programming.
+
+### The Ubiquity of Functions in R
 
 Let's a bit more closely at our code snippet.  Notice how prominently functions figure into it, on nearly every line.  In fact, *every* line calls at least one function!  This might seem unbelievable:  after all, consider the line below:
 
@@ -77,7 +81,7 @@ There don't appear to be any functions being called, here!  But in fact **two** 
     
     ```{r}
     "<-"(a, 3)
-    a   # check that's really 3
+    a   # check that a is really 3
     ```
     
 2. The sub-setting operator for vectors `[`, more formally known as *extraction* (see `help(Extract)`) is also a function.  The expression `m111survey[, isNumerical]` is actually the following function-call in disguise:
@@ -95,11 +99,11 @@ Indeed functions are ubiquitous in R.  This is part of the significance of the f
 
 > ---John Chambers
 
-The second second slogan indicates that functions are everywhere in R.  It also corresponds to the first principle of the *functional programming* \index{functional programming}paradigm, namely:
+The second slogan indicates that functions are everywhere in R.  It also corresponds to the first principle of the *functional programming* \index{functional programming}paradigm, namely:
 
 >Computation is regarded as the evaluation of functions.
 
-### Functional Programming:  Functions as First-Class Citizens
+### Functions as First-Class Citizens
 
 So functions are ubiquitous in R.  Another interesting thing about them is that even though they seem to be associated with procedures---after all, they make things happen---they are, nevertheless, also objects.  They are data, or "stuff" if you like.
 
@@ -116,9 +120,9 @@ f <- function(x) x+3
 typeof(f)
 ```
 
-Functions other than primitive functions are objects of type "closure."
+Functions other than primitive functions are objects of type "closure."^[The term "closure" comes from the fact that every function we define in R consists of three elements:  its formal arguments, its body, and a pointer to its enclosing environment.  (Recall that in R the enclosing environment is the environment that was active at the time the function was defined, and that it is the second place---after the run-time environment---where R consult when looking up names during the execution of the function.)  Due to the importance of its enclosing environment a function gets the name "closure."]
 
-If a function can be a certain type of thing, then it must be a "thing"---an object, things you can manipulate.  For example, you can put functions in a list:
+If a function can be a certain type of thing, then it must be a "thing"---an object, something you can manipulate.  For example, you can put functions in a list:
 
 ```{r}
 lst <- list(is.numeric, f)
@@ -156,11 +160,11 @@ Example of the first type of function included:
 * `names()`
 * `seq_along()`
 * `is.numeric()`
-* the extraction-function `[()`
+* the extraction-function `"["()`
 
 A function that produced output to the console was `str()`.
 
-The assignment function `<-()` added `cols`, `isNumerical` and `numsm111` to the Global Environment, and also made changes to `isNumerical` in the course of the `for`-loop.
+The assignment function `"<-"()` added `cols`, `isNumerical` and `numsm111` to the Global Environment, and also made changes to `isNumerical` in the course of the `for`-loop.
 
 Of course we have seen examples of functions that do two of these things at once, for example:
 
@@ -197,7 +201,7 @@ heavenlyHash
 ## Error: object 'heavenlyHash' not found
 ```
 
-This is as we expect:  the variable `a` exists only in the *runtime* environment that is created in the call to `addThree()`.  As soon as the function finishes execution that environment dies, and `a` dies long with it.  In particular, it never became part of the Global Environment.
+This is as we expect:  the variable `heavenlyHash` exists only in the run-time environment that is created in the call to `addThree()`.  As soon as the function finishes execution that environment dies, and `heavenlyHash` dies long with it.  In particular, it never becomes part of the Global Environment.
 
 If you really want you functions to modify the Global Environment---or any environment other than its run-time environment, for that matter---then you have to take special measures.  You could, for example, use the super-assignment operator `<<-`: \index{R-operators!<<- (super-assignment)@\texttt{<<-} (super-assignment)}
 
@@ -213,15 +217,15 @@ heavenlyHash
 
 The super-assignment operator looks for the name `heavenlyHash` in the parent environment of the run-time environment,  If if finds `heavenlyHash` there then it changes its value to 5 and stops.  Otherwise it looks in the next parent up, and so on until it reaches the Global Environment, at which point if it doesn't find a `heavenlyHash` it creates one and gives it the value.  In the example above, assuming you ran the function from the console, the parent environment is the Global Environment and the function has made a change to it:  a side-effect.
 
-Except in the case of explicit assignment functions like `<-()`, changes made by functions to the Global Environment can be quite problematic.  After all, we are used to using functions without having to look inside them to see how they do their work.  Even if we once wrote the function ourselves, we may not remember how it works, so if it creates side effects we may not remember that it does, and calling them could interfere with other important work that the program is doing.  (If the program already has `heavenlyHash` in the Global Environment and the we call a function that changes it value, we could be in for big trouble.)  Accordingly, R supports the third principle of functional programming to the extent of making it easy for you to avoid function calls that change your Global Environment.
+Except in the case of explicit assignment functions like `"<-"()`, changes made by functions to the Global Environment can be quite problematic.  After all, we are used to using functions without having to look inside them to see how they do their work.  Even if we once wrote the function ourselves, we may not remember how it works, so if it creates side effects we may not remember that it does, and calling them could interfere with other important work that the program is doing.  (If the program already has `heavenlyHash` in the Global Environment and the we call a function that changes it value, we could be in for big trouble.)  Accordingly, R supports the third principle of functional programming to the extent of making it easy for you to avoid function calls that change your Global Environment.
 
 ### Procedures as Higher-Order Function Calls
 
-The last principle of the functional programming paradigms that I'm going to sate isn't really a formal principle:  it's really more an indication of the programming style that prevails in languages where functions are first-class objects and that provide other support for functional programming.  The final principle is:
+The last principle of the functional programming paradigms that we will state here isn't really a formal principle:  it is really more an indication of the programming style that prevails in languages where functions are first-class objects and that provide other support for functional programming.  The final principle is:
 
 >As much as possible, procedures should be accomplished by function calls,  In particular, loops should be replaced by calls to higher-order functions.
 
-A higher-order function is simply a functions that takes other functions as arguments. \index{higher-order function}R provides a nice set of higher-order functions, many of which substitute for iterative procedures such as loops.  In subsequent sections we will study the some of the most important higher-order functions, and see how they allow us to express some fairly complex procedures in a concise and readable way.  You will also see how this style really blurs the distinction---so fundamental to procedural programming---between data and procedures.  In functional programming, functions ARE data, and procedures are just function calls.
+A higher-order function is simply a function that takes other functions as arguments. \index{higher-order function}R provides a nice set of higher-order functions, many of which substitute for iterative procedures such as loops.  In subsequent sections we will study the some of the most important higher-order functions, and see how they allow us to express some fairly complex procedures in a concise and readable way.  You will also see how this style really blurs the distinction---so fundamental to procedural programming---between data and procedures.  In functional programming, functions ARE data, and procedures are just function calls.
 
 ### Functional Programming:  A Summary
 
@@ -230,7 +234,7 @@ For our purposes, the principles of the functional programming paradigm are as f
 * Computation consists in the evaluation of functions.
 * Functions are first-class citizens in the language.
 * Functions should only return values; they should not produce side-effects. (At the very least they should not modify the Global Environment unless they are dedicated to assignment in the first place.)
-* As much as possible, procedures should be written in terms of function calls.  in particular, loops should be replaced by calls to higher-order functions.
+* As much as possible, procedures should be written in terms of function calls.  In particular, loops should be replaced by calls to higher-order functions.
 
 ## `lapply()` and Friends
 
@@ -286,7 +290,7 @@ In the template above:
 
 The result is always a list.
 
-With `lapply()` can get the list in our second example as follows:
+With `lapply()` we can get the list in our second example as follows:
 
 ```{r echo=2:4}
 set.seed(2020)
@@ -305,7 +309,7 @@ lst <- lapply(X = vec, FUN = runif, min = 4, max = 8)
 str(lst)
 ```
 
-The default behavior of `lapply()` is that the `X` vector supplies the first argument of `FUN`.  However, if some `...` parameters are supplied then `X` substitutes for the first parameter that is not mentioned in `...`.  In the above example, the `min` and `max`parameters are the second and third parameters for `runif()` so `X` substitutes for the first argument---the one that determines how many random numbers will be generated.  Later on we'll see an example where `X` substitutes for a non-first parameter.
+The default behavior of `lapply()` is that the `X` vector supplies the first argument of `FUN`.  However, if some `...` parameters are supplied then `X` substitutes for the first parameter that is not mentioned in `...`.  In the above example, the `min` and `max`parameters are the second and third parameters for `runif()` so `X` substitutes for the first parameter---the one that determines how many random numbers will be generated.  Later on we'll see an example where `X` substitutes for a non-first parameter.
 
 By the way:  most people don't bother to include the names of the `X` and `FUN` parameters when using `lapply()`:
 
@@ -367,7 +371,7 @@ Earlier we mentioned that in `lapply()` the `X` parameter substitutes for the fi
 
 The following is an example in which---due to what's supplied in `...`, the `X` parameter goes with a non-first parameter of `FUN`.
 
-You may recall an [Exericise](#appeals-exercise) in Chapter \@ref(frames) where you were asked to use vectorization to simulate the decisions of judges in the Appeals Court Paradox.  You can `sapply()` to produce the simulated decisions, too:  as follows:
+You may recall an Exercise in Chapter \@ref(frames) where you were asked to use vectorization to simulate the decisions of judges in the Appeals Court Paradox.  You can `sapply()` to produce the simulated decisions, too:  as follows:
 
 ```{r}
 probs <- c(0.95, 0.90, 0.90, 0.90, 0.80)
@@ -388,7 +392,7 @@ Therefore the elements of `probs`---which is the value assigned to the `X` param
 
 As a motivator for learning about `tapply()`, \index{R-functions!tapply()@\texttt{tapply()}}the next member of the `apply` family, consider the question from Section \@ref(onenum-onecat) about the `m111survey` data:  *Who tends to drive the fastest:  people who prefer to sit in the Front, the Middle, or the Back?*
 
-You will recall that we investigated the this question---a question about the relationship between the numerical variable `fastest` and the factor-variable `seat`---with a graph, which is reproduced here as Figure \@ref(fig:fastestseatviolinagain).  Comparing the relative positions of the violins and looking at the locations of individual values, it appears that folks who prefer to sit in the Back tend to drive faster than front and middle-sitters do, especially since there seems to be a reasonable number of back-sitters who drive quite fast (the back-sitter violin has a long upper "neck").
+You will recall that we investigated this question---a question about the relationship between the numerical variable `fastest` and the factor-variable `seat`---with a graph, which is reproduced here as Figure \@ref(fig:fastestseatviolinagain).  Comparing the relative positions of the violins and looking at the locations of individual values, it appears that folks who prefer to sit in the Back tend to drive faster than front and middle-sitters do, especially since there seems to be a reasonable number of back-sitters who drive quite fast (the back-sitter violin has a long upper "neck").
 
 ```{r include = F}
 library(ggplot2)
@@ -710,7 +714,7 @@ oddMembers <- function(vec) {
     
     Your task is to use `quantile()` to write a function called `iqRange()` that will return the interquartile range of any given numerical vector.  Then use that function with `tapply()` to get the interquartile ranges for the fastest speeds in the `m111survey` data, where the students are broken into groups according to both seating preference and sex.
     
-1. This exercise continues the study of sex discrimination in wages that was begun in the [exercises](#frames-exercises) from Chapter \@ref(frames).  In those exercises our approach was graphical, but we would like to check our conclusions with a numerical approach as well.  Working from the `cpsSmall` data frame, use `tappply()` to compare mean wages when the subjects are broken into groups according to both sex and sector of employment.  (This corresponds to the graph with eight violin-plots from the Chapter \@ref(frames) exercises.)
+1. This exercise continues the study of sex discrimination in wages that was begun in the [Exercises](#frames-exercises) from Chapter \@ref(frames).  In those exercises our approach was graphical, but we would like to check our conclusions with a numerical approach as well.  Working from the `cpsSmall` data frame, use `tappply()` to compare mean wages when the subjects are broken into groups according to both sex and sector of employment.  (This corresponds to the graph with eight violin-plots from the Chapter \@ref(frames) Exercises.)
 
     Examine the "table" you got with `tapply()`.
     * Are there any sectors in which it seems that women typically make more than men.  If so, what sectors are they?
@@ -723,7 +727,7 @@ oddMembers <- function(vec) {
     Map(function(x) x^2, y)
     ```
     
-    In the course of our explanation, say whether the result is a vector or a list.
+    In the course of your explanation, say whether the result is a vector or a list.
     
 1. Which do you think works faster for a given numerical vector `y`?  This code:
 
@@ -739,7 +743,9 @@ oddMembers <- function(vec) {
     
     Justify your answer with a convincing example, using `system.time()`.  What moral do you draw from this?
     
-1.  Refactor the following code so that it uses `Map()` instead of a loop:
+1.  To *refactor* \index{refactoring}computer code is to rewrite the code so that is does the same thing, but in a different way.  We might refactor code in order to make it more readable by humans, or to make it perform its task more quickly.
+
+    Refactor the following code so that it uses `Map()` instead of a loop:
 
     ```{r eval = F}
     df <- tigerstats::m111survey
@@ -754,9 +760,7 @@ oddMembers <- function(vec) {
     head(newFrame)
     ```
     
-1.  To *refactor* \index{refactoring}computer code is to rewrite the code so that is does the same thing, but in a different way.  We might refactor code in order to make it more readable by humans, or to make it perform its task more quickly.
-
-    The following function produces a list of vectors of uniform random numbers, where the lower and upper bounds of the numbers are given by the arguments to the parameters `lower` and `upper` respectively, and the number of vectors in the list and the number of random numbers in each vector are given by a vector supplied to the parameter `vecs`.
+1. The following function produces a list of vectors of uniform random numbers, where the lower and upper bounds of the numbers are given by the arguments to the parameters `lower` and `upper` respectively, and the number of vectors in the list and the number of random numbers in each vector are given by a vector supplied to the parameter `vecs`.
     
     ```{r}
     randomSims <- function(vecs, lower = 0, upper= 1, seed = NULL) {
@@ -774,7 +778,7 @@ oddMembers <- function(vec) {
     }
     ```
     
-    Refactor the code for the `randomSims()` so that it uses `lapply()` instead of a loop.
+    Refactor the code for `randomSims()` so that it uses `lapply()` instead of a loop.
     
 1. The following enhanced version of `randomSims()` is even more flexible, as it allows both the upper and lower limits for the randomly-generated numbers to vary with each vector of numbers that is produced.
 
