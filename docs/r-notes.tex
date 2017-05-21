@@ -5343,18 +5343,19 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:readr"          "package:tigerData"     
-##  [5] "package:tigerstats"     "package:abd"           
-##  [7] "package:mosaic"         "package:Matrix"        
-##  [9] "package:dplyr"          "package:lattice"       
-## [11] "package:nlme"           "package:TurtleGraphics"
-## [13] "package:grid"           "package:ggplot2"       
-## [15] "package:mosaicData"     "tools:rstudio"         
-## [17] "package:stats"          "package:graphics"      
-## [19] "package:grDevices"      "package:utils"         
-## [21] "package:datasets"       "package:methods"       
-## [23] "Autoloads"              "package:base"
+##  [1] ".GlobalEnv"             "package:clisymbols"    
+##  [3] "package:bookdown"       "package:R6"            
+##  [5] "package:readr"          "package:tigerData"     
+##  [7] "package:tigerstats"     "package:abd"           
+##  [9] "package:mosaic"         "package:Matrix"        
+## [11] "package:dplyr"          "package:lattice"       
+## [13] "package:nlme"           "package:TurtleGraphics"
+## [15] "package:grid"           "package:ggplot2"       
+## [17] "package:mosaicData"     "tools:rstudio"         
+## [19] "package:stats"          "package:graphics"      
+## [21] "package:grDevices"      "package:utils"         
+## [23] "package:datasets"       "package:methods"       
+## [25] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5460,7 +5461,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10e036840>
+## <bytecode: 0x10ead9d40>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9846,7 +9847,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-05-21 13:19:36 EDT"
+## [1] "2017-05-21 17:47:48 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9858,7 +9859,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1495387176
+## [1] 1495403268
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -20866,7 +20867,7 @@ more human-readable or to make it perform the task more quickly.)
 \BeginKnitrBlock{leadquote}
 repeat \{
 
-~~~~coffeeMug\$drinkFrom()`
+~~~~coffeeMug\$drinkFrom()
 
 ~~~~workTask\$execute()
 
@@ -20876,9 +20877,9 @@ repeat \{
 
 ~~~~~~~~~~~~coffeePot\$make()
 
-~~~~~~~~~~~~coffeeMug\$fill()
-
 ~~~~~~~~\}
+
+~~~~~~~~coffeeMug\$fill()
 
 ~~~~\}
 
@@ -20894,7 +20895,7 @@ repeat \{
 Our journey with R began in the Procedural Programming paradigm. In the
 last Chapter we learned about R's extensive support for the more modern
 paradigm known as Functional Programming. In the present Chapter we will
-explore one of the ways in which R supports a third modern programming
+explore the ways in which R supports a third modern programming
 paradigm: Object-Oriented Programming.
 
 \newpage
@@ -20903,7 +20904,7 @@ paradigm: Object-Oriented Programming.
 Paradigm}\label{the-object-oriented-programming-paradigm}
 
 We started out with Procedural Programming, which draws a distinction
-between data and procedures. Data provides out information, and
+between data and procedures. Data provides our information, and
 procedures solve problems by manipulating data into new forms.
 \index{procedural programming}
 
@@ -20945,8 +20946,8 @@ particular features. Some of these features they have in virtue of the
 kind of object that they are, and others are
 features--\emph{attributes}--that they have on their own, as
 individuals. And they can do various things. Again, some of the things
-they are do things that they do simply because of the kind of thing they
-are, and others things they do might be unique to them.
+they are do are things that they do simply because of the kind of thing
+they are, and others things they do might be unique to them.
 \index{attribute}
 
 Consider a typical object: my dog, for example. He has various
@@ -20970,7 +20971,7 @@ his life thus far. Other dogs, animals and material beings a weight, but
 they won't necessarily have the same weight as Beau.
 
 What emerges from this discussion is an (admittedly oversimplified) view
-of the world as a collection of complex objects. These objects hare
+of the world as a collection of complex objects. These objects are
 related to one another in systematic ways--related closely when they
 are, for instance, both Dogs, and more more distantly, as when one is a
 Dog and another is a Cat. And these objects can act on each themselves
@@ -21003,6 +21004,9 @@ R-package---but they are quite useful as an introduction to
 object-oriented programming. Accordingly, we will work with them in this
 Chapter.
 
+\section{Reference Classes with Package
+R6}\label{reference-classes-with-package-r6}
+
 The package \textbf{R6} \citep{R-R6} provides access to R6 classes. You
 will need to attach it:
 
@@ -21012,15 +21016,12 @@ will need to attach it:
 \end{Highlighting}
 \end{Shaded}
 
-\section{Reference Classes with Package
-R6}\label{reference-classes-with-package-r6}
-
 We'll get started by creating a miniature computerized world of objects
 that is based on characters from the Wizard of Oz.
 
 \subsection{Defining a Class}\label{defining-a-class}
 
-Construction of the object world begins with the definition of classes.
+Construction of the object-world begins with the definition of classes.
 A \emph{class} is simply a general prototype on the basis of which
 actual objects may be created.
 
@@ -21306,7 +21307,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b072728"
+## [1] "0x10f6728e8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21320,7 +21321,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b072728"
+## [1] "0x10f6728e8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21359,7 +21360,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b072728"
+## [1] "0x10f6728e8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21372,7 +21373,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x123224f48"
+## [1] "0x103f40918"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21390,7 +21391,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b072728"
+## [1] "0x10f6728e8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21434,7 +21435,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x124362c00" "0x124362c00"
+## [1] "0x10f760f50" "0x10f760f50"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21473,7 +21474,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x124362c00" "0x124362c00"
+## [1] "0x10f760f50" "0x10f760f50"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21482,7 +21483,7 @@ to it:
 
 For the sorts of complex objects created by R6 classes, reference
 semantics can be a useful feature. But what if we want a new and truly
-distinct copy of an R6 object? for this we need the \texttt{clone()}
+distinct copy of an R6 object? For this we need the \texttt{clone()}
 method that was alluded to earlier:
 
 \begin{Shaded}
@@ -21510,12 +21511,12 @@ method that was alluded to earlier:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{c}\NormalTok{(}\KeywordTok{c}\NormalTok{(pryr::}\KeywordTok{address}\NormalTok{(dorothy), pryr::}\KeywordTok{address}\NormalTok{(dorothy2)))}
+\KeywordTok{c}\NormalTok{(pryr::}\KeywordTok{address}\NormalTok{(dorothy), pryr::}\KeywordTok{address}\NormalTok{(dorothy2))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x124362c00" "0x10dce7710"
+## [1] "0x10f760f50" "0x126b1ab90"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
@@ -21678,9 +21679,9 @@ example of what programmers call \emph{polymorphism}.
 that means ``many forms'', and it refers to a task being performed
 differently depending on the class of the object involved. Polymorphism
 makes programming a bit easier: you only have to remember the name of
-the one common task. Invoke it on object and you can rest assured that
-the task will be performed in the way that is right and proper to that
-object.
+the one common task. Invoke it on an object and you can rest assured
+that the task will be performed in the way that is right and proper to
+that object.
 
 \section{Adding Members to a Class}\label{adding-members-to-a-class}
 
@@ -21782,7 +21783,7 @@ able to give her a favorite color:
 
 In this Section we will explore a concise and convenient device for
 calling multiple methods on an object. The device is known as
-\emph{method chaining}. \index{method chaining}.
+\emph{method chaining}. \index{method chaining}
 
 In order to illustrate method chaining, we'll extend the class Lion a
 bit, with some new attributes and new methods. First of all, we'd like
@@ -21953,7 +21954,7 @@ Ocean}\label{application-whales-in-an-ocean}
 
 Let's now write a more elaborate program in the object-oriented style.
 Our program will simulate the population growth for whales in a ocean.
-In our model,
+In our model:
 
 \begin{itemize}
 \tightlist
@@ -21962,8 +21963,8 @@ In our model,
   happily feeding upon plankton.
 \item
   When a male and female whale are sufficiently close together the
-  female whale will do a check on the male to see if he is mature enough
-  to mate. If she herself is fertile, then she will mate with him and a
+  female whale will check out the male to see if he is mature enough to
+  mate. If she herself is fertile, then she will mate with him and a
   child will be produced.
 \item
   That child will be either male or female, with equal likelihood for
@@ -21984,16 +21985,17 @@ From the above conditions you can see that if the whale population is
 small then there is low probability of starvation, but on the other hand
 whales are liable to be spread thinly throughout the ocean. As a result
 males and females are relatively unlikely to run across each other, and
-hence births are less likely to occur. with a low enough population
+hence births are less likely to occur. With a low enough population
 there is a strong possibility that the whales will die off before they
-can reproduce. (This is why biologist worry about some whale
-populations: if it is hunted to the point where the population is below
-a certain critical threshold, then the can go extinct on their own, even
-if hunting ceases.) On the other hand, if the whale population grows
-large then males and female meet frequently, and there are plenty of
-births. On the other hand there is a general shortage of food, resulting
-in high starvation rates. At some point birth and starvation balance
-each other out, resulting in a long-term equilibrium population-level.
+can reproduce. (This is why biologists worry about some whale
+populations: if the whales are hunted to the point where the population
+is below a certain critical threshold, then they can go extinct on their
+own, even if hunting ceases.) On the other hand, if the whale population
+grows large then males and female meet frequently, and there are plenty
+of births. On the other hand there is a general shortage of food,
+resulting in high starvation rates. At some point birth and starvation
+balance each other out, resulting in a long-term equilibrium
+population-level.
 
 We will implement our simulation with various objects:
 
@@ -22092,10 +22094,10 @@ The motion of a whale is implemented in the code below for a
 \end{Highlighting}
 \end{Shaded}
 
-Note the parameter \texttt{dims} for the move function. from the code we
-can tell that it's a vector of length 2. In fact parameter will contain
-the x and and y-dimensions (the width and breadth) of our ocean. It's
-something that will have to be determined by the ocean itself. We
+Note the parameter \texttt{dims} for the move function. From the code we
+can tell that it's a vector of length 2. In fact the parameter will
+contain the x and and y-dimensions (the width and breadth) of our ocean.
+It's something that will have to be determined by the ocean itself. We
 haven't written the class Ocean yet, so this part of the code will have
 to remain a bit mysterious, for now.
 
@@ -22587,13 +22589,13 @@ Printing to the console is a common task. It appears, however, that the
 method by which that task is performed depends on the type of object
 that is input to the \texttt{print()} function. If your object is a data
 frame, \texttt{print()} behaves one way. If your object is a list, print
-does something else. since the behavior of \texttt{print()} depends on
+does something else. Since the behavior of \texttt{print()} depends on
 the type of object involved in the operation of printing, you could say
 that it exhibits polymorphism. \index{polymorphism}.
 
-In fact it is the \emph{class} of the object given to print that
-determines the method that \texttt{prints()} employs. The class of an
-object in R can be accessed with the \texttt{class()} function
+In fact it is the \emph{class} of the object given to \texttt{print()}
+that determines the method that \texttt{prints()} employs. The class of
+an object in R can be accessed with the \texttt{class()} function
 \index{R-functions!class()@\texttt{class()}}:
 
 \begin{Shaded}
@@ -22690,8 +22692,8 @@ hood. Let's examine what happens, step-by-step, when we call
 ## [4] print.abbrev*                                     
 ## [5] print.acf*
 ## ...
-## [87] print.data.frame
-## [88] print.data.table   <== Here it is!
+## [87] print.data.frame  <== Here it is!
+## [88] print.data.table
 ## ...
 \end{verbatim}
 \item
@@ -22706,7 +22708,7 @@ hood. Let's examine what happens, step-by-step, when we call
 
 It is interesting to note that the very act of ``printing out'' the
 print function, which we did earlier in order to see the code for the
-function involved a search for a printing method:
+function, involved a search for a printing method:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -22753,7 +22755,7 @@ function that performs a common task by \emph{dispatching} its input to
 a particular method-function that is selected on the basis of the class
 of the input to the generic function. Languages that use generic
 functions are said to support \emph{generic-function OO}.
-\index{generic-function oo}.
+\index{generic-function oo}
 
 In message-oriented OO, objects own their own methods, and the way a
 task is performed depends on the class of the object that is invoked to
@@ -22761,7 +22763,7 @@ perform the task. Generic-function OO, which is most commonly found in
 languages that support functional programming, puts more stress on
 functions: the generic function ``owns'' the methods in the sense that
 it acts as the central dispatcher, assigning a method function to
-perform a given task. In a bit of a reversal to message-passing OO,
+perform a given task. In a bit of a reversal to message-passing OO, the
 method selected in generic-function OO depends on the class of the
 input-object to the generic, not on the generic that was called to
 perform the task.
@@ -22784,7 +22786,7 @@ S3 classes aren't strict enough.)
 
 \subsection{Common Generic Functions}\label{common-generic-functions}
 
-There are three very commonly-use generic functions in R:
+There are three very commonly-used generic functions in R:
 
 \begin{itemize}
 \tightlist
@@ -22887,10 +22889,10 @@ writing to programs to help you accomplish your own tasks to writing
 programs that help others---who are not as proficient in programming as
 you are---get some of \emph{their} work done. Since casual users of R
 often become accustomed to generic functions as providers of useful
-information about just about any R-object, you might find yourself
+information about many types of R-objects, you might find yourself
 writing methods for one or more of the common generic functions. In this
 Section will we will practice the art of method-writing: we will write
-some generic functions to report on the results of a simulation.
+some method-functions to report on the results of a simulation.
 
 Recall the problem from Section \ref{simulation-number-needed} about
 estimating the expected number of uniform random numbers one must create
@@ -22937,10 +22939,17 @@ First of all, let's rewrite \texttt{numberNeededSim()}:
 In the above code you will note that there is no longer a parameter
 \texttt{table} to permit printing of a table to the console. Also,
 nothing at all is \texttt{cat}-ed to the console. Instead we return only
-a list with two named elements: * \texttt{target}: the target you want
-your randomly-generated numbers to sum up to; * \texttt{sims}: the
-number of numbers required to sum to the target, in each repetition of
-the simulation.
+a list with two named elements:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{target}: the target you want your randomly-generated numbers
+  to sum up to;
+\item
+  \texttt{sims}: the number of numbers required to sum to the target, in
+  each repetition of the simulation.
+\end{itemize}
 
 The class of the returned list is set as ``numNeededSims''.
 
@@ -23246,7 +23255,7 @@ definition of the class includes a function called an \emph{initializer}
 that governs the creation of individual objects from the class.
 \item[Instantiation \index{instantiation}]
 The creation of an individual object as an instance of a class. The
-objects gets all of the attributes and methods of the class (except for
+object gets all of the attributes and methods of the class (except for
 the initializer function). Typically the intializer functions allows for
 determination of the values of some of the object's attributes at the
 time of instantiation.

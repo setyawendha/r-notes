@@ -454,8 +454,8 @@ df         <span class="co"># calls print(df) implicitly</span></code></pre></di
 ## [13] 59.00 78.00 69.00 68.00 73.00 73.00 65.00 65.00 66.00 67.75 63.00 66.00
 &lt;further output omitted to save space&gt;</code></pre>
 <p>We get the familiar output for a list whose elements are named. Users don’t expect lists to be represented in the console in spreadsheet-style format, even if the elements of the list happen to be vectors that are all of the same length. They expect a more “neutral” representation, and R delivers one.</p>
-<p>Printing to the console is a common task. It appears, however, that the method by which that task is performed depends on the type of object that is input to the <code>print()</code> function. If your object is a data frame, <code>print()</code> behaves one way. If your object is a list, print does something else. since the behavior of <code>print()</code> depends on the type of object involved in the operation of printing, you could say that it exhibits polymorphism. .</p>
-<p>In fact it is the <em>class</em> of the object given to print that determines the method that <code>prints()</code> employs. The class of an object in R can be accessed with the <code>class()</code> function :</p>
+<p>Printing to the console is a common task. It appears, however, that the method by which that task is performed depends on the type of object that is input to the <code>print()</code> function. If your object is a data frame, <code>print()</code> behaves one way. If your object is a list, print does something else. Since the behavior of <code>print()</code> depends on the type of object involved in the operation of printing, you could say that it exhibits polymorphism. .</p>
+<p>In fact it is the <em>class</em> of the object given to <code>print()</code> that determines the method that <code>prints()</code> employs. The class of an object in R can be accessed with the <code>class()</code> function :</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(df)</code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(lst)</code></pre></div>
@@ -484,13 +484,13 @@ df         <span class="co"># calls print(df) implicitly</span></code></pre></di
 ## [4] print.abbrev*                                     
 ## [5] print.acf*
 ## ...
-## [87] print.data.frame
-## [88] print.data.table   &lt;== Here it is!
+## [87] print.data.frame  &lt;== Here it is!
+## [88] print.data.table
 ## ...</code></pre></li>
 <li>R now calls the <code>print.data.frame()</code>, passing in <code>df</code>. The data frame is printed to the console.</li>
 <li><p>When <code>UseMethod()</code> completes execution, it does not return control to the enclosing function <code>print()</code> from which it was called. The work of printing is done, so R arranges for control to be passed back to whomever called <code>print()</code> in the first place.</p></li>
 </ol>
-<p>It is interesting to note that the very act of “printing out” the print function, which we did earlier in order to see the code for the function involved a search for a printing method:</p>
+<p>It is interesting to note that the very act of “printing out” the print function, which we did earlier in order to see the code for the function, involved a search for a printing method:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print      <span class="co"># this is equivalent to print(print)</span></code></pre></div>
 <pre><code>## function (x, ...) 
 ## UseMethod(&quot;print&quot;)
@@ -506,8 +506,8 @@ df         <span class="co"># calls print(df) implicitly</span></code></pre></di
 </div>
 <div id="terminology" class="section level3">
 <h3><span class="header-section-number">13.7.2</span> Terminology</h3>
-<p>The <code>print()</code> function is an example of a <em>generic</em> function.  A generic function is simply a function that performs a common task by <em>dispatching</em> its input to a particular method-function that is selected on the basis of the class of the input to the generic function. Languages that use generic functions are said to support <em>generic-function OO</em>. .</p>
-<p>In message-oriented OO, objects own their own methods, and the way a task is performed depends on the class of the object that is invoked to perform the task. Generic-function OO, which is most commonly found in languages that support functional programming, puts more stress on functions: the generic function “owns” the methods in the sense that it acts as the central dispatcher, assigning a method function to perform a given task. In a bit of a reversal to message-passing OO, method selected in generic-function OO depends on the class of the input-object to the generic, not on the generic that was called to perform the task.</p>
+<p>The <code>print()</code> function is an example of a <em>generic</em> function.  A generic function is simply a function that performs a common task by <em>dispatching</em> its input to a particular method-function that is selected on the basis of the class of the input to the generic function. Languages that use generic functions are said to support <em>generic-function OO</em>. </p>
+<p>In message-oriented OO, objects own their own methods, and the way a task is performed depends on the class of the object that is invoked to perform the task. Generic-function OO, which is most commonly found in languages that support functional programming, puts more stress on functions: the generic function “owns” the methods in the sense that it acts as the central dispatcher, assigning a method function to perform a given task. In a bit of a reversal to message-passing OO, the method selected in generic-function OO depends on the class of the input-object to the generic, not on the generic that was called to perform the task.</p>
 <p>We should also mention that R actually has two ways to implement generic-function OO:</p>
 <ul>
 <li>S3 classes;</li>
@@ -517,7 +517,7 @@ df         <span class="co"># calls print(df) implicitly</span></code></pre></di
 </div>
 <div id="common-generic-functions" class="section level3">
 <h3><span class="header-section-number">13.7.3</span> Common Generic Functions</h3>
-<p>There are three very commonly-use generic functions in R:</p>
+<p>There are three very commonly-used generic functions in R:</p>
 <ul>
 <li><code>print()</code>, which we have examined already;</li>
 <li><code>summary()</code>; </li>
@@ -558,7 +558,7 @@ Figure 13.2: Our vector graphed as a parabola!
 </div>
 <div id="writing-your-own-methods" class="section level3">
 <h3><span class="header-section-number">13.7.4</span> Writing Your Own Methods</h3>
-<p>As you advance in your programming skills, you will transition from writing to programs to help you accomplish your own tasks to writing programs that help others—who are not as proficient in programming as you are—get some of <em>their</em> work done. Since casual users of R often become accustomed to generic functions as providers of useful information about just about any R-object, you might find yourself writing methods for one or more of the common generic functions. In this Section will we will practice the art of method-writing: we will write some generic functions to report on the results of a simulation.</p>
+<p>As you advance in your programming skills, you will transition from writing to programs to help you accomplish your own tasks to writing programs that help others—who are not as proficient in programming as you are—get some of <em>their</em> work done. Since casual users of R often become accustomed to generic functions as providers of useful information about many types of R-objects, you might find yourself writing methods for one or more of the common generic functions. In this Section will we will practice the art of method-writing: we will write some method-functions to report on the results of a simulation.</p>
 <p>Recall the problem from Section <a href="simulation-number-needed.html#simulation-number-needed">6.6</a> about estimating the expected number of uniform random numbers one must create until their sum exceeds a specified target-number. Let’s rewrite the simulation function so that it returns an object of a special class. We will then write print and plot methods that permit a user to obtain information about the results of any simulation that was performed.</p>
 <p>First of all, let’s rewrite <code>numberNeededSim()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeededSim &lt;-<span class="st"> </span>function(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>, 
@@ -589,7 +589,11 @@ Figure 13.2: Our vector graphed as a parabola!
   <span class="kw">class</span>(results) &lt;-<span class="st"> &quot;numNeededSims&quot;</span>
   results
 }</code></pre></div>
-<p>In the above code you will note that there is no longer a parameter <code>table</code> to permit printing of a table to the console. Also, nothing at all is <code>cat</code>-ed to the console. Instead we return only a list with two named elements: * <code>target</code>: the target you want your randomly-generated numbers to sum up to; * <code>sims</code>: the number of numbers required to sum to the target, in each repetition of the simulation.</p>
+<p>In the above code you will note that there is no longer a parameter <code>table</code> to permit printing of a table to the console. Also, nothing at all is <code>cat</code>-ed to the console. Instead we return only a list with two named elements:</p>
+<ul>
+<li><code>target</code>: the target you want your randomly-generated numbers to sum up to;</li>
+<li><code>sims</code>: the number of numbers required to sum to the target, in each repetition of the simulation.</li>
+</ul>
 <p>The class of the returned list is set as “numNeededSims”.</p>
 <p>Next, we write a print-method function. Its name must be <code>print.numNeededSims</code>. All of the table output and <code>cat</code>-ing to the console goes here:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.numNeededSims &lt;-<span class="st"> </span>function(x) {

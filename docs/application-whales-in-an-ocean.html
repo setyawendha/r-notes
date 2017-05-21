@@ -422,16 +422,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="application-whales-in-an-ocean" class="section level2">
 <h2><span class="header-section-number">13.6</span> Application: Whales in an Ocean</h2>
-<p>Let’s now write a more elaborate program in the object-oriented style. Our program will simulate the population growth for whales in a ocean. In our model,</p>
+<p>Let’s now write a more elaborate program in the object-oriented style. Our program will simulate the population growth for whales in a ocean. In our model:</p>
 <ul>
 <li>Whales are mostly solitary: they move randomly about the ocean, happily feeding upon plankton.</li>
-<li>When a male and female whale are sufficiently close together the female whale will do a check on the male to see if he is mature enough to mate. If she herself is fertile, then she will mate with him and a child will be produced.</li>
+<li>When a male and female whale are sufficiently close together the female whale will check out the male to see if he is mature enough to mate. If she herself is fertile, then she will mate with him and a child will be produced.</li>
 <li>That child will be either male or female, with equal likelihood for either option.</li>
 <li>After mating, the female will be infertile for a period of time.</li>
 <li>Whales have a set maximum lifetime.</li>
 <li>in any given time period, it is possible for a whale to starve, causing it to die before reaches its lifespan. The probability of starvation is low when the whale population is small (presumably there is plenty of plankton available then) but the starvation-probability increases in direct proportion to the population.</li>
 </ul>
-<p>From the above conditions you can see that if the whale population is small then there is low probability of starvation, but on the other hand whales are liable to be spread thinly throughout the ocean. As a result males and females are relatively unlikely to run across each other, and hence births are less likely to occur. with a low enough population there is a strong possibility that the whales will die off before they can reproduce. (This is why biologist worry about some whale populations: if it is hunted to the point where the population is below a certain critical threshold, then the can go extinct on their own, even if hunting ceases.) On the other hand, if the whale population grows large then males and female meet frequently, and there are plenty of births. On the other hand there is a general shortage of food, resulting in high starvation rates. At some point birth and starvation balance each other out, resulting in a long-term equilibrium population-level.</p>
+<p>From the above conditions you can see that if the whale population is small then there is low probability of starvation, but on the other hand whales are liable to be spread thinly throughout the ocean. As a result males and females are relatively unlikely to run across each other, and hence births are less likely to occur. With a low enough population there is a strong possibility that the whales will die off before they can reproduce. (This is why biologists worry about some whale populations: if the whales are hunted to the point where the population is below a certain critical threshold, then they can go extinct on their own, even if hunting ceases.) On the other hand, if the whale population grows large then males and female meet frequently, and there are plenty of births. On the other hand there is a general shortage of food, resulting in high starvation rates. At some point birth and starvation balance each other out, resulting in a long-term equilibrium population-level.</p>
 <p>We will implement our simulation with various objects:</p>
 <ul>
 <li>an ocean</li>
@@ -487,7 +487,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
               }
             }
           }, <span class="dt">overwrite =</span> T)</code></pre></div>
-<p>Note the parameter <code>dims</code> for the move function. from the code we can tell that it’s a vector of length 2. In fact parameter will contain the x and and y-dimensions (the width and breadth) of our ocean. It’s something that will have to be determined by the ocean itself. We haven’t written the class Ocean yet, so this part of the code will have to remain a bit mysterious, for now.</p>
+<p>Note the parameter <code>dims</code> for the move function. From the code we can tell that it’s a vector of length 2. In fact the parameter will contain the x and and y-dimensions (the width and breadth) of our ocean. It’s something that will have to be determined by the ocean itself. We haven’t written the class Ocean yet, so this part of the code will have to remain a bit mysterious, for now.</p>
 <p>We need male and female whales, so we create a class for each sex. Both classes inherit from Whale. The class Male adds only a <code>sex</code> attribute:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Male &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Male&quot;</span>,
                 <span class="dt">inherit =</span> Whale,
