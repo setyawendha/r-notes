@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="iterating-over-a-list.html">
-<link rel="next" href="glossary-6.html">
+<link rel="next" href="investigate-your-object-str-and-lists.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -295,6 +295,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.6.1" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-1-passing-additional-arguments-to-functions-inside"><i class="fa fa-check"></i><b>8.6.1</b> Use #1: Passing Additional Arguments to Functions “Inside”</a></li>
 <li class="chapter" data-level="8.6.2" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-2-permitting-any-number-of-arguments"><i class="fa fa-check"></i><b>8.6.2</b> Use #2: Permitting Any Number of Arguments</a></li>
 </ul></li>
+<li class="chapter" data-level="8.7" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html"><i class="fa fa-check"></i><b>8.7</b> Investigate Your Object: <code>str()</code> and Lists</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -454,9 +455,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(vecs[[i]], ...)</code></pre></div>
 <p>Now we can see what happens in the call:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">means2</span>(<span class="dt">vecs =</span> <span class="kw">list</span>(vec1, vec2, vec3), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>The ellipsis argument will consist of the argument <code>na.rm = TRUE</code>, hence the call to mean inside the loop is equivalent to:</p>
+<p>The ellipsis argument will consist of the argument <code>na.rm = TRUE</code>, hence the call to <code>mean()</code> inside the loop is equivalent to:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(vecs[[i]], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>Consider, on the other hand, then call:</p>
+<p>Consider, on the other hand, the call:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">means2</span>(<span class="dt">vecs =</span> <span class="kw">list</span>(vec1, vec2, vec3))</code></pre></div>
 <p>Now the ellipsis is empty. In this case the code in the loop will be equivalent to:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">means2</span>(<span class="dt">vecs =</span> <span class="kw">list</span>(vec1, vec2, vec3))</code></pre></div>
@@ -492,7 +493,6 @@ vec2 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">4<
 vec3 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3</span>
 <span class="kw">sameLength</span>(vec1, vec2, vec3)</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-
 </div>
 </div>
             </section>
@@ -501,7 +501,7 @@ vec3 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3<
         </div>
       </div>
 <a href="iterating-over-a-list.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="glossary-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="investigate-your-object-str-and-lists.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -295,6 +295,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.6.1" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-1-passing-additional-arguments-to-functions-inside"><i class="fa fa-check"></i><b>8.6.1</b> Use #1: Passing Additional Arguments to Functions “Inside”</a></li>
 <li class="chapter" data-level="8.6.2" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-2-permitting-any-number-of-arguments"><i class="fa fa-check"></i><b>8.6.2</b> Use #2: Permitting Any Number of Arguments</a></li>
 </ul></li>
+<li class="chapter" data-level="8.7" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html"><i class="fa fa-check"></i><b>8.7</b> Investigate Your Object: <code>str()</code> and Lists</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -419,7 +420,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="returning-multiple-values" class="section level2">
 <h2><span class="header-section-number">8.4</span> Returning Multiple Values</h2>
 <p>Lists combine many different sorts of objects into one object. This makes them very useful in the context of some functions.</p>
-<p>Consider, for example, the drunken-turtle simulation form Section <a href="drunken-turtle-sim.html#drunken-turtle-sim">6.8</a>:</p>
+<p>Consider, for example, the drunken-turtle simulation from Section <a href="drunken-turtle-sim.html#drunken-turtle-sim">6.8</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span>function(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
                        <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {
   if ( <span class="kw">is.null</span>(seed) ) {
@@ -427,8 +428,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   }
   <span class="kw">set.seed</span>(seed)
   
-  <span class="co"># set up returns vedtor to store the number of </span>
-  <span class="co"># close returns in each repetition:</span>
   returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
   
   for (i in <span class="dv">1</span>:reps) {
@@ -453,14 +452,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="kw">cat</span>(<span class="st">&quot;The average number of close returns was:  &quot;</span>, 
       <span class="kw">mean</span>(returns), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
-<p>Suppose that we would like to store some of the results of the simulation:</p>
+<p>Suppose that we would like to store several of the results of the simulation:</p>
 <ul>
 <li>the vector of the number of close returns on each repetition;</li>
 <li>the table made from the close-returns vector;</li>
 <li>the mean number of returns.</li>
 </ul>
-<p>Unfortunately a function can only return one object.</p>
-<p>The solution to your problem is to make a list of the three objects we want, and then return the list. We can re-write the function so make all output to the console optional. The function will make the list and return it invisibly.</p>
+<p>Unfortunately a function can only return <em>one</em> object.</p>
+<p>The solution to your problem is to make a list of the three objects we want, and then return the list. We can re-write the function so as to make all output to the console optional. The function will construct the list and return it invisibly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSimList &lt;-<span class="st"> </span>function(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
                        <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
   if ( <span class="kw">is.null</span>(seed) ) {

@@ -295,6 +295,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.6.1" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-1-passing-additional-arguments-to-functions-inside"><i class="fa fa-check"></i><b>8.6.1</b> Use #1: Passing Additional Arguments to Functions “Inside”</a></li>
 <li class="chapter" data-level="8.6.2" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-2-permitting-any-number-of-arguments"><i class="fa fa-check"></i><b>8.6.2</b> Use #2: Permitting Any Number of Arguments</a></li>
 </ul></li>
+<li class="chapter" data-level="8.7" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html"><i class="fa fa-check"></i><b>8.7</b> Investigate Your Object: <code>str()</code> and Lists</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -601,10 +602,10 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
 <p>We would like to force R to provide a seed when it is not given one to use. Such a seed should vary from one call to another in a way that cannot be predicted easily.</p>
 <p>I suggest the use of the <code>Sys.time()</code> function, which gives your computer’s idea of the current time:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.time</span>()</code></pre></div>
-<pre><code>## [1] &quot;2017-05-20 07:48:46 EDT&quot;</code></pre>
+<pre><code>## [1] &quot;2017-05-20 21:53:08 EDT&quot;</code></pre>
 <p>This is not a number, but we can make it a number:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())</code></pre></div>
-<pre><code>## [1] 1495280926</code></pre>
+<pre><code>## [1] 1495331589</code></pre>
 <p>The result is—on Unix-like computer systems—the number of seconds elapsed since January 1, 1970. It should serve pretty well as a seed. The following code implements a <code>seed</code> parameter in such a way that the system-time is used when the user does not supply a seed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   <span class="co"># if user does not provide a seed, set one</span>

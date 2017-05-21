@@ -5344,17 +5344,18 @@ number of other environments:
 
 \begin{verbatim}
 ##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:readr"          "package:tigerData"     
-##  [5] "package:tigerstats"     "package:abd"           
-##  [7] "package:mosaic"         "package:Matrix"        
-##  [9] "package:dplyr"          "package:lattice"       
-## [11] "package:nlme"           "package:TurtleGraphics"
-## [13] "package:grid"           "package:ggplot2"       
-## [15] "package:mosaicData"     "tools:rstudio"         
-## [17] "package:stats"          "package:graphics"      
-## [19] "package:grDevices"      "package:utils"         
-## [21] "package:datasets"       "package:methods"       
-## [23] "Autoloads"              "package:base"
+##  [3] "package:readr"          "package:clisymbols"    
+##  [5] "package:tigerData"      "package:bookdown"      
+##  [7] "package:tigerstats"     "package:abd"           
+##  [9] "package:mosaic"         "package:Matrix"        
+## [11] "package:dplyr"          "package:lattice"       
+## [13] "package:nlme"           "package:TurtleGraphics"
+## [15] "package:grid"           "package:ggplot2"       
+## [17] "package:mosaicData"     "tools:rstudio"         
+## [19] "package:stats"          "package:graphics"      
+## [21] "package:grDevices"      "package:utils"         
+## [23] "package:datasets"       "package:methods"       
+## [25] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5460,7 +5461,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10e3f9040>
+## <bytecode: 0x10e4b7bc0>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9846,7 +9847,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-05-20 07:49:29 EDT"
+## [1] "2017-05-20 21:54:14 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9858,7 +9859,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1495280969
+## [1] 1495331654
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -14190,7 +14191,7 @@ couple of lists:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lst1 <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Dorothy"}\NormalTok{, }\DataTypeTok{age =} \StringTok{"12"}\NormalTok{)}
+\NormalTok{lst1 <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Dorothy"}\NormalTok{, }\DataTypeTok{age =} \DecValTok{12}\NormalTok{)}
 \NormalTok{df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{), }\DataTypeTok{y =} \NormalTok{letters[}\DecValTok{1}\NormalTok{:}\DecValTok{3}\NormalTok{])}
 \NormalTok{lst2 <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{vowels =} \KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"e"}\NormalTok{, }\StringTok{"i"}\NormalTok{, }\StringTok{"o"}\NormalTok{, }\StringTok{"u"}\NormalTok{),}
              \DataTypeTok{myFrame =} \NormalTok{df)}
@@ -14222,7 +14223,7 @@ it's rather small:
 ## [1] "Dorothy"
 ## 
 ## $age
-## [1] "12"
+## [1] 12
 \end{verbatim}
 
 Note that the name of each elements appears before the element itself is
@@ -14237,7 +14238,7 @@ the \texttt{frame\$variable} format for data frames:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "12"
+## [1] 12
 \end{verbatim}
 
 You can make an empty list, too:
@@ -14273,7 +14274,7 @@ elements of \texttt{lst3}:
 
 We get a new list consisting of the desired two elements.
 
-Suppose we want to pick out just one element form \texttt{lst3}: the
+Suppose we want to pick out just one element from \texttt{lst3}: the
 numbers, for instance. We could try this:
 
 \begin{Shaded}
@@ -14441,7 +14442,7 @@ to be content with
 Lists combine many different sorts of objects into one object. This
 makes them very useful in the context of some functions.
 
-Consider, for example, the drunken-turtle simulation form Section
+Consider, for example, the drunken-turtle simulation from Section
 \ref{drunken-turtle-sim}:
 
 \begin{Shaded}
@@ -14453,8 +14454,6 @@ Consider, for example, the drunken-turtle simulation form Section
   \NormalTok{\}}
   \KeywordTok{set.seed}\NormalTok{(seed)}
   
-  \CommentTok{# set up returns vedtor to store the number of }
-  \CommentTok{# close returns in each repetition:}
   \NormalTok{returns <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(reps)}
   
   \NormalTok{for (i in }\DecValTok{1}\NormalTok{:reps) \{}
@@ -14482,7 +14481,7 @@ Consider, for example, the drunken-turtle simulation form Section
 \end{Highlighting}
 \end{Shaded}
 
-Suppose that we would like to store some of the results of the
+Suppose that we would like to store several of the results of the
 simulation:
 
 \begin{itemize}
@@ -14495,12 +14494,12 @@ simulation:
   the mean number of returns.
 \end{itemize}
 
-Unfortunately a function can only return one object.
+Unfortunately a function can only return \emph{one} object.
 
 The solution to your problem is to make a list of the three objects we
-want, and then return the list. We can re-write the function so make all
-output to the console optional. The function will make the list and
-return it invisibly.
+want, and then return the list. We can re-write the function so as to
+make all output to the console optional. The function will construct the
+list and return it invisibly.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -14727,8 +14726,8 @@ Now we can see what happens in the call:
 \end{Shaded}
 
 The ellipsis argument will consist of the argument
-\texttt{na.rm\ =\ TRUE}, hence the call to mean inside the loop is
-equivalent to:
+\texttt{na.rm\ =\ TRUE}, hence the call to \texttt{mean()} inside the
+loop is equivalent to:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -14736,7 +14735,7 @@ equivalent to:
 \end{Highlighting}
 \end{Shaded}
 
-Consider, on the other hand, then call:
+Consider, on the other hand, the call:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -14820,6 +14819,237 @@ We can give this function two or more vectors, as follows:
 \begin{verbatim}
 ## [1] FALSE
 \end{verbatim}
+
+\section{\texorpdfstring{Investigate Your Object: \texttt{str()} and
+Lists}{Investigate Your Object: str() and Lists}}\label{investigate-your-object-str-and-lists}
+
+Let's reconsider the Meetup Simulation from Section
+\ref{simulation-connect}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meetupSim <-}\StringTok{ }\NormalTok{function(}\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
+  \NormalTok{if ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \NormalTok{seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \NormalTok{\}}
+  \KeywordTok{set.seed}\NormalTok{(seed)}
+  \NormalTok{anna <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps, }\DecValTok{0}\NormalTok{, }\DecValTok{60}\NormalTok{)}
+  \NormalTok{raj <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps, }\DecValTok{0}\NormalTok{, }\DecValTok{60}\NormalTok{)}
+  \NormalTok{connect <-}\StringTok{ }\NormalTok{(}\KeywordTok{abs}\NormalTok{(anna -}\StringTok{ }\NormalTok{raj) <}\StringTok{ }\DecValTok{10}\NormalTok{)}
+  \NormalTok{if ( table ) \{}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"Here is a table of the results:}\CharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+    \KeywordTok{print}\NormalTok{(}\KeywordTok{table}\NormalTok{(connect))}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \NormalTok{\}}
+  \KeywordTok{cat}\NormalTok{(}\StringTok{"The proportion of tims they met was "}\NormalTok{, }\KeywordTok{mean}\NormalTok{(connect), }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+You will recall that when the user asks for a table of results, the
+function prints out a table that looks like this:
+
+\begin{verbatim}
+## Here is a table of the results:
+
+## connect
+## FALSE  TRUE 
+## 69781 30219 
+\end{verbatim}
+
+There are a couple of small irritations, here:
+
+\begin{itemize}
+\tightlist
+\item
+  The name of the table (``connect'') appears in the output, even though
+  it was a name that was given in the code internal to the function. As
+  a name for the output-table, it's not the most descriptive choice.
+  Besides, we really don't need a name here, because have just
+  \texttt{cat}-ed out a sentence that introduces the table.
+\item
+  The names for the columns (\texttt{FALSE} and \texttt{TRUE}) again
+  pertain to features internal to the code of the function. The user
+  should see more descriptive names.
+\end{itemize}
+
+In order to investigate how we might deal with these issues, let's
+create a small table here:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logicalVector <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\DecValTok{6}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{tab <-}\StringTok{ }\KeywordTok{table}\NormalTok{(logicalVector)}
+\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## logicalVector
+## FALSE  TRUE 
+##     4     6
+\end{verbatim}
+
+One way to deal with the column-name issues might be to isolate each
+table value and then repackage the values. We can access the individual
+table-values with sub-setting. For example, the first value is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tab[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## FALSE 
+##     4
+\end{verbatim}
+
+Hence we could grab the values, create a vector from them, and then
+provide names for the vector that we like. Thus:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results <-}\StringTok{ }\KeywordTok{c}\NormalTok{(tab[}\DecValTok{1}\NormalTok{], tab[}\DecValTok{2}\NormalTok{])}
+\KeywordTok{names}\NormalTok{(results) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"did not meet"}\NormalTok{, }\StringTok{"met"}\NormalTok{)}
+\NormalTok{results}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## did not meet          met 
+##            4            6
+\end{verbatim}
+
+Another approach---and this is the more instructive and generally-useful
+procedure---is to begin by looking carefully at the structure of the
+problematic object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  'table' int [1:2(1d)] 4 6
+##  - attr(*, "dimnames")=List of 1
+##   ..$ logicalVector: chr [1:2] "FALSE" "TRUE"
+\end{verbatim}
+
+We see that
+
+\begin{itemize}
+\tightlist
+\item
+  the table has an attribute called \texttt{dimnames}
+\item
+  \texttt{dimnames} is a list of length one.
+\item
+  It is a named list. The name of its only element is
+  \texttt{logicalVector}.
+\item
+  The elements of this vector are the column names for the table.
+\end{itemize}
+
+If you would like to see the \texttt{dimnames} attribute all by itself,
+you can access it with the \texttt{attr()} function
+\index{R-functions!attr()@\texttt{attr()}}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{attr}\NormalTok{(tab, }\DataTypeTok{which =} \StringTok{"dimnames"}\NormalTok{)  }\CommentTok{# "which" says which attribute you want!}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $logicalVector
+## [1] "FALSE" "TRUE"
+\end{verbatim}
+
+You can also use \texttt{attr()} to \emph{set} the values of an
+attribute. Here, we want \texttt{dimnames} to be a list of length one
+that does not have a name for its sole element. The following should do
+the trick:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{attr}\NormalTok{(tab, }\DataTypeTok{which =} \StringTok{"dimnames"}\NormalTok{) <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"did not meet"}\NormalTok{, }\StringTok{"met"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Let's see if this worked:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## did not meet          met 
+##            4            6
+\end{verbatim}
+
+It appears to have worked very nicely! Hence we may rewrite
+\texttt{meetupSim()} as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meetupSim <-}\StringTok{ }\NormalTok{function(}\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
+  \NormalTok{if ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \NormalTok{seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \NormalTok{\}}
+  \KeywordTok{set.seed}\NormalTok{(seed)}
+  \NormalTok{anna <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps, }\DecValTok{0}\NormalTok{, }\DecValTok{60}\NormalTok{)}
+  \NormalTok{raj <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps, }\DecValTok{0}\NormalTok{, }\DecValTok{60}\NormalTok{)}
+  \NormalTok{connect <-}\StringTok{ }\NormalTok{(}\KeywordTok{abs}\NormalTok{(anna -}\StringTok{ }\NormalTok{raj) <}\StringTok{ }\DecValTok{10}\NormalTok{)}
+  \NormalTok{if ( table ) \{}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"Here is a table of the results:}\CharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+    \NormalTok{tab <-}\StringTok{ }\KeywordTok{table}\NormalTok{(connect)}
+    \KeywordTok{attr}\NormalTok{(tab, }\DataTypeTok{which =} \StringTok{"dimnames"}\NormalTok{) <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"did not meet"}\NormalTok{, }\StringTok{"met"}\NormalTok{))}
+    \KeywordTok{print}\NormalTok{(tab)}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \NormalTok{\}}
+  \KeywordTok{cat}\NormalTok{(}\StringTok{"The proportion of tims they met was "}\NormalTok{, }\KeywordTok{mean}\NormalTok{(connect), }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Let's try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{meetupSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{, }\DataTypeTok{table =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{3939}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Here is a table of the results:
+## 
+## did not meet          met 
+##        69781        30219 
+## 
+## The proportion of tims they met was 0.30219.
+\end{verbatim}
+
+Much better!
+
+The moral of the story is:
+
+\begin{quote}
+Make a habit of examining your objects with the \texttt{str()} function.
+Combining \texttt{str()} with your abilities to manipulate lists allows
+you to access and set pieces of the object in helpful ways.
+\end{quote}
+
+\textbf{Note}: the \texttt{dimnames} attribute for tables and matrices
+is so frequently used that it has its own special function for accessing
+and setting: \texttt{dimnames()}. Other popular attributes, such as
+\texttt{names} for a vector and \texttt{levels} for a factor, also have
+dedicated access/set functions---\texttt{names()} and \texttt{levels()}
+respectively. But keep in mind that you can access and set the values
+for \emph{any attribute at all} with the \texttt{attr()} function.
 
 \newpage
 
@@ -21031,7 +21261,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10edd7608"
+## [1] "0x125df0fe8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21045,7 +21275,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10edd7608"
+## [1] "0x125df0fe8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21084,7 +21314,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10edd7608"
+## [1] "0x125df0fe8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21097,7 +21327,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119022048"
+## [1] "0x124af5b38"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21115,7 +21345,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10edd7608"
+## [1] "0x125df0fe8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21159,7 +21389,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11b339d78" "0x11b339d78"
+## [1] "0x12194a958" "0x12194a958"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21198,7 +21428,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11b339d78" "0x11b339d78"
+## [1] "0x12194a958" "0x12194a958"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21240,7 +21470,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11b339d78" "0x1234a1788"
+## [1] "0x12194a958" "0x140eb1030"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

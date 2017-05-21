@@ -295,6 +295,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.6.1" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-1-passing-additional-arguments-to-functions-inside"><i class="fa fa-check"></i><b>8.6.1</b> Use #1: Passing Additional Arguments to Functions “Inside”</a></li>
 <li class="chapter" data-level="8.6.2" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-2-permitting-any-number-of-arguments"><i class="fa fa-check"></i><b>8.6.2</b> Use #2: Permitting Any Number of Arguments</a></li>
 </ul></li>
+<li class="chapter" data-level="8.7" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html"><i class="fa fa-check"></i><b>8.7</b> Investigate Your Object: <code>str()</code> and Lists</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -421,7 +422,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>So far the vectors that we have met have all been <em>atomic</em>, meaning that they can hold only one type of value. Hence we deal with vectors of type <code>integer</code>, or of type <code>double</code>, or of type <code>character</code>, and so on.</p>
 <p>A <em>list</em>  is a special kind of vector. Like any other vector it is one-dimensional, but unlike an atomic vector it can contain objects of <em>any</em> sort: atomic vectors, functions—even other lists! We say, therefore, that lists are <em>heterogeneous</em> vectors.</p>
 <p>The most direct way to create a list is with the function <code>list()</code> . Let’s make a couple of lists:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="st">&quot;12&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="dv">12</span>)
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), <span class="dt">y =</span> letters[<span class="dv">1</span>:<span class="dv">3</span>])
 lst2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">vowels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;o&quot;</span>, <span class="st">&quot;u&quot;</span>),
              <span class="dt">myFrame =</span> df)
@@ -436,10 +437,10 @@ lst3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt"
 ## [1] &quot;Dorothy&quot;
 ## 
 ## $age
-## [1] &quot;12&quot;</code></pre>
+## [1] 12</code></pre>
 <p>Note that the name of each elements appears before the element itself is printed out, and that the names are preceded by dollar signs. This is a hint that you can access a single member of the list in a way similar to the <code>frame$variable</code> format for data frames:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst1$age</code></pre></div>
-<pre><code>## [1] &quot;12&quot;</code></pre>
+<pre><code>## [1] 12</code></pre>
 <p>You can make an empty list, too:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emptyList &lt;-<span class="st"> </span><span class="kw">list</span>()</code></pre></div>
 <p>This is useful when you want to build up a list gradually, but you do not yet know what will go into it.</p>

@@ -22,7 +22,7 @@ A *list* \index{list} is a special kind of vector.  Like any other vector it is 
 The most direct way to create a list is with the function `list()` \index{R-functions!list()@\texttt{list()}}.  Let's make a couple of lists:
 
 ```{r}
-lst1 <- list(name = "Dorothy", age = "12")
+lst1 <- list(name = "Dorothy", age = 12)
 df <- data.frame(x = c(10, 20, 30), y = letters[1:3])
 lst2 <- list(vowels = c("a", "e", "i", "o", "u"),
              myFrame = df)
@@ -67,7 +67,7 @@ lst3[1:2]
 
 We get a new list consisting of the desired two elements.
 
-Suppose we want to pick out just one element form `lst3`:  the numbers, for instance.  We could try this:
+Suppose we want to pick out just one element from `lst3`:  the numbers, for instance.  We could try this:
 
 ```{r}
 justNumbers <- lst3[1]
@@ -152,7 +152,7 @@ bySeat[[1]]
 
 Lists combine many different sorts of objects into one object.  This makes them very useful in the context of some functions.
 
-Consider, for example, the drunken-turtle simulation form Section \@ref(drunken-turtle-sim):
+Consider, for example, the drunken-turtle simulation from Section \@ref(drunken-turtle-sim):
 
 ```{r eval = F}
 drunkenSim <- function(steps = 1000, reps = 10000, close = 0.5, 
@@ -162,8 +162,6 @@ drunkenSim <- function(steps = 1000, reps = 10000, close = 0.5,
   }
   set.seed(seed)
   
-  # set up returns vedtor to store the number of 
-  # close returns in each repetition:
   returns <- numeric(reps)
   
   for (i in 1:reps) {
@@ -190,15 +188,15 @@ drunkenSim <- function(steps = 1000, reps = 10000, close = 0.5,
 }
 ```
 
-Suppose that we would like to store some of the results of the simulation:
+Suppose that we would like to store several of the results of the simulation:
 
 * the vector of the number of close returns on each repetition;
 * the table made from the close-returns vector;
 * the mean number of returns.
 
-Unfortunately a function can only return one object.
+Unfortunately a function can only return *one* object.
 
-The solution to your problem is to make a list of the three objects we want, and then return the list.  We can re-write the function so make all output to the console optional.  The function will make the list and return it invisibly.
+The solution to your problem is to make a list of the three objects we want, and then return the list.  We can re-write the function so as to make all output to the console optional.  The function will construct the list and return it invisibly.
 
 
 ```{r}
@@ -354,13 +352,13 @@ Now we can see what happens in the call:
 means2(vecs = list(vec1, vec2, vec3), na.rm = TRUE)
 ```
 
-The ellipsis argument will consist of the argument `na.rm = TRUE`, hence the call to mean inside the loop is  equivalent to:
+The ellipsis argument will consist of the argument `na.rm = TRUE`, hence the call to `mean()` inside the loop is  equivalent to:
 
 ```{r eval = F}
 results[i] <- mean(vecs[[i]], na.rm = TRUE)
 ```
 
-Consider, on the other hand, then call:
+Consider, on the other hand, the call:
 
 ```{r eval = F}
 means2(vecs = list(vec1, vec2, vec3))
@@ -415,6 +413,132 @@ vec2 <- 1:4
 vec3 <- 1:3
 sameLength(vec1, vec2, vec3)
 ```
+
+## Investigate Your Object:  `str()` and Lists
+
+Let's reconsider the Meetup Simulation from Section \@ref(simulation-connect):
+
+```{r eval = F}
+meetupSim <- function(reps = 10000, table = FALSE, seed = NULL) {
+  if ( is.null(seed) ) {
+    seed <- as.numeric(Sys.time())
+  }
+  set.seed(seed)
+  anna <- runif(reps, 0, 60)
+  raj <- runif(reps, 0, 60)
+  connect <- (abs(anna - raj) < 10)
+  if ( table ) {
+    cat("Here is a table of the results:\n\n")
+    print(table(connect))
+    cat("\n")
+  }
+  cat("The proportion of tims they met was ", mean(connect), ".\n", sep = "")
+}
+```
+
+You will recall that when the user asks for a table of results, the function prints out a table that looks like this:
+
+```
+## Here is a table of the results:
+
+## connect
+## FALSE  TRUE 
+## 69781 30219 
+```
+
+There are a couple of small irritations, here:
+
+* The name of the table ("connect") appears in the output, even though it was a name that was given in the code internal to the function.  As a name for the output-table, it's not the most descriptive choice.  Besides, we really don't need a name here, because have just `cat`-ed out a sentence that introduces the table.
+* The names for the columns (`FALSE` and `TRUE`) again pertain to features internal to the code of the function.  The user should see more descriptive names.
+
+In order to investigate how we might deal with these issues, let's create a small table here:
+
+```{r}
+logicalVector <- c(rep(TRUE, 6), rep(FALSE, 4))
+tab <- table(logicalVector)
+tab
+```
+
+One way to deal with the column-name issues might be to isolate each table value and then repackage the values.  We can access the individual table-values with sub-setting.  For example, the first value is:
+
+```{r}
+tab[1]
+```
+
+Hence we could grab the values, create a vector from them, and then provide names for the vector that we like.  Thus:
+
+```{r}
+results <- c(tab[1], tab[2])
+names(results) <- c("did not meet", "met")
+results
+```
+
+Another approach---and this is the more instructive and generally-useful procedure---is to begin by looking carefully at the structure of the problematic object:
+
+```{r}
+str(tab)
+```
+
+We see that
+
+* the table has an attribute called `dimnames`
+* `dimnames` is a list of length one.
+* It is a named list.  The name of its only element is `logicalVector`.
+* The elements of this vector are the column names for the table.
+
+If you would like to see the `dimnames` attribute all by itself, you can access it with the `attr()` function \index{R-functions!attr()@\texttt{attr()}}:
+
+```{r}
+attr(tab, which = "dimnames")  # "which" says which attribute you want!
+```
+
+You can also use `attr()` to *set* the values of an attribute.  Here, we want `dimnames` to be a list of length one that does not have a name for its sole element.  The following should do the trick:
+
+```{r}
+attr(tab, which = "dimnames") <- list(c("did not meet", "met"))
+```
+
+Let's see if this worked:
+
+```{r}
+tab
+```
+
+It appears to have worked very nicely!  Hence we may rewrite `meetupSim()` as follows:
+
+```{r}
+meetupSim <- function(reps = 10000, table = FALSE, seed = NULL) {
+  if ( is.null(seed) ) {
+    seed <- as.numeric(Sys.time())
+  }
+  set.seed(seed)
+  anna <- runif(reps, 0, 60)
+  raj <- runif(reps, 0, 60)
+  connect <- (abs(anna - raj) < 10)
+  if ( table ) {
+    cat("Here is a table of the results:\n\n")
+    tab <- table(connect)
+    attr(tab, which = "dimnames") <- list(c("did not meet", "met"))
+    print(tab)
+    cat("\n")
+  }
+  cat("The proportion of tims they met was ", mean(connect), ".\n", sep = "")
+}
+```
+
+Let's try it out:
+
+```{r meetupSimattr, cache = T}
+meetupSim(reps = 100000, table = TRUE, seed = 3939)
+```
+
+Much better!
+
+The moral of the story is:
+
+>Make a habit of examining your objects with the `str()` function.  Combining `str()` with your abilities to manipulate lists allows you to access and set pieces of the object in helpful ways.
+
+**Note**:  the `dimnames` attribute for tables and matrices is so frequently used that it has its own special function for accessing and setting:  `dimnames()`.  Other popular attributes, such as `names` for a vector and `levels` for a factor, also have dedicated access/set functions---`names()` and `levels()` respectively.  But keep in mind that you can access and set the values for *any attribute at all* with the `attr()` function.
 
 \newpage
 
