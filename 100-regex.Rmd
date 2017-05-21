@@ -33,7 +33,7 @@ occurrences("yabbadabbadoo!")
 
 This looks right, as there are indeed exactly two occurrences of "ab":  one at beginning at the second character and another beginning at the seventh character.
 
-Suppose instead that we are interested in counting occurrences, in some arbitrary given string, of any of the following three strings in some arbitrary given string:
+Suppose instead that we are interested in counting occurrences, in some arbitrary given string, of any of the following three strings:
 
 * "ab"
 * "Ab"
@@ -42,7 +42,7 @@ Suppose instead that we are interested in counting occurrences, in some arbitrar
 How might we handle this task?  Again we could write a function.  This time we will generalize it a bit, allowing the user to input, along with the string to be searched, a vector of the sub-strings of interest.
 
 ```{r}
-# function to count occurrence of substrings in string.
+# function to count occurrences of substrings in string.
 # substrings are given as patterns
 occurrences2 <- function(string, patterns) {
   count <- 0
@@ -79,7 +79,7 @@ Fortunately, regular expressions are there to help us out.  A *regular expressio
 
 In practice, regular expressions are like a miniature programming language within a programming language.  They are a feature of most major programming languages, including R.  With regular expressions we can describe complex string-patterns concisely, and can perform rapid searches for these patterns in a given body of text.
 
-The rules for regular expressions vary a bit from one language to another, but the general idea is essentially the same for all of them.  In the remainder of this Chapter we'll learn enough of the principles of regular expressions to describe basic, useful patterns, and we'll also study R functions that make use of them.
+The rules for regular expressions vary a bit from one language to another, but the general idea is essentially the same for all of them.  In the remainder of this Chapter we'll learn enough of the principles of regular expressions to describe basic, useful patterns, and we'll also study R-functions that make use of them.
 
 First of all, here's a quick example to show the power of regular expressions.  The work done by `occurences2()` may also be done in one line with the `gregexpr()` \index{R-functions!gregexpr()@\texttt{gregexpr()}} function, as follows:
 
@@ -306,28 +306,28 @@ It is possible, however, to tell a quantifier to be *lazy*, \index{lazy} meaning
 \index{grouping}
 A quantifier refers to the shortest meaningful item immediately preceding it.  Look at these examples:
 
-* `ab+` matches a followed by 1 or more b's;
-* `a\d+` matches a followed by 1 or more digits;
-* `a[^bc]+` matches a followed by 1 or more occurrence of anything other than b or c;
+* `ab+` matches "a" followed by 1 or more "b"'s;
+* `a\d+` matches "a" followed by 1 or more digits;
+* `a[^bc]+` matches "a" followed by 1 or more occurrence of anything other than "b" or "c";
 
-In the examples above, any match begins with a.  If we want to get "a" into the scope of the quantifier, we have to group it with the item immediately preceding the quantifier.  Grouping is accomplished with parentheses.  Consider these examples:
+In the examples above, any match begins with "a".  If we want to get "a" into the scope of the quantifier, we have to group it with the item immediately preceding the quantifier.  Grouping is accomplished with parentheses.  Consider these examples:
 
 * `(ab)+` matches one or more occurrences of "ab" in succession;
-* `(a\d{2,})+` matches one or more occurrence of a followed by at least two digits.  Thus it matches "a23" and "a23a773".  It won't match "a2a3".  It will match only the "a23" in "a23a6" and it will match only the "a567" in "a4a567".
+* `(a\d{2,})+` matches one or more occurrences of "a" followed by at least two digits.  Thus it matches "a23" and "a23a773".  It won't match "a2a3".  It will match only the "a23" in "a23a6" and it will match only the "a567" in "a4a567".
 
 Grouping is a great help in constructing highly complex patterns.  Bear in mind that the grouping symbols `(` and `)` function as metacharacters and will have to be escaped outside of character classes when you are searching for them as literals.  Inside of character classes they function only as literals.  Thus:
 
-* `[(ab)*]` matches any one of the following characters:  (, a, b, ) and *.
+* `[(ab)*]` matches any one of the following characters:  "(", "a", "b", ")" and "*".
 * `\(yes\)` matches "(yes)".
 
 ### Alternation
 \index{alternation}
-In regex syntax the symbol `|` (the vertical "pipe") functions as a metacharacter meaning "or".  Thus:
+In regex syntax the symbol `|` (the vertical "pipe") functions as a metacharacter meaning *or*.  Thus:
 
-* `a|b` matches a and it matches b;
+* `a|b` matches "a" and it matches "b";
 * `bed|bath` matches "bed" and it matches "bath";
-* `a|b|c` matches any one of a, b and c;
-* `(aa|bb)+` matches one or more occurrence of aa or bb.  Thus it matches "aa", "bb", "aaaa", "aabb", "bbaa", "bbbb" and so on.
+* `a|b|c` matches any one of "a", "b" and "c";
+* `(aa|bb)+` matches one or more occurrence of "aa" or "bb".  Thus it matches "aa", "bb", "aaaa", "aabb", "bbaa", "bbbb" and so on.
 * `(a(a|b)b)+` matches "aab", "abb", "aabaab", "aababb", and so on.
 
 Use of the pipe-symbol is known as *alternation*.
@@ -434,13 +434,13 @@ If you want to match a palindrome^[Recall that a *palindrome* is a word that is 
 
 ### Looking Around
 
-Suppose that you have a string containing a number of words involving "bed", and you would like to find all of the instances in which "bed", except for the word "bedtime".  With the tools we have so far this is a difficult task.  Fortunately there are *look-aheads* \index{look-ahead} to simplify our work.
+Suppose that you have a string containing a number of words involving "bed", and you would like to find all occurences of "bed" that begin a word, except for the word "bedtime".  With the tools we have so far this is a difficult task.  Fortunately there are *look-aheads* \index{look-ahead} to simplify our work.
 
 The regex `\bbed(?!time\b)` will do the job.  Here's how it works:
 
 * It begins by asserting a word-boundary.
 * It continues with the characters to match "bed".
-* It concludes the a look-ahead group.  The parentheses mark out the group.  The initial `?` indicates that we plan to look ahead. The `!` may be thought of as "not equals"; it means that if we find the pattern that follows the `!` we will not have a match.
+* It concludes a look-ahead group.  The parentheses mark out the group.  The initial `?` indicates that we plan to look ahead. The `!` may be thought of as "not equals"; it means that if we find the pattern that follows the `!` we will not have a match.
 
 Note the matches in the text below:
 
@@ -448,7 +448,7 @@ Note the matches in the text below:
 
 Note that only "bed" is included in the match.  Just like the anchor `\b`, the look-ahead is an assertion:  it does not add any characters to the match.
 
-If we want only the occurrences of bed where the word begins in "bed" and ends in either "rock" and "time", then we could use the regex:
+If we want only the occurrences of "bed" where the word begins in "bed" and ends in either "rock" and "time", then we could use the regex:
 
 >`\bbed(?=rock\b|time\b)`
 
@@ -466,6 +466,8 @@ There are four types of look-around groups: \index{look-behind}
 * *Negative look-behind*:  `(?<!regex2)regex1`.  Match EXCEPT when you find an instance of `regex2` right before an instance of `regex1`.
 
 The `regex2` expression in look-aheads can be any regex at all.  For look-behinds, though, there are some important limitations.  The precise restrictions differ from one flavor of regular expressions to another, but roughly the rule is that the machine has to be able to figure out in advance how many characters it might have to look behind.  A group like `(?<=time\w*sheets)`, for instance,  would not be permitted, as the quantifier `*` allows matching strings of arbitrary length.
+
+### More to Learn
 
 We have not come near to exhausting the syntax of regular expressions. Readers who would like to delve into the subject more deeply should next consult online tutorials on the topics of non-capture groups, conditionals and more.  However, we now have enough background to express some fairly complex patterns quite concisely, so it is now time to learn how to work with them in R.
 
@@ -535,7 +537,7 @@ dates <- c("3 - 14 - 1963", "4/13/ 2005",
            "12-1-1997", "11 / 11 / 1918")
 ```
 
-It seems that the folks who entered the dates were not consistent in how to format them.  In order to make analysis easier, it wold be better if all the dates had exactly the same format.  With the function `gsub()` \index{R-functions!gsub()@\texttt{gsub()}}and regular expressions, this is not difficult:
+It seems that the folks who entered the dates were not consistent in how to format them.  In order to make analysis easier, it would be better if all the dates had exactly the same format.  With the function `gsub()` \index{R-functions!gsub()@\texttt{gsub()}}and regular expressions, this is not difficult:
 
 ```{r}
 tidyDates <- gsub(pattern = "[- /]+",
@@ -578,10 +580,11 @@ From here on out we'll use it, simply as a matter of caution.
 ### Patterned Replacement
 
 In the dates example from Section \@ref(regex-substitution) the replacement string (the argument for the parameter `replacement`) was constant:  no matter what sort of match we found for the pattern `[- /]+`, we replaced it with  the string "/".  It is important to note, however, that if we set `perl` to `TRUE` then the argument provided for `replacement` can vary depending on the match found.  In particular:
+
 * It can include the back-references `\1`, `\2`, ..., `\9`.
 * It can include special tokens for case-conversion:
-    * `\U` converts the rest of the replacement to upper-case (or ceases conversion when `\E` or `\L` occurs).
-    * `\L` converts the rest of the replacement to lower-case (or ceases conversion when `\E` or `\U` occurs).
+    * `\U` converts the rest of the replacement to upper-case (or ceases conversion when `\E` or `\L` occur).
+    * `\L` converts the rest of the replacement to lower-case (or ceases conversion when `\E` or `\U` occur).
     * `\E` signals the end of any case-conversion that is in effect.
     
 Let's look at an example.  Here is a function that, given a string,  will capitalize all of the vowels that it finds:
@@ -607,15 +610,24 @@ starRepeats("I have a boo boo on my knee knee.")
 The above substitution is tricky, and merits step-by-step analysis:
 
 * In order to get a repeated word, you would start with the regex 
+    
     >`\b(\w+) \1\b`.
+    
 * In order to enter the regex into R as a string, you would need some escapes:
+    
     >`\\b(\\w+) \\1\\b`
+    
 * You need to wrap the whole expression in parentheses in order to capture it and refer to it in the replacement expression:
+    
     >`(\\b(\\w+) \\1\\b)`
+    
 * But now you have a problem:  the back-reference `\1` applies to the *first* captured expression, which is the expression determined by the first opening parenthesis encountered.  Hence it refers to the whole expression, which doesn't make sense.  We want to refer to the first word in the pair (the `(\\w+)`) so we need to back-reference it with `\2`:
+    
     >`(\\b(\\w+) \\2\\b)`
+    
 * Meanwhile, in the replacement string, we want to refer to the entire repeated-word pair, so we refer to it with `\1`.
 * And of course we have to do the extra backslash escaping, so the replacement string ends up as:
+   
     >`*\\1*`
     
 Whew!
@@ -758,7 +770,7 @@ hunger$content[2]
 ```
 
 ```
-## A single long string.  We will show just the first few characters:
+## # A single long string.  We will show just the first few characters:
 ## [1] "\"<span class=\"\"a-size-base review-text\"\">Clearly ...
 ```
 
@@ -921,8 +933,8 @@ phoneNumber <- function(strs) {
 1.  For each of the following expressions, write a regular expression to test whether any of the sub-string(s) described occur in a given string.  The regular expression should match any of the sub-strings described, and should not match any other sub-string.  Try to make the regular expression as short as possible.  Write the regular expression as a string that could be used in one of R's regex functions (i.e. extra backslash escapes as needed).  The first item is done for you, as an example.
     * *box* and *bat*.  Regex string:  `"b[oa]t"`.  (This is the one to submit, because it's shorter than other alternatives such as`"box|bat"`).
     * *cart* and *cars* and *carp*.
-    * *slick* ans *sick*
-    * Any word ending in *ity* (such as *velocity* and *ferocity*).  Be sure to pay attention to word-boundaries.  You should match *velocity* but not * velocity* or *velocity;*.
+    * *slick* and *sick*
+    * Any word ending in *ity* (such as *velocity* and *ferocity*).  Be sure to pay attention to word-boundaries.  You should match *velocity* but not *\ velocity* (includes a space before the "v") or *velocity;*.
     * A whole number consisting of more than six digits.
     * A word that is between 3 and 6 characters long.  Pay attention to word-boundaries.
     * One or more whitespace characters, followed by a hyphen or a semicolon or a colon.

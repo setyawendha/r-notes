@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-20">
+<meta name="date" content="2017-05-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -327,6 +327,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.3.7" data-path="regex-syntax.html"><a href="regex-syntax.html#anchors"><i class="fa fa-check"></i><b>10.3.7</b> Anchors</a></li>
 <li class="chapter" data-level="10.3.8" data-path="regex-syntax.html"><a href="regex-syntax.html#regex-captures"><i class="fa fa-check"></i><b>10.3.8</b> Captures</a></li>
 <li class="chapter" data-level="10.3.9" data-path="regex-syntax.html"><a href="regex-syntax.html#looking-around"><i class="fa fa-check"></i><b>10.3.9</b> Looking Around</a></li>
+<li class="chapter" data-level="10.3.10" data-path="regex-syntax.html"><a href="regex-syntax.html#more-to-learn-1"><i class="fa fa-check"></i><b>10.3.10</b> More to Learn</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>10.4</b> Entering a Regex in R</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>10.4.1</b> String to Regex</a></li>
@@ -639,29 +640,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">10.3.5</span> Grouping</h3>
 <p> A quantifier refers to the shortest meaningful item immediately preceding it. Look at these examples:</p>
 <ul>
-<li><code>ab+</code> matches a followed by 1 or more b’s;</li>
-<li><code>a\d+</code> matches a followed by 1 or more digits;</li>
-<li><code>a[^bc]+</code> matches a followed by 1 or more occurrence of anything other than b or c;</li>
+<li><code>ab+</code> matches “a” followed by 1 or more “b”’s;</li>
+<li><code>a\d+</code> matches “a” followed by 1 or more digits;</li>
+<li><code>a[^bc]+</code> matches “a” followed by 1 or more occurrence of anything other than “b” or “c”;</li>
 </ul>
-<p>In the examples above, any match begins with a. If we want to get “a” into the scope of the quantifier, we have to group it with the item immediately preceding the quantifier. Grouping is accomplished with parentheses. Consider these examples:</p>
+<p>In the examples above, any match begins with “a”. If we want to get “a” into the scope of the quantifier, we have to group it with the item immediately preceding the quantifier. Grouping is accomplished with parentheses. Consider these examples:</p>
 <ul>
 <li><code>(ab)+</code> matches one or more occurrences of “ab” in succession;</li>
-<li><code>(a\d{2,})+</code> matches one or more occurrence of a followed by at least two digits. Thus it matches “a23” and “a23a773”. It won’t match “a2a3”. It will match only the “a23” in “a23a6” and it will match only the “a567” in “a4a567”.</li>
+<li><code>(a\d{2,})+</code> matches one or more occurrences of “a” followed by at least two digits. Thus it matches “a23” and “a23a773”. It won’t match “a2a3”. It will match only the “a23” in “a23a6” and it will match only the “a567” in “a4a567”.</li>
 </ul>
 <p>Grouping is a great help in constructing highly complex patterns. Bear in mind that the grouping symbols <code>(</code> and <code>)</code> function as metacharacters and will have to be escaped outside of character classes when you are searching for them as literals. Inside of character classes they function only as literals. Thus:</p>
 <ul>
-<li><code>[(ab)*]</code> matches any one of the following characters: (, a, b, ) and *.</li>
+<li><code>[(ab)*]</code> matches any one of the following characters: “(”, “a”, “b”, “)” and “*“.</li>
 <li><code>\(yes\)</code> matches “(yes)”.</li>
 </ul>
 </div>
 <div id="alternation" class="section level3">
 <h3><span class="header-section-number">10.3.6</span> Alternation</h3>
-<p> In regex syntax the symbol <code>|</code> (the vertical “pipe”) functions as a metacharacter meaning “or”. Thus:</p>
+<p> In regex syntax the symbol <code>|</code> (the vertical “pipe”) functions as a metacharacter meaning <em>or</em>. Thus:</p>
 <ul>
-<li><code>a|b</code> matches a and it matches b;</li>
+<li><code>a|b</code> matches “a” and it matches “b”;</li>
 <li><code>bed|bath</code> matches “bed” and it matches “bath”;</li>
-<li><code>a|b|c</code> matches any one of a, b and c;</li>
-<li><code>(aa|bb)+</code> matches one or more occurrence of aa or bb. Thus it matches “aa”, “bb”, “aaaa”, “aabb”, “bbaa”, “bbbb” and so on.</li>
+<li><code>a|b|c</code> matches any one of “a”, “b” and “c”;</li>
+<li><code>(aa|bb)+</code> matches one or more occurrence of “aa” or “bb”. Thus it matches “aa”, “bb”, “aaaa”, “aabb”, “bbaa”, “bbbb” and so on.</li>
 <li><code>(a(a|b)b)+</code> matches “aab”, “abb”, “aabaab”, “aababb”, and so on.</li>
 </ul>
 <p>Use of the pipe-symbol is known as <em>alternation</em>.</p>
@@ -764,19 +765,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="looking-around" class="section level3">
 <h3><span class="header-section-number">10.3.9</span> Looking Around</h3>
-<p>Suppose that you have a string containing a number of words involving “bed”, and you would like to find all of the instances in which “bed”, except for the word “bedtime”. With the tools we have so far this is a difficult task. Fortunately there are <em>look-aheads</em>  to simplify our work.</p>
+<p>Suppose that you have a string containing a number of words involving “bed”, and you would like to find all occurences of “bed” that begin a word, except for the word “bedtime”. With the tools we have so far this is a difficult task. Fortunately there are <em>look-aheads</em>  to simplify our work.</p>
 <p>The regex <code>\bbed(?!time\b)</code> will do the job. Here’s how it works:</p>
 <ul>
 <li>It begins by asserting a word-boundary.</li>
 <li>It continues with the characters to match “bed”.</li>
-<li>It concludes the a look-ahead group. The parentheses mark out the group. The initial <code>?</code> indicates that we plan to look ahead. The <code>!</code> may be thought of as “not equals”; it means that if we find the pattern that follows the <code>!</code> we will not have a match.</li>
+<li>It concludes a look-ahead group. The parentheses mark out the group. The initial <code>?</code> indicates that we plan to look ahead. The <code>!</code> may be thought of as “not equals”; it means that if we find the pattern that follows the <code>!</code> we will not have a match.</li>
 </ul>
 <p>Note the matches in the text below:</p>
 <blockquote>
 <p>bedtime <em>bed</em>rock <em>bed</em>rocking <em>bed</em>sheets <em>bed</em>ding embedding</p>
 </blockquote>
 <p>Note that only “bed” is included in the match. Just like the anchor <code>\b</code>, the look-ahead is an assertion: it does not add any characters to the match.</p>
-<p>If we want only the occurrences of bed where the word begins in “bed” and ends in either “rock” and “time”, then we could use the regex:</p>
+<p>If we want only the occurrences of “bed” where the word begins in “bed” and ends in either “rock” and “time”, then we could use the regex:</p>
 <blockquote>
 <p><code>\bbed(?=rock\b|time\b)</code></p>
 </blockquote>
@@ -793,6 +794,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><em>Negative look-behind</em>: <code>(?&lt;!regex2)regex1</code>. Match EXCEPT when you find an instance of <code>regex2</code> right before an instance of <code>regex1</code>.</li>
 </ul>
 <p>The <code>regex2</code> expression in look-aheads can be any regex at all. For look-behinds, though, there are some important limitations. The precise restrictions differ from one flavor of regular expressions to another, but roughly the rule is that the machine has to be able to figure out in advance how many characters it might have to look behind. A group like <code>(?&lt;=time\w*sheets)</code>, for instance, would not be permitted, as the quantifier <code>*</code> allows matching strings of arbitrary length.</p>
+</div>
+<div id="more-to-learn-1" class="section level3">
+<h3><span class="header-section-number">10.3.10</span> More to Learn</h3>
 <p>We have not come near to exhausting the syntax of regular expressions. Readers who would like to delve into the subject more deeply should next consult online tutorials on the topics of non-capture groups, conditionals and more. However, we now have enough background to express some fairly complex patterns quite concisely, so it is now time to learn how to work with them in R.</p>
 </div>
 </div>

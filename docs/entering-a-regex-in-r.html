@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-20">
+<meta name="date" content="2017-05-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -327,6 +327,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.3.7" data-path="regex-syntax.html"><a href="regex-syntax.html#anchors"><i class="fa fa-check"></i><b>10.3.7</b> Anchors</a></li>
 <li class="chapter" data-level="10.3.8" data-path="regex-syntax.html"><a href="regex-syntax.html#regex-captures"><i class="fa fa-check"></i><b>10.3.8</b> Captures</a></li>
 <li class="chapter" data-level="10.3.9" data-path="regex-syntax.html"><a href="regex-syntax.html#looking-around"><i class="fa fa-check"></i><b>10.3.9</b> Looking Around</a></li>
+<li class="chapter" data-level="10.3.10" data-path="regex-syntax.html"><a href="regex-syntax.html#more-to-learn-1"><i class="fa fa-check"></i><b>10.3.10</b> More to Learn</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>10.4</b> Entering a Regex in R</a><ul>
 <li class="chapter" data-level="10.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>10.4.1</b> String to Regex</a></li>
@@ -473,7 +474,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>One of the most useful applications of regular expressions is in substitution. Suppose that we have a vector of dates:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dates &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;3 - 14 - 1963&quot;</span>, <span class="st">&quot;4/13/ 2005&quot;</span>,
            <span class="st">&quot;12-1-1997&quot;</span>, <span class="st">&quot;11 / 11 / 1918&quot;</span>)</code></pre></div>
-<p>It seems that the folks who entered the dates were not consistent in how to format them. In order to make analysis easier, it wold be better if all the dates had exactly the same format. With the function <code>gsub()</code> and regular expressions, this is not difficult:</p>
+<p>It seems that the folks who entered the dates were not consistent in how to format them. In order to make analysis easier, it would be better if all the dates had exactly the same format. With the function <code>gsub()</code> and regular expressions, this is not difficult:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tidyDates &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;[- /]+&quot;</span>,
                   <span class="dt">replacement =</span> <span class="st">&quot;/&quot;</span>,
                   <span class="dt">x =</span> dates)
@@ -508,7 +509,16 @@ replaceFirst</code></pre></div>
 </div>
 <div id="patterned-replacement" class="section level3">
 <h3><span class="header-section-number">10.4.4</span> Patterned Replacement</h3>
-<p>In the dates example from Section <a href="entering-a-regex-in-r.html#regex-substitution">10.4.2</a> the replacement string (the argument for the parameter <code>replacement</code>) was constant: no matter what sort of match we found for the pattern <code>[- /]+</code>, we replaced it with the string “/”. It is important to note, however, that if we set <code>perl</code> to <code>TRUE</code> then the argument provided for <code>replacement</code> can vary depending on the match found. In particular: * It can include the back-references <code>\1</code>, <code>\2</code>, …, <code>\9</code>. * It can include special tokens for case-conversion: * <code>\U</code> converts the rest of the replacement to upper-case (or ceases conversion when <code>\E</code> or <code>\L</code> occurs). * <code>\L</code> converts the rest of the replacement to lower-case (or ceases conversion when <code>\E</code> or <code>\U</code> occurs). * <code>\E</code> signals the end of any case-conversion that is in effect.</p>
+<p>In the dates example from Section <a href="entering-a-regex-in-r.html#regex-substitution">10.4.2</a> the replacement string (the argument for the parameter <code>replacement</code>) was constant: no matter what sort of match we found for the pattern <code>[- /]+</code>, we replaced it with the string “/”. It is important to note, however, that if we set <code>perl</code> to <code>TRUE</code> then the argument provided for <code>replacement</code> can vary depending on the match found. In particular:</p>
+<ul>
+<li>It can include the back-references <code>\1</code>, <code>\2</code>, …, <code>\9</code>.</li>
+<li>It can include special tokens for case-conversion:
+<ul>
+<li><code>\U</code> converts the rest of the replacement to upper-case (or ceases conversion when <code>\E</code> or <code>\L</code> occur).</li>
+<li><code>\L</code> converts the rest of the replacement to lower-case (or ceases conversion when <code>\E</code> or <code>\U</code> occur).</li>
+<li><code>\E</code> signals the end of any case-conversion that is in effect.</li>
+</ul></li>
+</ul>
 <p>Let’s look at an example. Here is a function that, given a string, will capitalize all of the vowels that it finds:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">capVowels &lt;-<span class="st"> </span>function(str) {
   <span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;([aeiou])&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">U</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">E&quot;</span>, <span class="dt">x =</span> str, <span class="dt">perl =</span> T)
@@ -524,12 +534,27 @@ replaceFirst</code></pre></div>
 <pre><code>## [1] &quot;I have a *boo boo* on my *knee knee*.&quot;</code></pre>
 <p>The above substitution is tricky, and merits step-by-step analysis:</p>
 <ul>
-<li>In order to get a repeated word, you would start with the regex &gt;<code>\b(\w+) \1\b</code>.</li>
-<li>In order to enter the regex into R as a string, you would need some escapes: &gt;<code>\\b(\\w+) \\1\\b</code></li>
-<li>You need to wrap the whole expression in parentheses in order to capture it and refer to it in the replacement expression: &gt;<code>(\\b(\\w+) \\1\\b)</code></li>
-<li>But now you have a problem: the back-reference <code>\1</code> applies to the <em>first</em> captured expression, which is the expression determined by the first opening parenthesis encountered. Hence it refers to the whole expression, which doesn’t make sense. We want to refer to the first word in the pair (the <code>(\\w+)</code>) so we need to back-reference it with <code>\2</code>: &gt;<code>(\\b(\\w+) \\2\\b)</code></li>
+<li><p>In order to get a repeated word, you would start with the regex</p>
+<blockquote>
+<p><code>\b(\w+) \1\b</code>.</p>
+</blockquote></li>
+<li><p>In order to enter the regex into R as a string, you would need some escapes:</p>
+<blockquote>
+<p><code>\\b(\\w+) \\1\\b</code></p>
+</blockquote></li>
+<li><p>You need to wrap the whole expression in parentheses in order to capture it and refer to it in the replacement expression:</p>
+<blockquote>
+<p><code>(\\b(\\w+) \\1\\b)</code></p>
+</blockquote></li>
+<li><p>But now you have a problem: the back-reference <code>\1</code> applies to the <em>first</em> captured expression, which is the expression determined by the first opening parenthesis encountered. Hence it refers to the whole expression, which doesn’t make sense. We want to refer to the first word in the pair (the <code>(\\w+)</code>) so we need to back-reference it with <code>\2</code>:</p>
+<blockquote>
+<p><code>(\\b(\\w+) \\2\\b)</code></p>
+</blockquote></li>
 <li>Meanwhile, in the replacement string, we want to refer to the entire repeated-word pair, so we refer to it with <code>\1</code>.</li>
-<li>And of course we have to do the extra backslash escaping, so the replacement string ends up as: &gt;<code>*\\1*</code></li>
+<li><p>And of course we have to do the extra backslash escaping, so the replacement string ends up as:</p>
+<blockquote>
+<p><code>*\\1*</code></p>
+</blockquote></li>
 </ul>
 <p>Whew!</p>
 </div>
