@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.3.20 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-05-21">
+<meta name="date" content="2017-06-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -503,28 +503,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>No more bottles of beer on the wall.</p>
 </blockquote>
 <p>Make sure to get the lyrics exactly right. For example, it’s “1 bottle”, not “1 bottles”.</p></li>
-<li><p>Recall the function <code>madhavaPI()</code> from Section <a href="more-about-arguments.html#default-arguments">3.4.1</a>. Use this function to write a function called <code>madhavaGraph()</code> that will do the following: given a number <span class="math inline">\(n\)</span>, the function uses <strong>ggplot2</strong> to produce a line graph of the first <span class="math inline">\(n\)</span> approximations to <span class="math inline">\(\pi\)</span> using the initial terms of the Madhava series. The plot should be a line graph similar to the one produced by the <code>collatz()</code> functions from this Chapter. The function should take a single argument <code>n</code>, whose default value is 10. It should validate the input: if the number entered is not at least 1, then the function should throw an error and explain to the user that the he/she must enter a positive number.</p></li>
-</ol>
+<li><p>Recall the function <code>madhavaPI()</code> from Section <a href="more-about-arguments.html#default-arguments">3.4.1</a>. Use this function to write a function called <code>madhavaGraph()</code> that will do the following: given a number <span class="math inline">\(n\)</span>, the function uses <strong>ggplot2</strong> to produce a line graph of the first <span class="math inline">\(n\)</span> approximations to <span class="math inline">\(\pi\)</span> using the initial terms of the Madhava series. The plot should be a line graph similar to the one produced by the <code>collatz()</code> functions from this Chapter. The function should take a single argument <code>n</code>, whose default value is 10. It should validate the input: if the number entered is not at least 1, then the function should throw an error and explain to the user that the he/she must enter a positive number.</p>
 <p>Here is an example of how the function should work:</p>
-<pre><code>```r
-madhavaGraph(n = -3)
-```
-
-```
-## You need to enter a positive integer.  Try again!
-```</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaGraph</span>(<span class="dt">n =</span> -<span class="dv">3</span>)</code></pre></div>
+<pre><code>## You need to enter a positive integer.  Try again!</code></pre>
 <p>Here is another example:</p>
-<pre><code>```r
-madhavaGraph(n = 20)
-```
-
-The output should be as in Figure \@ref(fig:madhavaGraph).
-
-&lt;div class=&quot;figure&quot; style=&quot;text-align: center&quot;&gt;
-&lt;img src=&quot;r-notes_files/figure-html/madhavaGraph-1.png&quot; alt=&quot;This is how the output of the madhavaGraph function should look.&quot; width=&quot;50%&quot; /&gt;
-&lt;p class=&quot;caption&quot;&gt;(\#fig:madhavaGraph)This is how the output of the madhavaGraph function should look.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-<ol style="list-style-type: decimal">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaGraph</span>(<span class="dt">n =</span> <span class="dv">20</span>)</code></pre></div>
+<p>The output should be as in Figure <a href="exercises-2.html#fig:madhavaGraph">4.5</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:madhavaGraph"></span>
+<img src="r-notes_files/figure-html/madhavaGraph-1.png" alt="This is how the output of the     madhavaGraph function should look." width="50%" />
+<p class="caption">
+Figure 4.5: This is how the output of the madhavaGraph function should look.
+</p>
+</div></li>
 <li><p><strong>The Subtraction Game.</strong> In this game there are two players, A and B, and a pile of <span class="math inline">\(n\)</span> pebbles. The players take turns removing pebbles from the pile. On each turn , a player can take either one or two pebbles. The players who takes the last pebble wins the game.</p>
 <p>It turns out that one of the players has a winning strategy. If the initial number of pebbles is a multiple of 3, then player who goes second has a winning strategy, whereas if the initial number of pebbles is not a multiple of 3 then the player who goes second has the winning strategy.</p>
 The idea for the winning strategy comes from the following observations:

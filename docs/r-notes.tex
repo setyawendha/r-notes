@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-05-21}
+  \date{2017-06-13}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -288,6 +288,16 @@ working offline, and it also has an index.
 Instructional videos on selected topics will be published from time to
 time on this YouTube Channel:
 \url{https://www.youtube.com/user/GCstats}, in the CSC playlist.
+
+These notes are about the R programming language as such, so although in
+the class we will work within the R Studio Integrated Deveopment
+Environment right from the start, R Studio is not directly covered here.
+Eventually we will begin to write documents in R Markdown, which is also
+not treated in these Notes. For a resource on these topics in written
+form that will supplement class instructon and the videos on our YouTube
+Channel, you might want to consult the excellent little book
+\href{https://bookdown.org/chesterismay/rbasics/}{\emph{Getting used to
+R, RStudio, and R Markdown}}\citep{Ismay2016}.
 
 \section{The Why of these Notes: Remarks for
 Colleagues}\label{the-why-of-these-notes-remarks-for-colleagues}
@@ -5343,19 +5353,18 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:clisymbols"    
-##  [3] "package:bookdown"       "package:R6"            
-##  [5] "package:readr"          "package:tigerData"     
-##  [7] "package:tigerstats"     "package:abd"           
-##  [9] "package:mosaic"         "package:Matrix"        
-## [11] "package:dplyr"          "package:lattice"       
-## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:ggplot2"       
-## [17] "package:mosaicData"     "tools:rstudio"         
-## [19] "package:stats"          "package:graphics"      
-## [21] "package:grDevices"      "package:utils"         
-## [23] "package:datasets"       "package:methods"       
-## [25] "Autoloads"              "package:base"
+##  [1] ".GlobalEnv"             "package:R6"            
+##  [3] "package:readr"          "package:tigerData"     
+##  [5] "package:tigerstats"     "package:abd"           
+##  [7] "package:mosaic"         "package:Matrix"        
+##  [9] "package:dplyr"          "package:lattice"       
+## [11] "package:nlme"           "package:TurtleGraphics"
+## [13] "package:grid"           "package:ggplot2"       
+## [15] "package:mosaicData"     "tools:rstudio"         
+## [17] "package:stats"          "package:graphics"      
+## [19] "package:grDevices"      "package:utils"         
+## [21] "package:datasets"       "package:methods"       
+## [23] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5461,7 +5470,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10ead9d40>
+## <bytecode: 0x10e3fea30>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -8068,41 +8077,37 @@ helpful suggestions---if it is not of the correct form.
   is 10. It should validate the input: if the number entered is not at
   least 1, then the function should throw an error and explain to the
   user that the he/she must enter a positive number.
-\end{enumerate}
 
-Here is an example of how the function should work:
+  Here is an example of how the function should work:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{madhavaGraph}\NormalTok{(}\DataTypeTok{n =} \NormalTok{-}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
-```r
-madhavaGraph(n = -3)
-```
-
-```
 ## You need to enter a positive integer.  Try again!
-```
 \end{verbatim}
 
-Here is another example:
+  Here is another example:
 
-\begin{verbatim}
-```r
-madhavaGraph(n = 20)
-```
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{madhavaGraph}\NormalTok{(}\DataTypeTok{n =} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-The output should be as in Figure \\ref{fig:madhavaGraph}.
+  The output should be as in Figure \ref{fig:madhavaGraph}.
 
-\begin{figure}
+  \begin{figure}
 
-{\centering \includegraphics[width=0.5\linewidth]{r-notes_files/figure-latex/madhavaGraph-1} 
+  {\centering \includegraphics[width=0.5\linewidth]{r-notes_files/figure-latex/madhavaGraph-1} 
 
-}
+  }
 
-\caption{This is how the output of the madhavaGraph function should look.}\label{fig:madhavaGraph}
-\end{figure}
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+  \caption{This is how the output of the     madhavaGraph function should look.}\label{fig:madhavaGraph}
+  \end{figure}
 \item
   \textbf{The Subtraction Game.} In this game there are two players, A
   and B, and a pile of \(n\) pebbles. The players take turns removing
@@ -9847,7 +9852,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-05-21 17:47:48 EDT"
+## [1] "2017-06-13 13:21:20 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9859,7 +9864,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1495403268
+## [1] 1497374481
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -21307,7 +21312,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10f6728e8"
+## [1] "0x1193bc1b8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21321,7 +21326,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10f6728e8"
+## [1] "0x1193bc1b8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21360,7 +21365,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10f6728e8"
+## [1] "0x1193bc1b8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21373,7 +21378,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x103f40918"
+## [1] "0x1166cc868"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21391,7 +21396,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10f6728e8"
+## [1] "0x1193bc1b8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21435,7 +21440,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10f760f50" "0x10f760f50"
+## [1] "0x11e6e3f50" "0x11e6e3f50"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21474,7 +21479,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10f760f50" "0x10f760f50"
+## [1] "0x11e6e3f50" "0x11e6e3f50"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21516,7 +21521,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10f760f50" "0x126b1ab90"
+## [1] "0x11e6e3f50" "0x129ae75c0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
