@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-06-29}
+  \date{2017-07-06}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5354,17 +5354,18 @@ number of other environments:
 
 \begin{verbatim}
 ##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:readr"          "package:tigerData"     
-##  [5] "package:tigerstats"     "package:abd"           
-##  [7] "package:mosaic"         "package:Matrix"        
-##  [9] "package:dplyr"          "package:lattice"       
-## [11] "package:nlme"           "package:TurtleGraphics"
-## [13] "package:grid"           "package:ggplot2"       
-## [15] "package:mosaicData"     "tools:rstudio"         
-## [17] "package:stats"          "package:graphics"      
-## [19] "package:grDevices"      "package:utils"         
-## [21] "package:datasets"       "package:methods"       
-## [23] "Autoloads"              "package:base"
+##  [3] "package:clisymbols"     "package:bookdown"      
+##  [5] "package:readr"          "package:tigerData"     
+##  [7] "package:tigerstats"     "package:abd"           
+##  [9] "package:mosaic"         "package:Matrix"        
+## [11] "package:dplyr"          "package:lattice"       
+## [13] "package:nlme"           "package:TurtleGraphics"
+## [15] "package:grid"           "package:ggplot2"       
+## [17] "package:mosaicData"     "tools:rstudio"         
+## [19] "package:stats"          "package:graphics"      
+## [21] "package:grDevices"      "package:utils"         
+## [23] "package:datasets"       "package:methods"       
+## [25] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5470,7 +5471,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10ddf7108>
+## <bytecode: 0x10ed196b0>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9852,7 +9853,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-06-29 22:38:57 EDT"
+## [1] "2017-07-06 18:21:47 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9864,7 +9865,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1498790338
+## [1] 1499379708
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -16118,7 +16119,7 @@ and the conversion character, like so:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# left-justify both fields:}
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%10-s%20-s"}\NormalTok{, first, last))}
+\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-20s"}\NormalTok{, first, last))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -16143,7 +16144,7 @@ Here is another example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%10-s%10-d%10-f"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{3.2}\NormalTok{))}
+\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-10d%-10f"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{3.2}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -16156,7 +16157,7 @@ the significant figures in the 3.2:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%10-s%10-d%10-g"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{3.2}\NormalTok{))}
+\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-10d%-10g"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{3.2}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -16172,7 +16173,7 @@ decimal places, then try:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%10-s%10-d%10.3-f"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{234.5647}\NormalTok{))}
+\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-10d%-10.3f"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{234.5647}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -16191,15 +16192,15 @@ nicely-aligned, tabular fashion. Consider this example:
 \NormalTok{age <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{17}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{20}\NormalTok{)}
 \NormalTok{gpa <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{3.7}\NormalTok{, }\FloatTok{3.9}\NormalTok{, }\FloatTok{3.823}\NormalTok{)}
 \NormalTok{for (i in }\DecValTok{1}\NormalTok{:}\DecValTok{3}\NormalTok{) \{}
-  \KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%15-s%20-s%5-d%5-1.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
+  \KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%-15s%-20s%-5d%-5.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
               \NormalTok{firstName[i], lastName[i], age[i], gpa[i]))}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Donald         Duck                17   3.70
-## Gina           Gentorious          19   3.90
+## Donald         Duck                17   3.70 
+## Gina           Gentorious          19   3.90 
 ## Rohini         Lancaster           20   3.82
 \end{verbatim}
 
@@ -16210,14 +16211,14 @@ You could take advantage of vectorization to avoid the loop:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%15-s%20-s%5-d%5-1.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
+\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%-15s%-20s%5-d%-5.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
             \NormalTok{firstName, lastName, age, gpa))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Donald         Duck                17   3.70
-##  Gina           Gentorious          19   3.90
+## Donald         Duck                17   3.70 
+##  Gina           Gentorious          19   3.90 
 ##  Rohini         Lancaster           20   3.82
 \end{verbatim}
 
@@ -16228,15 +16229,15 @@ parameter of \texttt{cat()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%15-s%20-s%5-d%5-1.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
+\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%-15s%-20s%-5d%-5.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
             \NormalTok{firstName, lastName, age, gpa),}
     \DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Donald         Duck                17   3.70
-## Gina           Gentorious          19   3.90
+## Donald         Duck                17   3.70 
+## Gina           Gentorious          19   3.90 
 ## Rohini         Lancaster           20   3.82
 \end{verbatim}
 
@@ -18729,7 +18730,7 @@ Now take a look at the frame:
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 × 3
+## # A tibble: 6 x 3
 ##       country liters    gdp
 ##         <chr>  <dbl>  <int>
 ## 1 Afghanistan    0.0  20842
@@ -21313,7 +21314,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12e2b4fe8"
+## [1] "0x11f2dca68"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21327,7 +21328,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12e2b4fe8"
+## [1] "0x11f2dca68"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21366,7 +21367,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12e2b4fe8"
+## [1] "0x11f2dca68"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21379,7 +21380,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13c916268"
+## [1] "0x1167d63f8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21397,7 +21398,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12e2b4fe8"
+## [1] "0x11f2dca68"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21441,7 +21442,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x116e716e8" "0x116e716e8"
+## [1] "0x12b2db408" "0x12b2db408"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21480,7 +21481,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x116e716e8" "0x116e716e8"
+## [1] "0x12b2db408" "0x12b2db408"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21522,7 +21523,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x116e716e8" "0x12182d5b8"
+## [1] "0x12b2db408" "0x11603b750"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
