@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-07-06}
+  \date{2017-07-17}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5354,18 +5354,17 @@ number of other environments:
 
 \begin{verbatim}
 ##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:clisymbols"     "package:bookdown"      
-##  [5] "package:readr"          "package:tigerData"     
-##  [7] "package:tigerstats"     "package:abd"           
-##  [9] "package:mosaic"         "package:Matrix"        
-## [11] "package:dplyr"          "package:lattice"       
-## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:ggplot2"       
-## [17] "package:mosaicData"     "tools:rstudio"         
-## [19] "package:stats"          "package:graphics"      
-## [21] "package:grDevices"      "package:utils"         
-## [23] "package:datasets"       "package:methods"       
-## [25] "Autoloads"              "package:base"
+##  [3] "package:readr"          "package:tigerData"     
+##  [5] "package:tigerstats"     "package:abd"           
+##  [7] "package:mosaic"         "package:Matrix"        
+##  [9] "package:dplyr"          "package:lattice"       
+## [11] "package:nlme"           "package:TurtleGraphics"
+## [13] "package:grid"           "package:ggplot2"       
+## [15] "package:mosaicData"     "tools:rstudio"         
+## [17] "package:stats"          "package:graphics"      
+## [19] "package:grDevices"      "package:utils"         
+## [21] "package:datasets"       "package:methods"       
+## [23] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5471,7 +5470,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10ed196b0>
+## <bytecode: 0x10ca8e380>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9853,7 +9852,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-07-06 18:21:47 EDT"
+## [1] "2017-07-17 14:04:39 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9865,7 +9864,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1499379708
+## [1] 1500314680
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -21314,7 +21313,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f2dca68"
+## [1] "0x127e644d8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21328,7 +21327,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f2dca68"
+## [1] "0x127e644d8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21367,7 +21366,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f2dca68"
+## [1] "0x127e644d8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21380,7 +21379,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1167d63f8"
+## [1] "0x11bc39f38"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21398,7 +21397,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f2dca68"
+## [1] "0x127e644d8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21442,7 +21441,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12b2db408" "0x12b2db408"
+## [1] "0x1231d1a40" "0x1231d1a40"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21481,7 +21480,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12b2db408" "0x12b2db408"
+## [1] "0x1231d1a40" "0x1231d1a40"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21523,7 +21522,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12b2db408" "0x11603b750"
+## [1] "0x1231d1a40" "0x1277ea790"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
@@ -22439,13 +22438,13 @@ to produce a graph of the whale population as a function of time.
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(ggplot2)}
 \NormalTok{oceanSim <-}\StringTok{ }\NormalTok{function(}\DataTypeTok{steps =} \DecValTok{100}\NormalTok{, }\DataTypeTok{males =} \DecValTok{10}\NormalTok{, }\DataTypeTok{females =} \DecValTok{10}\NormalTok{,}
-                     \DataTypeTok{animate =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
+                     \DataTypeTok{starve =} \DecValTok{5}\NormalTok{, }\DataTypeTok{animate =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
   \NormalTok{if ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
     \NormalTok{seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
   \NormalTok{\}}
   \KeywordTok{set.seed}\NormalTok{(seed)}
   \NormalTok{ocean <-}\StringTok{ }\NormalTok{Ocean$}\KeywordTok{new}\NormalTok{(}\DataTypeTok{dims =} \KeywordTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{), }\DataTypeTok{males =} \NormalTok{males, }
-                     \DataTypeTok{females =} \NormalTok{females)}
+                     \DataTypeTok{females =} \NormalTok{females, }\DataTypeTok{starve =} \NormalTok{starve)}
   \NormalTok{population <-}\KeywordTok{numeric}\NormalTok{(steps)}
   \NormalTok{for ( i in }\DecValTok{1}\NormalTok{:steps ) \{}
     \NormalTok{population[i] <-}\StringTok{ }\NormalTok{ocean$malePop +}\StringTok{ }\NormalTok{ocean$femalePop}
@@ -22490,6 +22489,19 @@ whales move about by setting \texttt{animate} to \texttt{TRUE}:
 \begin{Highlighting}[]
 \KeywordTok{oceanSim}\NormalTok{(}\DataTypeTok{steps =} \DecValTok{200}\NormalTok{, }\DataTypeTok{males =} \DecValTok{15}\NormalTok{, }\DataTypeTok{females =} \DecValTok{15}\NormalTok{,}
          \DataTypeTok{animate =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You might also wish to explore varying the \texttt{starve} parameter:
+recall that the higher it is, the lower the long-term stable whale
+population will be. In order to better detect long-term stable
+population sizes, you will want to work with more steps, and you should
+turn off the step-by-step-animation, thus:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{oceanSim}\NormalTok{(}\DataTypeTok{steps =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{males =} \DecValTok{60}\NormalTok{, }\DataTypeTok{females =} \DecValTok{60}\NormalTok{,}
+         \DataTypeTok{starve =} \FloatTok{2.5}\NormalTok{, }\DataTypeTok{animate =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -23378,9 +23390,9 @@ or the type of object to which it is applied.
 \end{Shaded}
 
   Run a simulation, initializing the ocean with ten whales of each sex.
-  Their specific characteristics are up to you. Write an R Markdown
-  document that incorporates the appropriate code and includes a
-  discussion of your results.
+  Their specific characteristics are up to you, as is the value of the
+  starvation parameter. Write an R Markdown document that incorporates
+  the appropriate code and includes a discussion of your results.
 \item
   Recall the function \texttt{meetupSim()} from Section
   \ref{simulation-connect}, with which we investigated the probability

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-06">
+<meta name="date" content="2017-07-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -706,13 +706,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Finally, we write a simulation function. The function allows the user to specify the number of time-units that the simulation will cover, along with initial numbers of male and female whales. The user will have an option to “animate” the simulation showing a plot of the ocean after each time-unit. If the animation option is chosen, then R will use the <code>Sys.sleep()</code> function  to make the computer suspend computations for half a second so that the user can view the plot. The simulation will cease if all of the whales die prior to end of the allotted time. Finally, the function uses <strong>ggplot2</strong> to produce a graph of the whale population as a function of time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 oceanSim &lt;-<span class="st"> </span>function(<span class="dt">steps =</span> <span class="dv">100</span>, <span class="dt">males =</span> <span class="dv">10</span>, <span class="dt">females =</span> <span class="dv">10</span>,
-                     <span class="dt">animate =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
+                     <span class="dt">starve =</span> <span class="dv">5</span>, <span class="dt">animate =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   if ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
   }
   <span class="kw">set.seed</span>(seed)
   ocean &lt;-<span class="st"> </span>Ocean$<span class="kw">new</span>(<span class="dt">dims =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="dt">males =</span> males, 
-                     <span class="dt">females =</span> females)
+                     <span class="dt">females =</span> females, <span class="dt">starve =</span> starve)
   population &lt;-<span class="kw">numeric</span>(steps)
   for ( i in <span class="dv">1</span>:steps ) {
     population[i] &lt;-<span class="st"> </span>ocean$malePop +<span class="st"> </span>ocean$femalePop
@@ -739,6 +739,9 @@ Figure 13.1: Simulated whale population. Sadly, they all die after about 130 day
 <p>You should try running the simulation yourself a few times, for differing initial numbers of whales. If you like you can watch the whales move about by setting <code>animate</code> to <code>TRUE</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">200</span>, <span class="dt">males =</span> <span class="dv">15</span>, <span class="dt">females =</span> <span class="dv">15</span>,
          <span class="dt">animate =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>You might also wish to explore varying the <code>starve</code> parameter: recall that the higher it is, the lower the long-term stable whale population will be. In order to better detect long-term stable population sizes, you will want to work with more steps, and you should turn off the step-by-step-animation, thus:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">males =</span> <span class="dv">60</span>, <span class="dt">females =</span> <span class="dv">60</span>,
+         <span class="dt">starve =</span> <span class="fl">2.5</span>, <span class="dt">animate =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>The object-oriented approach to simulation is not necessarily the quickest approach: R6 objects do require a bit more time for computation, as compared to a system that stores relevant information about the population in vectors or in a data frame. On the other hand the object-oriented approach makes it easy to encode information about each individual whale as it proceeds through time. In larger applications, an object-oriented approach to programming can result in code that is relatively easy to read and to modify, albeit at some cost in terms of speed.</p>
 </div>
             </section>
