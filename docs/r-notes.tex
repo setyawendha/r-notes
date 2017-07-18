@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-07-17}
+  \date{2017-07-18}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5470,7 +5470,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10ca8e380>
+## <bytecode: 0x10eb1f098>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9852,7 +9852,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-07-17 14:04:39 EDT"
+## [1] "2017-07-18 15:30:54 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9864,7 +9864,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1500314680
+## [1] 1500406255
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -11350,7 +11350,7 @@ have to be 1000), and also to determine what distance counts as a
   \NormalTok{\}}
   \KeywordTok{set.seed}\NormalTok{(seed)}
   
-  \CommentTok{# set up returns vedtor to store the number of }
+  \CommentTok{# set up returns vector to store the number of }
   \CommentTok{# close returns in each repetition:}
   \NormalTok{returns <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(reps)}
   
@@ -11585,13 +11585,14 @@ until the program possesses all desired features.
   and 1.
 \item
   A gambler starts with 10 dollars, and repeatedly plays a game. If she
-  wins the game he gets one dollar and if she loses the game he
-  losesonea dollar. She has a 45 percent chance of winning the game.
-  Write a function to simulate the gambler repeatedly playing the game
-  until her money runs out. The function should keep track of how much
-  money she has left after each play, so that it can produce a line
-  graph (similar to the one in the section on the Drunken Turtle) of the
-  money left after each play. Write the function so that it has
+  wins the game she gets one dollar and if she loses the game she loses
+  one dollar. Her chance of winning each game is a fixed number that is
+  less than 0.50. Write a function to simulate the gambler repeatedly
+  playing the game until her money runs out. The function should keep
+  track of how much money she has left after each play, so that it can
+  produce a line graph (similar to the one in the section on the Drunken
+  Turtle) of the money left after each play. Write the function so that
+  it has
 
   \begin{itemize}
   \tightlist
@@ -11599,7 +11600,7 @@ until the program possesses all desired features.
     a \texttt{start} parameter for the initial amount of money the
     gambler has;
   \item
-    a \texttt{seed} parameter`
+    a \texttt{seed} parameter`;
   \item
     a \texttt{p} parameter for the chance of winning, so that the user
     can enter any chance less than or equal to 0.5. (The function should
@@ -21313,7 +21314,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127e644d8"
+## [1] "0x1225e1898"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21327,7 +21328,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127e644d8"
+## [1] "0x1225e1898"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21366,7 +21367,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127e644d8"
+## [1] "0x1225e1898"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21379,7 +21380,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11bc39f38"
+## [1] "0x11e7d9258"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21397,7 +21398,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127e644d8"
+## [1] "0x1225e1898"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21441,7 +21442,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1231d1a40" "0x1231d1a40"
+## [1] "0x11f446dc0" "0x11f446dc0"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21480,7 +21481,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1231d1a40" "0x1231d1a40"
+## [1] "0x11f446dc0" "0x11f446dc0"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21522,7 +21523,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1231d1a40" "0x1277ea790"
+## [1] "0x11f446dc0" "0x12259ed18"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
