@@ -143,3 +143,5 @@ freeThrow <- function(player = c(10,27), target = c(90, 95),
 }
 
 freeThrow()
+
+hist(rnorm(100, 70, 3))

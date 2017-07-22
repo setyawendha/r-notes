@@ -121,27 +121,27 @@ Quite often you will want to use the same value several different times.  You ca
 a <- 10
 ```
 
-The previous statement puts the value 10 in the computer's memory and causes the name `a` to refer to it.  If you ask R to show you `a`, you'll get that value:
+The previous statement puts the value 10 in the computer's memory and causes the name `a` to be *bound* to it.  This means that if you ask R to show you `a`, you'll get that value:
 
 ```{r}
 a
 ```
 
-Now you can use `a` as much as you like:
+Now you can use `a` as much as you like.  Whenever you use it, R will know that it stands for the value 10:
 
 ```{r}
 a + 23
 sqrt(a)
 ```
 
-Later on if you want to make `a` point to a different value, you can do so:
+Later on if you want to bind the name `a` to a different value, you can do so, with another assignment-statement:
 
 ```{r}
 a <- 4
 a + 23
 ```
 
-You can choose variable-names that are descriptive.  Let's write some code to introduce creatures of various types.  A creatuee should give his or her name, say what type of creature he or she is, and name a favorite food.
+Let's write some code to introduce creatures of various types.  A creature should give his or her name, say what type of creature he or she is, and name a favorite food.
 
 ```{r}
 creatureType <-"Munchkin"
@@ -149,7 +149,9 @@ creatureName <- "Boq"
 creatureFood <- "corn"
 ```
 
-Next, let's combine these items into a greeting:
+Notice that I chose variable-names that are descriptive of the values to which they are bound.  That's often a good practice.
+
+Next, let's combine our items into a greeting:
 
 ```{r}
 paste("Hello, I am a ",
@@ -164,7 +166,7 @@ paste("Hello, I am a ",
 
 We see that `paste()` \index{R-functions!paste()@\texttt{paste()}}function puts strings together.  The `sep = ""` argument at the end specifies that no space is to be inserted between the strings when they combined.
 
-Another thing we notice in the previous code is that R can ignore white space:  we were able to separate parts of the command to different lines.  This helps prevent our lines from being too long, and allows us to arrange the code so that it's easy to read.
+Another thing we notice in the previous code is that R can ignore white space:  we were able to place the parts of the command on different lines.  This helps prevent our lines from being too long, and allows us to arrange the code so that it's easy to read.
 
 Spaces do matter inside a string, though:
 
@@ -188,7 +190,7 @@ kali dah2
 ## Error: unexpected symbol in "kali dah2"
 ```
 
-R got confused by the unexpected space:  it knows about the name `kalidah2`, but `kali dah2` means nothing.
+R got confused by the unexpected space:  it knows about the name `kalidah2`, but `kali dah2` means nothing to R.
 
 Getting back to the Oz-creatures:  it would be nice if a creatures's greeting could be split over several lines.  This is possible if you use the special string "\\n", which produces a newline.  Just incorporate it into your message, as follows:
 
@@ -281,7 +283,7 @@ In the console nothing happens.  We only created the function `intro()`, we have
 intro(name = "Frederick", type = "Winkie", food = "macaroni")
 ```
 
-R allows you to be lazy:  you can omit the *parameter* `name`, `type` and `food`, so long as you indicate what their values should be, in the correct order:
+R allows you to be lazy:  you can omit the *parameters* `name`, `type` and `food`, so long as you indicate what their values should be, in the correct order:
 
 ```{r}
 intro("Frederick", "Winkie", "macaroni")
@@ -290,7 +292,7 @@ intro("Frederick", "Winkie", "macaroni")
 
 ### Data and Graphics {#idea-data}
 
-R was created for statisticians, so it has many features that are helpful in data analysis.  Let's take a quick look at a data set from a *contributed R package*, the package **mosaicData** [@R-mosaicData].
+Anyone can use R, but it was created for statisticians, so it has many features that are helpful in data analysis.  Let's take a quick look at a data set from a *contributed R package*, the package **mosaicData** [@R-mosaicData].
 
 First, we'll *attach* the package, \index{R-functions!library()@\texttt{library()}} so R can find all of the goodies it contains:
 
@@ -450,7 +452,7 @@ String
 
 Interactive Mode \index{interactive mode}
 
-:  A type of engagment between a human and a computer in which the computer prompts the humand for data and/or commands and may respond with output that the human can read and/or interpret.
+:  A type of engagement between a human and a computer in which the computer prompts the humand for data and/or commands and may respond with output that the human can read and/or interpret.
 
 Read-Evaluate-Print Loop \index{REPL}
 
