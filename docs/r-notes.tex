@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-07-18}
+  \date{2017-07-22}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -834,8 +834,8 @@ You can so this by creating a \emph{variable} \index{variables} with the
 \end{Shaded}
 
 The previous statement puts the value 10 in the computer's memory and
-causes the name \texttt{a} to refer to it. If you ask R to show you
-\texttt{a}, you'll get that value:
+causes the name \texttt{a} to be \emph{bound} to it. This means that if
+you ask R to show you \texttt{a}, you'll get that value:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -847,7 +847,8 @@ causes the name \texttt{a} to refer to it. If you ask R to show you
 ## [1] 10
 \end{verbatim}
 
-Now you can use \texttt{a} as much as you like:
+Now you can use \texttt{a} as much as you like. Whenever you use it, R
+will know that it stands for the value 10:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -869,8 +870,8 @@ Now you can use \texttt{a} as much as you like:
 ## [1] 3.162278
 \end{verbatim}
 
-Later on if you want to make \texttt{a} point to a different value, you
-can do so:
+Later on if you want to bind the name \texttt{a} to a different value,
+you can do so, with another assignment-statement:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -883,10 +884,9 @@ can do so:
 ## [1] 27
 \end{verbatim}
 
-You can choose variable-names that are descriptive. Let's write some
-code to introduce creatures of various types. A creatuee should give his
-or her name, say what type of creature he or she is, and name a favorite
-food.
+Let's write some code to introduce creatures of various types. A
+creature should give his or her name, say what type of creature he or
+she is, and name a favorite food.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -896,7 +896,10 @@ food.
 \end{Highlighting}
 \end{Shaded}
 
-Next, let's combine these items into a greeting:
+Notice that I chose variable-names that are descriptive of the values to
+which they are bound. That's often a good practice.
+
+Next, let's combine our items into a greeting:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -921,9 +924,9 @@ together. The \texttt{sep\ =\ ""} argument at the end specifies that no
 space is to be inserted between the strings when they combined.
 
 Another thing we notice in the previous code is that R can ignore white
-space: we were able to separate parts of the command to different lines.
-This helps prevent our lines from being too long, and allows us to
-arrange the code so that it's easy to read.
+space: we were able to place the parts of the command on different
+lines. This helps prevent our lines from being too long, and allows us
+to arrange the code so that it's easy to read.
 
 Spaces do matter inside a string, though:
 
@@ -965,7 +968,7 @@ object:
 \end{Shaded}
 
 R got confused by the unexpected space: it knows about the name
-\texttt{kalidah2}, but \texttt{kali\ dah2} means nothing.
+\texttt{kalidah2}, but \texttt{kali\ dah2} means nothing to R.
 
 Getting back to the Oz-creatures: it would be nice if a creatures's
 greeting could be split over several lines. This is possible if you use
@@ -1117,7 +1120,7 @@ In the console nothing happens. We only created the function
 ## I like to eat macaroni.
 \end{verbatim}
 
-R allows you to be lazy: you can omit the \emph{parameter}
+R allows you to be lazy: you can omit the \emph{parameters}
 \texttt{name}, \texttt{type} and \texttt{food}, so long as you indicate
 what their values should be, in the correct order:
 
@@ -1135,10 +1138,10 @@ what their values should be, in the correct order:
 
 \subsection{Data and Graphics}\label{idea-data}
 
-R was created for statisticians, so it has many features that are
-helpful in data analysis. Let's take a quick look at a data set from a
-\emph{contributed R package}, the package \textbf{mosaicData}
-\citep{R-mosaicData}.
+Anyone can use R, but it was created for statisticians, so it has many
+features that are helpful in data analysis. Let's take a quick look at a
+data set from a \emph{contributed R package}, the package
+\textbf{mosaicData} \citep{R-mosaicData}.
 
 First, we'll \emph{attach} the package,
 \index{R-functions!library()@\texttt{library()}} so R can find all of
@@ -1402,9 +1405,9 @@ by a computer.
 A value in a computer program that constitutes text (as opposed to
 numbers of some other type of data).
 \item[Interactive Mode \index{interactive mode}]
-A type of engagment between a human and a computer in which the computer
-prompts the humand for data and/or commands and may respond with output
-that the human can read and/or interpret.
+A type of engagement between a human and a computer in which the
+computer prompts the humand for data and/or commands and may respond
+with output that the human can read and/or interpret.
 \item[Read-Evaluate-Print Loop \index{REPL}]
 An interactive cycle in which the R-interpreter reads an expression from
 the console, evaluates it, and prints out the value to the console.
@@ -1857,9 +1860,9 @@ heights of people, in inches:
 \end{Shaded}
 
 The \texttt{NA} in the fifth position of the vector is a special value
-that may be considered to mean ``Not Assigned.''" It's R's way of
-letting us indicate that a value was not recorded or has gone missing
-for some reason.
+that may be considered to mean ``Not Assigned.'' It's R's way of letting
+us indicate that a value was not recorded or has gone missing for some
+reason.
 
 \subsection{\texorpdfstring{``Everything in R is a
 Vector''}{Everything in R is a Vector}}\label{everything-in-r-is-a-vector}
@@ -5470,7 +5473,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10eb1f098>
+## <bytecode: 0x10e86b318>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9852,7 +9855,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-07-18 15:30:54 EDT"
+## [1] "2017-07-22 09:37:25 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9864,7 +9867,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1500406255
+## [1] 1500730646
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -21314,7 +21317,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1225e1898"
+## [1] "0x127e9ab98"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21328,7 +21331,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1225e1898"
+## [1] "0x127e9ab98"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21367,7 +21370,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1225e1898"
+## [1] "0x127e9ab98"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21380,7 +21383,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e7d9258"
+## [1] "0x1307f7538"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21398,7 +21401,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1225e1898"
+## [1] "0x127e9ab98"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21442,7 +21445,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f446dc0" "0x11f446dc0"
+## [1] "0x11fe9f318" "0x11fe9f318"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21481,7 +21484,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f446dc0" "0x11f446dc0"
+## [1] "0x11fe9f318" "0x11fe9f318"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21523,7 +21526,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f446dc0" "0x12259ed18"
+## [1] "0x11fe9f318" "0x11f460580"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

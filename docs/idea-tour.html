@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-18">
+<meta name="date" content="2017-07-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -459,23 +459,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">1.2.3</span> Variables</h3>
 <p>Quite often you will want to use the same value several different times. You can so this by creating a <em>variable</em>  with the <em>assignment operator</em> <code>&lt;-</code>. </p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span></code></pre></div>
-<p>The previous statement puts the value 10 in the computer’s memory and causes the name <code>a</code> to refer to it. If you ask R to show you <code>a</code>, you’ll get that value:</p>
+<p>The previous statement puts the value 10 in the computer’s memory and causes the name <code>a</code> to be <em>bound</em> to it. This means that if you ask R to show you <code>a</code>, you’ll get that value:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a</code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<p>Now you can use <code>a</code> as much as you like:</p>
+<p>Now you can use <code>a</code> as much as you like. Whenever you use it, R will know that it stands for the value 10:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a +<span class="st"> </span><span class="dv">23</span></code></pre></div>
 <pre><code>## [1] 33</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(a)</code></pre></div>
 <pre><code>## [1] 3.162278</code></pre>
-<p>Later on if you want to make <code>a</code> point to a different value, you can do so:</p>
+<p>Later on if you want to bind the name <code>a</code> to a different value, you can do so, with another assignment-statement:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">4</span>
 a +<span class="st"> </span><span class="dv">23</span></code></pre></div>
 <pre><code>## [1] 27</code></pre>
-<p>You can choose variable-names that are descriptive. Let’s write some code to introduce creatures of various types. A creatuee should give his or her name, say what type of creature he or she is, and name a favorite food.</p>
+<p>Let’s write some code to introduce creatures of various types. A creature should give his or her name, say what type of creature he or she is, and name a favorite food.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">creatureType &lt;-<span class="st">&quot;Munchkin&quot;</span>
 creatureName &lt;-<span class="st"> &quot;Boq&quot;</span>
 creatureFood &lt;-<span class="st"> &quot;corn&quot;</span></code></pre></div>
-<p>Next, let’s combine these items into a greeting:</p>
+<p>Notice that I chose variable-names that are descriptive of the values to which they are bound. That’s often a good practice.</p>
+<p>Next, let’s combine our items into a greeting:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Hello, I am a &quot;</span>,
       creatureType,
       <span class="st">&quot;. My name is &quot;</span>,
@@ -486,7 +487,7 @@ creatureFood &lt;-<span class="st"> &quot;corn&quot;</span></code></pre></div>
       <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Hello, I am a Munchkin. My name is Boq.  I like to eat corn.&quot;</code></pre>
 <p>We see that <code>paste()</code> function puts strings together. The <code>sep = &quot;&quot;</code> argument at the end specifies that no space is to be inserted between the strings when they combined.</p>
-<p>Another thing we notice in the previous code is that R can ignore white space: we were able to separate parts of the command to different lines. This helps prevent our lines from being too long, and allows us to arrange the code so that it’s easy to read.</p>
+<p>Another thing we notice in the previous code is that R can ignore white space: we were able to place the parts of the command on different lines. This helps prevent our lines from being too long, and allows us to arrange the code so that it’s easy to read.</p>
 <p>Spaces do matter inside a string, though:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kalidah &lt;-<span class="st"> &quot;Teddy&quot;</span>
 kalidah</code></pre></div>
@@ -497,7 +498,7 @@ kalidah2</code></pre></div>
 <p>You must also be careful not to insert spaces within the name of any object:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kali dah2</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Error: unexpected symbol in &quot;kali dah2&quot;</code></pre></div>
-<p>R got confused by the unexpected space: it knows about the name <code>kalidah2</code>, but <code>kali dah2</code> means nothing.</p>
+<p>R got confused by the unexpected space: it knows about the name <code>kalidah2</code>, but <code>kali dah2</code> means nothing to R.</p>
 <p>Getting back to the Oz-creatures: it would be nice if a creatures’s greeting could be split over several lines. This is possible if you use the special string “\n”, which produces a newline. Just incorporate it into your message, as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Hello, I am a &quot;</span>,
       creatureType,
@@ -573,7 +574,7 @@ message &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class=
 <pre><code>## Hello, I am a Winkie.  
 ## My name is Frederick.
 ## I like to eat macaroni.</code></pre>
-<p>R allows you to be lazy: you can omit the <em>parameter</em> <code>name</code>, <code>type</code> and <code>food</code>, so long as you indicate what their values should be, in the correct order:</p>
+<p>R allows you to be lazy: you can omit the <em>parameters</em> <code>name</code>, <code>type</code> and <code>food</code>, so long as you indicate what their values should be, in the correct order:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">intro</span>(<span class="st">&quot;Frederick&quot;</span>, <span class="st">&quot;Winkie&quot;</span>, <span class="st">&quot;macaroni&quot;</span>)</code></pre></div>
 <pre><code>## Hello, I am a Winkie.  
 ## My name is Frederick.
@@ -581,7 +582,7 @@ message &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class=
 </div>
 <div id="idea-data" class="section level3">
 <h3><span class="header-section-number">1.2.5</span> Data and Graphics</h3>
-<p>R was created for statisticians, so it has many features that are helpful in data analysis. Let’s take a quick look at a data set from a <em>contributed R package</em>, the package <strong>mosaicData</strong> <span class="citation">(Pruim, Kaplan, and Horton <a href="#ref-R-mosaicData">2016</a>)</span>.</p>
+<p>Anyone can use R, but it was created for statisticians, so it has many features that are helpful in data analysis. Let’s take a quick look at a data set from a <em>contributed R package</em>, the package <strong>mosaicData</strong> <span class="citation">(Pruim, Kaplan, and Horton <a href="#ref-R-mosaicData">2016</a>)</span>.</p>
 <p>First, we’ll <em>attach</em> the package,  so R can find all of the goodies it contains:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mosaicData)</code></pre></div>
 <p>Package <strong>mosaicData</strong> contains a number of interesting datasets that are useful in the teaching of statistics. Let’s look into one of them—<code>Births78</code>—using R’s <code>help()</code> function:</p>
