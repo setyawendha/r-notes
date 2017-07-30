@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-07-22}
+  \date{2017-07-30}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -4540,7 +4540,7 @@ functions. The general form of a function definition is as follows:
 \end{Highlighting}
 \end{Shaded}
 
-\texttt{fucntionName} is the variable that will refer to the function
+\texttt{functionName} is the variable that will refer to the function
 you define. Like any other identifier, it can contain letters, numbers,
 the dot and the underscore character, but is not permitted to begin with
 the dot followed by a number.
@@ -5473,7 +5473,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10e86b318>
+## <bytecode: 0x10f55f720>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -5690,7 +5690,7 @@ Global Environment will no longer be the active environment. Instead the
 active environment will be one that is created at the moment when
 \texttt{f} is called. Accordingly, it is called the \emph{run-time
 environment} \index{run-time environment} (also known as the
-\emph{evaluation argument}) of f.
+\emph{evaluation environment}) of f.
 
 Let's go ahead and call \texttt{f()}:
 
@@ -6022,7 +6022,7 @@ The second environment (after the active environment) that R will search
 when it needs to look up a name.
 \item[Run-time Environment (also called the ``Evaluation Environment'')
 \index{run-time environment}]
-A special envrionment that is created when a fuction is called and
+A special environment that is created when a fuction is called and
 ceases to exist when the function finishes executing. It contains the
 values that are local to the function and the arguments of the function
 as well.
@@ -6262,7 +6262,7 @@ this for you:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{number <-}\StringTok{ }\KeywordTok{readline}\NormalTok{(}\StringTok{"Give me a number, and I'll add 10 to it:  "}\NormalTok{)}
-\KeywordTok{cat}\NormalTok{(}\StringTok{"The sum is:  "}\NormalTok{, }\KeywordTok{as.numeric}\NormalTok{(number) +}\DecValTok{10}\NormalTok{)}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"The sum is:  "}\NormalTok{, }\KeywordTok{as.numeric}\NormalTok{(number) +}\StringTok{ }\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6772,7 +6772,7 @@ The result is four lines printed out to the console.
 The more you need to repeat a particular pattern, the more it makes
 sense to write your code with a loop.
 
-The general for of a loop is:
+The general form of a loop is:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9855,7 +9855,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-07-22 09:37:25 EDT"
+## [1] "2017-07-30 13:51:29 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9867,7 +9867,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1500730646
+## [1] 1501437089
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -21317,7 +21317,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127e9ab98"
+## [1] "0x13c316658"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21331,7 +21331,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127e9ab98"
+## [1] "0x13c316658"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21370,7 +21370,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127e9ab98"
+## [1] "0x13c316658"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21383,7 +21383,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1307f7538"
+## [1] "0x122172498"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21401,7 +21401,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127e9ab98"
+## [1] "0x13c316658"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21445,7 +21445,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fe9f318" "0x11fe9f318"
+## [1] "0x10f698a30" "0x10f698a30"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21484,7 +21484,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fe9f318" "0x11fe9f318"
+## [1] "0x10f698a30" "0x10f698a30"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21526,7 +21526,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fe9f318" "0x11f460580"
+## [1] "0x10f698a30" "0x1251832a0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

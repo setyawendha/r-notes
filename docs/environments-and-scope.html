@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-22">
+<meta name="date" content="2017-07-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -472,7 +472,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## &lt;bytecode: 0x10e86b318&gt;
+## &lt;bytecode: 0x10f55f720&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>I got the definition of the <code>cat()</code> function, all the way up in package <strong>base</strong>.</p>
 <p>Now try:</p>
@@ -543,7 +543,7 @@ f &lt;-<span class="st"> </span>function(x, y) {
       <span class="st">&quot;y is &quot;</span>, y, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
 <p>Note that <code>a</code> and <code>b</code> are now in the Global Environment, where the value of <code>a</code> is 10 and the value of <code>b</code> is 5.</p>
-<p>We have defined the function <code>f()</code>; pretty soon we will <em>call</em> it. The moment we do so, we will no longer be working directly from the console: instead R will hand control over to the function that it can execute the code in its body. This means that the Global Environment will no longer be the active environment. Instead the active environment will be one that is created at the moment when <code>f</code> is called. Accordingly, it is called the <em>run-time environment</em>  (also known as the <em>evaluation argument</em>) of f.</p>
+<p>We have defined the function <code>f()</code>; pretty soon we will <em>call</em> it. The moment we do so, we will no longer be working directly from the console: instead R will hand control over to the function that it can execute the code in its body. This means that the Global Environment will no longer be the active environment. Instead the active environment will be one that is created at the moment when <code>f</code> is called. Accordingly, it is called the <em>run-time environment</em>  (also known as the <em>evaluation environment</em>) of f.</p>
 <p>Let’s go ahead and call <code>f()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="dv">3</span>)</code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;x&quot; &quot;y&quot;
