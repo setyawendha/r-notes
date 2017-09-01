@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -423,12 +423,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="motivation" class="section level2">
 <h2><span class="header-section-number">10.1</span> Motivation</h2>
 <p>Suppose you wish to determine how many times the string “ab” appears within some given string. You could write a function to perform this task.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">occurrences &lt;-<span class="st"> </span>function(string) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">occurrences &lt;-<span class="st"> </span><span class="cf">function</span>(string) {
   count &lt;-<span class="st"> </span><span class="dv">0</span>
-  for (i in <span class="dv">1</span>:<span class="kw">nchar</span>(string)) {
-    stringPart &lt;-<span class="st"> </span><span class="kw">substr</span>(string, i, i<span class="dv">+1</span>)
-    if ( stringPart ==<span class="st"> &quot;ab&quot;</span> ) {
-      count &lt;-<span class="st"> </span>count +<span class="dv">1</span>
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nchar</span>(string)) {
+    stringPart &lt;-<span class="st"> </span><span class="kw">substr</span>(string, i, i<span class="op">+</span><span class="dv">1</span>)
+    <span class="cf">if</span> ( stringPart <span class="op">==</span><span class="st"> &quot;ab&quot;</span> ) {
+      count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="dv">1</span>
     }
   }
   count
@@ -446,15 +446,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>How might we handle this task? Again we could write a function. This time we will generalize it a bit, allowing the user to input, along with the string to be searched, a vector of the sub-strings of interest.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># function to count occurrences of substrings in string.</span>
 <span class="co"># substrings are given as patterns</span>
-occurrences2 &lt;-<span class="st"> </span>function(string, patterns) {
+occurrences2 &lt;-<span class="st"> </span><span class="cf">function</span>(string, patterns) {
   count &lt;-<span class="st"> </span><span class="dv">0</span>
-  for (i in <span class="dv">1</span>:<span class="kw">nchar</span>(string)) {
-    for (j in <span class="dv">1</span>:<span class="kw">length</span>(patterns)) {
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nchar</span>(string)) {
+    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(patterns)) {
       pattern &lt;-<span class="st"> </span>patterns[j]
       len &lt;-<span class="st"> </span><span class="kw">nchar</span>(pattern)
-      stringPart &lt;-<span class="st"> </span><span class="kw">substr</span>(string, i, i +<span class="st"> </span>len -<span class="st"> </span><span class="dv">1</span>)
-      if ( stringPart ==<span class="st"> </span>pattern ) {
-        count &lt;-<span class="st"> </span>count +<span class="dv">1</span>
+      stringPart &lt;-<span class="st"> </span><span class="kw">substr</span>(string, i, i <span class="op">+</span><span class="st"> </span>len <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+      <span class="cf">if</span> ( stringPart <span class="op">==</span><span class="st"> </span>pattern ) {
+        count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="dv">1</span>
       }
     }
   }
@@ -533,7 +533,7 @@ occurrences2 &lt;-<span class="st"> </span>function(string, patterns) {
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

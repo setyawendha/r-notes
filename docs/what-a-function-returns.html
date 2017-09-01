@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -426,8 +426,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="the-final-expression-evaluated" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> The Final Expression Evaluated</h3>
 <p>Let’s write a small function to raise a number to a power:<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pow &lt;-<span class="st"> </span>function(x,y) {
-  x^y
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pow &lt;-<span class="st"> </span><span class="cf">function</span>(x,y) {
+  x<span class="op">^</span>y
 }</code></pre></div>
 <p>Check to see that it works:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pow</span>(<span class="dv">2</span>,<span class="dv">3</span>)</code></pre></div>
@@ -439,11 +439,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## I have 16 cats.</code></pre>
 <p>In computer programming parlance, <code>pow(x, y)</code> is said to <em>return</em> the numerical value <code>x^y</code>: <code>pow(2,3)</code> returns 8, <code>pow(2,4)</code> returns 16, and so on.</p>
 <p>In R, what a function returns is: <em>the value of the final expression that it evaluates</em>. You can see this principle at work in the following example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span>function(x) {
-  <span class="dv">2</span>*x +<span class="st"> </span><span class="dv">3</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="dv">3</span>
   <span class="dv">45</span>
   <span class="st">&quot;hello&quot;</span>
-  x^<span class="dv">2</span>
+  x<span class="op">^</span><span class="dv">2</span>
 }
 
 <span class="kw">f</span>(<span class="dv">4</span>)</code></pre></div>
@@ -459,8 +459,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="the-return-function" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> The <code>return()</code> Function</h3>
 <p>R does have a special function to force a function to cease evaluation at a specific point. Its name, unsurprisingly, is <code>return()</code>. Here is an example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span>function(x) {
-  val &lt;-<span class="st"> </span><span class="dv">3</span>*x +<span class="dv">7</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  val &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">*</span>x <span class="op">+</span><span class="dv">7</span>
   <span class="kw">return</span>(val)
   <span class="st">&quot;Hello!&quot;</span>
 }
@@ -469,15 +469,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 10</code></pre>
 <p>We get <span class="math inline">\(3*1+7 = 10\)</span>, but we don’t get “Hello!”. After returning the 10, the function stopped evaluating expressions: hence it never even bothered to evaluate “Hello”, much less to display it in the console.<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a></p>
 <p>It follows that it does not matter whether or not you wrap the final expression of a function in <code>return()</code>. The following two functions do exactly the same thing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 &lt;-<span class="st"> </span>function(x) x^<span class="dv">2</span>
-f2 &lt;-<span class="st"> </span>function(x) <span class="kw">return</span>(x^<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 &lt;-<span class="st"> </span><span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>
+f2 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">return</span>(x<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
 <p>Some people—especially those who are familiar with other programming languages where return statements are required—like to wrap the final expression in <code>return()</code>, simply as a matter of clarity.</p>
 </div>
 <div id="writing-a-talky-function" class="section level3">
 <h3><span class="header-section-number">3.3.3</span> Writing a “Talky” Function</h3>
 <p>Suppose that you would like your function to raise a number to a power, returning the answer to the user, but you also want it to print out a message to the console. You might try writing your function like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">talkySquare &lt;-<span class="st"> </span>function(x) {
-  result &lt;-<span class="st"> </span>x^<span class="dv">2</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">talkySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  result &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span>
   result
   <span class="kw">cat</span>(<span class="st">&quot;The square of &quot;</span>, x, <span class="st">&quot; is:  &quot;</span>, result, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
@@ -487,42 +487,42 @@ f2 &lt;-<span class="st"> </span>function(x) <span class="kw">return</span>(x^<s
 <p>All seems well. But what if we want to save the result in a variable, so that we could perhaps add a number to it later? Something like this, perhaps:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">talkySquare</span>(<span class="dv">4</span>)</code></pre></div>
 <pre><code>## The square of 4 is:  16.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a +<span class="st"> </span><span class="dv">4</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">4</span></code></pre></div>
 <pre><code>## numeric(0)</code></pre>
 <p>The results don’t really make sense. What happened, of course is that R dutifully returned the value of the final expression in the function’s body—the result of the <code>cat()</code> call, not the value of the variable <code>result</code>. If we want both the print-out <em>and</em> the square to be returned, the we have to write our functions like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">talkySquare &lt;-<span class="st"> </span>function(x) {
-  result &lt;-<span class="st"> </span>x^<span class="dv">2</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">talkySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  result &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span>
   <span class="kw">cat</span>(<span class="st">&quot;The square of &quot;</span>, x, <span class="st">&quot; is:  &quot;</span>, result, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   result
 }</code></pre></div>
 <p>This works out as expected:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">talkySquare</span>(<span class="dv">4</span>)</code></pre></div>
 <pre><code>## The square of 4 is:  16.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a +<span class="st"> </span><span class="dv">4</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">4</span></code></pre></div>
 <pre><code>## [1] 20</code></pre>
 <p>Well, maybe it doesn’t work <em>exactly</em> as we would like. It would nice if the function would talk to us only when we ask for the results in the console, not when we are simply assigning the results to a variable for later use. In Chapter <a href="flow.html#flow">4</a> we will learn how to make our talky function keep quiet when we prefer silence.</p>
 </div>
 <div id="the-print-function" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> The <code>print()</code> Function</h3>
 <p>Consider the following function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grumpySquare &lt;-<span class="st"> </span>function(x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grumpySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   <span class="st">&quot;OK, OK, I&#39;m getting to it ... &quot;</span>
-  x^<span class="dv">2</span>
+  x<span class="op">^</span><span class="dv">2</span>
 }</code></pre></div>
 <p>We know by now not to expect to see the grumpy message:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grumpySquare</span>(<span class="dv">4</span>)</code></pre></div>
 <pre><code>## [1] 16</code></pre>
 <p>If we want to see the message, we could wrap it in <code>cat()</code>. Another possibility is to use the <code>print()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grumpySquare &lt;-<span class="st"> </span>function(x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grumpySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   <span class="kw">print</span>(<span class="st">&quot;OK, OK, I&#39;m getting to it ... &quot;</span>)
-  x^<span class="dv">2</span>
+  x<span class="op">^</span><span class="dv">2</span>
 }
 <span class="kw">grumpySquare</span>(<span class="dv">4</span>)</code></pre></div>
 <pre><code>## [1] &quot;OK, OK, I&#39;m getting to it ... &quot;</code></pre>
 <pre><code>## [1] 16</code></pre>
 <p>When R executes a call to <code>print()</code> it is forced to print something out to the console, even if it is in the midst of evaluating expressions in a function. The <code>print</code>-statement is not involved in what the function returns—that’s all up to the expression <code>x^2</code>—but it does cause a result <em>outside of the function itself</em>. Any external result produced by a function (other than what the function returns) is called a <em>side-effect</em> of the function. <code>cat()</code> and <code>print()</code> are examples of functions that, when called inside of some other function, produce side-effects.</p>
 <p>You should know that in R you have been calling the <code>print()</code> function quite a bit, without even knowing it. Consider the following line of code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2+2</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>R evaluates the expression <code>2+2</code>, arriving at the value 4. But what makes the <code>4</code> appear on our console? Behind the scenes, R actually evaluated the expression</p>
 <blockquote>
@@ -557,7 +557,7 @@ f2 &lt;-<span class="st"> </span>function(x) <span class="kw">return</span>(x^<s
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

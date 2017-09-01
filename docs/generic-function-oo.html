@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -428,7 +428,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We begin by revisiting the task of <em>printing</em> to the console.</p>
 <p>Recall that whenever we type the name of an object into the console and press Enter, R interprets the input as a call to the <code>print()</code> function. Consider, for example, printing out some portion of <code>m111survey</code> from the <strong>tigerstats</strong> package.</p>
 <p>Thus the following two expressions accomplish the same</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>tigerstats::m111survey[, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight_feel&quot;</span>)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>tigerstats<span class="op">::</span>m111survey[, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight_feel&quot;</span>)]</code></pre></div>
 <p>If we want to print <code>df</code>, either of the following two statements will suffice:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(df)
 df         <span class="co"># calls print(df) implicitly</span></code></pre></div>
@@ -526,11 +526,11 @@ df         <span class="co"># calls print(df) implicitly</span></code></pre></di
 <p>Each of these generics is associated with a large number of method-functions. This is a great advantage to the casual user of R: one has to know only three R-commands in order to acquire useful information about a wide variety of R-objects.</p>
 <p>It is always a good idea to “try out” generic functions on objects you are using. You never know if the authors of R, or of a contributed package you have attached, may have written methods that are precisely tailored to that object.</p>
 <p>Here are some example of the versatile, polymorphic behavior of the generic function <code>summary()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span>df$height <span class="co"># vector of class &quot;numeric&quot;</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span>df<span class="op">$</span>height <span class="co"># vector of class &quot;numeric&quot;</span>
 <span class="kw">summary</span>(heights)</code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   51.00   65.00   68.00   67.99   71.75   79.00</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">feelings &lt;-<span class="st"> </span>df$weight_feel <span class="co"># has class &quot;factor&quot;</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">feelings &lt;-<span class="st"> </span>df<span class="op">$</span>weight_feel <span class="co"># has class &quot;factor&quot;</span>
 <span class="kw">summary</span>(feelings)</code></pre></div>
 <pre><code>## 1_underweight 2_about_right  3_overweight 
 ##             9            25            37</code></pre>
@@ -547,8 +547,8 @@ df         <span class="co"># calls print(df) implicitly</span></code></pre></di
 ## height      71     -none- numeric
 ## weight_feel 71     factor numeric</code></pre>
 <p>It is interesting also to see how <code>plot()</code> reacts to various types of input. See the Figure <a href="generic-function-oo.html#fig:xsquaregraph">13.2</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">3</span>,<span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
-<span class="kw">plot</span>(x^<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
+<span class="kw">plot</span>(x<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:xsquaregraph"></span>
 <img src="r-notes_files/figure-html/xsquaregraph-1.png" alt="Our vector graphed as a parabola!" width="60%" />
 <p class="caption">
@@ -561,28 +561,28 @@ Figure 13.2: Our vector graphed as a parabola!
 <p>As you advance in your programming skills, you will transition from writing to programs to help you accomplish your own tasks to writing programs that help others—who are not as proficient in programming as you are—get some of <em>their</em> work done. Since casual users of R often become accustomed to generic functions as providers of useful information about many types of R-objects, you might find yourself writing methods for one or more of the common generic functions. In this Section will we will practice the art of method-writing: we will write some method-functions to report on the results of a simulation.</p>
 <p>Recall the problem from Section <a href="simulation-number-needed.html#simulation-number-needed">6.6</a> about estimating the expected number of uniform random numbers one must create until their sum exceeds a specified target-number. Let’s rewrite the simulation function so that it returns an object of a special class. We will then write print and plot methods that permit a user to obtain information about the results of any simulation that was performed.</p>
 <p>First of all, let’s rewrite <code>numberNeededSim()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeededSim &lt;-<span class="st"> </span>function(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeededSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>, 
                             <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   
   <span class="co">#set the seed if none is provided</span>
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
   }
   <span class="kw">set.seed</span>(seed)
   
-  numberNeeded &lt;-<span class="st"> </span>function(target) {
+  numberNeeded &lt;-<span class="st"> </span><span class="cf">function</span>(target) {
     mySum &lt;-<span class="st"> </span><span class="dv">0</span>
     count &lt;-<span class="st"> </span><span class="dv">0</span>
-    while( mySum &lt;<span class="st"> </span>target ) {
+    <span class="cf">while</span>( mySum <span class="op">&lt;</span><span class="st"> </span>target ) {
       number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)
-      mySum &lt;-<span class="st"> </span>mySum +<span class="st"> </span>number
-      count &lt;-<span class="st"> </span>count +<span class="st"> </span><span class="dv">1</span>
+      mySum &lt;-<span class="st"> </span>mySum <span class="op">+</span><span class="st"> </span>number
+      count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
     }
     count
   }
   
   needed &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  for (i in <span class="dv">1</span>:reps ) {
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {
     needed[i] &lt;-<span class="st"> </span><span class="kw">numberNeeded</span>(target)
   }
   results &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">target =</span> target, <span class="dt">sims =</span> needed)
@@ -596,9 +596,9 @@ Figure 13.2: Our vector graphed as a parabola!
 </ul>
 <p>The class of the returned list is set as “numNeededSims”.</p>
 <p>Next, we write a print-method function. Its name must be <code>print.numNeededSims</code>. All of the table output and <code>cat</code>-ing to the console goes here:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.numNeededSims &lt;-<span class="st"> </span>function(x) {
-  <span class="kw">cat</span>(<span class="st">&quot;The target was &quot;</span>, x$target, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  sims &lt;-<span class="st"> </span>x$sims
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.numNeededSims &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="kw">cat</span>(<span class="st">&quot;The target was &quot;</span>, x<span class="op">$</span>target, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  sims &lt;-<span class="st"> </span>x<span class="op">$</span>sims
   reps &lt;-<span class="st"> </span><span class="kw">length</span>(sims)
   <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results, based on &quot;</span>, reps,
       <span class="st">&quot; simulations.</span><span class="ch">\n\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
@@ -616,15 +616,15 @@ Figure 13.2: Our vector graphed as a parabola!
       <span class="kw">mean</span>(sims), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
 <p>Finally, let’s write a plot method. Its name must be <code>plot.numNeededSims</code>. This method will produce a bar graph of the results of the simulations. We’ll use the <strong>ggplot2</strong> plotting package, so we should stop if the user hasn’t installed and attached <strong>ggplot2</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot.numNeededSims &lt;-<span class="st"> </span>function(x) {
-  if ( !<span class="st">&quot;package:ggplot2&quot;</span> %in%<span class="st"> </span><span class="kw">search</span>() ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot.numNeededSims &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="cf">if</span> ( <span class="op">!</span><span class="st">&quot;package:ggplot2&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">search</span>() ) {
     <span class="kw">cat</span>(<span class="st">&quot;Need to load package ggplot2 in order to plot.&quot;</span>)
   }
   
-  sims &lt;-<span class="st"> </span>x$sims
+  sims &lt;-<span class="st"> </span>x<span class="op">$</span>sims
   <span class="co"># for a good bar-plot, convert numerical vector sims</span>
   <span class="co"># to a factor with appropriate levels</span>
-  levels &lt;-<span class="st"> </span><span class="kw">min</span>(sims):<span class="kw">max</span>(sims)
+  levels &lt;-<span class="st"> </span><span class="kw">min</span>(sims)<span class="op">:</span><span class="kw">max</span>(sims)
   sims &lt;-<span class="st"> </span><span class="kw">factor</span>(sims, <span class="dt">levels =</span> levels)
   
   df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(sims)
@@ -632,7 +632,7 @@ Figure 13.2: Our vector graphed as a parabola!
   <span class="co"># in the code below, scale_x_discrete(drop = f) ensures that</span>
   <span class="co"># even if there are no values in sims for a particular level it</span>
   <span class="co"># will still appear in the plot as a zero-height bar</span>
-  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> sims)) +<span class="st"> </span><span class="kw">geom_bar</span>() +<span class="st"> </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> F) +
+  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> sims)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> F) <span class="op">+</span>
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Number Needed&quot;</span>, <span class="dt">title =</span> plotTitle)
 }</code></pre></div>
 <p>Let’s give it a try:</p>
@@ -653,7 +653,7 @@ Figure 13.2: Our vector graphed as a parabola!
 ##  $ sims  : num [1:10000] 3 2 2 2 3 3 4 2 2 5 ...
 ##  - attr(*, &quot;class&quot;)= chr &quot;numNeededSims&quot;</code></pre>
 <p>Then it’s possible for the user to recall specific features of the results, for example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$target  <span class="co"># get just the target number</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results<span class="op">$</span>target  <span class="co"># get just the target number</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>If we wanted the printout we could just say:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results</code></pre></div>
@@ -686,30 +686,30 @@ point2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="d
 <li><span class="math inline">\(r\)</span>: a non-negative real number that the distance from the origin to the point;</li>
 <li><span class="math inline">\(\theta\)</span>: the angle measure (in radians) between the positive <span class="math inline">\(x\)</span>-axis and ray from the origin to the point.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">r =</span> <span class="dv">2</span>, <span class="dt">theta =</span> pi/<span class="dv">2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">r =</span> <span class="dv">2</span>, <span class="dt">theta =</span> pi<span class="op">/</span><span class="dv">2</span>)
 point4 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">r =</span> <span class="dv">1</span>, <span class="dt">theta =</span> pi)
 <span class="kw">class</span>(point3) &lt;-<span class="st"> &quot;polarPoint&quot;</span>
 <span class="kw">class</span>(point4) &lt;-<span class="st"> &quot;polarPoint&quot;</span></code></pre></div>
 <p>In the definition above, <code>point3</code> is the point that lies at <span class="math inline">\(\pi/2\)</span> radians (90 degrees) counter-clockwise from the positive <span class="math inline">\(x\)</span>-axis. That means that it lies along the positive <span class="math inline">\(y\)</span>-axis. It is 2 units from the origin, so in Cartesian coordinates it would be written as <span class="math inline">\((0,2)\)</span>. Similarly, <code>point4</code> would be written in Cartesian coordinates as <span class="math inline">\((-1,0)\)</span>, since it lies one unit from the origin along the negative <span class="math inline">\(x\)</span>-axis.</p>
 <p>Now let us suppose that we would like to find the <span class="math inline">\(x\)</span>-coordinate of a point. For points of class <code>cartesianPoint</code> this is pretty simple:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point1$x  <span class="co"># gives x-coordinate</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point1<span class="op">$</span>x  <span class="co"># gives x-coordinate</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>If the point is given in polar coordinates, we must convert it to Cartesian coordinates. You may recall the conversion formulas from a previous trigonometry class. To get <span class="math inline">\(x\)</span>, use:</p>
 <p><span class="math display">\[x = r\cos \theta.\]</span> To get <span class="math inline">\(y\)</span>, use: <span class="math display">\[x = r\cos \theta.\]</span> Thus, to find the <span class="math inline">\(x\)</span>-coordinate for <code>point3</code>, work as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point3$r *<span class="st"> </span><span class="kw">cos</span>(point3$theta)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">point3<span class="op">$</span>r <span class="op">*</span><span class="st"> </span><span class="kw">cos</span>(point3<span class="op">$</span>theta)</code></pre></div>
 <pre><code>## [1] 1.224647e-16</code></pre>
 <p>The result is 0 (to a tiny bit of round-off error).</p>
 <p>We now write a generic function <code>xpos()</code> for the <span class="math inline">\(x\)</span>-coordinate:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xpos &lt;-<span class="st"> </span>function(x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xpos &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   <span class="kw">UseMethod</span>(<span class="st">&quot;xpos&quot;</span>)
 }</code></pre></div>
 <p>We need to write our method functions, one for each point class:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xpos.cartesianPoint &lt;-<span class="st"> </span>function(point) {
-  point$x
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xpos.cartesianPoint &lt;-<span class="st"> </span><span class="cf">function</span>(point) {
+  point<span class="op">$</span>x
 }
 
-xpos.polarPoint &lt;-<span class="st"> </span>function(point) {
-  point$r *<span class="st"> </span><span class="kw">cos</span>(point$theta)
+xpos.polarPoint &lt;-<span class="st"> </span><span class="cf">function</span>(point) {
+  point<span class="op">$</span>r <span class="op">*</span><span class="st"> </span><span class="kw">cos</span>(point<span class="op">$</span>theta)
 }</code></pre></div>
 <p>Now we can feed points of either class into the generic <code>xpos()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xpos</span>(point2)</code></pre></div>
@@ -742,7 +742,7 @@ xpos.polarPoint &lt;-<span class="st"> </span>function(point) {
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

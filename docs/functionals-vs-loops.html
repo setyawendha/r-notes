@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -425,10 +425,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The functions we have studied in this chapter are often called <em>functionals</em> or <em>higher-order</em> functions because they take a function as an input. As we pointed out earlier, they deliver results that could have been produced by a writing a loop of some sort.</p>
 <p>Once you get used to functionals, you will find that they are often more “expressive” than loops—easier for others to read and to understand, and less prone to bugs. Also, many of them are optimized by the developers of R to run a bit faster than an ordinary loop written in R.</p>
 <p>For example, consider the following list. It consists of ten thousand vectors, each of which contains 100 randomly-generated numbers.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span>:<span class="dv">10000</span>, function(x) <span class="kw">runif</span>(<span class="dv">100</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>, <span class="cf">function</span>(x) <span class="kw">runif</span>(<span class="dv">100</span>))</code></pre></div>
 <p>If we want the mean of each vector, we could write a loop:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">means &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">10000</span>)
-for ( i in <span class="dv">1</span>:<span class="dv">10000</span> ) {
+<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span> ) {
   means[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(lst[[i]])
 }</code></pre></div>
 <p>Or we could use <code>sapply()</code>:</p>
@@ -440,7 +440,7 @@ for ( i in <span class="dv">1</span>:<span class="dv">10000</span> ) {
 <p>For the loop, I get:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>({
   means &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">10000</span>)
-  for ( i in <span class="dv">1</span>:<span class="dv">10000</span> ) {
+  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span> ) {
     means[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(lst[[i]])
   }
 })</code></pre></div>
@@ -466,7 +466,7 @@ for ( i in <span class="dv">1</span>:<span class="dv">10000</span> ) {
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

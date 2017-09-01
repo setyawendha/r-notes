@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -457,7 +457,7 @@ Figure 5.9: Making a square.
 <p>This is a bit repetitious. Surely we can take advantage of the fact that there is a clear pattern to the turtle’s movements. A <code>for</code>-loop seems called for, as in the following code to build the square:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>()
 <span class="kw">turtle_do</span>({
-  for(i in <span class="dv">1</span>:<span class="dv">4</span>) {
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {
     <span class="kw">turtle_forward</span>(<span class="dt">dist =</span> <span class="dv">20</span>)
     <span class="kw">turtle_right</span>(<span class="dt">angle =</span> <span class="dv">90</span>)
   }
@@ -465,7 +465,7 @@ Figure 5.9: Making a square.
 <p>As we learned in Chapter <a href="flow.html#flow">4</a>, the more you need to repeat a particular pattern, the more it makes sense to write your code with a loop. Suppose, for example, that you decide to make regular octagons. A regular octagon has eight sides, and you turn 45 degrees after drawing each side. You can do this easily by modifying the square-code as follows (see Figure <a href="making-many-movements-an-introduction-to-looping.html#fig:turtle-octagon">5.10</a> for the results):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>()
 <span class="kw">turtle_do</span>({
-  for(i in <span class="dv">1</span>:<span class="dv">8</span>) {
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span>) {
     <span class="kw">turtle_forward</span>(<span class="dt">dist =</span> <span class="dv">20</span>)
     <span class="kw">turtle_right</span>(<span class="dt">angle =</span> <span class="dv">45</span>)
   }
@@ -480,7 +480,7 @@ Figure 5.10: Making an octagon.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>()
 <span class="kw">turtle_setpos</span>(<span class="dt">x =</span> <span class="dv">30</span>, <span class="dt">y =</span> <span class="dv">50</span>)
 <span class="kw">turtle_do</span>({
-  for(i in <span class="dv">1</span>:<span class="dv">180</span>) {
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">180</span>) {
     <span class="kw">turtle_forward</span>(<span class="dt">dist =</span> <span class="dv">1</span>)
     <span class="kw">turtle_right</span>(<span class="dt">angle =</span> <span class="dv">2</span>)
   }
@@ -496,9 +496,9 @@ Figure 5.11: Making a circle.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>(<span class="dt">width =</span> <span class="dv">150</span>, <span class="dt">height =</span> <span class="dv">150</span>, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
 <span class="kw">turtle_do</span>({
   <span class="kw">turtle_right</span>(<span class="dv">90</span>)
-  for (i in <span class="dv">1</span>:<span class="dv">720</span>) {
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">720</span>) {
     <span class="kw">turtle_left</span>(<span class="dv">1</span>)
-    <span class="kw">turtle_forward</span>(i/<span class="dv">720</span>)
+    <span class="kw">turtle_forward</span>(i<span class="op">/</span><span class="dv">720</span>)
   }
 })</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:turtle-spiral"></span>
@@ -532,7 +532,7 @@ Figure 5.12: Using a loop to make a spiral.
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

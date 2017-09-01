@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -430,8 +430,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>For now we’ll just study atomic vectors. Let’s make a few vectors, as examples.</p>
 <p>We can make a vector of numbers using the <code>c()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">23.2</span>, <span class="dv">45</span>, <span class="dv">631</span>, -<span class="dv">273</span>, <span class="dv">0</span>, <span class="fl">48.371</span>, <span class="dv">100000</span>,
-            <span class="dv">85</span>, <span class="dv">92</span>, -<span class="dv">236</span>, <span class="dv">8546</span>, <span class="dv">98774</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">23.2</span>, <span class="dv">45</span>, <span class="dv">631</span>, <span class="op">-</span><span class="dv">273</span>, <span class="dv">0</span>, <span class="fl">48.371</span>, <span class="dv">100000</span>,
+            <span class="dv">85</span>, <span class="dv">92</span>, <span class="op">-</span><span class="dv">236</span>, <span class="dv">8546</span>, <span class="dv">98774</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>)
 numVec</code></pre></div>
 <pre><code>##  [1]     23.200     45.000    631.000   -273.000      0.000     48.371
 ##  [7] 100000.000     85.000     92.000   -236.000   8546.000  98774.000
@@ -451,14 +451,14 @@ numVec</code></pre></div>
 <li><code>logical</code></li>
 </ul>
 <p>Let’s look at examples of the other types. Here is a vector of type <code>integer</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">intVec &lt;-<span class="st"> </span><span class="kw">c</span>(3L, 17L, -22L, 45L)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">intVec &lt;-<span class="st"> </span><span class="kw">c</span>(3L, 17L, <span class="op">-</span>22L, 45L)
 intVec</code></pre></div>
 <pre><code>## [1]   3  17 -22  45</code></pre>
 <p>The <code>L</code> after each number signifies to R that the number should be stored in memory as an integer, rather than in double-precision format. Officially, the type is <code>integer</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(intVec)</code></pre></div>
 <pre><code>## [1] &quot;integer&quot;</code></pre>
 <p>You should know that if you left off one or more of the <code>L</code>’s, then R would create a vector of type <code>double</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numVec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">17</span>, -<span class="dv">22</span>, <span class="dv">45</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numVec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">17</span>, <span class="op">-</span><span class="dv">22</span>, <span class="dv">45</span>)
 <span class="kw">typeof</span>(numVec2)</code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
 <p>We won’t work much with integer-type vectors, but you’ll see them out in the wild.</p>
@@ -515,7 +515,7 @@ newVector</code></pre></div>
 <li><code>as.logical()</code> .</li>
 </ul>
 <p>Here are some examples:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="fl">2.5</span>, -<span class="fl">7.32</span>, <span class="dv">0</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="fl">2.5</span>, <span class="op">-</span><span class="fl">7.32</span>, <span class="dv">0</span>)
 <span class="kw">as.character</span>(numVec)</code></pre></div>
 <pre><code>## [1] &quot;3&quot;     &quot;2.5&quot;   &quot;-7.32&quot; &quot;0&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(numVec)</code></pre></div>
@@ -607,7 +607,7 @@ heights</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

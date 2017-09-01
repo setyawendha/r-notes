@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -434,22 +434,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
                     <span class="dt">name =</span> <span class="ot">NULL</span>,
                     <span class="dt">age =</span> <span class="ot">NULL</span>,
                     <span class="dt">desire =</span> <span class="ot">NULL</span>,
-                    <span class="dt">initialize =</span> function(<span class="dt">name =</span> <span class="ot">NA</span>, <span class="dt">age =</span> <span class="ot">NA</span>, <span class="dt">desire =</span> <span class="ot">NA</span>) {
-                      self$name &lt;-<span class="st"> </span>name
-                      self$age &lt;-<span class="st"> </span>age
-                      self$desire &lt;-<span class="st"> </span>desire
-                      self$<span class="kw">greet</span>()
+                    <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">name =</span> <span class="ot">NA</span>, <span class="dt">age =</span> <span class="ot">NA</span>, <span class="dt">desire =</span> <span class="ot">NA</span>) {
+                      self<span class="op">$</span>name &lt;-<span class="st"> </span>name
+                      self<span class="op">$</span>age &lt;-<span class="st"> </span>age
+                      self<span class="op">$</span>desire &lt;-<span class="st"> </span>desire
+                      self<span class="op">$</span><span class="kw">greet</span>()
                     },
-                    <span class="dt">set_age =</span> function(val) {
-                      self$age &lt;-<span class="st"> </span>val
-                      <span class="kw">cat</span>(<span class="st">&quot;Age of &quot;</span>, self$name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+                    <span class="dt">set_age =</span> <span class="cf">function</span>(val) {
+                      self<span class="op">$</span>age &lt;-<span class="st"> </span>val
+                      <span class="kw">cat</span>(<span class="st">&quot;Age of &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
                     },
-                    <span class="dt">set_desire =</span> function(val) {
-                      self$desire &lt;-<span class="st"> </span>val
-                      <span class="kw">cat</span>(<span class="st">&quot;Desire of &quot;</span>, self$name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+                    <span class="dt">set_desire =</span> <span class="cf">function</span>(val) {
+                      self<span class="op">$</span>desire &lt;-<span class="st"> </span>val
+                      <span class="kw">cat</span>(<span class="st">&quot;Desire of &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
                     },
-                    <span class="dt">greet =</span> function() {
-                      <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;Hello, my name is &quot;</span>, self$name, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>))
+                    <span class="dt">greet =</span> <span class="cf">function</span>() {
+                      <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;Hello, my name is &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>))
                     }
                   )
 )</code></pre></div>
@@ -471,7 +471,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">13.2.2</span> Instantiation: Initializing Objects</h3>
 <p>On its own there is not much that a class can <em>do</em>. For anything to happen we need to create a particular individual: an object of class Person. Creation of an object having a particular class is called <em>instantiation</em>. </p>
 <p>Every class comes with a method—not mentioned in the definition of the class—called <code>new()</code>. This method, when called on the Class, instantiates an object of the class by running the <code>initialize()</code> function. Let’s create a person named Dorothy and store this new object in the variable <code>dorothy</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy &lt;-<span class="st"> </span>Person$<span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="dv">12</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy &lt;-<span class="st"> </span>Person<span class="op">$</span><span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="dv">12</span>, 
                       <span class="dt">desire =</span> <span class="st">&quot;Kansas&quot;</span>)</code></pre></div>
 <pre><code>## Hello, my name is Dorothy.</code></pre>
 <p>Note how the dollar-sign is used to indicate the calling of the <code>new()</code> method on the class Person. Note also that the arguments of <code>new()</code> are the arguments of <code>initialize()</code>: that’s because the <code>new()</code> method actually runs <code>initialize()</code> as part of its object-creation process.</p>
@@ -489,7 +489,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##     set_desire: function (val)</code></pre>
 <p>We get the basic information on Dorothy, including also an indication that she can be cloned (copied). We’ll discuss cloning later.</p>
 <p>We can instantiate as many people as we like. The code below for example, establishes <code>scarecrow</code> as a new instance of Person:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scarecrow &lt;-<span class="st"> </span>Person$<span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Scarecrow&quot;</span>, <span class="dt">age =</span> <span class="fl">0.038</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scarecrow &lt;-<span class="st"> </span>Person<span class="op">$</span><span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Scarecrow&quot;</span>, <span class="dt">age =</span> <span class="fl">0.038</span>, 
                       <span class="dt">desire =</span> <span class="st">&quot;Brains&quot;</span>)</code></pre></div>
 <pre><code>## Hello, my name is Scarecrow.</code></pre>
 <p>In <em>The Wizard of Oz</em>, Scarecrow is only two weeks old when Dorothy meets him, so his age is set at <span class="math inline">\(2/52 = 0.38\)</span> years.</p>
@@ -497,22 +497,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="getting-and-setting-attributes" class="section level3">
 <h3><span class="header-section-number">13.2.3</span> Getting and Setting Attributes</h3>
 <p>If we would like to change Dorothy’s age, we can do so by calling the <code>set_age()</code> method on her:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$<span class="kw">set_age</span>(<span class="dv">13</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy<span class="op">$</span><span class="kw">set_age</span>(<span class="dv">13</span>)</code></pre></div>
 <pre><code>## Age of Dorothy is:  13.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy<span class="op">$</span>age</code></pre></div>
 <pre><code>## [1] 13</code></pre>
 <p>We can also set Dorothy’s age directly, by regular assignment:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age &lt;-<span class="st"> </span><span class="dv">14</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy<span class="op">$</span>age &lt;-<span class="st"> </span><span class="dv">14</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy<span class="op">$</span>age</code></pre></div>
 <pre><code>## [1] 14</code></pre>
 <p>The effect is the same as when we use <code>set_age()</code> except that we don’t get a report to the console.</p>
 </div>
 <div id="calling-methods" class="section level3">
 <h3><span class="header-section-number">13.2.4</span> Calling Methods</h3>
 <p>We have seen that in order to call a method on an object, you follow the format:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">object$<span class="kw">method</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">object<span class="op">$</span><span class="kw">method</span>()</code></pre></div>
 <p>Thus, we can ask <code>dorothy</code> to issue a greeting:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$<span class="kw">greet</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy<span class="op">$</span><span class="kw">greet</span>()</code></pre></div>
 <pre><code>## Hello, my name is Dorothy.</code></pre>
 <p>In the syntax for calling methods, we see one aspect of “message-passing”: <code>dorothy$greet()</code> essentially passes a message to <code>dorothy</code>: “Please call your <code>greet()</code> method!”</p>
 </div>
@@ -529,53 +529,53 @@ a</code></pre></div>
 <p><code>b</code> has been changed to 20, but that change did not affect <code>a</code>, which keeps its initial value of 10.</p>
 <p>We can use the function <code>address()</code>  from the package <strong>pryr</strong> <span class="citation">(Wickham <a href="#ref-R-pryr">2015</a>)</span> to track what is happening behind the scenes. <code>address()</code> will tell us the current location in memory of the value corresponding to a name. Let’s repeat the above process, but use <code>address()</code> to see where the values are stored:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span>
-pryr::<span class="kw">address</span>(a)</code></pre></div>
-<pre><code>## [1] &quot;0x11e77b0f8&quot;</code></pre>
+pryr<span class="op">::</span><span class="kw">address</span>(a)</code></pre></div>
+<pre><code>## [1] &quot;0x11ab93ae8&quot;</code></pre>
 <p>The value 10 is stored in the memory address given above. Next, let’s create <code>b</code> by assignment from <code>a</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span>a
-pryr::<span class="kw">address</span>(b)</code></pre></div>
-<pre><code>## [1] &quot;0x11e77b0f8&quot;</code></pre>
+pryr<span class="op">::</span><span class="kw">address</span>(b)</code></pre></div>
+<pre><code>## [1] &quot;0x11ab93ae8&quot;</code></pre>
 <p>For the moment <code>b</code> points to the same place in memory as <code>a</code> does, so it will yield 10:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b</code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>We can use <code>b</code> for other operations; for example, we can add 30 to it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b +<span class="st"> </span><span class="dv">30</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b <span class="op">+</span><span class="st"> </span><span class="dv">30</span></code></pre></div>
 <pre><code>## [1] 40</code></pre>
 <p>But for now <code>b</code> still points to the same place in memory that <code>a</code> does:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pryr::<span class="kw">address</span>(b)</code></pre></div>
-<pre><code>## [1] &quot;0x11e77b0f8&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pryr<span class="op">::</span><span class="kw">address</span>(b)</code></pre></div>
+<pre><code>## [1] &quot;0x11ab93ae8&quot;</code></pre>
 <p>But now let’s assign a new value to <code>b</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span><span class="dv">20</span>
-pryr::<span class="kw">address</span>(b)</code></pre></div>
-<pre><code>## [1] &quot;0x118833b98&quot;</code></pre>
+pryr<span class="op">::</span><span class="kw">address</span>(b)</code></pre></div>
+<pre><code>## [1] &quot;0x1215bc1f8&quot;</code></pre>
 <p>Aha! <code>b</code> now points to a <strong>new</strong> location in the computer’s memory! That’s because R saw that the assignment operator was going to change the value of <code>b</code>. Since <code>b</code> has value semantics, R knows to set aside a new spot in memory to contain the value 20, and to associate the name <code>b</code> with that spot. That way, the new <code>b</code> won’t interfere with <code>a</code>, which points to the same old spot in memory and thus remains 10:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pryr::<span class="kw">address</span>(a)</code></pre></div>
-<pre><code>## [1] &quot;0x11e77b0f8&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pryr<span class="op">::</span><span class="kw">address</span>(a)</code></pre></div>
+<pre><code>## [1] &quot;0x11ab93ae8&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a</code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>On the other hand, R6 objects have <em>reference semantics</em>. We can see this in action with the following example. First, let’s check on <code>dorothy</code>’s age:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy<span class="op">$</span>age</code></pre></div>
 <pre><code>## [1] 14</code></pre>
 <p>Let’s now create <code>dorothy2</code> by assignment from <code>dorothy</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2 &lt;-<span class="st"> </span>dorothy</code></pre></div>
 <p>Let’s check the memory locations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(pryr::<span class="kw">address</span>(dorothy), pryr::<span class="kw">address</span>(dorothy2))</code></pre></div>
-<pre><code>## [1] &quot;0x11e4e4c68&quot; &quot;0x11e4e4c68&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(pryr<span class="op">::</span><span class="kw">address</span>(dorothy), pryr<span class="op">::</span><span class="kw">address</span>(dorothy2))</code></pre></div>
+<pre><code>## [1] &quot;0x11056e350&quot; &quot;0x11056e350&quot;</code></pre>
 <p>As with <code>a</code> and <code>b</code>, the two names initially point to the same place in memory.</p>
 <p>Now let’s change the age of <code>dorothy2</code> to 30:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2$age &lt;-<span class="st"> </span><span class="dv">30</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2<span class="op">$</span>age &lt;-<span class="st"> </span><span class="dv">30</span></code></pre></div>
 <p>Let’s check the age of <code>dorothy</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$age</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy<span class="op">$</span>age</code></pre></div>
 <pre><code>## [1] 30</code></pre>
 <p>Whoa! Changing the age of <code>dorothy2</code> changed the age of <code>dorothy</code>! That’s because of the reference semantics: <code>dorothy2</code> continues to be associated with the same spot in memory as <code>dorothy</code>, <em>even after</em> we begin to make changes to it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(pryr::<span class="kw">address</span>(dorothy), pryr::<span class="kw">address</span>(dorothy2))</code></pre></div>
-<pre><code>## [1] &quot;0x11e4e4c68&quot; &quot;0x11e4e4c68&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(pryr<span class="op">::</span><span class="kw">address</span>(dorothy), pryr<span class="op">::</span><span class="kw">address</span>(dorothy2))</code></pre></div>
+<pre><code>## [1] &quot;0x11056e350&quot; &quot;0x11056e350&quot;</code></pre>
 </div>
 <div id="cloning-an-object" class="section level3">
 <h3><span class="header-section-number">13.2.6</span> Cloning an Object</h3>
-<p></p>
+
 <p>For the sorts of complex objects created by R6 classes, reference semantics can be a useful feature. But what if we want a new and truly distinct copy of an R6 object? For this we need the <code>clone()</code> method that was alluded to earlier:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2 &lt;-<span class="st"> </span>dorothy$<span class="kw">clone</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2 &lt;-<span class="st"> </span>dorothy<span class="op">$</span><span class="kw">clone</span>()
 dorothy2</code></pre></div>
 <pre><code>## &lt;Person&gt;
 ##   Public:
@@ -588,11 +588,11 @@ dorothy2</code></pre></div>
 ##     set_age: function (val) 
 ##     set_desire: function (val)</code></pre>
 <p><code>dorothy2</code> looks just like <code>dorothy</code>. However, the name <code>dorothy2</code> does not point to the same place in memory:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(pryr::<span class="kw">address</span>(dorothy), pryr::<span class="kw">address</span>(dorothy2))</code></pre></div>
-<pre><code>## [1] &quot;0x11e4e4c68&quot; &quot;0x11acf7920&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(pryr<span class="op">::</span><span class="kw">address</span>(dorothy), pryr<span class="op">::</span><span class="kw">address</span>(dorothy2))</code></pre></div>
+<pre><code>## [1] &quot;0x11056e350&quot; &quot;0x11b57fbf0&quot;</code></pre>
 <p>Accordingly, changes to <code>dorothy2</code> will no longer result in changes to <code>dorothy</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2$age &lt;-<span class="st"> </span><span class="dv">100</span>
-dorothy$age</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy2<span class="op">$</span>age &lt;-<span class="st"> </span><span class="dv">100</span>
+dorothy<span class="op">$</span>age</code></pre></div>
 <pre><code>## [1] 30</code></pre>
 <p>You should know that if one or more of the members of an object is itself an object with reference semantics (such as an instance of an R6 class), then a copy produced by <code>clone()</code> will hold a reference to that same member-object, not a separate copy of the member-object. In such a case if you still want a totally separate copy, you will have to consult the R6 manual on the topic of “deep cloning.”</p>
 </div>
@@ -629,7 +629,7 @@ dorothy$age</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

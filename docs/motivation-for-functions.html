@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -422,7 +422,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="motivation-for-functions" class="section level2">
 <h2><span class="header-section-number">3.1</span> Motivation for Functions</h2>
-<p></p>
+
 <p>Suppose you have the job of printing out the word “Kansas” to the console four times, each time on a new line. The code for this is easy enough:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
 <pre><code>## Kansas</code></pre>
@@ -466,7 +466,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>If you wanted to implement this new idea throughout your program, you would have to search through the program for the many five-line snippets you created previously, replacing each one of them with the appropriate version of your clever one-liner. Not only is this a lot of work, it’s also quite error-prone: you could miss or more of the snippets along the way, or on some occasion fail to modify the word within the one-liner to have the value you need at that point.</p>
 <p>Accordingly programmers try, as much as possible, to solve problems in a <em>general</em> way and to implement that general solution in <em>one place</em> in their program. Then they call upon that solution in the many different locations where the solution might be required.</p>
 <p>Functions are one way in which programmers accomplish this. The following is a function that will print any given word four times, once on each line:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">catFourTimes &lt;-<span class="st"> </span>function(word) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">catFourTimes &lt;-<span class="st"> </span><span class="cf">function</span>(word) {
   wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   <span class="kw">cat</span>(<span class="kw">rep</span>(wordWithNewline, <span class="dv">4</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
@@ -477,7 +477,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Kansas
 ## Kansas</code></pre>
 <p>It works like a charm! What’s more, once we get to thinking in terms of general solutions, we realize that we might just as well have our function print not only any given word, but print it any given number of times. So instead of <code>catFourTimes()</code> we might actually use the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">manyCat &lt;-<span class="st"> </span>function(word, n) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, n) {
   wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)
   <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
@@ -515,7 +515,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

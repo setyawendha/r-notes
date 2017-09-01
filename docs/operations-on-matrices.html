@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -429,23 +429,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)
 mat2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)</code></pre></div>
 <p>To get the sum of the above two matrices, R adds their corresponding elements and forms a new matrix out of their sums, thus:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat1 +<span class="st"> </span>mat2</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat1 <span class="op">+</span><span class="st"> </span>mat2</code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    3    3
 ## [2,]    3    3</code></pre>
 <p>R applies recycling as needed. For example, suppose we have:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)
 mat</code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    3
 ## [2,]    2    4</code></pre>
 <p>In order to multiply each element of <code>mat</code> by 2, we need not create a 2-by-2 matrix of 2’s. We can simply multiply by 2, and R will take care of recycling the 2:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> *<span class="st"> </span>mat</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mat</code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    6
 ## [2,]    4    8</code></pre>
 <p>Or we could subtract 3 from each element of <code>mat</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat -<span class="st"> </span><span class="dv">3</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat <span class="op">-</span><span class="st"> </span><span class="dv">3</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   -2    0
 ## [2,]   -1    1</code></pre>
@@ -454,25 +454,25 @@ mat</code></pre></div>
 <h3><span class="header-section-number">7.3.2</span> Matrix Multiplication</h3>
 <p>This section is optional reading, but it may interest you if you know about matrix multiplication in linear algebra.</p>
 <p>In order to accomplish matrix multiplication, we have to keep in mind that the regular multiplication operator <code>*</code> works element-wise on matrices, as we have already seen. For matrix multiplication R provides the special operator <code>%*%</code>. For example, consider the following matrices:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">6</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
 a</code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    3    5
 ## [2,]    2    4    6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, -<span class="dv">1</span>), <span class="dt">nrow =</span> <span class="dv">3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), <span class="dt">nrow =</span> <span class="dv">3</span>)
 b</code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    2
 ## [2,]    1
 ## [3,]   -1</code></pre>
 <p>Observe that the number of columns of <code>a</code> is equal to the number of rows of <code>b</code>. Hence it is possible to form the matrix product <code>a %*% b</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a %*%<span class="st"> </span>b</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">%*%</span><span class="st"> </span>b</code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    0
 ## [2,]    2</code></pre>
 <p>As expected, the result is a matrix having as many rows as the rows of <code>a</code>and as many columns as the columns of <code>b</code>.</p>
 <p>It is also interesting to recall how matrix multiplication works when the second matrix has only one column. The product is obtained by multiplying each column of <code>a</code> by the element on the corresponding row of <code>b</code>, and adding the resulting matrices:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b[<span class="dv">1</span>,<span class="dv">1</span>]*a[ ,<span class="dv">1</span>, drop =<span class="st"> </span>F] +<span class="st"> </span>b[<span class="dv">2</span>,<span class="dv">1</span>, drop =<span class="st"> </span>F]*a[ ,<span class="dv">2</span>] +<span class="st"> </span>b[<span class="dv">3</span>,<span class="dv">1</span>]*a[ ,<span class="dv">3</span>, drop =<span class="st"> </span>F]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span>a[ ,<span class="dv">1</span>, drop =<span class="st"> </span>F] <span class="op">+</span><span class="st"> </span>b[<span class="dv">2</span>,<span class="dv">1</span>, drop =<span class="st"> </span>F]<span class="op">*</span>a[ ,<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>b[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span>a[ ,<span class="dv">3</span>, drop =<span class="st"> </span>F]</code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    0
 ## [2,]    2</code></pre>
@@ -480,9 +480,9 @@ b</code></pre></div>
 <div id="logical-operations" class="section level3">
 <h3><span class="header-section-number">7.3.3</span> Logical Operations</h3>
 <p>Boolean operations apply to matrices element-wise, just as they do to ordinary vectors. The result is a matrix of logical values. For examples, consider the original matrix <code>numbersMat</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)</code></pre></div>
 <p>Suppose we wish to determine which elements of <code>numbersMat</code> are odd. Then we simply ask whether the remainder of an element after division by 2 is equal to 1:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat %%<span class="st"> </span><span class="dv">2</span> ==<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
 <pre><code>##       [,1]  [,2]  [,3]  [,4]
 ## [1,]  TRUE  TRUE  TRUE  TRUE
 ## [2,] FALSE FALSE FALSE FALSE
@@ -491,7 +491,7 @@ b</code></pre></div>
 ## [5,]  TRUE  TRUE  TRUE  TRUE
 ## [6,] FALSE FALSE FALSE FALSE</code></pre>
 <p>We can select elements from a matrix using a Boolean operators, too:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat[numbersMat %%<span class="st"> </span><span class="dv">2</span> ==<span class="st"> </span><span class="dv">1</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat[numbersMat <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]</code></pre></div>
 <pre><code>##  [1]  1  3  5  7  9 11 13 15 17 19 21 23</code></pre>
 <p>Note that the result is an ordinary, one-dimensional vector.</p>
 </div>
@@ -513,7 +513,7 @@ b</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

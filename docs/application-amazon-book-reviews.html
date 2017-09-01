@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -433,13 +433,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>the content of the review itself.</li>
 </ul>
 <p>Let’s focus on reviews for <em>Hunger Games</em> series. The following code creates a new data frame that contains only those reviews:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hunger &lt;-<span class="st"> </span><span class="kw">subset</span>(reviews, book ==<span class="st"> &quot;hunger&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hunger &lt;-<span class="st"> </span><span class="kw">subset</span>(reviews, book <span class="op">==</span><span class="st"> &quot;hunger&quot;</span>)</code></pre></div>
 <p>That’s still a lot of reviews! We can tell by asking for the number of rows in the <code>hunger</code> data frame:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(hunger)</code></pre></div>
 <pre><code>## [1] 24027</code></pre>
 <p>We are looking at 24,027 reviews—some of which, by the way, are quite long.</p>
 <p>Explore the plain-text of some of the reviews. For example, the text of the second review can be viewed with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hunger$content[<span class="dv">2</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hunger<span class="op">$</span>content[<span class="dv">2</span>]</code></pre></div>
 <pre><code>## # A single long string.  We will show just the first few characters:
 ## [1] &quot;\&quot;&lt;span class=\&quot;\&quot;a-size-base review-text\&quot;\&quot;&gt;Clearly ...</code></pre>
 <p>Perusing this review, we come upon the following passage:</p>
@@ -459,14 +459,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linkPattern &lt;-<span class="st"> &quot;(?&lt;=&lt;a class=</span><span class="ch">\&quot;\&quot;</span><span class="st">a-link-normal</span><span class="ch">\&quot;\&quot;</span><span class="st"> href=</span><span class="ch">\&quot;\&quot;</span><span class="st">/)(.+?)(?=</span><span class="ch">\&quot;\&quot;</span><span class="st">&gt;)&quot;</span></code></pre></div>
 <p>We now construct a list of character-vectors containing the links (if any) in each review:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">links &lt;-<span class="st"> </span><span class="kw">list</span>()
-for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(hunger)) {
-  text &lt;-<span class="st"> </span>reviews$content[i]
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hunger)) {
+  text &lt;-<span class="st"> </span>reviews<span class="op">$</span>content[i]
   m &lt;-<span class="st"> </span><span class="kw">gregexpr</span>(linkPattern, <span class="dt">text =</span> text, <span class="dt">perl=</span>T)
   links[[i]] &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">regmatches</span>(text, m))
 }</code></pre></div>
 <p>If we are interested in <em>how many</em> books each reviewer links to, we can make a vector of these links:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberOfLinks &lt;-<span class="st"> </span><span class="kw">numeric</span>()
-for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(hunger)) {
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hunger)) {
   numberOfLinks[i] &lt;-<span class="st"> </span><span class="kw">length</span>(links[[i]])
 }</code></pre></div>
 <p>We can tabulate the link-numbers with R’s <code>table()</code> function:</p>
@@ -527,7 +527,7 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(hunger)) {
 </tbody>
 </table>
 <p>Most of the reviewers didn’t link at all, but 173 of them did provide at least one link. One reviewer linked to nine books! Here they are:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(links[numberOfLinks ==<span class="st"> </span><span class="dv">9</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(links[numberOfLinks <span class="op">==</span><span class="st"> </span><span class="dv">9</span>])</code></pre></div>
 <pre><code>## [1] &quot;Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
 ## [2] &quot;The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
 ## [3] &quot;The-Long-Walk/dp/0451196716&quot;                                
@@ -563,7 +563,7 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(hunger)) {
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

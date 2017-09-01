@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -428,7 +428,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>a certain number of columns.</li>
 </ul>
 <p>One way to create is matrix is to take a vector and <em>give</em> it those two extra attributes, via the <code>matrix()</code> function.  Here is an example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbers &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">24</span>  <span class="co"># this is an ordinary atomic vector</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbers &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">24</span>  <span class="co"># this is an ordinary atomic vector</span>
 numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)  <span class="co"># make a matrix</span>
 numbersMat</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
@@ -450,8 +450,8 @@ numbersMat</code></pre></div>
 ## [5,]   17   18   19   20
 ## [6,]   21   22   23   24</code></pre>
 <p>Sometimes we like to give names to our rows, or to our columns, or even to both:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(numbersMat) &lt;-<span class="st"> </span>letters[<span class="dv">1</span>:<span class="dv">6</span>]
-<span class="kw">colnames</span>(numbersMat) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span>:<span class="dv">4</span>]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(numbersMat) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]
+<span class="kw">colnames</span>(numbersMat) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
 numbersMat</code></pre></div>
 <pre><code>##   A  B  C  D
 ## a 1  7 13 19
@@ -490,7 +490,7 @@ numbersMat</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

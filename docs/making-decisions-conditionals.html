@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -431,31 +431,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>The user will then be asked to guess the number.</li>
 <li>If the user is correct, then the computer will congratulate the user.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
 guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">readline</span>(<span class="st">&quot;Guess the number (1-4):  &quot;</span>))
-if ( guess ==<span class="st"> </span>number ) {
+<span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {
   <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)
 }</code></pre></div>
 <p>The <code>sample()</code> function randomly picks a value from the vector that is is given. The <code>size</code> parameter specifies how many numbers to pick. (This time we only want one number.)</p>
 <p>Flow control enters the picture with the reserved word <code>if</code>. Immediately after <code>if</code> is a Boolean expression enclosed in parentheses. This expression is often called the <em>condition</em>. If the condition evaluates to <code>TRUE</code>, then the body of the <code>if</code> statement—the code enclosed in the brackets—will be executed. On the other hand if the condition evaluates to <code>FALSE</code>, then R skips past the bracketed code.<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a></p>
 <p>The code above congratulates the a lucky guesser, but it has nothing at all to say to someone who did not guess correctly. The way to provide an alternative is through the addition of the <code>else</code> reserved-word:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
 guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">readline</span>(<span class="st">&quot;Guess the number (1-4):  &quot;</span>))
-if ( guess ==<span class="st"> </span>number ) {
+<span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {
   <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)
-} else {
+} <span class="cf">else</span> {
   <span class="kw">cat</span>(<span class="st">&quot;Sorry, the correct number was &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   <span class="kw">cat</span>(<span class="st">&quot;Better luck next time!&quot;</span>)
 }</code></pre></div>
 <p>An <code>if-else</code>can be followed by any number of <code>if-else</code>’s, setting up a chain of alternative responses:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
 guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">readline</span>(<span class="st">&quot;Guess the number (1-4):  &quot;</span>))
-if ( guess ==<span class="st"> </span>number ) {
+<span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {
   <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)
-} else if ( <span class="kw">abs</span>(guess -<span class="st"> </span>number) ==<span class="st"> </span><span class="dv">1</span> ){
+} <span class="cf">else</span> <span class="cf">if</span> ( <span class="kw">abs</span>(guess <span class="op">-</span><span class="st"> </span>number) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ){
   <span class="kw">cat</span>(<span class="st">&quot;You were close!</span><span class="ch">\n</span><span class="st">&quot;</span>)
   <span class="kw">cat</span>(<span class="st">&quot;The correct number was &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-} else {
+} <span class="cf">else</span> {
   <span class="kw">cat</span>(<span class="st">&quot;You were way off.</span><span class="ch">\n</span><span class="st">&quot;</span>)
   <span class="kw">cat</span>(<span class="st">&quot;The correct number was &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
@@ -463,17 +463,17 @@ if ( guess ==<span class="st"> </span>number ) {
 <div id="invisible-returns" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Application: Invisible Returns</h3>
 <p>Let’s think again about the <span class="math inline">\(\pi\)</span>-computing function from Section <a href="more-about-arguments.html#default-arguments">3.4.1</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">1000000</span>) {
-  k &lt;-<span class="st"> </span><span class="dv">1</span>:n
-  terms &lt;-<span class="st"> </span>(-<span class="dv">1</span>)^(k<span class="dv">+1</span>)*<span class="dv">4</span>/(<span class="dv">2</span>*k<span class="dv">-1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>) {
+  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n
+  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="op">-</span><span class="dv">1</span>)
   <span class="kw">sum</span>(terms)
 }</code></pre></div>
 <p>We could use <code>if</code> to write in a “talky” option:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">1000000</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
-  k &lt;-<span class="st"> </span><span class="dv">1</span>:n
-  terms &lt;-<span class="st"> </span>(-<span class="dv">1</span>)^(k<span class="dv">+1</span>)*<span class="dv">4</span>/(<span class="dv">2</span>*k<span class="dv">-1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
+  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n
+  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="op">-</span><span class="dv">1</span>)
   approx &lt;-<span class="st"> </span><span class="kw">sum</span>(terms)
-  if ( verbose) {
+  <span class="cf">if</span> ( verbose) {
     <span class="kw">cat</span>(<span class="st">&quot;Madhava&#39;s approximation is:  &quot;</span>, approx, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;This is based on &quot;</span>, n, <span class="st">&quot; terms.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
@@ -486,11 +486,11 @@ if ( guess ==<span class="st"> </span>number ) {
 <pre><code>## [1] 3.140593</code></pre>
 <p>It’s a bit awkward that the approximation gets printed out at the end: after the message on the console, the user doesn’t need to see it. But if we were to remove the final <code>approx</code> expression, then the function would not return an approximation that could be used for further computations.</p>
 <p>The solution to this dilemma is R’s <code>invisible()</code> function. </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">1000000</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
-  k &lt;-<span class="st"> </span><span class="dv">1</span>:n
-  terms &lt;-<span class="st"> </span>(-<span class="dv">1</span>)^(k<span class="dv">+1</span>)*<span class="dv">4</span>/(<span class="dv">2</span>*k<span class="dv">-1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
+  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n
+  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="op">-</span><span class="dv">1</span>)
   approx &lt;-<span class="st"> </span><span class="kw">sum</span>(terms)
-  if ( verbose) {
+  <span class="cf">if</span> ( verbose) {
     <span class="kw">cat</span>(<span class="st">&quot;Madhava&#39;s approximation is:  &quot;</span>, approx, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;This is based on &quot;</span>, n, <span class="st">&quot; terms.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
@@ -502,7 +502,7 @@ if ( guess ==<span class="st"> </span>number ) {
 ## This is based on 1000 terms.</code></pre>
 <p>Nevertheless it is still returned, as we can see from the following code, in which the approximation is computed without any output to the console and stored in the variable <code>p</code> for use later on in a <code>cat()</code> statement.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">madhavaPI</span>() <span class="co"># verbose is FALSE by default</span>
-<span class="kw">cat</span>(<span class="st">&quot;Pi plus 10 is about &quot;</span>, p +<span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<span class="kw">cat</span>(<span class="st">&quot;Pi plus 10 is about &quot;</span>, p <span class="op">+</span><span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
 <pre><code>## Pi plus 10 is about 13.14159.</code></pre>
 </div>
 <div id="ifelse" class="section level3">
@@ -511,7 +511,7 @@ if ( guess ==<span class="st"> </span>number ) {
 <p>Suppose that you have a lot of heights:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">69</span>, <span class="dv">67</span>, <span class="dv">70</span>, <span class="dv">72</span>, <span class="dv">65</span>, <span class="dv">63</span>, <span class="dv">75</span>, <span class="dv">70</span>)</code></pre></div>
 <p>You would like to classify each person as either “tall” or “short”, depending on whether they are respectively more or less than 71 inches in height. <code>ifelse()</code> makes quick work of it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heightClass &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="dt">test =</span> height &gt;<span class="st"> </span><span class="dv">70</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heightClass &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="dt">test =</span> height <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>, 
                       <span class="dt">yes =</span> <span class="st">&quot;tall&quot;</span>, <span class="dt">no =</span> <span class="st">&quot;short&quot;</span>)
 heightClass</code></pre></div>
 <pre><code>## [1] &quot;short&quot; &quot;short&quot; &quot;short&quot; &quot;tall&quot;  &quot;short&quot; &quot;short&quot; &quot;tall&quot;  &quot;short&quot;</code></pre>
@@ -522,7 +522,7 @@ heightClass</code></pre></div>
 <li><code>no</code>: the value assigned when <code>test</code> is false;</li>
 </ul>
 <p>Most programmers don’t name the parameters. This is fine—just remember to keep the test-yes-no order:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(height &gt;<span class="st"> </span><span class="dv">70</span>, <span class="st">&quot;tall&quot;</span>, <span class="st">&quot;short&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(height <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>, <span class="st">&quot;tall&quot;</span>, <span class="st">&quot;short&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;short&quot; &quot;short&quot; &quot;short&quot; &quot;tall&quot;  &quot;short&quot; &quot;short&quot; &quot;tall&quot;  &quot;short&quot;</code></pre>
 <p>Here’s another example of the power of <code>ifelese()</code>. If a triangle has three sides of length <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span>, then the sum of any two sides must be greater than the remaining side:</p>
 <p><span class="math display">\[\begin{aligned}
@@ -531,8 +531,8 @@ x + z &amp;&gt; y, \\
 y + z &amp;&gt; x.
 \end{aligned}\]</span> This fact is known as the <em>Triangle Inequality</em>. It works the other way around, too: if three positive numbers are such that the sum of any two exceeds the third, then three line segments having those numbers as lengths could be arranged into a triangle.</p>
 <p>We can write a function that, when given three lengths, determines whether or not they can make a triangle:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span>function(x, y, z) {
-  (x +<span class="st"> </span>y &gt;<span class="st"> </span>z) &amp;<span class="st"> </span>(x +z &gt;<span class="st"> </span>y) &amp;<span class="st"> </span>(y +<span class="st"> </span>z &gt;<span class="st"> </span>x)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {
+  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)
 }</code></pre></div>
 <p><code>isTriangle()</code> simply evaluates a Boolean expression involving <code>x</code>, <code>y</code> and <code>z</code>. It will return <code>TRUE</code> when the three quantities satisfy the Triangle Inequality; otherwise, it returns <code>FALSE</code>. Let’s try it out:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isTriangle</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">4</span>, <span class="dt">z =</span> <span class="dv">5</span>)</code></pre></div>
@@ -562,8 +562,8 @@ triangle</code></pre></div>
 <li>and so on.</li>
 </ul>
 <p>If you would like to convert a day-number to the right day name, then you could write a function like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dayWord &lt;-<span class="st"> </span>function(dayNumber) {
-  switch(dayNumber,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dayWord &lt;-<span class="st"> </span><span class="cf">function</span>(dayNumber) {
+  <span class="cf">switch</span>(dayNumber,
          <span class="st">&quot;Sunday&quot;</span>,
          <span class="st">&quot;Monday&quot;</span>,
          <span class="st">&quot;Tuesday&quot;</span>,
@@ -576,8 +576,8 @@ triangle</code></pre></div>
 <pre><code>## [1] &quot;Tuesday&quot;</code></pre>
 <p>In <code>switch()</code> above, the first argument after <code>dayNumber</code> is what goes with 1, the second argument is what goes with 2, and so on.</p>
 <p>When the item you want to convert is a string rather than a number, then the <code>switch()</code> function works a little bit differently. Suppose, for instance, that you want to <em>abbreviate</em> the names of the weekdays. You might write an abbreviation-function as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">abbrDay &lt;-<span class="st"> </span>function(day) {
-  switch(day,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">abbrDay &lt;-<span class="st"> </span><span class="cf">function</span>(day) {
+  <span class="cf">switch</span>(day,
          <span class="dt">Monday =</span> <span class="st">&quot;Mon&quot;</span>,
          <span class="dt">Tuesday =</span> <span class="st">&quot;Tue&quot;</span>,
          <span class="dt">Wednesday =</span> <span class="st">&quot;Wed&quot;</span>,
@@ -589,8 +589,8 @@ triangle</code></pre></div>
 <pre><code>## [1] &quot;Wed&quot;</code></pre>
 <p>In the above call to <code>switch()</code>, the weekday names you want to abbreviate appear as the names of named character-vectors, each of length one. The value of each vector is what the its name will be converted to.</p>
 <p>When you are converting strings you have the option to provide a default conversion for values that don’t fit into the pattern you have in mind. All you have to do is to provide the default value as an additional argument. (It should NOT have a name.) Thus:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">abbrDay &lt;-<span class="st"> </span>function(day) {
-  switch(day,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">abbrDay &lt;-<span class="st"> </span><span class="cf">function</span>(day) {
+  <span class="cf">switch</span>(day,
          <span class="dt">Monday =</span> <span class="st">&quot;Mon&quot;</span>,
          <span class="dt">Tuesday =</span> <span class="st">&quot;Tue&quot;</span>,
          <span class="dt">Wednesday =</span> <span class="st">&quot;Wed&quot;</span>,
@@ -628,7 +628,7 @@ triangle</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

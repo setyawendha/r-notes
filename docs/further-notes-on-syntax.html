@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -426,7 +426,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="syntax-errors-vs.run-time-errors-vs.semantic-errors" class="section level3">
 <h3><span class="header-section-number">2.8.1</span> Syntax Errors vs. Run-time Errors vs. Semantic Errors</h3>
 <p>For the most part you will learn the syntax informally. By now, for example, you have probably realized that when you call a function you have to supply a closing parenthesis to match the open parenthesis. Thus the following is completely fine:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span>:<span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
 <pre><code>## [1] 15</code></pre>
 <p>On the other hand if you were to type <code>sum(1:5</code> alone on a single line in a R script, R Studio’s code-checker would show a red warning-circle at that line. Hovering over the circle you would see the message:</p>
 <blockquote>
@@ -457,7 +457,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emeraldCity &lt;-<span class="st"> </span><span class="dv">15</span>
 emeraldcity &lt;-<span class="st"> </span><span class="dv">4</span></code></pre></div>
 <p>Suppose now that—wanting R to compute <span class="math inline">\(15^2\)</span>—you run the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emeraldcity^<span class="dv">2</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emeraldcity<span class="op">^</span><span class="dv">2</span></code></pre></div>
 <pre><code>## [1] 16</code></pre>
 <p>You don’t get the results you wanted, because you accidentally asked for the square of the wrong number.</p>
 <p>Semantic errors are usually the most difficult errors for programmers to detect and repair.</p>
@@ -487,7 +487,7 @@ c &lt;-<span class="st"> </span><span class="dv">5</span></code></pre></div>
 <h3><span class="header-section-number">2.8.3</span> Multiple Expressions</h3>
 <p>R allows you to write more than one expression on a single line, as long as you separate the expressions with semicolons:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span>b &lt;-<span class="st"> </span>c &lt;-<span class="st"> </span><span class="dv">5</span>
-a; b; c; <span class="dv">2+2</span>; <span class="kw">sum</span>(<span class="dv">1</span>:<span class="dv">5</span>)</code></pre></div>
+a; b; c; <span class="dv">2</span><span class="op">+</span><span class="dv">2</span>; <span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <pre><code>## [1] 5</code></pre>
 <pre><code>## [1] 5</code></pre>
@@ -536,7 +536,7 @@ a; b; c; <span class="dv">2+2</span>; <span class="kw">sum</span>(<span class="d
 <p><code>if</code>, <code>else</code>, <code>while</code>, <code>repeat</code>, <code>function</code>, <code>for</code>, <code>in</code>, <code>next</code>, <code>break</code>,<code>TRUE</code>, <code>FALSE</code>, <code>NULL</code>, <code>inf</code>, <code>NaN</code>, <code>NA</code>, <code>NA_integer</code>, <code>NA_real</code>, <code>NA_complex</code>, <code>NA_character</code></p>
 </blockquote>
 <p>You need not memorize the above list: You’ll gradually learn most of it, and words you don’t learn are words that you are unlikely to ever choose as a variable-name on your own. Besides, reserved words show in in blue in the R Studio editor, and if you manage to use one anyway then R will stop you outright with a clear error message:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">break &lt;-<span class="st"> </span><span class="dv">5</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">break</span> &lt;-<span class="st"> </span><span class="dv">5</span></code></pre></div>
 <pre><code>## Error in break &lt;- 5 : invalid (NULL) left side of assignment</code></pre>
 <p>One final remark: variables together with reserved words constitute the part of the R language called <em>identifiers</em>.</p>
 
@@ -567,7 +567,7 @@ a; b; c; <span class="dv">2+2</span>; <span class="kw">sum</span>(<span class="d
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

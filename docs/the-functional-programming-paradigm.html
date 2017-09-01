@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -463,7 +463,7 @@ a   <span class="co"># check that a is really 3</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(is.numeric)</code></pre></div>
 <pre><code>## [1] &quot;builtin&quot;</code></pre>
 <p>The so-called “primitive” functions of R—the functions written not in R but in C-code—are “built in” objects. On the other hand, consider this user-defined function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span>function(x) x<span class="dv">+3</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>(x) x<span class="op">+</span><span class="dv">3</span>
 <span class="kw">typeof</span>(f)</code></pre></div>
 <pre><code>## [1] &quot;closure&quot;</code></pre>
 <p>Functions other than primitive functions are objects of type “closure.”<a href="#fn37" class="footnoteRef" id="fnref37"><sup>37</sup></a></p>
@@ -477,12 +477,12 @@ lst</code></pre></div>
 ## function (x) 
 ## x + 3</code></pre>
 <p>Very importantly, you can make functions serve as argument for other functions, and functions can return other functions as their results. The following example demonstrates both of these possibilities.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cuber &lt;-<span class="st"> </span>function(f) {
-  g &lt;-<span class="st"> </span>function(x) <span class="kw">f</span>(x)^<span class="dv">3</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cuber &lt;-<span class="st"> </span><span class="cf">function</span>(f) {
+  g &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">f</span>(x)<span class="op">^</span><span class="dv">3</span>
   g
 }
 h &lt;-<span class="st"> </span><span class="kw">cuber</span>(abs)
-<span class="kw">h</span>(-<span class="dv">2</span>)  <span class="co"># returns |-2|^3 = 2^3 = 8</span></code></pre></div>
+<span class="kw">h</span>(<span class="op">-</span><span class="dv">2</span>)  <span class="co"># returns |-2|^3 = 2^3 = 8</span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
 <p>In fact, in R functions can be treated just like any variable. In computer programming, we say that such functions are <em>first-class citizens</em>.</p>
 <p>Although it is not often stated as a separate principle of the functional programming paradigm it is true that in languages that provide support for functional programming, the following principle holds true:</p>
@@ -508,9 +508,9 @@ h &lt;-<span class="st"> </span><span class="kw">cuber</span>(abs)
 <p>A function that produced output to the console was <code>str()</code>.</p>
 <p>The assignment function <code>&quot;&lt;-&quot;()</code> added <code>cols</code>, <code>isNumerical</code> and <code>numsm111</code> to the Global Environment, and also made changes to <code>isNumerical</code> in the course of the <code>for</code>-loop.</p>
 <p>Of course we have seen examples of functions that do two of these things at once, for example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myFun &lt;-<span class="st"> </span>function(x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myFun &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   <span class="kw">cat</span>(<span class="st">&quot;myFun is running!</span><span class="ch">\n</span><span class="st">&quot;</span>)  <span class="co"># output to console</span>
-  x +<span class="st"> </span><span class="dv">3</span>                       <span class="co"># return a value</span>
+  x <span class="op">+</span><span class="st"> </span><span class="dv">3</span>                       <span class="co"># return a value</span>
 }
 <span class="kw">myFun</span>(<span class="dv">6</span>)</code></pre></div>
 <pre><code>## myFun is running!</code></pre>
@@ -522,9 +522,9 @@ h &lt;-<span class="st"> </span><span class="kw">cuber</span>(abs)
 </blockquote>
 <p>Now this principle is difficult to adhere to, and in fact if you were to adhere strictly to it in R then your programs would never “do” anything. There do exist quite practical programming languages in which all of the functions are pure—and this leads to some very interesting features such as that the order in which operations are evaluated doesn’t affect what the function returns—but these “purely functional” languages manage purity by having other objects besides functions produce the necessary side-effects. In R we happily let our functions have side-effects: we certainly want to do some assignment, and print things out to the console from time to time.</p>
 <p>One way that R does support the third principle of functional programming is that it makes it easy to avoid having your functions modify the Global Environment. To see this consider the following example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">addThree &lt;-<span class="st"> </span>function(x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">addThree &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   heavenlyHash &lt;-<span class="st"> </span><span class="dv">5</span>
-  x<span class="dv">+3</span>  <span class="co"># returns this value</span>
+  x<span class="op">+</span><span class="dv">3</span>  <span class="co"># returns this value</span>
 }
 result &lt;-<span class="st"> </span><span class="kw">addThree</span>(<span class="dv">10</span>)
 result
@@ -533,9 +533,9 @@ heavenlyHash</code></pre></div>
 ## Error: object &#39;heavenlyHash&#39; not found</code></pre>
 <p>This is as we expect: the variable <code>heavenlyHash</code> exists only in the run-time environment that is created in the call to <code>addThree()</code>. As soon as the function finishes execution that environment dies, and <code>heavenlyHash</code> dies long with it. In particular, it never becomes part of the Global Environment.</p>
 <p>If you really want you functions to modify the Global Environment—or any environment other than its run-time environment, for that matter—then you have to take special measures. You could, for example, use the super-assignment operator <code>&lt;&lt;-</code>: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">addThreeSideEffect &lt;-<span class="st"> </span>function(x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">addThreeSideEffect &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   heavenlyHash &lt;&lt;-<span class="st"> </span><span class="dv">5</span>
-  x<span class="dv">+3</span>  <span class="co"># returns this value</span>
+  x<span class="op">+</span><span class="dv">3</span>  <span class="co"># returns this value</span>
 }
 result &lt;-<span class="st"> </span><span class="kw">addThreeSideEffect</span>(<span class="dv">10</span>)
 result</code></pre></div>
@@ -587,7 +587,7 @@ result</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

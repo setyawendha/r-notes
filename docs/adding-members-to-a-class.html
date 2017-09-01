@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -423,7 +423,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="adding-members-to-a-class" class="section level2">
 <h2><span class="header-section-number">13.4</span> Adding Members to a Class</h2>
 <p>Sometimes we need to add or to modify a member of a class, after we have defined that class. Every class comes with a <code>set()</code> method that allows us to do this. For example, suppose that we would like our people to have a favorite color:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person$<span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="ot">NA</span>, <span class="dt">overwrite =</span> T)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="ot">NA</span>, <span class="dt">overwrite =</span> T)</code></pre></div>
 <p>We now see that <code>color</code> is now one of the public members of class Person:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person</code></pre></div>
 <pre><code>## &lt;Person&gt; object generator
@@ -443,17 +443,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##   Portable: TRUE</code></pre>
 <p>In the above call to set, the argument <code>overwrite = T</code> was not strictly necessary, since <code>color</code> did not previously exist as a member of Person. If you are developing a program, though, and you find yourself repeatedly running a piece of code that sets a new member for a class, it’s useful to have overwriting turned on.</p>
 <p>While we are at it. let’s write a special <code>set_color()</code> method:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person$<span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;set_color&quot;</span>, function(val) {
-  self$color &lt;-<span class="st"> </span>val
-  <span class="kw">cat</span>(self$name, <span class="st">&quot; has favorite color: &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;set_color&quot;</span>, <span class="cf">function</span>(val) {
+  self<span class="op">$</span>color &lt;-<span class="st"> </span>val
+  <span class="kw">cat</span>(self<span class="op">$</span>name, <span class="st">&quot; has favorite color: &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }, <span class="dt">overwrite =</span> T)</code></pre></div>
 <p>You might think that we can now set a favorite color for <code>dorothy</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy$<span class="kw">set_color</span>(<span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy<span class="op">$</span><span class="kw">set_color</span>(<span class="st">&quot;blue&quot;</span>)</code></pre></div>
 <pre><code>Error: attempt to apply non-function</code></pre>
 <p>Why did this not work? It turns out that when you add a new member to a class it is only available to instances of the class that are created <strong>after</strong> the new member is added to that class. If we create a new instance of Person, the Good Witch Glinda, let’s say, then we should be able to give her a favorite color:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glinda &lt;-<span class="st"> </span>Person$<span class="kw">new</span>(<span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;500&quot;</span>, <span class="st">&quot;the good of all&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glinda &lt;-<span class="st"> </span>Person<span class="op">$</span><span class="kw">new</span>(<span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;500&quot;</span>, <span class="st">&quot;the good of all&quot;</span>)</code></pre></div>
 <pre><code>## Hello, my name is Glinda.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glinda$<span class="kw">set_color</span>(<span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glinda<span class="op">$</span><span class="kw">set_color</span>(<span class="st">&quot;blue&quot;</span>)</code></pre></div>
 <pre><code>## Glinda has favorite color: blue.</code></pre>
 </div>
             </section>
@@ -473,7 +473,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

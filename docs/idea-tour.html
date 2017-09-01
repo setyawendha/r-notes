@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -436,19 +436,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Just as on a graphing calculator, parentheses can be used to clarify the order of operations.</p>
 <p>Here are some examples:</p>
 <p>To get <span class="math inline">\(\frac{27-10}{3}\)</span>, use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">27-3</span>)/<span class="dv">10</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">27</span><span class="op">-</span><span class="dv">3</span>)<span class="op">/</span><span class="dv">10</span></code></pre></div>
 <pre><code>## [1] 2.4</code></pre>
 <p>To get <span class="math inline">\(3^2 + 4^2\)</span> try:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span>^<span class="dv">2+4</span>^<span class="dv">2</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span><span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="dv">4</span><span class="op">^</span><span class="dv">2</span></code></pre></div>
 <pre><code>## [1] 25</code></pre>
 <p>Sometimes you’ll want to take roots. As with a calculator, you can accomplish this by raising your number to a fractional power. So if you want <span class="math inline">\(\sqrt[3]{64}\)</span> then you could try:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">64</span>^{<span class="dv">1</span>/<span class="dv">3</span>}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">64</span><span class="op">^</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)</code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>If you would like square roots then you can either raise your number to the <span class="math inline">\(1/2\)</span>-power or you could use R’s special square-root function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="dv">64</span>)</code></pre></div>
 <pre><code>## [1] 8</code></pre>
 <p>One way or another, you can evaluate quite complex mathematical expressions. For example, to get <span class="math inline">\(\sqrt{3^2 + 4^2}\)</span> simply type:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="dv">3</span>^<span class="dv">2+4</span>^<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="dv">3</span><span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="dv">4</span><span class="op">^</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## [1] 5</code></pre>
 </div>
 <div id="read-evaluate-print-loop" class="section level3">
@@ -463,13 +463,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a</code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>Now you can use <code>a</code> as much as you like. Whenever you use it, R will know that it stands for the value 10:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a +<span class="st"> </span><span class="dv">23</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">23</span></code></pre></div>
 <pre><code>## [1] 33</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(a)</code></pre></div>
 <pre><code>## [1] 3.162278</code></pre>
 <p>Later on if you want to bind the name <code>a</code> to a different value, you can do so, with another assignment-statement:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">4</span>
-a +<span class="st"> </span><span class="dv">23</span></code></pre></div>
+a <span class="op">+</span><span class="st"> </span><span class="dv">23</span></code></pre></div>
 <pre><code>## [1] 27</code></pre>
 <p>Let’s write some code to introduce creatures of various types. A creature should give his or her name, say what type of creature he or she is, and name a favorite food.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">creatureType &lt;-<span class="st">&quot;Munchkin&quot;</span>
@@ -526,7 +526,7 @@ kalidah2</code></pre></div>
 <p>That last example showed that you can use variables together with functions to create new variables. Here is another example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span>
 b &lt;-<span class="st"> </span><span class="dv">27</span>
-mySum &lt;-<span class="st"> </span>a +<span class="st"> </span>b
+mySum &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b
 mySum</code></pre></div>
 <pre><code>## [1] 37</code></pre>
 </div>
@@ -558,7 +558,7 @@ message &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class=
 ## I like to eat cookies.</code></pre>
 <p>That’s great, but it seems that every time we introduce a new creature we have to type a lot of code. It would be much better if we could find a way to re-use code, rather than repeating it.</p>
 <p><em>Functions</em> allow us to re-use code. Let’s define a function to do introductions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">intro &lt;-<span class="st"> </span>function(name, type, food) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">intro &lt;-<span class="st"> </span><span class="cf">function</span>(name, type, food) {
   message &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Hello, I am a &quot;</span>,
                  type,
                  <span class="st">&quot;.  </span><span class="ch">\n</span><span class="st">My name is &quot;</span>,
@@ -646,7 +646,7 @@ Figure 1.2: A simple scatterplot with R’s ggplot2 graphics system.
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

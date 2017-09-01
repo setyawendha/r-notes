@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -428,7 +428,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Suppose that we want to generate five vectors, each of which consists of ten numbers randomly chosen between 0 and 1. We accomplish the task with a loop, as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set up a list of length 10:</span>
 lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">5</span>)
-for ( i in <span class="dv">1</span>:<span class="dv">5</span> ) {
+<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span> ) {
   lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)
 }
 <span class="kw">str</span>(lst)</code></pre></div>
@@ -440,8 +440,8 @@ for ( i in <span class="dv">1</span>:<span class="dv">5</span> ) {
 ##  $ : num [1:10] 0.255 0.654 0.312 0.201 0.181 ...</code></pre>
 <p>If we wanted the vectors to have length <span class="math inline">\(1, 4, 9, 16,\)</span> and 25, then we could write:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">5</span>)
-for ( i in <span class="dv">1</span>:<span class="dv">5</span> ) {
-  lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(i^<span class="dv">2</span>)
+<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span> ) {
+  lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(i<span class="op">^</span><span class="dv">2</span>)
 }
 <span class="kw">str</span>(lst)</code></pre></div>
 <pre><code>## List of 5
@@ -453,7 +453,7 @@ for ( i in <span class="dv">1</span>:<span class="dv">5</span> ) {
 <p>In the first example, the elements in the vector <code>1:10</code> didn’t matter—we wanted a vector of length ten each time—and in the second case the elements in the <code>1:10</code> did matter, in that it determined the length of the new vector produced. Of course in general we could apply <code>runif()</code> to each element of <em>any</em> vector at all, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">9</span>)
 lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="kw">length</span>(vec))
-for ( i in <span class="kw">seq_along</span>(vec) ) {
+<span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(vec) ) {
   lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(vec[i])
 }
 <span class="kw">str</span>(lst)</code></pre></div>
@@ -504,7 +504,7 @@ lst &lt;-<span class="st"> </span><span class="kw">lapply</span>(vec, runif, <sp
 ##  $ : num [1:2] 4.79 4.31
 ##  $ : num [1:9] 7.27 7.77 7.54 4.66 5.42 ...</code></pre>
 <p>If you want to use <code>lapply()</code> to get the results of our first example, in which each vector was of length 10, then you have to get around the fact that by default each element in the vector becomes the first argument of <code>FUN</code>. One way to do this is by setting <code>FUN</code> to be a function that you write on the spot yourself:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span>:<span class="dv">5</span>, function(x) <span class="kw">runif</span>(<span class="dv">10</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="cf">function</span>(x) <span class="kw">runif</span>(<span class="dv">10</span>))
 <span class="kw">str</span>(lst)</code></pre></div>
 <pre><code>## List of 5
 ##  $ : num [1:10] 0.647 0.394 0.619 0.477 0.136 ...
@@ -513,12 +513,12 @@ lst &lt;-<span class="st"> </span><span class="kw">lapply</span>(vec, runif, <sp
 ##  $ : num [1:10] 0.96407 0.07147 0.95581 0.94798 0.00119 ...
 ##  $ : num [1:10] 0.985 0.225 0.864 0.885 0.625 ...</code></pre>
 <p>In the code above, <code>FUN</code> has been set to an <em>anonymous</em> function that returns <code>runif(10)</code> no matter what value was supplied to it. In computer programming a function is called <em>anonymous</em> when it is not given a name. We could have used a regular “named” function, but we would have needed an extra line of code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myfun &lt;-<span class="st"> </span>function(x) <span class="kw">runif</span>(<span class="dv">10</span>)
-lst &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span>:<span class="dv">5</span>, myFun)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myfun &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">runif</span>(<span class="dv">10</span>)
+lst &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, myFun)</code></pre></div>
 <p>We lied a little bit when we said earlier that <code>X</code> was a vector: <code>X</code> could also be what in R is called an <em>expression</em>. We won’t get into the topic of exactly what constitutes an expression (see <code>help(expression)</code> for more on the topic), but suffice to say that an expression is a combination of object-names and function calls. In particular—and this is a very common application of <code>lapply()</code>—<code>X</code> could be the name of a data frame. For example, suppose that you want to find the number of elements in each column of <code>mat111survery</code> that are <code>NA</code>. with <code>lapply()</code> this is not difficult:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tigerstats)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNA &lt;-<span class="st"> </span><span class="kw">lapply</span>(m111survey, function(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)))
-numberNA[<span class="dv">1</span>:<span class="dv">2</span>]   <span class="co"># show results just for the first two variables</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNA &lt;-<span class="st"> </span><span class="kw">lapply</span>(m111survey, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)))
+numberNA[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]   <span class="co"># show results just for the first two variables</span></code></pre></div>
 <pre><code>## $height
 ## [1] 0
 ## 
@@ -530,7 +530,7 @@ numberNA[<span class="dv">1</span>:<span class="dv">2</span>]   <span class="co"
 <h3><span class="header-section-number">12.3.2</span> <code>sapply()</code></h3>
 <p><code>lapply()</code> always returns a list. Sometimes you would prefer that the result be something more “compact”: a matrix, perhaps, or even a vector. In that case you should look into <code>sapply()</code>, which you make think of as short for “simplify-apply.”</p>
 <p>Consider the problem we brought up in the previous section: finding out how many <code>NA</code>s there are in each variable of a data frame. It would be nice to have the results in a vector rather than a list, and <code>sapply()</code> can return a vector in this case:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(m111survey, function(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)), <span class="dt">simplify =</span> <span class="st">&quot;vector&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(m111survey, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)), <span class="dt">simplify =</span> <span class="st">&quot;vector&quot;</span>)</code></pre></div>
 <pre><code>##          height        ideal_ht           sleep         fastest 
 ##               0               2               0               0 
 ##     weight_feel      love_first      extra_life            seat 
@@ -559,7 +559,7 @@ decisions &lt;-<span class="st"> </span><span class="kw">sapply</span>(probs, rb
 <p>As a motivator for learning about <code>tapply()</code>, the next member of the <code>apply</code> family, consider the question from Section <a href="more-graphing.html#onenum-onecat">7.9.3</a> about the <code>m111survey</code> data: <em>Who tends to drive the fastest: people who prefer to sit in the Front, the Middle, or the Back?</em></p>
 <p>You will recall that we investigated this question—a question about the relationship between the numerical variable <code>fastest</code> and the factor-variable <code>seat</code>—with a graph, which is reproduced here as Figure <a href="lapply-and-friends.html#fig:fastestseatviolinagain">12.1</a>. Comparing the relative positions of the violins and looking at the locations of individual values, it appears that folks who prefer to sit in the Back tend to drive faster than front and middle-sitters do, especially since there seems to be a reasonable number of back-sitters who drive quite fast (the back-sitter violin has a long upper “neck”).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat, <span class="dt">y =</span> fastest))
-p +<span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) +<span class="st"> </span><span class="kw">geom_jitter</span>()</code></pre></div>
+p <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastestseatviolinagain"></span>
 <img src="r-notes_files/figure-html/fastestseatviolinagain-1.png" alt="It kinds looks like the back-sitters drive faster, on the whole." width="60%" />
 <p class="caption">
@@ -568,7 +568,7 @@ Figure 12.1: It kinds looks like the back-sitters drive faster, on the whole.
 </div>
 <p>It would be nice, though, to be able to base our judgement on something other than mere eye-balling. Should we not undertake a numerical investigation of our question?</p>
 <p>One possible numerical approach is to compare the <em>mean</em> fastest speeds of the three groups of students. We could use the <code>split()</code> function from Section <a href="lists-splitting.html#lists-splitting">8.3</a> to split the vector <code>fastest</code> into a list of three vectors, one for each value of the factor <code>seat</code>. We can then compute the mean of each vector in the list and display them together for easy comparison. The following code accomplishes this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>tigerstats::m111survey
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>tigerstats<span class="op">::</span>m111survey
 splitSpeeds &lt;-<span class="st"> </span><span class="kw">with</span>(df, <span class="kw">split</span>(fastest, <span class="dt">f =</span> seat))
 means &lt;-<span class="st"> </span><span class="kw">sapply</span>(splitSpeeds, <span class="dt">FUN =</span> mean, <span class="dt">na.rm =</span> T)
 means</code></pre></div>
@@ -595,12 +595,12 @@ means</code></pre></div>
 </div>
 <div id="map" class="section level3">
 <h3><span class="header-section-number">12.3.4</span> <code>Map()</code></h3>
-<p></p>
+
 <p>The apply-family of functions are quite flexible, but they are subject to the limitation that the arguments specified in <code>...</code> apply in the same way in each iteration of the <code>FUN</code>, even as the object passed in for <code>X</code> provides a <em>different</em> value to <code>FUN</code> each time. What if we would like <em>two or more</em> parameters to vary? In that case we should look to the <code>Map()</code> function.</p>
 <p>Can you figure out what the following code does? Think about it before reading on in the text.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reps &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">5</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reps &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
 probs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.20</span>, <span class="fl">0.30</span>, <span class="fl">0.50</span>, <span class="fl">0.70</span>, <span class="fl">0.90</span>)
-sizes &lt;-<span class="st"> </span><span class="dv">5</span>:<span class="dv">1</span> *<span class="st"> </span><span class="dv">1000</span>
+sizes &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>
 sims &lt;-<span class="st"> </span><span class="kw">Map</span>(rbinom, <span class="dt">n =</span> reps, <span class="dt">size =</span> sizes, <span class="dt">prob =</span> probs)</code></pre></div>
 <p>Ready to read on? The code simulates what might happen if:</p>
 <ul>
@@ -626,16 +626,16 @@ sims &lt;-<span class="st"> </span><span class="kw">Map</span>(rbinom, <span cla
 ## [[5]]
 ## [1] 904 896 907 897 917</code></pre>
 <p>Here is an application of <code>Map()</code> to the simulation problem—Section <a href="triangle-chance.html#triangle-chance">6.3</a>—of making a triangle out of a randomly-split stick:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span>function(x, y, z) {
-  (x +<span class="st"> </span>y &gt;<span class="st"> </span>z) &amp;<span class="st"> </span>(x +z &gt;<span class="st"> </span>y) &amp;<span class="st"> </span>(y +<span class="st"> </span>z &gt;<span class="st"> </span>x)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {
+  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)
 }
 
-makesTriangle &lt;-<span class="st"> </span>function(x, y) {
+makesTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
   a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)
   b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)
   side1 &lt;-<span class="st"> </span>a
-  side2 &lt;-<span class="st"> </span>b-a
-  side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span>b
+  side2 &lt;-<span class="st"> </span>b<span class="op">-</span>a
+  side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b
   <span class="kw">isTriangle</span>(<span class="dt">x =</span> side1, <span class="dt">y =</span> side2, <span class="dt">z =</span> side3)
 }
 
@@ -643,16 +643,16 @@ makesTriangle &lt;-<span class="st"> </span>function(x, y) {
   <span class="kw">Map</span>(makesTriangle, 
       <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">10000</span>), 
       <span class="dt">y =</span> <span class="kw">runif</span>(<span class="dv">10000</span>))))  <span class="co"># estimate the chance of a triangle</span></code></pre></div>
-<pre><code>## [1] 0.2495</code></pre>
+<pre><code>## [1] 0.2503</code></pre>
 <p>Note the use of the function <code>simplify2array()</code> which turns the list of <code>TRUE</code>s and <code>FALSE</code>s returned by <code>Map()</code> into a logical vector. The mean of this vector gives the proportion of times in our simulation that a triangle was formed.</p>
 </div>
 <div id="replicate" class="section level3">
 <h3><span class="header-section-number">12.3.5</span> <code>replicate()</code></h3>
-<p></p>
+
 <p><code>replicate()</code> evaluates a given expression a specified number of times. By default it simplifies the results to an array, if possible:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sims &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10</span>, <span class="kw">runif</span>(<span class="dv">5</span>))
 <span class="kw">str</span>(sims)</code></pre></div>
-<pre><code>##  num [1:5, 1:10] 0.8928 0.8882 0.0398 0.4617 0.9886 ...</code></pre>
+<pre><code>##  num [1:5, 1:10] 0.822 0.864 0.803 0.813 0.886 ...</code></pre>
 </div>
 </div>
             </section>
@@ -672,7 +672,7 @@ makesTriangle &lt;-<span class="st"> </span>function(x, y) {
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

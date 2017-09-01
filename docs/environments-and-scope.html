@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -472,7 +472,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## &lt;bytecode: 0x10f55f720&gt;
+## &lt;bytecode: 0x10c671878&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>I got the definition of the <code>cat()</code> function, all the way up in package <strong>base</strong>.</p>
 <p>Now try:</p>
@@ -499,7 +499,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## Pippin is a cat</code></pre>
 <p>Wait a minute: why did this work? Doesn’t the Global Environment come before package <strong>base</strong> in the search path? Yes it does, but since the first occurrence of <code>cat</code> was followed by an open parenthesis R know to expect that it referred to a function. Hence it kept looking along the search path for a function with the name <code>cat</code>, eventually finding our familiar <code>cat()</code> function in <strong>base</strong>.</p>
 <p>Well then, consider happens if we do this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat &lt;-<span class="st"> </span>function(...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
   <span class="st">&quot;Meow!&quot;</span>
 }</code></pre></div>
 <p>We have defined a function <code>cat()</code> that returns “Meow!” no matter what it is given as input.<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a></p>
@@ -508,7 +508,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] &quot;Meow!&quot;</code></pre>
 <p>Since the <code>cat()</code> we defined is a function in the Global Environment—which comes before <strong>base</strong> in the search path—R uses our <code>cat()</code> instead of the <strong>base</strong>’s <code>cat()</code>. R programmers say that the <strong>base</strong> version of cat has been <em>masked</em>.</p>
 <p>If I want to keep my <code>cat()</code> and still use the <strong>base</strong> version of<code>cat()</code> as well, I can do that. In order to be sure of getting a particular package’s version of a function, put the name of the package and then two semicolons before the function-name, like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base::<span class="kw">cat</span>(<span class="st">&quot;This is the good ol&#39; cat() we have been missing!&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base<span class="op">::</span><span class="kw">cat</span>(<span class="st">&quot;This is the good ol&#39; cat() we have been missing!&quot;</span>)</code></pre></div>
 <pre><code>## This is the good ol&#39; cat() we have been missing!</code></pre>
 <p>But we don’t like our <code>cat()</code> so very much: let’s remove it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(cat)</code></pre></div>
@@ -534,7 +534,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Consider the following code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span>
 b &lt;-<span class="st"> </span><span class="dv">4</span>
-f &lt;-<span class="st"> </span>function(x, y) {
+f &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
   a &lt;-<span class="st"> </span><span class="dv">5</span>
   <span class="kw">print</span>(<span class="kw">ls</span>())
   <span class="kw">cat</span>(<span class="st">&quot;a is &quot;</span>, a, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,
@@ -558,7 +558,7 @@ f &lt;-<span class="st"> </span>function(x, y) {
 <p>One consequence of the ephemeral nature of run-time environments is that they are not accessible from parent environments. Thus if the active environment is the Global Environment and you run across a reference to <code>a</code>, you will never “find” the <code>a</code> “inside of” <code>f()</code> or “inside of” any other function, for that matter. R looks only in the active environment and in ancestor-environments, never in child-environments, and besides the run-time environment no longer exists after a function has been called.</p>
 <p>Let’s make sure of this with an example.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span>
-f &lt;-<span class="st"> </span>function() {
+f &lt;-<span class="st"> </span><span class="cf">function</span>() {
   a &lt;-<span class="st"> </span><span class="dv">10</span>
   <span class="kw">cat</span>(<span class="st">&quot;In the run-time environment, a exists and has value: &quot;</span>, a, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }
@@ -596,7 +596,7 @@ f &lt;-<span class="st"> </span>function() {
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -435,7 +435,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Before we write a simulation in full, we should consider how we are going to simulate something that has a specified percentage chance of happening. For example, how would we simulate decisions made by Judge A?</p>
 <p>One approach is to use <code>runif()</code> with a cutoff:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>) <span class="co"># random number between 0 and 1</span>
-number &lt;<span class="st"> </span><span class="fl">0.95</span></code></pre></div>
+number <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.95</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>In repeated trials, a random real number between 0 and 1 will turn out to be less than 0.95 about 95% of the time.</p>
 <p>Another—and more convenient—way is to use the function <code>rbinom()</code>.  This function simulates the results of flipping a coin a number of times and counting how many heads one gets. The general form of a call to <code>rbinom()</code>is as follows:</p>
@@ -477,9 +477,9 @@ c &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 d &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.90</span>)  <span class="co"># Judge D</span>
 e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.80</span>)  <span class="co"># Judge E</span></code></pre></div>
 <p>Now we come to the key idea in coding our simulation: in order to determine the total number of correct votes in each case, all we need to do is <em>add</em> the five vectors we created above:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span>a +<span class="st"> </span>b +<span class="st"> </span>c +<span class="st"> </span>d +<span class="st"> </span>e</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d <span class="op">+</span><span class="st"> </span>e</code></pre></div>
 <p>The court will decide correctly when the number of votes for the correct option is at least 3. The following logical vector records this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">courtCorrect &lt;-<span class="st"> </span>(correctVotes &gt;=<span class="st"> </span><span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)</code></pre></div>
 <p>Table <a href="appeals-court-paradox.html#tab:judge-votes">6.2</a> shows some possible results:</p>
 <table>
 <caption><span id="tab:judge-votes">Table 6.2: </span>Results of 20 simulated appeals court decisions.</caption>
@@ -679,12 +679,12 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 </table>
 <p>Note that all of the court’s decisions were correct, even though in a couple of cases the correct decisions were barely in the majority.</p>
 <p>We now have the basic idea of the simulation. In order to estimate the probability of a correct decision, we simply need to recast our idea in the form of a function that permits us to simulate a very large number of imaginary court cases and that will report the results to us. Here is the code for such a function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">courtSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">courtSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,
                      <span class="dt">seed =</span> <span class="ot">NULL</span>,
                      <span class="dt">table =</span> <span class="ot">FALSE</span>,
                      <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.94</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)) {
   
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
   }
   <span class="kw">set.seed</span>(seed)
@@ -704,13 +704,13 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
   e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> eProb)
   
   <span class="co"># count the number of correct votes in each case:</span>
-  correctVotes &lt;-<span class="st"> </span>a +<span class="st"> </span>b +<span class="st"> </span>c +<span class="st"> </span>d +<span class="st"> </span>e
+  correctVotes &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d <span class="op">+</span><span class="st"> </span>e
   
   <span class="co"># determine whether court decided correctly, in each case:</span>
-  courtCorrect &lt;-<span class="st"> </span>(correctVotes &gt;=<span class="st"> </span><span class="dv">3</span>)
+  courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)
   
   <span class="co"># record results</span>
-  if ( table ) {
+  <span class="cf">if</span> ( table ) {
     <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
     <span class="kw">print</span>(<span class="kw">table</span>(courtCorrect))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -730,14 +730,14 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 <p>The court seems to be doing quite well! But of course this is not very surprising: after all, most of the judges make the correct decision almost all the time. It is interesting, though, that the chance of the <em>full court</em> rendering a correct verdict is higher than the chance of any individual judge to be correct. There appears to be a benefit to the voting procedure.</p>
 <p>But things get even more interesting if we imagine that the judges recognize, after some time, that Judge E simply isn’t as sharp as Judge A, and that they pressure him into voting whichever way Judge A votes. “Surely”, they reason, “since Judge A is so good this new policy will increase our chance to hand down a correct verdict!”</p>
 <p>We will simulate to see if the judges’ reasoning is correct. All we need to do is to count Judge A’s vote twice in the sum, and not count Judge E’s vote at all:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span><span class="dv">2</span>*a +<span class="st"> </span>b +<span class="st"> </span>c +<span class="st"> </span>d</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d</code></pre></div>
 <p>Here is the new simulation-function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">courtSim2 &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">courtSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,
                      <span class="dt">seed =</span> <span class="ot">NULL</span>,
                      <span class="dt">table =</span> <span class="ot">FALSE</span>,
                      <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.94</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)) {
   
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
   }
   <span class="kw">set.seed</span>(seed)
@@ -756,13 +756,13 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
   d &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> dProb)
   
   <span class="co"># count rhe number of correct votes in each case:</span>
-  correctVotes &lt;-<span class="st"> </span><span class="dv">2</span>*a +<span class="st"> </span>b +<span class="st"> </span>c +<span class="st"> </span>d
+  correctVotes &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d
   
   <span class="co"># determine whether court decided correctly, in each case:</span>
-  courtCorrect &lt;-<span class="st"> </span>(correctVotes &gt;=<span class="st"> </span><span class="dv">3</span>)
+  courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)
   
   <span class="co"># record results</span>
-  if ( table ) {
+  <span class="cf">if</span> ( table ) {
     <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
     <span class="kw">print</span>(<span class="kw">table</span>(courtCorrect))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -810,7 +810,7 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

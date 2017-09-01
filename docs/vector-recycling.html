@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -425,23 +425,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Consider the vector</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>)</code></pre></div>
 <p>Look at what happens when we evaluate the expression:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &gt;<span class="st"> </span><span class="dv">4</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE  TRUE FALSE</code></pre>
 <p>At first blush this doesn’t make any sense: <code>vec</code> has length 5, whereas <code>4</code> is a vector of length 1. How can the two of them be compared?</p>
 <p>They cannot, in fact, be compared. Instead the shorter of the two vectors—the <code>4</code>—is <em>recycled</em> into the <code>c(4,4,4,4,4)</code> a vector of length five, which may then be compared element-wise with <code>vec</code>. Recycling is a great convenience as it allows us to express an idea clearly and concisely.</p>
 <p>Recycling is always performed on the shorter of two vectors. Consider the example below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec2 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">6</span>
-vec2 &gt;<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
+vec2 <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>)</code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE</code></pre>
 <p>Here, <code>c(3,1)</code> was recycled into <code>c(3,1,3,1,3,1)</code> prior to being compared with <code>vec2</code>.</p>
 <p>What happens if the length of the longer vector is not a multiple of the shorter one? We should look into this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec2 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">7</span>
-vec2 &gt;<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">7</span>
+vec2 <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>)</code></pre></div>
 <pre><code>## longer object length is not a multiple of shorter object length
 ## [1] FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
 <p>We get a warning, but R tries to do the job for us anyway, recycling the shorter vector to <code>c(3,8,3,8,3,8,3)</code> and then performing the comparison.</p>
 <p>By the way, if you don’t want to see the warning you can put the expression into the <code>suppressWarnings()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressWarnings</span>(vec2 &gt;<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressWarnings</span>(vec2 <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>))</code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE  TRUE FALSE</code></pre>
 </div>
             </section>
@@ -461,7 +461,7 @@ vec2 &gt;<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

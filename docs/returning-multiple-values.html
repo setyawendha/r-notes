@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -424,29 +424,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">8.4</span> Returning Multiple Values</h2>
 <p>Lists combine many different sorts of objects into one object. This makes them very useful in the context of some functions.</p>
 <p>Consider, for example, the drunken-turtle simulation from Section <a href="drunken-turtle-sim.html#drunken-turtle-sim">6.8</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span>function(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
                        <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
   }
   <span class="kw">set.seed</span>(seed)
   
   returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
   
-  for (i in <span class="dv">1</span>:reps) {
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span>*pi)
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {
+  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
   xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
   ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
   
   x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
   y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
   
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x^<span class="dv">2</span> +<span class="st"> </span>y^<span class="dv">2</span>)
-  closeReturn &lt;-<span class="st"> </span>(dist &lt;<span class="st"> </span><span class="fl">0.5</span>)
+  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)
+  closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)
   returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)
   }
   
-  if ( table ) {
+  <span class="cf">if</span> ( table ) {
     <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
     tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(returns))
     <span class="kw">print</span>(tab)
@@ -463,25 +463,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Unfortunately a function can only return <em>one</em> object.</p>
 <p>The solution to your problem is to make a list of the three objects we want, and then return the list. We can re-write the function so as to make all output to the console optional. The function will construct the list and return it invisibly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSimList &lt;-<span class="st"> </span>function(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSimList &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
                        <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
   }
   <span class="kw">set.seed</span>(seed)
   
   <span class="co"># get the returns:</span>
   returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  for (i in <span class="dv">1</span>:reps) {
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span>*pi)
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {
+  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
   xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
   ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
   
   x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
   y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
   
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x^<span class="dv">2</span> +<span class="st"> </span>y^<span class="dv">2</span>)
-  closeReturn &lt;-<span class="st"> </span>(dist &lt;<span class="st"> </span><span class="fl">0.5</span>)
+  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)
+  closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)
   returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)
   }
   <span class="co"># compute the table and the mean:</span>
@@ -489,7 +489,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   meanReturns &lt;-<span class="st"> </span><span class="kw">mean</span>(returns)
   
   <span class="co"># handle output to console if user wants it</span>
-  if ( verbose ) {
+  <span class="cf">if</span> ( verbose ) {
     <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
     <span class="kw">print</span>(<span class="kw">prop.table</span>(tableReturns))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -509,7 +509,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simResults &lt;-<span class="st"> </span><span class="kw">drunkenSimList</span>(<span class="dt">seed =</span> <span class="dv">3939</span>)</code></pre></div>
 <p>We can use any of the results at any time and in any way we like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;On the first ten repetitions, the number of close returns were:</span><span class="ch">\n\n\t</span><span class="st">&quot;</span>,
-    simResults$returns[<span class="dv">1</span>:<span class="dv">10</span>])</code></pre></div>
+    simResults<span class="op">$</span>returns[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre></div>
 <pre><code>## On the first ten repetitions, the number of close returns were:
 ## 
 ##   0 6 4 4 2 0 2 5 2 4</code></pre>
@@ -531,7 +531,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

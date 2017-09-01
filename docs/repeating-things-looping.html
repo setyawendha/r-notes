@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -425,10 +425,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We have looked a bit into the aspect of flow control that pertains to making decisions. Let us now turn to the R-constructs that make the computer repeat actions.</p>
 <div id="for-loops" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> For Loops</h3>
-<p></p>
+
 <p>The reserved word <code>for</code> is used to make R repeat an action a specified number of times.</p>
 <p>We begin with an very simple example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for ( i in <span class="dv">1</span>:<span class="dv">4</span> ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span> ) {
   <span class="kw">cat</span>(<span class="st">&quot;Hello, Dorothy!</span><span class="ch">\n</span><span class="st">&quot;</span>)
 }</code></pre></div>
 <pre><code>## Hello, Dorothy!
@@ -436,14 +436,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Hello, Dorothy!
 ## Hello, Dorothy!</code></pre>
 <p>Here’s how the loop works. Recall that the vector <code>1:4</code> is simply the sequence of integers from 1 to 4:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span>:<span class="dv">4</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">4</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
 <p>When R sees the code <code>(i in 1:4)</code> it knows that it will have to go four times through the body of the loop.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Hello, Dorothy!</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
 <p>(The <em>body</em> of a loop is what’s contained in the brackets after <code>for(i in 1:4)</code>). At the start of the loop, the <em>index variable</em> <code>i</code> is set to 1. After the body is executed the first time, R sets <code>i</code> to 2, then executes the body again. Then R sets <code>i</code> to 3 and executes the body yet again. Then R sets <code>i</code> to 4, and executes the body for the final time. The result is four lines printed out to the console.</p>
 <p>The more you need to repeat a particular pattern, the more it makes sense to write your code with a loop.</p>
 <p>The general form of a loop is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for ( var in seq ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> ( var <span class="cf">in</span> seq ) {
   expression
   another expression
   ...
@@ -454,7 +454,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>It’s important to realize that the index variable can have <em>any</em> valid name, and the sequence can be any type of vector at all—not just a sequence of consecutive whole numbers beginning with 1. This level of generality permits a for-loop to automate a wide variety of tasks, and for its code to be written in a way that evokes the operations being performed.</p>
 <p>For example, here is a loop to print out some greetings;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Tin Man&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Lion&quot;</span>)
-for ( person in people ) {
+<span class="cf">for</span> ( person <span class="cf">in</span> people ) {
   <span class="kw">cat</span>(<span class="st">&quot;Hello, &quot;</span>, person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
 <pre><code>## Hello, Dorothy!
@@ -463,7 +463,7 @@ for ( person in people ) {
 ## Hello, Lion!</code></pre>
 <p>Or perhaps you want to abbreviate a vector-ful of weekday-names:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weekdays &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Friday&quot;</span>, <span class="st">&quot;Saturday&quot;</span>)
-for ( day in weekdays ) {
+<span class="cf">for</span> ( day <span class="cf">in</span> weekdays ) {
   <span class="kw">print</span>(<span class="kw">abbrDay</span>(day))
 }</code></pre></div>
 <pre><code>## [1] &quot;Sat&quot;
@@ -477,7 +477,7 @@ abbrDays &lt;-<span class="st"> </span><span class="kw">character</span>(<span c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">abbrDays</code></pre></div>
 <pre><code>## [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</code></pre>
 <p>We will now write a for-loop to fill it up with abbreviations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for ( i in <span class="dv">1</span>:<span class="kw">length</span>(weekdays) ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(weekdays) ) {
   abbrDays[i] &lt;-<span class="st"> </span><span class="kw">abbrDay</span>(weekdays[i])
 }</code></pre></div>
 <p>Now each of the four elements of <code>abbrDays</code> contains the abbreviation for the corresponding element of <code>weekdays</code>:</p>
@@ -492,7 +492,7 @@ abbrDays &lt;-<span class="st"> </span><span class="kw">character</span>(<span c
 <pre><code>## Today is Thursday.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weekdays &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Friday&quot;</span>, <span class="st">&quot;Saturday&quot;</span>)
 abbrDays &lt;-<span class="st"> </span><span class="kw">character</span>(<span class="kw">length</span>(weekdays))
-for ( day in weekdays ) {
+<span class="cf">for</span> ( day <span class="cf">in</span> weekdays ) {
   <span class="kw">print</span>(day)
 }</code></pre></div>
 <pre><code>## [1] &quot;Saturday&quot;
@@ -506,8 +506,8 @@ for ( day in weekdays ) {
 <span class="kw">cat</span>(<span class="st">&quot;Today is &quot;</span>, day, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
 <pre><code>## Today is Thursday.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weekdays &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Friday&quot;</span>, <span class="st">&quot;Saturday&quot;</span>)
-listDays &lt;-<span class="st"> </span>function(days) {
-  for ( day in days )    {
+listDays &lt;-<span class="st"> </span><span class="cf">function</span>(days) {
+  <span class="cf">for</span> ( day <span class="cf">in</span> days )    {
     <span class="kw">print</span>(day)
   }
 }
@@ -525,7 +525,7 @@ listDays &lt;-<span class="st"> </span>function(days) {
 <p>Suppose for example that you want a function that searches through a vector for a given element, updating the user along the way as to the progress of the search. You can try something like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># function to find index of element in vector.</span>
 <span class="co"># returns -1 if elem is not in vector</span>
-verboseSearch &lt;-<span class="st"> </span>function(elem, vec) {
+verboseSearch &lt;-<span class="st"> </span><span class="cf">function</span>(elem, vec) {
   
   <span class="co"># The following logical keeps track of whether</span>
   <span class="co"># we have found the element.</span>
@@ -534,33 +534,33 @@ verboseSearch &lt;-<span class="st"> </span>function(elem, vec) {
   found &lt;-<span class="st"> </span><span class="ot">FALSE</span>
   
   <span class="co"># validate input:</span>
-  if ( <span class="kw">length</span>(vec) ==<span class="st"> </span><span class="dv">0</span> ) {
+  <span class="cf">if</span> ( <span class="kw">length</span>(vec) <span class="op">==</span><span class="st"> </span><span class="dv">0</span> ) {
     <span class="kw">cat</span>(<span class="st">&quot;The vector empty.  No way does it contain &quot;</span>, 
         elem, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-    <span class="kw">return</span>(-<span class="dv">1</span>)
+    <span class="kw">return</span>(<span class="op">-</span><span class="dv">1</span>)
   }
   
   <span class="co"># check the elements of vector:</span>
-  for ( i in <span class="dv">1</span>:<span class="st"> </span><span class="kw">length</span>(vec) ) {
-    if ( vec[i] ==<span class="st"> </span>elem ) {
+  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="kw">length</span>(vec) ) {
+    <span class="cf">if</span> ( vec[i] <span class="op">==</span><span class="st"> </span>elem ) {
       <span class="co"># record that we found the element:</span>
       found &lt;-<span class="st"> </span><span class="ot">TRUE</span>
-      break
-    } else {
+      <span class="cf">break</span>
+    } <span class="cf">else</span> {
       <span class="co"># report no match at this index:</span>
       <span class="kw">cat</span>(<span class="st">&quot;Checked index &quot;</span>, i, 
           <span class="st">&quot; in the vector.  No match there ...</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     }
   }
   
-  if ( found ) {
+  <span class="cf">if</span> ( found ) {
     <span class="co"># report success:</span>
     <span class="kw">cat</span>(<span class="st">&quot;Found &quot;</span>, elem, <span class="st">&quot; at index &quot;</span>, i, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">return</span>(i)
-  } else {
+  } <span class="cf">else</span> {
     <span class="co"># report failure:</span>
     <span class="kw">cat</span>(elem, <span class="st">&quot; is not in the vector.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-    <span class="kw">return</span>(-<span class="dv">1</span>)
+    <span class="kw">return</span>(<span class="op">-</span><span class="dv">1</span>)
   }
 }</code></pre></div>
 <p>Let’s see our function in action:</p>
@@ -574,10 +574,10 @@ scarecrowPlace &lt;-<span class="st"> </span><span class="kw">verboseSearch</spa
 emptyVec[<span class="dv">1</span>]  <span class="co"># You get NA</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>Then check out what happens if you compare an <code>NA</code> to a string:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> ==<span class="st"> &quot;Scarecrow&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span> <span class="op">==</span><span class="st"> &quot;Scarecrow&quot;</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>Now look at what happens in an <code>if</code> statement where the condition is <code>NA</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if ( <span class="ot">NA</span> ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( <span class="ot">NA</span> ) {
   <span class="kw">cat</span>(<span class="st">&quot;We are in the bracket!</span><span class="ch">\n</span><span class="st">&quot;</span>)
 }</code></pre></div>
 <pre><code>## Error in if (NA) { : missing value where TRUE/FALSE needed</code></pre>
@@ -586,7 +586,7 @@ emptyVec[<span class="dv">1</span>]  <span class="co"># You get NA</span></code>
 <div id="solving-the-empty-vector-problem-in-for-loops-with-seq_along" class="section level3">
 <h3><span class="header-section-number">4.3.4</span> Solving the Empty-Vector Problem in <code>for</code>-Loops with <code>seq_along()</code></h3>
 <p>In the previous section we considered a possible problem with <code>for</code>-loops of the following form:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for ( i in <span class="dv">1</span>:<span class="kw">length</span>(vec) ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec) ) {
   ## do something ...
 }</code></pre></div>
 <p>In the above loop <code>vec</code> could be thought of as a “loop-defining” vector: its length determines the sequence of values 1, 2, 3 … for the index <code>i</code>. This sequence of values is supposed to end at the length of <code>vec</code>.</p>
@@ -603,8 +603,8 @@ emptyVec[<span class="dv">1</span>]  <span class="co"># You get NA</span></code>
 <span class="kw">seq_along</span>(vec)</code></pre></div>
 <pre><code>## integer(0)</code></pre>
 <p>Now consider the loop inside the following function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loopy &lt;-<span class="st"> </span>function(vec) {
-  for ( i in <span class="kw">seq_along</span>(vec) ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loopy &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {
+  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(vec) ) {
     <span class="kw">cat</span>(<span class="st">&quot;This time i is &quot;</span>, i, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
 }</code></pre></div>
@@ -622,10 +622,10 @@ emptyVec[<span class="dv">1</span>]  <span class="co"># You get NA</span></code>
 <p>Depending on what happens within a loop, you might sometimes wish to skip the remaining code within the loop and proceed to the next iteration. R provides the reserved-word <code>next</code>  for this purpose. Here is a simple example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;e&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;o&quot;</span>, <span class="st">&quot;u&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;z&quot;</span>)
 <span class="co"># shout ahoy when you see the specified element</span>
-verboseAhoy &lt;-<span class="st"> </span>function(elem, vec) {
-  if (<span class="kw">length</span>(vec) &gt;<span class="st"> </span><span class="dv">0</span>) {
-    for ( i in <span class="dv">1</span>:<span class="st"> </span><span class="kw">length</span>(vec) ) {
-      if ( vec[i] !=<span class="st"> </span>elem) next
+verboseAhoy &lt;-<span class="st"> </span><span class="cf">function</span>(elem, vec) {
+  <span class="cf">if</span> (<span class="kw">length</span>(vec) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+    <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="kw">length</span>(vec) ) {
+      <span class="cf">if</span> ( vec[i] <span class="op">!=</span><span class="st"> </span>elem) <span class="cf">next</span>
       <span class="kw">cat</span>(<span class="st">&quot;Ahoy! &quot;</span>, elem, <span class="st">&quot; at index &quot;</span>, i, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     }
   }
@@ -643,36 +643,36 @@ verboseAhoy &lt;-<span class="st"> </span>function(elem, vec) {
 <p>For-loops are pretty wonderful, but they are best used in circumstances when you know how many times you will need to loop. When you need to repeat a block of code until a certain condition occurs, then the <code>repeat</code> reserved-word might be a good choice.</p>
 <p>For example, suppose you want to play the number-guessing game with the user, but let her keep guessing until either she gives up or gets the correct answer. Here’s an implementation using <code>repeat</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">20</span>
-number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:n, <span class="dt">size =</span> <span class="dv">1</span>)
+number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> <span class="dv">1</span>)
 <span class="kw">cat</span>(<span class="st">&quot;I&#39;m thinking of a whole number from 1 to &quot;</span>, n, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-repeat {
+<span class="cf">repeat</span> {
   guess &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;What&#39;s your guess? (Enter q to quit.)  &quot;</span>)
-  if ( guess ==<span class="st"> &quot;q&quot;</span>  ) {
+  <span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> &quot;q&quot;</span>  ) {
     <span class="kw">cat</span>(<span class="st">&quot;Bye!</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    break
-  } else if ( guess ==<span class="st"> </span>number ) {
+    <span class="cf">break</span>
+  } <span class="cf">else</span> <span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {
     <span class="kw">cat</span>(<span class="st">&quot;You are correct!  Thanks for playing!&quot;</span>)
-    break
+    <span class="cf">break</span>
   }
   <span class="co"># If we get here, the guess was not correct:</span>
   <span class="co"># loop will repeat!</span>
 }</code></pre></div>
 <p>The game works well enough, but if you give it a try, you are sure to find it a bit fatiguing. It wold be nice to give the user a hint after an incorrect guess. Let’s revise the game to tell the reader whether her guess was high or low. While we are at it, let’s cast the game into the form of a function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberGuess &lt;-<span class="st"> </span>function(n) {
-  number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:n, <span class="dt">size =</span> <span class="dv">1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberGuess &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
+  number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> <span class="dv">1</span>)
   <span class="kw">cat</span>(<span class="st">&quot;I&#39;m thinking of a whole number from 1 to &quot;</span>, n, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  repeat {
+  <span class="cf">repeat</span> {
     guess &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;What&#39;s your guess? (Enter q to quit.)  &quot;</span>)
-    if (guess ==<span class="st"> &quot;q&quot;</span>) {
+    <span class="cf">if</span> (guess <span class="op">==</span><span class="st"> &quot;q&quot;</span>) {
       <span class="kw">cat</span>(<span class="st">&quot;Bye!</span><span class="ch">\n</span><span class="st">&quot;</span>)
-      break
-    } else if (guess ==<span class="st"> </span>number) {
+      <span class="cf">break</span>
+    } <span class="cf">else</span> <span class="cf">if</span> (guess <span class="op">==</span><span class="st"> </span>number) {
       <span class="kw">cat</span>(<span class="st">&quot;You are correct!  Thanks for playing!&quot;</span>)
-      break
+      <span class="cf">break</span>
     }
     <span class="co"># If we get to this point the guess was not correct.</span>
     <span class="co"># Issue hint:</span>
-    hint &lt;-<span class="st"> </span><span class="kw">ifelse</span>(guess &gt;<span class="st"> </span>number, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>)
+    hint &lt;-<span class="st"> </span><span class="kw">ifelse</span>(guess <span class="op">&gt;</span><span class="st"> </span>number, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;Your guess was &quot;</span>, hint, <span class="st">&quot;.  Keep at it!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="co"># Repeat loop</span>
   }
@@ -697,32 +697,32 @@ You are correct!  Thanks for playing!</code></pre>
 <h3><span class="header-section-number">4.3.7</span> While</h3>
 <p>The reserved word <code>while</code> constructs a loop that runs as long as a specified condition is true. Unlike <code>repeat</code>, which launches directly into the loop, the condition for <code>while</code> is evaluated prior to the body of the loop. If the condition is false at the beginning, the code in the body of the loop is never executed.</p>
 <p><code>verboseSearch()</code> could be re-written with <code>while</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">verboseSearch &lt;-<span class="st"> </span>function(elem, vec) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">verboseSearch &lt;-<span class="st"> </span><span class="cf">function</span>(elem, vec) {
   found &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-  if ( <span class="kw">length</span>(vec) ==<span class="st"> </span><span class="dv">0</span> ) {
+  <span class="cf">if</span> ( <span class="kw">length</span>(vec) <span class="op">==</span><span class="st"> </span><span class="dv">0</span> ) {
     <span class="kw">cat</span>(<span class="st">&quot;The vector empty.  No way does it contain &quot;</span>, 
         elem, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-    <span class="kw">return</span>(-<span class="dv">1</span>)
+    <span class="kw">return</span>(<span class="op">-</span><span class="dv">1</span>)
   }
   <span class="co"># index of vec (start looking at 1):</span>
   i &lt;-<span class="st"> </span><span class="dv">1</span>
-  while ( !found &amp;<span class="st"> </span>i &lt;=<span class="st"> </span><span class="kw">length</span>(vec) ) {
-    if ( vec[i] ==<span class="st"> </span>elem ) {
+  <span class="cf">while</span> ( <span class="op">!</span>found <span class="op">&amp;</span><span class="st"> </span>i <span class="op">&lt;=</span><span class="st"> </span><span class="kw">length</span>(vec) ) {
+    <span class="cf">if</span> ( vec[i] <span class="op">==</span><span class="st"> </span>elem ) {
       found &lt;-<span class="st"> </span><span class="ot">TRUE</span>
-      break
+      <span class="cf">break</span>
     }
     <span class="kw">cat</span>(<span class="st">&quot;No match at position &quot;</span>, i, <span class="st">&quot; ...</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    i &lt;-<span class="st"> </span>i +<span class="st"> </span><span class="dv">1</span>
+    i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
   }
 
-  if ( found ) {
+  <span class="cf">if</span> ( found ) {
     <span class="co"># report success:</span>
     <span class="kw">cat</span>(<span class="st">&quot;Found &quot;</span>, elem, <span class="st">&quot; at index &quot;</span>, i, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">return</span>(i)
-  } else {
+  } <span class="cf">else</span> {
     <span class="co"># report failure:</span>
     <span class="kw">cat</span>(elem, <span class="st">&quot; is not in the vector.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-    <span class="kw">return</span>(-<span class="dv">1</span>)
+    <span class="kw">return</span>(<span class="op">-</span><span class="dv">1</span>)
   }
 }</code></pre></div>
 </div>
@@ -744,7 +744,7 @@ You are correct!  Thanks for playing!</code></pre>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

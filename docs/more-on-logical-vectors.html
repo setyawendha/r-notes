@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -423,7 +423,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="more-on-logical-vectors" class="section level2">
 <h2><span class="header-section-number">2.4</span> More on Logical Vectors</h2>
 <p>Consider the following expression:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">13</span> &lt;<span class="st"> </span><span class="dv">20</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">13</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>We constructed it with the “less-than” operator <code>&lt;</code>. You can think of it as saying that 13 is less than 20, which is a true statement, and sure enough, R <em>evaluates</em> the expression <code>13 &lt; 20</code> as <code>TRUE</code>.</p>
 <p>When you think about it, we’ve seen lots of expressions so far. Here are just a few of them:</p>
@@ -441,7 +441,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">17</span>)
 b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">12</span>)</code></pre></div>
 <p>Now let’s evaluate the expression <code>a &lt; b</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;<span class="st"> </span>b</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">&lt;</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE</code></pre>
 <p>The <code>&lt;</code> operator, when applied to vectors, always works <em>element-wise</em>; that is, it is applied to corresponding elements of the vectors on either side of it. R’s evaluation of <code>a &lt; b</code> involves evaluation of the following three expressions:</p>
 <ul>
@@ -507,7 +507,7 @@ b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">8</sp
 <p>The “numerical-looking operators” (<code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>) have their usual meanings when one is working with numerical vectors<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> When applied to character vectors they evaluate according to an alphabetical order:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;toto&quot;</span>, <span class="st">&quot;Boq&quot;</span>)
 b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;tinman&quot;</span>, <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;2017&quot;</span>)
-a &lt;<span class="st"> </span>b</code></pre></div>
+a <span class="op">&lt;</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE</code></pre>
 <p>The reasons for the evaluation above are as follows:</p>
 <ul>
@@ -521,7 +521,7 @@ a &lt;<span class="st"> </span>b</code></pre></div>
 <p>The equality (<code>==</code>) operator indicates whether the expressions being compared evaluate to the same value. Note that it’s made with <em>two</em> equal-signs, not one! It’s all about evaluation to the same value, not strict identity. The following examples will help to clarify this.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Dorothy =</span> <span class="dv">1</span>,<span class="dt">Toto =</span> <span class="dv">2</span>) <span class="co"># a named vector</span>
 b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Glinda =</span> <span class="dv">1</span>, <span class="dt">Tinman =</span> <span class="dv">2</span>)
-a ==<span class="st"> </span>b</code></pre></div>
+a <span class="op">==</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## Dorothy    Toto 
 ##    TRUE    TRUE</code></pre>
 <p>(Note that the resulting logical vector inherits the names of <code>a</code>, the vector on the left.).</p>
@@ -530,7 +530,7 @@ a ==<span class="st"> </span>b</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>Corresponding elements of <code>a</code> and <code>b</code> have the same values, but the two vectors don’t have the same set of names, so they aren’t considered identical.</p>
 <p>Here’s another way to see that “evaluating to the same value” is not the same as “identity”:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="ot">TRUE</span> ==<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="ot">TRUE</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>When <code>TRUE (itself of</code>type <code>logical</code>) is being compared with something numerical (type <code>integer</code> or <code>double</code>) it is <em>coerced</em> into the numerical vector 1. (In the same situation <code>FALSE</code> would be coerced to 0.) But clearly <code>TRUE</code> and 1 are not identical:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(<span class="ot">TRUE</span>, <span class="dv">1</span>)</code></pre></div>
@@ -541,32 +541,32 @@ a ==<span class="st"> </span>b</code></pre></div>
 <p>We consider an “and” statement to be true when both of its component statements are true; otherwise it is counted as false. The <code>&amp;</code> Boolean operator accords with our thinking:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, T, F, F)
 b &lt;-<span class="st"> </span><span class="kw">c</span>(T, F, T, F)
-a &amp;<span class="st"> </span>b</code></pre></div>
+a <span class="op">&amp;</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE FALSE</code></pre>
 <p>In logic and mathematics, an “or” statement is considered to be true when <em>at least one</em> of its component statements are true. (This is sometimes called the “inclusive” use of the term “or.”) R accords with this line of thinking:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, T, F, F)
 b &lt;-<span class="st"> </span><span class="kw">c</span>(T, F, T, F)
-a |<span class="st"> </span>b</code></pre></div>
+a <span class="op">|</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## [1]  TRUE  TRUE  TRUE FALSE</code></pre>
 <p>The <code>&amp;&amp;</code> and <code>||</code> operators follow the “and” and “or” logic respectively, but are applied only to the first elements of the vectors being compared:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, T)
 b &lt;-<span class="st"> </span><span class="kw">c</span>(F, T)
-a &amp;&amp;<span class="st"> </span>b</code></pre></div>
+a <span class="op">&amp;&amp;</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, F)
 b &lt;-<span class="st"> </span><span class="kw">c</span>(F, F)
-a ||<span class="st"> </span>b</code></pre></div>
+a <span class="op">||</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>These operators will come in handy later on, when we study <em>conditionals</em>.</p>
 <p>The final Boolean operator is <code>!</code>, which works like “not”:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, F)
-!a</code></pre></div>
+<span class="op">!</span>a</code></pre></div>
 <pre><code>## [1] FALSE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>)
 f &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>)
-e &gt;<span class="st"> </span>f</code></pre></div>
+e <span class="op">&gt;</span><span class="st"> </span>f</code></pre></div>
 <pre><code>## [1] FALSE  TRUE  TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">!(e &gt;<span class="st"> </span>f)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span>(e <span class="op">&gt;</span><span class="st"> </span>f)</code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE</code></pre>
 </div>
 </div>
@@ -595,7 +595,7 @@ e &gt;<span class="st"> </span>f</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

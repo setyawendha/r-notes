@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -436,7 +436,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>prob</code> specifies the desired probability for each member of the population to be chosen.</li>
 </ul>
 <p>A few examples will help us understand how the arguments work:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span> <span class="co"># we&#39;ll sample from this vector</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="co"># we&#39;ll sample from this vector</span>
 <span class="kw">sample</span>(vec, <span class="dv">1</span>)</code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>We got only one number because we set <code>size</code> to 1. Every element in <code>vec</code> had an equal chance of being the element selected. This time we got 7, but if you were to run the function again for yourself your results would probably be different.</p>
@@ -468,22 +468,22 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <h3><span class="header-section-number">5.4.2</span> Application: a Bouncing Turtle</h3>
 <p>Let’s apply <code>sample()</code> to design a scenario in which the turtle moves a fixed amount at each step, but the direction—north, east, south, or west—is completely random. When the turtle reaches the boundary of its domain, however, we would like it to “bounce back”: i.e., take a step in the direction opposite to the step that brought it to the boundary. We will also query the user prior to each step, asking if he/she wants to see another move. This not only allows the user to decide when to end the scenario; it also permits the user to see where the turtle is after each step.</p>
 <p>One possible implementation is as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_bounce &lt;-<span class="st"> </span>function(<span class="dt">side =</span> <span class="dv">60</span>, <span class="dt">step=</span> <span class="dv">10</span>) {
-  if ( (side/<span class="dv">2</span>) %%<span class="st"> </span>step !=<span class="st"> </span><span class="dv">0</span> ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_bounce &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">side =</span> <span class="dv">60</span>, <span class="dt">step=</span> <span class="dv">10</span>) {
+  <span class="cf">if</span> ( (side<span class="op">/</span><span class="dv">2</span>) <span class="op">%%</span><span class="st"> </span>step <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> ) {
     <span class="kw">stop</span>(<span class="st">&quot;Side-length divided by two must be a multiple of step.&quot;</span>)
   }
   bounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, side)
   <span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
   origin &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
   cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
-  repeat {
+  <span class="cf">repeat</span> {
     move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)
-    if ( move ==<span class="st"> &quot;q&quot;</span>) break
+    <span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span>
     x &lt;-<span class="st"> </span>cp[<span class="st">&quot;x&quot;</span>]
     y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]
-    if (x %in%<span class="st"> </span>bounds |<span class="st"> </span>y %in%<span class="st"> </span>bounds) {
+    <span class="cf">if</span> (x <span class="op">%in%</span><span class="st"> </span>bounds <span class="op">|</span><span class="st"> </span>y <span class="op">%in%</span><span class="st"> </span>bounds) {
       angle &lt;-<span class="st"> </span><span class="dv">180</span>
-    } else {
+    } <span class="cf">else</span> {
       angle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">90</span>,<span class="dv">180</span>,<span class="dv">270</span>), <span class="dv">1</span>)
     }
     <span class="kw">turtle_right</span>(angle)
@@ -502,7 +502,7 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <li><code>step</code> specifies how many units the turtle will move at each step. In this analysis we will assume that <code>step</code> is set to 15.</li>
 </ul>
 <p>Inside the function, we begin with a bit of input-validation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if ( (side/<span class="dv">2</span>) %%<span class="st"> </span>step !=<span class="st"> </span><span class="dv">0</span> ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( (side<span class="op">/</span><span class="dv">2</span>) <span class="op">%%</span><span class="st"> </span>step <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> ) {
     <span class="kw">stop</span>(<span class="st">&quot;Side-length divided by two must be a multiple of step.&quot;</span>)
   }</code></pre></div>
 <p>Remember that the turtle will start at <span class="math inline">\((\texttt{side}/2, \texttt{side}/2)\)</span> and will move <code>step</code> each time. If <span class="math inline">\(\texttt{side}/2\)</span> is not evenly divisible by <code>step</code> then the turtle would be able to go from inside its field to outside in a single step. We don’t want that to happen so we stop the user if the remainder after dividing <span class="math inline">\(\texttt{side}/2\)</span> by <code>side</code> is anything other than zero.</p>
@@ -515,14 +515,14 @@ cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</code><
 <p>(You can think of <code>cp</code> as short for: “current position”.)</p>
 <p>Next, we enter a <code>repeat</code>-loop. Inside the loop we begin with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)
-if ( move ==<span class="st"> &quot;q&quot;</span>) break
+<span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span>
 x &lt;-<span class="st"> </span>cp[<span class="st">&quot;x&quot;</span>]
 y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code></pre></div>
 <p>We first asked the user if she wanted to quit. If she enters “q” then we’ll break out of the loop and end the scenario. If she enters anything else (including just pressing Enter) then we record the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates of the turtle’s current position in the vectors <code>x</code> and <code>y</code> respectively.</p>
 <p>Our next task is to determine how the turtle should move:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (x %in%<span class="st"> </span>bounds |<span class="st"> </span>y %in%<span class="st"> </span>bounds) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (x <span class="op">%in%</span><span class="st"> </span>bounds <span class="op">|</span><span class="st"> </span>y <span class="op">%in%</span><span class="st"> </span>bounds) {
       angle &lt;-<span class="st"> </span><span class="dv">180</span>
-    } else {
+    } <span class="cf">else</span> {
       angle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">90</span>,<span class="dv">180</span>,<span class="dv">270</span>), <span class="dv">1</span>)
     }</code></pre></div>
 <p>If the turtle is at a boundary (either <code>x</code> equal to 0 or 60 or <code>y</code> equal to 0 or 60) then we need to “bounce back”. This corresponds to making the turtle turn right by 180 degrees and then step. On the other hand if the turtle is not at a boundary then the direction of the turtle should be random, so we should have it turn right by either 0, 90, 180 or 270 degrees, with each possibility being equally likely. This is accomplished with the above call to the <code>sample()</code> function.</p>
@@ -560,13 +560,13 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <div id="drunken-turtle-intro" class="section level3">
 <h3><span class="header-section-number">5.4.5</span> Application: a Drunken Turtle</h3>
 <p>We will now modify the previous scenario so that the turtle’s motion will be almost completely random. Even though it will take the same-size step every time, the angle at which it steps will be completely random: any real number of degrees from 0 to 360. We will also show the user the position of the turtle at each step, and use the “distance formula” from high-school geometry to compute and display the current distance of the turtle from the place where it started.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_drunk &lt;-<span class="st"> </span>function(side, step) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_drunk &lt;-<span class="st"> </span><span class="cf">function</span>(side, step) {
   <span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
   <span class="co"># save (side/2, side/2), the turtle&#39;s initial position:</span>
   initial &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
-  repeat {
+  <span class="cf">repeat</span> {
     move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)
-    if ( move ==<span class="st"> &quot;q&quot;</span>) break
+    <span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span>
     <span class="co"># pick a random angle to turn by:</span>
     angle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">360</span>)
     <span class="kw">turtle_left</span>(angle)
@@ -576,7 +576,7 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
     <span class="co"># print to console:</span>
     <span class="kw">print</span>(cp)
     <span class="co"># determine distnce from initial position (round to 3 decimals):</span>
-    distance &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sqrt</span>((cp[<span class="dv">1</span>] -<span class="st"> </span>initial[<span class="dv">1</span>])^<span class="dv">2</span> +<span class="st"> </span>(cp[<span class="dv">2</span>] -<span class="st"> </span>initial[<span class="dv">2</span>])^<span class="dv">2</span>),<span class="dv">3</span>)
+    distance &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sqrt</span>((cp[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>initial[<span class="dv">1</span>])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(cp[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>initial[<span class="dv">2</span>])<span class="op">^</span><span class="dv">2</span>),<span class="dv">3</span>)
     <span class="co"># prepare message to console,and print it:</span>
     message &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Distance from starting point is: &quot;</span>, distance)
     <span class="kw">cat</span>(message)
@@ -611,7 +611,7 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

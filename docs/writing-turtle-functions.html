@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -423,17 +423,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="writing-turtle-functions" class="section level2">
 <h2><span class="header-section-number">5.3</span> Writing Turtle Functions</h2>
 <p>Once you have designed some shapes that you think you might want to draw again, you should write them up as functions. Here for example, is the code for a function that makes squares:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_square &lt;-<span class="st"> </span>function(side) { 
-  for (i in <span class="dv">1</span>:<span class="dv">4</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_square &lt;-<span class="st"> </span><span class="cf">function</span>(side) { 
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {
     <span class="kw">turtle_forward</span>(side)
     <span class="kw">turtle_right</span>(<span class="dv">90</span>) 
   }
 }</code></pre></div>
 <p>Note that the user can vary the length of a side.</p>
 <p>Functions are nice, but note that <code>turtle_do()</code> cannot be used freely inside of them. For example, suppose you were to write the square-making function as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_square &lt;-<span class="st"> </span>function(side) { 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_square &lt;-<span class="st"> </span><span class="cf">function</span>(side) { 
   <span class="kw">turtle_do</span>({
-    for (i in <span class="dv">1</span>:<span class="dv">4</span>) {
+    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {
       <span class="kw">turtle_forward</span>(side)
       <span class="kw">turtle_right</span>(<span class="dv">90</span>)
     }
@@ -464,7 +464,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

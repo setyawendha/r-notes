@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -424,7 +424,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">8.6</span> A Note on Ellipses</h2>
 <p>The functions of the previous section contained a mysterious <code>...</code> argument in their definitions. This is known in R as the <em>ellipsis</em> argument, and it signals the possibility that one or more additional arguments may be supplied when the function is actually called.</p>
 <p>The following function illustrates the operation of the ellipsis argument:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ellipisDemo &lt;-<span class="st"> </span>function(...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ellipisDemo &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
   <span class="kw">cat</span>(<span class="st">&quot;I got the following arguments:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
   <span class="kw">print</span>(<span class="kw">list</span>(...))
 }
@@ -443,13 +443,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="use-1-passing-additional-arguments-to-functions-inside" class="section level3">
 <h3><span class="header-section-number">8.6.1</span> Use #1: Passing Additional Arguments to Functions “Inside”</h3>
 <p>Look again at the code for the function <code>means2()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">means2 &lt;-<span class="st"> </span>function(<span class="dt">vecs =</span> <span class="kw">list</span>(), ...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">means2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">vecs =</span> <span class="kw">list</span>(), ...) {
   n &lt;-<span class="st"> </span><span class="kw">length</span>(vecs)
-  if ( n ==<span class="st"> </span><span class="dv">0</span> ) {
+  <span class="cf">if</span> ( n <span class="op">==</span><span class="st"> </span><span class="dv">0</span> ) {
     <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Need some vectors to work with!&quot;</span>))
   }
   results &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)
-  for ( i in <span class="dv">1</span>:n ) {
+  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n ) {
     results[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(vecs[[i]], ...)
   }
   results
@@ -474,26 +474,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;argument one,&quot;</span>, <span class="st">&quot;argument two,&quot;</span>, <span class="st">&quot;and as many more as you like!&quot;</span>)</code></pre></div>
 <pre><code>## argument one, argument two, and as many more as you like!</code></pre>
 <p>With the ellipsis argument we can do this sort of thing ourselves. For example, here is a function that takes any number of vectors as arguments and determines whether the vectors are all of the same length:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sameLength &lt;-<span class="st"> </span>function(...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sameLength &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
   vecs &lt;-<span class="st"> </span><span class="kw">list</span>(...)
   numVecs &lt;-<span class="st"> </span><span class="kw">length</span>(vecs)
-  if ( numVecs &lt;=<span class="st"> </span><span class="dv">1</span> ) {
+  <span class="cf">if</span> ( numVecs <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span> ) {
     <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Need two or more vectors.&quot;</span>))
   }
   allSame &lt;-<span class="st"> </span><span class="ot">TRUE</span>
   len &lt;-<span class="st"> </span><span class="kw">length</span>(vecs[[<span class="dv">1</span>]])
-  for ( i in <span class="dv">2</span>:numVecs ) {
-    if ( <span class="kw">length</span>(vecs[[i]]) !=<span class="st"> </span>len ) {
+  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>numVecs ) {
+    <span class="cf">if</span> ( <span class="kw">length</span>(vecs[[i]]) <span class="op">!=</span><span class="st"> </span>len ) {
       allSame &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-      break
+      <span class="cf">break</span>
     }
   }
   allSame 
 }</code></pre></div>
 <p>We can give this function two or more vectors, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec1 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3</span>
-vec2 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">4</span>
-vec3 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec1 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>
+vec2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>
+vec3 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>
 <span class="kw">sameLength</span>(vec1, vec2, vec3)</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </div>
@@ -515,7 +515,7 @@ vec3 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3<
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

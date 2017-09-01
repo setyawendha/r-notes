@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -429,43 +429,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 mass &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">25</span>, <span class="dv">60</span>, <span class="dv">45</span>, <span class="dv">55</span>)
 prey &lt;-<span class="st"> </span><span class="kw">data.frame</span>(animal, mass, <span class="dt">stringsAsFactors =</span> F)</code></pre></div>
 <p>Let’s now add <code>prey</code> as a new attribute to class Lion. We will also add an attribute <code>eaten</code>: a character vector—initially empty—that will contain a record of all the animals that the lion has eaten.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Lion$<span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;prey&quot;</span>, prey, <span class="dt">overwrite =</span> T)
-Lion$<span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;eaten&quot;</span>, <span class="kw">character</span>(), <span class="dt">overwrite =</span> T)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;prey&quot;</span>, prey, <span class="dt">overwrite =</span> T)
+Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;eaten&quot;</span>, <span class="kw">character</span>(), <span class="dt">overwrite =</span> T)</code></pre></div>
 <p>Let us now endow our lions with the capacity to eat a beast of prey, by adding the method <code>eat()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Lion$<span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;eat&quot;</span>, function() {
-  n &lt;-<span class="st"> </span><span class="kw">nrow</span>(self$prey)
-  item &lt;-<span class="st"> </span>self$prey[<span class="kw">sample</span>(<span class="dv">1</span>:n, <span class="dt">size =</span> <span class="dv">1</span>), ]
-  initLetter &lt;-<span class="st"> </span><span class="kw">substr</span>(item$animal, <span class="dv">1</span>, <span class="dv">1</span>)
-  article &lt;-<span class="st"> </span><span class="kw">ifelse</span>(initLetter %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;o&quot;</span>, <span class="st">&quot;u&quot;</span>), <span class="st">&quot;An &quot;</span>, <span class="st">&quot;A &quot;</span>)
-  <span class="kw">cat</span>(article, item$animal, <span class="st">&quot; was eaten just now ...</span><span class="ch">\n\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  self$eaten &lt;-<span class="st"> </span><span class="kw">c</span>(self$eaten, item$animal)
-  self$weight &lt;-<span class="st"> </span>self$weight +<span class="st"> </span>item$mass
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;eat&quot;</span>, <span class="cf">function</span>() {
+  n &lt;-<span class="st"> </span><span class="kw">nrow</span>(self<span class="op">$</span>prey)
+  item &lt;-<span class="st"> </span>self<span class="op">$</span>prey[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> <span class="dv">1</span>), ]
+  initLetter &lt;-<span class="st"> </span><span class="kw">substr</span>(item<span class="op">$</span>animal, <span class="dv">1</span>, <span class="dv">1</span>)
+  article &lt;-<span class="st"> </span><span class="kw">ifelse</span>(initLetter <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;o&quot;</span>, <span class="st">&quot;u&quot;</span>), <span class="st">&quot;An &quot;</span>, <span class="st">&quot;A &quot;</span>)
+  <span class="kw">cat</span>(article, item<span class="op">$</span>animal, <span class="st">&quot; was eaten just now ...</span><span class="ch">\n\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  self<span class="op">$</span>eaten &lt;-<span class="st"> </span><span class="kw">c</span>(self<span class="op">$</span>eaten, item<span class="op">$</span>animal)
+  self<span class="op">$</span>weight &lt;-<span class="st"> </span>self<span class="op">$</span>weight <span class="op">+</span><span class="st"> </span>item<span class="op">$</span>mass
   <span class="kw">return</span>(<span class="kw">invisible</span>(self))
 }, <span class="dt">overwrite =</span> T)</code></pre></div>
 <p>When it eats an animal—randomly selected from the <code>prey</code> data frame—the lion gains the amount of weight that is associated with its unfortunate victim, and the victim is added to the lion’s <code>eaten</code> attribute.</p>
 <p>Note that the <code>eat()</code> method returns <code>self</code> invisibly. When the method is called on a lion, that very lion itself is returned as a value, but since it is returned invisibly it won’t be printed to the console. The usefulness of returning <code>self</code> will soon become apparent.</p>
 <p>Lions enjoy talking about what they have eaten recently, and for some reason they monitor their weight obsessively. The new method <code>report()</code> accounts for these characteristics of lions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Lion$<span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;report&quot;</span>, function() {
-  n &lt;-<span class="st"> </span><span class="kw">length</span>(self$eaten)
-  if ( n &gt;=<span class="st"> </span><span class="dv">1</span> ) {
-    <span class="kw">cat</span>(<span class="st">&quot;My name is &quot;</span>, self$name, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-    <span class="kw">cat</span>(<span class="st">&quot;My most recent meal consisted of: &quot;</span>, self$eaten[n], <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;report&quot;</span>, <span class="cf">function</span>() {
+  n &lt;-<span class="st"> </span><span class="kw">length</span>(self<span class="op">$</span>eaten)
+  <span class="cf">if</span> ( n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span> ) {
+    <span class="kw">cat</span>(<span class="st">&quot;My name is &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+    <span class="kw">cat</span>(<span class="st">&quot;My most recent meal consisted of: &quot;</span>, self<span class="op">$</span>eaten[n], <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
-  <span class="kw">cat</span>(<span class="st">&quot;I now weigh &quot;</span>, self$weight, <span class="st">&quot; pounds.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot;I now weigh &quot;</span>, self<span class="op">$</span>weight, <span class="st">&quot; pounds.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   <span class="kw">return</span>(<span class="kw">invisible</span>(self))
 }, <span class="dt">overwrite =</span> T)</code></pre></div>
 <p>Note that <code>report()</code> also returns the lion invisibly.</p>
 <p>Let us now instantiate a new lion named Simba:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba &lt;-<span class="st"> </span>Lion$<span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Simba&quot;</span>, <span class="dt">age =</span> <span class="dv">10</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba &lt;-<span class="st"> </span>Lion<span class="op">$</span><span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Simba&quot;</span>, <span class="dt">age =</span> <span class="dv">10</span>, 
                   <span class="dt">desire =</span> <span class="st">&quot;Hakuna Matata&quot;</span>)</code></pre></div>
 <pre><code>## Grr!  My name is Simba!</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba$<span class="kw">set_weight</span>(<span class="dv">300</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">set_weight</span>(<span class="dv">300</span>)</code></pre></div>
 <pre><code>## Simba has weight:  300.</code></pre>
 <p>Having been created after the addition of the <code>prey</code> and <code>eaten</code> attributes and the <code>eat()</code> and <code>report()</code> methods, <code>simba</code> has access to all of them. in particular, he can eat a random beast of prey:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba$<span class="kw">eat</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">eat</span>()</code></pre></div>
 <pre><code>## A cape buffalo was eaten just now ...</code></pre>
 <p><code>simba</code> has eaten, and he has presumably gained some weight as a result. Let’s see verify this by asking for his report:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba$<span class="kw">report</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">report</span>()</code></pre></div>
 <pre><code>## My name is Simba.
 ## My most recent meal consisted of: cape buffalo.
 ## I now weigh 360 pounds.</code></pre>
@@ -476,7 +476,7 @@ Lion$<span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <sp
 <li>and finally call <code>report()</code> on the result of our second call.</li>
 </ul>
 <p>All of this can be accomplished in one line of calls, in which the three method-calls are “chained” together with dollar-signs:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba$<span class="kw">eat</span>()$<span class="kw">eat</span>()$<span class="kw">report</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">eat</span>()<span class="op">$</span><span class="kw">eat</span>()<span class="op">$</span><span class="kw">report</span>()</code></pre></div>
 <pre><code>## A pig was eaten just now ...
 ## 
 ## A cape buffalo was eaten just now ...
@@ -503,7 +503,7 @@ Lion$<span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <sp
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

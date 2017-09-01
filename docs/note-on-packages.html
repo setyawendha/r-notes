@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -430,7 +430,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">installed.packages</span>()[, <span class="kw">c</span>(<span class="st">&quot;Package&quot;</span>, <span class="st">&quot;Version&quot;</span>)]</code></pre></div>
 <p>In fact R is really nothing but a collection of packages. Many of the R-functions you have been learning about come from the package <strong>base</strong>. This is one of a number of packages that are automatically attached to the search path when an R session begins. Other packages have to be attached by you if you want immediate access to all of the functions and data that they contain.</p>
 <p>In order to attach a package, you can click the little box next to its name in the Package tab in R-Studio, or you can attach it from the console with the command:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(&lt;name of package here&gt;)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="op">&lt;</span>name of package here<span class="op">&gt;</span>)</code></pre></div>
 <p>When you don’t want a package any more, you can detach it from the search path by un-clicking the little box, or by running this command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(<span class="st">&quot;package:&lt;name of package here&gt;&quot;</span>, <span class="dt">unload=</span><span class="ot">TRUE</span>)</code></pre></div>
 <p>The package will still be installed, ready to be attached whenever you like.</p>
@@ -438,7 +438,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="learning-about-a-package" class="section level3">
 <h3><span class="header-section-number">3.6.2</span> Learning About a Package</h3>
 <p>You can learn about a Package by clicking on its name, or by using the command:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(&lt;name of package&gt;)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(<span class="op">&lt;</span>name of package<span class="op">&gt;</span>)</code></pre></div>
 <p>From the display that shows in the Help pane you can navigate to learn about each of the functions and data sets that come with the package.</p>
 </div>
 <div id="installing-packages" class="section level3">
@@ -449,7 +449,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As long as we are working on the R Studio server, it’s a good idea to refrain from installing packages yourself, unless they are packages that we don’t use in class and that you simply want to explore on your own. That’s because when you install your own packages on the Server they go into a special directory in your Home folder and become part of your “User Library”. Packages that are installed by a system administrator for general use are in the “System Library.” If a package is in your User Library and in the System Library, when you ask to attach it you will get the version that it is your User Library. Now packages are updated from time to time, so it may happen that the version you have in your User Library will be different from the one in the System Library. If that is the case then your package might not work the same way for you as it does for the instructor and for other students: that can be confusing.</p>
 <p>Eventually, though, you will install R and R Studio on your own computer, and then you will have to install many packages on your own.</p>
 <p>Not all packages come from CRAN: many useful packages exist on other repositories, including the very popular code repository known as <a href="https://github.com/">GitHub</a>. Special functions exist to install R-packages from GitHub. For example, you may eventually wish to install the package <strong>tigerData</strong>, which resides in a GitHub repository belonging to your instructor. In order to install it, you would use the <code>install_github()</code> function from the <strong>devtools</strong> package <span class="citation">(Pruim, Kaplan, and Horton <a href="#ref-R-mosaicData">2016</a>)</span>, like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="dt">repo =</span> <span class="st">&quot;homerhanumat/tigerData&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="dt">repo =</span> <span class="st">&quot;homerhanumat/tigerData&quot;</span>)</code></pre></div>
 <p>There are a couple of things worth noting about the command above:</p>
 <ol style="list-style-type: decimal">
 <li>The argument to <code>repo</code> has two parts: the word before the “/” is the username of the individual who owns the repository; the word after the “/” is the name of the repository itself. For R-packages on GitHub, the name of the repository is the same as the name of the package.</li>
@@ -480,7 +480,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

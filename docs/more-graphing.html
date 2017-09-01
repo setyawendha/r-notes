@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -431,7 +431,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Notice the presence of the new parameter <code>data</code>, which provides the data set from which the names of variables shall be drawn. In the <code>aes()</code> function, we can refer to <code>fastest</code> without having to use the <code>frame$variable</code> form.</p>
 <p>The result of the call to <code>ggplot()</code> is a blank plot, which we have stored as the variable <code>p</code>.</p>
 <p>We now add a <em>geom</em> to <code>p</code>: something that will specify how the values of <code>fastest</code> will look when plotted. For a numerical variable such as <code>fastest</code>, density plots are a good choice, and they are specified by the function <code>geom_density()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p +<span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
 <p>We are ready to check out our plot. The result appears as Figure <a href="more-graphing.html#fig:fastestdensity">7.1</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastestdensity"></span>
@@ -441,9 +441,9 @@ Figure 7.1: Basic density plot of the fastest speed every driven.
 </p>
 </div>
 <p>Recall that the density curve is high where the speeds are crowded together and lower where they are spread out. Since there are only 71 students in the data set, it’s not a bad idea to add a “rug” of the individual speeds to the x-axis. The <code>geom_rug()</code> function calls for the rug as another “shape” that is added on to the plot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p +<span class="st"> </span><span class="kw">geom_rug</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>()</code></pre></div>
 <p>It’s always good to label the axes of a plot—providing units if possible—and to add a brief but descriptive title. This is accomplished by adding labels to the plot with the <code>labs()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p +<span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
              <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph.&quot;</span>)</code></pre></div>
 <p>Let’s print out <code>p</code> again. The result is Figure <a href="more-graphing.html#fig:fastestdensity2">7.2</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p</code></pre></div>
@@ -454,15 +454,15 @@ Figure 7.2: Density plot of the fastest speed every driven, with rug and labels.
 </p>
 </div>
 <p>Of course the entire plot could be written out in one command:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> m111survey, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> fastest)) +
-<span class="st">  </span><span class="kw">geom_density</span>() +<span class="st"> </span><span class="kw">geom_rug</span>() +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> m111survey, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> fastest)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
              <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph&quot;</span>)</code></pre></div>
 <p>Usually, though, it’s a good idea to set up a blank plot with the <code>ggplot()</code> function and then add to it. In this way one can reuse the plot-variable, adding different geoms to it, and then stick with the ones you like best.</p>
 <p>For example, you might prefer to make a histogram. Start again with the blank plot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> m111survey, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> fastest))</code></pre></div>
 <p>Now see how a histogram would look (the result is Figure <a href="more-graphing.html#fig:fastesthistogram">7.3</a>.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_histogram</span>() +<span class="st"> </span><span class="kw">geom_rug</span>() +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
              <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastesthistogram"></span>
@@ -474,7 +474,7 @@ Figure 7.3: Histogram of the fastest speed every driven, with rug and labels.
 <p>If you run code yourself, you see a message to the console:</p>
 <pre><code>##  `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><strong>ggplot2</strong> likes to offer advice: in this case it wants you to select the width of the histogram-rectangles yourself. This is done with a <code>stat_bin()</code> function. Let’s make all of our rectangles 10 mph wide by adding a <code>binwidth</code> argument to <code>geom_histogram()</code>. The result is Figure <a href="more-graphing.html#fig:fastesthistogram2">7.4</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>) +<span class="st"> </span><span class="kw">geom_rug</span>() +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
              <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastesthistogram2"></span>
@@ -495,7 +495,7 @@ Figure 7.4: Histogram of the fastest speed every driven, now with binwidth = 10.
 ##  1_front 2_middle   3_back 
 ##       27       32       12</code></pre>
 <p>You can see the same thing graphically with a bar chart (Figure <a href="more-graphing.html#fig:seatbargraph">7.5</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat)) +<span class="st"> </span><span class="kw">geom_bar</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:seatbargraph"></span>
 <img src="r-notes_files/figure-html/seatbargraph-1.png" alt="Bar graph of seating preference." width="60%" />
 <p class="caption">
@@ -503,7 +503,7 @@ Figure 7.5: Bar graph of seating preference.
 </p>
 </div>
 <p>So far the values of the values of the variable under study have been shown on the x-axis. Any time you like you can have them appear along the y-axis, if you add <code>coord_flip()</code> (see Figure <a href="more-graphing.html#fig:seatbargraph2">7.6</a>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat)) +<span class="st"> </span><span class="kw">geom_bar</span>() +<span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:seatbargraph2"></span>
 <img src="r-notes_files/figure-html/seatbargraph2-1.png" alt="Bar graph of seating preference, with coordinates flipped." width="60%" />
 <p class="caption">
@@ -511,7 +511,7 @@ Figure 7.6: Bar graph of seating preference, with coordinates flipped.
 </p>
 </div>
 <p>You might get tired of the dark “fill” in histograms and bar charts. The color of the fill is up to you, though. Just set the <code>fill</code> parameter to the color of your choice. See Figure <a href="more-graphing.html#fig:seatbargraph3">7.7</a> for the results of the code below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat)) +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:seatbargraph3"></span>
 <img src="r-notes_files/figure-html/seatbargraph3-1.png" alt="Bar graph of seating preference.  The bars have a burlywood fill." width="60%" />
 <p class="caption">
@@ -529,7 +529,7 @@ Figure 7.7: Bar graph of seating preference. The bars have a burlywood fill.
 ##   male         8       16      7</code></pre>
 <p>The arguments to <code>table()</code> are the two categorical variables of interest.</p>
 <p>If we want to look into the matter graphically, then we face a conundrum: there are two categorical variables, but only one x-axis. We can assign one of the variables to the x-axis in the call to <code>aes()</code>, but how are we to incorporate the other variable? The solution lies in a second call to <code>aes()</code>, supplied as an argument to the desired geom. The code is shown below, and the results appear as Figure <a href="more-graphing.html#fig:sexseat1">7.8</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> sex)) +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> seat))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> sex)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> seat))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:sexseat1"></span>
 <img src="r-notes_files/figure-html/sexseat1-1.png" alt="Seating preference, by sex." width="60%" />
 <p class="caption">
@@ -542,7 +542,7 @@ Figure 7.8: Seating preference, by sex.
 <li><code>geom_bar(aes(fill = seat))</code>. Note that here the fill is specified as part of an <em>aesthetic</em>, and a categorical variable—not a specific color—is assigned to it. This causes <strong>ggplot2</strong> to <em>map</em> each level of <code>seat</code> to a different color. In this way the variable <code>seat</code> makes its presence known in a graph that started out devoted just to the variable <code>sex</code>.</li>
 </ul>
 <p>Some people don’t like the colors “stacked”. In that case, you can set <code>position</code> to “dodge”, as in the code below. The results appear in Figure <a href="more-graphing.html#fig:sexseat2">7.9</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> sex)) +<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> sex)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> seat), <span class="dt">position =</span><span class="st">&quot;dodge&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:sexseat2"></span>
 <img src="r-notes_files/figure-html/sexseat2-1.png" alt="Seating preference, by sex---no stacking of bars.." width="60%" />
@@ -558,7 +558,7 @@ Figure 7.9: Seating preference, by sex—no stacking of bars..
 <p>In this case we can assign one variable to the x-axis and the other to the y-axis.:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat, <span class="dt">y =</span> fastest))</code></pre></div>
 <p>We can now add geoms. We’ll make a violin plot—a density curve mirrored against itself—and an individual-value plot, in which the individual speeds appear at the appropriate y-axis level, but with their x-coordinates “jittered” randomly so that identical speeds don’t over-plot each other. The graph appears in Figure <a href="more-graphing.html#fig:violinfastestseat">7.10</a>. Where a violin is “thick” data points are crowded closely together. Where it is “thin”, they are more sparse.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) +<span class="st"> </span><span class="kw">geom_jitter</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:violinfastestseat"></span>
 <img src="r-notes_files/figure-html/violinfastestseat-1.png" alt="Violin plot of fastest speed by seating preference, with individuals plotted as points." width="60%" />
 <p class="caption">
@@ -566,7 +566,7 @@ Figure 7.10: Violin plot of fastest speed by seating preference, with individual
 </p>
 </div>
 <p>Another way to handle the question is to group with a call to <code>aes()</code> provided to an appropriate geom, as in the code below. The resulting graph is appears in Figure <a href="more-graphing.html#fig:fastestseatgrouping">7.11</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> fastest)) +<span class="st"> </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">color =</span> seat))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> fastest)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">color =</span> seat))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastestseatgrouping"></span>
 <img src="r-notes_files/figure-html/fastestseatgrouping-1.png" alt="Density plots of fastest speed ever driven, for each seating preference." width="60%" />
 <p class="caption">
@@ -577,7 +577,7 @@ Figure 7.11: Density plots of fastest speed ever driven, for each seating prefer
 <div id="two-numerical-variables" class="section level3">
 <h3><span class="header-section-number">7.9.4</span> Two Numerical Variables</h3>
 <p>As we have seen in previous chapters, scatter plots are a fine way to visualize the relationship between two numerical variables. In our call to <code>aes()</code> we simply assign one of the variables to the x-axis and the other to the y-axis. A scatter plot showing the relationship between grade=point average and fastest speed ever driven is shown in Figure <a href="more-graphing.html#fig:fastestGPAseatA">7.12</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> fastest, <span class="dt">y =</span> GPA)) +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">na.rm =</span> T)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> fastest, <span class="dt">y =</span> GPA)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">na.rm =</span> T)
 p</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastestGPAseatA"></span>
 <img src="r-notes_files/figure-html/fastestGPAseatA-1.png" alt="Scatter plot of GPA vs. fastest speed ever driven. Students who drive faster tend to have lower GPAs." width="60%" />
@@ -589,7 +589,7 @@ Figure 7.12: Scatter plot of GPA vs. fastest speed ever driven. Students who dr
 <div id="grouping-by-a-categorical-variable" class="section level3">
 <h3><span class="header-section-number">7.9.5</span> Grouping by a Categorical Variable</h3>
 <p>It is possible to incorporate a third variable into our plot. As with the bar geoms—or any other geom—this is accomplished by mapping through an aesthetic parameter. The code below uses the color of the points to represent the levels of the variable <code>seat</code>. The scatter plot itself is shown in Figure <a href="more-graphing.html#fig:fastestGPAseat">7.13</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> seat), <span class="dt">na.rm =</span> T)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> seat), <span class="dt">na.rm =</span> T)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fastestGPAseat"></span>
 <img src="r-notes_files/figure-html/fastestGPAseat-1.png" alt="Scatter plot of GPA vs. fastest speed ever driven, with individuals grouped by seating preference." width="60%" />
 <p class="caption">
@@ -616,7 +616,7 @@ Figure 7.14: Some of the days have significantly fewer births. What’s going on
 ##  $ wday     : Ord.factor w/ 7 levels &quot;Sun&quot;&lt;&quot;Mon&quot;&lt;&quot;Tues&quot;&lt;..: 1 2 3 4 5 6 7 1 2 3 ...
 ##  $ weekend  : chr  &quot;weekend&quot; &quot;weekday&quot; &quot;weekday&quot; &quot;weekday&quot; ...</code></pre>
 <p>We see that the variable <code>wday</code> gives the name of the day of the week, for each of the days in the year. On a hunch, we make violin plots of the births for each of the days of the week. The code appears below, and the resulting plot is shown in Figure <a href="more-graphing.html#fig:violinbirthswday">7.15</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> wday, <span class="dt">y =</span> births)) +<span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> wday, <span class="dt">y =</span> births)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_jitter</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:violinbirthswday"></span>
 <img src="r-notes_files/figure-html/violinbirthswday-1.png" alt="Violin plot of births, by day of the week." width="60%" />
@@ -625,11 +625,11 @@ Figure 7.15: Violin plot of births, by day of the week.
 </p>
 </div>
 <p>Aha! There are considerably fewer births on the weekend-days—Saturday and Sunday. Perhaps the <em>entire</em> lower cloud of points is composed of weekends. Let’s check this by re-coding the days according to whether or not they are during the week or at the weekend:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weekend &lt;-<span class="st"> </span><span class="kw">with</span>(Births78, <span class="kw">ifelse</span>(wday %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sat&quot;</span>,<span class="st">&quot;Sun&quot;</span>),
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weekend &lt;-<span class="st"> </span><span class="kw">with</span>(Births78, <span class="kw">ifelse</span>(wday <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sat&quot;</span>,<span class="st">&quot;Sun&quot;</span>),
                                  <span class="st">&quot;weekend&quot;</span>, <span class="st">&quot;weekday&quot;</span>))
-Births78$weekend &lt;-<span class="st"> </span>weekend</code></pre></div>
+Births78<span class="op">$</span>weekend &lt;-<span class="st"> </span>weekend</code></pre></div>
 <p>Note that we have added the new variable to the data frame, so that it will be easy in <strong>ggplot2</strong> to use that variable for grouping, as in the code below. The results appear in Figure <a href="more-graphing.html#fig:birthsplotframesweekend">7.16</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> births)) +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> weekend)) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> births)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> weekend)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Day of the Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Number of U.S. Births&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Daily U.S. Birth-Numbers in 1978&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:birthsplotframesweekend"></span>
@@ -639,7 +639,7 @@ Figure 7.16: The days with fewer births are almost always weekend-days.
 </p>
 </div>
 <p>Well, a <em>few</em> of the points in the lower cloud are weekdays. Is there anything special about them? To find out, we subset the data frame to examine only those points:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">subset</span>(Births78, weekend !=<span class="st"> &quot;weekend&quot;</span> &amp;<span class="st"> </span>births &lt;=<span class="st"> </span><span class="dv">8500</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">subset</span>(Births78, weekend <span class="op">!=</span><span class="st"> &quot;weekend&quot;</span> <span class="op">&amp;</span><span class="st"> </span>births <span class="op">&lt;=</span><span class="st"> </span><span class="dv">8500</span>)
 df</code></pre></div>
 <pre><code>##           date births dayofyear  wday weekend
 ## 2   1978-01-02   7527         2   Mon weekday
@@ -673,7 +673,7 @@ df</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

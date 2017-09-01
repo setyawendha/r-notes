@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -424,8 +424,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">6.3</span> Example: Chance of a Triangle</h2>
 <p>In the examples considered so far, intuition or a simple calculation suggests what the exact value of the probability or expected value should be. The true power of the Monte Carlo simulation method shines forth in situations where it is difficult or impossible to compute a value mathematically.</p>
 <p>Let’s revisit an example from Section <a href="making-decisions-conditionals.html#ifelse">4.2.3</a>, where we considered whether or not three segments could be put together to form a triangle. We developed the following function to determine, from the lengths of each segment, whether or not a triangle is possible:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span>function(x, y, z) {
-  (x +<span class="st"> </span>y &gt;<span class="st"> </span>z) &amp;<span class="st"> </span>(x +z &gt;<span class="st"> </span>y) &amp;<span class="st"> </span>(y +<span class="st"> </span>z &gt;<span class="st"> </span>x)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {
+  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)
 }</code></pre></div>
 <p>Recall also that this function applied to vectors of any length, so we can use it to decide about many triples of segments at once.</p>
 <p>Let’s now inject some chance variation into the situation. Suppose that you have a stick that is one unit in length: one foot, one meter, one yard—whatever. You plan to break the stick at two randomly selected points. Breaking the stick will yield three pieces. You wonder: what is the chance that these three pieces can form a triangle?</p>
@@ -445,15 +445,15 @@ y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)
 b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)
 side1 &lt;-<span class="st"> </span>a     <span class="co"># leftmost</span>
-side2 &lt;-<span class="st"> </span>b -<span class="st"> </span>a  <span class="co"># middle</span>
-side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span>b <span class="co"># rigttmost</span></code></pre></div>
+side2 &lt;-<span class="st"> </span>b <span class="op">-</span><span class="st"> </span>a  <span class="co"># middle</span>
+side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b <span class="co"># rigttmost</span></code></pre></div>
 <p>It is useful to write a helper-function that starts from the breaks, computes the sides, and then decides whether they form a triangle:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">makesTriangle &lt;-<span class="st"> </span>function(x, y) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">makesTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
   a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)
   b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)
   side1 &lt;-<span class="st"> </span>a
-  side2 &lt;-<span class="st"> </span>b -<span class="st"> </span>a
-  side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span>b
+  side2 &lt;-<span class="st"> </span>b <span class="op">-</span><span class="st"> </span>a
+  side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b
   <span class="kw">isTriangle</span>(<span class="dt">x =</span> side1, <span class="dt">y =</span> side2, <span class="dt">z =</span> side3)
 }</code></pre></div>
 <p>Let’s try it our for our repetitions</p>
@@ -560,18 +560,18 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
 <pre><code>## [1] 0.4</code></pre>
 <p>When we ask R to add the elements of a logical vector, it coerces the Boolean values to numbers: <code>TRUE</code> becomes 1 and <code>FALSE</code> becomes 0. Summing the numbers is then equivalent to counting how many times <code>TRUE</code> appeared in <code>triangle</code>. Taking the mean is equivalent to computing the proportion of <code>TRUE</code>s in <code>triangle</code>.</p>
 <p>We would like, of course, to simulate breaking the unit length many times, and we would like to be able to choose easily—without a lot of fuss in coding—the number of repetitions. It makes sense, therefore, to write a simulation function that will do our work for us:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span> ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span> ) {
   cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
   <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
 <p>Now that we think about it, it might also be nice to have the option to view a table of the results, along with the estimate of the probability:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span> ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span> ) {
   cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
-  if ( table ) {
+  <span class="cf">if</span> ( table ) {
     <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n</span><span class="st">&quot;</span>)
     <span class="kw">print</span>(<span class="kw">table</span>(triangle))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -590,11 +590,11 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
 <div id="setting-a-seed" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Setting a Seed</h3>
 <p>There are further possibilities for refining the simulation function. We know that it can be a good idea to set a seed for R’s random-number generator. When you do this you still get random-looking results, but they will be the same results no matter how often you call the simulation function. In that way others who have access to your function can “reproduce” the results you got, thus assuring themselves that you weren’t making anything up. Let’s add a <code>seed</code> parameter to our simulation function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, seed ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, seed ) {
   cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
-  if ( table ) {
+  <span class="cf">if</span> ( table ) {
     <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
     <span class="kw">print</span>(<span class="kw">table</span>(triangle))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -605,15 +605,15 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
 <p>We would like to force R to provide a seed when it is not given one to use. Such a seed should vary from one call to another in a way that cannot be predicted easily.</p>
 <p>I suggest the use of the <code>Sys.time()</code> function, which gives your computer’s idea of the current time:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.time</span>()</code></pre></div>
-<pre><code>## [1] &quot;2017-07-30 13:50:47 EDT&quot;</code></pre>
+<pre><code>## [1] &quot;2017-09-01 14:00:44 EDT&quot;</code></pre>
 <p>This is not a number, but we can make it a number:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())</code></pre></div>
-<pre><code>## [1] 1501437048</code></pre>
+<pre><code>## [1] 1504288844</code></pre>
 <p>The result is—on Unix-like computer systems—the number of seconds elapsed since January 1, 1970. It should serve pretty well as a seed. The following code implements a <code>seed</code> parameter in such a way that the system-time is used when the user does not supply a seed.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   <span class="co"># if user does not provide a seed, set one</span>
   <span class="co"># using the current time:</span>
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
   }
   <span class="co"># now we can set the seed:</span>
@@ -622,7 +622,7 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
   cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
-  if ( table ) {
+  <span class="cf">if</span> ( table ) {
     <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
     <span class="kw">print</span>(<span class="kw">table</span>(triangle))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -645,11 +645,11 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
 <h3><span class="header-section-number">6.3.3</span> Number of Repetitions</h3>
 <p>The Law of Large Numbers says that the more times you repeat the simulation, the better our estimate of the desired probability—or expected value—is liable to be. Let’s use the Stick-Splitting Problem to investigate the effect of the choice of repetitions on the accuracy of our estimate of the probability of getting a triangle.</p>
 <p>We will need to run the <code>tringleSim()</code> function several times, with a different choice for <code>reps</code> each time, keeping track of the estimates we obtain. In the process we won’t need tables or other output to the console. Let’s rewrite <code>triangleSim()</code> for maximum flexibility, making console output optional and using the invisible return discussed in Section <a href="making-decisions-conditionals.html#invisible-returns">4.2.2</a>.<a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span>function(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>,
                         <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
   <span class="co"># if user does not provide a seed, set one</span>
   <span class="co"># using the current time:</span>
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
   }
   <span class="co"># now we can set the seed:</span>
@@ -658,12 +658,12 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
   cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
   triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
-  if ( table ) {
+  <span class="cf">if</span> ( table ) {
     <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
     <span class="kw">print</span>(<span class="kw">table</span>(triangle))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
   }
-  if ( verbose ) {
+  <span class="cf">if</span> ( verbose ) {
     <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
   <span class="kw">invisible</span>(<span class="kw">mean</span>(triangle))
@@ -672,7 +672,7 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>)
 estimates &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">length</span>(reps))</code></pre></div>
 <p>Next we loop through <code>reps</code>, performing a complete simulation for each repetition-number and storing our results:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for ( i in <span class="dv">1</span>:<span class="kw">length</span>(reps)) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(reps)) {
   estimates[i] &lt;-<span class="st"> </span><span class="kw">triangleSim</span>(<span class="dt">reps =</span> reps[i], <span class="dt">seed =</span> <span class="dv">3030</span>,
                              <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
 }</code></pre></div>
@@ -708,7 +708,7 @@ estimates</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

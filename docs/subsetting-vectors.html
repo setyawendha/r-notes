@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -441,10 +441,10 @@ heights[desired]</code></pre></div>
 <pre><code>## Scarecrow      Toto 
 ##        72        NA</code></pre>
 <p>Negative numbers are significant in subsetting:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[-<span class="dv">2</span>] <span class="co">#select all but second element</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[<span class="op">-</span><span class="dv">2</span>] <span class="co">#select all but second element</span></code></pre></div>
 <pre><code>## Scarecrow      Lion   Dorothy      Toto       Boq 
 ##        72        69        58        NA        45</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[-<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]  <span class="co"># all but first and third</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]  <span class="co"># all but first and third</span></code></pre></div>
 <pre><code>##  Tinman Dorothy    Toto     Boq 
 ##      70      58      NA      45</code></pre>
 <p>If you specify a nonexistent index, you get <code>NA</code>, the reasonable result:</p>
@@ -452,16 +452,16 @@ heights[desired]</code></pre></div>
 <pre><code>## &lt;NA&gt; 
 ##   NA</code></pre>
 <p>Patterned vectors are quite useful for subsetting. If you want the first three elements of <code>heights</code>, you don’t have to type <code>heights[c(1,2,3)]</code>. Instead you can just say:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span>:<span class="dv">3</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion 
 ##        72        70        69</code></pre>
 <p>The following gives the same as <code>heights</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span>:<span class="kw">length</span>(heights)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(heights)]</code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
 ##        72        70        69        58        NA        45</code></pre>
 <p>If you desire to quickly provide names for a vector, subsetting can help:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">14</span>, <span class="dv">82</span>, <span class="dv">33</span>, <span class="dv">33</span>, <span class="dv">45</span>)
-<span class="kw">names</span>(vec) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span>:<span class="kw">length</span>(vec)]
+<span class="kw">names</span>(vec) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec)]
 vec</code></pre></div>
 <pre><code>##  A  B  C  D  E  F 
 ## 23 14 82 33 33 45</code></pre>
@@ -509,7 +509,7 @@ permuted</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

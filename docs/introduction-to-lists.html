@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -426,10 +426,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>A <em>list</em>  is a special kind of vector. Like any other vector it is one-dimensional, but unlike an atomic vector it can contain objects of <em>any</em> sort: atomic vectors, functions—even other lists! We say, therefore, that lists are <em>heterogeneous</em> vectors.</p>
 <p>The most direct way to create a list is with the function <code>list()</code> . Let’s make a couple of lists:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="dv">12</span>)
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), <span class="dt">y =</span> letters[<span class="dv">1</span>:<span class="dv">3</span>])
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])
 lst2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">vowels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;o&quot;</span>, <span class="st">&quot;u&quot;</span>),
              <span class="dt">myFrame =</span> df)
-lst3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">nums =</span> <span class="dv">10</span>:<span class="dv">20</span>,
+lst3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">nums =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">20</span>,
              <span class="dt">bools =</span> <span class="kw">c</span>(T, F, F),
              <span class="dt">george =</span> lst1)</code></pre></div>
 <p>Note that the elements of our three lists are not objects of a single data type. Note also that <code>lst3</code> actually contains <code>lst2</code> as one of its elements.</p>
@@ -442,7 +442,7 @@ lst3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt"
 ## $age
 ## [1] 12</code></pre>
 <p>Note that the name of each elements appears before the element itself is printed out, and that the names are preceded by dollar signs. This is a hint that you can access a single member of the list in a way similar to the <code>frame$variable</code> format for data frames:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst1$age</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst1<span class="op">$</span>age</code></pre></div>
 <pre><code>## [1] 12</code></pre>
 <p>You can make an empty list, too:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emptyList &lt;-<span class="st"> </span><span class="kw">list</span>()</code></pre></div>
@@ -465,7 +465,7 @@ lst3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt"
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

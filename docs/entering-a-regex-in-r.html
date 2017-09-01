@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -522,14 +522,14 @@ replaceFirst</code></pre></div>
 </ul></li>
 </ul>
 <p>Let’s look at an example. Here is a function that, given a string, will capitalize all of the vowels that it finds:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">capVowels &lt;-<span class="st"> </span>function(str) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">capVowels &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
   <span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;([aeiou])&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">U</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">E&quot;</span>, <span class="dt">x =</span> str, <span class="dt">perl =</span> T)
 }
 <span class="kw">capVowels</span>(<span class="st">&quot;Far and away the best!&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;FAr And AwAy thE bEst!&quot;</code></pre>
 <p>Note that the pattern <code>[aeiou]</code> for vowels had to be enclosed in parentheses so that it could be captured and referred to by the back-reference <code>\1</code>. Also note that, since R converts the replacement string into a pattern, extra backslash escapes are required, just as in regular expressions.</p>
 <p>Here is another function that searches for repeated words and encloses each pair in asterisks:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starRepeats &lt;-<span class="st"> </span>function(str) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starRepeats &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
   <span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">b)&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;*</span><span class="ch">\\</span><span class="st">1*&quot;</span>, <span class="dt">x =</span> str, <span class="dt">perl =</span> T)
 }
 <span class="kw">starRepeats</span>(<span class="st">&quot;I have a boo boo on my knee knee.&quot;</span>)</code></pre></div>
@@ -669,7 +669,7 @@ m &lt;-<span class="st"> </span><span class="kw">gregexpr</span>(myPattern, mySt
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

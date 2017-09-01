@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -427,7 +427,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">turtle_do</span>({
   <span class="kw">turtle_setpos</span>(<span class="dv">600</span>,<span class="dv">400</span>)
   <span class="kw">turtle_right</span>(<span class="dv">90</span>)
-  for (i in <span class="dv">1</span>:<span class="dv">2000</span>) {
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2000</span>) {
     <span class="kw">turtle_right</span>(i)
     <span class="kw">turtle_forward</span>(<span class="kw">sqrt</span>(i))
   }
@@ -443,15 +443,15 @@ Figure 5.13: Galactic Zany!
 <span class="kw">turtle_do</span>({
   i &lt;-<span class="st"> </span><span class="dv">1</span>
   <span class="kw">turtle_right</span>(<span class="dv">90</span>)
-  repeat {
+  <span class="cf">repeat</span> {
     bidding &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Proceed? (Enter q to quit) &quot;</span>)
-    if ( bidding ==<span class="st"> &quot;q&quot;</span>) break
+    <span class="cf">if</span> ( bidding <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span>
     <span class="kw">turtle_right</span>(i)
-    <span class="kw">turtle_forward</span>(<span class="dv">2</span>*<span class="kw">sqrt</span>(i))
+    <span class="kw">turtle_forward</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(i))
     <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;Turned &quot;</span>, i, <span class="st">&quot; degrees,</span><span class="ch">\n</span><span class="st">&quot;</span>))
-    <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;stepped forward &quot;</span>, <span class="kw">round</span>(<span class="dv">2</span>*<span class="kw">sqrt</span>(i), <span class="dv">3</span>), <span class="st">&quot; units.</span><span class="ch">\n</span><span class="st">&quot;</span>))
+    <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;stepped forward &quot;</span>, <span class="kw">round</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(i), <span class="dv">3</span>), <span class="st">&quot; units.</span><span class="ch">\n</span><span class="st">&quot;</span>))
     <span class="kw">cat</span>(<span class="st">&quot;Turtle&#39;s current angle is: &quot;</span>, <span class="kw">turtle_getangle</span>(), <span class="st">&quot; degrees.</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    i &lt;-<span class="st"> </span>i +<span class="st"> </span><span class="dv">20</span>
+    i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">20</span>
   }
   <span class="kw">cat</span>(<span class="st">&quot;All done!&quot;</span>)
 })</code></pre></div>
@@ -480,7 +480,7 @@ Figure 5.13: Galactic Zany!
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

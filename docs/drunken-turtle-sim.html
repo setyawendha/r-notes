@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -431,10 +431,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In particular, we would like to know the distribution of <span class="math inline">\(X\)</span>: what is the chance that the turtle does not make a close return during the first thousand steps? What’s the chance of making only one close return? Two close returns? And so on … . We would also like to estimate the expected value of <span class="math inline">\(X\)</span>: the average number of close returns in the first 1000 steps.</p>
 <p>We will next consider how to code a simulation. Obviously we will need a way to record the turtle’s position at each step. In order to accomplish this we will have to apply the unit-circle trigonometry you learned in high school.</p>
 <p>Instead of measuring angles in degrees, we will work in radians: by default R does trigonometry that way. Recall that 360 degrees is <span class="math inline">\(2 \pi\)</span> radians; hence the way to determine the angle of a turn by the drunken turtle is with the following call to <code>runif()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>*pi)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</code></pre></div>
 <pre><code>## [1] 2.746987</code></pre>
 <p>If we want a thousand drunken turn-angles, then we can get them all in a vector, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span>*pi)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</code></pre></div>
 <p>So much for the turning angles. But in order to decide at each step whether the turtle has made a close return, we have to know the coordinates of the turtle after each step. This is where unit-circle trigonometry comes in handy. Recall that if a right triangle has a hypotenuse of length 1 (the length of a turtle step) and if one of the angles of the triangle is <span class="math inline">\(\alpha\)</span>, then the side adjacent to <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(\cos(\alpha)\)</span> and the side opposite is <span class="math inline">\(\sin(\alpha)\)</span>. The situation is illustrated in Figure <a href="drunken-turtle-sim.html#fig:right-triangle">6.4</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:right-triangle"></span>
 <img src="images/righttriangle.png" alt="Sides of a right triangle with hypotenuse 1, in terms of the angle shown." width="75%" />
@@ -458,7 +458,7 @@ Figure 6.5: The first two steps by the Drunken Turtle. Turtle turns by <span cla
 </p>
 </div>
 <p>Let’s put this idea into practice, for just the first ten steps. First, get the turning angles, the sines and the cosines:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">0</span> , <span class="dv">2</span>*pi)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
 xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
 ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</code></pre></div>
 <p>Next, we need to add the <code>xSteps</code> together. If we do a sum, we would get the <span class="math inline">\(x\)</span>-coordinate after the tenth step:</p>
@@ -477,9 +477,9 @@ x</code></pre></div>
 <p>Similarly we can get the first ten <span class="math inline">\(y\)</span>-coordinates:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)</code></pre></div>
 <p>Using the distance formula, we can compute the distance of each point from the origin as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x^<span class="dv">2</span> +<span class="st"> </span>y^<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
 <p>The following logical vector will then record, at each each step, whether or not the turtle has made a close return:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">closeReturn &lt;-<span class="st"> </span>(dist &lt;<span class="st"> </span><span class="fl">0.5</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)</code></pre></div>
 <p>The results are shown in Table <a href="drunken-turtle-sim.html#tab:tensteptab">6.3</a>.</p>
 <table>
 <caption><span id="tab:tensteptab">Table 6.3: </span>Record of the turtle’s first ten steps. It has not yet made a close return.</caption>
@@ -588,9 +588,9 @@ x</code></pre></div>
 </tbody>
 </table>
 <p>It remains only to package our code into a simulation function. We will allow the user to specify the fixed initial number of steps (it does not have to be 1000), and also to determine what distance counts as a “close return.”</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span>function(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
                        <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
   }
   <span class="kw">set.seed</span>(seed)
@@ -599,20 +599,20 @@ x</code></pre></div>
   <span class="co"># close returns in each repetition:</span>
   returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
   
-  for (i in <span class="dv">1</span>:reps) {
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span>*pi)
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {
+  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
   xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
   ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
   
   x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
   y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
   
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x^<span class="dv">2</span> +<span class="st"> </span>y^<span class="dv">2</span>)
-  closeReturn &lt;-<span class="st"> </span>(dist &lt;<span class="st"> </span><span class="fl">0.5</span>)
+  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)
+  closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)
   returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)
   }
   
-  if ( table ) {
+  <span class="cf">if</span> ( table ) {
     <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
     tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(returns))
     <span class="kw">print</span>(tab)
@@ -635,20 +635,20 @@ x</code></pre></div>
 ## The average number of close returns was:  1.5655.</code></pre>
 <p>Notice that 38.81% of the time the turtle did not make a close return at all during the first thousand steps. On the other hand it is possible, though not at all likely, for the turtle to make quite a few close returns.<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a></p>
 <p>It is interesting to look specifically at the distances from the origin. The following function draws a graph of the distance from the origin for the specified number of turtle steps:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim2 &lt;-<span class="st"> </span>function(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  if ( <span class="kw">is.null</span>(seed) ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
   }
   <span class="kw">set.seed</span>(seed)
   
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span>*pi)
+  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
   xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
   ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
   x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
   y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x^<span class="dv">2</span> +<span class="st"> </span>y^<span class="dv">2</span>)
+  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)
   plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;First &quot;</span>, steps, <span class="st">&quot; Steps of the Drunken Turtle&quot;</span>)
-  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>:steps, <span class="dt">y=</span>dist)) +<span class="st"> </span><span class="kw">geom_line</span>() +
+  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span>steps, <span class="dt">y=</span>dist)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Distance From Origin&quot;</span>,
          <span class="dt">title =</span> plotTitle)
   <span class="kw">print</span>(p)
@@ -687,7 +687,7 @@ Figure 6.6: Line plot of the Turtle’s distance from the origin, as a function 
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

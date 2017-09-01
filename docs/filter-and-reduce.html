@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -422,7 +422,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="filter-and-reduce" class="section level2">
 <h2><span class="header-section-number">12.4</span> <code>Filter()</code> and <code>Reduce()</code></h2>
-<p></p>
+
 <p>R provides support for several “higher-order” functions commonly-used in functional programming languages. (See <code>help(funprog)</code>.) Within this family of functions we have already met <code>Map()</code>. Another useful member is <code>Filter()</code>, which can do sub-setting work in situations when R’s usual vector-based sub-setting falls short.</p>
 <p>Suppose, for example, that you want to select from <code>mat111survey</code> only those variables that are factors. This can be accomplished as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111Factors &lt;-<span class="st"> </span><span class="kw">Filter</span>(is.factor, m111survey)
@@ -460,7 +460,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 14</code></pre>
 <p>Hence a common application of <code>Reduce</code> is to take an operation that is defined on only two items and extend it to operate on any number of items. Consider, for example, the function <code>intersect()</code>, , which will find the intersection of any two vectors of the same type:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)
-vec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, -<span class="dv">4</span>)
+vec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="op">-</span><span class="dv">4</span>)
 <span class="kw">intersect</span>(vec1, vec2)</code></pre></div>
 <pre><code>## [1] 4 6</code></pre>
 <p>You cannot intersect three or more vectors at once:</p>
@@ -491,7 +491,7 @@ vec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4<
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

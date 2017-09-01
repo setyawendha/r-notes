@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -440,13 +440,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">70</span>, <span class="dt">sd =</span> <span class="dv">3</span>)</code></pre></div>
 <p>We have just asked R to produce 100 numbers chosen randomly from a <em>normal</em> distribution. The <code>mean</code> parameter sets what the values should be “on average”, and the <code>sd</code> parameter indicates how much they should typically differ from that average value. The bigger the <code>sd</code>, the bigger the difference between the mean and value actually obtained is liable to be.</p>
 <p>Let’s get a look at the first ten values in the vector <code>x</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</code></pre></div>
 <pre><code>##  [1] 71.13092 70.90465 66.70593 66.60878 61.61040 72.16172 72.81736
 ##  [8] 69.31187 75.27739 70.35210</code></pre>
 <p>Sure enough, the numbers are typically around the mean of 70, give or take 3 units or so.</p>
 <p>We can use the <strong>ggplot2</strong> package to produce a density curve from all 100 values in the vector <code>x</code>. (The resulting plot appears as Figure <a href="example-dental-floss.html#fig:densitynormal">6.2</a>.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x)) +<span class="st"> </span><span class="kw">geom_density</span>() +<span class="st"> </span><span class="kw">geom_rug</span>() +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;x-value&quot;</span>)
 p</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:densitynormal"></span>
@@ -457,19 +457,19 @@ Figure 6.2: Density plot of 100 random values from a normal distribution with me
 </div>
 <p>The <code>geom_density()</code> part of the plotting-command produces the curve. The <code>geom_rug()</code> part produces tick-marks along the horizontal axis, each of which is located at a particular value in the vector <code>x</code>. You can see that the curve is higher where values are crowded together, and lower where the values are spread apart. The scale on the y-axis has been chosen carefully so that the area under the density curve between any two numbers <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> on the axis gives an estimate of the chance that the normal random variable would produce a value between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. In this way the density curve gives us a visual sense of the distribution of the random variable: it seems rather likely to be between 67 and 73 (most of the area under the curve occurs there) and rather unlikely to be greater than 76, and so on.</p>
 <p>We are now ready to simulate the dental-floss scenario. Since we have worked through the encapsulation-and-generalization development process a number of times by now, we will simply show a final-form implementation of a simulation function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flossSim &lt;-<span class="st"> </span>function(<span class="dt">len =</span> <span class="dv">150</span>, <span class="dt">min =</span> <span class="dv">1</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flossSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">len =</span> <span class="dv">150</span>, <span class="dt">min =</span> <span class="dv">1</span>, 
                      <span class="dt">max =</span> <span class="dv">2</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, 
                      <span class="dt">graph =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
   }
   <span class="kw">set.seed</span>(seed)
   
   <span class="co"># helper function to pick whihc box gets used:</span>
-  whichOne &lt;-<span class="st"> </span>function(x) {
-    if (x &lt;<span class="st"> </span><span class="fl">0.5</span> ) {
+  whichOne &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+    <span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span> ) {
       <span class="kw">return</span>(<span class="st">&quot;a&quot;</span>)
-    } else <span class="kw">return</span>(<span class="st">&quot;b&quot;</span>)
+    } <span class="cf">else</span> <span class="kw">return</span>(<span class="st">&quot;b&quot;</span>)
   }
   
   <span class="co"># vector to contains our results:</span>
@@ -478,7 +478,7 @@ Figure 6.2: Density plot of 100 random values from a normal distribution with me
   <span class="co"># now the simulation.  Each time we loop through, we</span>
   <span class="co"># start with two fresh boxes and use them until one of</span>
   <span class="co"># them runs out.</span>
-  for (i in <span class="dv">1</span>:reps ) {
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {
     <span class="co"># set the initial lengh of the two fresh boxes:</span>
     a &lt;-<span class="st"> </span>b &lt;-<span class="st"> </span>len
     
@@ -486,20 +486,20 @@ Figure 6.2: Density plot of 100 random values from a normal distribution with me
     bothOK &lt;-<span class="st"> </span><span class="ot">TRUE</span>
     
     <span class="co"># start flossing</span>
-    while ( bothOK ) {
+    <span class="cf">while</span> ( bothOK ) {
       <span class="co"># determine which box is picked</span>
       <span class="co"># &lt; 0.5 is a; &gt;= 0.5 is b;</span>
       boxPicked &lt;-<span class="st"> </span><span class="kw">whichOne</span>(<span class="kw">runif</span>(<span class="dv">1</span>))
       
       <span class="co"># if we choose box a, attempt to use floss from it</span>
-      if ( boxPicked ==<span class="st"> &quot;a&quot;</span> ) {
-        if ( a &lt;<span class="st"> </span><span class="dv">1</span> ) {
+      <span class="cf">if</span> ( boxPicked <span class="op">==</span><span class="st"> &quot;a&quot;</span> ) {
+        <span class="cf">if</span> ( a <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span> ) {
           leftover[i] &lt;-<span class="st"> </span>b
           bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-        } else {
+        } <span class="cf">else</span> {
           useAmount &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">runif</span>(<span class="dv">1</span>, min, max), a)
-          a &lt;-<span class="st"> </span>a -<span class="st"> </span>useAmount
-          if (<span class="kw">abs</span>(a) &lt;<span class="st"> </span><span class="dv">10</span>^(-<span class="dv">4</span>)) {
+          a &lt;-<span class="st"> </span>a <span class="op">-</span><span class="st"> </span>useAmount
+          <span class="cf">if</span> (<span class="kw">abs</span>(a) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">4</span>)) {
             leftover[i] &lt;-<span class="st"> </span>b
             bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span>
           }
@@ -507,14 +507,14 @@ Figure 6.2: Density plot of 100 random values from a normal distribution with me
       }
       
       <span class="co"># use floss from b (if we choose it) </span>
-      if ( boxPicked ==<span class="st"> &quot;b&quot;</span> ) {
-        if ( b &lt;<span class="st"> </span><span class="dv">1</span> ) {
+      <span class="cf">if</span> ( boxPicked <span class="op">==</span><span class="st"> &quot;b&quot;</span> ) {
+        <span class="cf">if</span> ( b <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span> ) {
           leftover[i] &lt;-<span class="st"> </span>a
           bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-        } else {
+        } <span class="cf">else</span> {
           useAmount &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">runif</span>(<span class="dv">1</span>, min, max), b)
-          b &lt;-<span class="st"> </span>b -<span class="st"> </span>useAmount
-          if (<span class="kw">abs</span>(b) &lt;<span class="st"> </span><span class="dv">10</span>^(-<span class="dv">4</span>)) {
+          b &lt;-<span class="st"> </span>b <span class="op">-</span><span class="st"> </span>useAmount
+          <span class="cf">if</span> (<span class="kw">abs</span>(b) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">4</span>)) {
             leftover[i] &lt;-<span class="st"> </span>a
             bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span>
           }
@@ -525,14 +525,14 @@ Figure 6.2: Density plot of 100 random values from a normal distribution with me
   }    <span class="co"># end for loop</span>
   
   <span class="co"># report results:</span>
-  if ( graph ) {
+  <span class="cf">if</span> ( graph ) {
     plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Dental-Floss Simulation with &quot;</span>, reps, <span class="st">&quot; Repetitions&quot;</span>)
-    p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(leftover)) +<span class="st"> </span><span class="kw">geom_density</span>() +
+    p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(leftover)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Amount left in spare (ft)&quot;</span>,
           <span class="dt">title =</span> plotTitle)
     <span class="co"># add a rug of individual points, provided there are not too many:</span>
-    if ( reps &lt;=<span class="st"> </span><span class="dv">100</span> ) {
-      p &lt;-<span class="st"> </span>p +<span class="st"> </span><span class="kw">geom_rug</span>()
+    <span class="cf">if</span> ( reps <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span> ) {
+      p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>()
     }
   }
   <span class="kw">print</span>(p)
@@ -573,7 +573,7 @@ Figure 6.3: Density plot of the results of a dental-floss simulation.
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

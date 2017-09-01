@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -428,7 +428,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] 14</code></pre>
 <p>The row and column numbers are called <em>indices</em>.</p>
 <p>If we want the entire second row, then we could ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">2</span>,<span class="dv">1</span>:<span class="dv">4</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">2</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</code></pre></div>
 <pre><code>##  A  B  C  D 
 ##  2  8 14 20</code></pre>
 <p>The result is a one-dimensional vector consisting of the elements in the second row of <code>numbersMat</code>. It inherits as its names the column names of <code>numbersMat</code>.</p>
@@ -441,7 +441,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>##  A  B  D 
 ##  2  8 20</code></pre>
 <p>You can specify a vector of row-indices along with a vector of column-indices, if you like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">1</span>:<span class="dv">3</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
 <pre><code>##   A B  C
 ## a 1 7 13
 ## b 2 8 14</code></pre>
@@ -525,7 +525,7 @@ numbersMat</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

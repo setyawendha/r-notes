@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -424,7 +424,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">7.7</span> Ordering Data Frames</h2>
 <p>You can reorder as well as select. For example, the following code selects the first five rows of<code>m111survey</code> and then reverses them:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;ideal_ht&quot;</span>)]
-dfRev &lt;-<span class="st"> </span>df[<span class="dv">5</span>:<span class="dv">1</span>, ]
+dfRev &lt;-<span class="st"> </span>df[<span class="dv">5</span><span class="op">:</span><span class="dv">1</span>, ]
 <span class="kw">head</span>(dfRev)</code></pre></div>
 <pre><code>##   height ideal_ht
 ## 5     72       72
@@ -434,7 +434,7 @@ dfRev &lt;-<span class="st"> </span>df[<span class="dv">5</span>:<span class="dv
 ## 1     76       78</code></pre>
 <p>If you want, you can even scramble the rows of the data frame in a random order:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(m111survey)
-shuffle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:n, <span class="dt">size =</span> n, <span class="dt">replace =</span> F)
+shuffle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> n, <span class="dt">replace =</span> F)
 df &lt;-<span class="st"> </span>m111survey[shuffle, ]
 <span class="kw">head</span>(df[<span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;seat&quot;</span>)])  <span class="co">#show just two columns</span></code></pre></div>
 <pre><code>##       sex     seat
@@ -465,7 +465,7 @@ df &lt;-<span class="st"> </span>m111survey[shuffle, ]
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(vec)</code></pre></div>
 <pre><code>## [1]  7 12 15 23</code></pre>
 <p>The power of <code>order()</code> comes with the rearrangement of rows of a data frame. In order to “sort” the frame from shortest to tallest subject, call:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[<span class="kw">order</span>(m111survey$height), ]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[<span class="kw">order</span>(m111survey<span class="op">$</span>height), ]
 <span class="kw">head</span>(df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>)])  <span class="co"># to show that it worked</span></code></pre></div>
 <pre><code>##       sex height
 ## 45 female     51
@@ -475,7 +475,7 @@ df &lt;-<span class="st"> </span>m111survey[shuffle, ]
 ## 40 female     60
 ## 69 female     61</code></pre>
 <p>If you want to order the rows from tallest to shortest instead, then use the <code>decreasing</code> parameter, which by default is <code>FALSE</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[<span class="kw">order</span>(m111survey$height, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>), ]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[<span class="kw">order</span>(m111survey<span class="op">$</span>height, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>), ]
 <span class="kw">head</span>(df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>)])  <span class="co"># to show that it worked</span></code></pre></div>
 <pre><code>##       sex height
 ## 8    male     79
@@ -517,7 +517,7 @@ df &lt;-<span class="st"> </span>m111survey[ordering, ]
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

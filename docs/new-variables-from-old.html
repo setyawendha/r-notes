@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -424,23 +424,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">7.8</span> New Variables from Old</h2>
 <p>Quite often you will want to <em>transform</em> one or more variables in a data frame. Transforming a variable means changing its values in a systematic way.</p>
 <p>For example, you might want to measure height in feet rather than inches. Then you want the following</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heightInFeet &lt;-<span class="st"> </span><span class="kw">with</span>(m111survey, height/<span class="dv">12</span>)  <span class="co"># 12 inches in a foot</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heightInFeet &lt;-<span class="st"> </span><span class="kw">with</span>(m111survey, height<span class="op">/</span><span class="dv">12</span>)  <span class="co"># 12 inches in a foot</span></code></pre></div>
 <p>If you plan to use this new variable in your analysis later on, it might be a good idea to add it to the data frame:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey$height_ft &lt;-<span class="st"> </span>heightInFeet</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>height_ft &lt;-<span class="st"> </span>heightInFeet</code></pre></div>
 <p>Another common need is to <em>recode</em> the values of a categorical variable. For example, you might want to divide people into two groups: those who prefer to sit in the back and those who don’t. This is a good time to use <code>ifelse()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(m111survey$seat ==<span class="st"> &quot;3_back&quot;</span>, <span class="st">&quot;Back&quot;</span>, <span class="st">&quot;Other&quot;</span>)
-m111survey$seat2 &lt;-<span class="st"> </span>seat2</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(m111survey<span class="op">$</span>seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span>, <span class="st">&quot;Back&quot;</span>, <span class="st">&quot;Other&quot;</span>)
+m111survey<span class="op">$</span>seat2 &lt;-<span class="st"> </span>seat2</code></pre></div>
 <p>If you plan to re-code into a variable that involves more than two values, then you might want to look into the <code>mapvalues()</code> function from the <strong>plyr</strong> package <span class="citation">(Wickham <a href="#ref-R-plyr">2016</a>)</span>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat3 &lt;-<span class="st"> </span>plyr::<span class="kw">mapvalues</span>(m111survey$seat,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat3 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(m111survey<span class="op">$</span>seat,
                 <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;1_front&quot;</span>, <span class="st">&quot;2_middle&quot;</span>, <span class="st">&quot;3_back&quot;</span>),
                 <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))
 <span class="kw">str</span>(seat3)</code></pre></div>
 <pre><code>##  Factor w/ 3 levels &quot;Front&quot;,&quot;Middle&quot;,..: 1 2 2 1 3 1 1 3 3 2 ...</code></pre>
 <p>The do-it-yourself approach is to write a loop. Remember <code>switch()</code>? </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat &lt;-<span class="st"> </span>m111survey$seat
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">seat &lt;-<span class="st"> </span>m111survey<span class="op">$</span>seat
 seat3 &lt;-<span class="st"> </span><span class="kw">character</span>(<span class="kw">length</span>(seat))  <span class="co"># this will be the recoded variable</span>
-for ( i in <span class="dv">1</span>:<span class="kw">length</span>(seat) ) {
-  seat3[i] &lt;-<span class="st"> </span>switch(<span class="kw">as.character</span>(seat[i]),
+<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(seat) ) {
+  seat3[i] &lt;-<span class="st"> </span><span class="cf">switch</span>(<span class="kw">as.character</span>(seat[i]),
                      <span class="st">&quot;1_front&quot;</span> =<span class="st"> &quot;Front&quot;</span>,
                      <span class="st">&quot;2_middle&quot;</span> =<span class="st"> &quot;Middle&quot;</span>,
                      <span class="st">&quot;3_back&quot;</span> =<span class="st"> &quot;Back&quot;</span>)
@@ -448,7 +448,7 @@ for ( i in <span class="dv">1</span>:<span class="kw">length</span>(seat) ) {
 <span class="kw">str</span>(seat3)</code></pre></div>
 <pre><code>##  chr [1:71] &quot;Front&quot; &quot;Middle&quot; &quot;Middle&quot; &quot;Front&quot; &quot;Back&quot; &quot;Front&quot; &quot;Front&quot; ...</code></pre>
 <p>The re-coding is done but the result is a character vector and not a factor. We have to make it a factor ourselves:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey$seat3 &lt;-<span class="st"> </span><span class="kw">factor</span>(seat3, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>seat3 &lt;-<span class="st"> </span><span class="kw">factor</span>(seat3, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))</code></pre></div>
 <p>This seems like a lot of work!</p>
 <p>Another common transformation involves turning a numerical variable into a factor. For example, we might need to classify people as:</p>
 <ul>
@@ -457,9 +457,9 @@ for ( i in <span class="dv">1</span>:<span class="kw">length</span>(seat) ) {
 <li>Short (less than 65 inches)</li>
 </ul>
 <p>The <code>cut()</code> function  will be helpful.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">minh &lt;-<span class="st"> </span><span class="kw">min</span>(m111survey$height, <span class="dt">na.rm =</span> T)
-maxh &lt;-<span class="st"> </span><span class="kw">max</span>(m111survey$height, <span class="dt">na.rm =</span> T)
-heightClass &lt;-<span class="st"> </span><span class="kw">cut</span>(m111survey$height,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">minh &lt;-<span class="st"> </span><span class="kw">min</span>(m111survey<span class="op">$</span>height, <span class="dt">na.rm =</span> T)
+maxh &lt;-<span class="st"> </span><span class="kw">max</span>(m111survey<span class="op">$</span>height, <span class="dt">na.rm =</span> T)
+heightClass &lt;-<span class="st"> </span><span class="kw">cut</span>(m111survey<span class="op">$</span>height,
                    <span class="dt">breaks =</span> <span class="kw">c</span>(minh, <span class="dv">65</span>, <span class="dv">70</span>, maxh),
                    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Short&quot;</span>, <span class="st">&quot;Medium&quot;</span>,<span class="st">&quot;Tall&quot;</span>),
                    <span class="dt">right =</span> <span class="ot">TRUE</span>)
@@ -475,9 +475,9 @@ heightClass &lt;-<span class="st"> </span><span class="kw">cut</span>(m111survey
 ##  [7] &quot;extra_life&quot;      &quot;seat&quot;            &quot;GPA&quot;            
 ## [10] &quot;enough_Sleep&quot;    &quot;sex&quot;             &quot;diff.ideal.act.&quot;
 ## [13] &quot;height_ft&quot;       &quot;seat2&quot;           &quot;seat3&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey$height_ft &lt;-<span class="st"> </span><span class="ot">NULL</span>
-m111survey$seat2 &lt;-<span class="st"> </span><span class="ot">NULL</span>
-m111survey$seat3 &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>height_ft &lt;-<span class="st"> </span><span class="ot">NULL</span>
+m111survey<span class="op">$</span>seat2 &lt;-<span class="st"> </span><span class="ot">NULL</span>
+m111survey<span class="op">$</span>seat3 &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">names</span>(m111survey)  <span class="co"># the extra variables are gone</span></code></pre></div>
 <pre><code>##  [1] &quot;height&quot;          &quot;ideal_ht&quot;        &quot;sleep&quot;          
 ##  [4] &quot;fastest&quot;         &quot;weight_feel&quot;     &quot;love_first&quot;     
@@ -508,7 +508,7 @@ m111survey$seat3 &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

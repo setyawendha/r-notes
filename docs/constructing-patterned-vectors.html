@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -443,13 +443,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">3</span>, <span class="dv">16</span>, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## [1]  3  5  7  9 11 13 15</code></pre>
 <p>Negative steps are fine:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">5</span>, -<span class="dv">4</span>, -<span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">5</span>, <span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
 <pre><code>##  [1]  5  4  3  2  1  0 -1 -2 -3 -4</code></pre>
 <p>The <em>colon operator</em> <code>:</code> is a convenient abbreviation for <code>seq</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span>:<span class="dv">5</span> <span class="co"># 1 is from, 5 is to</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">5</span> <span class="co"># 1 is from, 5 is to</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
 <p>If the <code>from</code> number is greater than the <code>to</code> number the step for the colon operator is -1:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span>:<span class="dv">1</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span><span class="op">:</span><span class="dv">1</span></code></pre></div>
 <pre><code>## [1] 5 4 3 2 1</code></pre>
 </div>
 <div id="repeating" class="section level3">
@@ -469,7 +469,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">rep</span>(vec, <span class="dt">each =</span> <span class="dv">2</span>, <span class="dt">times =</span> <span class="dv">3</span>)</code></pre></div>
 <pre><code>##  [1] 7 7 3 3 4 4 7 7 3 3 4 4 7 7 3 3 4 4</code></pre>
 <p>If we combine <code>seq()</code> and <code>rep()</code> we can create fairly complex patterns concisely:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">5</span>, -<span class="dv">3</span>, -<span class="dv">2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">5</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">2</span>)
 <span class="kw">rep</span>(vec, <span class="dt">each =</span> <span class="dv">2</span>, <span class="dt">times =</span> <span class="dv">2</span>)</code></pre></div>
 <pre><code>##  [1]  5  5  3  3  1  1 -1 -1 -3 -3  5  5  3  3  1  1 -1 -1 -3 -3</code></pre>
 <p>In order to create fifty 10’s followed by fifty 30’s followed by fifty 50’s I would write:</p>
@@ -493,7 +493,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

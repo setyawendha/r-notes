@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -445,14 +445,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The idea is to keep on going in this way until the sum of the numbers you have picked exceeds 1.</p>
 <p>The random variable we are interested in is the <em>number</em> of numbers we have to pick to make the sum of those numbers exceed 1. Let us call this random variable <span class="math inline">\(X\)</span>. As you can see, this number could be 2, or 3, or 4, or even more depending on how small the random numbers you pick happen to be.</p>
 <p>In order to fully grasp what is going on, it will be helpful to go through the process of computing <span class="math inline">\(X\)</span>. The following function will do this for us:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeeded &lt;-<span class="st"> </span>function(<span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeeded &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
   mySum &lt;-<span class="st"> </span><span class="dv">0</span>
   count &lt;-<span class="st"> </span><span class="dv">0</span>
-  while( mySum &lt;<span class="st"> </span><span class="dv">1</span> ) {
+  <span class="cf">while</span>( mySum <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span> ) {
     number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)
-    mySum &lt;-<span class="st"> </span>mySum +<span class="st"> </span>number
-    count &lt;-<span class="st"> </span>count +<span class="st"> </span><span class="dv">1</span>
-    if ( verbose ) {
+    mySum &lt;-<span class="st"> </span>mySum <span class="op">+</span><span class="st"> </span>number
+    count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+    <span class="cf">if</span> ( verbose ) {
       <span class="kw">cat</span>(<span class="st">&quot;Just now picked &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
       <span class="kw">cat</span>(count, <span class="st">&quot; number(s) picked so far.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
       <span class="kw">cat</span>(<span class="st">&quot;Their sum is &quot;</span>, mySum, <span class="st">&quot;.</span><span class="ch">\n\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
@@ -477,7 +477,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As you can see, it’s quite common to need 2 or 3 numbers to make the sum exceed 1, but sometimes, you need 4, 5 or even more numbers.</p>
 <p>Since we are interested in the expected value of <span class="math inline">\(X\)</span>, we should repeat the process a large number of times and compute the mean of the <span class="math inline">\(X\)</span>-values that we find. The following code repeats the process 1000 times:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">needed &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">1000</span>)
-for (i in <span class="dv">1</span>:<span class="dv">1000</span> ) {
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span> ) {
   needed[i] &lt;-<span class="st"> </span><span class="kw">numberNeeded</span>()
 }
 <span class="kw">cat</span>(<span class="st">&quot;The expected number needed is about &quot;</span>, 
@@ -496,35 +496,35 @@ for (i in <span class="dv">1</span>:<span class="dv">1000</span> ) {
 ## 0.528 0.303 0.123 0.037 0.008 0.001</code></pre>
 <p>The proportions serve as estimates of the <em>probability</em> of getting each of the possible values of <span class="math inline">\(X\)</span>. Such a table of proportions gives us a sense of the <em>distribution</em> of <span class="math inline">\(X\)</span>—the chances for <span class="math inline">\(X\)</span> to assume each of its possible values.<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a></p>
 <p>Now that we have the basic idea of how to accomplish the simulation, it remains to package up our code into a nice function that will enable a user to set the number of repetitions, set a seed, and choose reporting options. Along the way we will generalize a bit, allowing the user to set a target sum other than 1.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeededSim &lt;-<span class="st"> </span>function(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeededSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>, 
                             <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>) {
   
   <span class="co">#set the seed if none is provided</span>
-  if ( <span class="kw">is.null</span>(seed) ) {
+  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
     seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
   }
   <span class="kw">set.seed</span>(seed)
   
   <span class="co"># define helper function</span>
-  numberNeeded &lt;-<span class="st"> </span>function(target) {
+  numberNeeded &lt;-<span class="st"> </span><span class="cf">function</span>(target) {
     mySum &lt;-<span class="st"> </span><span class="dv">0</span>
     count &lt;-<span class="st"> </span><span class="dv">0</span>
-    while( mySum &lt;<span class="st"> </span>target ) {
+    <span class="cf">while</span>( mySum <span class="op">&lt;</span><span class="st"> </span>target ) {
       number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)
-     mySum &lt;-<span class="st"> </span>mySum +<span class="st"> </span>number
-      count &lt;-<span class="st"> </span>count +<span class="st"> </span><span class="dv">1</span>
+     mySum &lt;-<span class="st"> </span>mySum <span class="op">+</span><span class="st"> </span>number
+      count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
     }
     count
   }
   
   <span class="co">#perform simulation</span>
   needed &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  for (i in <span class="dv">1</span>:reps ) {
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {
     needed[i] &lt;-<span class="st"> </span><span class="kw">numberNeeded</span>(target)
   }
   
   <span class="co"># report results</span>
-  if ( table ) {
+  <span class="cf">if</span> ( table ) {
     <span class="kw">print</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(needed)))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
   }
@@ -564,7 +564,7 @@ for (i in <span class="dv">1</span>:<span class="dv">1000</span> ) {
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -479,25 +479,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  [7] &quot;extra_life&quot;      &quot;seat&quot;            &quot;GPA&quot;            
 ## [10] &quot;enough_Sleep&quot;    &quot;sex&quot;             &quot;diff.ideal.act.&quot;</code></pre>
 <p>By means of the names we can isolate a vector in any column, identified in our code in the format <code>frame$variable</code>. For example, to see the first ten elements of the <code>fastest</code> variable, we ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey$fastest[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>fastest[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</code></pre></div>
 <pre><code>##  [1] 119 110  85 100  95 100  85 160  90  90</code></pre>
 <p>In order to compute the mean fastest speed our subjects drove their cars, we can ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(m111survey$fastest, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(m111survey<span class="op">$</span>fastest, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## [1] 105.9014</code></pre>
 <p>If you want to see the speeds that are at least 150 miles per hour, you could ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey$fastest[m111survey$fastest &gt;=<span class="st"> </span><span class="dv">150</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>fastest[m111survey<span class="op">$</span>fastest <span class="op">&gt;=</span><span class="st"> </span><span class="dv">150</span>]</code></pre></div>
 <pre><code>## [1] 160 190</code></pre>
 <p>If you worry that the form <code>frame$variable</code> will require an annoying amount of typing—as seems to be the case in the the example above—then you can use the <code>with()</code> function: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(m111survey, fastest[fastest &gt;=<span class="dv">150</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(m111survey, fastest[fastest <span class="op">&gt;=</span><span class="dv">150</span>])</code></pre></div>
 <pre><code>## [1] 160 190</code></pre>
 <p>It’s instructive to consider how <code>with()</code> works. If we were to includes the names of the parameters of <code>with()</code> explicitly, then the call would have looked like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="dt">data =</span> m111survey, <span class="dt">expr =</span> fastest[fastest &gt;=<span class="dv">150</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="dt">data =</span> m111survey, <span class="dt">expr =</span> fastest[fastest <span class="op">&gt;=</span><span class="dv">150</span>])</code></pre></div>
 <p>For the <code>data</code> parameter we can supply a data frame or any other R-object that can be used to construct an environment . In this case <code>m111survey</code> provides a miniature environment consisting of the names of its variables. For the <code>expr</code> parameter we supply an expression for R to evaluate. As R evaluates the expression, it encounters names (such as <code>fastest</code>). Now ordinarily R would first search whatever counts as the active environment—in this case it’s the Global Environment—for the names in the expression, but <code>with()</code> forces R to look first within the environment created by the <code>data</code> argument. In our example, R finds <code>fastest</code> inside <code>m111survey</code> and evaluates the expression on that basis. If it had not found <code>fastest</code> in <code>m111survey</code>, R would have moved on to the Global Environment and then the rest of the usual search path and (probably) would have found nothing, causing it to throw an “object not found” error message. In R, as in any other programming language, good programming depends very much on paying attention to how the language searches for the objects to which names refer.</p>
 </div>
 <div id="factors" class="section level3">
 <h3><span class="header-section-number">7.4.3</span> Factors</h3>
 <p>Some of the variables in <code>m111survey</code> are called <em>factors</em>; an example is <code>seat</code>, which pertains to where one prefers to sit in a classroom:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(m111survey$seat)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(m111survey<span class="op">$</span>seat)</code></pre></div>
 <pre><code>##  Factor w/ 3 levels &quot;1_front&quot;,&quot;2_middle&quot;,..: 1 2 2 1 3 1 1 3 3 2 ...</code></pre>
 <p>Seating preference is an example of a <em>categorical</em> variable: one whose values are not meaningfully expressed in terms of numbers. When a categorical variable has a relatively small number of possible values, it can be convenient to store its values in a vector of class <code>factor</code>.</p>
 <p>The <em>levels</em> of factor variable are its possible values. In the case of <code>seat</code>, these are: Front, Middle and Back. As a memory-saving measure, R stores the values in the factor as numbers, where 1 stands for the first level, 2 for the second level, and so on. But please bear in mind that we are dealing with a categorical variable, so the numbers don’t relate to the possible values in any natural way: they are just storage conventions.</p>
@@ -549,7 +549,7 @@ factorFavs</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,
