@@ -468,10 +468,13 @@ madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
   terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="op">-</span><span class="dv">1</span>)
   <span class="kw">sum</span>(terms)
 }</code></pre></div>
-<p>If the user provides his or her own value, it will <em>override</em> the default:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>(<span class="dv">100</span>)</code></pre></div>
+<p>Now we can call the function without having to specify an argument for the parameter <code>n</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>()</code></pre></div>
+<pre><code>## [1] 3.141592</code></pre>
+<p>The function used the default value of 1000000, so it summed the first million terms.</p>
+<p>On the other hand, if the user provides his or her own value for <code>n</code> then the function will <em>override</em> the default:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>(<span class="dv">100</span>)   <span class="co"># only the first hundred terms, please!</span></code></pre></div>
 <pre><code>## [1] 3.131593</code></pre>
-<p>On the other hand, if the user provides nothing then the function sums the first million terms.</p>
 <p>If you are writing a function for which some of the parameters will often be assigned particular values, it would be a kindness to your users to write in these common values as defaults.</p>
 </div>
 <div id="argument-matching" class="section level3">

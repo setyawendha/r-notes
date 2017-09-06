@@ -435,13 +435,20 @@ madhavaPI <- function(n = 1000000) {
 }
 ```
 
-If the user provides his or her own value, it will *override* the default:
+Now we can call the function without having to specify an argument for the parameter `n`:
 
 ```{r}
-madhavaPI(100)
+madhavaPI()
 ```
 
-On the other hand, if the user provides nothing then the function sums the first million terms.
+
+The function used the default value of 1000000, so it summed the first million terms.
+
+On the other hand, if the user provides his or her own value for `n` then the function will *override* the default:
+
+```{r}
+madhavaPI(100)   # only the first hundred terms, please!
+```
 
 If you are writing a function for which some of the parameters will often be assigned particular values, it would be a kindness to your users to write in these common values as defaults.
 

@@ -5132,21 +5132,34 @@ value}\index{default value} for it, like this:
 \end{Highlighting}
 \end{Shaded}
 
-If the user provides his or her own value, it will \emph{override} the
-default:
+Now we can call the function without having to specify an argument for
+the parameter \texttt{n}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{madhavaPI}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\KeywordTok{madhavaPI}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.141592
+\end{verbatim}
+
+The function used the default value of 1000000, so it summed the first
+million terms.
+
+On the other hand, if the user provides his or her own value for
+\texttt{n} then the function will \emph{override} the default:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{madhavaPI}\NormalTok{(}\DecValTok{100}\NormalTok{)   }\CommentTok{# only the first hundred terms, please!}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## [1] 3.131593
 \end{verbatim}
-
-On the other hand, if the user provides nothing then the function sums
-the first million terms.
 
 If you are writing a function for which some of the parameters will
 often be assigned particular values, it would be a kindness to your
@@ -5360,18 +5373,19 @@ number of other environments:
 
 \begin{verbatim}
 ##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:readr"          "package:tigerData"     
-##  [5] "package:tigerstats"     "package:abd"           
-##  [7] "package:mosaic"         "package:Matrix"        
-##  [9] "package:ggformula"      "package:dplyr"         
-## [11] "package:lattice"        "package:nlme"          
-## [13] "package:TurtleGraphics" "package:grid"          
-## [15] "package:ggplot2"        "package:mosaicData"    
-## [17] "tools:rstudio"          "package:stats"         
-## [19] "package:graphics"       "package:grDevices"     
-## [21] "package:utils"          "package:datasets"      
-## [23] "package:methods"        "Autoloads"             
-## [25] "package:base"
+##  [3] "package:clisymbols"     "package:bookdown"      
+##  [5] "package:readr"          "package:tigerData"     
+##  [7] "package:tigerstats"     "package:abd"           
+##  [9] "package:mosaic"         "package:Matrix"        
+## [11] "package:ggformula"      "package:dplyr"         
+## [13] "package:lattice"        "package:nlme"          
+## [15] "package:TurtleGraphics" "package:grid"          
+## [17] "package:ggplot2"        "package:mosaicData"    
+## [19] "tools:rstudio"          "package:stats"         
+## [21] "package:graphics"       "package:grDevices"     
+## [23] "package:utils"          "package:datasets"      
+## [25] "package:methods"        "Autoloads"             
+## [27] "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5477,7 +5491,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x102fe9590>
+## <bytecode: 0x10c440d48>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -8158,9 +8172,9 @@ helpful suggestions---if it is not of the correct form.
   As long as the number of pebbles left is a multiple of 3 and it's the
   other player's turn, you will win!
 
-  In this problem you task is to write a function called
-  \texttt{subtraction()} will play the Subtraction Game with a user. The
-  function should take two parameters:
+  In this problem your task is to write a function called
+  \texttt{subtraction()} that will play the Subtraction Game with a
+  user. The function should take two parameters:
 
   \begin{itemize}
   \tightlist
@@ -8175,7 +8189,7 @@ helpful suggestions---if it is not of the correct form.
 
   Each time the computer plays it should announce how many pebbles it
   removed, and how many are left. When there are no pebbles left the
-  computer should say who won and quit the function.
+  computer should say who won and then quit the function.
 
   The function should play optimally for the computer:
 
@@ -9859,7 +9873,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-09-06 05:33:15 EDT"
+## [1] "2017-09-06 13:25:46 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9871,7 +9885,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1504690396
+## [1] 1504718746
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -21321,7 +21335,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1316dc7a8"
+## [1] "0x11ff4aa08"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21335,7 +21349,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1316dc7a8"
+## [1] "0x11ff4aa08"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21374,7 +21388,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1316dc7a8"
+## [1] "0x11ff4aa08"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21387,7 +21401,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1202a1b68"
+## [1] "0x10e8bff98"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21405,7 +21419,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1316dc7a8"
+## [1] "0x11ff4aa08"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21449,7 +21463,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12b7c5580" "0x12b7c5580"
+## [1] "0x10ea62b50" "0x10ea62b50"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21488,7 +21502,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12b7c5580" "0x12b7c5580"
+## [1] "0x10ea62b50" "0x10ea62b50"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21530,7 +21544,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12b7c5580" "0x12715a9f0"
+## [1] "0x10ea62b50" "0x117ab1d78"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
