@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-09-01}
+  \date{2017-09-06}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5362,15 +5362,16 @@ number of other environments:
 ##  [1] ".GlobalEnv"             "package:R6"            
 ##  [3] "package:readr"          "package:tigerData"     
 ##  [5] "package:tigerstats"     "package:abd"           
-##  [7] "package:mosaic"         "package:ggformula"     
-##  [9] "package:dplyr"          "package:lattice"       
-## [11] "package:nlme"           "package:TurtleGraphics"
-## [13] "package:grid"           "package:ggplot2"       
-## [15] "package:mosaicData"     "tools:rstudio"         
-## [17] "package:stats"          "package:graphics"      
-## [19] "package:grDevices"      "package:utils"         
-## [21] "package:datasets"       "package:methods"       
-## [23] "Autoloads"              "package:base"
+##  [7] "package:mosaic"         "package:Matrix"        
+##  [9] "package:ggformula"      "package:dplyr"         
+## [11] "package:lattice"        "package:nlme"          
+## [13] "package:TurtleGraphics" "package:grid"          
+## [15] "package:ggplot2"        "package:mosaicData"    
+## [17] "tools:rstudio"          "package:stats"         
+## [19] "package:graphics"       "package:grDevices"     
+## [21] "package:utils"          "package:datasets"      
+## [23] "package:methods"        "Autoloads"             
+## [25] "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5476,7 +5477,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10c671878>
+## <bytecode: 0x102fe9590>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -6153,7 +6154,7 @@ and data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{palindrome}\NormalTok{(}\DataTypeTok{vec =} \KeywordTok{c}\NormalTok{(}\StringTok{"Bob"}\NormalTok{, }\StringTok{"Marley"}\NormalTok{, }\StringTok{"Bob"}\NormalTok{))}
+\KeywordTok{isPalindrome}\NormalTok{(}\DataTypeTok{vec =} \KeywordTok{c}\NormalTok{(}\StringTok{"Bob"}\NormalTok{, }\StringTok{"Marley"}\NormalTok{, }\StringTok{"Bob"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6163,7 +6164,7 @@ and data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{palindrome}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\KeywordTok{isPalindrome}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6182,7 +6183,7 @@ and data.
   \[\pi = \sqrt{\left(\sum_{k=1}^{k=\infty} \frac{6}{k^2}\right)}.\] Use
   this fact to write a function called \texttt{eulerPI()} that will
   approximate \(\pi\). The function should take a single parameter
-  \texttt{n}, which is the number of terms in the infinite seres that
+  \texttt{n}, which is the number of terms in the infinite series that
   are to be summed to make the approximation. The default value of
   \texttt{n} should be 10,000.
 \end{enumerate}
@@ -9858,7 +9859,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-09-01 14:01:38 EDT"
+## [1] "2017-09-06 05:33:15 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9870,7 +9871,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1504288898
+## [1] 1504690396
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -21320,7 +21321,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1174da748"
+## [1] "0x1316dc7a8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21334,7 +21335,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1174da748"
+## [1] "0x1316dc7a8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21373,7 +21374,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1174da748"
+## [1] "0x1316dc7a8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21386,7 +21387,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120940a08"
+## [1] "0x1202a1b68"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21404,7 +21405,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1174da748"
+## [1] "0x1316dc7a8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21448,7 +21449,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x140a08898" "0x140a08898"
+## [1] "0x12b7c5580" "0x12b7c5580"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21487,7 +21488,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x140a08898" "0x140a08898"
+## [1] "0x12b7c5580" "0x12b7c5580"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21529,7 +21530,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x140a08898" "0x127878718"
+## [1] "0x12b7c5580" "0x12715a9f0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
