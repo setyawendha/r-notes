@@ -4047,6 +4047,8 @@ The following, though, are not valid:
   \texttt{.2yellow} (cannot start with dot and then number)
 \item
   \texttt{\_yellow} (cannot start with \texttt{\_})
+\item
+  \texttt{5scones} (cannot start with a number)
 \end{itemize}
 
 Most programmers try to devise names for variables that are
@@ -5373,19 +5375,18 @@ number of other environments:
 
 \begin{verbatim}
 ##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:clisymbols"     "package:bookdown"      
-##  [5] "package:readr"          "package:tigerData"     
-##  [7] "package:tigerstats"     "package:abd"           
-##  [9] "package:mosaic"         "package:Matrix"        
-## [11] "package:ggformula"      "package:dplyr"         
-## [13] "package:lattice"        "package:nlme"          
-## [15] "package:TurtleGraphics" "package:grid"          
-## [17] "package:ggplot2"        "package:mosaicData"    
-## [19] "tools:rstudio"          "package:stats"         
-## [21] "package:graphics"       "package:grDevices"     
-## [23] "package:utils"          "package:datasets"      
-## [25] "package:methods"        "Autoloads"             
-## [27] "package:base"
+##  [3] "package:readr"          "package:tigerData"     
+##  [5] "package:tigerstats"     "package:abd"           
+##  [7] "package:mosaic"         "package:Matrix"        
+##  [9] "package:ggformula"      "package:dplyr"         
+## [11] "package:lattice"        "package:nlme"          
+## [13] "package:TurtleGraphics" "package:grid"          
+## [15] "package:ggplot2"        "package:mosaicData"    
+## [17] "tools:rstudio"          "package:stats"         
+## [19] "package:graphics"       "package:grDevices"     
+## [21] "package:utils"          "package:datasets"      
+## [23] "package:methods"        "Autoloads"             
+## [25] "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5491,7 +5492,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10c440d48>
+## <bytecode: 0x10b697c00>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9873,7 +9874,7 @@ your computer's idea of the current time:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2017-09-06 13:25:46 EDT"
+## [1] "2017-09-06 17:06:41 EDT"
 \end{verbatim}
 
 This is not a number, but we can make it a number:
@@ -9885,7 +9886,7 @@ This is not a number, but we can make it a number:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1504718746
+## [1] 1504732002
 \end{verbatim}
 
 The result is---on Unix-like computer systems---the number of seconds
@@ -21335,7 +21336,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ff4aa08"
+## [1] "0x125a60e28"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21349,7 +21350,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ff4aa08"
+## [1] "0x125a60e28"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21388,7 +21389,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ff4aa08"
+## [1] "0x125a60e28"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21401,7 +21402,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10e8bff98"
+## [1] "0x1163a85d8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21419,7 +21420,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ff4aa08"
+## [1] "0x125a60e28"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21463,7 +21464,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ea62b50" "0x10ea62b50"
+## [1] "0x12524ff40" "0x12524ff40"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21502,7 +21503,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ea62b50" "0x10ea62b50"
+## [1] "0x12524ff40" "0x12524ff40"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21544,7 +21545,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ea62b50" "0x117ab1d78"
+## [1] "0x12524ff40" "0x1151acdf0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
