@@ -603,7 +603,7 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-
   <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
 <p>This is all very well, but if for some reason you <em>desire</em> to have the function produce different results with every call, you have to come up with the seed yourself. It would be nice to have the option to call your function without having to provide a seed.</p>
-<p>This is not difficult to accomplish. We’ll set the default value for <code>seed</code> to be <code>NULL</code>. Then when the function begins we’ll check the value of <code>seed</code>. If it is not <code>NULL</code>, then the user has provided a seed, and we;ll use that. Otherwise, we’ll let R grab pseudo-random numbers however it likes.</p>
+<p>This is not difficult to accomplish. We’ll set the default value for <code>seed</code> to be <code>NULL</code>. Then when the function begins we’ll check the value of <code>seed</code>. If it is not <code>NULL</code>, then the user has provided a seed, and we’ll use that. Otherwise, we’ll let R grab pseudo-random numbers however it likes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
     <span class="kw">set.seed</span>(seed)
@@ -618,7 +618,6 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-
   }
   <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
-<p>As long as you don’t make the very same simulation-function call twice in the same second, you should get different results on different calls.</p>
 </div>
 <div id="program-development" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> Program Development</h3>
