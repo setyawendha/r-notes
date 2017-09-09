@@ -460,10 +460,9 @@ Figure 6.2: Density plot of 100 random values from a normal distribution with me
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flossSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">len =</span> <span class="dv">150</span>, <span class="dt">min =</span> <span class="dv">1</span>, 
                      <span class="dt">max =</span> <span class="dv">2</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, 
                      <span class="dt">graph =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
-  <span class="kw">set.seed</span>(seed)
   
   <span class="co"># helper function to pick whihc box gets used:</span>
   whichOne &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
@@ -539,15 +538,15 @@ Figure 6.2: Density plot of 100 random values from a normal distribution with me
   <span class="kw">cat</span>(<span class="st">&quot;The average amount left in the spare is:  &quot;</span>, 
       <span class="kw">mean</span>(leftover), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }      <span class="co"># end flossSim</span></code></pre></div>
-<p>Let’s give it a try with 10,000 repetitions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">flossSim</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">graph =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</code></pre></div>
+<p>Let’s give it a try with one thousand repetitions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">flossSim</span>(<span class="dt">reps =</span> <span class="dv">1000</span>, <span class="dt">graph =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:dentalflosssim"></span>
 <img src="r-notes_files/figure-html/dentalflosssim-1.png" alt="Density plot of the results of a dental-floss simulation." width="60%" />
 <p class="caption">
 Figure 6.3: Density plot of the results of a dental-floss simulation.
 </p>
 </div>
-<pre><code>## The average amount left in the spare is:  16.30542.</code></pre>
+<pre><code>## The average amount left in the spare is:  16.55715.</code></pre>
 <p>A density plot of the results appears as Figure <a href="example-dental-floss.html#fig:dentalflosssim">6.3</a>. The expected value of the amount left in the remaining box is about 16.3 feet, but you can see from the plot that there is quite a bit of variability: it’s not all that unlikely to have 40 or more feet left!</p>
 </div>
 <div class="footnotes">

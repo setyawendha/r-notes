@@ -873,10 +873,9 @@ Finally, we write a simulation function.  The function allows the user to specif
 library(ggplot2)
 oceanSim <- function(steps = 100, males = 10, females = 10,
                      starve = 5, animate = TRUE, seed = NULL) {
-  if ( is.null(seed) ) {
-    seed <- as.numeric(Sys.time())
+  if ( !is.null(seed) ) {
+    set.seed(seed)
   }
-  set.seed(seed)
   ocean <- Ocean$new(dims = c(100, 100), males = males, 
                      females = females, starve = starve)
   population <-numeric(steps)
@@ -1118,10 +1117,9 @@ numberNeededSim <- function(target = 1, reps = 1000,
                             seed = NULL) {
   
   #set the seed if none is provided
-  if ( is.null(seed) ) {
-    seed <- as.numeric(Sys.time())
+  if ( !is.null(seed) ) {
+    set.seed(seed)
   }
-  set.seed(seed)
   
   numberNeeded <- function(target) {
     mySum <- 0

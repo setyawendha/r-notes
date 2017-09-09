@@ -5492,7 +5492,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x109219188>
+## <bytecode: 0x10f26e8e8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9457,7 +9457,6 @@ again, with ten thousand repetitions:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{4040}\NormalTok{)}
 \NormalTok{sims <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(tickets, }\DataTypeTok{size =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)}
 \KeywordTok{prop.table}\NormalTok{(}\KeywordTok{table}\NormalTok{(sims))}
 \end{Highlighting}
@@ -9741,7 +9740,7 @@ x & y & side1 & side2 & side3 & triangle\\
 \end{table}
 
 Interestingly, R can compute the proportion of times that a triangle was
-formed directly from the logical vector \texttt{triangle}. Look at the
+formed, directly from the logical vector \texttt{triangle}. Look at the
 following code:
 
 \begin{Shaded}
@@ -9842,6 +9841,7 @@ simulation function:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{triangleSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{, seed ) \{}
+  \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  cut1 <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps)}
 \NormalTok{  cut2 <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps)}
 \NormalTok{  triangle <-}\StringTok{ }\KeywordTok{makesTriangle}\NormalTok{(cut1, cut2)}
@@ -9860,52 +9860,18 @@ the function produce different results with every call, you have to come
 up with the seed yourself. It would be nice to have the option to call
 your function without having to provide a seed.
 
-We would like to force R to provide a seed when it is not given one to
-use. Such a seed should vary from one call to another in a way that
-cannot be predicted easily.
-
-I suggest the use of the \texttt{Sys.time()}
-function\index{R-functions!Sys.time()@\texttt{Sys.time()}}, which gives
-your computer's idea of the current time:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{Sys.time}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "2017-09-09 11:09:06 EDT"
-\end{verbatim}
-
-This is not a number, but we can make it a number:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1504969747
-\end{verbatim}
-
-The result is---on Unix-like computer systems---the number of seconds
-elapsed since January 1, 1970. It should serve pretty well as a seed.
-The following code implements a \texttt{seed} parameter in such a way
-that the system-time is used when the user does not supply a seed.
+This is not difficult to accomplish. We'll set the default value for
+\texttt{seed} to be \texttt{NULL}. Then when the function begins we'll
+check the value of \texttt{seed}. If it is not \texttt{NULL}, then the
+user has provided a seed, and we;ll use that. Otherwise, we'll let R
+grab pseudo-random numbers however it likes.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{triangleSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
-  \CommentTok{# if user does not provide a seed, set one}
-  \CommentTok{# using the current time:}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \CommentTok{# now we can set the seed:}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
-  
 \NormalTok{  cut1 <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps)}
 \NormalTok{  cut2 <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps)}
 \NormalTok{  triangle <-}\StringTok{ }\KeywordTok{makesTriangle}\NormalTok{(cut1, cut2)}
@@ -9957,7 +9923,7 @@ expected value---is liable to be. Let's use the Stick-Splitting Problem
 to investigate the effect of the choice of repetitions on the accuracy
 of our estimate of the probability of getting a triangle.
 
-We will need to run the \texttt{tringleSim()} function several times,
+We will need to run the \texttt{triangleSim()} function several times,
 with a different choice for \texttt{reps} each time, keeping track of
 the estimates we obtain. In the process we won't need tables or other
 output to the console. Let's rewrite \texttt{triangleSim()} for maximum
@@ -9971,14 +9937,9 @@ return discussed in Section \ref{invisible-returns}.\footnote{The
 \begin{Highlighting}[]
 \NormalTok{triangleSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{,}
                         \DataTypeTok{verbose =} \OtherTok{TRUE}\NormalTok{) \{}
-  \CommentTok{# if user does not provide a seed, set one}
-  \CommentTok{# using the current time:}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \CommentTok{# now we can set the seed:}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
-  
 \NormalTok{  cut1 <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps)}
 \NormalTok{  cut2 <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps)}
 \NormalTok{  triangle <-}\StringTok{ }\KeywordTok{makesTriangle}\NormalTok{(cut1, cut2)}
@@ -10062,10 +10023,9 @@ arrival time. The following code implements this idea:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{meetupSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  anna <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps, }\DecValTok{0}\NormalTok{, }\DecValTok{60}\NormalTok{)}
 \NormalTok{  raj <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps, }\DecValTok{0}\NormalTok{, }\DecValTok{60}\NormalTok{)}
 \NormalTok{  connect <-}\StringTok{ }\NormalTok{(}\KeywordTok{abs}\NormalTok{(anna }\OperatorTok{-}\StringTok{ }\NormalTok{raj) }\OperatorTok{<}\StringTok{ }\DecValTok{10}\NormalTok{)}
@@ -10107,8 +10067,8 @@ meetup-simulation as follows:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{meetupSim2 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
   \CommentTok{#create an empty vector to hold the results:}
 \NormalTok{  connect <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(reps)}
@@ -10460,10 +10420,9 @@ the code for such a function.
                      \DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{,}
                      \DataTypeTok{probs =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.95}\NormalTok{, }\FloatTok{0.94}\NormalTok{, }\FloatTok{0.90}\NormalTok{, }\FloatTok{0.90}\NormalTok{, }\FloatTok{0.80}\NormalTok{)) \{}
   
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
   
   \CommentTok{# get the probabilities}
 \NormalTok{  aProb <-}\StringTok{ }\NormalTok{probs[}\DecValTok{1}\NormalTok{]}
@@ -10548,10 +10507,9 @@ Here is the new simulation-function:
                      \DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{,}
                      \DataTypeTok{probs =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.95}\NormalTok{, }\FloatTok{0.94}\NormalTok{, }\FloatTok{0.90}\NormalTok{, }\FloatTok{0.90}\NormalTok{, }\FloatTok{0.80}\NormalTok{)) \{}
   
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
   
   \CommentTok{# get the probabilities}
 \NormalTok{  aProb <-}\StringTok{ }\NormalTok{probs[}\DecValTok{1}\NormalTok{]}
@@ -10806,11 +10764,9 @@ set a target sum other than 1.
 \NormalTok{numberNeededSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{target =} \DecValTok{1}\NormalTok{, }\DataTypeTok{reps =} \DecValTok{1000}\NormalTok{, }
                             \DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{table =} \OtherTok{TRUE}\NormalTok{) \{}
   
-  \CommentTok{#set the seed if none is provided}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
   
   \CommentTok{# define helper function}
 \NormalTok{  numberNeeded <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(target) \{}
@@ -11013,10 +10969,9 @@ implementation of a simulation function:
 \NormalTok{flossSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{len =} \DecValTok{150}\NormalTok{, }\DataTypeTok{min =} \DecValTok{1}\NormalTok{, }
                      \DataTypeTok{max =} \DecValTok{2}\NormalTok{, }\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }
                      \DataTypeTok{graph =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
   
   \CommentTok{# helper function to pick whihc box gets used:}
 \NormalTok{  whichOne <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
@@ -11095,11 +11050,11 @@ implementation of a simulation function:
 \end{Highlighting}
 \end{Shaded}
 
-Let's give it a try with 10,000 repetitions.
+Let's give it a try with one thousand repetitions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{flossSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{graph =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{3535}\NormalTok{)}
+\KeywordTok{flossSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{graph =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{3535}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -11113,7 +11068,7 @@ Let's give it a try with 10,000 repetitions.
 \end{figure}
 
 \begin{verbatim}
-## The average amount left in the spare is:  16.30542.
+## The average amount left in the spare is:  16.55715.
 \end{verbatim}
 
 A density plot of the results appears as Figure
@@ -11170,7 +11125,7 @@ drunken turtle is with the following call to \texttt{runif()}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2.746987
+## [1] 4.146176
 \end{verbatim}
 
 If we want a thousand drunken turn-angles, then we can get them all in a
@@ -11368,10 +11323,9 @@ have to be 1000), and also to determine what distance counts as a
 \begin{Highlighting}[]
 \NormalTok{drunkenSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{steps =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{close =} \FloatTok{0.5}\NormalTok{, }
                        \DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{table =} \OtherTok{FALSE}\NormalTok{) \{}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{Sys.time}\NormalTok{()}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
   
   \CommentTok{# set up returns vector to store the number of }
   \CommentTok{# close returns in each repetition:}
@@ -11437,10 +11391,9 @@ the specified number of turtle steps:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{drunkenSim2 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{steps =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{Sys.time}\NormalTok{()}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
   
 \NormalTok{  angle <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(steps, }\DecValTok{0}\NormalTok{ , }\DecValTok{2}\OperatorTok{*}\NormalTok{pi)}
 \NormalTok{  xSteps <-}\StringTok{ }\KeywordTok{cos}\NormalTok{(angle)}
@@ -21337,7 +21290,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x136211c18"
+## [1] "0x121803328"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21351,7 +21304,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x136211c18"
+## [1] "0x121803328"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21390,7 +21343,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x136211c18"
+## [1] "0x121803328"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21403,7 +21356,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x116575328"
+## [1] "0x126897dd8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21421,7 +21374,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x136211c18"
+## [1] "0x121803328"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21465,7 +21418,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12dbf6400" "0x12dbf6400"
+## [1] "0x123e59ff0" "0x123e59ff0"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21504,7 +21457,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12dbf6400" "0x12dbf6400"
+## [1] "0x123e59ff0" "0x123e59ff0"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21546,7 +21499,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12dbf6400" "0x1138e4b50"
+## [1] "0x123e59ff0" "0x116bc1990"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
@@ -22463,10 +22416,9 @@ to produce a graph of the whale population as a function of time.
 \KeywordTok{library}\NormalTok{(ggplot2)}
 \NormalTok{oceanSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{steps =} \DecValTok{100}\NormalTok{, }\DataTypeTok{males =} \DecValTok{10}\NormalTok{, }\DataTypeTok{females =} \DecValTok{10}\NormalTok{,}
                      \DataTypeTok{starve =} \DecValTok{5}\NormalTok{, }\DataTypeTok{animate =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  ocean <-}\StringTok{ }\NormalTok{Ocean}\OperatorTok{$}\KeywordTok{new}\NormalTok{(}\DataTypeTok{dims =} \KeywordTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{), }\DataTypeTok{males =}\NormalTok{ males, }
                      \DataTypeTok{females =}\NormalTok{ females, }\DataTypeTok{starve =}\NormalTok{ starve)}
 \NormalTok{  population <-}\KeywordTok{numeric}\NormalTok{(steps)}
@@ -22952,10 +22904,9 @@ First of all, let's rewrite \texttt{numberNeededSim()}:
                             \DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
   
   \CommentTok{#set the seed if none is provided}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
   
 \NormalTok{  numberNeeded <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(target) \{}
 \NormalTok{    mySum <-}\StringTok{ }\DecValTok{0}

@@ -707,10 +707,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 oceanSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">100</span>, <span class="dt">males =</span> <span class="dv">10</span>, <span class="dt">females =</span> <span class="dv">10</span>,
                      <span class="dt">starve =</span> <span class="dv">5</span>, <span class="dt">animate =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
-  <span class="kw">set.seed</span>(seed)
   ocean &lt;-<span class="st"> </span>Ocean<span class="op">$</span><span class="kw">new</span>(<span class="dt">dims =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="dt">males =</span> males, 
                      <span class="dt">females =</span> females, <span class="dt">starve =</span> starve)
   population &lt;-<span class="kw">numeric</span>(steps)

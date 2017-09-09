@@ -425,10 +425,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Anna and Raj make a date for coffee tomorrow at the local Coffee Shop. After making the date, both of them forget the exact time they agreed to meet: they can only remember that it was to be sometime between 10 and 11am. Each person, independently of the other, randomly picks a time between 10 and 11 to arrive. If Anna arrives and Raj is not there, she will wait up to ten minutes for him, but will leave if he does not show within that time period. Raj is similarly disposed: he will wait ten minutes—but no more—for Anna. What is the chance that they meet?</p>
 <p>The key to designing a simulation procedure is to realize that Anna and Raj will connect if and only if the difference between their arrival times is less than 10 minutes. It doesn’t matter who arrived first, so long as the <em>difference</em> is less than 10. This means that we want to check on the <em>absolute value</em> of Anna’s arrival time minus Raj’s arrival time. The following code implements this idea:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">meetupSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
-  <span class="kw">set.seed</span>(seed)
   anna &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)
   raj &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)
   connect &lt;-<span class="st"> </span>(<span class="kw">abs</span>(anna <span class="op">-</span><span class="st"> </span>raj) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)
@@ -452,8 +451,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">6.4.1</span> Vectorization vs. Looping</h3>
 <p>Whenever you perform a simulation you have the option to use a <code>for</code>-loop, running through the loop once for each repetition of the random process in question. For example, you could rewrite the meetup-simulation as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">meetupSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
   <span class="co">#create an empty vector to hold the results:</span>
   connect &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)

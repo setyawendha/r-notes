@@ -565,10 +565,9 @@ Figure 13.2: Our vector graphed as a parabola!
                             <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   
   <span class="co">#set the seed if none is provided</span>
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
-  <span class="kw">set.seed</span>(seed)
   
   numberNeeded &lt;-<span class="st"> </span><span class="cf">function</span>(target) {
     mySum &lt;-<span class="st"> </span><span class="dv">0</span>

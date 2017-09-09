@@ -499,11 +499,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeededSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>, 
                             <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>) {
   
-  <span class="co">#set the seed if none is provided</span>
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
-  <span class="kw">set.seed</span>(seed)
   
   <span class="co"># define helper function</span>
   numberNeeded &lt;-<span class="st"> </span><span class="cf">function</span>(target) {

@@ -432,7 +432,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We will next consider how to code a simulation. Obviously we will need a way to record the turtle’s position at each step. In order to accomplish this we will have to apply the unit-circle trigonometry you learned in high school.</p>
 <p>Instead of measuring angles in degrees, we will work in radians: by default R does trigonometry that way. Recall that 360 degrees is <span class="math inline">\(2 \pi\)</span> radians; hence the way to determine the angle of a turn by the drunken turtle is with the following call to <code>runif()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</code></pre></div>
-<pre><code>## [1] 2.746987</code></pre>
+<pre><code>## [1] 4.146176</code></pre>
 <p>If we want a thousand drunken turn-angles, then we can get them all in a vector, as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</code></pre></div>
 <p>So much for the turning angles. But in order to decide at each step whether the turtle has made a close return, we have to know the coordinates of the turtle after each step. This is where unit-circle trigonometry comes in handy. Recall that if a right triangle has a hypotenuse of length 1 (the length of a turtle step) and if one of the angles of the triangle is <span class="math inline">\(\alpha\)</span>, then the side adjacent to <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(\cos(\alpha)\)</span> and the side opposite is <span class="math inline">\(\sin(\alpha)\)</span>. The situation is illustrated in Figure <a href="drunken-turtle-sim.html#fig:right-triangle">6.4</a>.</p>
@@ -590,10 +590,9 @@ x</code></pre></div>
 <p>It remains only to package our code into a simulation function. We will allow the user to specify the fixed initial number of steps (it does not have to be 1000), and also to determine what distance counts as a “close return.”</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
                        <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
-  <span class="kw">set.seed</span>(seed)
   
   <span class="co"># set up returns vector to store the number of </span>
   <span class="co"># close returns in each repetition:</span>
@@ -636,10 +635,9 @@ x</code></pre></div>
 <p>Notice that 38.81% of the time the turtle did not make a close return at all during the first thousand steps. On the other hand it is possible, though not at all likely, for the turtle to make quite a few close returns.<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a></p>
 <p>It is interesting to look specifically at the distances from the origin. The following function draws a graph of the distance from the origin for the specified number of turtle steps:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
-  <span class="kw">set.seed</span>(seed)
   
   angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
   xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
