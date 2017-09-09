@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-08">
+<meta name="date" content="2017-09-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -483,20 +483,21 @@ sims &lt;-<span class="st"> </span><span class="kw">sample</span>(tickets, <span
 <p><span class="math display">\[0.25 \times -1 + 0.50 \times 0 + 0.25 \times 2.\]</span> This works out to 0.25, or 25 cents.</p>
 <p>We would like to see if Monte Carlo simulation can render an estimate that is close to this value.</p>
 <p>For a simple game like ours where there are only a few possible outcomes for the random variable, it is still a good idea to use <code>sample()</code> to simulate the random process of playing the game. We only need to provide a vector of possible values for <span class="math inline">\(W\)</span> to sample from, and a vector of probabilities for obtaining each of those possible values. The following code illustrates how we might simulate playing the game ten times:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">px &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.25</span>)
-winnings &lt;-<span class="st"> </span><span class="kw">sample</span>(x, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">replace =</span> T, <span class="dt">prob =</span> px)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">w &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>)
+pw &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.25</span>)
+winnings &lt;-<span class="st"> </span><span class="kw">sample</span>(w, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">replace =</span> T, <span class="dt">prob =</span> pw)
 winnings</code></pre></div>
 <pre><code>##  [1]  0  0 -1 -1  2  0  0  0  2 -1</code></pre>
 <p>The Monte Carlo estimate of the expected value of <span class="math inline">\(W\)</span> is just the average of the winnings in our simulations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(winnings)</code></pre></div>
 <pre><code>## [1] 0.1</code></pre>
 <p>Of course, with such a small number of repetitions of the game we cannot expect the Monte Carlo estimate to be very accurate. Let’s try again, but with ten thousand repetitions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">winnings &lt;-<span class="st"> </span><span class="kw">sample</span>(x, <span class="dt">size =</span> <span class="dv">10000</span>, <span class="dt">replace =</span> T, <span class="dt">prob =</span> px)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">winnings &lt;-<span class="st"> </span><span class="kw">sample</span>(w, <span class="dt">size =</span> <span class="dv">10000</span>, <span class="dt">replace =</span> T, <span class="dt">prob =</span> pw)
 <span class="kw">mean</span>(winnings)</code></pre></div>
 <pre><code>## [1] 0.2435</code></pre>
 <p>Yes, that’s much closer to our mathematically-computed value!</p>
 <p>By the way, R can easily compute the weighted average itself:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(x<span class="op">*</span>px)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(w<span class="op">*</span>pw)</code></pre></div>
 <pre><code>## [1] 0.25</code></pre>
 </div>
 <div id="the-law-of-large-numbers" class="section level3">

@@ -120,10 +120,10 @@ We would like to see if Monte Carlo simulation can render an estimate that is cl
 
 For a simple game like ours where there are only a few possible outcomes for the random variable, it is still a good idea to use `sample()` to simulate the random process of playing the game.  We only need to provide a vector of possible values for $W$ to sample from, and a vector of probabilities for obtaining each of those possible values.  The following code illustrates how we might simulate playing the game ten times:
 
-```{r echo=2:4}
-x <- c(-1, 0, 2)
-px <- c(0.25, 0.50, 0.25)
-winnings <- sample(x, size = 10, replace = T, prob = px)
+```{r}
+w <- c(-1, 0, 2)
+pw <- c(0.25, 0.50, 0.25)
+winnings <- sample(w, size = 10, replace = T, prob = pw)
 winnings
 ```
 
@@ -137,7 +137,7 @@ Of course, with such a small number of repetitions of the game we cannot expect 
 
 ```{r echo=2:3}
 set.seed(4545)
-winnings <- sample(x, size = 10000, replace = T, prob = px)
+winnings <- sample(w, size = 10000, replace = T, prob = pw)
 mean(winnings)
 ```
 
@@ -146,7 +146,7 @@ Yes, that's much closer to our mathematically-computed value!
 By the way, R can easily compute the weighted average itself:
 
 ```{r}
-sum(x*px)
+sum(w*pw)
 ```
 
 
