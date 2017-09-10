@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-09-09}
+  \date{2017-09-10}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -1691,6 +1691,12 @@ else---like the following---you get an error:
 ## Error: object 'false' not found
 \end{verbatim}
 
+\textbf{Note}: Although R allows \texttt{T} to be interpreted as
+\texttt{TRUE} and \texttt{F} as \texttt{FALSE}, it can be dangerous to
+use them in some circumstances. Best to get into the habit of always
+using \texttt{TRUE} and \texttt{FALSE}, rather than the permitted
+abbreviations.
+
 \subsection{Coercion}\label{coercion}
 
 What would happen if you tried to represent falsity with the string
@@ -2681,8 +2687,8 @@ Boolean operator accords with our thinking:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T, T, F, F)}
-\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T, F, T, F)}
+\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
+\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
 \NormalTok{a }\OperatorTok{&}\StringTok{ }\NormalTok{b}
 \end{Highlighting}
 \end{Shaded}
@@ -2698,8 +2704,8 @@ with this line of thinking:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T, T, F, F)}
-\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T, F, T, F)}
+\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
+\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
 \NormalTok{a }\OperatorTok{|}\StringTok{ }\NormalTok{b}
 \end{Highlighting}
 \end{Shaded}
@@ -2714,20 +2720,20 @@ elements of the vectors being compared:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T, T)}
-\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(F, T)}
+\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
 \NormalTok{a }\OperatorTok{&&}\StringTok{ }\NormalTok{b}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] FALSE
+## [1] TRUE
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T, F)}
-\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(F, F)}
+\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
+\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
 \NormalTok{a }\OperatorTok{||}\StringTok{ }\NormalTok{b}
 \end{Highlighting}
 \end{Shaded}
@@ -2743,7 +2749,7 @@ The final Boolean operator is \texttt{!}, which works like ``not'':
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T, F)}
+\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
 \OperatorTok{!}\NormalTok{a}
 \end{Highlighting}
 \end{Shaded}
@@ -2885,7 +2891,7 @@ can use a logical vector to do this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{wanted <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T, T, F, T, F, F)}
+\NormalTok{wanted <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
 \NormalTok{heights[wanted]}
 \end{Highlighting}
 \end{Shaded}
@@ -2895,9 +2901,9 @@ can use a logical vector to do this:
 ##        73        70        60
 \end{verbatim}
 
-The \texttt{T}'s at indices 1, 2, and 4 in \texttt{wanted} inform R that
-we want the heights vector at indices 1, 2 and 4. The \texttt{F}'s say:
-``don't include this element!''
+The \texttt{TRUE}'s at indices 1, 2, and 4 in \texttt{wanted} inform R
+that we want the heights vector at indices 1, 2 and 4. The
+\texttt{FALSE}'s say: ``don't include this element!''
 
 Subsetting can be used powerfully along with logical vectors and Boolean
 operators.
@@ -3154,7 +3160,7 @@ Applied to a logical vector, the \texttt{which()} function returns the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{boolVec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T,T,F,T)}
+\NormalTok{boolVec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{,}\OtherTok{TRUE}\NormalTok{,}\OtherTok{FALSE}\NormalTok{,}\OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{which}\NormalTok{(boolVec)}
 \end{Highlighting}
 \end{Shaded}
@@ -4124,6 +4130,61 @@ stop you outright with a clear error message:
 \begin{verbatim}
 ## Error in break <- 5 : invalid (NULL) left side of assignment
 \end{verbatim}
+
+Notice also that although \texttt{TRUE} and \texttt{FALSE} are reserved
+words, their accepted abbreviations \texttt{T} and \texttt{F} are not.
+This can lead to problems in code, if someone chooses to bind \texttt{T}
+or \texttt{F} to some value.
+
+For example, suppose that have two lines of code like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{T <-}\StringTok{ }\DecValTok{0}
+\NormalTok{F <-}\StringTok{ }\DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+Later on, suppose you create what you think is a logical vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myVector <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T, F, F, T)}
+\end{Highlighting}
+\end{Shaded}
+
+But it's \emph{not} logical:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{typeof}\NormalTok{(myVector)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "double"
+\end{verbatim}
+
+That's because \texttt{T} ad \texttt{F} have been bound to numerical
+values. If you coerce \texttt{myLogical} to a logical vector, you get
+the exact opposite of what you would have expected:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{as.logical}\NormalTok{(myVector)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE  TRUE  TRUE FALSE
+\end{verbatim}
+
+The moral of the story is:
+
+\BeginKnitrBlock{rmdimportant}
+To be safe, never use \texttt{T} for \texttt{TRUE} or \texttt{F} for
+\texttt{FALSE}.
+\EndKnitrBlock{rmdimportant}
 
 One final remark: variables together with reserved words constitute the
 part of the R language called \emph{identifiers}.
@@ -5492,7 +5553,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10f26e8e8>
+## <bytecode: 0x1035597b8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -10031,7 +10092,7 @@ arrival time. The following code implements this idea:
     \KeywordTok{print}\NormalTok{(}\KeywordTok{table}\NormalTok{(connect))}
     \KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 \NormalTok{  \}}
-  \KeywordTok{cat}\NormalTok{(}\StringTok{"The proportion of tims they met was "}\NormalTok{, }\KeywordTok{mean}\NormalTok{(connect), }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+  \KeywordTok{cat}\NormalTok{(}\StringTok{"The proportion of times they met was "}\NormalTok{, }\KeywordTok{mean}\NormalTok{(connect), }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -10106,7 +10167,7 @@ the original vectorized function:
 \end{Shaded}
 
 \begin{verbatim}
-## The proportion of tims they met was 0.3074.
+## The proportion of times they met was 0.3079.
 ##   user  system elapsed 
 ##  0.002   0.001   0.003 
 \end{verbatim}
@@ -10124,7 +10185,7 @@ looping implementation:
 \end{Shaded}
 
 \begin{verbatim}
-## The proportion of tims they met was 0.3084.
+## The proportion of times they met was 0.2993.
 ##    user  system elapsed 
 ##  0.056   0.007   0.065 
 \end{verbatim}
@@ -21287,7 +21348,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11a0348f8"
+## [1] "0x138b09bd8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21301,7 +21362,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11a0348f8"
+## [1] "0x138b09bd8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21340,7 +21401,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11a0348f8"
+## [1] "0x138b09bd8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21353,7 +21414,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1165d7f28"
+## [1] "0x11fda2448"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21371,7 +21432,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11a0348f8"
+## [1] "0x138b09bd8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21415,7 +21476,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10d2f96a8" "0x10d2f96a8"
+## [1] "0x102fbad50" "0x102fbad50"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21454,7 +21515,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10d2f96a8" "0x10d2f96a8"
+## [1] "0x102fbad50" "0x102fbad50"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21496,7 +21557,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10d2f96a8" "0x138a33c28"
+## [1] "0x102fbad50" "0x11da68f48"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

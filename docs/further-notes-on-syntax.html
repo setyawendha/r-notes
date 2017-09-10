@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-09">
+<meta name="date" content="2017-09-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -539,6 +539,24 @@ a; b; c; <span class="dv">2</span><span class="op">+</span><span class="dv">2</s
 <p>You need not memorize the above list: You’ll gradually learn most of it, and words you don’t learn are words that you are unlikely to ever choose as a variable-name on your own. Besides, reserved words show in in blue in the R Studio editor, and if you manage to use one anyway then R will stop you outright with a clear error message:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">break</span> &lt;-<span class="st"> </span><span class="dv">5</span></code></pre></div>
 <pre><code>## Error in break &lt;- 5 : invalid (NULL) left side of assignment</code></pre>
+<p>Notice also that although <code>TRUE</code> and <code>FALSE</code> are reserved words, their accepted abbreviations <code>T</code> and <code>F</code> are not. This can lead to problems in code, if someone chooses to bind <code>T</code> or <code>F</code> to some value.</p>
+<p>For example, suppose that have two lines of code like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T &lt;-<span class="st"> </span><span class="dv">0</span>
+F &lt;-<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<p>Later on, suppose you create what you think is a logical vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myVector &lt;-<span class="st"> </span><span class="kw">c</span>(T, F, F, T)</code></pre></div>
+<p>But it’s <em>not</em> logical:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(myVector)</code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<p>That’s because <code>T</code> ad <code>F</code> have been bound to numerical values. If you coerce <code>myLogical</code> to a logical vector, you get the exact opposite of what you would have expected:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.logical</span>(myVector)</code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE FALSE</code></pre>
+<p>The moral of the story is:</p>
+
+<div class="rmdimportant">
+To be safe, never use <code>T</code> for <code>TRUE</code> or <code>F</code> for <code>FALSE</code>.
+</div>
+
 <p>One final remark: variables together with reserved words constitute the part of the R language called <em>identifiers</em>.</p>
 
 </div>

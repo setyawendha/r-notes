@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-09">
+<meta name="date" content="2017-09-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -436,7 +436,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="kw">print</span>(<span class="kw">table</span>(connect))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
   }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of tims they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot;The proportion of times they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
 }</code></pre></div>
 <p>Let’s try it out:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="dv">3939</span>)</code></pre></div>
@@ -476,13 +476,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Be aware, though, that when you use a loop in place of vectorization your routine is liable to run more slowly. We can measure the difference with the R-function <code>system.time()</code>. As an illustration, let’s compare the running times for the vectorized and the looping versions of the meetup simulation.</p>
 <p>First we get the time for the thousand repetitions of the meetup, using the original vectorized function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>))</code></pre></div>
-<pre><code>## The proportion of tims they met was 0.3074.
+<pre><code>## The proportion of times they met was 0.3079.
 ##   user  system elapsed 
 ##  0.002   0.001   0.003 </code></pre>
 <p>Our concern is with the total elapsed time: a mere three-thousandths of a second!</p>
 <p>Next we get the time for the same number of repetitions, using the looping implementation:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">meetupSim2</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>))</code></pre></div>
-<pre><code>## The proportion of tims they met was 0.3084.
+<pre><code>## The proportion of times they met was 0.2993.
 ##    user  system elapsed 
 ##  0.056   0.007   0.065 </code></pre>
 <p>Here the elapsed time is 0.065 seconds. This still seems pretty fast, but it’s more than 20 times as long as for the vectorized simulation. For more complex simulations such a dramatic slowdown could pose serious practical problems.</p>

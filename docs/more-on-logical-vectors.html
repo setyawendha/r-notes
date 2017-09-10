@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-09">
+<meta name="date" content="2017-09-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -539,27 +539,27 @@ a <span class="op">==</span><span class="st"> </span>b</code></pre></div>
 <div id="and-or-not" class="section level4">
 <h4><span class="header-section-number">2.4.1.3</span> And, Or, Not</h4>
 <p>We consider an “and” statement to be true when both of its component statements are true; otherwise it is counted as false. The <code>&amp;</code> Boolean operator accords with our thinking:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, T, F, F)
-b &lt;-<span class="st"> </span><span class="kw">c</span>(T, F, T, F)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)
+b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
 a <span class="op">&amp;</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE FALSE</code></pre>
 <p>In logic and mathematics, an “or” statement is considered to be true when <em>at least one</em> of its component statements are true. (This is sometimes called the “inclusive” use of the term “or.”) R accords with this line of thinking:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, T, F, F)
-b &lt;-<span class="st"> </span><span class="kw">c</span>(T, F, T, F)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)
+b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
 a <span class="op">|</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## [1]  TRUE  TRUE  TRUE FALSE</code></pre>
 <p>The <code>&amp;&amp;</code> and <code>||</code> operators follow the “and” and “or” logic respectively, but are applied only to the first elements of the vectors being compared:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, T)
-b &lt;-<span class="st"> </span><span class="kw">c</span>(F, T)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>)
+b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>)
 a <span class="op">&amp;&amp;</span><span class="st"> </span>b</code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, F)
-b &lt;-<span class="st"> </span><span class="kw">c</span>(F, F)
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
+b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>)
 a <span class="op">||</span><span class="st"> </span>b</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>These operators will come in handy later on, when we study <em>conditionals</em>.</p>
 <p>The final Boolean operator is <code>!</code>, which works like “not”:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(T, F)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
 <span class="op">!</span>a</code></pre></div>
 <pre><code>## [1] FALSE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>)

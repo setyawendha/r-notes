@@ -108,6 +108,8 @@ badVec <- c(TRUE, false)
 ## Error: object 'false' not found
 ```
 
+**Note**:  Although R allows `T` to be interpreted as `TRUE` and `F` as `FALSE`, it can be dangerous to use them in some circumstances.  Best to get into the habit of always using `TRUE` and `FALSE`, rather than the permitted abbreviations.
+
 ### Coercion
 
 What would happen if you tried to represent falsity with the string `"false"`?
@@ -574,30 +576,30 @@ identical(TRUE, 1)
 We consider an "and" statement to be true when both of its component statements are true; otherwise it is counted as false.  The `&` Boolean operator accords with our thinking:
 
 ```{r}
-a <- c(T, T, F, F)
-b <- c(T, F, T, F)
+a <- c(TRUE, TRUE, FALSE, FALSE)
+b <- c(TRUE, FALSE, TRUE, FALSE)
 a & b
 ```
 
 In logic and mathematics, an "or" statement is considered to be true when *at least one* of its component statements are true.  (This is sometimes called the "inclusive" use of the term "or.") R accords with this line of thinking:
 
 ```{r}
-a <- c(T, T, F, F)
-b <- c(T, F, T, F)
+a <- c(TRUE, TRUE, FALSE, FALSE)
+b <- c(TRUE, FALSE, TRUE, FALSE)
 a | b
 ```
 
 The `&&` and `||` operators follow the "and" and "or" logic respectively, but are applied only to the first elements of the vectors being compared:
 
 ```{r}
-a <- c(T, T)
-b <- c(F, T)
+a <- c(TRUE, TRUE)
+b <- c(TRUE, TRUE)
 a && b
 ```
 
 ```{r}
-a <- c(T, F)
-b <- c(F, F)
+a <- c(TRUE, FALSE)
+b <- c(FALSE, FALSE)
 a || b
 ```
 
@@ -606,7 +608,7 @@ These operators will come in handy later on, when we study *conditionals*.
 The final Boolean operator is `!`, which works like "not":
 
 ```{r}
-a <- c(T, F)
+a <- c(TRUE, FALSE)
 !a
 e <- c(2, 5, 6)
 f <-  c(3, 1, 2)
@@ -675,11 +677,11 @@ heights
 Let's say that we want the heights of Scarecrow, Tinman and Dorothy.  We can use a logical vector to do this:
 
 ```{r}
-wanted <- c(T, T, F, T, F, F)
+wanted <- c(TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 heights[wanted]
 ```
 
-The `T`'s at indices 1, 2, and 4 in `wanted` inform R that we want the heights vector at indices 1, 2 and 4.  The `F`'s say:  "don't include this element!"
+The `TRUE`'s at indices 1, 2, and 4 in `wanted` inform R that we want the heights vector at indices 1, 2 and 4.  The `FALSE`'s say:  "don't include this element!"
 
 Subsetting can be used powerfully along with logical vectors and Boolean operators.
 
@@ -804,7 +806,7 @@ There are several functions on logical vectors that are worth keeping in your ba
 Applied to a logical vector, the `which()` function returns the *indices* of the vector that have the value `TRUE`:
 
 ```{r}
-boolVec <- c(T,T,F,T)
+boolVec <- c(TRUE,TRUE,FALSE,TRUE)
 which(boolVec)
 ```
 
@@ -1253,6 +1255,48 @@ break <- 5
 ```
 ## Error in break <- 5 : invalid (NULL) left side of assignment
 ```
+
+Notice also that although `TRUE` and `FALSE` are reserved words, their accepted abbreviations `T` and `F` are not.  This can lead to problems in code, if someone chooses to bind `T` or `F` to some value.
+
+For example, suppose that have two lines of code like this:
+
+```{r}
+T <- 0
+F <- 1
+```
+
+Later on, suppose you create what you think is a logical vector:
+
+```{r}
+myVector <- c(T, F, F, T)
+```
+
+But it's *not* logical:
+
+```{r}
+typeof(myVector)
+```
+
+That's because `T` ad `F` have been bound to numerical values.  If you coerce `myLogical` to a logical vector, you get the exact opposite of what you would have expected:
+
+```{r}
+as.logical(myVector)
+```
+
+```{r echo = FALSE}
+rm(T); rm(F); rm(myVector)
+```
+
+
+The moral of the story is:
+
+```{block2, r-true-t, type='rmdimportant'}
+To be safe, never use `T` for `TRUE` or `F` for `FALSE`.
+```
+
+
+
+
 
 One final remark:  variables together with reserved words constitute the part of the R language called *identifiers*.
 
