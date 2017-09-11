@@ -27,6 +27,7 @@ The `readline()` \index{R-functions!readline()@\texttt{readline()}}function will
 
 ```{r eval = F}
 person <- readline(prompt = "What is your name?  ")
+# Type your name before running the next line!
 cat("Hello, ", person, "!\n", sep = "")
 ```
 
@@ -39,6 +40,7 @@ Note that the input obtained from `readline()` is always a character vector of l
 
 ```{r eval = F}
 number <- readline("Give me a number, and I'll add 10 to it:  ")
+# Give R your number before you run the next line!
 cat("The sum is:  ", as.numeric(number) + 10)
 ```
 
@@ -624,7 +626,7 @@ repeat {
   if ( guess == "q"  ) {
     cat("Bye!\n")
     break
-  } else if ( guess == number ) {
+  } else if ( as.numeric(guess) == number ) {
     cat("You are correct!  Thanks for playing!")
     break
   }
@@ -644,13 +646,13 @@ numberGuess <- function(n) {
     if (guess == "q") {
       cat("Bye!\n")
       break
-    } else if (guess == number) {
+    } else if (as.numeric(guess) == number) {
       cat("You are correct!  Thanks for playing!")
       break
     }
     # If we get to this point the guess was not correct.
     # Issue hint:
-    hint <- ifelse(guess > number, "high", "low")
+    hint <- ifelse(as.numeric(guess) > number, "high", "low")
     cat("Your guess was ", hint, ".  Keep at it!\n", sep = "")
     # Repeat loop
   }
@@ -686,8 +688,8 @@ The reserved word `while` \index{while@\texttt{while}}constructs a loop that run
 verboseSearch <- function(elem, vec) {
   found <- FALSE
   if ( length(vec) == 0 ) {
-    cat("The vector empty.  No way does it contain ", 
-        elem, ".", sep = "")
+    cat("The vector is empty.  No way does it contain ", 
+        elem, ".\n", sep = "")
     return(-1)
   }
   # index of vec (start looking at 1):

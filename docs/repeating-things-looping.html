@@ -650,7 +650,7 @@ number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class=
   <span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> &quot;q&quot;</span>  ) {
     <span class="kw">cat</span>(<span class="st">&quot;Bye!</span><span class="ch">\n</span><span class="st">&quot;</span>)
     <span class="cf">break</span>
-  } <span class="cf">else</span> <span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {
+  } <span class="cf">else</span> <span class="cf">if</span> ( <span class="kw">as.numeric</span>(guess) <span class="op">==</span><span class="st"> </span>number ) {
     <span class="kw">cat</span>(<span class="st">&quot;You are correct!  Thanks for playing!&quot;</span>)
     <span class="cf">break</span>
   }
@@ -666,13 +666,13 @@ number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class=
     <span class="cf">if</span> (guess <span class="op">==</span><span class="st"> &quot;q&quot;</span>) {
       <span class="kw">cat</span>(<span class="st">&quot;Bye!</span><span class="ch">\n</span><span class="st">&quot;</span>)
       <span class="cf">break</span>
-    } <span class="cf">else</span> <span class="cf">if</span> (guess <span class="op">==</span><span class="st"> </span>number) {
+    } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">as.numeric</span>(guess) <span class="op">==</span><span class="st"> </span>number) {
       <span class="kw">cat</span>(<span class="st">&quot;You are correct!  Thanks for playing!&quot;</span>)
       <span class="cf">break</span>
     }
     <span class="co"># If we get to this point the guess was not correct.</span>
     <span class="co"># Issue hint:</span>
-    hint &lt;-<span class="st"> </span><span class="kw">ifelse</span>(guess <span class="op">&gt;</span><span class="st"> </span>number, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>)
+    hint &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">as.numeric</span>(guess) <span class="op">&gt;</span><span class="st"> </span>number, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;Your guess was &quot;</span>, hint, <span class="st">&quot;.  Keep at it!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="co"># Repeat loop</span>
   }
@@ -700,8 +700,8 @@ You are correct!  Thanks for playing!</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">verboseSearch &lt;-<span class="st"> </span><span class="cf">function</span>(elem, vec) {
   found &lt;-<span class="st"> </span><span class="ot">FALSE</span>
   <span class="cf">if</span> ( <span class="kw">length</span>(vec) <span class="op">==</span><span class="st"> </span><span class="dv">0</span> ) {
-    <span class="kw">cat</span>(<span class="st">&quot;The vector empty.  No way does it contain &quot;</span>, 
-        elem, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+    <span class="kw">cat</span>(<span class="st">&quot;The vector is empty.  No way does it contain &quot;</span>, 
+        elem, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">return</span>(<span class="op">-</span><span class="dv">1</span>)
   }
   <span class="co"># index of vec (start looking at 1):</span>

@@ -430,11 +430,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We can get any printout we like as long as we assign the desired string to <code>person</code>—but we have to do that <em>in the code itself</em>. But what if we don’t know the name of the person whom we want to greet? How can we be assured of printing out the correct name?</p>
 <p>The <code>readline()</code> function will be helpful, here. It reads input directly from the console and produces a character vector (of length one) that we may use as we like. Thus</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">person &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;What is your name?  &quot;</span>)
+<span class="co"># Type your name before running the next line!</span>
 <span class="kw">cat</span>(<span class="st">&quot;Hello, &quot;</span>, person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
 <pre><code>## What is your name?  Cowardly Lion
 ## Hello, Cowardly Lion!</code></pre>
 <p>Note that the input obtained from <code>readline()</code> is always a character vector of length one—a single string—so if you plan to use it as a number then you need to convert it to a number. The <code>as.numeric()</code> function will do this for you:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Give me a number, and I&#39;ll add 10 to it:  &quot;</span>)
+<span class="co"># Give R your number before you run the next line!</span>
 <span class="kw">cat</span>(<span class="st">&quot;The sum is:  &quot;</span>, <span class="kw">as.numeric</span>(number) <span class="op">+</span><span class="st"> </span><span class="dv">10</span>)</code></pre></div>
 <pre><code>## Give me a number, and I&#39;ll add 10 to it:  15
 ## The sum is:  25</code></pre>

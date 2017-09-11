@@ -5553,7 +5553,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10eb935b8>
+## <bytecode: 0x10e637870>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -6323,6 +6323,7 @@ character vector (of length one) that we may use as we like. Thus
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{person <-}\StringTok{ }\KeywordTok{readline}\NormalTok{(}\DataTypeTok{prompt =} \StringTok{"What is your name?  "}\NormalTok{)}
+\CommentTok{# Type your name before running the next line!}
 \KeywordTok{cat}\NormalTok{(}\StringTok{"Hello, "}\NormalTok{, person, }\StringTok{"!}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -6342,6 +6343,7 @@ this for you:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{number <-}\StringTok{ }\KeywordTok{readline}\NormalTok{(}\StringTok{"Give me a number, and I'll add 10 to it:  "}\NormalTok{)}
+\CommentTok{# Give R your number before you run the next line!}
 \KeywordTok{cat}\NormalTok{(}\StringTok{"The sum is:  "}\NormalTok{, }\KeywordTok{as.numeric}\NormalTok{(number) }\OperatorTok{+}\StringTok{ }\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -7348,7 +7350,7 @@ correct answer. Here's an implementation using \texttt{repeat}:
   \ControlFlowTok{if}\NormalTok{ ( guess }\OperatorTok{==}\StringTok{ "q"}\NormalTok{  ) \{}
     \KeywordTok{cat}\NormalTok{(}\StringTok{"Bye!}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
     \ControlFlowTok{break}
-\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ ( guess }\OperatorTok{==}\StringTok{ }\NormalTok{number ) \{}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{as.numeric}\NormalTok{(guess) }\OperatorTok{==}\StringTok{ }\NormalTok{number ) \{}
     \KeywordTok{cat}\NormalTok{(}\StringTok{"You are correct!  Thanks for playing!"}\NormalTok{)}
     \ControlFlowTok{break}
 \NormalTok{  \}}
@@ -7374,13 +7376,13 @@ form of a function.
     \ControlFlowTok{if}\NormalTok{ (guess }\OperatorTok{==}\StringTok{ "q"}\NormalTok{) \{}
       \KeywordTok{cat}\NormalTok{(}\StringTok{"Bye!}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
       \ControlFlowTok{break}
-\NormalTok{    \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (guess }\OperatorTok{==}\StringTok{ }\NormalTok{number) \{}
+\NormalTok{    \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{as.numeric}\NormalTok{(guess) }\OperatorTok{==}\StringTok{ }\NormalTok{number) \{}
       \KeywordTok{cat}\NormalTok{(}\StringTok{"You are correct!  Thanks for playing!"}\NormalTok{)}
       \ControlFlowTok{break}
 \NormalTok{    \}}
     \CommentTok{# If we get to this point the guess was not correct.}
     \CommentTok{# Issue hint:}
-\NormalTok{    hint <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(guess }\OperatorTok{>}\StringTok{ }\NormalTok{number, }\StringTok{"high"}\NormalTok{, }\StringTok{"low"}\NormalTok{)}
+\NormalTok{    hint <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(guess) }\OperatorTok{>}\StringTok{ }\NormalTok{number, }\StringTok{"high"}\NormalTok{, }\StringTok{"low"}\NormalTok{)}
     \KeywordTok{cat}\NormalTok{(}\StringTok{"Your guess was "}\NormalTok{, hint, }\StringTok{".  Keep at it!}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
     \CommentTok{# Repeat loop}
 \NormalTok{  \}}
@@ -7423,8 +7425,8 @@ never executed.
 \NormalTok{verboseSearch <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(elem, vec) \{}
 \NormalTok{  found <-}\StringTok{ }\OtherTok{FALSE}
   \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{length}\NormalTok{(vec) }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
-    \KeywordTok{cat}\NormalTok{(}\StringTok{"The vector empty.  No way does it contain "}\NormalTok{, }
-\NormalTok{        elem, }\StringTok{"."}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"The vector is empty.  No way does it contain "}\NormalTok{, }
+\NormalTok{        elem, }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
     \KeywordTok{return}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
 \NormalTok{  \}}
   \CommentTok{# index of vec (start looking at 1):}
@@ -20600,9 +20602,9 @@ considerable, though.
 Remember also that vectorization is \emph{much} faster than looping, and
 is also usually quite expressive, so don't struggle to take a functional
 approach when vectorization is possible. (This advice applies to a
-number of of examples from this Chapter, in which the desired
-computations had already been accomplished in earlier chapters by some
-form of vectorization.)
+number of examples from this Chapter, in which the desired computations
+had already been accomplished in earlier chapters by some form of
+vectorization.)
 
 \section{Conclusion}\label{conclusion}
 
@@ -21344,7 +21346,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11923cf58"
+## [1] "0x11ca4c438"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21358,7 +21360,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11923cf58"
+## [1] "0x11ca4c438"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21397,7 +21399,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11923cf58"
+## [1] "0x11ca4c438"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21410,7 +21412,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x138f7e708"
+## [1] "0x11a2dc478"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21428,7 +21430,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11923cf58"
+## [1] "0x11ca4c438"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21472,7 +21474,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x133b236e8" "0x133b236e8"
+## [1] "0x10f0f18d8" "0x10f0f18d8"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21511,7 +21513,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x133b236e8" "0x133b236e8"
+## [1] "0x10f0f18d8" "0x10f0f18d8"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21553,7 +21555,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x133b236e8" "0x1171c7bf8"
+## [1] "0x10f0f18d8" "0x12f49dc28"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
