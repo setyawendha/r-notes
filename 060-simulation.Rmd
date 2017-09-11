@@ -80,7 +80,7 @@ Based on twenty repetitions of the random process, our estimate of the chance an
 
 ```{r echo=2:3}
 set.seed(4040)
-sims <- sample(tickets, size = 10000, replace = T)
+sims <- sample(tickets, size = 10000, replace = TRUE)
 prop.table(table(sims))
 ```
 
@@ -123,7 +123,7 @@ For a simple game like ours where there are only a few possible outcomes for the
 ```{r}
 w <- c(-1, 0, 2)
 pw <- c(0.25, 0.50, 0.25)
-winnings <- sample(w, size = 10, replace = T, prob = pw)
+winnings <- sample(w, size = 10, replace = TRUE, prob = pw)
 winnings
 ```
 
@@ -137,7 +137,7 @@ Of course, with such a small number of repetitions of the game we cannot expect 
 
 ```{r echo=2:3}
 set.seed(4545)
-winnings <- sample(w, size = 10000, replace = T, prob = pw)
+winnings <- sample(w, size = 10000, replace = TRUE, prob = pw)
 mean(winnings)
 ```
 
@@ -648,7 +648,7 @@ courtSim <- function(reps = 10000,
 Let's now estimate the probability of the court rendering a correct verdict, using one hundred thousand simulated cases:
 
 ```{r courtresults1, cache = T}
-courtSim(reps = 100000, seed = 3838, table = T)
+courtSim(reps = 100000, seed = 3838, table = TRUE)
 ```
 
 The court seems to be doing quite well!  But of course this is not very surprising:  after all, most of the judges make the correct decision almost all the time.  It is interesting, though, that the chance of the *full court* rendering a correct verdict is higher than the chance of any individual judge to be correct.  There appears to be a benefit to the voting procedure.
@@ -707,7 +707,7 @@ courtSim2 <- function(reps = 10000,
 Let's try it out:
 
 ```{r}
-courtSim2(reps = 100000, seed = 3838, table = T)
+courtSim2(reps = 100000, seed = 3838, table = TRUE)
 ```
 
 Hey!  That's a *lower* chance of success than before!  The difference is small but significant:  compelling the weakest judge to vote with the strongest judge actually *decreased* the court's chance of rendering a correct verdict overall.  This circumstance is sometimes called the Appeals Court Paradox, but it occurs in many other practical situations.  More often than you might think, the benefit of independent voting can outweigh the advantage associated with relying solely on a small number of "experts."

@@ -206,7 +206,7 @@ Examine `oz.txt` for a bit.  If we plan to make a lexicon for the book, then we 
 ```{r}
 # a helper function
 findIndex <- function(pattern, text) {
-  inText <- grepl(pattern = pattern, x = text, perl = T)
+  inText <- grepl(pattern = pattern, x = text, perl = TRUE)
   which(inText)
 }
 
@@ -223,7 +223,7 @@ Let us now take a first pass at splitting the text into all of its "words." Our 
 \index{R-functions!unlist()@\texttt{unlist()}}
 \index{R-functions!strsplit()@\texttt{strsplit()}}
 ```{r}
-ozwds <- unlist(strsplit(oz2, split = "\\s+", perl = T))
+ozwds <- unlist(strsplit(oz2, split = "\\s+", perl = TRUE))
 ```
 
 Next, let's convert all of the words to lowercase, then make a new word-list with no repeats, then sort that list:
@@ -277,7 +277,7 @@ ozwds <- unlist(
                     |        # or 
                     (\\s+)   # one or more white-space
                    ", 
-           perl = T))
+           perl = TRUE))
 ```
 
 Now let's strip off any leading or trailing punctuation.  In PCRE2, `\p{P}` is a shortcut for any punctuation character:
@@ -289,12 +289,12 @@ Now let's strip off any leading or trailing punctuation.  In PCRE2, `\p{P}` is a
 ozwds <- gsub(pattern = "^\\p{P}+",
                 replacement = "",
                 x = ozwds,
-                perl = T)
+                perl = TRUE)
 # then trailing:
 ozwds <- gsub(pattern = "\\p{P}+$",
                 replacement = "",
                 x = ozwds,
-                perl = T)
+                perl = TRUE)
 # lowercase, remove duplicates, sort:
 ozWords <- sort(unique(tolower(ozwds)))
 ```
@@ -306,7 +306,7 @@ Taking a second look at `ozWords`, we see that we need to get rid of some number
 ```{r}
 isNumber <- grepl(pattern = "\\d+",
                   x = ozWords,
-                  perl = T)
+                  perl = TRUE)
 isEmpty <- ozWords == ""
 validWord <- !isNumber & !isEmpty
 ozWords <- ozWords[validWord]
@@ -324,7 +324,7 @@ indexFactory <- function(lexicon, fn) {
   for ( i in seq_len(length(lexicon)) ) {
     word <- lexicon[i]
     pattern <- paste0("(?i)", word)
-    hasWord <- grepl(pattern = pattern, x = fileLines, perl = T)
+    hasWord <- grepl(pattern = pattern, x = fileLines, perl = TRUE)
     index[[word]] <- which(hasWord)
   }
   index

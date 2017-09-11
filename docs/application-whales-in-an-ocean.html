@@ -486,7 +486,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
                 <span class="cf">break</span>
               }
             }
-          }, <span class="dt">overwrite =</span> T)</code></pre></div>
+          }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Note the parameter <code>dims</code> for the move function. From the code we can tell that it’s a vector of length 2. In fact the parameter will contain the x and and y-dimensions (the width and breadth) of our ocean. It’s something that will have to be determined by the ocean itself. We haven’t written the class Ocean yet, so this part of the code will have to remain a bit mysterious, for now.</p>
 <p>We need male and female whales, so we create a class for each sex. Both classes inherit from Whale. The class Male adds only a <code>sex</code> attribute:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Male &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Male&quot;</span>,
@@ -516,7 +516,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
                }
              }
              foundOne
-           }, <span class="dt">overwrite =</span> T)</code></pre></div>
+           }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Again, note the parameters <code>males</code> and <code>dist</code>. Values for these parameters will be provided by the ocean object. <code>males</code> will be a list of the male whales in the population at the current time, and <code>dist</code> will be a function for computing the distance between any two points in the ocean.</p>
 <p>A female whale also needs to be able to mate:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Female<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>,
@@ -525,7 +525,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
              babySex &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>), <span class="dt">size =</span> <span class="dv">1</span>)
              self<span class="op">$</span>timeToFertility &lt;-<span class="st"> </span>self<span class="op">$</span>infertilityPeriod
              <span class="kw">return</span>(babySex)
-           }, <span class="dt">overwrite =</span> T)</code></pre></div>
+           }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Now it is time to define the Ocean class. It’s a bit of a mouthful:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Ocean &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Ocean&quot;</span>,
                  <span class="dt">public =</span> <span class="kw">list</span>(
@@ -672,7 +672,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             } <span class="cf">else</span> {
               self<span class="op">$</span>females &lt;-<span class="st"> </span><span class="kw">list</span>()
             }
-          }, <span class="dt">overwrite =</span> T)</code></pre></div>
+          }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>In simulations we might enjoy looking at a picture of the ocean at any given time moment. Hence we add a <code>plot()</code> method that enables an ocean to produce a graph of the whales within it. In this graph males will be colored red and females green. Mature whales will appear as larger than immature whales. For purposes of speed we use R’s base graphics system rather than <strong>ggplot2</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Ocean<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, 
           <span class="st">&quot;plot&quot;</span>,
@@ -702,7 +702,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
                  <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> color, <span class="dt">cex =</span> size,
                  <span class="dt">main =</span> <span class="kw">paste0</span>(<span class="st">&quot;Population = &quot;</span>, <span class="kw">nrow</span>(df))))
             <span class="kw">box</span>(<span class="dt">lwd =</span> <span class="dv">2</span>)
-          }, <span class="dt">overwrite =</span> T)</code></pre></div>
+          }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Finally, we write a simulation function. The function allows the user to specify the number of time-units that the simulation will cover, along with initial numbers of male and female whales. The user will have an option to “animate” the simulation showing a plot of the ocean after each time-unit. If the animation option is chosen, then R will use the <code>Sys.sleep()</code> function  to make the computer suspend computations for half a second so that the user can view the plot. The simulation will cease if all of the whales die prior to end of the allotted time. Finally, the function uses <strong>ggplot2</strong> to produce a graph of the whale population as a function of time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 oceanSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">100</span>, <span class="dt">males =</span> <span class="dv">10</span>, <span class="dt">females =</span> <span class="dv">10</span>,

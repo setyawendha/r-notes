@@ -493,7 +493,7 @@ results</code></pre></div>
 <pre><code>## [1] 20 49 94 15 50 88</code></pre>
 <p>The first and fourth entries simulate a person tossing a fair coin 100 times when she has only a 10% chance of heads. The second and fifth entries simulate the same, when the chance of heads is 50%. The third and sixth simulate coin-tossing when there is a 90% chance of heads.</p>
 <p>If you would like to arrange the results more nicely—say in a matrix where each column gives the results for a different person—you can do so:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resultsMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(results, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> T)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resultsMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(results, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
 resultsMat</code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]   20   49   94
@@ -502,7 +502,7 @@ resultsMat</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">probCorrect &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)</code></pre></div>
 <p>If you would like to simulate the judges deciding, say, 6 cases, try this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">5</span><span class="op">*</span><span class="dv">6</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob=</span> <span class="kw">rep</span>(probCorrect, <span class="dv">6</span>))
-resultsMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(results, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> T)
+resultsMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(results, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
 resultsMat</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    1    1    1    0    1

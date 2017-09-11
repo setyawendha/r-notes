@@ -423,7 +423,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="adding-members-to-a-class" class="section level2">
 <h2><span class="header-section-number">13.4</span> Adding Members to a Class</h2>
 <p>Sometimes we need to add or to modify a member of a class, after we have defined that class. Every class comes with a <code>set()</code> method that allows us to do this. For example, suppose that we would like our people to have a favorite color:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="ot">NA</span>, <span class="dt">overwrite =</span> T)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="ot">NA</span>, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>We now see that <code>color</code> is now one of the public members of class Person:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person</code></pre></div>
 <pre><code>## &lt;Person&gt; object generator
@@ -441,12 +441,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##   Locked objects: TRUE
 ##   Locked class: FALSE
 ##   Portable: TRUE</code></pre>
-<p>In the above call to set, the argument <code>overwrite = T</code> was not strictly necessary, since <code>color</code> did not previously exist as a member of Person. If you are developing a program, though, and you find yourself repeatedly running a piece of code that sets a new member for a class, it’s useful to have overwriting turned on.</p>
+<p>In the above call to set, the argument <code>overwrite = TRUE</code> was not strictly necessary, since <code>color</code> did not previously exist as a member of Person. If you are developing a program, though, and you find yourself repeatedly running a piece of code that sets a new member for a class, it’s useful to have overwriting turned on.</p>
 <p>While we are at it. let’s write a special <code>set_color()</code> method:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Person<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;set_color&quot;</span>, <span class="cf">function</span>(val) {
   self<span class="op">$</span>color &lt;-<span class="st"> </span>val
   <span class="kw">cat</span>(self<span class="op">$</span>name, <span class="st">&quot; has favorite color: &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }, <span class="dt">overwrite =</span> T)</code></pre></div>
+  }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>You might think that we can now set a favorite color for <code>dorothy</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dorothy<span class="op">$</span><span class="kw">set_color</span>(<span class="st">&quot;blue&quot;</span>)</code></pre></div>
 <pre><code>Error: attempt to apply non-function</code></pre>

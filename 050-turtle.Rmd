@@ -375,7 +375,7 @@ When we set `replace = TRUE` then each selected element is returned to the popul
 
 ```{r echo = 2:2}
 set.seed(4040)
-sample(vec, 20, replace = T)
+sample(vec, 20, replace = TRUE)
 ```
 
 When the `prob` parameter is left at its `NULL` value, R gives each member of the population the *same* chance to be the member that is selected.  It is possible to adjust the probabilities of selection by setting `prob` to a vector of probabilities (one for each corresponding member of `x`).  Thus, suppose we want to select 20 numbers from `vec`, according to the following the probabilities:
@@ -388,7 +388,7 @@ Then we can call `sample()` like this:
 
 ```{r echo = 2:2}
 set.seed(5050)
-sample(vec, 20, replace = T,
+sample(vec, 20, replace = TRUE,
        prob  = c(rep(0.05, 8), 0.30, 0.30))
 ```
 

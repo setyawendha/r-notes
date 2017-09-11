@@ -218,11 +218,11 @@ As expected, the result is a matrix having as many rows as the rows of `a`and as
 It is also interesting to recall how matrix multiplication works when the second matrix has only one column.  The product is obtained by multiplying each column of `a` by the element on the corresponding row of `b`, and adding the resulting matrices:
 
 ```{r eval = F}
-b[1,1]*a[ ,1, drop = F] + b[2,1, drop = F]*a[ ,2] + b[3,1]*a[ ,3, drop = F]
+b[1,1]*a[ ,1, drop = FALSE] + b[2,1, drop = FALSE]*a[ ,2] + b[3,1]*a[ ,3, drop = FALSE]
 ```
 
 ```{r echo = F}
-suppressWarnings(b[1,1]*a[ ,1, drop = F] + b[2,1, drop = F]*a[ ,2] + b[3,1]*a[ ,3, drop = F])
+suppressWarnings(b[1,1]*a[ ,1, drop = FALSE] + b[2,1, drop = FALSE]*a[ ,2] + b[3,1]*a[ ,3, drop = FALSE])
 ```
 
 ### Logical Operations
@@ -513,7 +513,7 @@ You can even select some of the rows at random.  Here is a random sample of size
 ```{r echo = 2:4}
 set.seed(2929)
 n <- nrow(m111survey)
-df <- m111survey[sample(1:n, size = 6, replace = F), ]
+df <- m111survey[sample(1:n, size = 6, replace = FALSE), ]
 df[c("sex", "seat")]  # show just two columns
 ```
 
@@ -560,7 +560,7 @@ If you want, you can even scramble the rows of the data frame in a random order:
 ```{r echo = 2:5}
 set.seed(3535)
 n <- nrow(m111survey)
-shuffle <- sample(1:n, size = n, replace = F)
+shuffle <- sample(1:n, size = n, replace = FALSE)
 df <- m111survey[shuffle, ]
 head(df[c("sex", "seat")])  #show just two columns
 ```
@@ -686,8 +686,8 @@ Another common transformation involves turning a numerical variable into a facto
 The `cut()` function \index{R-functions!cut()@\texttt{cut()}} will be helpful.
 
 ```{r}
-minh <- min(m111survey$height, na.rm = T)
-maxh <- max(m111survey$height, na.rm = T)
+minh <- min(m111survey$height, na.rm = TRUE)
+maxh <- max(m111survey$height, na.rm = TRUE)
 heightClass <- cut(m111survey$height,
                    breaks = c(minh, 65, 70, maxh),
                    labels = c("Short", "Medium","Tall"),
@@ -901,7 +901,7 @@ ggplot(m111survey, aes(x = fastest)) + geom_density(aes(color = seat))
 As we have seen in previous chapters, scatter plots are a fine way to visualize the relationship between two numerical variables.  In our call to `aes()` we simply assign one of the variables to the x-axis and the other to the y-axis.  A scatter plot showing the relationship between grade=point average and fastest speed ever driven is shown in Figure \@ref(fig:fastestGPAseatA).
 
 ```{r fastestGPAseatA, fig.align = "center", out.width = "60%", fig.cap = "Scatter plot of GPA vs. fastest speed ever driven. Students who drive faster tend to have lower GPAs."}
-p <- ggplot(m111survey, aes(x = fastest, y = GPA)) + geom_point(na.rm = T)
+p <- ggplot(m111survey, aes(x = fastest, y = GPA)) + geom_point(na.rm = TRUE)
 p
 ```
 
@@ -911,7 +911,7 @@ It is possible to incorporate a third variable into our plot.  As with the bar g
 
 
 ```{r fastestGPAseat, fig.align = "center", out.width = "60%", fig.cap = "Scatter plot of GPA vs. fastest speed ever driven, with individuals grouped by seating preference."}
-p + geom_point(aes(color = seat), na.rm = T)
+p + geom_point(aes(color = seat), na.rm = TRUE)
 ```
 
 Evidently the people who prefer the back tend to drive pretty fast and to have lower grade-point averages!
@@ -1017,7 +1017,7 @@ dimSum <- function(mat, dim = c("row", "column")) {
 }
 
 transpose <- function(mat) {
-  matrix(as.vector(mat), nrow = ncol(mat), byrow = T)
+  matrix(as.vector(mat), nrow = ncol(mat), byrow = TRUE)
 }
 ```
 
@@ -1109,7 +1109,7 @@ transpose <- function(mat) {
     If you would like to arrange the results more nicely---say in a matrix where each column gives the results for a different person---you can do so:
     
     ```{r}
-    resultsMat <- matrix(results, ncol = 3, byrow = T)
+    resultsMat <- matrix(results, ncol = 3, byrow = TRUE)
     resultsMat
     ```
     
@@ -1124,7 +1124,7 @@ transpose <- function(mat) {
     ```{r echo = 2:4}
     set.seed(4848)
     results <- rbinom(5*6, size = 1, prob= rep(probCorrect, 6))
-    resultsMat <- matrix(results, nrow = 6, byrow = T)
+    resultsMat <- matrix(results, nrow = 6, byrow = TRUE)
     resultsMat
     ```    
     

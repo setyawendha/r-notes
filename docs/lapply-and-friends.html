@@ -570,13 +570,13 @@ Figure 12.1: It kinds looks like the back-sitters drive faster, on the whole.
 <p>One possible numerical approach is to compare the <em>mean</em> fastest speeds of the three groups of students. We could use the <code>split()</code> function from Section <a href="lists-splitting.html#lists-splitting">8.3</a> to split the vector <code>fastest</code> into a list of three vectors, one for each value of the factor <code>seat</code>. We can then compute the mean of each vector in the list and display them together for easy comparison. The following code accomplishes this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>tigerstats<span class="op">::</span>m111survey
 splitSpeeds &lt;-<span class="st"> </span><span class="kw">with</span>(df, <span class="kw">split</span>(fastest, <span class="dt">f =</span> seat))
-means &lt;-<span class="st"> </span><span class="kw">sapply</span>(splitSpeeds, <span class="dt">FUN =</span> mean, <span class="dt">na.rm =</span> T)
+means &lt;-<span class="st"> </span><span class="kw">sapply</span>(splitSpeeds, <span class="dt">FUN =</span> mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
 means</code></pre></div>
 <pre><code>##  1_front 2_middle   3_back 
 ## 102.2593 102.9688 121.9167</code></pre>
 <p>Sure enough, the back-sitters have a much higher mean fastest speed!</p>
 <p>The <code>tapply()</code> function is designed to handle these splitting situations automatically.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(df, <span class="kw">tapply</span>(<span class="dt">X =</span> fastest, <span class="dt">INDEX =</span> seat, <span class="dt">FUN =</span> mean, <span class="dt">na.rm =</span> T))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(df, <span class="kw">tapply</span>(<span class="dt">X =</span> fastest, <span class="dt">INDEX =</span> seat, <span class="dt">FUN =</span> mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <pre><code>##  1_front 2_middle   3_back 
 ## 102.2593 102.9688 121.9167</code></pre>
 <p>Here’s how the interface to <code>tapply()</code> works:</p>
@@ -587,7 +587,7 @@ means</code></pre></div>
 <li>You can pass in other arguments that <code>FUN</code> will use. In this case we set <code>na.rm</code> to <code>TRUE</code> so that the <code>mean()</code> function will ignore missing values in any of the vectors of the split.</li>
 </ul>
 <p>As it stands, <code>tapply()</code> appears to save only a line or two of code-writing. The real power of <code>tapply()</code>, however, lies in the <code>INDEX</code> parameter. <code>INDEX</code> need not be a single vector: it could be a <em>list</em> of factors, in which case <code>tapply()</code> will split up the elements of <code>X</code> into groups determined by all possible combinations of levels of the factors in <code>INDEX</code>. The best way to understand this is with an example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(df, <span class="kw">tapply</span>(fastest, <span class="dt">INDEX =</span> <span class="kw">list</span>(sex, seat), <span class="dt">FUN =</span> mean, <span class="dt">na.rm =</span> T))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(df, <span class="kw">tapply</span>(fastest, <span class="dt">INDEX =</span> <span class="kw">list</span>(sex, seat), <span class="dt">FUN =</span> mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <pre><code>##          1_front 2_middle   3_back
 ## female  99.63158  94.9375 118.0000
 ## male   108.50000 111.0000 124.7143</code></pre>

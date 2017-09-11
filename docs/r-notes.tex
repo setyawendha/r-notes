@@ -5553,7 +5553,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x1035597b8>
+## <bytecode: 0x10eb935b8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -8823,7 +8823,7 @@ how many times that member has already been selected. Thus, when
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{sample}\NormalTok{(vec, }\DecValTok{20}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)}
+\KeywordTok{sample}\NormalTok{(vec, }\DecValTok{20}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -8853,7 +8853,7 @@ Then we can call \texttt{sample()} like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{sample}\NormalTok{(vec, }\DecValTok{20}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T,}
+\KeywordTok{sample}\NormalTok{(vec, }\DecValTok{20}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{,}
        \DataTypeTok{prob  =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\FloatTok{0.05}\NormalTok{, }\DecValTok{8}\NormalTok{), }\FloatTok{0.30}\NormalTok{, }\FloatTok{0.30}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -9518,7 +9518,7 @@ again, with ten thousand repetitions:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sims <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(tickets, }\DataTypeTok{size =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)}
+\NormalTok{sims <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(tickets, }\DataTypeTok{size =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{prop.table}\NormalTok{(}\KeywordTok{table}\NormalTok{(sims))}
 \end{Highlighting}
 \end{Shaded}
@@ -9601,7 +9601,7 @@ game ten times:
 \begin{Highlighting}[]
 \NormalTok{w <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{)}
 \NormalTok{pw <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.50}\NormalTok{, }\FloatTok{0.25}\NormalTok{)}
-\NormalTok{winnings <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(w, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T, }\DataTypeTok{prob =}\NormalTok{ pw)}
+\NormalTok{winnings <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(w, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{prob =}\NormalTok{ pw)}
 \NormalTok{winnings}
 \end{Highlighting}
 \end{Shaded}
@@ -9629,7 +9629,7 @@ but with ten thousand repetitions:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{winnings <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(w, }\DataTypeTok{size =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T, }\DataTypeTok{prob =}\NormalTok{ pw)}
+\NormalTok{winnings <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(w, }\DataTypeTok{size =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{prob =}\NormalTok{ pw)}
 \KeywordTok{mean}\NormalTok{(winnings)}
 \end{Highlighting}
 \end{Shaded}
@@ -10519,7 +10519,7 @@ verdict, using one hundred thousand simulated cases:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{courtSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{3838}\NormalTok{, }\DataTypeTok{table =}\NormalTok{ T)}
+\KeywordTok{courtSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{3838}\NormalTok{, }\DataTypeTok{table =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -10604,7 +10604,7 @@ Let's try it out:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{courtSim2}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{3838}\NormalTok{, }\DataTypeTok{table =}\NormalTok{ T)}
+\KeywordTok{courtSim2}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{3838}\NormalTok{, }\DataTypeTok{table =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -12153,7 +12153,7 @@ corresponding row of \texttt{b}, and adding the resulting matrices:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{b[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{a[ ,}\DecValTok{1}\NormalTok{, drop =}\StringTok{ }\NormalTok{F] }\OperatorTok{+}\StringTok{ }\NormalTok{b[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{, drop =}\StringTok{ }\NormalTok{F]}\OperatorTok{*}\NormalTok{a[ ,}\DecValTok{2}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{b[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{a[ ,}\DecValTok{3}\NormalTok{, drop =}\StringTok{ }\NormalTok{F]}
+\NormalTok{b[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{a[ ,}\DecValTok{1}\NormalTok{, drop =}\StringTok{ }\OtherTok{FALSE}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{b[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{, drop =}\StringTok{ }\OtherTok{FALSE}\NormalTok{]}\OperatorTok{*}\NormalTok{a[ ,}\DecValTok{2}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{b[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{a[ ,}\DecValTok{3}\NormalTok{, drop =}\StringTok{ }\OtherTok{FALSE}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -12837,7 +12837,7 @@ of size six:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(m111survey)}
-\NormalTok{df <-}\StringTok{ }\NormalTok{m111survey[}\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n, }\DataTypeTok{size =} \DecValTok{6}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ F), ]}
+\NormalTok{df <-}\StringTok{ }\NormalTok{m111survey[}\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n, }\DataTypeTok{size =} \DecValTok{6}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{FALSE}\NormalTok{), ]}
 \NormalTok{df[}\KeywordTok{c}\NormalTok{(}\StringTok{"sex"}\NormalTok{, }\StringTok{"seat"}\NormalTok{)]  }\CommentTok{# show just two columns}
 \end{Highlighting}
 \end{Shaded}
@@ -12948,7 +12948,7 @@ random order:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(m111survey)}
-\NormalTok{shuffle <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n, }\DataTypeTok{size =}\NormalTok{ n, }\DataTypeTok{replace =}\NormalTok{ F)}
+\NormalTok{shuffle <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n, }\DataTypeTok{size =}\NormalTok{ n, }\DataTypeTok{replace =} \OtherTok{FALSE}\NormalTok{)}
 \NormalTok{df <-}\StringTok{ }\NormalTok{m111survey[shuffle, ]}
 \KeywordTok{head}\NormalTok{(df[}\KeywordTok{c}\NormalTok{(}\StringTok{"sex"}\NormalTok{, }\StringTok{"seat"}\NormalTok{)])  }\CommentTok{#show just two columns}
 \end{Highlighting}
@@ -13209,8 +13209,8 @@ will be helpful.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{minh <-}\StringTok{ }\KeywordTok{min}\NormalTok{(m111survey}\OperatorTok{$}\NormalTok{height, }\DataTypeTok{na.rm =}\NormalTok{ T)}
-\NormalTok{maxh <-}\StringTok{ }\KeywordTok{max}\NormalTok{(m111survey}\OperatorTok{$}\NormalTok{height, }\DataTypeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{minh <-}\StringTok{ }\KeywordTok{min}\NormalTok{(m111survey}\OperatorTok{$}\NormalTok{height, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{maxh <-}\StringTok{ }\KeywordTok{max}\NormalTok{(m111survey}\OperatorTok{$}\NormalTok{height, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{heightClass <-}\StringTok{ }\KeywordTok{cut}\NormalTok{(m111survey}\OperatorTok{$}\NormalTok{height,}
                    \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(minh, }\DecValTok{65}\NormalTok{, }\DecValTok{70}\NormalTok{, maxh),}
                    \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Short"}\NormalTok{, }\StringTok{"Medium"}\NormalTok{,}\StringTok{"Tall"}\NormalTok{),}
@@ -13686,7 +13686,7 @@ Figure \ref{fig:fastestGPAseatA}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(m111survey, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ fastest, }\DataTypeTok{y =}\NormalTok{ GPA)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(m111survey, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ fastest, }\DataTypeTok{y =}\NormalTok{ GPA)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{p}
 \end{Highlighting}
 \end{Shaded}
@@ -13711,7 +13711,7 @@ scatter plot itself is shown in Figure \ref{fig:fastestGPAseat}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ seat), }\DataTypeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ seat), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -14130,7 +14130,7 @@ values cannot be expressed meaningfully by numbers.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{resultsMat <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(results, }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{, }\DataTypeTok{byrow =}\NormalTok{ T)}
+\NormalTok{resultsMat <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(results, }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{resultsMat}
 \end{Highlighting}
 \end{Shaded}
@@ -14156,7 +14156,7 @@ values cannot be expressed meaningfully by numbers.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{results <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DecValTok{5}\OperatorTok{*}\DecValTok{6}\NormalTok{, }\DataTypeTok{size =} \DecValTok{1}\NormalTok{, }\DataTypeTok{prob=} \KeywordTok{rep}\NormalTok{(probCorrect, }\DecValTok{6}\NormalTok{))}
-\NormalTok{resultsMat <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(results, }\DataTypeTok{nrow =} \DecValTok{6}\NormalTok{, }\DataTypeTok{byrow =}\NormalTok{ T)}
+\NormalTok{resultsMat <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(results, }\DataTypeTok{nrow =} \DecValTok{6}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{resultsMat}
 \end{Highlighting}
 \end{Shaded}
@@ -15213,7 +15213,7 @@ any sort of R-object.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{vec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\OtherTok{NA}\NormalTok{)}
-\NormalTok{myStats <-}\StringTok{ }\KeywordTok{goodStats}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ vec, }\DataTypeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{myStats <-}\StringTok{ }\KeywordTok{goodStats}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ vec, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{myStats}\OperatorTok{$}\NormalTok{mean}
 \end{Highlighting}
 \end{Shaded}
@@ -18889,7 +18889,7 @@ material out of \texttt{oz}:
 \begin{Highlighting}[]
 \CommentTok{# a helper function}
 \NormalTok{findIndex <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(pattern, text) \{}
-\NormalTok{  inText <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ pattern, }\DataTypeTok{x =}\NormalTok{ text, }\DataTypeTok{perl =}\NormalTok{ T)}
+\NormalTok{  inText <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ pattern, }\DataTypeTok{x =}\NormalTok{ text, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
   \KeywordTok{which}\NormalTok{(inText)}
 \NormalTok{\}}
 
@@ -18912,7 +18912,7 @@ try this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ozwds <-}\StringTok{ }\KeywordTok{unlist}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(oz2, }\DataTypeTok{split =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+"}\NormalTok{, }\DataTypeTok{perl =}\NormalTok{ T))}
+\NormalTok{ozwds <-}\StringTok{ }\KeywordTok{unlist}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(oz2, }\DataTypeTok{split =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+"}\NormalTok{, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -19010,7 +19010,7 @@ Let's go back and try the splitting again:
 \StringTok{                    |        # or }
 \StringTok{                    (}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+)   # one or more white-space}
 \StringTok{                   "}\NormalTok{, }
-           \DataTypeTok{perl =}\NormalTok{ T))}
+           \DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -19026,12 +19026,12 @@ character:
 \NormalTok{ozwds <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"^}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{p\{P\}+"}\NormalTok{,}
                 \DataTypeTok{replacement =} \StringTok{""}\NormalTok{,}
                 \DataTypeTok{x =}\NormalTok{ ozwds,}
-                \DataTypeTok{perl =}\NormalTok{ T)}
+                \DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
 \CommentTok{# then trailing:}
 \NormalTok{ozwds <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{p\{P\}+$"}\NormalTok{,}
                 \DataTypeTok{replacement =} \StringTok{""}\NormalTok{,}
                 \DataTypeTok{x =}\NormalTok{ ozwds,}
-                \DataTypeTok{perl =}\NormalTok{ T)}
+                \DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
 \CommentTok{# lowercase, remove duplicates, sort:}
 \NormalTok{ozWords <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(}\KeywordTok{unique}\NormalTok{(}\KeywordTok{tolower}\NormalTok{(ozwds)))}
 \end{Highlighting}
@@ -19046,7 +19046,7 @@ of some numbers and a spurious empty string:
 \begin{Highlighting}[]
 \NormalTok{isNumber <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d+"}\NormalTok{,}
                   \DataTypeTok{x =}\NormalTok{ ozWords,}
-                  \DataTypeTok{perl =}\NormalTok{ T)}
+                  \DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{isEmpty <-}\StringTok{ }\NormalTok{ozWords }\OperatorTok{==}\StringTok{ ""}
 \NormalTok{validWord <-}\StringTok{ }\OperatorTok{!}\NormalTok{isNumber }\OperatorTok{&}\StringTok{ }\OperatorTok{!}\NormalTok{isEmpty}
 \NormalTok{ozWords <-}\StringTok{ }\NormalTok{ozWords[validWord]}
@@ -19069,7 +19069,7 @@ function:
   \ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \KeywordTok{seq_len}\NormalTok{(}\KeywordTok{length}\NormalTok{(lexicon)) ) \{}
 \NormalTok{    word <-}\StringTok{ }\NormalTok{lexicon[i]}
 \NormalTok{    pattern <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"(?i)"}\NormalTok{, word)}
-\NormalTok{    hasWord <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ pattern, }\DataTypeTok{x =}\NormalTok{ fileLines, }\DataTypeTok{perl =}\NormalTok{ T)}
+\NormalTok{    hasWord <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ pattern, }\DataTypeTok{x =}\NormalTok{ fileLines, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{    index[[word]] <-}\StringTok{ }\KeywordTok{which}\NormalTok{(hasWord)}
 \NormalTok{  \}}
 \NormalTok{  index}
@@ -20167,7 +20167,7 @@ accomplishes this:
 \begin{Highlighting}[]
 \NormalTok{df <-}\StringTok{ }\NormalTok{tigerstats}\OperatorTok{::}\NormalTok{m111survey}
 \NormalTok{splitSpeeds <-}\StringTok{ }\KeywordTok{with}\NormalTok{(df, }\KeywordTok{split}\NormalTok{(fastest, }\DataTypeTok{f =}\NormalTok{ seat))}
-\NormalTok{means <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(splitSpeeds, }\DataTypeTok{FUN =}\NormalTok{ mean, }\DataTypeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{means <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(splitSpeeds, }\DataTypeTok{FUN =}\NormalTok{ mean, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{means}
 \end{Highlighting}
 \end{Shaded}
@@ -20184,7 +20184,7 @@ situations automatically.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{with}\NormalTok{(df, }\KeywordTok{tapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ fastest, }\DataTypeTok{INDEX =}\NormalTok{ seat, }\DataTypeTok{FUN =}\NormalTok{ mean, }\DataTypeTok{na.rm =}\NormalTok{ T))}
+\KeywordTok{with}\NormalTok{(df, }\KeywordTok{tapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ fastest, }\DataTypeTok{INDEX =}\NormalTok{ seat, }\DataTypeTok{FUN =}\NormalTok{ mean, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -20224,7 +20224,7 @@ best way to understand this is with an example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{with}\NormalTok{(df, }\KeywordTok{tapply}\NormalTok{(fastest, }\DataTypeTok{INDEX =} \KeywordTok{list}\NormalTok{(sex, seat), }\DataTypeTok{FUN =}\NormalTok{ mean, }\DataTypeTok{na.rm =}\NormalTok{ T))}
+\KeywordTok{with}\NormalTok{(df, }\KeywordTok{tapply}\NormalTok{(fastest, }\DataTypeTok{INDEX =} \KeywordTok{list}\NormalTok{(sex, seat), }\DataTypeTok{FUN =}\NormalTok{ mean, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21348,7 +21348,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x138b09bd8"
+## [1] "0x124283728"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21362,7 +21362,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x138b09bd8"
+## [1] "0x124283728"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21401,7 +21401,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x138b09bd8"
+## [1] "0x124283728"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21414,7 +21414,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fda2448"
+## [1] "0x106dc3208"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21432,7 +21432,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x138b09bd8"
+## [1] "0x124283728"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21476,7 +21476,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x102fbad50" "0x102fbad50"
+## [1] "0x110327aa0" "0x110327aa0"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21515,7 +21515,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x102fbad50" "0x102fbad50"
+## [1] "0x110327aa0" "0x110327aa0"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21557,7 +21557,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x102fbad50" "0x11da68f48"
+## [1] "0x110327aa0" "0x123b5e720"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
@@ -21733,7 +21733,7 @@ to have a favorite color:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Person}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\StringTok{"public"}\NormalTok{, }\StringTok{"color"}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{Person}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\StringTok{"public"}\NormalTok{, }\StringTok{"color"}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21764,11 +21764,11 @@ Person:
 ##   Portable: TRUE
 \end{verbatim}
 
-In the above call to set, the argument \texttt{overwrite\ =\ T} was not
-strictly necessary, since \texttt{color} did not previously exist as a
-member of Person. If you are developing a program, though, and you find
-yourself repeatedly running a piece of code that sets a new member for a
-class, it's useful to have overwriting turned on.
+In the above call to set, the argument \texttt{overwrite\ =\ TRUE} was
+not strictly necessary, since \texttt{color} did not previously exist as
+a member of Person. If you are developing a program, though, and you
+find yourself repeatedly running a piece of code that sets a new member
+for a class, it's useful to have overwriting turned on.
 
 While we are at it. let's write a special \texttt{set\_color()} method:
 
@@ -21777,7 +21777,7 @@ While we are at it. let's write a special \texttt{set\_color()} method:
 \NormalTok{Person}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\StringTok{"public"}\NormalTok{, }\StringTok{"set_color"}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(val) \{}
 \NormalTok{  self}\OperatorTok{$}\NormalTok{color <-}\StringTok{ }\NormalTok{val}
   \KeywordTok{cat}\NormalTok{(self}\OperatorTok{$}\NormalTok{name, }\StringTok{" has favorite color: "}\NormalTok{, val, }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
-\NormalTok{  \}, }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{  \}, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21848,8 +21848,8 @@ eaten.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Lion}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\StringTok{"public"}\NormalTok{, }\StringTok{"prey"}\NormalTok{, prey, }\DataTypeTok{overwrite =}\NormalTok{ T)}
-\NormalTok{Lion}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\StringTok{"public"}\NormalTok{, }\StringTok{"eaten"}\NormalTok{, }\KeywordTok{character}\NormalTok{(), }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{Lion}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\StringTok{"public"}\NormalTok{, }\StringTok{"prey"}\NormalTok{, prey, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{Lion}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\StringTok{"public"}\NormalTok{, }\StringTok{"eaten"}\NormalTok{, }\KeywordTok{character}\NormalTok{(), }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21867,7 +21867,7 @@ adding the method \texttt{eat()}:
 \NormalTok{  self}\OperatorTok{$}\NormalTok{eaten <-}\StringTok{ }\KeywordTok{c}\NormalTok{(self}\OperatorTok{$}\NormalTok{eaten, item}\OperatorTok{$}\NormalTok{animal)}
 \NormalTok{  self}\OperatorTok{$}\NormalTok{weight <-}\StringTok{ }\NormalTok{self}\OperatorTok{$}\NormalTok{weight }\OperatorTok{+}\StringTok{ }\NormalTok{item}\OperatorTok{$}\NormalTok{mass}
   \KeywordTok{return}\NormalTok{(}\KeywordTok{invisible}\NormalTok{(self))}
-\NormalTok{\}, }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{\}, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21896,7 +21896,7 @@ reason they monitor their weight obsessively. The new method
 \NormalTok{  \}}
   \KeywordTok{cat}\NormalTok{(}\StringTok{"I now weigh "}\NormalTok{, self}\OperatorTok{$}\NormalTok{weight, }\StringTok{" pounds.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
   \KeywordTok{return}\NormalTok{(}\KeywordTok{invisible}\NormalTok{(self))}
-\NormalTok{\}, }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{\}, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22131,7 +22131,7 @@ The motion of a whale is implemented in the code below for a
                 \ControlFlowTok{break}
 \NormalTok{              \}}
 \NormalTok{            \}}
-\NormalTok{          \}, }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{          \}, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22192,7 +22192,7 @@ is in the vicinity:
 \NormalTok{               \}}
 \NormalTok{             \}}
 \NormalTok{             foundOne}
-\NormalTok{           \}, }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{           \}, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22212,7 +22212,7 @@ A female whale also needs to be able to mate:
 \NormalTok{             babySex <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"female"}\NormalTok{, }\StringTok{"male"}\NormalTok{), }\DataTypeTok{size =} \DecValTok{1}\NormalTok{)}
 \NormalTok{             self}\OperatorTok{$}\NormalTok{timeToFertility <-}\StringTok{ }\NormalTok{self}\OperatorTok{$}\NormalTok{infertilityPeriod}
              \KeywordTok{return}\NormalTok{(babySex)}
-\NormalTok{           \}, }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{           \}, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22412,7 +22412,7 @@ code below:
 \NormalTok{            \} }\ControlFlowTok{else}\NormalTok{ \{}
 \NormalTok{              self}\OperatorTok{$}\NormalTok{females <-}\StringTok{ }\KeywordTok{list}\NormalTok{()}
 \NormalTok{            \}}
-\NormalTok{          \}, }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{          \}, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22453,7 +22453,7 @@ graphics system rather than \textbf{ggplot2}.
                  \DataTypeTok{ylab =} \StringTok{""}\NormalTok{, }\DataTypeTok{axes =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ color, }\DataTypeTok{cex =}\NormalTok{ size,}
                  \DataTypeTok{main =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"Population = "}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(df))))}
             \KeywordTok{box}\NormalTok{(}\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
-\NormalTok{          \}, }\DataTypeTok{overwrite =}\NormalTok{ T)}
+\NormalTok{          \}, }\DataTypeTok{overwrite =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

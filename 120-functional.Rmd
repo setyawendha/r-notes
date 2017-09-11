@@ -412,7 +412,7 @@ One possible numerical approach is to compare the *mean* fastest speeds of the t
 ```{r}
 df <- tigerstats::m111survey
 splitSpeeds <- with(df, split(fastest, f = seat))
-means <- sapply(splitSpeeds, FUN = mean, na.rm = T)
+means <- sapply(splitSpeeds, FUN = mean, na.rm = TRUE)
 means
 ```
 
@@ -421,7 +421,7 @@ Sure enough, the back-sitters have a much higher mean fastest speed!
 The `tapply()` function is designed to handle these splitting situations automatically.
 
 ```{r}
-with(df, tapply(X = fastest, INDEX = seat, FUN = mean, na.rm = T))
+with(df, tapply(X = fastest, INDEX = seat, FUN = mean, na.rm = TRUE))
 ```
 
 Here's how the interface to `tapply()` works:
@@ -434,7 +434,7 @@ Here's how the interface to `tapply()` works:
 As it stands, `tapply()` appears to save only a line or two of code-writing.  The real power of `tapply()`, however, lies in the `INDEX` parameter.  `INDEX` need not be a single vector:  it could be a *list* of factors, in which case `tapply()` will split up the elements of `X` into groups determined by all possible combinations of levels of the factors in `INDEX`.  The best way to understand this is with an example:
 
 ```{r}
-with(df, tapply(fastest, INDEX = list(sex, seat), FUN = mean, na.rm = T))
+with(df, tapply(fastest, INDEX = list(sex, seat), FUN = mean, na.rm = TRUE))
 ```
 
 `tapply()` has returned a matrix with named rows and columns.  (This resembles a table, hence the letter `t` in the name of the function.)  Each cell of the matrix contains the mean speed for the group of people specified by the row and column names.  From this "table" we can see that for each seating preference males tend to drive faster than females do, on average.
