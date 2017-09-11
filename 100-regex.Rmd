@@ -591,7 +591,7 @@ Let's look at an example.  Here is a function that, given a string,  will capita
 
 ```{r}
 capVowels <- function(str) {
-  gsub(pattern = "([aeiou])", replacement = "\\U\\1\\E", x = str, perl = T)
+  gsub(pattern = "([aeiou])", replacement = "\\U\\1\\E", x = str, perl = TRUE)
 }
 capVowels("Far and away the best!")
 ```
@@ -602,7 +602,7 @@ Here is another function that searches for repeated words and encloses each pair
 
 ```{r}
 starRepeats <- function(str) {
-  gsub(pattern = "(\\b(\\w+) \\2\\b)", replacement = "*\\1*", x = str, perl = T)
+  gsub(pattern = "(\\b(\\w+) \\2\\b)", replacement = "*\\1*", x = str, perl = TRUE)
 }
 starRepeats("I have a boo boo on my knee knee.")
 ```
@@ -647,7 +647,7 @@ sentences <- c("My name is Tom, Sir",
 If we would like to find the strings that contain a word beginning with capital T, we could proceed as follows:
 
 ```{r}
-grep(pattern = "\\bT\\w*\\b", x = sentences, perl = T)
+grep(pattern = "\\bT\\w*\\b", x = sentences, perl = TRUE)
 ```
 
 `grep()` returns a vector consisting of the indices of the vector `sentences` where the string contains at least one word beginning with "T".
@@ -655,13 +655,13 @@ grep(pattern = "\\bT\\w*\\b", x = sentences, perl = T)
 A related function is `grepl()`: \index{R-functions!grepl()@\texttt{grepl()}}
 
 ```{r}
-grepl(pattern = "\\bT\\w*\\b", x = sentences, perl = T)
+grepl(pattern = "\\bT\\w*\\b", x = sentences, perl = TRUE)
 ```
 
 `grepl()` returns a logical vector with `TRUE` where `sentences` has a capital-T word, `FALSE` otherwise.  We can get a look at the T-word-containing sentences themselves as follows:
 
 ```{r}
-hasTWord <- grepl(pattern = "\\bT\\w*\\b", x = sentences, perl = T)
+hasTWord <- grepl(pattern = "\\bT\\w*\\b", x = sentences, perl = TRUE)
 sentences[hasTWord]
 ```
 
@@ -672,7 +672,7 @@ If you require more information about the matches within each string you are pro
 We started our regular-expression journey with `gregexpr()`, but let's check in on it once more, this time looking for capital-T words in `sentences`:
 
 ```{r}
-matchInfo <- gregexpr(pattern = "\\bT\\w*\\b", text = sentences, perl = T)
+matchInfo <- gregexpr(pattern = "\\bT\\w*\\b", text = sentences, perl = TRUE)
 str(matchInfo)
 ```
 
@@ -879,29 +879,29 @@ knitr::include_graphics("images/thinking.png")
 findMister <- function(str) {
   #mister <- "((\\w+)\\b)(?<=Mr\\.\\b)"
   mister <- "(?<=Mister )\\w+\\b"
-  results <- gregexpr(pattern = mister, text = str, perl = T)
+  results <- gregexpr(pattern = mister, text = str, perl = TRUE)
   unlist(regmatches(x = str, m = results))
 }
 findMr <- function(str) {
   #mister <- "((\\w+)\\b)(?<=Mr\\.\\b)"
   mister <- "(?<=Mr\\. )\\w+\\b"
-  results <- gregexpr(pattern = mister, text = str, perl = T)
+  results <- gregexpr(pattern = mister, text = str, perl = TRUE)
   unlist(regmatches(x = str, m = results))
 }
 findTitled <- function(str) {
   pattern <- "(?<=Mr\\. |Mrs\\. |Ms\\. |Mister |Missus |Miss )\\w+\\b"
-  results <- gregexpr(pattern, text = str, perl = T)
+  results <- gregexpr(pattern, text = str, perl = TRUE)
   unlist(regmatches(x = str, m = results))
 }
 capRepeats <- function(str) {
   gsub(pattern = "(\\b(\\w+)\\s+\\2\\b)", replacement = "\\U\\1\\E", x = str, perl = T)
 }
 longWord <- function(strs) {
-  indices <- grep("\\b\\w{8,}\\b", strs, perl = T)
+  indices <- grep("\\b\\w{8,}\\b", strs, perl = TRUE)
   strs[indices]
 }
 longWord2 <- function(strs) {
-  results <- gregexpr("\\b\\w{8,}\\b", strs, perl = T)
+  results <- gregexpr("\\b\\w{8,}\\b", strs, perl = TRUE)
   regmatches(x = strs, m = results)
 }
 phoneNumber <- function(strs) {
@@ -912,7 +912,7 @@ phoneNumber <- function(strs) {
               \\1       # same separator as before
               \\d{4}    # four-digit extension
               "
-  grepl(pattern, strs, perl = T)
+  grepl(pattern, strs, perl = TRUE)
 }
 ```
 

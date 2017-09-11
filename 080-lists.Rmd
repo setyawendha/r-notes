@@ -157,10 +157,9 @@ Consider, for example, the drunken-turtle simulation from Section \@ref(drunken-
 ```{r eval = F}
 drunkenSim <- function(steps = 1000, reps = 10000, close = 0.5, 
                        seed = NULL, table = FALSE) {
-  if ( is.null(seed) ) {
-    seed <- Sys.time()
+  if ( !is.null(seed) ) {
+    set.seed(seed)
   }
-  set.seed(seed)
   
   returns <- numeric(reps)
   
@@ -202,10 +201,9 @@ The solution to your problem is to make a list of the three objects we want, and
 ```{r}
 drunkenSimList <- function(steps = 1000, reps = 10000, close = 0.5, 
                        seed = NULL, verbose = FALSE) {
-  if ( is.null(seed) ) {
-    seed <- Sys.time()
+  if ( !is.null(seed) ) {
+    set.seed(seed)
   }
-  set.seed(seed)
   
   # get the returns:
   returns <- numeric(reps)
@@ -420,10 +418,9 @@ Let's reconsider the Meetup Simulation from Section \@ref(simulation-connect):
 
 ```{r eval = F}
 meetupSim <- function(reps = 10000, table = FALSE, seed = NULL) {
-  if ( is.null(seed) ) {
-    seed <- as.numeric(Sys.time())
+  if ( !is.null(seed) ) {
+    set.seed(seed)
   }
-  set.seed(seed)
   anna <- runif(reps, 0, 60)
   raj <- runif(reps, 0, 60)
   connect <- (abs(anna - raj) < 10)
@@ -508,10 +505,9 @@ It appears to have worked very nicely!  Hence we may rewrite `meetupSim()` as fo
 
 ```{r}
 meetupSim <- function(reps = 10000, table = FALSE, seed = NULL) {
-  if ( is.null(seed) ) {
-    seed <- as.numeric(Sys.time())
+  if ( !is.null(seed) ) {
+    set.seed(seed)
   }
-  set.seed(seed)
   anna <- runif(reps, 0, 60)
   raj <- runif(reps, 0, 60)
   connect <- (abs(anna - raj) < 10)

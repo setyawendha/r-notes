@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-10">
+<meta name="date" content="2017-09-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -523,14 +523,14 @@ replaceFirst</code></pre></div>
 </ul>
 <p>Let’s look at an example. Here is a function that, given a string, will capitalize all of the vowels that it finds:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">capVowels &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
-  <span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;([aeiou])&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">U</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">E&quot;</span>, <span class="dt">x =</span> str, <span class="dt">perl =</span> T)
+  <span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;([aeiou])&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">U</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">E&quot;</span>, <span class="dt">x =</span> str, <span class="dt">perl =</span> <span class="ot">TRUE</span>)
 }
 <span class="kw">capVowels</span>(<span class="st">&quot;Far and away the best!&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;FAr And AwAy thE bEst!&quot;</code></pre>
 <p>Note that the pattern <code>[aeiou]</code> for vowels had to be enclosed in parentheses so that it could be captured and referred to by the back-reference <code>\1</code>. Also note that, since R converts the replacement string into a pattern, extra backslash escapes are required, just as in regular expressions.</p>
 <p>Here is another function that searches for repeated words and encloses each pair in asterisks:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starRepeats &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
-  <span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">b)&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;*</span><span class="ch">\\</span><span class="st">1*&quot;</span>, <span class="dt">x =</span> str, <span class="dt">perl =</span> T)
+  <span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">b)&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;*</span><span class="ch">\\</span><span class="st">1*&quot;</span>, <span class="dt">x =</span> str, <span class="dt">perl =</span> <span class="ot">TRUE</span>)
 }
 <span class="kw">starRepeats</span>(<span class="st">&quot;I have a boo boo on my knee knee.&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;I have a *boo boo* on my *knee knee*.&quot;</code></pre>
@@ -568,14 +568,14 @@ replaceFirst</code></pre></div>
                <span class="st">&quot;And I&#39;m Tulip!&quot;</span>,
                <span class="st">&quot;Whereas my name is Lester.&quot;</span>)</code></pre></div>
 <p>If we would like to find the strings that contain a word beginning with capital T, we could proceed as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">x =</span> sentences, <span class="dt">perl =</span> T)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">x =</span> sentences, <span class="dt">perl =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## [1] 1 2</code></pre>
 <p><code>grep()</code> returns a vector consisting of the indices of the vector <code>sentences</code> where the string contains at least one word beginning with “T”.</p>
 <p>A related function is <code>grepl()</code>: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">x =</span> sentences, <span class="dt">perl =</span> T)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">x =</span> sentences, <span class="dt">perl =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE</code></pre>
 <p><code>grepl()</code> returns a logical vector with <code>TRUE</code> where <code>sentences</code> has a capital-T word, <code>FALSE</code> otherwise. We can get a look at the T-word-containing sentences themselves as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hasTWord &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">x =</span> sentences, <span class="dt">perl =</span> T)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hasTWord &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">x =</span> sentences, <span class="dt">perl =</span> <span class="ot">TRUE</span>)
 sentences[hasTWord]</code></pre></div>
 <pre><code>## [1] &quot;My name is Tom, Sir&quot; &quot;And I&#39;m Tulip!&quot;</code></pre>
 </div>
@@ -583,7 +583,7 @@ sentences[hasTWord]</code></pre></div>
 <h3><span class="header-section-number">10.4.6</span> More Information with <code>gregexpr()</code></h3>
 <p>  If you require more information about the matches within each string you are processing, then you’ll want to use either <code>gregexpr() or</code>regexpr()`.</p>
 <p>We started our regular-expression journey with <code>gregexpr()</code>, but let’s check in on it once more, this time looking for capital-T words in <code>sentences</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">matchInfo &lt;-<span class="st"> </span><span class="kw">gregexpr</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">text =</span> sentences, <span class="dt">perl =</span> T)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">matchInfo &lt;-<span class="st"> </span><span class="kw">gregexpr</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">text =</span> sentences, <span class="dt">perl =</span> <span class="ot">TRUE</span>)
 <span class="kw">str</span>(matchInfo)</code></pre></div>
 <pre><code>## List of 3
 ##  $ : atomic [1:1] 12
