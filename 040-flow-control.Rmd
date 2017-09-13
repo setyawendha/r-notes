@@ -817,7 +817,7 @@ In order to get around this problem, we should impose a limit on the number of C
 
 ```{r}
 collatz <- function(n, limit = 10000) {
-  # collatz number swill go in this vector
+  # collatz numbers will go in this vector
   numbers <- numeric(limit)
   # keep count of how many numbers we have made:
   counter <- 0
@@ -929,15 +929,16 @@ collatz <- function(n, limit = 10000) {
     n <- collatzRule(n)
   }
   howMany <- min(counter, limit)
+  steps <- 1:howMany
   cat("The Collatz sequence has ", howMany, " elements.\n", sep = "")
   show <- readline("Do you want to see it (y/n)?  ")
   if ( show == "y" ) {
-    print(numbers[1:howMany])
+    print(numbers[steps])
   }
   # use initial value to make plot title:
   plotTitle <- paste0("Collatz Sequence for n = ", initial)
   # make the plot
-  p <- ggplot(mapping = aes(x = steps, y = number[1:howMany])) +
+  p <- ggplot(mapping = aes(x = steps, y = numbers[steps])) +
     geom_point() + geom_line() +
     labs( x = "Step", y = "Collatz Value at Step",
           title = plotTitle)

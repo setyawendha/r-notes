@@ -490,7 +490,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>In order to get around this problem, we should impose a limit on the number of Collatz numbers that we will compute. We’ll set the limit at 10,000. The user can change the limit, but should exercise caution in doing so. Also, we’ll initialize our <code>numbers</code> vector to have a length set to this limit. We can then assign values to elements of an <em>already existing</em> vector: this is much faster than copying entire vectors from scratch.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
-  <span class="co"># collatz number swill go in this vector</span>
+  <span class="co"># collatz numbers will go in this vector</span>
   numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)
   <span class="co"># keep count of how many numbers we have made:</span>
   counter &lt;-<span class="st"> </span><span class="dv">0</span>
@@ -581,15 +581,16 @@ Figure 4.4: A ggplot2 plot with point and line geoms.
     n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
   }
   howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)
+  steps &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>howMany
   <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)
   <span class="cf">if</span> ( show <span class="op">==</span><span class="st"> &quot;y&quot;</span> ) {
-    <span class="kw">print</span>(numbers[<span class="dv">1</span><span class="op">:</span>howMany])
+    <span class="kw">print</span>(numbers[steps])
   }
   <span class="co"># use initial value to make plot title:</span>
   plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Collatz Sequence for n = &quot;</span>, initial)
   <span class="co"># make the plot</span>
-  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> number[<span class="dv">1</span><span class="op">:</span>howMany])) <span class="op">+</span>
+  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> numbers[steps])) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Collatz Value at Step&quot;</span>,
           <span class="dt">title =</span> plotTitle)

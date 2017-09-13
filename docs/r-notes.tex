@@ -7630,7 +7630,7 @@ vectors from scratch.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{collatz <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, }\DataTypeTok{limit =} \DecValTok{10000}\NormalTok{) \{}
-  \CommentTok{# collatz number swill go in this vector}
+  \CommentTok{# collatz numbers will go in this vector}
 \NormalTok{  numbers <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(limit)}
   \CommentTok{# keep count of how many numbers we have made:}
 \NormalTok{  counter <-}\StringTok{ }\DecValTok{0}
@@ -7817,15 +7817,16 @@ looks like:
 \NormalTok{    n <-}\StringTok{ }\KeywordTok{collatzRule}\NormalTok{(n)}
 \NormalTok{  \}}
 \NormalTok{  howMany <-}\StringTok{ }\KeywordTok{min}\NormalTok{(counter, limit)}
+\NormalTok{  steps <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{howMany}
   \KeywordTok{cat}\NormalTok{(}\StringTok{"The Collatz sequence has "}\NormalTok{, howMany, }\StringTok{" elements.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
 \NormalTok{  show <-}\StringTok{ }\KeywordTok{readline}\NormalTok{(}\StringTok{"Do you want to see it (y/n)?  "}\NormalTok{)}
   \ControlFlowTok{if}\NormalTok{ ( show }\OperatorTok{==}\StringTok{ "y"}\NormalTok{ ) \{}
-    \KeywordTok{print}\NormalTok{(numbers[}\DecValTok{1}\OperatorTok{:}\NormalTok{howMany])}
+    \KeywordTok{print}\NormalTok{(numbers[steps])}
 \NormalTok{  \}}
   \CommentTok{# use initial value to make plot title:}
 \NormalTok{  plotTitle <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"Collatz Sequence for n = "}\NormalTok{, initial)}
   \CommentTok{# make the plot}
-\NormalTok{  p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ steps, }\DataTypeTok{y =}\NormalTok{ number[}\DecValTok{1}\OperatorTok{:}\NormalTok{howMany])) }\OperatorTok{+}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ steps, }\DataTypeTok{y =}\NormalTok{ numbers[steps])) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{( }\DataTypeTok{x =} \StringTok{"Step"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Collatz Value at Step"}\NormalTok{,}
           \DataTypeTok{title =}\NormalTok{ plotTitle)}
@@ -21349,7 +21350,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x133c07258"
+## [1] "0x10bc70c18"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21363,7 +21364,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x133c07258"
+## [1] "0x10bc70c18"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21402,7 +21403,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x133c07258"
+## [1] "0x10bc70c18"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21415,7 +21416,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x113755ff8"
+## [1] "0x1364b0148"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21433,7 +21434,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x133c07258"
+## [1] "0x10bc70c18"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21477,7 +21478,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1141faca8" "0x1141faca8"
+## [1] "0x124845d40" "0x124845d40"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21516,7 +21517,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1141faca8" "0x1141faca8"
+## [1] "0x124845d40" "0x124845d40"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21558,7 +21559,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1141faca8" "0x12cdc92a0"
+## [1] "0x124845d40" "0x11c4acbf0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
