@@ -5553,7 +5553,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10dc0c5c0>
+## <bytecode: 0x10f2bfcb0>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -6399,6 +6399,16 @@ code.\footnote{Actually you don't need the brackets if you plan to put
   only one expression in them. Many people keep the brackets, though,
   for the sake of clarity.}
 
+The general form of an \texttt{if} expression is as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ ( condition ) \{}
+\NormalTok{  ## code to run when the condition evaluates to TRUE}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
 The code above congratulates the a lucky guesser, but it has nothing at
 all to say to someone who did not guess correctly. The way to provide an
 alternative is through the addition of the \texttt{else}
@@ -6413,6 +6423,18 @@ reserved-word\index{if ... else@\texttt{if ... else}}:
 \NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
   \KeywordTok{cat}\NormalTok{(}\StringTok{"Sorry, the correct number was "}\NormalTok{, number, }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
   \KeywordTok{cat}\NormalTok{(}\StringTok{"Better luck next time!"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The general form of an \texttt{if-else} expression is as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ ( condition ) \{}
+  \CommentTok{# code to run if the condition evaluates to TRUE}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \CommentTok{# code to run if condition evaluates to FALSE}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -6432,6 +6454,25 @@ setting up a chain of alternative responses:
 \NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
   \KeywordTok{cat}\NormalTok{(}\StringTok{"You were way off.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
   \KeywordTok{cat}\NormalTok{(}\StringTok{"The correct number was "}\NormalTok{, number, }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+In general, a chain looks like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ ( condition1) \{}
+  \CommentTok{# code to run if condition1 evaluates to TRUE}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ ( condition2 ) \{}
+  \CommentTok{# code to run if condition2 evaluates to TRUE}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ ( condition3 ) \{}
+  \CommentTok{# code to run if condition2 evaluates to TRUE}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ ......}
+
+  \CommentTok{# and so on until}
+\ErrorTok{\}} \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ ( conditionN ) \{}
+  \CommentTok{# code to run if conditionN evaluates to TRUE}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -6859,10 +6900,7 @@ The general form of a loop is:
 \begin{Shaded}
 \begin{Highlighting}[]
 \ControlFlowTok{for}\NormalTok{ ( var }\ControlFlowTok{in}\NormalTok{ seq ) \{}
-\NormalTok{  expression}
-\NormalTok{  another expression}
-\NormalTok{  ...}
-\NormalTok{  final expression}
+  \CommentTok{# code involving var}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -6970,6 +7008,24 @@ abbreviation for the corresponding element of \texttt{weekdays}:
 \begin{verbatim}
 ## [1] "Sat" "Mon" "Fri" "Sat"
 \end{verbatim}
+
+You will often have reason to set up an empty vector of a definite
+length and use a loop to store information in it. The general format
+looks like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(someLength) }\CommentTok{# empty numerical vector}
+
+\ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{someLength ) \{}
+  \CommentTok{# computations involving i, and then:}
+\NormalTok{  results[i] <-}\StringTok{ }\NormalTok{some_result_depending_on_i}
+\NormalTok{\}}
+
+\CommentTok{# then do something with results, such as:}
+\KeywordTok{print}\NormalTok{(results)}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{For-Loop Caution}\label{for-loop-caution}
 
@@ -11295,17 +11351,34 @@ clear in the following example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{vec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\OperatorTok{-}\DecValTok{2}\NormalTok{)}
 \KeywordTok{cumsum}\NormalTok{(vec)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1 2 3 4 5
+## [1] 3 5 4 8 6
 \end{verbatim}
 
-Accordingly, we can get the \(x\)-coordinates of the first ten steps
-like this:
+Look at the table below.
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\texttt{vec} & cumulative sum & \texttt{cumsum(vec)}\tabularnewline
+\midrule
+\endhead
+3 & 3 & 3\tabularnewline
+2 & \(3+2\) & 5\tabularnewline
+-1 & \(3+2+-1\) & 4\tabularnewline
+4 & \(3+2+-1+4\) & 8\tabularnewline
+-2 & \(3+2+-1+4+-2\) & 6\tabularnewline
+\bottomrule
+\end{longtable}
+
+See how it works?
+
+Returning to \texttt{xSteps}, we see that we can get the
+\(x\)-coordinates of the first ten steps like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -21350,7 +21423,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10bc70c18"
+## [1] "0x1368916f8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21364,7 +21437,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10bc70c18"
+## [1] "0x1368916f8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21403,7 +21476,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10bc70c18"
+## [1] "0x1368916f8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21416,7 +21489,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1364b0148"
+## [1] "0x137c5af58"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21434,7 +21507,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10bc70c18"
+## [1] "0x1368916f8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21478,7 +21551,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x124845d40" "0x124845d40"
+## [1] "0x136150a00" "0x136150a00"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21517,7 +21590,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x124845d40" "0x124845d40"
+## [1] "0x136150a00" "0x136150a00"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21559,7 +21632,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x124845d40" "0x11c4acbf0"
+## [1] "0x136150a00" "0x11fd17260"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

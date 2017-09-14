@@ -444,10 +444,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The more you need to repeat a particular pattern, the more it makes sense to write your code with a loop.</p>
 <p>The general form of a loop is:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> ( var <span class="cf">in</span> seq ) {
-  expression
-  another expression
-  ...
-  final expression
+  <span class="co"># code involving var</span>
 }</code></pre></div>
 <p><code>var</code> is the index variable, and it can be any permitted name for a variable, and <code>seq</code> can be any vector. As R traverses the loop, the value of the index variable <code>var</code> becomes each element of the vector <code>seq</code> in turn. With every change in the value of <code>var</code>, the code in the brackets is executed.</p>
 <p>To <em>iterate</em> is to do a thing again and again. The vector <code>seq</code> is sometimes called an <em>iterable</em>, since it is “iterated over.” It contains the values that the index variable will assume, one by one, as the loop is repeated. </p>
@@ -483,6 +480,16 @@ abbrDays &lt;-<span class="st"> </span><span class="kw">character</span>(<span c
 <p>Now each of the four elements of <code>abbrDays</code> contains the abbreviation for the corresponding element of <code>weekdays</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">abbrDays</code></pre></div>
 <pre><code>## [1] &quot;Sat&quot; &quot;Mon&quot; &quot;Fri&quot; &quot;Sat&quot;</code></pre>
+<p>You will often have reason to set up an empty vector of a definite length and use a loop to store information in it. The general format looks like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw">numeric</span>(someLength) <span class="co"># empty numerical vector</span>
+
+<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>someLength ) {
+  <span class="co"># computations involving i, and then:</span>
+  results[i] &lt;-<span class="st"> </span>some_result_depending_on_i
+}
+
+<span class="co"># then do something with results, such as:</span>
+<span class="kw">print</span>(results)</code></pre></div>
 </div>
 <div id="for-loop-caution" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> For-Loop Caution</h3>

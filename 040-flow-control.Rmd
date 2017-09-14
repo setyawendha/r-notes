@@ -73,6 +73,15 @@ The `sample()` \index{R-functions!sample()@\texttt{sample()}}function randomly p
 
 Flow control enters the picture with the reserved word `if`\index{if@\texttt{if}}.  Immediately after `if` is a Boolean expression enclosed in parentheses.  This expression is often called the *condition*.  \index{condition}If the condition evaluates to `TRUE`, then the body of the `if` statement---the code enclosed in the brackets---will be executed.  On the other hand if the condition evaluates to `FALSE`, then R skips past the bracketed code.^[Actually you don't need the brackets if you plan to put only one expression in them.  Many people keep the brackets, though, for the sake of clarity.]
 
+The general form of an `if` expression is as follows:
+
+```{r eval = FALSE}
+if ( condition ) {
+  ## code to run when the condition evaluates to TRUE
+}
+```
+
+
 The code above congratulates the a lucky guesser, but it has nothing at all to say to someone who did not guess correctly.  The way to provide an alternative is through the addition of the `else` reserved-word\index{if ... else@\texttt{if ... else}}:
 
 ```{r eval = F}
@@ -85,6 +94,17 @@ if ( guess == number ) {
   cat("Better luck next time!")
 }
 ```
+
+The general form of an `if-else` expression is as follows:
+
+```{r eval = FALSE}
+if ( condition ) {
+  # code to run if the condition evaluates to TRUE
+} else {
+  # code to run if condition evaluates to FALSE
+}
+```
+
 
 An `if-else`can be followed by any number of `if-else`'s, setting up a chain of alternative responses:
 
@@ -101,6 +121,24 @@ if ( guess == number ) {
   cat("The correct number was ", number, ".\n", sep = "")
 }
 ```
+
+In general, a chain looks like this:
+
+```{r eval = FALSE}
+if ( condition1) {
+  # code to run if condition1 evaluates to TRUE
+} else if ( condition2 ) {
+  # code to run if condition2 evaluates to TRUE
+} else if ( condition3 ) {
+  # code to run if condition2 evaluates to TRUE
+} else if ......
+
+  # and so on until
+} else if ( conditionN ) {
+  # code to run if conditionN evaluates to TRUE
+}
+```
+
 
 ### Application:  Invisible Returns  {#invisible-returns}
 
@@ -350,10 +388,7 @@ The general form of a loop is:
 
 ```{r eval = F}
 for ( var in seq ) {
-  expression
-  another expression
-  ...
-  final expression
+  # code involving var
 }
 ```
 
@@ -407,6 +442,21 @@ Now each of the four elements of `abbrDays` contains the abbreviation for the co
 ```{r}
 abbrDays
 ```
+
+You will often have reason to set up an empty vector of a definite length and use a loop to store information in it.  The general format looks like this:
+
+```{r eval = FALSE}
+results <- numeric(someLength) # empty numerical vector
+
+for ( i in 1:someLength ) {
+  # computations involving i, and then:
+  results[i] <- some_result_depending_on_i
+}
+
+# then do something with results, such as:
+print(results)
+```
+
 
 ### For-Loop Caution
 
@@ -1072,7 +1122,7 @@ madhavaGraph <- function(n = 10) {
   plotTitle <- paste0("The first ", n, " Madhava approximations to pi.")
   p <- ggplot(mapping = aes(x = 1:n, y = approx)) +
     geom_point() + geom_line() +
-    labs( x = "k", y = "Approximation using first k terms",
+    labs( x = "m", y = "Sum of first m terms",
           title = plotTitle)
   print(p)
 }

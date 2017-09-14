@@ -1068,10 +1068,23 @@ sum(xSteps)
 We need the $x$-coordinates after all of the previous steps, as well.  This can be accomplished by R's `cumsum()` function. \index{R-functions!cumsum()@\texttt{cumsum()}} You may think of `cumsum` as short for "cumulative sum".  Given a vector `vec` of numbers, `cumsum(vec)` returns a vector of the same length, where for every index `i`, `cumsum(vec)[i]` is `sum(vec[1:i])`.   This is made clear in the following example:
 
 ```{r}
-vec <- c(1, 1, 1, 1, 1)
+vec <- c(3, 2, -1, 4, -2)
 cumsum(vec)
 ```
-Accordingly, we can get the $x$-coordinates of the first ten steps like this:
+
+Look at the table below.
+
+`vec`                 cumulative sum        `cumsum(vec)`
+--------------        ---------------       --------
+3                     3                     3
+2                     $3+2$                 5
+-1                    $3+2+-1$              4
+4                     $3+2+-1+4$            8
+-2                    $3+2+-1+4+-2$         6
+
+See how it works?
+
+Returning to `xSteps`, we see that we can get the $x$-coordinates of the first ten steps like this:
 
 ```{r}
 x <- cumsum(xSteps)

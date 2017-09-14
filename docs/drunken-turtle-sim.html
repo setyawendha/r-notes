@@ -466,10 +466,48 @@ ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</code></
 <pre><code>## [1] -1.370258</code></pre>
 <p>(Apparently some of the cosines were negative, meaning that some of the turning angles were between 90 and 270 degrees.)</p>
 <p>We need the <span class="math inline">\(x\)</span>-coordinates after all of the previous steps, as well. This can be accomplished by R’s <code>cumsum()</code> function.  You may think of <code>cumsum</code> as short for “cumulative sum”. Given a vector <code>vec</code> of numbers, <code>cumsum(vec)</code> returns a vector of the same length, where for every index <code>i</code>, <code>cumsum(vec)[i]</code> is <code>sum(vec[1:i])</code>. This is made clear in the following example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">2</span>)
 <span class="kw">cumsum</span>(vec)</code></pre></div>
-<pre><code>## [1] 1 2 3 4 5</code></pre>
-<p>Accordingly, we can get the <span class="math inline">\(x\)</span>-coordinates of the first ten steps like this:</p>
+<pre><code>## [1] 3 5 4 8 6</code></pre>
+<p>Look at the table below.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><code>vec</code></th>
+<th align="left">cumulative sum</th>
+<th><code>cumsum(vec)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">3</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left"><span class="math inline">\(3+2\)</span></td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td align="left">-1</td>
+<td align="left"><span class="math inline">\(3+2+-1\)</span></td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left"><span class="math inline">\(3+2+-1+4\)</span></td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td align="left">-2</td>
+<td align="left"><span class="math inline">\(3+2+-1+4+-2\)</span></td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<p>See how it works?</p>
+<p>Returning to <code>xSteps</code>, we see that we can get the <span class="math inline">\(x\)</span>-coordinates of the first ten steps like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
 x</code></pre></div>
 <pre><code>##  [1] -0.6034165 -1.3905805 -2.1259607 -3.1154380 -2.4593130 -1.5476110
