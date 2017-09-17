@@ -518,11 +518,18 @@ In R an *environment* is a particular kind of data structure that helps the comp
 
 R has a considerable number of environments---and environments can be created and destroyed throughout the course of an R session---but at any moment only one of them is *active*.  The *active environment* is \index{active environment}the first environment that R will examine when it needs to look up a name in an expression.
 
-The most familiar environment is the *Global Environment*---\index{global environment}the one that is active when you are using R from the console.  The names in the Global Environment, along with descriptions of the objects to which they refer, are shown in the **Environment** panel in the R Studio IDE.  Alternatively, you see the names in the Global Environment by using the `ls()`\index{R-functions!ls()@\texttt{ls()}} function:
+The most familiar environment is the *Global Environment*---\index{global environment}the one that is active when you are using R from the console.  The names in the Global Environment, along with descriptions of the objects to which they refer, are shown in the **Environment** panel in the R Studio IDE.  Alternatively, you see the names in the active environment by using the `ls()`\index{R-functions!ls()@\texttt{ls()}} function:
 
-```{r eval = F}
+```{r eval = FALSE}
 ls()
 ```
+
+Even better is `ls.str()`, which will give the name of each object along with a summary of what sort of object it is.
+
+```{r eval = FALSE}
+ls.str()
+```
+
 
 You can remove all of the names from your Global Environment by pressing the Broom icon in the IDE, or by using the `rm()`function:\index{R-functions!rm()@\texttt{rm()}}
 
@@ -530,7 +537,9 @@ You can remove all of the names from your Global Environment by pressing the Bro
 rm(list = ls())
 ```
 
-As we mentioned previously, the Global Environment only one of many environments that exist in R.  The `search()` function\index{R-functions!search()@\texttt{search()}} will show you a number of other environments:
+
+
+As we mentioned previously, the Global Environment is only one of many environments that exist in R.  The `search()` function\index{R-functions!search()@\texttt{search()}} will show you a number of other environments:
 
 ```{r}
 search()
@@ -830,7 +839,7 @@ Let's make sure of this with an example.
 a <- 5
 f <- function() {
   a <- 10
-  cat("In the run-time environment, a exists and has value: ", a, ".", sep = "")
+  print(ls.str()) # print out the active environment
 }
 f()
 ```

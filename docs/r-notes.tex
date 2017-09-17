@@ -5404,12 +5404,21 @@ Environment}---\index{global environment}the one that is active when you
 are using R from the console. The names in the Global Environment, along
 with descriptions of the objects to which they refer, are shown in the
 \textbf{Environment} panel in the R Studio IDE. Alternatively, you see
-the names in the Global Environment by using the
+the names in the active environment by using the
 \texttt{ls()}\index{R-functions!ls()@\texttt{ls()}} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ls}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Even better is \texttt{ls.str()}, which will give the name of each
+object along with a summary of what sort of object it is.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ls.str}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5423,7 +5432,7 @@ the Broom icon in the IDE, or by using the
 \end{Highlighting}
 \end{Shaded}
 
-As we mentioned previously, the Global Environment only one of many
+As we mentioned previously, the Global Environment is only one of many
 environments that exist in R. The \texttt{search()}
 function\index{R-functions!search()@\texttt{search()}} will show you a
 number of other environments:
@@ -6071,14 +6080,14 @@ Let's make sure of this with an example.
 \NormalTok{a <-}\StringTok{ }\DecValTok{5}
 \NormalTok{f <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
 \NormalTok{  a <-}\StringTok{ }\DecValTok{10}
-  \KeywordTok{cat}\NormalTok{(}\StringTok{"In the run-time environment, a exists and has value: "}\NormalTok{, a, }\StringTok{"."}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+  \KeywordTok{print}\NormalTok{(}\KeywordTok{ls.str}\NormalTok{()) }\CommentTok{# print out the active environment}
 \NormalTok{\}}
 \KeywordTok{f}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## In the run-time environment, a exists and has value: 10.
+## a :  num 10
 \end{verbatim}
 
 Did calling \texttt{f()} change the value of \texttt{a} in the Global
@@ -21643,7 +21652,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fea2e68"
+## [1] "0x11e468ad8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21657,7 +21666,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fea2e68"
+## [1] "0x11e468ad8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21696,7 +21705,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fea2e68"
+## [1] "0x11e468ad8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21709,7 +21718,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x111ee3788"
+## [1] "0x11a63ca68"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21727,7 +21736,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fea2e68"
+## [1] "0x11e468ad8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21771,7 +21780,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13aaca988" "0x13aaca988"
+## [1] "0x114552d40" "0x114552d40"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21810,7 +21819,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13aaca988" "0x13aaca988"
+## [1] "0x114552d40" "0x114552d40"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21852,7 +21861,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13aaca988" "0x11fb0ec00"
+## [1] "0x114552d40" "0x12bcf9208"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
