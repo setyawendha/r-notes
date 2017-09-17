@@ -653,6 +653,125 @@ rm(cat)
 
 The vector `cat` is removed as well by the previous command.
 
+### A Note on Parameters vs. Arguments
+
+
+
+It's important to keep in mind the distinction between a *parameter* of a function on the one hand and, on the other hand the *argument* that gets supplied to that parameter.
+
+When you are just starting out in R programming, this distinction can be difficult to remember, especially when the parameter and the argument have the *same name*.  Now that we understand environments, though, we can get a grip on this tricky situation.
+
+Let's proceed by way of an example.
+
+First of all, clear out your Global Environment:
+
+```{r}
+rm(list = ls())
+```
+
+Next, re-make the `manyCat()` function, but to make it a bit more interesting, give the parameter `n` a default value of 3.
+
+
+```{r}
+manyCat <- function(word, n = 3) {
+  wordWithNewline <- paste(word, "\n", sep = "")
+  lines <- rep(wordWithNewline, times = n)
+  cat(lines, sep = "")
+}
+```
+
+Next, bind the name `n` to the value 2:
+
+```{r}
+n <- 2
+```
+
+You should now have two items in your Global Environment.  Confirm this:
+
+```{r}
+ls.str()
+```
+
+Now call the function as follows:
+
+```{r}
+manyCat(word = "Hello!", n = 4)
+```
+
+Let's recall how this works:
+
+* R sees that you want to assign the value `"Hello!"` to the parameter `word`.
+* R sees that you want assign the value 4 to the parameter `n`.
+* "Great!", says R.  "I've got everything I need to run this function."
+* R executes the code in the body of the function.
+
+
+Now call the function as follows:
+
+```{r}
+manyCat(word = "Hello!")
+```
+
+Let's recall how this works:
+
+* R sees that you want to assign the value `"Hello!"` to the parameter `word`.
+* R sees that you did not assign anything to the parameter `n`.
+* "That's OK", says R. "I'll use the default value of 3 for `n`."
+* R executes the code in the body of the function.
+
+Next, call the function as follows:
+
+```{r}
+manyCat(word = "Hello!", n = n)
+```
+
+Let's think about how this works:
+
+* R sees that you want to assign the value `"Hello!"` to the parameter `word`.
+* R sees that you want to assign something to the parameter `n`.  Apparently it is the value of a name `n` in some environment.
+* "Fine", says R. "I'll make sure that I can find this `n` thingie before I run the function."
+* R goes along the search path, finding `n` at once in the Global Environment.
+* "Great!", says R.  "Now I know to assign 2 to the parameter `n`"
+* R then executes the code in the body of the function.
+
+Now call the function as follows:
+
+```{r}
+manyCat(word = "Hello!", n)
+```
+
+Again let's consider how this works:
+
+* R sees that you want to assign the value `"Hello!"` to the parameter `word`.
+* R sees the `n`.  Since `word` is already assigned, R figures that you mean to assign the value of `n` (in some environment) to the parameter `n`.
+* "Fine", says R. "I'll make sure that I can find this `n` thingie before I run the function."
+* R goes along the search path, finding `n` at once in the Global Environment.
+* "Great!", says R.  "Now I know to assign 2 to the parameter `n`"
+* R then executes the code in the body of the function.
+
+Now let's remove `n` from the Global Environment:
+
+
+```{r}
+rm(n)
+```
+
+Now call the function again, in the following way:
+
+
+```{r eval = FALSE}
+manyCat(word = "Hello!", n = n)
+```
+
+```
+Error in manyCat(word = "Hello!", n = n) : object 'n' not found
+```
+
+Can you see why we got an error?  This time when R goes looking for `n`, it can't find it:  `n` is no longer in the Global Environment, nor is it anywhere else along the search path.  Accordingly R throws the error.
+
+The call `manyCat(word = "Hello!", n)` will elicit the same error message, for the same reason.
+
+The moral of the story is that parameters really, really are NOT the same thing as arguments, even when they are called by the same name.
 
 ### Function Environments
 

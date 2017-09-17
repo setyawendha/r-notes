@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-09-13}
+  \date{2017-09-16}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5553,7 +5553,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10f2bfcb0>
+## <bytecode: 0x10c56a1c8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -5702,6 +5702,227 @@ But we don't like our \texttt{cat()} so very much: let's remove it:
 \end{Shaded}
 
 The vector \texttt{cat} is removed as well by the previous command.
+
+\subsection{A Note on Parameters
+vs.~Arguments}\label{a-note-on-parameters-vs.arguments}
+
+It's important to keep in mind the distinction between a
+\emph{parameter} of a function on the one hand and, on the other hand
+the \emph{argument} that gets supplied to that parameter.
+
+When you are just starting out in R programming, this distinction can be
+difficult to remember, especially when the parameter and the argument
+have the \emph{same name}. Now that we understand environments, though,
+we can get a grip on this tricky situation.
+
+Let's proceed by way of an example.
+
+First of all, clear out your Global Environment:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list =} \KeywordTok{ls}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+Next, re-make the \texttt{manyCat()} function, but to make it a bit more
+interesting, give the parameter \texttt{n} a default value of 3.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{manyCat <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(word, }\DataTypeTok{n =} \DecValTok{3}\NormalTok{) \{}
+\NormalTok{  wordWithNewline <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(word, }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  lines <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(wordWithNewline, }\DataTypeTok{times =}\NormalTok{ n)}
+  \KeywordTok{cat}\NormalTok{(lines, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Next, bind the name \texttt{n} to the value 2:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n <-}\StringTok{ }\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+You should now have two items in your Global Environment. Confirm this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ls.str}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## manyCat : function (word, n = 3)  
+## n :  num 2
+\end{verbatim}
+
+Now call the function as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{manyCat}\NormalTok{(}\DataTypeTok{word =} \StringTok{"Hello!"}\NormalTok{, }\DataTypeTok{n =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Hello!
+## Hello!
+## Hello!
+## Hello!
+\end{verbatim}
+
+Let's recall how this works:
+
+\begin{itemize}
+\tightlist
+\item
+  R sees that you want to assign the value \texttt{"Hello!"} to the
+  parameter \texttt{word}.
+\item
+  R sees that you want assign the value 4 to the parameter \texttt{n}.
+\item
+  ``Great!'', says R. ``I've got everything I need to run this
+  function.''
+\item
+  R executes the code in the body of the function.
+\end{itemize}
+
+Now call the function as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{manyCat}\NormalTok{(}\DataTypeTok{word =} \StringTok{"Hello!"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Hello!
+## Hello!
+## Hello!
+\end{verbatim}
+
+Let's recall how this works:
+
+\begin{itemize}
+\tightlist
+\item
+  R sees that you want to assign the value \texttt{"Hello!"} to the
+  parameter \texttt{word}.
+\item
+  R sees that you did not assign anything to the parameter \texttt{n}.
+\item
+  ``That's OK'', says R. ``I'll use the default value of 3 for
+  \texttt{n}.''
+\item
+  R executes the code in the body of the function.
+\end{itemize}
+
+Next, call the function as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{manyCat}\NormalTok{(}\DataTypeTok{word =} \StringTok{"Hello!"}\NormalTok{, }\DataTypeTok{n =}\NormalTok{ n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Hello!
+## Hello!
+\end{verbatim}
+
+Let's think about how this works:
+
+\begin{itemize}
+\tightlist
+\item
+  R sees that you want to assign the value \texttt{"Hello!"} to the
+  parameter \texttt{word}.
+\item
+  R sees that you want to assign something to the parameter \texttt{n}.
+  Apparently it is the value of a name \texttt{n} in some environment.
+\item
+  ``Fine'', says R. ``I'll make sure that I can find this \texttt{n}
+  thingie before I run the function.''
+\item
+  R goes along the search path, finding \texttt{n} at once in the Global
+  Environment.
+\item
+  ``Great!'', says R. ``Now I know to assign 2 to the parameter
+  \texttt{n}''
+\item
+  R then executes the code in the body of the function.
+\end{itemize}
+
+Now call the function as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{manyCat}\NormalTok{(}\DataTypeTok{word =} \StringTok{"Hello!"}\NormalTok{, n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Hello!
+## Hello!
+\end{verbatim}
+
+Again let's consider how this works:
+
+\begin{itemize}
+\tightlist
+\item
+  R sees that you want to assign the value \texttt{"Hello!"} to the
+  parameter \texttt{word}.
+\item
+  R sees the \texttt{n}. Since \texttt{word} is already assigned, R
+  figures that you mean to assign the value of \texttt{n} (in some
+  environment) to the parameter \texttt{n}.
+\item
+  ``Fine'', says R. ``I'll make sure that I can find this \texttt{n}
+  thingie before I run the function.''
+\item
+  R goes along the search path, finding \texttt{n} at once in the Global
+  Environment.
+\item
+  ``Great!'', says R. ``Now I know to assign 2 to the parameter
+  \texttt{n}''
+\item
+  R then executes the code in the body of the function.
+\end{itemize}
+
+Now let's remove \texttt{n} from the Global Environment:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(n)}
+\end{Highlighting}
+\end{Shaded}
+
+Now call the function again, in the following way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{manyCat}\NormalTok{(}\DataTypeTok{word =} \StringTok{"Hello!"}\NormalTok{, }\DataTypeTok{n =}\NormalTok{ n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Error in manyCat(word = "Hello!", n = n) : object 'n' not found
+\end{verbatim}
+
+Can you see why we got an error? This time when R goes looking for
+\texttt{n}, it can't find it: \texttt{n} is no longer in the Global
+Environment, nor is it anywhere else along the search path. Accordingly
+R throws the error.
+
+The call \texttt{manyCat(word\ =\ "Hello!",\ n)} will elicit the same
+error message, for the same reason.
+
+The moral of the story is that parameters really, really are NOT the
+same thing as arguments, even when they are called by the same name.
 
 \subsection{Function Environments}\label{function-environments}
 
@@ -11787,8 +12008,8 @@ two extra attributes, via the \texttt{matrix()} function.
 Of course if you are making a matrix out of 24 numbers and you know that
 it's going to have 6 rows, then you know it must have 4 columns.
 Similarly, if you know the number of columns then the number of rows is
-determined. Hence you could have just as well constructed the matrix
-with just one of the row or column arguments, like this:
+determined. Hence you could have constructed the matrix with just one of
+the row or column arguments, like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -12274,7 +12495,7 @@ division by 2 is equal to 1:
 ## [6,] FALSE FALSE FALSE FALSE
 \end{verbatim}
 
-We can select elements from a matrix using a Boolean operators, too:
+We can select elements from a matrix using a Boolean operator, too:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13833,12 +14054,11 @@ To begin with, look at all of the variables available in the data frame
 \end{Shaded}
 
 \begin{verbatim}
-## 'data.frame':    365 obs. of  5 variables:
+## 'data.frame':    365 obs. of  4 variables:
 ##  $ date     : POSIXct, format: "1978-01-01" "1978-01-02" ...
 ##  $ births   : int  7701 7527 8825 8859 9043 9208 8084 7611 9172 9089 ...
 ##  $ dayofyear: int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ wday     : Ord.factor w/ 7 levels "Sun"<"Mon"<"Tues"<..: 1 2 3 4 5 6 7 1 2 3 ...
-##  $ weekend  : chr  "weekend" "weekday" "weekday" "weekday" ...
 \end{verbatim}
 
 We see that the variable \texttt{wday} gives the name of the day of the
@@ -21423,7 +21643,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1368916f8"
+## [1] "0x11fea2e68"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21437,7 +21657,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1368916f8"
+## [1] "0x11fea2e68"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21476,7 +21696,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1368916f8"
+## [1] "0x11fea2e68"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21489,7 +21709,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137c5af58"
+## [1] "0x111ee3788"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21507,7 +21727,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1368916f8"
+## [1] "0x11fea2e68"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21551,7 +21771,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x136150a00" "0x136150a00"
+## [1] "0x13aaca988" "0x13aaca988"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21590,7 +21810,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x136150a00" "0x136150a00"
+## [1] "0x13aaca988" "0x13aaca988"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21632,7 +21852,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x136150a00" "0x11fd17260"
+## [1] "0x13aaca988" "0x11fb0ec00"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

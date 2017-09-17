@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-13">
+<meta name="date" content="2017-09-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -178,7 +178,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.5</b> Environments and Scope</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="environments-and-scope.html"><a href="environments-and-scope.html#environments-and-searching"><i class="fa fa-check"></i><b>3.5.1</b> Environments and Searching</a></li>
-<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.2</b> Function Environments</a></li>
+<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#a-note-on-parameters-vs.arguments"><i class="fa fa-check"></i><b>3.5.2</b> A Note on Parameters vs. Arguments</a></li>
+<li class="chapter" data-level="3.5.3" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.3</b> Function Environments</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="note-on-packages.html"><a href="note-on-packages.html"><i class="fa fa-check"></i><b>3.6</b> A Note on Packages</a><ul>
 <li class="chapter" data-level="3.6.1" data-path="note-on-packages.html"><a href="note-on-packages.html#installed-packages"><i class="fa fa-check"></i><b>3.6.1</b> Installed Packages</a></li>
@@ -472,7 +473,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## &lt;bytecode: 0x10f2bfcb0&gt;
+## &lt;bytecode: 0x10c56a1c8&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>I got the definition of the <code>cat()</code> function, all the way up in package <strong>base</strong>.</p>
 <p>Now try:</p>
@@ -514,8 +515,87 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(cat)</code></pre></div>
 <p>The vector <code>cat</code> is removed as well by the previous command.</p>
 </div>
+<div id="a-note-on-parameters-vs.arguments" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> A Note on Parameters vs. Arguments</h3>
+<p>It’s important to keep in mind the distinction between a <em>parameter</em> of a function on the one hand and, on the other hand the <em>argument</em> that gets supplied to that parameter.</p>
+<p>When you are just starting out in R programming, this distinction can be difficult to remember, especially when the parameter and the argument have the <em>same name</em>. Now that we understand environments, though, we can get a grip on this tricky situation.</p>
+<p>Let’s proceed by way of an example.</p>
+<p>First of all, clear out your Global Environment:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Next, re-make the <code>manyCat()</code> function, but to make it a bit more interesting, give the parameter <code>n</code> a default value of 3.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, <span class="dt">n =</span> <span class="dv">3</span>) {
+  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)
+  <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}</code></pre></div>
+<p>Next, bind the name <code>n</code> to the value 2:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">2</span></code></pre></div>
+<p>You should now have two items in your Global Environment. Confirm this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls.str</span>()</code></pre></div>
+<pre><code>## manyCat : function (word, n = 3)  
+## n :  num 2</code></pre>
+<p>Now call the function as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello!&quot;</span>, <span class="dt">n =</span> <span class="dv">4</span>)</code></pre></div>
+<pre><code>## Hello!
+## Hello!
+## Hello!
+## Hello!</code></pre>
+<p>Let’s recall how this works:</p>
+<ul>
+<li>R sees that you want to assign the value <code>&quot;Hello!&quot;</code> to the parameter <code>word</code>.</li>
+<li>R sees that you want assign the value 4 to the parameter <code>n</code>.</li>
+<li>“Great!”, says R. “I’ve got everything I need to run this function.”</li>
+<li>R executes the code in the body of the function.</li>
+</ul>
+<p>Now call the function as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello!&quot;</span>)</code></pre></div>
+<pre><code>## Hello!
+## Hello!
+## Hello!</code></pre>
+<p>Let’s recall how this works:</p>
+<ul>
+<li>R sees that you want to assign the value <code>&quot;Hello!&quot;</code> to the parameter <code>word</code>.</li>
+<li>R sees that you did not assign anything to the parameter <code>n</code>.</li>
+<li>“That’s OK”, says R. “I’ll use the default value of 3 for <code>n</code>.”</li>
+<li>R executes the code in the body of the function.</li>
+</ul>
+<p>Next, call the function as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello!&quot;</span>, <span class="dt">n =</span> n)</code></pre></div>
+<pre><code>## Hello!
+## Hello!</code></pre>
+<p>Let’s think about how this works:</p>
+<ul>
+<li>R sees that you want to assign the value <code>&quot;Hello!&quot;</code> to the parameter <code>word</code>.</li>
+<li>R sees that you want to assign something to the parameter <code>n</code>. Apparently it is the value of a name <code>n</code> in some environment.</li>
+<li>“Fine”, says R. “I’ll make sure that I can find this <code>n</code> thingie before I run the function.”</li>
+<li>R goes along the search path, finding <code>n</code> at once in the Global Environment.</li>
+<li>“Great!”, says R. “Now I know to assign 2 to the parameter <code>n</code>”</li>
+<li>R then executes the code in the body of the function.</li>
+</ul>
+<p>Now call the function as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello!&quot;</span>, n)</code></pre></div>
+<pre><code>## Hello!
+## Hello!</code></pre>
+<p>Again let’s consider how this works:</p>
+<ul>
+<li>R sees that you want to assign the value <code>&quot;Hello!&quot;</code> to the parameter <code>word</code>.</li>
+<li>R sees the <code>n</code>. Since <code>word</code> is already assigned, R figures that you mean to assign the value of <code>n</code> (in some environment) to the parameter <code>n</code>.</li>
+<li>“Fine”, says R. “I’ll make sure that I can find this <code>n</code> thingie before I run the function.”</li>
+<li>R goes along the search path, finding <code>n</code> at once in the Global Environment.</li>
+<li>“Great!”, says R. “Now I know to assign 2 to the parameter <code>n</code>”</li>
+<li>R then executes the code in the body of the function.</li>
+</ul>
+<p>Now let’s remove <code>n</code> from the Global Environment:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(n)</code></pre></div>
+<p>Now call the function again, in the following way:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello!&quot;</span>, <span class="dt">n =</span> n)</code></pre></div>
+<pre><code>Error in manyCat(word = &quot;Hello!&quot;, n = n) : object &#39;n&#39; not found</code></pre>
+<p>Can you see why we got an error? This time when R goes looking for <code>n</code>, it can’t find it: <code>n</code> is no longer in the Global Environment, nor is it anywhere else along the search path. Accordingly R throws the error.</p>
+<p>The call <code>manyCat(word = &quot;Hello!&quot;, n)</code> will elicit the same error message, for the same reason.</p>
+<p>The moral of the story is that parameters really, really are NOT the same thing as arguments, even when they are called by the same name.</p>
+</div>
 <div id="function-environments" class="section level3">
-<h3><span class="header-section-number">3.5.2</span> Function Environments</h3>
+<h3><span class="header-section-number">3.5.3</span> Function Environments</h3>
 <p>Let’s summarize what we have learned so far:</p>
 <ul>
 <li>An environment is a collection of names associated with objects.</li>

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-13">
+<meta name="date" content="2017-09-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -178,7 +178,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.5</b> Environments and Scope</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="environments-and-scope.html"><a href="environments-and-scope.html#environments-and-searching"><i class="fa fa-check"></i><b>3.5.1</b> Environments and Searching</a></li>
-<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.2</b> Function Environments</a></li>
+<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#a-note-on-parameters-vs.arguments"><i class="fa fa-check"></i><b>3.5.2</b> A Note on Parameters vs. Arguments</a></li>
+<li class="chapter" data-level="3.5.3" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.3</b> Function Environments</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="note-on-packages.html"><a href="note-on-packages.html"><i class="fa fa-check"></i><b>3.6</b> A Note on Packages</a><ul>
 <li class="chapter" data-level="3.6.1" data-path="note-on-packages.html"><a href="note-on-packages.html#installed-packages"><i class="fa fa-check"></i><b>3.6.1</b> Installed Packages</a></li>
@@ -438,7 +439,7 @@ numbersMat</code></pre></div>
 ## [4,]    4   10   16   22
 ## [5,]    5   11   17   23
 ## [6,]    6   12   18   24</code></pre>
-<p>Of course if you are making a matrix out of 24 numbers and you know that it’s going to have 6 rows, then you know it must have 4 columns. Similarly, if you know the number of columns then the number of rows is determined. Hence you could have just as well constructed the matrix with just one of the row or column arguments, like this:</p>
+<p>Of course if you are making a matrix out of 24 numbers and you know that it’s going to have 6 rows, then you know it must have 4 columns. Similarly, if you know the number of columns then the number of rows is determined. Hence you could have constructed the matrix with just one of the row or column arguments, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">6</span>)</code></pre></div>
 <p>Notice that the numbers went down the first column, then down the second, and so on. If you would rather fill up the matrix row-by-row, then set the <code>byrow</code> parameter, which is <code>FALSE</code> by default, to <code>TRUE</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</code></pre></div>

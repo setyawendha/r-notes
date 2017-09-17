@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-13">
+<meta name="date" content="2017-09-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -178,7 +178,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.5</b> Environments and Scope</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="environments-and-scope.html"><a href="environments-and-scope.html#environments-and-searching"><i class="fa fa-check"></i><b>3.5.1</b> Environments and Searching</a></li>
-<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.2</b> Function Environments</a></li>
+<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#a-note-on-parameters-vs.arguments"><i class="fa fa-check"></i><b>3.5.2</b> A Note on Parameters vs. Arguments</a></li>
+<li class="chapter" data-level="3.5.3" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.3</b> Function Environments</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="note-on-packages.html"><a href="note-on-packages.html"><i class="fa fa-check"></i><b>3.6</b> A Note on Packages</a><ul>
 <li class="chapter" data-level="3.6.1" data-path="note-on-packages.html"><a href="note-on-packages.html#installed-packages"><i class="fa fa-check"></i><b>3.6.1</b> Installed Packages</a></li>
@@ -609,12 +610,11 @@ Figure 7.14: Some of the days have significantly fewer births. What’s going on
 </div>
 <p>To begin with, look at all of the variables available in the data frame <code>Births78</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(Births78)</code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    365 obs. of  5 variables:
+<pre><code>## &#39;data.frame&#39;:    365 obs. of  4 variables:
 ##  $ date     : POSIXct, format: &quot;1978-01-01&quot; &quot;1978-01-02&quot; ...
 ##  $ births   : int  7701 7527 8825 8859 9043 9208 8084 7611 9172 9089 ...
 ##  $ dayofyear: int  1 2 3 4 5 6 7 8 9 10 ...
-##  $ wday     : Ord.factor w/ 7 levels &quot;Sun&quot;&lt;&quot;Mon&quot;&lt;&quot;Tues&quot;&lt;..: 1 2 3 4 5 6 7 1 2 3 ...
-##  $ weekend  : chr  &quot;weekend&quot; &quot;weekday&quot; &quot;weekday&quot; &quot;weekday&quot; ...</code></pre>
+##  $ wday     : Ord.factor w/ 7 levels &quot;Sun&quot;&lt;&quot;Mon&quot;&lt;&quot;Tues&quot;&lt;..: 1 2 3 4 5 6 7 1 2 3 ...</code></pre>
 <p>We see that the variable <code>wday</code> gives the name of the day of the week, for each of the days in the year. On a hunch, we make violin plots of the births for each of the days of the week. The code appears below, and the resulting plot is shown in Figure <a href="more-graphing.html#fig:violinbirthswday">7.15</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> wday, <span class="dt">y =</span> births)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_jitter</span>()</code></pre></div>
