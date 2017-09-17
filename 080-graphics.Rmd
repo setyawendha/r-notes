@@ -1,0 +1,320 @@
+# Graphics {#graphics}
+
+```{block2, deep-philosophy, type='leadquote'}
+*It’s hard to succinctly describe how **ggplot2** works because it embodies a deep philosophy of visualisation.*
+
+---Hadley Wickham (creator of **ggplot2**)
+```
+
+
+## More Graphing
+
+Now that we know a bit about how data can be stored and manipulated in data frames, we can begin to analyze data.  In this section we will take a closer look at visualizations of data; our primary tool will be the **ggplot2** package.  In Section \@ref(collatz-conjecture) we began to learn about how **ggplot** constructs a graph; in this section we will build on that knowledge and apply it in the context of data frames.
+
+### One Numerical Variable
+
+Sometimes you want a visual picture of how a numerical variable is distributed.  For example, you might want to know:  what do the fastest speeds ever driven look like, for the students in the `m111survey` data?
+
+We know that we are interested in the variable `fastest` from `m111survey`.  When we construct a plot, we will have two dimensions available:  the x-axis and the y-axis.  We will need to begin by specifying to **ggplot2** what variable we want to study, and on which axis its values should be displayed.  This is accomplished by the `ggplot()` function:
+
+```{r include = F}
+library(ggplot2)
+```
+
+```{r}
+p <- ggplot(data = m111survey, mapping = aes(x = fastest))
+```
+
+Notice the presence of the new parameter `data`, which provides the data set from which the names of variables shall be drawn.  In the `aes()` function, we can refer to `fastest` without having to use the `frame$variable` form.
+
+The result of the call to `ggplot()` is a blank plot, which we have stored as the variable `p`.
+
+We now add a *geom* to `p`:  something that will specify how the values of `fastest` will look when plotted.  For a numerical variable such as `fastest`, density plots are a good choice, and they are specified by the function `geom_density()`:
+
+```{r}
+p <- p + geom_density()
+```
+
+We are ready to check out our plot.  The result appears as Figure \@ref(fig:fastestdensity).
+
+```{r fastestdensity, fig.align = "center", out.width = "60%", fig.cap = "Basic density plot of the fastest speed every driven."}
+p
+```
+
+Recall that the density curve is high where the speeds are crowded together and lower where they are spread out.  Since there are only 71 students in the data set, it's not a bad idea to add a "rug" of the individual speeds to the x-axis.  The `geom_rug()` function calls for the rug as another "shape" that is added on to the plot:
+
+```{r}
+p <- p + geom_rug()
+```
+
+It's always good to label the axes of a plot---providing units if possible---and to add a brief but descriptive title.  This is accomplished by adding labels to the plot with the `labs()` function:
+
+```{r}
+p <- p + labs(x = "Fastest speed ever driven (mph)",
+             title = "For most students the fastest speed is around 100 mph.")
+```
+
+Let's print out `p` again.  The result is Figure \@ref(fig:fastestdensity2).
+
+
+```{r fastestdensity2, fig.align = "center", out.width = "60%", fig.cap = "Density plot of the fastest speed every driven, with rug and labels."}
+p
+```
+
+Of course the entire plot could be written out in one command:
+
+```{r eval = F}
+ggplot(data = m111survey, mapping = aes(x = fastest)) +
+  geom_density() + geom_rug() +
+  labs(x = "Fastest speed ever driven (mph)",
+             title = "For most students the fastest speed is around 100 mph")
+```
+
+Usually, though, it's a good idea to set up a blank plot with the `ggplot()` function and then add to it.  In this way one can reuse the plot-variable, adding different geoms to it, and then stick with the ones you like best.
+
+For example, you might prefer to make a histogram.  Start again with the blank plot:
+
+```{r}
+p <- ggplot(data = m111survey, mapping = aes(x = fastest))
+```
+
+Now see how a histogram would look (the result is Figure \@ref(fig:fastesthistogram).)
+
+```{r eval = F}
+p + geom_histogram() + geom_rug() +
+  labs(x = "Fastest speed ever driven (mph)",
+             title = "For most students the fastest speed is around 100 mph")
+```
+
+
+```{r fastesthistogram, echo = F, fig.align = "center", out.width = "60%", fig.cap = "Histogram of the fastest speed every driven, with rug and labels.", message=F}
+p + geom_histogram() + geom_rug() +
+  labs(x = "Fastest speed ever driven (mph)",
+             title = "For most students the fastest speed is around 100 mph")
+```
+
+If you run code yourself, you see a message to the console:
+
+```
+## 	`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+**ggplot2** likes to offer advice: in this case it wants you to select the width of the histogram-rectangles yourself.  This is done with a `stat_bin()` function.  Let's make all of our rectangles 10 mph wide by adding a `binwidth` argument to `geom_histogram()`.  The result is Figure \@ref(fig:fastesthistogram2).
+
+```{r fastesthistogram2, fig.align = "center", out.width = "60%", fig.cap = "Histogram of the fastest speed every driven, now with binwidth = 10."}
+p + geom_histogram(binwidth = 10) + geom_rug() +
+  labs(x = "Fastest speed ever driven (mph)",
+             title = "For most students the fastest speed is around 100 mph")
+```
+
+
+### Categorical Variables
+
+Beginning with this section we will make only "rough" graphs:  this is the way to operate when you are in the process of analyzing data, trying things out and making discoveries.  A proper title, axis-labels and other refinements can wait until you are polishing your work for publication.
+
+#### One Categorical Variable
+
+In order to study the distribution of a single categorical variable such as `seat`, you can make a table:
+
+```{r}
+with(m111survey, table(seat))
+```
+
+You can see the same thing graphically with a bar chart (Figure \@ref(fig:seatbargraph)).
+
+
+```{r seatbargraph, fig.align = "center", out.width = "60%", fig.cap = "Bar graph of seating preference."}
+ggplot(m111survey, aes(x = seat)) + geom_bar()
+```
+
+So far the values of the values of the variable under study have been shown on the x-axis.  Any time you like you can have them appear along the y-axis, if you add `coord_flip()` (see Figure \@ref(fig:seatbargraph2)):
+
+
+```{r seatbargraph2, fig.align = "center", out.width = "60%", fig.cap = "Bar graph of seating preference, with coordinates flipped."}
+ggplot(m111survey, aes(x = seat)) + geom_bar() + coord_flip()
+```
+
+You might get tired of the dark "fill" in histograms and bar charts.  The color of the fill is up to you, though.  Just set the `fill` parameter to the color of your choice.  See Figure \@ref(fig:seatbargraph3) for the results of the code below.
+
+```{r seatbargraph3, fig.align = "center", out.width = "60%", fig.cap = "Bar graph of seating preference.  The bars have a burlywood fill."}
+ggplot(m111survey, aes(x = seat)) + geom_bar(fill = "burlywood")
+```
+
+
+#### Two Categorical Variables
+
+Quite often one is interested in comparing two groups of people.  For example, do males and females differ in their seating preferences?  One can investigate this question numerically with a table:
+
+```{r}
+with(m111survey, table(sex, seat))
+```
+
+The arguments to `table()` are the two categorical variables of interest.
+
+If we want to look into the matter graphically, then we face a conundrum:  there are two categorical variables, but only one x-axis.  We can assign one of the variables to the x-axis in the call to `aes()`, but how are we to incorporate the other variable?  The solution lies in a second call to `aes()`, supplied as an argument to the desired geom.  The code is shown below, and the results appear as Figure \@ref(fig:sexseat1).
+
+```{r sexseat1, fig.align = "center", out.width = "60%", fig.cap = "Seating preference, by sex."}
+ggplot(m111survey, aes(x = sex)) + geom_bar(aes(fill = seat))
+```
+
+Within each bar, the proportions of fill-colors indicate the distribution of seating preference for each gender.  It is important to note the dramatically different roles played by `fill` in these two code-snippets:
+
+* `geom_bar(fill = "burlywood")`.  In this geom, the fill is assigned to be of burlywood color throughout the geom.
+* `geom_bar(aes(fill = seat))`. Note that here the fill is specified as part of an *aesthetic*, and a categorical variable---not a specific color---is assigned to it.  This causes **ggplot2** to *map* each level of `seat` to a different color.  In this way the variable `seat` makes its presence known in a graph that started out devoted just to the variable `sex`.
+
+Some people don't like the colors "stacked". In that case, you can set `position` to "dodge", as in the code below.  The results appear in Figure \@ref(fig:sexseat2).
+
+```{r sexseat2, fig.align = "center", out.width = "60%", fig.cap = "Seating preference, by sex---no stacking of bars.."}
+ggplot(m111survey, aes(x = sex)) + 
+  geom_bar(aes(fill = seat), position ="dodge")
+```
+
+
+### One Numerical and One Categorical Variable {#onenum-onecat}
+
+Who tends to drive fastest:  people who prefer the Front, the Middle or the Back?  Investigating this question involves comparing the speeds of three groups of people; more technically we can say that we are asking about the *relationship* between the numerical variable `fastest` and the categorical variable `seat`.
+
+In this case we can assign one variable to the x-axis and the other to the y-axis.:
+
+```{r}
+p <- ggplot(m111survey, aes(x = seat, y = fastest))
+```
+
+We can now add geoms.  We'll make a violin plot---a density curve mirrored against itself---and an individual-value plot, in which the individual speeds appear at the appropriate y-axis level, but with their x-coordinates "jittered" randomly so that identical speeds don't over-plot each other.  The graph appears in Figure \@ref(fig:violinfastestseat).  Where a violin is "thick" data points are crowded closely together.  Where it is "thin", they are more sparse.
+
+
+```{r violinfastestseat, fig.align = "center", out.width = "60%", fig.cap = "Violin plot of fastest speed by seating preference, with individuals plotted as points."}
+p + geom_violin(fill = "burlywood") + geom_jitter()
+```
+
+Another way to handle the question is to group with a call to `aes()` provided to an appropriate geom, as in the code below.  The resulting graph is appears in Figure \@ref(fig:fastestseatgrouping).
+
+```{r fastestseatgrouping, fig.align = "center", out.width = "60%", fig.cap = "Density plots of fastest speed ever driven, for each seating preference."}
+ggplot(m111survey, aes(x = fastest)) + geom_density(aes(color = seat))
+```
+
+
+### Two Numerical Variables
+
+As we have seen in previous chapters, scatter plots are a fine way to visualize the relationship between two numerical variables.  In our call to `aes()` we simply assign one of the variables to the x-axis and the other to the y-axis.  A scatter plot showing the relationship between grade=point average and fastest speed ever driven is shown in Figure \@ref(fig:fastestGPAseatA).
+
+```{r fastestGPAseatA, fig.align = "center", out.width = "60%", fig.cap = "Scatter plot of GPA vs. fastest speed ever driven. Students who drive faster tend to have lower GPAs."}
+p <- ggplot(m111survey, aes(x = fastest, y = GPA)) + geom_point(na.rm = TRUE)
+p
+```
+
+### Grouping by a Categorical Variable
+
+It is possible to incorporate a third variable into our plot.  As with the bar geoms---or any other geom---this is accomplished by mapping through an aesthetic parameter.  The code below uses the color of the points to represent the levels of the variable `seat`.  The scatter plot itself is shown in Figure \@ref(fig:fastestGPAseat).
+
+
+```{r fastestGPAseat, fig.align = "center", out.width = "60%", fig.cap = "Scatter plot of GPA vs. fastest speed ever driven, with individuals grouped by seating preference."}
+p + geom_point(aes(color = seat), na.rm = TRUE)
+```
+
+Evidently the people who prefer the back tend to drive pretty fast and to have lower grade-point averages!
+
+
+### Application:  U.S. Births
+
+In Section \@ref(idea-data), we made a plot of the number of births in the United States for each day of that year (see Figure \@ref(fig:birthsplotframes)).  We noticed that there appear to be two clouds of points.  What accounts for this phenomenon?  By now we have the R-programming chops to take on this question.
+
+```{r echo = F, birthsplotframes, fig.cap = "Some of the days have significantly fewer births.  What's going on?",fig.align="center", out.width = "60%"}
+ggplot(Births78, aes(x = date, y = births)) + geom_point() +
+  labs(x = "Day of the Year", y = "Number of U.S. Births",
+       title = "Daily U.S. Birth-Numbers in 1978")
+```
+
+To begin with, look at all of the variables available in the data frame `Births78`:
+
+
+```{r}
+str(Births78)
+```
+
+We see that the variable `wday` gives the name of the day of the week, for each of the days in the year.  On a hunch, we make violin plots of the births for each of the days of the week.  The code appears below, and the resulting plot is shown in Figure \@ref(fig:violinbirthswday)
+
+```{r echo = T, violinbirthswday, fig.cap = "Violin plot of births, by day of the week.",fig.align="center", out.width = "60%"}
+ggplot(Births78, aes(x = wday, y = births)) + geom_violin(fill = "burlywood") +
+  geom_jitter()
+```
+
+
+Aha! There are considerably fewer births on the weekend-days---Saturday and Sunday.  Perhaps the *entire* lower cloud of points is composed of weekends.  Let's check this by re-coding the days according to whether or not they are during the week or at the weekend:
+
+
+```{r}
+weekend <- with(Births78, ifelse(wday %in% c("Sat","Sun"),
+                                 "weekend", "weekday"))
+Births78$weekend <- weekend
+```
+
+Note that we have added the new variable to the data frame, so that it will be easy in **ggplot2** to use that variable for grouping, as in the code below.  The results appear in Figure \@ref(fig:birthsplotframesweekend).
+
+
+```{r echo = T, birthsplotframesweekend, fig.cap = "The days with fewer births are almost always weekend-days.",fig.align="center", out.width = "60%"}
+ggplot(Births78, aes(x = date, y = births)) + geom_point(aes(color = weekend)) +
+  labs(x = "Day of the Year", y = "Number of U.S. Births",
+       title = "Daily U.S. Birth-Numbers in 1978")
+```
+
+Well, a *few* of the points in the lower cloud are weekdays.  Is there anything special about them?  To find out, we subset the data frame to examine only those points:
+
+```{r}
+df <- subset(Births78, weekend != "weekend" & births <= 8500)
+df
+```
+
+If you consult a calendar for the year 1978, you will find that every one of the above days was a major holiday.  Apparently doctors prefer not to deliver babies on weekend and holidays.  Scheduled births---induced births or births by non-emergency Cesarean section---are not usually set for weekends or holidays.  Perhaps this accounts for the two clouds we saw in the original scatter plot.
+
+### Learn More
+
+From time to time we will return to **gplot2** and deepen our study of this remarkable graphing system.  If you are impatient to learn more right way, you can explore the package's [documentation site](http://docs.ggplot2.org/current/index.html).  The site teaches the system by way of numerous examples that you can copy and modify.
+
+\newpage
+
+## Glossary {-}
+
+Frame  \index{frame}
+
+:  The aesthetics (usually x and y position) that help locate cases on a plot.
+
+
+\newpage
+
+## Exercises {- #graphics-exercises}
+
+```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+knitr::include_graphics("images/thinking.png")
+```
+
+1. The next few exercises pertain to the data frame `CPS85` from the package **mosaicData**.  Learn about it with `help(CPS85)`.  We will use the **ggplot2** graphing package to explore whether men were being paid more than women in 1985.
+
+    Make a density plot of the wages of the people in the study.  As with all plot you make, it should have well-labelled axes (with units if possible).  For a density plot you should label the horizontal axis, but you can let **ggplo2** provide the label for the "density" axis.  As always, provide a descriptive title.  Also provide a "rug" of individual values along the horizontal axis.
+    
+1. Look at the plot you made in the previous exercise:  you will notice that one person made a wage that was much higher than all the rest.  In data analysis, when a value is much higher or lower than the rest of the values we call it an *outlier*.
+
+    Write the code needed to find the age, sex and sector of employment of the person who made this extraoridinarily high wage.  Report the age, sex and sector of this person.
+   
+    Create a new data frame called `cpsSmall` that is the same as `CPC85` execept that it excludes the row corresponding to the outlier-individual.
+   
+1. In order to explore the relationship between wage and sex in the CPS study, make violin plots for the wages of men and women.  (In this exercise and in subsequent exercises, use the `cpsSmall` data frame so as to exclude the outlier.  You can produce the plot by modifying the code for the "fastest speed vs. seating" plot in Section \@ref(onenum-onecat).)  Based on the plot, who tends to earn higher wages:  men or women?
+
+1. Someone might argue that men don't earn higher wages because of sex-discrimination in the workplace, but rather because of some other factor.  For example, it could be that in 1985 women chose to work in low-wage sectors of the economy, whereas men tended to work in higher-wage sectors.  Of course for this explanation to be viable, some sectors of the economy have to pay more on average than other sectors do.  In order to verify whether this is the case, make a violin plot of wage vs. sector of employment.  Use the plot to name a couple of high-wage sectors and a couple of low-wage sectors.
+
+1. From the previous exercise you now know that some sectors of the economy pay more than other sectors.  Hence in order to investigate properly whether there was wage-discrimination in the wrokforce based on sex, we would have to compare the wages of men and women who work in the *same* sector.  To this end it would be nice to have eight separate violin plots, one for each sector.  Each plot would compare the wages of men and women in that sector.  Go to the online **ggplot2** documentation and look up `facet_wrap()`.  Use it to construct a graph that displays all eight plots at once.
+
+    Examine your graph.
+    * Are there any sectors in which it seems that women typically make more than men.  If so, what sectors are they?
+    * On the other hand, are there any sectors where men typically make more than women?  If so, what sectors are they?
+    * Based on your analysis, does it seem plausible that women made less than men simply because they chose lower-paying sectors of employment?
+
+1. The next few exercises pertain to the data frame `imagpop` in the **tigerstats** package.  Learn about it with `help(imagpop)`.
+
+    One of the variables in `imagpop` is `kkardashtemp`, the rating given by each person to the celebrity Kim Kardashian.  Make a density plot of the ratings.  Compute the mean Kim Kardashian raintg for all the people in `imagpop`.  Finally, compute the percentage of people in the population who gave a rating more than 40 but less than 60.
+    
+1. Write a program that repeats the following procedure 100 times:
+    * Randomly select 10 people from the population.
+    * Compute the mean `kkardashtemp` rating for these 10 people.
+    
+    The means should be stored in a numerical vector.  Make a density plot (with rug) of the means, and also compute the percentage of the means that are between 40 and 60.  As always, the plot should have sensible labels and a descriptive title.
