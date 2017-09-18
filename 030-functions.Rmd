@@ -678,14 +678,12 @@ First of all, clear out your Global Environment:
 rm(list = ls())
 ```
 
-Next, re-make the `manyCat()` function, but to make it a bit more interesting, give the parameter `n` a default value of 3.
+Next make a simple function that adds three to any given number.  Our function will take one parameter `n` (the number to which 3 is to be added), and the default value of `n` shall be 4.
 
 
 ```{r}
-manyCat <- function(word, n = 3) {
-  wordWithNewline <- paste(word, "\n", sep = "")
-  lines <- rep(wordWithNewline, times = n)
-  cat(lines, sep = "")
+addThree <- function(n = 4) {
+  n + 3
 }
 ```
 
@@ -704,59 +702,52 @@ ls.str()
 Now call the function as follows:
 
 ```{r}
-manyCat(word = "Hello!", n = 4)
+addThree(n = 5)
 ```
 
 Let's recall how this works:
 
-* R sees that you want to assign the value `"Hello!"` to the parameter `word`.
-* R sees that you want assign the value 4 to the parameter `n`.
-* "Great!", says R.  "I've got everything I need to run this function."
-* R executes the code in the body of the function.
+* R sees that you want to assign the value 5 to the parameter `n`.
+* R executes the code in the body of the function.  All is well.
 
 
 Now call the function as follows:
 
 ```{r}
-manyCat(word = "Hello!")
+addThree()
 ```
 
 Let's recall how this works:
 
-* R sees that you want to assign the value `"Hello!"` to the parameter `word`.
 * R sees that you did not assign anything to the parameter `n`.
-* "That's OK", says R. "I'll use the default value of 3 for `n`."
-* R executes the code in the body of the function.
+* "That's OK", says R. "I'll use the default value of 4 for `n`."
+* R executes the code in the body of the function.  All is well.
 
 Next, call the function as follows:
 
 ```{r}
-manyCat(word = "Hello!", n = n)
+addThree(n = n)
 ```
 
 Let's think about how this works:
 
-* R sees that you want to assign the value `"Hello!"` to the parameter `word`.
 * R sees that you want to assign something to the parameter `n`.  Apparently it is the value of a name `n` in some environment.
-* "Fine", says R. "I'll make sure that I can find this `n` thingie before I run the function."
-* R goes along the search path, finding `n` at once in the Global Environment.
-* "Great!", says R.  "Now I know to assign 2 to the parameter `n`"
-* R then executes the code in the body of the function.
+* "Fine", says R. "I'll look up the value of this `n` thingie, if ever I have to use it in a computation."
+* R executes the one line of code in the body of the function.
+* "Well, I'll be darned," says R, "I *do* need the value of this `n` thingie after all.  I'll look it up."
+* R looks for `n`, finding it in the Global Environment.  Apparently it's bound to 2.
+* R computes $2+3$ and returns $5$.  All is well.
 
 Now call the function as follows:
 
 ```{r}
-manyCat(word = "Hello!", n)
+addThree(n)
 ```
 
 Again let's consider how this works:
 
-* R sees that you want to assign the value `"Hello!"` to the parameter `word`.
-* R sees the `n`.  Since `word` is already assigned, R figures that you mean to assign the value of `n` (in some environment) to the parameter `n`.
-* "Fine", says R. "I'll make sure that I can find this `n` thingie before I run the function."
-* R goes along the search path, finding `n` at once in the Global Environment.
-* "Great!", says R.  "Now I know to assign 2 to the parameter `n`"
-* R then executes the code in the body of the function.
+* R sees the `n`.  Since the function has only one parameter, R figures that you mean to assign the value of `n` (in some environment) to its parameter `n`.
+* Everything now proceeds just as before, with 5 being the number returned.
 
 Now let's remove `n` from the Global Environment:
 
@@ -769,18 +760,18 @@ Now call the function again, in the following way:
 
 
 ```{r eval = FALSE}
-manyCat(word = "Hello!", n = n)
+addThree(n = n)
 ```
 
 ```
-Error in manyCat(word = "Hello!", n = n) : object 'n' not found
+Error in addThree(n = n) : object 'n' not found
 ```
 
 Can you see why we got an error?  This time when R goes looking for `n`, it can't find it:  `n` is no longer in the Global Environment, nor is it anywhere else along the search path.  Accordingly R throws the error.
 
-The call `manyCat(word = "Hello!", n)` will elicit the same error message, for the same reason.
+The call `addThree(n)` will elicit the same error message, for the same reason.
 
-The moral of the story is that parameters really, really are NOT the same thing as arguments, even when they are called by the same name.
+The moral of the story is that parameters really, really are NOT the same thing as arguments, even when a parameter and an argument happen to be called by the same name.
 
 ### Function Environments
 
