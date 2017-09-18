@@ -1,6 +1,6 @@
 # Functions {#functions}
 
-```{r gneral-problem, fig.pos='!h', fig.cap = "The General Problem, by xkcd.", echo=F, out.width = "90%", fig.align = "center"}
+```{r gneral-problem, fig.pos='!h', fig.cap = "The General Problem, by xkcd.", echo=FALSE, out.width = "90%", fig.align = "center"}
 knitr::include_graphics("images/xkcd-the_general_problem.png")
 ```
 
@@ -115,7 +115,7 @@ There is a well-known principle in computer programming called DRY, which is an 
 
 `function` is the reserved word in R that permits us to define functions.  The general form of a function definition is as follows:
 
-```{r eval = F}
+```{r eval =FALSE}
 functionName <- function(parameter, parameter, ...) {
   Body of the Function ...
 }
@@ -136,7 +136,7 @@ add3(-7)
 
 In the `add3()` function above, `x` was a parameter.  When the function is called the parameter is assigned a particular value called an *argument*.\index{argument}  We see that `add3()` was called  twice, once with an argument of 3 and again with an argument of -7.  If the parameter is explicitly mentioned in the function call, then an equal-sign `=` separates the parameter and the argument.  Note also that the parameter and `=` may be omitted if it is clear what parameter the argument will be matched to.  In the case of `add3` there is only one parameter `x`, so R knows that any value provided within the parentheses is to be assigned to `x`.  R also knows to refer to the order of parameters within the function's definition to determine which arguments go with which parameters.  Thus, the following calls do the same thing:
 
-```{r eval = F}
+```{r eval =FALSE}
 manyCat(word = "Hello", n = 4)
 manyCat(word = "Hello", 4)
 manyCat("Hello", n = 4)
@@ -146,7 +146,7 @@ manyCat(n = 4, word = "Hello")
 
 On the other hand, the following would produce an error:
 
-```{r eval = F}
+```{r eval =FALSE}
 manyCat(4, "Hello")
 ```
 
@@ -160,7 +160,7 @@ If you don't label your arguments with the parameters they are to match to, then
 
 In the definition of functions and in all calls to functions, commas must separate arguments.  Thus the following would produce an error:
 
-```{r eval = F}
+```{r eval =FALSE}
 manyCat("Hello" 4)
 ```
 
@@ -170,7 +170,7 @@ manyCat("Hello" 4)
 
 If R cannot match all your arguments to a parameter it will throw an error;
 
-```{r eval = F}
+```{r eval =FALSE}
 manyCat("Hello", 4, 7)
 ```
 
@@ -417,7 +417,7 @@ Madhava's approximation was pretty close, although we did have to add up quite a
 
 The `madhavaPI()` function has a parameter `n` that stands for the number of terms we want to add up. If we don't provide a value for `n`, then there will be an error:
 
-```{r eval = F}
+```{r eval =FALSE}
 madhavaPI()
 ```
 
@@ -494,7 +494,7 @@ Sometimes when you look at R-help you'll see the default value for a parameter s
 
 The matching is done by exact match of initial characters.  For example, it won't do for me to enter:
 
-```{r eval = F}
+```{r eval =FALSE}
 favColorReport("w")  # wants Winkies, but using lower-case w
 ```
 
@@ -533,7 +533,7 @@ ls.str()
 
 You can remove all of the names from your Global Environment by pressing the Broom icon in the IDE, or by using the `rm()`function:\index{R-functions!rm()@\texttt{rm()}}
 
-```{r eval = F}
+```{r eval =FALSE}
 rm(list = ls())
 ```
 
@@ -585,7 +585,7 @@ I got the definition of the `cat()` function, all the way up in package **base**
 
 Now try:
 
-```{r eval = F}
+```{r eval =FALSE}
 rep(cat, times = 3)
 ```
 
@@ -864,7 +864,7 @@ A *package* \index{package}is a bundle of R-code (usually functions) and data th
 
 When you click on the Packages tab in the lower right-hand pane in R Studio, you can see a list of all the packages that are installed on the machine.  You can get the same information by running the command:
 
-```{r eval = F}
+```{r eval =FALSE}
 installed.packages()[, c("Package", "Version")]
 ```
 
@@ -872,13 +872,13 @@ In fact R is really nothing but a collection of packages.  Many of the R-functio
 
 In order to attach a package, you can click the little box next to its name in the Package tab in R-Studio, or you can attach it from the console with the command:
 
-```{r eval = F}
+```{r eval =FALSE}
 library(<name of package here>)
 ```
 
 When you don't want a package any more, you can detach it from the search path by un-clicking the little box, or by running this command:
 
-```{r eval = F}
+```{r eval =FALSE}
 detach("package:<name of package here>", unload=TRUE)
 ```
 
@@ -888,7 +888,7 @@ The package will still be installed, ready to be attached whenever you like.
 
 You can learn about a Package by clicking on its name, or by using the command:
 
-```{r eval = F}
+```{r eval =FALSE}
 help(<name of package>)
 ```
 
@@ -898,7 +898,7 @@ From the display that shows in the Help pane you can navigate to learn about eac
 
 You can also install additional packages on the computer.  This can be done by clicking the Install button in R Studio and typing in the package name, or with the command:
 
-```{r eval = F}
+```{r eval =FALSE}
 install.packages("<name of package here>")
 ```
 
@@ -910,7 +910,7 @@ Eventually, though, you will install R and R Studio on your own computer, and th
 
 Not all packages come from CRAN:  many useful packages exist on other repositories, including the very popular code repository known as [GitHub](https://github.com/).  Special functions exist to install R-packages from GitHub.  For example, you may eventually wish to install the package **tigerData**, which resides in a GitHub repository belonging to your instructor.  In order to install it, you would use the `install_github()` function from the **devtools** package [@R-mosaicData], like this:
 
-```{r eval = F}
+```{r eval =FALSE}
 devtools::install_github(repo = "homerhanumat/tigerData")
 ```
 
@@ -999,11 +999,11 @@ Package \index{package}
 
 ## Exercises {-}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
-```{r include = F}
+```{r include =FALSE}
 pattern <- function(char = "*") {
   cat(rep(char, times = 1), "\n", sep = "")
   cat(rep(char, times = 2), "\n", sep = "")
@@ -1014,14 +1014,14 @@ pattern <- function(char = "*") {
 ```
 
 
-```{r echo = F}
+```{r echo =FALSE}
 reverse <- function(vec = c("Bob", "Marley")) {
   n <- length(vec)
   vec[n:1]
 }
 ```
 
-```{r echo = F}
+```{r echo =FALSE}
 isPalindrome <- function(vec) {
   all(vec == reverse(vec))
 }
@@ -1042,7 +1042,7 @@ isPalindrome <- function(vec) {
     
     The function should take one parameter called `char`.  The default value of this parameter should be `*`.  Typical examples of use should be as follows:
     
-    ```{r eval = F}
+    ```{r eval =FALSE}
     pattern()
     ```
     
@@ -1054,7 +1054,7 @@ isPalindrome <- function(vec) {
     ## *
     ```
     
-    ```{r eval = F}
+    ```{r eval =FALSE}
     pattern(char = "x")
     ```
     

@@ -23,11 +23,11 @@ One of the older programming paradigms in existence is *procedural prograaming*.
 
 Before we define procedural programming, let's illustrate it with an example.  Almost any of the programs we have written so far would do as examples; for specificity, let's consider the following snippet of code that produces from the data frame `m111survey` a new, smaller frame consisting of just the numerical variables:
 
-```{r eval = F}
+```{r eval =FALSE}
 library(tigerstats)
 ```
 
-```{r include=F}
+```{r include=FALSE}
 library(tigerstats)
 ```
 
@@ -65,7 +65,7 @@ Let us now turn to the second of the two major programming paradigms that we stu
 
 Let's a bit more closely at our code snippet.  Notice how prominently functions figure into it, on nearly every line.  In fact, *every* line calls at least one function!  This might seem unbelievable:  after all, consider the line below:
 
-```{r eval = F}
+```{r eval =FALSE}
 numsm111 <- m111survey[, isNumerical]
 ```
 
@@ -73,7 +73,7 @@ There don't appear to be any functions being called, here!  But in fact **two** 
 
 1. The so-called *assignment operator* `<-` is actually a function in disguise:  the more official---albeit less readable---form of `variable <- value` is:
 
-    ```{r eval=F}
+    ```{r eval=FALSE}
     "<-"(variable, value)
     ```
     
@@ -86,7 +86,7 @@ There don't appear to be any functions being called, here!  But in fact **two** 
     
 2. The sub-setting operator for vectors `[`, more formally known as *extraction* (see `help(Extract)`) is also a function.  The expression `m111survey[, isNumerical]` is actually the following function-call in disguise:
 
-    ```{r eval=F}
+    ```{r eval=FALSE}
     "["(m111survey, isNumerical)
     ```
     
@@ -186,7 +186,7 @@ Now this principle is difficult to adhere to, and in fact if you were to adhere 
 
 One way that R does support the third principle of functional programming is that it makes it easy to avoid having your functions modify the Global Environment.  To see this consider the following example:
 
-```{r eval=F}
+```{r eval=FALSE}
 addThree <- function(x) {
   heavenlyHash <- 5
   x+3  # returns this value
@@ -278,7 +278,7 @@ str(lst)
 
 If we can apply `runif()` to each element of a vector, why not apply *an arbitrary function* to each element?  That's what the function `lapply()` \index{R-functions!lapply()@\texttt{lapply()}} will do for us.  The general form of `lapply()` is:
 
-```{r eval = F}
+```{r eval =FALSE}
 lapply(X, FUN, ...)
 ```
 
@@ -330,18 +330,18 @@ str(lst)
 
 In the code above, `FUN` has been set to an *anonymous* function that returns `runif(10)` no matter what value was supplied to it.  In computer programming a function is called *anonymous* when it is not given a name.  \index{anonymous function}We could have used a regular "named" function, but we would have needed an extra line of code:
 
-```{r eval = F}
+```{r eval =FALSE}
 myfun <- function(x) runif(10)
 lst <- lapply(1:5, myFun)
 ```
 
 We lied a little bit when we said earlier that `X` was a vector:  `X` could also be what in R is called an *expression*.  We won't get into the topic of exactly what constitutes an expression (see `help(expression)` for more on the topic), but suffice to say that an expression is a combination of object-names and function calls.  In particular---and this is a very common application of `lapply()`---`X` could be the name of a data frame.  For example, suppose that you want to find the number of elements in each column of `mat111survery` that are `NA`.  with `lapply()` this is not difficult:
 
-```{r eval = F}
+```{r eval =FALSE}
 library(tigerstats)
 ```
 
-```{r include = F}
+```{r include =FALSE}
 library(tigerstats)
 ```
 
@@ -394,7 +394,7 @@ As a motivator for learning about `tapply()`, \index{R-functions!tapply()@\textt
 
 You will recall that we investigated this question---a question about the relationship between the numerical variable `fastest` and the factor-variable `seat`---with a graph, which is reproduced here as Figure \@ref(fig:fastestseatviolinagain).  Comparing the relative positions of the violins and looking at the locations of individual values, it appears that folks who prefer to sit in the Back tend to drive faster than front and middle-sitters do, especially since there seems to be a reasonable number of back-sitters who drive quite fast (the back-sitter violin has a long upper "neck").
 
-```{r include = F}
+```{r include =FALSE}
 library(ggplot2)
 library(tigerstats)
 ```
@@ -564,7 +564,7 @@ intersect(vec1, vec2)
 
 You cannot intersect three or more vectors at once:
 
-```{r eval=F}
+```{r eval=FALSE}
 intersect(vec1, vec2, c(4, 7, 9))
 ```
 
@@ -597,7 +597,7 @@ lst <- lapply(1:10000, function(x) runif(100))
 
 If we want the mean of each vector, we could write a loop:
 
-```{r eval = F}
+```{r eval =FALSE}
 means <- numeric(10000)
 for ( i in 1:10000 ) {
   means[i] <- mean(lst[[i]])
@@ -606,13 +606,13 @@ for ( i in 1:10000 ) {
 
 Or we could use `sapply()`:
 
-```{r eval = F}
+```{r eval =FALSE}
 means <- sapply(lst, mean)
 ```
 
 Comparing the two using `system.time()` \index{R-functions!system.time()@\texttt{system.time()}}, on my machine I got:
 
-```{r eval = F}
+```{r eval =FALSE}
 system.time(means <- sapply(lst, mean))
 ```
 
@@ -623,7 +623,7 @@ system.time(means <- sapply(lst, mean))
 
 For the loop, I get:
 
-```{r eval = F}
+```{r eval =FALSE}
 system.time({
   means <- numeric(10000)
   for ( i in 1:10000 ) {
@@ -690,11 +690,11 @@ Refactoring \index{refactoring}
 
 ## Exercises {-}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
-```{r echo = F}
+```{r echo =FALSE}
 oddMembers <- function(vec) {
   Filter(function(x) x %% 2 == 1, vec)
 }
@@ -708,7 +708,7 @@ oddMembers <- function(vec) {
     
     Study the function `quantile()` \index{R-functions()!quantile()@\texttt{quantile()}}from the **stats** package.  Notice that you can get the first and third quartiles of `x` with the command
     
-    ```{r eval = F}
+    ```{r eval =FALSE}
     quantile(x, probs = c(0.25, 0.75))
     ```
     
@@ -723,7 +723,7 @@ oddMembers <- function(vec) {
 
 1. Explain in words what the following line of code produces when given a vector `y`:
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     Map(function(x) x^2, y)
     ```
     
@@ -731,13 +731,13 @@ oddMembers <- function(vec) {
     
 1. Which do you think works faster for a given numerical vector `y`?  This code:
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     Map(function(x) sqrt(x), y)
     ```
     
     Or this code?
     
-    ```{r eval = F}
+    ```{r eval =FALSE}
   sqrt(y)
     ```
     
@@ -747,7 +747,7 @@ oddMembers <- function(vec) {
 
     Refactor the following code so that it uses `Map()` instead of a loop:
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     df <- tigerstats::m111survey
     keepVariable <- logical(length(names(df)))
     for ( col in seq_along(keepVariable) ) {
@@ -810,7 +810,7 @@ oddMembers <- function(vec) {
 
 1.  Supposing that `y` is a numerical vector, explain in words what the following code produces:
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     Filter(function(x) x >= 4, y)
     ```
    

@@ -1,6 +1,6 @@
 # Files {#files}
 
-```{r wizard-oz, echo=F, fig.pos='!h', fig.cap = "Scarecrow, Tin Man, Dorothy, Toto and the Cowardly Lion wearing Emerald City Specticals:  an original llustration from *The Wonderful Wizard of Oz*, by L. Frank Bloom.", out.width = "60%", fig.align = "center"}
+```{r wizard-oz, echo=FALSE, fig.pos='!h', fig.cap = "Scarecrow, Tin Man, Dorothy, Toto and the Cowardly Lion wearing Emerald City Specticals:  an original llustration from *The Wonderful Wizard of Oz*, by L. Frank Bloom.", out.width = "60%", fig.align = "center"}
 knitr::include_graphics("images/wizardoz.jpg")
 ```
 
@@ -14,7 +14,7 @@ First we'll deal with the situation in which the data we want is in a file somew
 
 It's a good idea to keep one's work organized.  Since we plan to begin downloading data files, we might as well create a directory dedicated to them.  It's easy to use the R Studio IDE to create the directory, but we might as well learn how the same task could be accomplished with an R-command.  We will use the function `dir.create()`. \index{R-functions!dir.create()@\texttt{dir.create()}}
 
-```{r eval = F}
+```{r eval =FALSE}
 dir.create("downloads")
 ```
 
@@ -24,7 +24,7 @@ We are ready to begin downloading.  Let's begin with a file^[This file is a comp
 
 The relevant function is `download.file()`:
 
-```{r eval = F}
+```{r eval =FALSE}
 download.file(url = "https://homerhanumat.github.io/r-notes/downloads/words.zip",
               destfile = "downloads/words.zip")
 ```
@@ -34,7 +34,7 @@ The file should now be in the `downloads` folder of your Home directory.
 We see that it's a zip-file.  R can unzip it for us:
 
 
-```{r eval = F}
+```{r eval =FALSE}
 unzip(zipfile = "downloads/words.zip")
 ```
 
@@ -82,11 +82,11 @@ length(words)
 
 R has many tools for reading data into data frames; one of the most convenient---and most popular---is the set of functions in the **readr** package [@R-readr].
 
-```{r eval = F}
+```{r eval =FALSE}
 library(readr)
 ```
 
-```{r include = F}
+```{r include =FALSE}
 library(readr)
 ```
 
@@ -107,18 +107,18 @@ The easiest way to learn the functions of **readr** is to use a widget supplied 
 * You should copy the code and save it somewhere (in an R script or R Markdown document) in order to keep a record of your work.
 * You may then press the **Import** button.
 
-```{r include = F}
+```{r include =FALSE}
 alcGDP <- read_csv("~/git/r-notes/downloads/alcGDP.csv")
 save(alcGDP, file = "downloads/alcGDP.rda")
 ```
 
 The data is read into `alcGDP` according to the `read_csv()` call below:
 
-```{r eval = F}
+```{r eval =FALSE}
 alcGDP <- read_csv("https://query.data.world/s/b6plbxp3ym20s5a5iey36geul")
 ```
 
-```{r include = F}
+```{r include =FALSE}
 load("downloads/alcGDP.rda")
 ```
 
@@ -142,7 +142,7 @@ The output looks a bit different from the usual data-frame listing.  That's beca
 
 \index{R-functions!as.data.frame()@\texttt{as.data.frame()}}
 
-```{r eval = F}
+```{r eval =FALSE}
 alcGDP <- as.data.frame(alcGDP)
 ```
 
@@ -150,7 +150,7 @@ We won't analyze `alcGDP` here, but you might want to look at it later.  You can
 
 \index{R-functions!save()@\texttt{save()}}
 
-```{r eval = F}
+```{r eval =FALSE}
 save(alcGDP, file = "downloads/alcGDP.rda")
 ```
 
@@ -158,7 +158,7 @@ save(alcGDP, file = "downloads/alcGDP.rda")
 
 \index{R-functions!load()@\texttt{load()}}
 
-```{r eval = F}
+```{r eval =FALSE}
 load("downloads/alcGDP.rda")
 ```
 
@@ -169,7 +169,7 @@ If you would like to send the data in a data frame to a colleague who does not u
 
 \index{R-functions!write.csv()@\texttt{write.csv()}}
 
-```{r eval = F}
+```{r eval =FALSE}
 library(tigerstats)
 write.csv(m111survey, file = "m111survey.csv", row.names = FALSE)
 ```
@@ -187,7 +187,7 @@ First you need to get hold of the text itself.  *The Wizrd of Oz* has been in th
 
 Go ahead and download the file: \index{R-functions!download.file()@\texttt{download.file()}}
 
-```{r eval = F}
+```{r eval =FALSE}
 if ( !(file.exists("downloads/oz.txt")) ) {
   download.file(url = "homerhanmat.github.io/r-notes/downloads/oz.txt",
               destfile = "downloads/oz.txt")
@@ -333,7 +333,7 @@ indexFactory <- function(lexicon, fn) {
 
 Now we call our helper function to create the index:
 
-```{r cache = T}
+```{r cache =TRUE}
 ozIndex <- indexFactory(ozWords, "downloads/oz.txt")
 ```
 
@@ -390,7 +390,7 @@ Connection (also called a "Generalized File") \index{connection}
 
 ## Exercises {-}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 

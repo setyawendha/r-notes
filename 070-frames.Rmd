@@ -30,7 +30,7 @@ numbersMat
 
 Of course if you are making a matrix out of 24 numbers and you know that it's going to have 6 rows, then you know it must have 4 columns.  Similarly, if you know the number of columns then the number of rows is determined.  Hence you could have constructed the matrix with just one of the row or column arguments, like this:
 
-```{r eval = F}
+```{r eval =FALSE}
 numbersMat <- matrix(numbers, nrow = 6)
 ```
 
@@ -217,11 +217,11 @@ As expected, the result is a matrix having as many rows as the rows of `a`and as
 
 It is also interesting to recall how matrix multiplication works when the second matrix has only one column.  The product is obtained by multiplying each column of `a` by the element on the corresponding row of `b`, and adding the resulting matrices:
 
-```{r eval = F}
+```{r eval =FALSE}
 b[1,1]*a[ ,1, drop = FALSE] + b[2,1, drop = FALSE]*a[ ,2] + b[3,1]*a[ ,3, drop = FALSE]
 ```
 
-```{r echo = F}
+```{r echo =FALSE}
 suppressWarnings(b[1,1]*a[ ,1, drop = FALSE] + b[2,1, drop = FALSE]*a[ ,2] + b[3,1]*a[ ,3, drop = FALSE])
 ```
 
@@ -260,23 +260,23 @@ A data frame is like a matrix in that it is two-dimensional---it has rows and co
 
 Let's take a close look at a data frame:  the frame `m111survey`, which is available from the **tigerstats** package [@R-tigerstats].  First let's attach the package itself:
 
-```{r eval = F}
+```{r eval =FALSE}
 library(tigerstats)
 ```
 
-```{r include = F}
+```{r include =FALSE}
 library(tigerstats)
 ```
 
 In the R Studio IDE, we can get a look at the frame in a tab in the Editor pane if we use the `View()` function:
 
-```{r eval = F}
+```{r eval =FALSE}
 View(m111survey)
 ```
 
 As with many objects provided by a package, we can get more information about it:
 
-```{r eval = F}
+```{r eval =FALSE}
 help("m111survey")
 ```
 
@@ -284,13 +284,13 @@ From the Help we see that `m111survey` records the results of a survey conducted
 
 When you are not working in R Studio, there are still a couple of way so view the frame.  You could print it all out to the console:
 
-```{r eval = F}
+```{r eval =FALSE}
 m111survey
 ```
 
 You could also use the `head()` function \index{R-functions!head()@\texttt{head()}} to view a specified number of initial rows:
 
-```{r eval = F}
+```{r eval =FALSE}
 head(m111survey, n = 6)  # see first six rows
 ```
 
@@ -364,7 +364,7 @@ with(m111survey, fastest[fastest >=150])
 
 It's instructive to consider how `with()` works.  If we were to includes the names of the parameters of `with()` explicitly, then the call would have looked like this:
 
-```{r eval = F}
+```{r eval =FALSE}
 with(data = m111survey, expr = fastest[fastest >=150])
 ```
 
@@ -496,7 +496,7 @@ is.vector(df)
 If for some reason you want to prevent this, set `drop` to `FALSE`:
 
 ```{r}
-df <- m111survey[, "height", drop = F]
+df <- m111survey[, "height", drop =FALSE]
 head(df)
 ```
 
@@ -734,11 +734,11 @@ Categorical Variable (in Data Analysis)
 
 ## Exercises {- #frames-exercises}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
-```{r echo = F}
+```{r echo =FALSE}
 dimSum <- function(mat, dim = c("row", "column")) {
   dim <- match.arg(dim)
   if (dim == "column") mat <- t(mat)
@@ -752,6 +752,27 @@ dimSum <- function(mat, dim = c("row", "column")) {
 transpose <- function(mat) {
   matrix(as.vector(mat), nrow = ncol(mat), byrow = TRUE)
 }
+
+dfRandSelect <- function(df, n) {
+  rows <- nrow(df)
+  if ( n > rows ) {
+    return(cat("No can do!  The frame has only", rows, "rows."))
+  }
+  df[sample(1:rows, n, FALSE), ]
+}
+
+set.seed(4040)
+lowerLetters <- character(100)
+for ( i in 1:100 ) {
+  lowerLetters[i] <- paste0(sample(letters, 3, TRUE), collapse = "")
+}
+height <- runif(100, 60, 75)
+sex <- sample(c("female", "male"), 100, TRUE)
+myFrame <- data.frame(lowerLetters = lowerLetters,
+                      height = height,
+                      sex = sex,
+                      stringsAsFactors = FALSE)
+myFrame$sex <- factor(myFrame$sex)
 ```
 
 1.  R has a function called `t()` that computes the *transpose* of a given matrix.  This means that it switches around the rows and columns of the matrix, like this:
@@ -782,6 +803,60 @@ transpose <- function(mat) {
     dimSum(myMatrix, "c")
     ```
 
+1. Starting with `m111survey` in the **tigerstats** package, write the code necessary to create a new data frame called `smaller` that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall.  The new data frame should contain all of the original variables except for `sex`.
+
+1.  Write a function called `dfRandSelect()` that randomly selects (without replacement) a specified number of rows from a given data frame.  The function should have two parameters:
+    * `df`:  the data frame from which to select;
+    * `n`:  the number of rows to select.
+    
+    If `n` is greater than the number of rows in `df`, the function should return immediately with a message informing the user that the required task is not possible and informing him/her of the number of rows in `df`.  Typical examples of use should be as follows:
+    
+    ```{r echo=2:2}
+    set.seed(2020)
+    dfRandSelect(tigerstats::fuel, 5)
+    ```
+    
+    ```{r eval=FALSE}
+    dfRandSelect(tigerstats::fuel, 200)
+    ```
+    
+    ```
+    ## No can do!  The frame has only 15 rows.
+    ```
+    
+    **Hint**:  Use the function `nrow()`, which gives the number of rows of a matrix or data frame.
+    
+1.  Create your own data frame, named `myFrame`.  The frame should have 100 rows, along with the following variables:
+    * `lowerLetters`:  a character vector randomly-produced 3-letter strings, like "chj", "bbw", and so on.  The letters should all be lowercase.
+    * `height`:  a numerical vector consisting of real numbers chosen randomly between the values of 60 and 75.
+    * `sex`:  a factor whose possible value are "female" and "male".  Again, these values should be chosen randomly.
+    
+    A call to `str(myFrame)` would come out *like* this (although your results will vary a bit since the vectors are constructed randomly):
+    
+    ```{r}
+    str(myFrame)
+    ```
+    
+    `summary()` is useful when working with data frames.  Here is how a call to `summary(myFrame)` might look:
+    
+    ```{r}
+    summary(myFrame)
+    ```
+    
+    **Hint**:  If you have a vector of three letters, such as
+    
+    ```{r}
+    vec <- c("g", "a", "r")
+    ```
+    
+    then you can paste them together as follows:
+    
+    ```{r}
+    paste0(vec, collapse = "")
+    ```
+    
+1.  Study the data frame `fuel` in the **tigerstats** package.  Note that the fuel efficiency is reported as the number of liters of fuel required to travel 100 kilometers.  Look up the conversion between gallons and liters and between kilometers and miles, and use this information to create a new variable called `mpg` that gives the fuel efficiency as miles per gallon.  Finally, add this new variable to the `fuel` data frame.
+
 1. Use matrices to generalize the simulation in the Appeals Court Paradox (see Section \@ref(appeals-court-paradox)).  Your goal is to write a simulation function called `appealsSimPlus()` that comes with all the options provided in the text, but with additional parameters so that the user can choose:
     * the number of judges on the court;
     * the probability for each judge to make a correct decision;
@@ -789,7 +864,7 @@ transpose <- function(mat) {
     
     A typical call to the functions should look like this:
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     appealsSimPlus(reps = 10000, seed = 5252, 
                    probs = c(0.95, 0.90, 0.90, 0.90, 0.80),
                    votes = c(2, 1, 1, 1, 0))

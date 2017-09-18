@@ -1,6 +1,6 @@
 # Simulation {#simulation}
 
-```{r monkey-typewriter, echo=F, fig.pos='!h', fig.cap="A monkey typing randomly manages to type out a line of Shakespeare.  What is the chance that the monkey would produce this particular line?  Source: http://www.gloryofkings.com/?p=189.", out.width="40%", fig.align="center"}
+```{r monkey-typewriter, echo=FALSE, fig.pos='!h', fig.cap="A monkey typing randomly manages to type out a line of Shakespeare.  What is the chance that the monkey would produce this particular line?  Source: http://www.gloryofkings.com/?p=189.", out.width="40%", fig.align="center"}
 knitr::include_graphics("images/monkey-typewriter.jpeg")
 ```
 
@@ -228,7 +228,7 @@ triangle <- makesTriangle(x, y)
 
 Table \@ref(tab:trianglesimstab) shows the results.  Based on our ten repetitions, we would estimate the probability of a triangle as $4/10$.
 
-```{r trianglesimstab, echo=F}
+```{r trianglesimstab, echo=FALSE}
 df <- data.frame(x, y, side1, side2, side3, triangle)
 knitr::kable(df, caption = "Results of ten repetitions of breaking a unit length at two random points to form three segments.")
 ```
@@ -371,7 +371,7 @@ estimates <- numeric(length(reps))
 
 Next we loop through `reps`, performing a complete simulation for each repetition-number and storing our results:
 
-```{r trianglesimrepsize, cache=T}
+```{r trianglesimrepsize, cache=TRUE}
 for ( i in 1:length(reps)) {
   estimates[i] <- triangleSim(reps = reps[i], seed = 3030,
                              verbose = FALSE)
@@ -412,7 +412,7 @@ meetupSim <- function(reps = 10000, table = FALSE, seed = NULL) {
 
 Let's try it out:
 
-```{r meetupSim, cache = T}
+```{r meetupSim, cache =TRUE}
 meetupSim(reps = 100000, table = TRUE, seed = 3939)
 ```
 
@@ -450,7 +450,7 @@ Be aware, though, that when you use a loop in place of vectorization your routin
 
 First we get the time for the thousand repetitions of the meetup, using the original vectorized function:
 
-```{r eval= F}
+```{r eval=FALSE}
 system.time(meetupSim(reps = 10000, seed = 4040))
 ```
 
@@ -464,7 +464,7 @@ Our concern is with the total elapsed time:  a mere three-thousandths of a secon
 
 Next we get the time for the same number of repetitions, using the looping implementation:
 
-```{r eval= F}
+```{r eval=FALSE}
 system.time(meetupSim2(reps = 10000, seed = 4040))
 ```
 
@@ -509,7 +509,7 @@ In repeated trials,  a random real number between 0 and 1 will turn out to be le
 
 Another---and more convenient---way is to use the function `rbinom()`.  \index{R-functions!rbinom()@\texttt{rbinom()}} This function simulates the results of flipping a coin a number of times and counting how many heads one gets.  The general form of a call to `rbinom()`is as follows:
 
-```{r eval = F}
+```{r eval =FALSE}
 rbinom(n, size, prob)
 ```
 
@@ -559,7 +559,7 @@ In the above results, each 1 stands for a correct decision and the 0 stands for 
 
 Note that the following call would be incorrect:
 
-```{r eval=F}
+```{r eval=FALSE}
 rbinom(n = 1, size = 20, prob = 0.95)
 ```
 
@@ -591,7 +591,7 @@ courtCorrect <- (correctVotes >= 3)
 
 Table \@ref(tab:judge-votes) shows some possible results:
 
-```{r judge-votes, echo=F}
+```{r judge-votes, echo=FALSE}
 df <- data.frame(a, b,c, d, e, correctVotes, courtCorrect)
 rownames(df) <- NULL
 names(df) <- c("A", "B", "C", "D",
@@ -647,7 +647,7 @@ courtSim <- function(reps = 10000,
 
 Let's now estimate the probability of the court rendering a correct verdict, using one hundred thousand simulated cases:
 
-```{r courtresults1, cache = T}
+```{r courtresults1, cache =TRUE}
 courtSim(reps = 100000, seed = 3838, table = TRUE)
 ```
 
@@ -658,7 +658,7 @@ But things get even more interesting if we imagine that the judges recognize, af
 
 We will simulate to see if the judges' reasoning is correct.  All we need to do is to count Judge A's vote twice in the sum, and not count Judge E's vote at all:
 
-```{r eval = F}
+```{r eval =FALSE}
 correctVotes <- 2*a + b + c + d
 ```
 
@@ -773,7 +773,7 @@ As you can see, it's quite common to need 2 or 3 numbers to make the sum exceed 
 
 Since we are interested in the expected value of $X$, we should repeat the process a large number of times and compute the mean of the $X$-values that we find.  The following code repeats the process 1000 times:
 
-```{r unifsum1000, echo = 2:7, cache = T}
+```{r unifsum1000, echo = 2:7, cache =TRUE}
 set.seed(5050)
 needed <- numeric(1000)
 for (i in 1:1000 ) {
@@ -842,7 +842,7 @@ numberNeededSim <- function(target = 1, reps = 1000,
 
 Let's test the function with ten thousand repetitions:
 
-```{r expSumFinal, cache = T}
+```{r expSumFinal, cache =TRUE}
 numberNeededSim(target = 1, reps = 10000, seed = 4848, table = TRUE)
 ```
 
@@ -887,11 +887,11 @@ Sure enough, the numbers are typically around the mean of 70, give or take 3 uni
 
 We can use the **ggplot2** package to produce a density curve from all 100 values in the vector `x`.  (The resulting plot appears as Figure \@ref(fig:densitynormal).)
 
-```{r include = F}
+```{r include =FALSE}
 library(ggplot2)
 ```
 
-```{r eval = F}
+```{r eval =FALSE}
 library(ggplot2)
 ```
 
@@ -992,7 +992,7 @@ flossSim <- function(len = 150, min = 1,
 
 Let's give it a try with one thousand repetitions.
 
-```{r dentalflosssim, cache=T, width.out="60%", fig.cap="Density plot of the results of a dental-floss simulation.", fig.align="center"}
+```{r dentalflosssim, cache=TRUE, width.out="60%", fig.cap="Density plot of the results of a dental-floss simulation.", fig.align="center"}
 flossSim(reps = 1000, graph = TRUE, seed = 3535)
 ```
 
@@ -1020,14 +1020,14 @@ runif(1, min = 0, max = 2*pi)
 
 If we want a thousand drunken turn-angles, then we can get them all in a vector, as follows:
 
-```{r eval = F}
+```{r eval =FALSE}
 runif(1000, min = 0, max = 2*pi)
 ```
 
 So much for the turning angles. But in order to decide at each step whether the turtle has made a close return, we have to know the coordinates of the turtle after each step.  This is where unit-circle trigonometry comes in handy.  Recall that if a right triangle has a hypotenuse of length 1 (the length of a turtle step) and if one of the angles of the triangle is $\alpha$, then the side adjacent to $\alpha$ is $\cos(\alpha)$ and the side opposite is $\sin(\alpha)$.  The situation is illustrated in Figure \@ref(fig:right-triangle).
 
 
-```{r right-triangle, echo=F, fig.cap="Sides of a right triangle with hypotenuse 1, in terms of the angle shown.", out.width="75%", fig.align="center"}
+```{r right-triangle, echo=FALSE, fig.cap="Sides of a right triangle with hypotenuse 1, in terms of the angle shown.", out.width="75%", fig.align="center"}
 knitr::include_graphics("images/righttriangle.png")
 ```
 
@@ -1043,7 +1043,7 @@ We now see the idea:  in order to record the position of the turtle at the end o
 * sum the cosines to get the $x$-coordinate;
 * sum the sines to get the $y$-coordinate.
 
-```{r two-steps, echo=F, fig.cap="The first two steps by the Drunken Turtle.  Turtle turns by $a_1$ radians for Step One, then by $a_2$ radians for Step Two.", out.width="75%", fig.align="center"}
+```{r two-steps, echo=FALSE, fig.cap="The first two steps by the Drunken Turtle.  Turtle turns by $a_1$ radians for Step One, then by $a_2$ radians for Step Two.", out.width="75%", fig.align="center"}
 knitr::include_graphics("images/twosteps.png")
 ```
 
@@ -1111,7 +1111,7 @@ closeReturn <- (dist < 0.5)
 
 The results are shown in Table \@ref(tab:tensteptab).
 
-```{r tensteptab, echo = F}
+```{r tensteptab, echo =FALSE}
 df <- data.frame(angle, xSteps, ySteps, x, y, dist, closeReturn)
 knitr::kable(df, caption = "Record of the turtle's first ten steps.  It has not yet made a close return.")
 ```
@@ -1155,7 +1155,7 @@ drunkenSim <- function(steps = 1000, reps = 10000, close = 0.5,
 
 Let's try it out:
 
-```{r durnkensimrun, cache = T}
+```{r durnkensimrun, cache =TRUE}
 drunkenSim(steps = 1000, reps = 10000, 
            close = 0.5, seed = 3535, table = TRUE)
 ```
@@ -1185,7 +1185,7 @@ drunkenSim2 <- function(steps = 1000, seed = NULL) {
 
 Let's try it out!  The results appear in Figure \@ref(fig:drunken-turtle-steps)
 
-```{r drunken-turtle-steps, cache=T, fig.out = "60%", fig.align= "center", fig.cap ="Line plot of the Turtle's distance from the origin, as a function of how many steps the turtle has taken."}
+```{r drunken-turtle-steps, cache=TRUE, fig.out = "60%", fig.align= "center", fig.cap ="Line plot of the Turtle's distance from the origin, as a function of how many steps the turtle has taken."}
 drunkenSim2(steps = 1000, seed = 2525)
 ```
 
@@ -1224,7 +1224,7 @@ Encapsulation and Generalization \index{encapsulation and generalization}
 
 ## Exercises {-}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 

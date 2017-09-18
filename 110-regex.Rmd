@@ -1,6 +1,6 @@
 # Regular Expressions {#regex}
 
-```{r xkcd-regular-expressions, fig.pos='!h', echo=F, fig.cap="Regular Expressions, by xkcd.", out.width="60%", fig.align="center"}
+```{r xkcd-regular-expressions, fig.pos='!h', echo=FALSE, fig.cap="Regular Expressions, by xkcd.", out.width="60%", fig.align="center"}
 knitr::include_graphics("images/xkcd-regex-save-day.png")
 ```
 
@@ -209,7 +209,7 @@ But keep the following in mind:
 
 Some character classes occur so commonly that they have been granted special names.  Table \@ref(tab:character-class-names) gives a few that are worth remembering.
 
-```{r character-class-names, echo=F}
+```{r character-class-names, echo=FALSE}
 name <- c("[:alpha:]", "[:alnum:]", "[:word:]", "[:space:]", "[:lower:]", "[:upper:]")
 meanings <- c("a-zA-Z", "a-zA-Z0-9", "a-zA-Z0-9_ (note the underscore)",
               "white space", "a-z", "A-Z")
@@ -228,7 +228,7 @@ Here's how you would use character class names in a regular expression:
 Some character classes are so very common that they merit extra-short shortcuts:   most of these shortcuts begin with a backslash.  We'll call them *character class shortcuts*.  \index{character class shortcut} Some of the most common character class shortcuts are shown in Table \@ref(tab:character-types)
 
 
-```{r character-types, echo=F}
+```{r character-types, echo=FALSE}
 types <- c("\\\\d", "\\\\D", "\\\\s", "\\\\S", "\\\\w", "\\\\W", ".")
 meanings <- c("any decimal digit (0-9)",
               "anything not a decimal digit",
@@ -505,7 +505,7 @@ So why did we set `split = "\\s+"`?  What's with the extra backslash?
 
 The reason is that the argument passed with `split` is a string, not a regular expression object.  It starts out life, as if were, as a string, and R converts it to a regular expression, then hands the regex over to its regular expression engine to locate the matches in `myString` that in turn determine how `myString` is to be split up.  Since in R's string-world "\\s" is not a recognized character in the way that newline ("\\n"), tab ("\\t") and other control-characters are, R won't accept "\\s+" as a valid string.  Try it for your self:
 
-```{r eval=F}
+```{r eval=FALSE}
 strsplit(myString, split = "\s+")
 ```
 
@@ -515,7 +515,7 @@ strsplit(myString, split = "\s+")
 
 It follows that when you enter regular expressions as strings in R, you'll have to remember to escape the backslashed tokens that are used in a regular expression.  Table \@ref(tab:regex-string-escape-examples) gives several examples of this.
 
-```{r regex-string-escape-examples, echo=F}
+```{r regex-string-escape-examples, echo=FALSE}
 regex <- c("\\\\s+", "find\\\\.dot", "^\\\\w*\\\\d{1,3}$")
 strForm <- c("\"\\\\\\\\s+\"", 
              "\"find\\\\\\\\.dot \"", 
@@ -738,7 +738,7 @@ library(tigerData)
 help(reviews)
 ```
 
-```{r include = F}
+```{r include =FALSE}
 library(tigerData)
 ```
 
@@ -765,7 +765,7 @@ We are looking at 24,027 reviews---some of which, by the way, are quite long.
 
 Explore the plain-text of some of the reviews.  For example, the text of the second review can be viewed with:
 
-```{r eval = F}
+```{r eval =FALSE}
 hunger$content[2]
 ```
 
@@ -797,18 +797,18 @@ linkPattern <- "(?<=<a class=\"\"a-link-normal\"\" href=\"\"/)(.+?)(?=\"\">)"
 
 We now construct a list of character-vectors containing the links (if any) in each review:
 
-```{r anchor-links, cache = T}
+```{r anchor-links, cache =TRUE}
 links <- list()
 for (i in 1:nrow(hunger)) {
   text <- reviews$content[i]
-  m <- gregexpr(linkPattern, text = text, perl=T)
+  m <- gregexpr(linkPattern, text = text, perl=TRUE)
   links[[i]] <- unlist(regmatches(text, m))
 }
 ```
 
 If we are interested in *how many* books each reviewer links to, we can make a vector of these links:
 
-```{r number-links, cache = T}
+```{r number-links, cache =TRUE}
 numberOfLinks <- numeric()
 for (i in 1:nrow(hunger)) {
   numberOfLinks[i] <- length(links[[i]])
@@ -824,7 +824,7 @@ table(numberOfLinks)
 
 A better-looking table appears in Table \@ref(tab:tabulated-link-numbers).
 
-```{r tabulated-link-numbers, echo=F}
+```{r tabulated-link-numbers, echo=FALSE}
 tab <- table(numberOfLinks)
 numbers <- names(tab)
 tab2 <- cbind(as.numeric(numbers), tab)
@@ -871,11 +871,11 @@ Metacharacter (also called "Special Character") \index{metacharacter}
 
 ## Exercises {-}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
-```{r echo = F}
+```{r echo =FALSE}
 findMister <- function(str) {
   #mister <- "((\\w+)\\b)(?<=Mr\\.\\b)"
   mister <- "(?<=Mister )\\w+\\b"
@@ -894,7 +894,7 @@ findTitled <- function(str) {
   unlist(regmatches(x = str, m = results))
 }
 capRepeats <- function(str) {
-  gsub(pattern = "(\\b(\\w+)\\s+\\2\\b)", replacement = "\\U\\1\\E", x = str, perl = T)
+  gsub(pattern = "(\\b(\\w+)\\s+\\2\\b)", replacement = "\\U\\1\\E", x = str, perl =TRUE)
 }
 longWord <- function(strs) {
   indices <- grep("\\b\\w{8,}\\b", strs, perl = TRUE)

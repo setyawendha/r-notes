@@ -1,6 +1,6 @@
 # Turtle Graphics {#turtle}
 
-```{r xkcd-turtles, echo=F, fig.pos='!h', fig.cap="Turtles, by xkcd.", out.width="90%", fig.align="center"}
+```{r xkcd-turtles, echo=FALSE, fig.pos='!h', fig.cap="Turtles, by xkcd.", out.width="90%", fig.align="center"}
 knitr::include_graphics("images/xkcd-turtles.png")
 ```
 
@@ -12,7 +12,7 @@ In this chapter we will practice our knowledge of R---and of basic programming c
 
 First, we begin by loading the package:
 
-```{r eval = F}
+```{r eval =FALSE}
 library(TurtleGraphics)
 ```
 
@@ -22,7 +22,7 @@ library(TurtleGraphics)
 
 In order to create a Turtle Graphics scenario, call the function `turtle_init()`.  You get the plot shown in Figure \@ref(fig:initial-turtle).
 
-```{r initial-turtle, cache = T, out.width = "50%", fig.align="center", fig.cap = "Initialized Turtle"}
+```{r initial-turtle, cache =TRUE, out.width = "50%", fig.align="center", fig.cap = "Initialized Turtle"}
 turtle_init()
 ```
 
@@ -30,7 +30,7 @@ By default the turtle is positioned in the middle of a square of dimensions 100 
 
 You can get the turtle's position at any time:
 
-```{r eval = F}
+```{r eval =FALSE}
 turtle_getpos()
 ```
 
@@ -55,7 +55,7 @@ turtle_getangle()
 Now let's make the turtle move.  If you are following along on your own computer, it's best to run the lines of code one at a time, so you can see the effect of each command.  (If you run multiples lines, you'll only see the graph produced by the final line.)
 
 
-```{r first-movement, cache = T, out.width = "50%", fig.keep = 'last', echo = 2:3, fig.cap = "First Movements", fig.align="center"}
+```{r first-movement, cache =TRUE, out.width = "50%", fig.keep = 'last', echo = 2:3, fig.cap = "First Movements", fig.align="center"}
 turtle_init()
 turtle_forward(dist = 30)
 turtle_backward(dist = 10)
@@ -63,7 +63,7 @@ turtle_backward(dist = 10)
 
 The result appears in Figure \@ref(fig:first-movement). Next we'll add a little triangle:
 
-```{r add-triangle, cache = T, out.width = "50%", fig.keep = 'last', echo = 4:11, fig.cap = "Adding a Triangle", fig.align="center"}
+```{r add-triangle, cache =TRUE, out.width = "50%", fig.keep = 'last', echo = 4:11, fig.cap = "Adding a Triangle", fig.align="center"}
 turtle_init()
 turtle_forward(dist = 30)
 turtle_backward(dist = 10)
@@ -81,7 +81,7 @@ You can see the triangle in Figure \@ref(fig:add-triangle).
 
 The turtle is set in the "down" position, so that it leaves a trace out the path that it follows.  You can avoid the trace by pulling the turtle "up" with `turtle_up()`.  Whenever you want to restore the tracing, call `turtle_down()`.  See Figure \@ref(fig:up-down) for the results of the following code.
 
-```{r up-down, cache = T, out.width = "50%", fig.keep = 'last', echo = 12:19, fig.cap = "We moved the turtle around in the up position, then put the turtle down and traced out a line segment.", fig.align="center"}
+```{r up-down, cache =TRUE, out.width = "50%", fig.keep = 'last', echo = 12:19, fig.cap = "We moved the turtle around in the up position, then put the turtle down and traced out a line segment.", fig.align="center"}
 turtle_init()
 turtle_forward(dist = 30)
 turtle_backward(dist = 10)
@@ -111,13 +111,13 @@ turtle_col(col = "green")
 
 In R here are many, many colors to choose from, and 657 of them even have names.  To view them, use:= the `colors()` function:  \index{R-functions!colors()@\texttt{colors()}}
 
-```{r eval = F}
+```{r eval =FALSE}
 colors()
 ```
 
 You can also hide your turtle, and show it again any time you like.  See Figure \@ref(fig:hide-show) for the results of the following code.
 
-```{r hide-show, cache = T, out.width = "50%", fig.keep = 'last', echo = 21:26, fig.cap = "The graph after hiding, moving and showing.", fig.align="center"}
+```{r hide-show, cache =TRUE, out.width = "50%", fig.keep = 'last', echo = 21:26, fig.cap = "The graph after hiding, moving and showing.", fig.align="center"}
 turtle_init()
 turtle_forward(dist = 30)
 turtle_backward(dist = 10)
@@ -148,7 +148,7 @@ turtle_show()
 
 Finally, you can choose the type of line your turtle draws, and the width of the line.  See Figure \@ref(fig:type-width) for the results of the following code.
 
-```{r type-width, cache = T, out.width = "50%", fig.keep = 'last', echo = 27:31, fig.cap = "Choosing line-type and line-width.", fig.align="center"}
+```{r type-width, cache =TRUE, out.width = "50%", fig.keep = 'last', echo = 27:31, fig.cap = "Choosing line-type and line-width.", fig.align="center"}
 turtle_init()
 turtle_forward(dist = 30)
 turtle_backward(dist = 10)
@@ -190,7 +190,7 @@ turtle_forward(dist = 15)
 Eventually we want to make some complex figures that require many movements on the part of the turtle.  In order to make these go faster, we can turn off some of the turtle graphing by wrapping the desired movements in `turtle_do()`.  See Figure \@ref(fig:turtle-do-intro) for the results of the following code.
 
 
-```{r turtle-do-intro, cache = T, out.width = "50%", fig.keep='last', fig.cap="After final movement.", fig.align="center"}
+```{r turtle-do-intro, cache =TRUE, out.width = "50%", fig.keep='last', fig.cap="After final movement.", fig.align="center"}
 turtle_init()
 turtle_do({
   turtle_move(10)
@@ -203,7 +203,7 @@ turtle_do({
 
 How might we make a square?  The following code offers one way to do it.  See Figure \@ref(fig:turtle-square) for the results.
 
-```{r turtle-square, cache = T, out.width = "50%", fig.keep='last', fig.cap="Making a square.", fig.align="center"}
+```{r turtle-square, cache =TRUE, out.width = "50%", fig.keep='last', fig.cap="Making a square.", fig.align="center"}
 turtle_init()
 turtle_do({
   turtle_move(20)
@@ -232,7 +232,7 @@ turtle_do({
 
 As we learned in Chapter \@ref(flow), the more you need to repeat a particular pattern, the more it makes sense to write your code with a loop.  Suppose, for example, that you decide to make regular octagons.  A regular octagon has eight sides, and you turn 45 degrees after drawing each side.  You can do this easily by modifying the square-code as follows (see Figure \@ref(fig:turtle-octagon) for the results):
 
-```{r turtle-octagon, cache = T, out.width = "50%", fig.keep='last', fig.cap="Making an octagon.", fig.align="center"}
+```{r turtle-octagon, cache =TRUE, out.width = "50%", fig.keep='last', fig.cap="Making an octagon.", fig.align="center"}
 turtle_init()
 turtle_do({
   for(i in 1:8) {
@@ -246,7 +246,7 @@ turtle_do({
 You can even make many small turns, so that the resulting figure starts to look like a circle (see Figure \@ref(fig:turtle-circle) for the results):
 
 
-```{r turtle-circle, cache = T, out.width = "50%", fig.keep='last', fig.cap="Making a circle.", fig.align="center"}
+```{r turtle-circle, cache =TRUE, out.width = "50%", fig.keep='last', fig.cap="Making a circle.", fig.align="center"}
 turtle_init()
 turtle_setpos(x = 30, y = 50)
 turtle_do({
@@ -262,7 +262,7 @@ Notice that in the above code the turtle was initially set a bit to the left of 
 
 If you allow the index variable to be involved in the computations in the body of the loop then you can start making more complex figures.  For example, here is the code for a spiral (see Figure \@ref(fig:turtle-spiral) for the results):
 
-```{r turtle-spiral, cache = T, out.width = "50%", fig.keep='last', fig.cap="Using a loop to make a spiral.", fig.align="center"}
+```{r turtle-spiral, cache =TRUE, out.width = "50%", fig.keep='last', fig.cap="Using a loop to make a spiral.", fig.align="center"}
 turtle_init(width = 150, height = 150, mode = "clip")
 turtle_do({
   turtle_right(90)
@@ -293,7 +293,7 @@ Note that the user can vary the length of a side.
 
 Functions are nice, but note that `turtle_do()` cannot be used freely inside of them.  For example, suppose you were to write the square-making function as follows:
 
-```{r eval = F}
+```{r eval =FALSE}
 turtle_square <- function(side) { 
   turtle_do({
     for (i in 1:4) {
@@ -306,7 +306,7 @@ turtle_square <- function(side) {
 
 Attempting to use the function would result in an error:
 
-```{r eval=F}
+```{r eval=FALSE}
 turtle_init()
 turtle_square(50)
 ```
@@ -329,7 +329,7 @@ You have already met the `sample()` \index{R-functions!sample()@\texttt{sample()
 
 `sample()` makes a random choice from a given vector.  From the R-help we read that the general form of a call to sample is as follows:
 
-```{r eval = F}
+```{r eval =FALSE}
 sample(x, size, replace = FALSE, prob = NULL)
 ```
 
@@ -361,7 +361,7 @@ Because `replace` was left at its default value of `FALSE`, R did not replace nu
 
 Of course when `replace = FALSE` any attempt to sample more than the number of elements of `vec` will result in an error:
 
-```{r eval = F}
+```{r eval =FALSE}
 sample(vec, 11)
 ```
 
@@ -401,7 +401,7 @@ Let's apply `sample()` to design a scenario in which the turtle moves a fixed am
 One possible implementation is as follows:
 
 
-```{r eval = F}
+```{r eval =FALSE}
 turtle_bounce <- function(side = 60, step= 10) {
   if ( (side/2) %% step != 0 ) {
     stop("Side-length divided by two must be a multiple of step.")
@@ -431,7 +431,7 @@ turtle_bounce <- function(side = 60, step= 10) {
 
 Play the game a few times, to get a feel for how it works:
 
-```{r eval = F}
+```{r eval =FALSE}
 turtle_bounce(60, 15)
 ```
 
@@ -445,7 +445,7 @@ The definition indicates that there are two parameters:  `side` and `step`.
 
 Inside the function, we begin with a bit of input-validation:
 
-```{r eval = F}
+```{r eval =FALSE}
 if ( (side/2) %% step != 0 ) {
     stop("Side-length divided by two must be a multiple of step.")
   }
@@ -455,14 +455,14 @@ Remember that the turtle will start at $(\texttt{side}/2, \texttt{side}/2)$ and 
 
 If the input is OK, then we set up a vector `bounds` that records the smallest and largest possible values for the $x$ and $y$ coordinates of the turtle:
 
-```{r eval = F}
+```{r eval =FALSE}
 bounds <- c(0, side)
 ```
 
 Next, we initialize the turtle in the middle of the field and record its initial position in the vector `cp`:
 
 
-```{r eval = F}
+```{r eval =FALSE}
 turtle_init(side, side, mode = "clip")
 origin <- turtle_getpos()
 cp <- turtle_getpos()
@@ -473,7 +473,7 @@ cp <- turtle_getpos()
 
 Next, we enter a `repeat`-loop.  Inside the loop we begin with:
 
-```{r eval = F}
+```{r eval =FALSE}
 move <- readline(prompt = "Go Again? (enter q to quit):  ")
 if ( move == "q") break
 x <- cp["x"]
@@ -484,7 +484,7 @@ We first asked the user if she wanted to quit.  If she enters "q" then we'll bre
 
 Our next task is to determine how the turtle should move:
 
-```{r eval = F}
+```{r eval =FALSE}
 if (x %in% bounds | y %in% bounds) {
       angle <- 180
     } else {
@@ -497,14 +497,14 @@ If the turtle is at a boundary (either `x` equal to 0 or 60 or `y` equal to 0 or
 
 Having determined the amount by which to turn prior to the next step, we then have the turtle turn that amount and take the step:
 
-```{r eval = F}
+```{r eval =FALSE}
 turtle_right(angle)
 turtle_forward(step)
 ```
 
 Finally, we set `cp` to the new position of the turtle, and print that position out to the console for the user to see:
 
-```{r eval = F}
+```{r eval =FALSE}
 cp <- round(turtle_getpos(), 0)
 print(cp)
 ```
@@ -519,7 +519,7 @@ We then repeat the loop.
 
 A call to `runif()` looks like this:
 
-```{r eval = F}
+```{r eval =FALSE}
 runif(n, min = 0, max = 1)
 ```
 
@@ -580,7 +580,7 @@ turtle_drunk <- function(side, step) {
 
 Try the game once or twice:
 
-```{r eval = F}
+```{r eval =FALSE}
 turtle_drunk(100, 5)
 ```
 
@@ -590,7 +590,7 @@ It is natural to wonder how likely the turtle is to wander back close to where i
 
 Simple instructions, when combined with looping, can produce quite complex patterns.  Consider the following process (with results shown in Figure \@ref(fig:turtle-zany)):
 
-```{r turtle-zany, cache = T, out.width = "50%", fig.keep='last', fig.cap="Galactic Zany!", fig.align="center"}
+```{r turtle-zany, cache =TRUE, out.width = "50%", fig.keep='last', fig.cap="Galactic Zany!", fig.align="center"}
 turtle_init(1000, 1000, mode = "clip")
 turtle_do({
   turtle_setpos(600,400)
@@ -604,7 +604,7 @@ turtle_do({
 
 You might enjoy figuring out why this pattern occurs.  As you ponder this, it might help to construct a set of "ragged" spirals with somewhat larger steps, and pause at each step.  Code like the following might be useful:^[Also don't forget that every 360 degrees is a full turn around the circle, so when the turtle's angle is, say 720 degrees, it's the same as an angle of 360 degrees which is the same as an angle of 0 degrees.  All three angles amount to the same direction.]
 
-```{r eval = F}
+```{r eval =FALSE}
 turtle_init(1000, 1000, mode = "clip")
 turtle_do({
   i <- 1
@@ -635,7 +635,7 @@ Pseudo-random Numbers \index{pseudo-random numbers}
 
 ## Exercises {-}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
@@ -648,7 +648,7 @@ knitr::include_graphics("images/thinking.png")
     * the line-type of the rays (default is 1);
     * the line-width of the rays (default is 1).
 
-    ```{r turtlestarstart, echo = F, fig.cap="Sample Stars", out.width="60%", fig.align="center"}
+    ```{r turtlestarstart, echo =FALSE, fig.cap="Sample Stars", out.width="60%", fig.align="center"}
     knitr::include_graphics("images/turtle-stars.png")
     ```
     
@@ -657,7 +657,7 @@ knitr::include_graphics("images/thinking.png")
 
 1. Make a new star function `turtle_rstar()` in which the lengths of the rays are not determined by the user but instead vary randomly from 5 to 25 units, as in Figure \@ref(fig:next-turtle-star): 
 
-    ```{r next-turtle-star, echo = F, fig.cap="A star with rays of random lengths.", out.width="60%", fig.align="center"}
+    ```{r next-turtle-star, echo =FALSE, fig.cap="A star with rays of random lengths.", out.width="60%", fig.align="center"}
     knitr::include_graphics("images/turtle-stars-2.png")
     ```
 
@@ -665,7 +665,7 @@ knitr::include_graphics("images/thinking.png")
 
 1. Make a new star function `turtle_rstarColors()` that behaves like `turtle_rstar()` except that instead of being determined by the user the ray-color varies randomly from one ray to another, as in Figure \@ref(fig:turtle-star-3): 
 
-    ```{r turtle-star-3, echo = F, fig.cap="A star with rays of random lengths and random colors.", out.width="60%", fig.align="center"}
+    ```{r turtle-star-3, echo =FALSE, fig.cap="A star with rays of random lengths and random colors.", out.width="60%", fig.align="center"}
     knitr::include_graphics("images/turtle-stars-3.png")
     ```
 

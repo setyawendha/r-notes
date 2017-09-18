@@ -1,6 +1,6 @@
 # Our First Computer Programs {#idea}
 
-```{r beginning-journey, echo=F, fig.pos='!h', fig.cap = "The Yellow Brick Road, by Jorge Cruz.  [clipartfest.com](https://clipartfest.com/).", out.width = "70%", fig.align = "center"}
+```{r beginning-journey, echo=FALSE, fig.pos='!h', fig.cap = "The Yellow Brick Road, by Jorge Cruz.  [clipartfest.com](https://clipartfest.com/).", out.width = "70%", fig.align = "center"}
 knitr::include_graphics("images/yellow_brick_road.png")
 ```
 
@@ -296,7 +296,7 @@ Anyone can use R, but it was created for statisticians, so it has many features 
 
 First, we'll *attach* the package, \index{R-functions!library()@\texttt{library()}} so R can find all of the goodies it contains:
 
-```{r eval = FALSE}
+```{r eval=FALSE}
 library(mosaicData)
 ```
 
@@ -325,13 +325,13 @@ head(Births78, n = 10)
 
 We might wonder whether the number of births varies with the time of year.  One way to investigate this question is to make a *scatterplot*, where the days of the year (numbered 1 through 365) are on the horizontal axis and the number of births for each day are on the vertical axis.  Figure \@ref(fig:birthsplot) shows such a plot.^[The plot is made with the **ggplot2** graphics package [@R-ggplot2].  Graphing will not be a major focus of the course at first, but we will return from time to time, to the subject of graphing in **ggplot2** as our need for graphs dictates.]
 
-```{r include = F}
+```{r include=FALSE}
 library(ggplot2)
 ```
 
 
 
-```{r echo = F, birthsplot, fig.cap = "A simple scatterplot with R's ggplot2 graphics system.",fig.align="center", out.width = "60%"}
+```{r echo = FALSE, birthsplot, fig.cap = "A simple scatterplot with R's ggplot2 graphics system.",fig.align="center", out.width = "60%"}
 p <- ggplot(Births78, aes(x = date, y = births)) + geom_point() +
   labs(x = "Day of the Year", y = "Number of U.S. Births",
        title = "Birth-Numbers Vary Seasonally")
@@ -471,19 +471,19 @@ Delimiter
 
 ## Exercises { - #idea-exercises}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
 1.  Write a program that modifies the function `intro()` (see Section \@ref(idea-functions)) so that the person who introduces him or herself states a favorite sport.  For example, the result of the following function call:
 
-    ```{r eval = F}
+    ```{r eval = FALSE}
     intro(name = "Bettina", type = "human", sport = "lacrosse")
     ```
 
     should be:
 
-    ```{r echo = F}
+    ```{r echo = FALSE}
    intro <- function(name, type, sport) {
      message <- paste("Hello, I am a ",
                  type,
@@ -502,7 +502,7 @@ knitr::include_graphics("images/thinking.png")
 1. Write a program to produce the following output to the console:
 
   
-    ```{r echo = F}
+    ```{r echo = FALSE}
     catFun <- function() {
       cat("*\n")
     cat("**\n")
@@ -517,7 +517,7 @@ knitr::include_graphics("images/thinking.png")
 
 1.  Suppose we want to `cat` "Hello, World" to the console, and we enter:
 
-    ```{r eval = F}
+    ```{r eval = FALSE}
     cat(Hello, World!)
     ```
 

@@ -1,6 +1,6 @@
 # Lists {#lists}
 
-```{r santa-list, echo=F, fig.pos='!h', out.width = "60%", fig.align = "center"}
+```{r santa-list, echo=FALSE, fig.pos='!h', out.width = "60%", fig.align = "center"}
 knitr::include_graphics("images/santa-list.jpg")
 ```
 
@@ -10,7 +10,7 @@ In this Chapter we will study *lists*, another important data structure in R.
 
 ## Introduction to Lists
 
-```{r include = F}
+```{r include =FALSE}
 library(tigerstats)
 ```
 
@@ -133,7 +133,7 @@ Now you can carry on three separate analyses, working with one frame at a time.
 
 There is a pitfall which of you should be aware.  If you try to access any one of the frames by its name, you will get an error:
 
-```{r eval = F}
+```{r eval =FALSE}
 bySeat$1_front
 ```
 
@@ -143,7 +143,7 @@ bySeat$1_front
 
 The reason is that variable names cannot begin with a number!  You have to be content with
 
-```{r eval = F}
+```{r eval =FALSE}
 bySeat[[1]]
 ```
 
@@ -154,7 +154,7 @@ Lists combine many different sorts of objects into one object.  This makes them 
 
 Consider, for example, the drunken-turtle simulation from Section \@ref(drunken-turtle-sim):
 
-```{r eval = F}
+```{r eval =FALSE}
 drunkenSim <- function(steps = 1000, reps = 10000, close = 0.5, 
                        seed = NULL, table = FALSE) {
   if ( !is.null(seed) ) {
@@ -324,7 +324,7 @@ At this point in our study of R, `...` is useful in two ways.
 
 Look again at the code for the function `means2()`:
 
-```{r eval = F}
+```{r eval =FALSE}
 means2 <- function(vecs = list(), ...) {
   n <- length(vecs)
   if ( n == 0 ) {
@@ -340,25 +340,25 @@ means2 <- function(vecs = list(), ...) {
 
 We plan to take the mean of some vectors and therefore the `mean()` function will be used in the body of `means2()`.  However we would like the user to be able to decide how `mean()` deals with `NA`-values. When we include the ellipsis argument in the definition of `means2()` we have the option to pass its contents into `mean()`, and we exercise that option in the line:
 
-```{r eval = F}
+```{r eval =FALSE}
 results[i] <- mean(vecs[[i]], ...)
 ```
 
 Now we can see what happens in the call:
 
-```{r eval = F}
+```{r eval =FALSE}
 means2(vecs = list(vec1, vec2, vec3), na.rm = TRUE)
 ```
 
 The ellipsis argument will consist of the argument `na.rm = TRUE`, hence the call to `mean()` inside the loop is  equivalent to:
 
-```{r eval = F}
+```{r eval =FALSE}
 results[i] <- mean(vecs[[i]], na.rm = TRUE)
 ```
 
 Consider, on the other hand, the call:
 
-```{r eval = F}
+```{r eval =FALSE}
 means2(vecs = list(vec1, vec2, vec3))
 ```
 
@@ -416,7 +416,7 @@ sameLength(vec1, vec2, vec3)
 
 Let's reconsider the Meetup Simulation from Section \@ref(simulation-connect):
 
-```{r eval = F}
+```{r eval =FALSE}
 meetupSim <- function(reps = 10000, table = FALSE, seed = NULL) {
   if ( !is.null(seed) ) {
     set.seed(seed)
@@ -524,7 +524,7 @@ meetupSim <- function(reps = 10000, table = FALSE, seed = NULL) {
 
 Let's try it out:
 
-```{r meetupSimattr, cache = T}
+```{r meetupSimattr, cache =TRUE}
 meetupSim(reps = 100000, table = TRUE, seed = 3939)
 ```
 
@@ -549,11 +549,11 @@ List \index{list}
 
 ## Exercises {-}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
-```{r echo = F}
+```{r echo =FALSE}
 goodStats <- function(x, ...) {
   list(mean = mean(x, ...),
        sd = sd(x, ...),

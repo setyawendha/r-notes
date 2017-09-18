@@ -17,7 +17,7 @@ Sometimes you want a visual picture of how a numerical variable is distributed. 
 
 We know that we are interested in the variable `fastest` from `m111survey`.  When we construct a plot, we will have two dimensions available:  the x-axis and the y-axis.  We will need to begin by specifying to **ggplot2** what variable we want to study, and on which axis its values should be displayed.  This is accomplished by the `ggplot()` function:
 
-```{r include = F}
+```{r include =FALSE}
 library(ggplot2)
 ```
 
@@ -63,7 +63,7 @@ p
 
 Of course the entire plot could be written out in one command:
 
-```{r eval = F}
+```{r eval =FALSE}
 ggplot(data = m111survey, mapping = aes(x = fastest)) +
   geom_density() + geom_rug() +
   labs(x = "Fastest speed ever driven (mph)",
@@ -80,14 +80,14 @@ p <- ggplot(data = m111survey, mapping = aes(x = fastest))
 
 Now see how a histogram would look (the result is Figure \@ref(fig:fastesthistogram).)
 
-```{r eval = F}
+```{r eval =FALSE}
 p + geom_histogram() + geom_rug() +
   labs(x = "Fastest speed ever driven (mph)",
              title = "For most students the fastest speed is around 100 mph")
 ```
 
 
-```{r fastesthistogram, echo = F, fig.align = "center", out.width = "60%", fig.cap = "Histogram of the fastest speed every driven, with rug and labels.", message=F}
+```{r fastesthistogram, echo =FALSE, fig.align = "center", out.width = "60%", fig.cap = "Histogram of the fastest speed every driven, with rug and labels.", message=FALSE}
 p + geom_histogram() + geom_rug() +
   labs(x = "Fastest speed ever driven (mph)",
              title = "For most students the fastest speed is around 100 mph")
@@ -219,7 +219,7 @@ Evidently the people who prefer the back tend to drive pretty fast and to have l
 
 In Section \@ref(idea-data), we made a plot of the number of births in the United States for each day of that year (see Figure \@ref(fig:birthsplotframes)).  We noticed that there appear to be two clouds of points.  What accounts for this phenomenon?  By now we have the R-programming chops to take on this question.
 
-```{r echo = F, birthsplotframes, fig.cap = "Some of the days have significantly fewer births.  What's going on?",fig.align="center", out.width = "60%"}
+```{r echo =FALSE, birthsplotframes, fig.cap = "Some of the days have significantly fewer births.  What's going on?",fig.align="center", out.width = "60%"}
 ggplot(Births78, aes(x = date, y = births)) + geom_point() +
   labs(x = "Day of the Year", y = "Number of U.S. Births",
        title = "Daily U.S. Birth-Numbers in 1978")
@@ -234,7 +234,7 @@ str(Births78)
 
 We see that the variable `wday` gives the name of the day of the week, for each of the days in the year.  On a hunch, we make violin plots of the births for each of the days of the week.  The code appears below, and the resulting plot is shown in Figure \@ref(fig:violinbirthswday)
 
-```{r echo = T, violinbirthswday, fig.cap = "Violin plot of births, by day of the week.",fig.align="center", out.width = "60%"}
+```{r echo =TRUE, violinbirthswday, fig.cap = "Violin plot of births, by day of the week.",fig.align="center", out.width = "60%"}
 ggplot(Births78, aes(x = wday, y = births)) + geom_violin(fill = "burlywood") +
   geom_jitter()
 ```
@@ -252,7 +252,7 @@ Births78$weekend <- weekend
 Note that we have added the new variable to the data frame, so that it will be easy in **ggplot2** to use that variable for grouping, as in the code below.  The results appear in Figure \@ref(fig:birthsplotframesweekend).
 
 
-```{r echo = T, birthsplotframesweekend, fig.cap = "The days with fewer births are almost always weekend-days.",fig.align="center", out.width = "60%"}
+```{r echo =TRUE, birthsplotframesweekend, fig.cap = "The days with fewer births are almost always weekend-days.",fig.align="center", out.width = "60%"}
 ggplot(Births78, aes(x = date, y = births)) + geom_point(aes(color = weekend)) +
   labs(x = "Day of the Year", y = "Number of U.S. Births",
        title = "Daily U.S. Birth-Numbers in 1978")
@@ -284,7 +284,7 @@ Frame  \index{frame}
 
 ## Exercises {- #graphics-exercises}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 

@@ -3635,7 +3635,7 @@ parameter:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{max}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{, }\OperatorTok{-}\DecValTok{2}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DataTypeTok{na.rm =}\NormalTok{ T)}
+\KeywordTok{max}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{, }\OperatorTok{-}\DecValTok{2}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DataTypeTok{na.rm =}\OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -13107,7 +13107,7 @@ If for some reason you want to prevent this, set \texttt{drop} to
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\NormalTok{m111survey[, }\StringTok{"height"}\NormalTok{, drop =}\StringTok{ }\NormalTok{F]}
+\NormalTok{df <-}\StringTok{ }\NormalTok{m111survey[, }\StringTok{"height"}\NormalTok{, drop =}\OtherTok{FALSE}\NormalTok{]}
 \KeywordTok{head}\NormalTok{(df)}
 \end{Highlighting}
 \end{Shaded}
@@ -13688,6 +13688,140 @@ values cannot be expressed meaningfully by numbers.
 \begin{verbatim}
 ## [1]  21  57  93 129
 \end{verbatim}
+\item
+  Starting with \texttt{m111survey} in the \textbf{tigerstats} package,
+  write the code necessary to create a new data frame called
+  \texttt{smaller} that consists precisely of the male students who
+  believe in extraterrestrial life and who are more than 68 inches tall.
+  The new data frame should contain all of the original variables except
+  for \texttt{sex}.
+\item
+  Write a function called \texttt{dfRandSelect()} that randomly selects
+  (without replacement) a specified number of rows from a given data
+  frame. The function should have two parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{df}: the data frame from which to select;
+  \item
+    \texttt{n}: the number of rows to select.
+  \end{itemize}
+
+  If \texttt{n} is greater than the number of rows in \texttt{df}, the
+  function should return immediately with a message informing the user
+  that the required task is not possible and informing him/her of the
+  number of rows in \texttt{df}. Typical examples of use should be as
+  follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dfRandSelect}\NormalTok{(tigerstats}\OperatorTok{::}\NormalTok{fuel, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    speed efficiency
+## 10   100       8.27
+## 6     60       5.90
+## 9     90       7.57
+## 14   140      11.77
+## 2     20      13.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dfRandSelect}\NormalTok{(tigerstats}\OperatorTok{::}\NormalTok{fuel, }\DecValTok{200}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## No can do!  The frame has only 15 rows.
+\end{verbatim}
+
+  \textbf{Hint}: Use the function \texttt{nrow()}, which gives the
+  number of rows of a matrix or data frame.
+\item
+  Create your own data frame, named \texttt{myFrame}. The frame should
+  have 100 rows, along with the following variables:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{lowerLetters}: a character vector randomly-produced 3-letter
+    strings, like ``chj'', ``bbw'', and so on. The letters should all be
+    lowercase.
+  \item
+    \texttt{height}: a numerical vector consisting of real numbers
+    chosen randomly between the values of 60 and 75.
+  \item
+    \texttt{sex}: a factor whose possible value are ``female'' and
+    ``male''. Again, these values should be chosen randomly.
+  \end{itemize}
+
+  A call to \texttt{str(myFrame)} would come out \emph{like} this
+  (although your results will vary a bit since the vectors are
+  constructed randomly):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(myFrame)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    100 obs. of  3 variables:
+##  $ lowerLetters: chr  "hst" "stx" "knq" "bit" ...
+##  $ height      : num  68.6 67 63.1 70.7 62 ...
+##  $ sex         : Factor w/ 2 levels "female","male": 2 2 1 1 1 2 1 1 2 2 ...
+\end{verbatim}
+
+  \texttt{summary()} is useful when working with data frames. Here is
+  how a call to \texttt{summary(myFrame)} might look:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(myFrame)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  lowerLetters           height          sex    
+##  Length:100         Min.   :60.63   female:46  
+##  Class :character   1st Qu.:64.14   male  :54  
+##  Mode  :character   Median :68.56              
+##                     Mean   :68.06              
+##                     3rd Qu.:71.91              
+##                     Max.   :74.58
+\end{verbatim}
+
+  \textbf{Hint}: If you have a vector of three letters, such as
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"g"}\NormalTok{, }\StringTok{"a"}\NormalTok{, }\StringTok{"r"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  then you can paste them together as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{paste0}\NormalTok{(vec, }\DataTypeTok{collapse =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "gar"
+\end{verbatim}
+\item
+  Study the data frame \texttt{fuel} in the \textbf{tigerstats} package.
+  Note that the fuel efficiency is reported as the number of liters of
+  fuel required to travel 100 kilometers. Look up the conversion between
+  gallons and liters and between kilometers and miles, and use this
+  information to create a new variable called \texttt{mpg} that gives
+  the fuel efficiency as miles per gallon. Finally, add this new
+  variable to the \texttt{fuel} data frame.
 \item
   Use matrices to generalize the simulation in the Appeals Court Paradox
   (see Section \ref{appeals-court-paradox}). Your goal is to write a
@@ -18539,7 +18673,7 @@ any) in each review:
 \NormalTok{links <-}\StringTok{ }\KeywordTok{list}\NormalTok{()}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(hunger)) \{}
 \NormalTok{  text <-}\StringTok{ }\NormalTok{reviews}\OperatorTok{$}\NormalTok{content[i]}
-\NormalTok{  m <-}\StringTok{ }\KeywordTok{gregexpr}\NormalTok{(linkPattern, }\DataTypeTok{text =}\NormalTok{ text, }\DataTypeTok{perl=}\NormalTok{T)}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{gregexpr}\NormalTok{(linkPattern, }\DataTypeTok{text =}\NormalTok{ text, }\DataTypeTok{perl=}\OtherTok{TRUE}\NormalTok{)}
 \NormalTok{  links[[i]] <-}\StringTok{ }\KeywordTok{unlist}\NormalTok{(}\KeywordTok{regmatches}\NormalTok{(text, m))}
 \NormalTok{\}}
 \end{Highlighting}
@@ -21681,7 +21815,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119a1f158"
+## [1] "0x13b0ea698"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -21695,7 +21829,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119a1f158"
+## [1] "0x13b0ea698"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -21734,7 +21868,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119a1f158"
+## [1] "0x13b0ea698"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -21747,7 +21881,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11983b2a8"
+## [1] "0x13416ab78"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -21765,7 +21899,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119a1f158"
+## [1] "0x13b0ea698"
 \end{verbatim}
 
 \begin{Shaded}
@@ -21809,7 +21943,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e43bcd0" "0x11e43bcd0"
+## [1] "0x125dec438" "0x125dec438"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -21848,7 +21982,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e43bcd0" "0x11e43bcd0"
+## [1] "0x125dec438" "0x125dec438"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -21890,7 +22024,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e43bcd0" "0x10d133f78"
+## [1] "0x125dec438" "0x11a628200"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
@@ -22170,7 +22304,7 @@ an associated weight.
 \NormalTok{animal <-}\StringTok{  }\KeywordTok{c}\NormalTok{(}\StringTok{"zebra"}\NormalTok{, }\StringTok{"giraffe"}\NormalTok{, }\StringTok{"pig"}\NormalTok{, }
              \StringTok{"cape buffalo"}\NormalTok{, }\StringTok{"antelope"}\NormalTok{, }\StringTok{"wildebeast"}\NormalTok{)}
 \NormalTok{mass <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{55}\NormalTok{)}
-\NormalTok{prey <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(animal, mass, }\DataTypeTok{stringsAsFactors =}\NormalTok{ F)}
+\NormalTok{prey <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(animal, mass, }\DataTypeTok{stringsAsFactors =}\OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -23390,7 +23524,7 @@ package, so we should stop if the user hasn't installed and attached
   \CommentTok{# in the code below, scale_x_discrete(drop = f) ensures that}
   \CommentTok{# even if there are no values in sims for a particular level it}
   \CommentTok{# will still appear in the plot as a zero-height bar}
-  \KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sims)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{drop =}\NormalTok{ F) }\OperatorTok{+}
+  \KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sims)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{drop =}\OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Number Needed"}\NormalTok{, }\DataTypeTok{title =}\NormalTok{ plotTitle)}
 \NormalTok{\}}
 \end{Highlighting}

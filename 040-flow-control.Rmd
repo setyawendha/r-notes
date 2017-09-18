@@ -1,6 +1,6 @@
 # Flow-Control {#flow}
 
-```{r flow-loop, echo=F, fig.pos='!h', fig.cap = "Foxtrot, October 3, 2003.  Used with permission.",  out.width = "95%", fig.align = "center"}
+```{r flow-loop, echo=FALSE, fig.pos='!h', fig.cap = "Foxtrot, October 3, 2003.  Used with permission.",  out.width = "95%", fig.align = "center"}
 knitr::include_graphics("images/foxtrot-loop.jpg")
 ```
 
@@ -25,7 +25,7 @@ We can get any printout we like as long as we assign the desired string to `pers
 
 The `readline()` \index{R-functions!readline()@\texttt{readline()}}function will be helpful, here.  It reads input directly from the console and produces a character vector (of length one) that we may use as we like.  Thus
 
-```{r eval = F}
+```{r eval =FALSE}
 person <- readline(prompt = "What is your name?  ")
 # Type your name before running the next line!
 cat("Hello, ", person, "!\n", sep = "")
@@ -38,7 +38,7 @@ cat("Hello, ", person, "!\n", sep = "")
 
 Note that the input obtained from `readline()` is always a character vector of length one---a single string---so if you plan to use it as a number then you need to convert it to a number.  The `as.numeric()` \index{R-functions!as.numeric()@\texttt{as.numeric()}}function will do this for you:
 
-```{r eval = F}
+```{r eval =FALSE}
 number <- readline("Give me a number, and I'll add 10 to it:  ")
 # Give R your number before you run the next line!
 cat("The sum is:  ", as.numeric(number) + 10)
@@ -61,7 +61,7 @@ Let's design a simple guessing-game for the user:
 * The user will then be asked to guess the number.
 * If the user is correct, then the computer will congratulate the user.
 
-```{r eval = F}
+```{r eval =FALSE}
 number <- sample(1:4, size = 1)
 guess <- as.numeric(readline("Guess the number (1-4):  "))
 if ( guess == number ) {
@@ -84,7 +84,7 @@ if ( condition ) {
 
 The code above congratulates the a lucky guesser, but it has nothing at all to say to someone who did not guess correctly.  The way to provide an alternative is through the addition of the `else` reserved-word\index{if ... else@\texttt{if ... else}}:
 
-```{r eval = F}
+```{r eval =FALSE}
 number <- sample(1:4, size = 1)
 guess <- as.numeric(readline("Guess the number (1-4):  "))
 if ( guess == number ) {
@@ -108,7 +108,7 @@ if ( condition ) {
 
 An `if-else`can be followed by any number of `if-else`'s, setting up a chain of alternative responses:
 
-```{r eval = F}
+```{r eval =FALSE}
 number <- sample(1:4, size = 1)
 guess <- as.numeric(readline("Guess the number (1-4):  "))
 if ( guess == number ) {
@@ -145,7 +145,7 @@ if ( condition1) {
 
 Let's think again about the $\pi$-computing function from Section \@ref(default-arguments):
 
-```{r eval = F}
+```{r eval =FALSE}
 madhavaPI <- function(n = 1000000) {
   k <- 1:n
   terms <- (-1)^(k+1)*4/(2*k-1)
@@ -386,7 +386,7 @@ The more you need to repeat a particular pattern, the more it makes sense to wri
 
 The general form of a loop is:
 
-```{r eval = F}
+```{r eval =FALSE}
 for ( var in seq ) {
   # code involving var
 }
@@ -562,7 +562,7 @@ NA == "Scarecrow"
 
 Now look at what happens in an `if` statement where the condition is `NA`:
 
-```{r eval = F}
+```{r eval =FALSE}
 if ( NA ) {
   cat("We are in the bracket!\n")
 }
@@ -580,7 +580,7 @@ Checking that the input vector has positive length is an example of *validating*
 
 In the previous section we considered a possible problem with `for`-loops of the following form:
 
-```{r eval = F}
+```{r eval =FALSE}
 for ( i in 1:length(vec) ) {
   ## do something ...
 }
@@ -590,7 +590,7 @@ In the above loop `vec` could be thought of as a "loop-defining" vector:  its le
 
 The problem is that if `vec` happens to be an empty vector then we probably don't want to enter the loop at all.  However, the length of an empty vector is 0, and so the vector `1:length(vec)` actually works out to be a vector with two elements:
 
-```{r eval = F}
+```{r eval =FALSE}
 c(1,0)
 ```
 
@@ -667,7 +667,7 @@ For-loops are pretty wonderful, but they are best used in circumstances when you
 
 For example, suppose you want to play the number-guessing game with the user, but let her keep guessing until either she gives up or gets the correct answer.  Here's an implementation using `repeat`:
 
-```{r eval = F}
+```{r eval =FALSE}
 n <- 20
 number <- sample(1:n, size = 1)
 cat("I'm thinking of a whole number from 1 to ", n, ".\n", sep = "")
@@ -687,7 +687,7 @@ repeat {
 
 The game works well enough, but if you give it a try, you are sure to find it a bit fatiguing.  It wold be nice to give the user a hint after an incorrect guess.  Let's revise the game to tell the reader whether her guess was high or low.  While we are at it, let's cast the game into the form of a function.
 
-```{r eval = F}
+```{r eval =FALSE}
 numberGuess <- function(n) {
   number <- sample(1:n, size = 1)
   cat("I'm thinking of a whole number from 1 to ", n, ".\n", sep = "")
@@ -734,7 +734,7 @@ The reserved word `while` \index{while@\texttt{while}}constructs a loop that run
 
 `verboseSearch()` could be re-written with `while`:
 
-```{r eval = F}
+```{r eval =FALSE}
 verboseSearch <- function(elem, vec) {
   found <- FALSE
   if ( length(vec) == 0 ) {
@@ -914,12 +914,12 @@ collatz <- function(n, limit = 10000) {
 
 Next let's think about the plot.  We'll use the plotting system in the **ggplot2** package [@R-ggplot2].
 
-```{r eval = F}
+```{r eval =FALSE}
 library(ggplot2)
 ```
 
 
-```{r include=F}
+```{r include=FALSE}
 library(ggplot2)
 ```
 
@@ -999,7 +999,7 @@ collatz <- function(n, limit = 10000) {
 
 Try this version a few times, like so:
 
-```{r eval = F}
+```{r eval =FALSE}
 collatz(257)
 ```
 
@@ -1019,7 +1019,7 @@ In the last example, the result is `NA`, and a cryptic warning was issued.  In o
 
 Let's try out a piece of code that implements validation:
 
-```{r eval = F}
+```{r eval =FALSE}
 n <- -2
 n <- suppressWarnings(as.integer(n))
 isValid <- !is.na(n) && n > 1
@@ -1097,11 +1097,11 @@ Validation \index{validation}
 
 ## Exercises {-}
 
-```{r thinking-flow-control, fig.pos='!h', echo=F, out.width = "50%", fig.align = "center"}
+```{r thinking-flow-control, fig.pos='!h', echo=FALSE, out.width = "50%", fig.align = "center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
-```{r echo = F}
+```{r echo =FALSE}
 madhavaPI <- function(n) {
   # make a vector of all of the k's we need:
   k <- 1:n
@@ -1215,7 +1215,7 @@ madhavaGraph <- function(n = 10) {
 
     Here is an example of how the function should work:
    
-    ```{r eval = F}
+    ```{r eval =FALSE}
     madhavaGraph(n = -3)
     ```
     
@@ -1225,13 +1225,13 @@ madhavaGraph <- function(n = 10) {
    
     Here is another example:
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     madhavaGraph(n = 20)
     ```
     
     The output should be as in Figure \@ref(fig:madhavaGraph).
     
-    ```{r madhavaGraph, out.width = "50%", fig.cap = "This is how the output of the     madhavaGraph function should look.", echo = F, fig.align="center"}
+    ```{r madhavaGraph, out.width = "50%", fig.cap = "This is how the output of the     madhavaGraph function should look.", echo =FALSE, fig.align="center"}
     madhavaGraph(n = 20)
     ```
 

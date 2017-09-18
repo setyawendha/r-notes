@@ -6,7 +6,7 @@ output:
 
 # Vectors {#vectors}
 
-```{r vector-of-strings, echo=F, fig.pos='!h', fig.cap = "`rep(yarn, times = 4)`.", out.width = "24%", fig.show="hold"}
+```{r vector-of-strings, echo=FALSE, fig.pos='!h', fig.cap = "`rep(yarn, times = 4)`.", out.width = "24%", fig.show="hold"}
 knitr::include_graphics(rep("images/yarn.png",4))
 ```
 
@@ -100,7 +100,7 @@ In order to represent a logical value you can use:
 
 You can't represent truth or falsity any other way.  If you try anything else---like the following---you get an error:
 
-```{r eval = F}
+```{r eval =FALSE}
 badVec <- c(TRUE, false)
 ```
 
@@ -347,7 +347,7 @@ rep(vec, each = 2, times = 2)
 
 In order to create fifty 10's followed by fifty 30's followed by fifty 50's I would write:
 
-```{r eval = F}
+```{r eval =FALSE}
 rep(seq(10, 50, 20), each = 50)
 ```
 
@@ -512,7 +512,7 @@ The `<` operator is an example of a *Boolean operator* in R.  Table \@ref(boolea
 \index{R-operators!or for vectors}
 \index{R-operators!scalar or}
 
-```{r echo = F}
+```{r echo =FALSE}
 ops <- c("<", ">", "<=", ">=", "==", "&", "|", "&&", "||", "!")
 meanings <- c("less than", "greater than", "less than or equal to",
               "greater than or equal to", "equal to", "and", "or",
@@ -876,7 +876,7 @@ R provides a number of arithmetical operations on pairs of numerical vectors.  T
 \index{R-operators!exponentiation}
 \index{R-operators!\%/\% (quotient)}
 \index{R-operators!\%\% (remainder)}
-```{r arithmetical-operators, echo = F}
+```{r arithmetical-operators, echo =FALSE}
 ops <- c("x + y", "x - y", "x * y", "x / y", "x^y", "x %/% y", "x %% y")
 meanings <- c("addition", "subtraction",
               "multiplication", "division", 
@@ -1019,7 +1019,7 @@ max(3, 7, -2, NA)
 Like `sum()` and mean()`, they respond to the `na.rm` parameter:
 
 ```{r}
-max(3, 7, -2, NA, na.rm = T)
+max(3, 7, -2, NA, na.rm =TRUE)
 ```
 
 The `pmax()` \index{R-functions!pmax()@\texttt{pmax()}} function compares corresponding elements of each input-vector and produces a vector of the maximum values:
@@ -1106,7 +1106,7 @@ Syntax errors in computer programming are similar to grammatical errors in ordin
 
 A *run-time error* \index{errors!run-time} is an error that occurs when the syntax is correct but R is unable to finish the execution of your code for some other reason.  The following code, for example, is perfectly fine from a syntactical point of view:
 
-```{r eval = F}
+```{r eval =FALSE}
 sum("hello")
 ```
 
@@ -1118,7 +1118,7 @@ When run, however, it produces an error:
 
 Here is another example:
 
-```{r eval = F}
+```{r eval =FALSE}
 sum(emeraldCity)
 ```
 
@@ -1178,7 +1178,7 @@ rep("Dorothy", times = 3)
 
 When you have to assign the same value to several values, R allows you to abbreviate a bit.  Consider the following code:
 
-```{r eval = F}
+```{r eval =FALSE}
 a <- b <- c <- 5
 ```
 
@@ -1248,7 +1248,7 @@ There is one further restriction on variable-names that we have not yet mentione
 
 You need not memorize the above list:  You'll gradually learn most of it, and words you don't learn are words that you are unlikely to ever choose as a variable-name on your own.  Besides, reserved words show in in blue in the R Studio editor, and if you manage to use one anyway then R will stop you outright with a clear error message:
 
-```{r eval = F}
+```{r eval =FALSE}
 break <- 5
 ```
 
@@ -1349,7 +1349,7 @@ Semantic Error
 
 ## Exercises {-}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
@@ -1368,7 +1368,7 @@ knitr::include_graphics("images/thinking.png")
 
 1. The following three vectors gives the names, heights and ages of five people, and also say whether or not each person likes Toto:
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     person <- c("Akash", "Bee", "Celia", "Devadatta", "Enid")
     age <- c(23, 21, 22, 25, 63)
     height <- c(68, 67, 71, 70, 69)
@@ -1384,7 +1384,7 @@ knitr::include_graphics("images/thinking.png")
     
 1. Logical vectors are not numerical vectors, so it would seem that you should not be able to sum their elements.  But:
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     sum(likesToto)
     ```
     

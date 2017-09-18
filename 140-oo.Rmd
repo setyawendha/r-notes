@@ -72,11 +72,11 @@ Reference Classes are a relatively recent introduction to R.  R6 Classes are a s
 
 The package **R6** [@R-R6] provides access to R6 classes.  You will need to attach it:
 
-```{r eval = F}
+```{r eval =FALSE}
 library(R6)
 ```
 
-```{r include = F}
+```{r include =FALSE}
 library(R6)
 ```
 
@@ -190,7 +190,7 @@ The effect is the same as when we use `set_age()` except that we don't get a rep
 
 We have seen that in order to call a method on an object, you follow the format:
 
-```{r eval = F}
+```{r eval =FALSE}
 object$method()
 ```
 
@@ -430,7 +430,7 @@ Person$set("public", "set_color", function(val) {
 
 You might think that we can now set a favorite color for `dorothy`:
 
-```{r eval = F}
+```{r eval =FALSE}
 dorothy$set_color("blue")
 ```
 
@@ -458,7 +458,7 @@ In order to illustrate method chaining, we'll extend the class Lion a bit, with 
 animal <-  c("zebra", "giraffe", "pig", 
              "cape buffalo", "antelope", "wildebeast")
 mass <- c(50, 100, 25, 60, 45, 55)
-prey <- data.frame(animal, mass, stringsAsFactors = F)
+prey <- data.frame(animal, mass, stringsAsFactors =FALSE)
 ```
 
 Let's now add `prey` as a new attribute to class Lion.  We will also add an attribute `eaten`:  a character vector---initially empty---that will contain a record of all the animals that the lion has eaten.
@@ -899,21 +899,21 @@ We are now ready for a simulation.  The results are graphed in Figure \@ref(fig:
 
 
 
-```{r whalesimgraph, width.out="60%", fig.cap="Simulated whale population.  Sadly, they all die after about 130 days.", fig.align='center', cache = T}
+```{r whalesimgraph, width.out="60%", fig.cap="Simulated whale population.  Sadly, they all die after about 130 days.", fig.align='center', cache =TRUE}
 oceanSim(steps = 200, males = 15, females = 15,
          animate = FALSE, seed = 3030)
 ```
 
 You should try running the simulation yourself a few times, for differing initial numbers of whales.  If you like you can watch the whales move about by setting `animate` to `TRUE`:
 
-```{r eval = F}
+```{r eval =FALSE}
 oceanSim(steps = 200, males = 15, females = 15,
          animate = TRUE)
 ```
 
 You might also wish to explore varying the `starve` parameter:  recall that the higher it is, the lower the long-term stable whale population will be.  In order to better detect long-term stable population sizes, you will want to work with more steps, and you should turn off the step-by-step-animation, thus:
 
-```{r eval = F}
+```{r eval =FALSE}
 oceanSim(steps = 1000, males = 60, females = 60,
          starve = 2.5, animate = TRUE)
 ```
@@ -938,7 +938,7 @@ df <- tigerstats::m111survey[, c("height", "weight_feel")]
 
 If we want to print `df`, either of the following two statements will suffice:
 
-```{r eval = F}
+```{r eval =FALSE}
 print(df)
 df         # calls print(df) implicitly
 ```
@@ -966,7 +966,7 @@ str(lst)
 
 Now let's print `lst`:
 
-```{r eval = F}
+```{r eval =FALSE}
 lst   # same as print(lst)
 ```
 
@@ -990,7 +990,7 @@ class(lst)
 
 How does the class of `df` determine the method used for printing?  To see how this is done, look at the code for the `print()` function:
 
-```{r eval = F}
+```{r eval =FALSE}
 print
 ```
 
@@ -1011,7 +1011,7 @@ The body of the `print()` consists of just one expression:  `UseMethod("print")`
 4. Control has now passed to the `UseMethod()` function, which searches for a suitable method for printing an object of class `data.frame`.  It does this by pasting together "print" (the argument to `generic`) and `data.frame` (the class of the object `df` it was given) with a period in between, getting the string "print.data.frame".  A search is now conducted for a function of the name.
 5.  The function `print.data.frame()` will be found.  We can tell because it appears on the list of available "methods" for `print()`.  The `methods()` function \index{R-functions!methods()@\texttt{methods()}} will give us the complete list of available methods, if we like
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     methods("print")
     ```
     
@@ -1031,7 +1031,7 @@ The body of the `print()` consists of just one expression:  `UseMethod("print")`
 
 It is interesting to note that the very act of "printing out" the print function, which we did earlier in order to see the code for the function, involved a search for a printing method:
 
-```{r eval = F}
+```{r eval =FALSE}
 print      # this is equivalent to print(print)
 ```
 
@@ -1192,14 +1192,14 @@ plot.numNeededSims <- function(x) {
   # in the code below, scale_x_discrete(drop = f) ensures that
   # even if there are no values in sims for a particular level it
   # will still appear in the plot as a zero-height bar
-  ggplot(df, aes(x = sims)) + geom_bar() + scale_x_discrete(drop = F) +
+  ggplot(df, aes(x = sims)) + geom_bar() + scale_x_discrete(drop =FALSE) +
     labs(x = "Number Needed", title = plotTitle)
 }
 ```
 
 Let's give it a try:
 
-```{r numberneededSimgeneric, cache = T}
+```{r numberneededSimgeneric, cache =TRUE}
 numberNeededSim(reps = 10000, seed = 4040)
 ```
 
@@ -1207,7 +1207,7 @@ The print function was called implicitly, so we got useful output to the console
 
 It's also possible to save the results somewhere, for example:
 
-```{r numberneededSimgeneric2, cache = T}
+```{r numberneededSimgeneric2, cache =TRUE}
 results <- numberNeededSim(reps = 10000, seed = 4040)
 str(results)
 ```
@@ -1364,11 +1364,11 @@ Polymorphism  \index{polymorphism}
 
 ## Exercises {-}
 
-```{r echo=F, fig.pos='!h', out.width="50%", fig.align="center"}
+```{r echo=FALSE, fig.pos='!h', out.width="50%", fig.align="center"}
 knitr::include_graphics("images/thinking.png")
 ```
 
-```{r echo = F}
+```{r echo =FALSE}
 meetupSim <- function(reps = 10000, seed = NULL) {
   if ( is.null(seed) ) {
     seed <- as.numeric(Sys.time())
@@ -1429,7 +1429,7 @@ plot.meetupSims <- function(x) {
     
 1. Revisit the class Ocean, and rewrite its `initialize()` method so that you can set the age, time to maturity, range and stepSize individually for each new whale.  You should be able to use it like this:
 
-    ```{r eval = F}
+    ```{r eval =FALSE}
     maleInfo <- data.frame(age = c(10, 12, 13, 8, 7, 14, 2),
                                     maturity = rep(10, times = 7),
                                     range = c(4, 4, 5, 6, 6, 6, 8),
@@ -1451,7 +1451,7 @@ plot.meetupSims <- function(x) {
     
     Make the list have class "meetupSims".  A typical example of use should look like this:
     
-    ```{r meetupgnefnoo, cache = T}
+    ```{r meetupgnefnoo, cache =TRUE}
     results <- meetupSim(reps = 10000, seed = 3535)
     str(results)
     ```

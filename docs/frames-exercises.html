@@ -459,6 +459,50 @@ Your task is to write your own function called <code>dimSum()</code> that will s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)
 <span class="kw">dimSum</span>(myMatrix, <span class="st">&quot;c&quot;</span>)</code></pre></div>
 <pre><code>## [1]  21  57  93 129</code></pre></li>
+<li><p>Starting with <code>m111survey</code> in the <strong>tigerstats</strong> package, write the code necessary to create a new data frame called <code>smaller</code> that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall. The new data frame should contain all of the original variables except for <code>sex</code>.</p></li>
+<li>Write a function called <code>dfRandSelect()</code> that randomly selects (without replacement) a specified number of rows from a given data frame. The function should have two parameters:
+<ul>
+<li><code>df</code>: the data frame from which to select;</li>
+<li><code>n</code>: the number of rows to select.</li>
+</ul>
+<p>If <code>n</code> is greater than the number of rows in <code>df</code>, the function should return immediately with a message informing the user that the required task is not possible and informing him/her of the number of rows in <code>df</code>. Typical examples of use should be as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dfRandSelect</span>(tigerstats<span class="op">::</span>fuel, <span class="dv">5</span>)</code></pre></div>
+<pre><code>##    speed efficiency
+## 10   100       8.27
+## 6     60       5.90
+## 9     90       7.57
+## 14   140      11.77
+## 2     20      13.00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dfRandSelect</span>(tigerstats<span class="op">::</span>fuel, <span class="dv">200</span>)</code></pre></div>
+<pre><code>## No can do!  The frame has only 15 rows.</code></pre>
+<p><strong>Hint</strong>: Use the function <code>nrow()</code>, which gives the number of rows of a matrix or data frame.</p></li>
+<li>Create your own data frame, named <code>myFrame</code>. The frame should have 100 rows, along with the following variables:
+<ul>
+<li><code>lowerLetters</code>: a character vector randomly-produced 3-letter strings, like “chj”, “bbw”, and so on. The letters should all be lowercase.</li>
+<li><code>height</code>: a numerical vector consisting of real numbers chosen randomly between the values of 60 and 75.</li>
+<li><code>sex</code>: a factor whose possible value are “female” and “male”. Again, these values should be chosen randomly.</li>
+</ul>
+<p>A call to <code>str(myFrame)</code> would come out <em>like</em> this (although your results will vary a bit since the vectors are constructed randomly):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(myFrame)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    100 obs. of  3 variables:
+##  $ lowerLetters: chr  &quot;hst&quot; &quot;stx&quot; &quot;knq&quot; &quot;bit&quot; ...
+##  $ height      : num  68.6 67 63.1 70.7 62 ...
+##  $ sex         : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 2 1 1 1 2 1 1 2 2 ...</code></pre>
+<p><code>summary()</code> is useful when working with data frames. Here is how a call to <code>summary(myFrame)</code> might look:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(myFrame)</code></pre></div>
+<pre><code>##  lowerLetters           height          sex    
+##  Length:100         Min.   :60.63   female:46  
+##  Class :character   1st Qu.:64.14   male  :54  
+##  Mode  :character   Median :68.56              
+##                     Mean   :68.06              
+##                     3rd Qu.:71.91              
+##                     Max.   :74.58</code></pre>
+<p><strong>Hint</strong>: If you have a vector of three letters, such as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;g&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;r&quot;</span>)</code></pre></div>
+<p>then you can paste them together as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(vec, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;gar&quot;</code></pre></li>
+<li><p>Study the data frame <code>fuel</code> in the <strong>tigerstats</strong> package. Note that the fuel efficiency is reported as the number of liters of fuel required to travel 100 kilometers. Look up the conversion between gallons and liters and between kilometers and miles, and use this information to create a new variable called <code>mpg</code> that gives the fuel efficiency as miles per gallon. Finally, add this new variable to the <code>fuel</code> data frame.</p></li>
 <li>Use matrices to generalize the simulation in the Appeals Court Paradox (see Section <a href="appeals-court-paradox.html#appeals-court-paradox">6.5</a>). Your goal is to write a simulation function called <code>appealsSimPlus()</code> that comes with all the options provided in the text, but with additional parameters so that the user can choose:
 <ul>
 <li>the number of judges on the court;</li>

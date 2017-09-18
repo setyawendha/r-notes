@@ -466,7 +466,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">links &lt;-<span class="st"> </span><span class="kw">list</span>()
 <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hunger)) {
   text &lt;-<span class="st"> </span>reviews<span class="op">$</span>content[i]
-  m &lt;-<span class="st"> </span><span class="kw">gregexpr</span>(linkPattern, <span class="dt">text =</span> text, <span class="dt">perl=</span>T)
+  m &lt;-<span class="st"> </span><span class="kw">gregexpr</span>(linkPattern, <span class="dt">text =</span> text, <span class="dt">perl=</span><span class="ot">TRUE</span>)
   links[[i]] &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">regmatches</span>(text, m))
 }</code></pre></div>
 <p>If we are interested in <em>how many</em> books each reviewer links to, we can make a vector of these links:</p>
