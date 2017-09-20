@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="glossary-6.html">
-<link rel="next" href="lists.html">
+<link rel="prev" href="graphics.html">
+<link rel="next" href="implementation-in-ggplot2.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -514,47 +514,322 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="graphics-exercises" class="section level2 unnumbered">
-<h2>Exercises</h2>
-<p><img src="images/thinking.png" width="50%" style="display: block; margin: auto;" /></p>
-<ol style="list-style-type: decimal">
-<li><p>Using the <code>tigerstats::m111survey</code> data frame, write the <strong>ggplot2</strong> code necessary to produce the graph in Figure <a href="#fig:heightideal"><strong>??</strong></a>. (The points are all blue.)</p>
-<p><img src="r-notes_files/figure-html/heightideal-1.png" width="672" /></p></li>
-<li><p>Using the <code>mosaicData::Utilities</code> data frame, write the <strong>ggplot2</strong> code necessary to produce the graph in Figure <a href="#fig:utilitybills"><strong>??</strong></a>.</p>
-<p><img src="r-notes_files/figure-html/utitlitybills-1.png" width="672" /></p></li>
-<li><p>The next few exercises pertain to the data frame <code>CPS85</code> from the package <strong>mosaicData</strong>. Learn about it with <code>help(CPS85)</code>. We will use the <strong>ggplot2</strong> graphing package to explore whether men were being paid more than women in 1985.</p>
-<p>Make a density plot of the wages of the people in the study. As with all plots you make, it should have well-labelled axes (with units if possible). For a density plot you should label the horizontal axis, but you can let <strong>ggplo2</strong> provide the label for the “density” axis. As always, provide a descriptive title. Also provide a “rug” of individual values along the horizontal axis.</p></li>
-<li><p>Look at the plot you made in the previous exercise: you will notice that one person made a wage that was much higher than all the rest. In data analysis, when a value is much higher or lower than the rest of the values we call it an <em>outlier</em>.</p>
-<p>Write the code needed to find the age, sex and sector of employment of the person who made this extraoridinarily high wage. Report the age, sex and sector of this person.</p>
-<p>Create a new data frame called <code>cpsSmall</code> that is the same as <code>CPC85</code> except that it excludes the row corresponding to the outlier-individual.</p></li>
-<li><p>In order to explore the relationship between wage and sex in the CPS study, make violin plots for the wages of men and women. (In this exercise and in subsequent exercises, use the <code>cpsSmall</code> data frame so as to exclude the outlier.) Based on the plot, who tends to earn higher wages: men or women?</p></li>
-<li><p>Someone might argue that men don’t earn higher wages because of sex-discrimination in the workplace, but rather because of some other factor. For example, it could be that in 1985 women chose to work in low-wage sectors of the economy, whereas men tended to work in higher-wage sectors. Of course for this explanation to be viable, some sectors of the economy have to pay more on average than other sectors do. In order to verify whether this is the case, make a violin plot of wage vs. sector of employment. Use the plot to name a couple of high-wage sectors and a couple of low-wage sectors.</p></li>
-<li><p>From the previous exercise you now know that some sectors of the economy pay more than other sectors. Hence in order to investigate properly whether there was wage-discrimination in the workforce based on sex, we would have to compare the wages of men and women who work in the <em>same</em> sector. To this end it would be nice to have eight separate violin plots, one for each sector. Each plot would compare the wages of men and women in that sector. Use <code>facet_wrap()</code> to construct a graph that displays all eight plots at once.</p>
-Examine your graph.
+<div id="the-grammar-of-graphics" class="section level2">
+<h2><span class="header-section-number">8.1</span> The Grammar of Graphics</h2>
+<p>A graph begins with data, and the data we work with will be tidy data that comes in a data frame. Leland Wilkinson’s Grammar of Graphics (see <span class="citation">(Wilkinson <a href="#ref-Wilkinson2005">2005</a>)</span>) posits that most quantitative graphics constructed from a data frame can be understood in terms of a few basic elements. In our quite elementary introduction to the Grammar, the elements to which we will pay the most attention are as follows:</p>
 <ul>
-<li>Are there any sectors in which it seems that women typically make more than men. If so, what sectors are they?</li>
-<li>On the other hand, are there any sectors where men typically make more than women? If so, what sectors are they?</li>
-<li>Based on your analysis, does it seem plausible that women made less than men simply because they chose lower-paying sectors of employment?</li>
-</ul></li>
-<li><p>This exercise and the next one pertain to the data frame <code>imagpop</code> in the <strong>tigerstats</strong> package. Learn about it with <code>help(imagpop)</code>.</p>
-<p>One of the variables in <code>imagpop</code> is <code>kkardashtemp</code>, the rating given by each person to the celebrity Kim Kardashian. Make a density plot of the ratings. Compute the mean Kim Kardashian raintg for all the people in <code>imagpop</code>. Finally, compute the percentage of people in the population who gave a rating more than 40 but less than 60.</p></li>
-<li>Write a program that repeats the following procedure 100 times:
-<ul>
-<li>Randomly select 10 people from the population.</li>
-<li>Compute the mean <code>kkardashtemp</code> rating for these 10 people.</li>
+<li><em>Glyphs</em>: the basic units of a graph. Glyphs represent cases in the data frame. Each glyph corresponds to one or more cases, but no two glyphs correspond to the same case.</li>
+<li><em>Aesthetics</em>: perceptual properties of glyphs that are not the same for all glyphs but instead vary depending on the values of variables for the case (or cases) that each glyph represents.</li>
+<li><em>Frame</em>: special aesthetics that relate the <strong>position</strong> of each glyphs in the graph to values of variables for the cases that the glyph represents.</li>
+<li><em>Scales</em>: particular choices that determine the precise relationship between aesthetic properties and data values for glyphs.</li>
+<li><em>Guides</em>: visual aids that help the human viewer to infer data values for cases from the aesthetic properties of the glyphs that represent them.</li>
 </ul>
-<p>The means should be stored in a numerical vector. Make a density plot (with rug) of the means, and also compute the percentage of the means that are between 40 and 60. As always, the plot should have sensible labels and a descriptive title.</p></li>
-</ol>
-
+<p>We will clarify these abstract ideas with a series of examples. Many of our examples will be drawn from the <code>m111survey</code> data frame in the <strong>tigerstats</strong> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tigerstats)
+<span class="kw">help</span>(m111survey)</code></pre></div>
+<p>You will recall that the data frame records the results of a survey of 71 students at Georgetown College in Kentucky. Each case (row in the frame) corresponds to an individual student. See Table <a href="the-grammar-of-graphics.html#tab:m111surveyhead">8.1</a>.</p>
+<table>
+<caption><span id="tab:m111surveyhead">Table 8.1: </span>The first few rows of the m111survey data frame. Five variables are shown.</caption>
+<thead>
+<tr class="header">
+<th align="left">sex</th>
+<th align="right">fastest</th>
+<th align="right">GPA</th>
+<th align="left">seat</th>
+<th align="left">weight_feel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">male</td>
+<td align="right">119</td>
+<td align="right">3.56</td>
+<td align="left">1_front</td>
+<td align="left">1_underweight</td>
+</tr>
+<tr class="even">
+<td align="left">male</td>
+<td align="right">110</td>
+<td align="right">2.50</td>
+<td align="left">2_middle</td>
+<td align="left">2_about_right</td>
+</tr>
+<tr class="odd">
+<td align="left">female</td>
+<td align="right">85</td>
+<td align="right">3.80</td>
+<td align="left">2_middle</td>
+<td align="left">2_about_right</td>
+</tr>
+<tr class="even">
+<td align="left">female</td>
+<td align="right">100</td>
+<td align="right">3.50</td>
+<td align="left">1_front</td>
+<td align="left">1_underweight</td>
+</tr>
+<tr class="odd">
+<td align="left">male</td>
+<td align="right">95</td>
+<td align="right">3.20</td>
+<td align="left">3_back</td>
+<td align="left">1_underweight</td>
+</tr>
+<tr class="even">
+<td align="left">male</td>
+<td align="right">100</td>
+<td align="right">3.10</td>
+<td align="left">1_front</td>
+<td align="left">3_overweight</td>
+</tr>
+</tbody>
+</table>
+<div id="example-a-scatterplot" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> Example: a Scatterplot</h3>
+<p>We begin with a simple scatter plot based on the data. A scatter plot is often a good way to investigate graphically the relationship between two numerical variables. Figure <a href="the-grammar-of-graphics.html#fig:ggfastestgpasex">8.1</a> shows a scatter plot of student GPA vs. the fastest speed at which the student has ever driven a car.</p>
+<div class="figure"><span id="fig:ggfastestgpasex"></span>
+<img src="r-notes_files/figure-html/ggfastestgpasex-1.png" alt="Scatterplot of fastest driving speed and GPA.  Points are colored by sex of the student." width="672" />
+<p class="caption">
+Figure 8.1: Scatterplot of fastest driving speed and GPA. Points are colored by sex of the student.
+</p>
 </div>
-<!-- </div> -->
+<div id="the-glyphs" class="section level4">
+<h4><span class="header-section-number">8.1.1.1</span> The Glyphs </h4>
+<p>In this scatter plot, the glyphs are points. Each case—each student in the survey—is represented by one and only one point on the plot.</p>
+</div>
+<div id="the-aesthetics" class="section level4">
+<h4><span class="header-section-number">8.1.1.2</span> The Aesthetics </h4>
+<p>In ordinary discourse the term <em>aesthetic</em> refers to any perceptual property of an object. For a point, the list of its perceptual properties includes its location, its shape, its size, its color, and so on. In the Grammar of Graphics, however, only some of the properties—the one that vary from glyph to glyph depending on data—count as aesthetics in the graph.</p>
+<p>For the scatter plot, the property of <strong>size</strong> is not considered to be an aesthetic: we can see that this is so because all of the points are the same size, and so the size cannot vary with the values of some variable in the data frame. The same goes for the property of <strong>shape</strong>: all of the points in this scatter plot are circular.</p>
+<p>On the other hand, the property of <strong>color</strong> IS an aesthetic for the glyphs in the graph, since the males and the females in the study are represented by points of different colors. You could say that color is <em>mapped</em> to the variable <code>sex</code> in the data frame:</p>
+<ul>
+<li>the reddish color goes with the value “female”;</li>
+<li>the turquoise color goes with the value “male”.</li>
+</ul>
+</div>
+<div id="the-frame" class="section level4">
+<h4><span class="header-section-number">8.1.1.3</span> The Frame </h4>
+<p>In our scatter plot there are two other glyph properties that count as aesthetics:</p>
+<ul>
+<li><em>x-location</em>: the position of the glyph relative to the horizontal axis of the graph;</li>
+<li><em>y-location</em>: the position of the glyph relative to the vertical axis.</li>
+</ul>
+<p>We can see that these properties are aesthetics because:</p>
+<ul>
+<li><em>x-location</em> is mapped to the variable <code>fastest</code>: the further to the right the glyph is, the greater is the value of <code>fastest</code> for the student represented by that glyph.</li>
+<li><em>y-location</em> is mapped to the variable <code>GPA</code>: the higher up the glyph is, the greater is the value of <code>GPA</code> for the student represented by that glyph.</li>
+</ul>
+<p>Although x and y locations are just two more aesthetics, they are so crucial to the nature of a two-dimensional graph that they are classed separately in the Grammar of Graphics as the <em>frame</em> for the graph.</p>
+<p>In the graphs we consider in this Chapter, the frame will always consist of at least the x-location, and sometimes—as in the case of our scatter plot—the y-location as well.</p>
+</div>
+<div id="scales" class="section level4">
+<h4><span class="header-section-number">8.1.1.4</span> Scales </h4>
+<p>We can decide that color (for example) is to be mapped to <code>sex</code>, but that decision leaves open the question of how, precisely, to make the connection. The computer can make thousands of colors: which one will correspond to the value “male”, and which to “female”? To answer that question is to choose a <em>scale</em>.</p>
+<p>In this example our scale was:</p>
+<ul>
+<li>reddish = female</li>
+<li>turquoise = male</li>
+</ul>
+<p>But we might have adopted a different scale, such as:</p>
+<ul>
+<li>blue = female</li>
+<li>pink = male</li>
+</ul>
+<p>Every aesthetic mapping involves a choice of a scale. Consider x-location: apparently a point on the extreme left of the scatter plot represent a student who drove 50 miles per hour. A point at the extreme right corresponds to a speed of 200 miles per hour, and in general the relationship between x-location and <code>fastest</code> is linear: for example, a point halfway across the graph goes with a speed of 125 miles per hour, halfway between 50 mph and 200 mph. In the same way, the mapping of y-location to <code>GPA</code> involves a linear choice of scale.</p>
+</div>
+<div id="guides" class="section level4">
+<h4><span class="header-section-number">8.1.1.5</span> Guides </h4>
+<p>How were we able to see what the scales were for each of the three aesthetic mappings in the scatter plot? We were assisted by three set of <em>guides</em>, one for each mapping:</p>
+<ul>
+<li>the legend to the right of the plot guided us from color to value of <code>sex</code>;</li>
+<li>the labels and tick marks on the x-axis and the thin vertical white lines guided us from x-location to value of <code>fastest</code>;</li>
+<li>the labels and tick marks on the y-axis and the thin horizontal white lines guided us from y-location to value of <code>GPA</code>.</li>
+</ul>
+<p>Most of the time, every aesthetic mapping is accompanied by a guide that gives the human viewer at least a rough idea of the scale chosen for that mapping.</p>
+</div>
+<div id="summary" class="section level4">
+<h4><span class="header-section-number">8.1.1.6</span> Summary</h4>
+<p>In summary we say that for this scatter plot:</p>
+<ul>
+<li>The <em>glyphs</em> are points.
+<ul>
+<li>This time each glyph represents one and only one case.</li>
+</ul></li>
+<li>The <em>frame</em> is:
+<ul>
+<li>x = <code>fastest</code></li>
+<li>y = <code>GPA</code></li>
+</ul></li>
+<li>Other <em>aesthetics</em> are:
+<ul>
+<li>color = <code>sex</code></li>
+</ul></li>
+<li>There are <em>scales</em> for the three aesthetic mappings above. (But we usually don’t say much about the x and y-location scales if they are linear, and we don’t make a big deal of the color scale unless we went to some trouble to choose it ourselves.)</li>
+<li>The legend and the axis labels, tick marks and hash-lines are the <em>guides</em>.</li>
+</ul>
+</div>
+</div>
+<div id="example-two-bar-graphs" class="section level3">
+<h3><span class="header-section-number">8.1.2</span> Example: Two Bar Graphs</h3>
+<p>Bar graphs are useful in the study of categorical variables, especially factor variables that have only a few possible values. Figure <a href="the-grammar-of-graphics.html#fig:ggseatbargraph">8.2</a> shows the distribution of the factor variable <code>seat</code> in the <code>mat111survey</code> data frame.</p>
+<div class="figure"><span id="fig:ggseatbargraph"></span>
+<img src="r-notes_files/figure-html/ggseatbargraph-1.png" alt="Bar graph of seating preference.  The bars have a burlywood fill." width="672" />
+<p class="caption">
+Figure 8.2: Bar graph of seating preference. The bars have a burlywood fill.
+</p>
+</div>
+<p>In this graph:</p>
+<ul>
+<li>The <em>glyphs</em> are bars.
+<ul>
+<li>This time each glyph an entire group of cases: there is a bar for the students who prefer the front, a bar for the students who prefer the middle, and a bar for the back-sitters.</li>
+</ul></li>
+<li>The <em>frame</em> is:
+<ul>
+<li>x = <code>seat</code>. Note that it is possible for x-location to map to a categorical variable!</li>
+<li>In this graph the y-location does not count as part of the frame, since it is not really an aesthetic. Instead the height of a bar along the y-axis tells us how many students are represented by that bar. In the Grammar of Graphics we say that the y-axis represents a <strong>statistic</strong>—a value computed from the data. In the situation at hand, our statistic is a simple tally of the cases for each value of <code>seat</code>.</li>
+</ul></li>
+<li>There are no other <em>aesthetics</em>! The glyphs have various perceptual properties such as a shape rectangular and color, but these don’t vary with the cases: the shape is always rectangular and the color is always burlywood.</li>
+<li>There is a <em>scale</em> for the x-location, but there is nothing very interesting about it: the three values of <code>seat</code> are equally spaced along the axis.</li>
+<li>There is a <em>guide</em> for the x-location: labels on the x-axis tell us which bar goes with which value of the variable <code>seat</code>.</li>
+</ul>
+<p>Bar graphs can also be used to study the relationship between two categorical variables. Figure <a href="the-grammar-of-graphics.html#fig:ggsexseat">8.3</a> shows the relationship between sex and seating preference in the <code>m111survey</code> data.</p>
+<div class="figure"><span id="fig:ggsexseat"></span>
+<img src="r-notes_files/figure-html/ggsexseat-1.png" alt="Seating preference, by sex." width="672" />
+<p class="caption">
+Figure 8.3: Seating preference, by sex.
+</p>
+</div>
+<p>Again the glyphs are bars and each bar represents many cases, but now there is a bar for each combination of the values of <code>sex</code> and <code>seat</code>. The frame is again specified only by the x-location, but this time it is mapped to <code>sex</code>. There is another aesthetic as well: the color (more technically, the <em>fill</em>) of the bars is mapped to the variable <code>seat</code>, allowing us to see the relationship between the two categorical variables <code>sex</code> and <code>seat</code>. Scales and guides work much the same way as in the previous example.</p>
+</div>
+<div id="examples-histograms-density-plots-and-box-plots" class="section level3">
+<h3><span class="header-section-number">8.1.3</span> Examples: Histograms, Density Plots and Box Plots</h3>
+<p>In this section we’ll examine some glyphs that are useful in the visualization of numerical variables.</p>
+<div id="histograms" class="section level4">
+<h4><span class="header-section-number">8.1.3.1</span> Histograms</h4>
+<p>How are the fastest speeds driven distributed, for students in the <code>m111survey</code> data? In order to investigate such a question graphically, we might make a <em>histogram</em> like the one in Figure <a href="the-grammar-of-graphics.html#fig:ggfastesthistogram">8.4</a>.</p>
+<div class="figure"><span id="fig:ggfastesthistogram"></span>
+<img src="r-notes_files/figure-html/ggfastesthistogram-1.png" alt="Histogram of the fastest speed ever driven." width="672" />
+<p class="caption">
+Figure 8.4: Histogram of the fastest speed ever driven.
+</p>
+</div>
+<p>In this graph:</p>
+<ul>
+<li>The <em>glyphs</em> are rectangles. Each rectangle represents cases where the value of <code>fastest</code> lies within a particular range covered by the bottom left and right corners of the rectangle.</li>
+<li>The <em>frame</em> is:
+<ul>
+<li>x = <code>fastest</code>.</li>
+<li>As with our bar graphs, the y-location does not count as part of the frame, but instead represents a statistic, permitting the height of a rectangle to indicate the number of cases that it represents.</li>
+</ul></li>
+<li>Again there are no other <em>aesthetics</em>. The burlywood fill of the rectangles is constant.</li>
+<li>The <em>scale</em> for x-location, maps location to <code>fastest</code> in the familiar linear fashion, and the x-axis has the usual <em>guides</em> found for numerical variables.</li>
+</ul>
+<p>Figure <a href="the-grammar-of-graphics.html#fig:ggfastesthistogramrug">8.5</a> is a variant, containing a second type of glyph: each student is now represented along the X-axis by a rug-tick located approximately at his or her fastest speed. (The ticks are actually “jittered” randomly so as to avoid over-plotting when two or more students report the same speed.) The addition of a second set of glyphs is called <em>layerng</em>, and is a common device to enhance the communicative power of a graph.</p>
+<div class="figure"><span id="fig:ggfastesthistogramrug"></span>
+<img src="r-notes_files/figure-html/ggfastesthistogramrug-1.png" alt="Histogram of the fastest speed ever driven." width="672" />
+<p class="caption">
+Figure 8.5: Histogram of the fastest speed ever driven.
+</p>
+</div>
+</div>
+<div id="density-plots" class="section level4">
+<h4><span class="header-section-number">8.1.3.2</span> Density Plots</h4>
+<p>One may also study the distribution of numerical variable with a <em>density plot</em>, as in Figure <a href="the-grammar-of-graphics.html#fig:ggdensityfastest">8.6</a>. In this figure there is only one glyph, the curve itself, and it represents all of the cases. However, its height represents crowding (density) of values of <code>fastest</code> for the cases: when the curve is high, many values are crowded closely together on the x-axis, and for speeds where the curve is low the viewer knows that few (if any) students drive around that speed. The y-axis is again used along with a statistic: for density plots the vertical scale is chosen in such a way that the total area under the density curve is 1, so that the area under the curve between two given speeds is approximately equal to the proportion of students who had speeds within that range. For density plots a rug, provided again by slightly jittered ticks, is a useful additional layer to indicate crowding of values.</p>
+<div class="figure"><span id="fig:ggdensityfastest"></span>
+<img src="r-notes_files/figure-html/ggdensityfastest-1.png" alt="Density plot of the fastest speed ever driven." width="672" />
+<p class="caption">
+Figure 8.6: Density plot of the fastest speed ever driven.
+</p>
+</div>
+<p>Since they don’t take up much territory on a graph, density curves are especially useful when we want to study the relationship between a numerical and a categorical variable. For example, Figure <a href="the-grammar-of-graphics.html#fig:ggdensityfastestseat">8.7</a> shows density plots of the fastest speeds for each of the three possible seating preferences. The glyphs are again density curves, but since the color aesthetic has been mapped to <code>seat</code>, we get a separate and differently-colored glyphs, one for each seating-preference..</p>
+<div class="figure"><span id="fig:ggdensityfastestseat"></span>
+<img src="r-notes_files/figure-html/ggdensityfastestseat-1.png" alt="Density plot of the fastest speed ever driven." width="672" />
+<p class="caption">
+Figure 8.7: Density plot of the fastest speed ever driven.
+</p>
+</div>
+<p>Another approach to the same graphing problem is to use a type of glyph known as a <em>violin</em>. Look at Figure <a href="the-grammar-of-graphics.html#fig:ggviolinfastestseat">8.8</a>.</p>
+<div class="figure"><span id="fig:ggviolinfastestseat"></span>
+<img src="r-notes_files/figure-html/ggviolinfastestseat-1.png" alt="Violin plot of the fastest speed ever driven." width="672" />
+<p class="caption">
+Figure 8.8: Violin plot of the fastest speed ever driven.
+</p>
+</div>
+<p>A violin glyph is simply two mirror-images of the same density plot, pasted together along their bases. Thus the violin is thick where many values are clustered together and thin where data values are rare. In this plot, the frame is constituted by mapping x-location to <code>seat</code> and y-location to the variable <code>fastest</code>. For additional communicative power we have layered another set of glyphs–jittered points, one for each case–onto the plot.</p>
+<p>Suppose that one wished to incorporate a third variable, such as sex, into the graph? One possible way to to this is to divide the graphs into separate plots based on the values of one of the categorical variables in question. The separate plots are known as <em>facets</em>,  and are illustrated in Figure <a href="the-grammar-of-graphics.html#fig:ggviolinfastestseatsex">8.9</a>, where facet-ing has been done on the basis of the variable <code>seat</code>.</p>
+<div class="figure"><span id="fig:ggviolinfastestseatsex"></span>
+<img src="r-notes_files/figure-html/ggviolinfastestseatsex-1.png" alt="Violin plots of the fastest speed ever driven, by sex and seating preference." width="672" />
+<p class="caption">
+Figure 8.9: Violin plots of the fastest speed ever driven, by sex and seating preference.
+</p>
+</div>
+</div>
+<div id="box-plots" class="section level4">
+<h4><span class="header-section-number">8.1.3.3</span> Box Plots</h4>
+<p>The <em>five number</em> summary is a convenient way to summarize the distribution of a numerical variable. The five numbers involved are:</p>
+<ul>
+<li>the minimum value</li>
+<li>the <em>first quartile</em> <span class="math inline">\(Q1\)</span>, the <span class="math inline">\(25^{\text{th}}\)</span> percentile of the values</li>
+<li>the <em>median</em>, which is the <span class="math inline">\(50^{\text{th}}\)</span> percentile</li>
+<li>the <em>third quartile</em> <span class="math inline">\(Q3\)</span>, the <span class="math inline">\(75^{\text{th}}\)</span> percentile</li>
+<li>the maximum value</li>
+</ul>
+<p>Also of interest is the <em>interquartile range</em> <span class="math inline">\(IQR\)</span>, defined as:</p>
+<p><span class="math display">\[IQR = Q3 - Q1.\]</span></p>
+<p>The interquartile range covers measures the spread in the middle 50% of the values.</p>
+<p>In R the five number summary can be got quickly with the <code>fivenum()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fnFastest &lt;-<span class="st"> </span><span class="kw">fivenum</span>(m111survey<span class="op">$</span>fastest)
+<span class="kw">names</span>(fnFastest) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;min&quot;</span>, <span class="st">&quot;Q1&quot;</span>, <span class="st">&quot;median&quot;</span>, <span class="st">&quot;Q3&quot;</span>, <span class="st">&quot;max&quot;</span>)
+fnFastest</code></pre></div>
+<pre><code>##    min     Q1 median     Q3    max 
+##   60.0   90.5  102.0  119.5  190.0</code></pre>
+<p>A box-plot glyph is the graphical counterpart of the five number summary. Figure <a href="the-grammar-of-graphics.html#fig:ggboxplotsample">8.10</a> shows how it works for the variable <code>fastest</code> in the <code>m111survey</code> data frame. The box ranges from <span class="math inline">\(Q1\)</span> to <span class="math inline">\(Q3\)</span>, covering the middle half of the speeds. The lower hinge extends from <span class="math inline">\(Q1\)</span> down to the minimum speed. The upper hinge would have extended from <span class="math inline">\(Q3\)</span> to the maximum value, but the maximum value was flagged as an outlier. When <strong>ggplot2</strong> makes a box-plot, any point that is</p>
+<ul>
+<li>greater than <span class="math inline">\(Q3 + 1.5 \times IQR\)</span> or</li>
+<li>less than <span class="math inline">\(Q1 - 1.5 \times IQR\)</span></li>
+</ul>
+<p>is flagged for individual plotting, and the corresponding hinge will be <span class="math inline">\(1.5 \times IQR\)</span> units long.</p>
+<div class="figure"><span id="fig:ggboxplotsample"></span>
+<img src="r-notes_files/figure-html/ggboxplotsample-1.png" alt="Illustration of a simple box plot." width="672" />
+<p class="caption">
+Figure 8.10: Illustration of a simple box plot.
+</p>
+</div>
+<p>A single box glyph on its own is not very interesting. Where box plots shine is in the study of the relationship between a numerical variable and a categorical with a large number of levels, as in Figure (fig:utitlitybills1). Here the glyphs are boxes, with each box being constructed from the bills that were issued in a particular month.</p>
+<div class="figure"><span id="fig:utitlitybills1"></span>
+<img src="r-notes_files/figure-html/utitlitybills1-1.png" alt="Utility bills throught the year." width="672" />
+<p class="caption">
+Figure 8.11: Utility bills throught the year.
+</p>
+</div>
+</div>
+</div>
+<div id="example-choropleth-maps" class="section level3">
+<h3><span class="header-section-number">8.1.4</span> Example: Choropleth Maps</h3>
+<p>The term “choropleth” derives from Greek and means “many regions.” A choropleth graph is a graph in which the frame is provided by some sort of map with regions that might be countries, cities or counties in the U.S. etc.</p>
+<p>In the choropleth map shown in Figure <a href="the-grammar-of-graphics.html#fig:ggchoropleth">8.12</a>, is based on a data frame in which ease case is a state in the U.S (along with the District of Columbia). One of the variables is <code>population</code>, the population of the state. The glyphs are the territories of each of the U.S. states. The frame is determined by mapping x and y-location to latitude and longitude. The aesthetic property <em>color</em> is mapped to the <code>population</code>, and a guide is provided to the right of the graph.</p>
+<div class="figure"><span id="fig:ggchoropleth"></span>
+<img src="r-notes_files/figure-html/ggchoropleth-1.png" alt="Choropleth map of state populations in the U.S." width="672" />
+<p class="caption">
+Figure 8.12: Choropleth map of state populations in the U.S.
+</p>
+</div>
+</div>
+</div>
+<h3> Placeholder</h3>
+<div id="refs" class="references">
+<div id="ref-Wilkinson2005">
+<p>Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. Springer Verlag. <a href="http://www.springer.com/us/book/9780387245447" class="uri">http://www.springer.com/us/book/9780387245447</a>.</p>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="glossary-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lists.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="graphics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="implementation-in-ggplot2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

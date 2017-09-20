@@ -282,3 +282,14 @@ set.seed(4040)
 turtle_init(50, 50)
 turtle_rstarColor(n = 12, width = 5)
 turtle_hide()
+
+turtle_poly <- function(side, n) {
+  for ( i in 1:n ) {
+    turtle_forward(side)
+    turtle_right(360/n)
+  }
+}
+
+turtle_init(mode = "clip")
+turtle_setpos(30, 50)
+turtle_poly(15, 12)
