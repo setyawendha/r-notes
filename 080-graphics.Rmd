@@ -190,7 +190,7 @@ ggplot(m111survey, aes(x = fastest)) +
              title = "For most students the fastest speed is around 100 mph")
 ```
 
-#### Density Plots
+#### Density Plots {#graphics-density-plots}
 
 One may also study the distribution of numerical variable with a *density plot*, as in Figure \@ref(fig:ggdensityfastest).  In this figure there is only one glyph, the curve itself, and it represents all of the cases.  However, its height represents crowding (density) of values of `fastest` for the cases: when the curve is high, many values are crowded closely together on the x-axis, and for speeds where the curve is low the viewer knows that few (if any) students drive around that speed.  The y-axis is again used along with a statistic:  for density plots the vertical scale is chosen in such a way that the total area under the density curve is 1, so that the area under the curve between two given speeds is approximately equal to the proportion of students who had speeds within that range.  For density plots a rug, provided again by slightly jittered ticks, is a useful additional layer to indicate crowding of values.
 
@@ -271,7 +271,7 @@ A box-plot glyph is the graphical counterpart of the five number summary.  Figur
 
 is flagged for individual plotting, and the corresponding hinge will be $1.5 \times IQR$ units long.
 
-```{r ggboxplotsample, echo=FALSE, cache=TRUE, fig.cap="Illustration of a simple box plot."}
+```{r ggboxplotsample, echo=FALSE, fig.cap="Illustration of a simple box plot."}
 fn <- fivenum(m111survey$fastest)
 iqr <- fn[4] - fn[2]
 ggplot(m111survey, aes(group = 1, x = factor(1), y = fastest)) +
@@ -419,7 +419,7 @@ ggplot(m111survey, aes(x = fastest, y = GPA)) +
        subtitle = "(But guys tend to drive faster, and to have lower GPAs.)")
 ```
 
-Points have other perceptual properties in besides their color.  *Shape* is such a property.  (From the point of view of the Grammar of Graphics, a point in itself is only an abstract location in space.  Only when it assumes all of its perceptual properties does it actually "appear", and when it does appear it shape may be other than circular, just as its color may be other than, for instance, black.)  Thus alternative way to incorporate sex into the graph would have been to map shape to `sex`,as in the following code that results in Figure \@ref(fig:impscatterplotshap):
+Points have other perceptual properties in besides their color.  *Shape* is such a property.  (From the point of view of the Grammar of Graphics, a point in itself is only an abstract location in space.  Only when it assumes all of its perceptual properties does it actually "appear", and when it does appear it shape may be other than circular, just as its color may be other than, for instance, black.)  Thus alternative way to incorporate sex into the graph would have been to map shape to `sex`,as in the following code that results in Figure \@ref(fig:impscatterplotshape):
 
 ```{r impscatterplotshape, cache=TRUE, fig.cap = "Mapping shape to the variable sex."}
 ggplot(m111survey, aes(x = fastest, y = GPA)) +
@@ -439,7 +439,7 @@ ggplot(m111survey, aes(x = sex)) +
        title = "Males are more likely to prefer the Back!")
 ```
 
-Some people don't like the glyphs "stacked" in bar graphs.  In order to mollify them we can set `position` to "dodge", as in the code below.  The results appear in Figure \@ref(fig:sexseat2).
+Some people don't like the glyphs "stacked" in bar graphs.  In order to mollify them we can set `position` to "dodge", as in the code below.  The results appear in Figure \@ref(fig:impsexseat2).
 
 ```{r impsexseat2, cache=TRUE, fig.cap = "Seating preference, by sex---no stacking of bars.."}
 ggplot(m111survey, aes(x = sex)) + 
@@ -503,7 +503,7 @@ ggplot(m111survey, aes(x = fastest, y = GPA)) +
 
 ### Layering:  Adding Another Glyph Type
 
-If you want to add another layer of glyphs, simply add on another call to a `geom`-function.  In order to produce Figure \@ref(fig:violinfastestseat), for example, we use the code below:
+If you want to add another layer of glyphs, simply add on another call to a `geom`-function.  In order to produce Figure \@ref(fig:impviolinfastestseat), for example, we use the code below:
 
 ```{r impviolinfastestseat, cache=TRUE, echo=FALSE, fig.cap="Violin plot of the fastest speed ever driven."}
 ggplot(m111survey, aes(x = seat, y = fastest)) + 
@@ -730,7 +730,7 @@ Guide \index{guide}
 knitr::include_graphics("images/thinking.png")
 ```
 
-1.  Using the `tigerstats::m111survey` data frame, write the **ggplot2** code necessary to produce the graph in Figure \@ref(fig:heightideal).  (The points are all blue.)
+1.  Using the `tigerstats::m111survey` data frame, write the **ggplot2** code necessary to produce the graph in the figure below.  (The points are all blue.)
 
     ```{r heightideal, cache=TRUE,echo=FALSE, fig.pos='!h'}
     ggplot(m111survey, aes(x = height, y = ideal_ht)) +
@@ -740,9 +740,9 @@ knitr::include_graphics("images/thinking.png")
            title = "The taller you are, the taller you wanna be!")
     ```
     
-1.  Using the `mosaicData::Utilities` data frame, write the **ggplot2** code necessary to produce the graph in Figure \@ref(fig:utilitybills).
+1.  Using the `mosaicData::Utilities` data frame, write the **ggplot2** code necessary to produce the graph in the figure below.
 
-    ```{r utitlitybills, cache=TRUE,echo=FALSE, fig.pos='!h'}
+    ```{r utilitybills, cache=TRUE,echo=FALSE, fig.pos='!h'}
     monthAbbr <- with(Utilities, 
                       plyr::mapvalues(month, from = 1:12,
                                       to = month.abb))
