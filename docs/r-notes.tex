@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-09-20}
+  \date{2017-09-21}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5446,13 +5446,13 @@ number of other environments:
 \begin{verbatim}
 ##  [1] ".GlobalEnv"             "package:bindrcpp"      
 ##  [3] "package:R6"             "package:readr"         
-##  [5] "package:tigerData"      "package:TurtleGraphics"
-##  [7] "package:tigerstats"     "package:abd"           
-##  [9] "package:mosaic"         "package:Matrix"        
-## [11] "package:mosaicData"     "package:ggformula"     
-## [13] "package:ggplot2"        "package:dplyr"         
-## [15] "package:grid"           "package:lattice"       
-## [17] "package:nlme"           "tools:rstudio"         
+##  [5] "package:tigerData"      "package:tigerstats"    
+##  [7] "package:abd"            "package:mosaic"        
+##  [9] "package:Matrix"         "package:ggformula"     
+## [11] "package:dplyr"          "package:lattice"       
+## [13] "package:nlme"           "package:TurtleGraphics"
+## [15] "package:grid"           "package:ggplot2"       
+## [17] "package:mosaicData"     "tools:rstudio"         
 ## [19] "package:stats"          "package:graphics"      
 ## [21] "package:grDevices"      "package:utils"         
 ## [23] "package:datasets"       "package:methods"       
@@ -5562,7 +5562,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10baef428>
+## <bytecode: 0x10f147200>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -22610,7 +22610,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ade7db8"
+## [1] "0x1110b45b8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -22624,7 +22624,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ade7db8"
+## [1] "0x1110b45b8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -22663,7 +22663,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ade7db8"
+## [1] "0x1110b45b8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -22676,7 +22676,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13350c498"
+## [1] "0x115c0ca68"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -22694,7 +22694,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ade7db8"
+## [1] "0x1110b45b8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -22738,7 +22738,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x142545608" "0x142545608"
+## [1] "0x13ddd6940" "0x13ddd6940"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -22777,7 +22777,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x142545608" "0x142545608"
+## [1] "0x13ddd6940" "0x13ddd6940"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -22819,7 +22819,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x142545608" "0x11a762580"
+## [1] "0x13ddd6940" "0x10efa04a0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
