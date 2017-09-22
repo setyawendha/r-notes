@@ -1102,6 +1102,13 @@ knitr::include_graphics("images/thinking.png")
 ```
 
 ```{r echo =FALSE}
+pattern <- function(char = "*", n = 3) {
+  numbers <- c(1:n, (n-1):1)
+  for ( number in numbers ) {
+    cat(rep(char, times = number), "\n", sep = "")
+  }
+}
+
 madhavaPI <- function(n) {
   # make a vector of all of the k's we need:
   k <- 1:n
@@ -1161,25 +1168,21 @@ madhavaGraph <- function(n = 10) {
     * another line with $n-1$ $x$'s,
     * and so on until ...
     * a line with just one $x$.
-
-    Thus when the character is `*` and `n` is 5, the output would look like this:
-    
-    ```
-    ## *
-    ## **
-    ## ***
-    ## ****
-    ## *****
-    ## ****
-    ## ***
-    ## **
-    ## *
-    ```
     
     The function should take two arguments:
     
     * `char`:  the character to repeat.  The default value should be `"*"`.
     * `n`:  the number of characters in the longest, middle line.  The default value should be 3.
+    
+    Typical examples of use should be as follows:
+    
+    ```{r}
+    pattern()
+    ```
+    
+    ```{r}
+    pattern(char = "y", n = 5)
+    ```
 
 1.  Write a function called `beerTune()` that prints out the complete lyrics to the song *Ninety-Nine Bottles of Beer on the Wall*.  You'll recall that the song goes like this:
 
