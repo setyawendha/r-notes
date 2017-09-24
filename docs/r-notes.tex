@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-09-22}
+  \date{2017-09-24}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5228,7 +5228,7 @@ If you are writing a function for which some of the parameters will
 often be assigned particular values, it would be a kindness to your
 users to write in these common values as defaults.
 
-\hypertarget{argument-matching}{\subsection{Argument-Matching}\label{argument-matching}}
+\subsection{Argument-Matching}\label{argument-matching}
 
 Sometimes you will see functions in R that provide what appears to be a
 \emph{vector} of default values. You'll see this in the following
@@ -5444,19 +5444,19 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:bindrcpp"      
-##  [3] "package:R6"             "package:readr"         
-##  [5] "package:tigerData"      "package:tigerstats"    
-##  [7] "package:abd"            "package:mosaic"        
-##  [9] "package:Matrix"         "package:ggformula"     
-## [11] "package:dplyr"          "package:lattice"       
-## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:ggplot2"       
-## [17] "package:mosaicData"     "tools:rstudio"         
-## [19] "package:stats"          "package:graphics"      
-## [21] "package:grDevices"      "package:utils"         
-## [23] "package:datasets"       "package:methods"       
-## [25] "Autoloads"              "package:base"
+##  [1] ".GlobalEnv"             "package:R6"            
+##  [3] "package:readr"          "package:tigerData"     
+##  [5] "package:tigerstats"     "package:abd"           
+##  [7] "package:mosaic"         "package:Matrix"        
+##  [9] "package:ggformula"      "package:dplyr"         
+## [11] "package:lattice"        "package:nlme"          
+## [13] "package:TurtleGraphics" "package:grid"          
+## [15] "package:ggplot2"        "package:mosaicData"    
+## [17] "tools:rstudio"          "package:stats"         
+## [19] "package:graphics"       "package:grDevices"     
+## [21] "package:utils"          "package:datasets"      
+## [23] "package:methods"        "Autoloads"             
+## [25] "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5562,7 +5562,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10d807098>
+## <bytecode: 0x10b9ef758>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -8477,8 +8477,8 @@ helpful suggestions---if it is not of the correct form.
   \caption{This is how the output of the     madhavaGraph function should look.}\label{fig:madhavaGraph}
   \end{figure}
 \item
-  \textbf{The Subtraction Game.} In this game there are two players, A
-  and B, and a pile of \(n\) pebbles. The players take turns removing
+  (*) \textbf{The Subtraction Game.} In this game there are two players,
+  A and B, and a pile of \(n\) pebbles. The players take turns removing
   pebbles from the pile. On each turn, a player can take either one or
   two pebbles. The players who takes the last pebble wins the game.
 
@@ -11843,8 +11843,8 @@ until the program possesses all desired features.
     two dollars, whereas if it comes up Tails you get one dollar.
   \item
     In Game B you roll a fair die. If the six-spot comes up, you win
-    twenty-five dollars. If you get 3, 4, or 5, nothing happens. If the
-    one-spot comes up, you lose fifteen dollars.
+    twenty-five dollars. If you get 2, 3, 4, or 5, nothing happens. If
+    the one-spot comes up, you lose fifteen dollars.
   \end{itemize}
 
   You can choose either to play Game A ten thousand times or to play
@@ -11865,7 +11865,7 @@ until the program possesses all desired features.
     seed.
   \end{itemize}
 
-  Try both functions with ten thousand reps and with simple starting
+  Try both functions with fifty thousand reps and with simple starting
   seeds. Report the seeds you used for each function, and the estimated
   expected values for each game. Use your results to decide which game
   is the better choice.
@@ -11889,17 +11889,6 @@ until the program possesses all desired features.
   assuming that Anna is willing to wait 13 minutes and Raj is willing to
   wait 7 minutes.
 \item
-  A pipe-smoker has two boxes of matches in his pocket. Both boxes
-  contain 40 matches. Every time he lights his pipe, the smoker reaches
-  into his pocket and randomly picks one of the boxes, pulling a match
-  from the box. Eventually one of the boxes runs out. What is the
-  expected value of the number of matches remaining in the other box at
-  that time? Write a simulation function to estimate the answer. Your
-  function should have at least a \texttt{reps} and a \texttt{seed}
-  parameter. Apply the function with ten thousand repetitions---and with
-  a simple seed that you report---in order to estimate the expected
-  value.
-\item
   Refer back to the \texttt{numberNeededSim()} function. Modify it so
   that it returns the estimated expected value invisibly, and has an
   option to turn off the \texttt{cat()} report to the console. Write a
@@ -11920,15 +11909,26 @@ until the program possesses all desired features.
   number of numbers needed, when the target is a real number between 0
   and 1.
 \item
-  A gambler starts with 10 dollars, and repeatedly plays a game. If she
-  wins the game she gets one dollar and if she loses the game she loses
-  one dollar. Her chance of winning each game is a fixed number that is
-  less than 0.50. Write a function to simulate the gambler repeatedly
-  playing the game until her money runs out. The function should keep
-  track of how much money she has left after each play, so that it can
-  produce a line graph (similar to the one in the section on the Drunken
-  Turtle) of the money left after each play. Write the function so that
-  it has
+  (*) A pipe-smoker has two boxes of matches in his pocket. Both boxes
+  contain 40 matches. Every time he lights his pipe, the smoker reaches
+  into his pocket and randomly picks one of the boxes, pulling a match
+  from the box. Eventually one of the boxes runs out. What is the
+  expected value of the number of matches remaining in the other box at
+  that time? Write a simulation function to estimate the answer. Your
+  function should have at least a \texttt{reps} and a \texttt{seed}
+  parameter. Apply the function with ten thousand repetitions---and with
+  a simple seed that you report---in order to estimate the expected
+  value.
+\item
+  (*) A gambler starts with 10 dollars, and repeatedly plays a game. If
+  she wins the game she gets one dollar and if she loses the game she
+  loses one dollar. Her chance of winning each game is a fixed number
+  that is less than 0.50. Write a function to simulate the gambler
+  repeatedly playing the game until her money runs out. The function
+  should keep track of how much money she has left after each play, so
+  that it can produce a line graph (similar to the one in the section on
+  the Drunken Turtle) of the money left after each play. Write the
+  function so that it has
 
   \begin{itemize}
   \tightlist
@@ -11945,6 +11945,44 @@ until the program possesses all desired features.
 
   Apply the function with a simple seed that you report, a starting
   amount of ten dollars, and a chance of winning equal to 0.45.
+\item
+  (*) An absent-minded professor walks to and from campus every day.
+  Prior to every commute---either from home to office or the
+  reverse---she checks the weather, taking an umbrella with her if it is
+  raining. The problem is that she \emph{never} takes an umbrella when
+  the weather is dry, so even though she owns quite a few umbrellas the
+  time comes eventually when it is raining but all of her umbrellas are
+  at her destination, so that she will have to put up with a wet
+  commute.
+
+  Suppose that there are \(x\) umbrellas at her house and \(y\)
+  umbrellas at her office, and that she begins at home. Suppose further
+  that the chance of rain on any commute is \(p\), a number between 0
+  and 1.
+
+  Write a simulation function to estimate the expected number of dry
+  commutes that she will enjoy before her first wet commute. The
+  function should have five parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{x}: the initial number of umbrellas at home (default 1);
+  \item
+    \texttt{y}: the initial number of umbrellas at the office (default
+    1);
+  \item
+    \texttt{p}: the probability of rain at any commute (default 0.5);
+  \item
+    \texttt{seed}: an seed for the randomizers (default \texttt{NULL}).
+  \item
+    \texttt{reps}: the number of times to simulate commuting until wet.
+  \end{itemize}
+
+  Apply the function with \texttt{x} and \texttt{y} set at three, for
+  the values 0.1, 0.5 and 0.9 for \texttt{p}. Use 10,000 repetitions for
+  each simulation, with seeds that you report. Which value of \texttt{p}
+  results in the smallest expected number of dry commutes?
 \end{enumerate}
 
 \chapter{Data Frames}\label{frames}
@@ -13662,7 +13700,7 @@ values cannot be expressed meaningfully by numbers.
   \item
     \texttt{dim}: the dimension to sum along, either rows or columns.
     The default value should be \texttt{c("rows",\ "columns")}, and you
-    should use \protect\hyperlink{argument-matching}{argument-matching}
+    should use argument-matching (see Section \ref{argument-matching})
     so that the user doesn't have to spell out all of the possible
     arguments.
   \end{itemize}
@@ -13687,7 +13725,7 @@ values cannot be expressed meaningfully by numbers.
   \texttt{smaller} that consists precisely of the male students who
   believe in extraterrestrial life and who are more than 68 inches tall.
   The new data frame should contain all of the original variables except
-  for \texttt{sex}.
+  for \texttt{sex} and \texttt{extra\_life}.
 \item
   Write a function called \texttt{dfRandSelect()} that randomly selects
   (without replacement) a specified number of rows from a given data
@@ -13816,11 +13854,11 @@ values cannot be expressed meaningfully by numbers.
   the fuel efficiency as miles per gallon. Finally, add this new
   variable to the \texttt{fuel} data frame.
 \item
-  Use matrices to generalize the simulation in the Appeals Court Paradox
-  (see Section \ref{appeals-court-paradox}). Your goal is to write a
-  simulation function called \texttt{appealsSimPlus()} that comes with
-  all the options provided in the text, but with additional parameters
-  so that the user can choose:
+  (*) Use matrices to generalize the simulation in the Appeals Court
+  Paradox (see Section \ref{appeals-court-paradox}). Your goal is to
+  write a simulation function called \texttt{appealsSimPlus()} that
+  comes with all the options provided in the text, but with additional
+  parameters so that the user can choose:
 
   \begin{itemize}
   \tightlist
@@ -22630,7 +22668,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118fb6db8"
+## [1] "0x137a328c8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -22644,7 +22682,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118fb6db8"
+## [1] "0x137a328c8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -22683,7 +22721,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118fb6db8"
+## [1] "0x137a328c8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -22696,7 +22734,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11cfe9448"
+## [1] "0x137ac8928"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -22714,7 +22752,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118fb6db8"
+## [1] "0x137a328c8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -22758,7 +22796,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ef3c710" "0x10ef3c710"
+## [1] "0x11840abf8" "0x11840abf8"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -22797,7 +22835,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ef3c710" "0x10ef3c710"
+## [1] "0x11840abf8" "0x11840abf8"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -22839,7 +22877,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ef3c710" "0x11bd44440"
+## [1] "0x11840abf8" "0x11261bcb0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

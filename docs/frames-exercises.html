@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-22">
+<meta name="date" content="2017-09-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -460,13 +460,13 @@ myMatrix</code></pre></div>
 Your task is to write your own function called <code>dimSum()</code> that will sum either the rows or the columns of a given matrix. The function should have two parameters:
 <ul>
 <li><code>mat</code>: the matrix to be summed.</li>
-<li><code>dim</code>: the dimension to sum along, either rows or columns. The default value should be <code>c(&quot;rows&quot;, &quot;columns&quot;)</code>, and you should use <a href="more-about-arguments.html#argument-matching">argument-matching</a> so that the user doesn’t have to spell out all of the possible arguments.</li>
+<li><code>dim</code>: the dimension to sum along, either rows or columns. The default value should be <code>c(&quot;rows&quot;, &quot;columns&quot;)</code>, and you should use argument-matching (see Section <a href="more-about-arguments.html#argument-matching">3.4.2</a>) so that the user doesn’t have to spell out all of the possible arguments.</li>
 </ul>
 <p><strong>You may NOT use <code>rowSums()</code> or <code>colSums()</code> in the code for your function.</strong> A typical example of use should look like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)
 <span class="kw">dimSum</span>(myMatrix, <span class="st">&quot;c&quot;</span>)</code></pre></div>
 <pre><code>## [1]  21  57  93 129</code></pre></li>
-<li><p>Starting with <code>m111survey</code> in the <strong>tigerstats</strong> package, write the code necessary to create a new data frame called <code>smaller</code> that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall. The new data frame should contain all of the original variables except for <code>sex</code>.</p></li>
+<li><p>Starting with <code>m111survey</code> in the <strong>tigerstats</strong> package, write the code necessary to create a new data frame called <code>smaller</code> that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall. The new data frame should contain all of the original variables except for <code>sex</code> and <code>extra_life</code>.</p></li>
 <li>Write a function called <code>dfRandSelect()</code> that randomly selects (without replacement) a specified number of rows from a given data frame. The function should have two parameters:
 <ul>
 <li><code>df</code>: the data frame from which to select;</li>
@@ -510,7 +510,7 @@ Your task is to write your own function called <code>dimSum()</code> that will s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(vec, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;gar&quot;</code></pre></li>
 <li><p>Study the data frame <code>fuel</code> in the <strong>tigerstats</strong> package. Note that the fuel efficiency is reported as the number of liters of fuel required to travel 100 kilometers. Look up the conversion between gallons and liters and between kilometers and miles, and use this information to create a new variable called <code>mpg</code> that gives the fuel efficiency as miles per gallon. Finally, add this new variable to the <code>fuel</code> data frame.</p></li>
-<li>Use matrices to generalize the simulation in the Appeals Court Paradox (see Section <a href="appeals-court-paradox.html#appeals-court-paradox">6.5</a>). Your goal is to write a simulation function called <code>appealsSimPlus()</code> that comes with all the options provided in the text, but with additional parameters so that the user can choose:
+<li>(*) Use matrices to generalize the simulation in the Appeals Court Paradox (see Section <a href="appeals-court-paradox.html#appeals-court-paradox">6.5</a>). Your goal is to write a simulation function called <code>appealsSimPlus()</code> that comes with all the options provided in the text, but with additional parameters so that the user can choose:
 <ul>
 <li>the number of judges on the court;</li>
 <li>the probability for each judge to make a correct decision;</li>
