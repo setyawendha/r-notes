@@ -5562,7 +5562,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10b9ef758>
+## <bytecode: 0x10d7095f0>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -13851,8 +13851,9 @@ values cannot be expressed meaningfully by numbers.
   fuel required to travel 100 kilometers. Look up the conversion between
   gallons and liters and between kilometers and miles, and use this
   information to create a new variable called \texttt{mpg} that gives
-  the fuel efficiency as miles per gallon. Finally, add this new
-  variable to the \texttt{fuel} data frame.
+  the fuel efficiency as miles per gallon. While you are at it, create a
+  new variable \texttt{mph} that gives the speed in miles per hour.
+  Finally, add these new variables to the \texttt{fuel} data frame.
 \item
   (*) Use matrices to generalize the simulation in the Appeals Court
   Paradox (see Section \ref{appeals-court-paradox}). Your goal is to
@@ -15455,7 +15456,7 @@ aesthetic mapping.
   sex and sector of this person.
 
   Create a new data frame called \texttt{cpsSmall} that is the same as
-  \texttt{CPC85} except that it excludes the row corresponding to the
+  \texttt{CPS85} except that it excludes the row corresponding to the
   outlier-individual.
 \item
   In order to explore the relationship between wage and sex in the CPS
@@ -15470,7 +15471,7 @@ aesthetic mapping.
   low-wage sectors of the economy, whereas men tended to work in
   higher-wage sectors. Of course for this explanation to be viable, some
   sectors of the economy have to pay more on average than other sectors
-  do. In order to verify whether this is the case, make a violin plot of
+  do. In order to verify whether this is the case, make a box plot of
   wage vs.~sector of employment. Use the plot to name a couple of
   high-wage sectors and a couple of low-wage sectors.
 \item
@@ -15479,9 +15480,9 @@ aesthetic mapping.
   properly whether there was wage-discrimination in the workforce based
   on sex, we would have to compare the wages of men and women who work
   in the \emph{same} sector. To this end it would be nice to have eight
-  separate violin plots, one for each sector. Each plot would compare
-  the wages of men and women in that sector. Use \texttt{facet\_wrap()}
-  to construct a graph that displays all eight plots at once.
+  separate box plots, one for each sector. Each plot would compare the
+  wages of men and women in that sector. Use \texttt{facet\_wrap()} to
+  construct a graph that displays all eight plots at once.
 
   Examine your graph.
 
@@ -22668,7 +22669,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137a328c8"
+## [1] "0x10b311668"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -22682,7 +22683,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137a328c8"
+## [1] "0x10b311668"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -22721,7 +22722,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137a328c8"
+## [1] "0x10b311668"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -22734,7 +22735,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137ac8928"
+## [1] "0x13296e788"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -22752,7 +22753,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137a328c8"
+## [1] "0x10b311668"
 \end{verbatim}
 
 \begin{Shaded}
@@ -22796,7 +22797,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11840abf8" "0x11840abf8"
+## [1] "0x122fcfab0" "0x122fcfab0"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -22835,7 +22836,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11840abf8" "0x11840abf8"
+## [1] "0x122fcfab0" "0x122fcfab0"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -22877,7 +22878,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11840abf8" "0x11261bcb0"
+## [1] "0x122fcfab0" "0x11462b870"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
