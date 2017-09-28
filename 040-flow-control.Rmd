@@ -1034,19 +1034,33 @@ isValid <- !is.na(n) && n > 1
 
 The `stop()` \index{R-functions!stop()@\texttt{stop()}}function throws a true error that prevents any further code from being executed, but allows us to write a custom, friendly error-message.  The goal of validation is for the user to receive clear and helpful error messages, rather than obscure, technical messages from the depths of R.
 
+Another issue worth considering is that our collatz() function depends on the previously-defined function `collatzRule()`.  In order for it to work correctly, R would need to be able to find the name `collatzRule` somewhere on the search path.  If the user hasn't already defined the `collatzRule()` function, then a call to `collatz() will fail.
+
+One solution is simply to remind users of the need to define both `collatzRule()` and `collatz()` prior to running `collatz()`.  Another solution---perhaps the kinder one---is to define the `collatzRule()` function in the body of `collatz()`.  Let's adopt this approach.
+
 The final version of the `collatz()` function appears below.
 
 
 ```{r}
 collatz <- function(n, limit = 10000) {
-  # record initial numer because will change n
-  initial <- n 
   # validation:
   n <- suppressWarnings(as.integer(n))
   isValid <- !is.na(n) && n > 1
   if (!isValid ) {
     stop("Need an integer bigger than 1.  Try again.")
   }
+  # define collatzRule:
+  collatzRule <- function(m) {
+    if ( m %% 2 == 0) {
+      return(m/2)
+    } else {
+      return(3*m + 1)
+    }
+  }
+  
+  # On with the show!
+  # Record initial number because we will change it:
+  initial <- n 
   numbers <- numeric(limit)
   counter <- 0
   while ( n > 1 & counter < limit) {
@@ -1061,7 +1075,8 @@ collatz <- function(n, limit = 10000) {
     print(numbers[1:howMany])
   }
   plotTitle <- paste0("Collatz Sequence for n = ", initial)
-  p <- ggplot(mapping = aes(x = steps, y = number[1:howMany])) +
+  steps <- 1:howMany
+  p <- ggplot(mapping = aes(x = steps, y = numbers[1:howMany])) +
     geom_point() + geom_line() +
     labs( x = "Step", y = "Collatz Value at Step",
           title = plotTitle)
@@ -1216,7 +1231,7 @@ madhavaGraph <- function(n = 10) {
     
     Make sure to get the lyrics exactly right.  For example, it's "1 bottle", not "1 bottles".
     
-1.  Recall the function `madhavaPI()` from Section \@ref(default-arguments).  Use this function to write a function called `madhavaGraph()` that will do the following:  given a number $n$, the function uses **ggplot2** to produce a line graph of the first $n$ approximations to $\pi$ using the initial terms of the Madhava series.  The plot should be a line graph similar to the one produced by the `collatz()` functions from this Chapter.  The function should take a single argument `n`, whose default value is 10.  It should validate the input:  if the number entered is not at least 1, then the function should throw an error and explain to the user that the he/she must enter a positive number.
+1.  Recall the function `madhavaPI()` from Section \@ref(default-arguments).  Use this function to write a function called `madhavaGraph()` that will do the following:  given a number $n$, the function uses **ggplot2** to produce a line graph of the first $n$ approximations to $\pi$ using the initial terms of the Madhava series.  The plot should be a line graph similar to the one produced by the `collatz()` functions from this Chapter.  The function should take a single argument `n`, whose default value is 10.  It should validate the input:  if the number entered is not at least 1, then the function should explain to the user that the he/she must enter a positive number, and then stop.
 
     Here is an example of how the function should work:
    

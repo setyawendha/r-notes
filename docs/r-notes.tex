@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-09-24}
+  \date{2017-09-28}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5562,7 +5562,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10d7095f0>
+## <bytecode: 0x10d212c30>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -8185,19 +8185,42 @@ but allows us to write a custom, friendly error-message. The goal of
 validation is for the user to receive clear and helpful error messages,
 rather than obscure, technical messages from the depths of R.
 
+Another issue worth considering is that our collatz() function depends
+on the previously-defined function \texttt{collatzRule()}. In order for
+it to work correctly, R would need to be able to find the name
+\texttt{collatzRule} somewhere on the search path. If the user hasn't
+already defined the \texttt{collatzRule()} function, then a call to
+`collatz() will fail.
+
+One solution is simply to remind users of the need to define both
+\texttt{collatzRule()} and \texttt{collatz()} prior to running
+\texttt{collatz()}. Another solution---perhaps the kinder one---is to
+define the \texttt{collatzRule()} function in the body of
+\texttt{collatz()}. Let's adopt this approach.
+
 The final version of the \texttt{collatz()} function appears below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{collatz <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, }\DataTypeTok{limit =} \DecValTok{10000}\NormalTok{) \{}
-  \CommentTok{# record initial numer because will change n}
-\NormalTok{  initial <-}\StringTok{ }\NormalTok{n }
   \CommentTok{# validation:}
 \NormalTok{  n <-}\StringTok{ }\KeywordTok{suppressWarnings}\NormalTok{(}\KeywordTok{as.integer}\NormalTok{(n))}
 \NormalTok{  isValid <-}\StringTok{ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(n) }\OperatorTok{&&}\StringTok{ }\NormalTok{n }\OperatorTok{>}\StringTok{ }\DecValTok{1}
   \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\NormalTok{isValid ) \{}
     \KeywordTok{stop}\NormalTok{(}\StringTok{"Need an integer bigger than 1.  Try again."}\NormalTok{)}
 \NormalTok{  \}}
+  \CommentTok{# define collatzRule:}
+\NormalTok{  collatzRule <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(m) \{}
+    \ControlFlowTok{if}\NormalTok{ ( m }\OperatorTok{%%}\StringTok{ }\DecValTok{2} \OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+      \KeywordTok{return}\NormalTok{(m}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+      \KeywordTok{return}\NormalTok{(}\DecValTok{3}\OperatorTok{*}\NormalTok{m }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  
+  \CommentTok{# On with the show!}
+  \CommentTok{# Record initial number because we will change it:}
+\NormalTok{  initial <-}\StringTok{ }\NormalTok{n }
 \NormalTok{  numbers <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(limit)}
 \NormalTok{  counter <-}\StringTok{ }\DecValTok{0}
   \ControlFlowTok{while}\NormalTok{ ( n }\OperatorTok{>}\StringTok{ }\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{counter }\OperatorTok{<}\StringTok{ }\NormalTok{limit) \{}
@@ -8212,7 +8235,8 @@ The final version of the \texttt{collatz()} function appears below.
     \KeywordTok{print}\NormalTok{(numbers[}\DecValTok{1}\OperatorTok{:}\NormalTok{howMany])}
 \NormalTok{  \}}
 \NormalTok{  plotTitle <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"Collatz Sequence for n = "}\NormalTok{, initial)}
-\NormalTok{  p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ steps, }\DataTypeTok{y =}\NormalTok{ number[}\DecValTok{1}\OperatorTok{:}\NormalTok{howMany])) }\OperatorTok{+}
+\NormalTok{  steps <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{howMany}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ steps, }\DataTypeTok{y =}\NormalTok{ numbers[}\DecValTok{1}\OperatorTok{:}\NormalTok{howMany])) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{( }\DataTypeTok{x =} \StringTok{"Step"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Collatz Value at Step"}\NormalTok{,}
           \DataTypeTok{title =}\NormalTok{ plotTitle)}
@@ -8443,8 +8467,8 @@ helpful suggestions---if it is not of the correct form.
   produced by the \texttt{collatz()} functions from this Chapter. The
   function should take a single argument \texttt{n}, whose default value
   is 10. It should validate the input: if the number entered is not at
-  least 1, then the function should throw an error and explain to the
-  user that the he/she must enter a positive number.
+  least 1, then the function should explain to the user that the he/she
+  must enter a positive number, and then stop.
 
   Here is an example of how the function should work:
 
@@ -22669,7 +22693,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10b311668"
+## [1] "0x10bdcd768"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -22683,7 +22707,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10b311668"
+## [1] "0x10bdcd768"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -22722,7 +22746,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10b311668"
+## [1] "0x10bdcd768"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -22735,7 +22759,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13296e788"
+## [1] "0x11ca95a08"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -22753,7 +22777,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10b311668"
+## [1] "0x10bdcd768"
 \end{verbatim}
 
 \begin{Shaded}
@@ -22797,7 +22821,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122fcfab0" "0x122fcfab0"
+## [1] "0x134f0b478" "0x134f0b478"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -22836,7 +22860,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122fcfab0" "0x122fcfab0"
+## [1] "0x134f0b478" "0x134f0b478"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -22878,7 +22902,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122fcfab0" "0x11462b870"
+## [1] "0x134f0b478" "0x11671c2a8"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
