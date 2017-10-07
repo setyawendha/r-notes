@@ -154,6 +154,8 @@ turtle_drunk <- function() {
   cat("All done!")
 }
 
+turtle_drunk()
+
 # A Drunken Turtle Bouncing Off Wall----------------
 
 turtle_bounce <- function(side = 60, step= 10) {

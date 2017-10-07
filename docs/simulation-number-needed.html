@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-09-28">
+<meta name="date" content="2017-10-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -507,9 +507,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##     2     3     4     5     6     7 
 ## 0.528 0.303 0.123 0.037 0.008 0.001</code></pre>
 <p>The proportions serve as estimates of the <em>probability</em> of getting each of the possible values of <span class="math inline">\(X\)</span>. Such a table of proportions gives us a sense of the <em>distribution</em> of <span class="math inline">\(X\)</span>—the chances for <span class="math inline">\(X\)</span> to assume each of its possible values.<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a></p>
-<p>Now that we have the basic idea of how to accomplish the simulation, it remains to package up our code into a nice function that will enable a user to set the number of repetitions, set a seed, and choose reporting options. Along the way we will generalize a bit, allowing the user to set a target sum other than 1.</p>
+<p>Now that we have the basic idea of how to accomplish the simulation, it remains to package up our code into a nice function that will enable a user to set the number of repetitions, set a seed, and choose reporting options. Along the way we will generalize a bit, allowing the user to set a target sum other than 1. We’ll also return our estimate of the expected number needed invisibly, so that the function can be used in the context of larger-scale investigations (see the exercises from this Chapter).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberNeededSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>, 
-                            <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>) {
+                            <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">report =</span> <span class="ot">FALSE</span>) {
   
   <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
     <span class="kw">set.seed</span>(seed)
@@ -533,16 +533,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     needed[i] &lt;-<span class="st"> </span><span class="kw">numberNeeded</span>(target)
   }
   
-  <span class="co"># report results</span>
-  <span class="cf">if</span> ( table ) {
+  <span class="co"># report results (if desired)</span>
+  <span class="cf">if</span> ( report ) {
     <span class="kw">print</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(needed)))
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    <span class="kw">cat</span>(<span class="st">&quot;The expected number needed is about &quot;</span>,
+        <span class="kw">mean</span>(needed), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
-  <span class="kw">cat</span>(<span class="st">&quot;The expected number needed is about &quot;</span>, 
-    <span class="kw">mean</span>(needed), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  <span class="co"># return estimate of the expected number needed:</span>
+  <span class="kw">invisible</span>(<span class="kw">mean</span>(needed))
 }</code></pre></div>
 <p>Let’s test the function with ten thousand repetitions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">numberNeededSim</span>(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4848</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">numberNeededSim</span>(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4848</span>, <span class="dt">report =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## needed
 ##      2      3      4      5      6      7      8 
 ## 0.4937 0.3350 0.1313 0.0317 0.0071 0.0010 0.0002 

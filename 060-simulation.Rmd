@@ -801,12 +801,12 @@ prop.table(table(needed))
 The proportions serve as estimates of the *probability* of getting each of the possible values of $X$.  Such a table of proportions gives us a sense of the *distribution* of $X$---the chances for $X$ to assume each of its possible values.^[Of course not all of the possible values for $X$ appear on the table:  the only values appearing are those that happened to occur in our simulation.  The values that did not occur probably have a very small (but nonzero) chance of occurring.]
 
 
-Now that we have the basic idea of how to accomplish the simulation, it remains to package up our code into a nice function that will enable a user to set the number of repetitions, set a seed, and choose reporting options.  Along the way we will generalize a bit, allowing the user to set a target sum other than 1.
+Now that we have the basic idea of how to accomplish the simulation, it remains to package up our code into a nice function that will enable a user to set the number of repetitions, set a seed, and choose reporting options.  Along the way we will generalize a bit, allowing the user to set a target sum other than 1.  We'll also return our estimate of the expected number needed invisibly, so that the function can be used in the context of larger-scale investigations (see the exercises from this Chapter).
 
 
 ```{r}
 numberNeededSim <- function(target = 1, reps = 1000, 
-                            seed = NULL, table = TRUE) {
+                            seed = NULL, report = FALSE) {
   
   if ( !is.null(seed) ) {
     set.seed(seed)
@@ -830,20 +830,22 @@ numberNeededSim <- function(target = 1, reps = 1000,
     needed[i] <- numberNeeded(target)
   }
   
-  # report results
-  if ( table ) {
+  # report results (if desired)
+  if ( report ) {
     print(prop.table(table(needed)))
     cat("\n")
+    cat("The expected number needed is about ",
+        mean(needed), ".\n", sep = "")
   }
-  cat("The expected number needed is about ", 
-    mean(needed), ".\n", sep = "")
+  # return estimate of the expected number needed:
+  invisible(mean(needed))
 }
 ```
 
 Let's test the function with ten thousand repetitions:
 
 ```{r expSumFinal, cache =TRUE}
-numberNeededSim(target = 1, reps = 10000, seed = 4848, table = TRUE)
+numberNeededSim(target = 1, reps = 10000, seed = 4848, report = TRUE)
 ```
 
 Does the estimate of the expected number of numbers look a bit familiar?  Mathematicians have proven that the exact expected value---what you would get for an average if you could do more and more repetitions, without limit---is the famous number $e$:
@@ -1232,25 +1234,67 @@ knitr::include_graphics("images/thinking.png")
     * In Game A you flip a fair coin.  If the coin comes up Heads you get two dollars, whereas if it comes up Tails you get one dollar.
     * In Game B you roll a fair die. If the six-spot comes up, you win twenty-five dollars.  If you get 2, 3, 4, or 5, nothing happens.  If the one-spot comes up, you lose fifteen dollars.
     
-    You can choose either to play Game A ten thousand times or to play Game B ten thousand times.  You wonder:  *which game is the better choice?*  Before you answer the question, write two simulation functions:  one that provides an estimate of the expected value of the winnings from a play of Game A, and another that estimates the expected value of the winnings from a play of Game B.  The functions should have two parameters:
+    In this exercise you need to answer two question:
+    1. If you could choose to play either Game A or Game B *just once*, whihc game would you prefer to play, and why?
+    2. Suppose that you can choose either to play Game A ten thousand times, or Game B ten thousand times.  whcih choice would you prefer, and why?
+    
+    Answers to the first question will vary from person to person, depending on circumstances and personal taste.  On the other hand, astute consideration of expected values leads most people to answer the second question in the same way.  Therefore, before you answer the question please write two simulation functions:  one called `GameA` that provides an estimate of the expected value of the winnings from a play of Game A, and another called `GameB` that estimates the expected value of the winnings from a play of Game B.  The functions should have two parameters:
     * a `rep` parameter to permit the user to choose the number of repetitions of the game;
     * a `seed` parameter to permit the user to choose a starting seed.
     
-    Try both functions with fifty thousand reps and with simple starting seeds.  Report the seeds you used for each function, and the estimated expected values for each game.  Use your results to decide which game is the better choice.
+    Use both functions with fifty thousand reps, in order to obtain estimates for the expected amount of winnings in a single play of each game.  Use a simple starting seed for each function.  Report the seeds you used, along with the estimated expected values for each game.  Use your results to decide which game is the better choice to play ten thusand times.
+    
+    **Note**:  Please keep in mind that the fifty-thousand figure is just the number of times you repeat your simulations in order to estimate the expected value of a *single play* of one of the games.  It's **not** how many times you actually get to play either game---that's ten thousand.
     
 1. Reconsider the meeting of Anna and Raj.  Suppose that they still plan to meet during the same one-hour period, but that Anna is willing to wait $a$ minutes and Raj is willing to wait $r$ minutes, where $a$ and $r$ could differ.  Modify the `meetupSim()` function so that it accepts two additional parameters:
     * `a`:  the time Anna is willing to wait;
     * `r`:  the time Raj is willing to wait;
     
     Apply the function with ten thousand repetitions (and a simple seed that you report) in order to estimate the probability of a meeting, assuming that Anna is willing to wait 13 minutes and Raj is willing to wait 7 minutes.
+    
+    **Hint**: Suppose that Anna arrvies at time $Anna$ and Raj arrives at times $raj$.  We want a simple mathematical expression that gives the conditions for Anna and Raj to connect.  In the example in the text, this was:
+    
+    $$\vert\ anna - raj \ \vert < 10$$
+    
+    because both Anna and Raj were willing to wait the same amount of time:  ten minutes.  Now we have to think a bit more carefully when Anna waits $a$ minutes and Raj waits $r$ minutes, where $a$ and $r$ may differ.  You might start by observing that we must have
+    
+    $$anna - r \le raj,$$
+    
+    for if not then Raj would arrive and leave before Anna gets there.  Also, we would have to have
+    
+    $$raj \le anna + a,$$
+    
+    for if not then Anna would arrive and leave before Raj gets there.  But if we have *both* of those conditions:
+    
+    $$anna - r \le raj \text{ and } raj \le anna + a$$
+    
+    then they must connect, since neither person will arrive too much before the other.
 
-1.  Refer back to the `numberNeededSim()` function.  Modify it so that it returns the estimated expected value invisibly, and has an option to turn off the `cat()` report to the console.  Write a program that computes the estimated expected number needed, for the following targets:
+1.  Refer back to the `numberNeededSim()` function.  Write a program that computes the estimated expected number needed, for the following targets:
 
     ```{r eval = FALSE}
     targets <- seq(0.05, 0.95, by = 0.05)
     ```
     
     Each estimate should be based on ten thousand repetitions.  Start with a simple seed that you report.  Report the estimated expected values for all of the required targets.  Compare these estimates with `exp(targets)` (the number $e$ raised to the power of each of the targets.)  Formulate a conjecture about the value of the expected number of numbers needed, when the target is a real number between 0 and 1.
+    
+    **Hint**:  Recall that `numberNeededSim()` function returns its estimate of the expected number needed.  Hence you could use it inside a `for`-loop that iterates through the elements of the `target` vector above, something like this:
+    
+    ```{r eval=FALSE}
+    targets <- seq(0.05, 0.95, by = 0.05)
+    n <- length(targets)
+    results <- numeric(n)
+    set.seed(3030) # or some other simple seed that you like
+    for ( i in 1:n ) {
+      # use numberNeededSim() with:
+      #    * 10000 reps
+      #    * seed left at the default NULL (you provided one already)
+      #    * target set to targets[i]
+      #    * report left at FALSE (no need to have R talk to you at each step)
+      # make sure to store the estimate in results[i]
+    }
+    # after the loop, you can compare results with exp(targets)
+    ```
     
 1.  (\*) A pipe-smoker has two boxes of matches in his pocket.  Both boxes contain 40 matches.  Every time he lights his pipe, the smoker reaches into his pocket and randomly picks one of the boxes, pulling a match from the box.  Eventually one of the boxes runs out.  What is the expected value of the number of matches remaining in the other box at that time?  Write a simulation function to estimate the answer.  Your function should have at least a `reps` and a `seed` parameter.  Apply the function with ten thousand repetitions---and with a simple seed that you report---in order to estimate the expected value.  
     

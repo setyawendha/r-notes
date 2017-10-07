@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-09-28}
+  \date{2017-10-07}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -4724,7 +4724,7 @@ Give it a try:
 
 \begin{verbatim}
 ## function(word, n) {
-##   wordWithNewline <- paste(word, "\\n", sep = "")
+##   wordWithNewline <- paste(word, "\n", sep = "")
 ##   lines <- rep(wordWithNewline, times = n)
 ##   cat(lines, sep = "")
 ## }
@@ -5444,19 +5444,19 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:readr"          "package:tigerData"     
-##  [5] "package:tigerstats"     "package:abd"           
-##  [7] "package:mosaic"         "package:Matrix"        
-##  [9] "package:ggformula"      "package:dplyr"         
-## [11] "package:lattice"        "package:nlme"          
-## [13] "package:TurtleGraphics" "package:grid"          
-## [15] "package:ggplot2"        "package:mosaicData"    
-## [17] "tools:rstudio"          "package:stats"         
-## [19] "package:graphics"       "package:grDevices"     
-## [21] "package:utils"          "package:datasets"      
-## [23] "package:methods"        "Autoloads"             
-## [25] "package:base"
+##  [1] ".GlobalEnv"             "package:bindrcpp"      
+##  [3] "package:R6"             "package:readr"         
+##  [5] "package:tigerData"      "package:tigerstats"    
+##  [7] "package:abd"            "package:mosaic"        
+##  [9] "package:Matrix"         "package:ggformula"     
+## [11] "package:dplyr"          "package:lattice"       
+## [13] "package:nlme"           "package:TurtleGraphics"
+## [15] "package:grid"           "package:ggplot2"       
+## [17] "package:mosaicData"     "tools:rstudio"         
+## [19] "package:stats"          "package:graphics"      
+## [21] "package:grDevices"      "package:utils"         
+## [23] "package:datasets"       "package:methods"       
+## [25] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5562,7 +5562,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10d212c30>
+## <bytecode: 0x10da08000>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -11124,12 +11124,15 @@ Now that we have the basic idea of how to accomplish the simulation, it
 remains to package up our code into a nice function that will enable a
 user to set the number of repetitions, set a seed, and choose reporting
 options. Along the way we will generalize a bit, allowing the user to
-set a target sum other than 1.
+set a target sum other than 1. We'll also return our estimate of the
+expected number needed invisibly, so that the function can be used in
+the context of larger-scale investigations (see the exercises from this
+Chapter).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{numberNeededSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{target =} \DecValTok{1}\NormalTok{, }\DataTypeTok{reps =} \DecValTok{1000}\NormalTok{, }
-                            \DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{table =} \OtherTok{TRUE}\NormalTok{) \{}
+                            \DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{report =} \OtherTok{FALSE}\NormalTok{) \{}
   
   \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
     \KeywordTok{set.seed}\NormalTok{(seed)}
@@ -11153,13 +11156,15 @@ set a target sum other than 1.
 \NormalTok{    needed[i] <-}\StringTok{ }\KeywordTok{numberNeeded}\NormalTok{(target)}
 \NormalTok{  \}}
   
-  \CommentTok{# report results}
-  \ControlFlowTok{if}\NormalTok{ ( table ) \{}
+  \CommentTok{# report results (if desired)}
+  \ControlFlowTok{if}\NormalTok{ ( report ) \{}
     \KeywordTok{print}\NormalTok{(}\KeywordTok{prop.table}\NormalTok{(}\KeywordTok{table}\NormalTok{(needed)))}
     \KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"The expected number needed is about "}\NormalTok{,}
+        \KeywordTok{mean}\NormalTok{(needed), }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
 \NormalTok{  \}}
-  \KeywordTok{cat}\NormalTok{(}\StringTok{"The expected number needed is about "}\NormalTok{, }
-    \KeywordTok{mean}\NormalTok{(needed), }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+  \CommentTok{# return estimate of the expected number needed:}
+  \KeywordTok{invisible}\NormalTok{(}\KeywordTok{mean}\NormalTok{(needed))}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -11168,7 +11173,7 @@ Let's test the function with ten thousand repetitions:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{numberNeededSim}\NormalTok{(}\DataTypeTok{target =} \DecValTok{1}\NormalTok{, }\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{4848}\NormalTok{, }\DataTypeTok{table =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{numberNeededSim}\NormalTok{(}\DataTypeTok{target =} \DecValTok{1}\NormalTok{, }\DataTypeTok{reps =} \DecValTok{10000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{4848}\NormalTok{, }\DataTypeTok{report =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -11871,13 +11876,29 @@ until the program possesses all desired features.
     the one-spot comes up, you lose fifteen dollars.
   \end{itemize}
 
-  You can choose either to play Game A ten thousand times or to play
-  Game B ten thousand times. You wonder: \emph{which game is the better
-  choice?} Before you answer the question, write two simulation
-  functions: one that provides an estimate of the expected value of the
-  winnings from a play of Game A, and another that estimates the
-  expected value of the winnings from a play of Game B. The functions
-  should have two parameters:
+  In this exercise you need to answer two question:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    If you could choose to play either Game A or Game B \emph{just
+    once}, whihc game would you prefer to play, and why?
+  \item
+    Suppose that you can choose either to play Game A ten thousand
+    times, or Game B ten thousand times. whcih choice would you prefer,
+    and why?
+  \end{enumerate}
+
+  Answers to the first question will vary from person to person,
+  depending on circumstances and personal taste. On the other hand,
+  astute consideration of expected values leads most people to answer
+  the second question in the same way. Therefore, before you answer the
+  question please write two simulation functions: one called
+  \texttt{GameA} that provides an estimate of the expected value of the
+  winnings from a play of Game A, and another called \texttt{GameB} that
+  estimates the expected value of the winnings from a play of Game B.
+  The functions should have two parameters:
 
   \begin{itemize}
   \tightlist
@@ -11889,10 +11910,18 @@ until the program possesses all desired features.
     seed.
   \end{itemize}
 
-  Try both functions with fifty thousand reps and with simple starting
-  seeds. Report the seeds you used for each function, and the estimated
-  expected values for each game. Use your results to decide which game
-  is the better choice.
+  Use both functions with fifty thousand reps, in order to obtain
+  estimates for the expected amount of winnings in a single play of each
+  game. Use a simple starting seed for each function. Report the seeds
+  you used, along with the estimated expected values for each game. Use
+  your results to decide which game is the better choice to play ten
+  thusand times.
+
+  \textbf{Note}: Please keep in mind that the fifty-thousand figure is
+  just the number of times you repeat your simulations in order to
+  estimate the expected value of a \emph{single play} of one of the
+  games. It's \textbf{not} how many times you actually get to play
+  either game---that's ten thousand.
 \item
   Reconsider the meeting of Anna and Raj. Suppose that they still plan
   to meet during the same one-hour period, but that Anna is willing to
@@ -11912,12 +11941,37 @@ until the program possesses all desired features.
   that you report) in order to estimate the probability of a meeting,
   assuming that Anna is willing to wait 13 minutes and Raj is willing to
   wait 7 minutes.
+
+  \textbf{Hint}: Suppose that Anna arrvies at time \(Anna\) and Raj
+  arrives at times \(raj\). We want a simple mathematical expression
+  that gives the conditions for Anna and Raj to connect. In the example
+  in the text, this was:
+
+  \[\vert\ anna - raj \ \vert < 10\]
+
+  because both Anna and Raj were willing to wait the same amount of
+  time: ten minutes. Now we have to think a bit more carefully when Anna
+  waits \(a\) minutes and Raj waits \(r\) minutes, where \(a\) and \(r\)
+  may differ. You might start by observing that we must have
+
+  \[anna - r \le raj,\]
+
+  for if not then Raj would arrive and leave before Anna gets there.
+  Also, we would have to have
+
+  \[raj \le anna + a,\]
+
+  for if not then Anna would arrive and leave before Raj gets there. But
+  if we have \emph{both} of those conditions:
+
+  \[anna - r \le raj \text{ and } raj \le anna + a\]
+
+  then they must connect, since neither person will arrive too much
+  before the other.
 \item
-  Refer back to the \texttt{numberNeededSim()} function. Modify it so
-  that it returns the estimated expected value invisibly, and has an
-  option to turn off the \texttt{cat()} report to the console. Write a
-  program that computes the estimated expected number needed, for the
-  following targets:
+  Refer back to the \texttt{numberNeededSim()} function. Write a program
+  that computes the estimated expected number needed, for the following
+  targets:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -11932,6 +11986,29 @@ until the program possesses all desired features.
   the targets.) Formulate a conjecture about the value of the expected
   number of numbers needed, when the target is a real number between 0
   and 1.
+
+  \textbf{Hint}: Recall that \texttt{numberNeededSim()} function returns
+  its estimate of the expected number needed. Hence you could use it
+  inside a \texttt{for}-loop that iterates through the elements of the
+  \texttt{target} vector above, something like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{targets <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\FloatTok{0.05}\NormalTok{, }\FloatTok{0.95}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.05}\NormalTok{)}
+\NormalTok{n <-}\StringTok{ }\KeywordTok{length}\NormalTok{(targets)}
+\NormalTok{results <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(n)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{3030}\NormalTok{) }\CommentTok{# or some other simple seed that you like}
+\ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n ) \{}
+  \CommentTok{# use numberNeededSim() with:}
+  \CommentTok{#    * 10000 reps}
+  \CommentTok{#    * seed left at the default NULL (you provided one already)}
+  \CommentTok{#    * target set to targets[i]}
+  \CommentTok{#    * report left at FALSE (no need to have R talk to you at each step)}
+  \CommentTok{# make sure to store the estimate in results[i]}
+\NormalTok{\}}
+\CommentTok{# after the loop, you can compare results with exp(targets)}
+\end{Highlighting}
+\end{Shaded}
 \item
   (*) A pipe-smoker has two boxes of matches in his pocket. Both boxes
   contain 40 matches. Every time he lights his pipe, the smoker reaches
@@ -22693,7 +22770,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10bdcd768"
+## [1] "0x13643e558"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -22707,7 +22784,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10bdcd768"
+## [1] "0x13643e558"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -22746,7 +22823,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10bdcd768"
+## [1] "0x13643e558"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -22759,7 +22836,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ca95a08"
+## [1] "0x10b51dcf8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -22777,7 +22854,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10bdcd768"
+## [1] "0x13643e558"
 \end{verbatim}
 
 \begin{Shaded}
@@ -22821,7 +22898,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x134f0b478" "0x134f0b478"
+## [1] "0x1241a4188" "0x1241a4188"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -22860,7 +22937,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x134f0b478" "0x134f0b478"
+## [1] "0x1241a4188" "0x1241a4188"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -22902,7 +22979,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x134f0b478" "0x11671c2a8"
+## [1] "0x1241a4188" "0x11d3b5b48"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
