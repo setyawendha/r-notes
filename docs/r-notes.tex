@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-07}
+  \date{2017-10-12}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5562,7 +5562,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10da08000>
+## <bytecode: 0x10879e778>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -9596,8 +9596,8 @@ processes in nature.
   \end{figure}
 
   Starting with \texttt{turtle\_init()}, use your function to create a
-  star with 10 rays each of length 20 units. The lines should be red and
-  dashed. I'll leave the thickness up to you.
+  star with 10 rays, each of length 20 units. The lines should be red
+  and dashed. I'll leave the thickness up to you.
 \item
   Make a new star function \texttt{turtle\_rstar()} in which the lengths
   of the rays are not determined by the user but instead vary randomly
@@ -9616,6 +9616,19 @@ processes in nature.
   previous exercise. Starting from \texttt{turtle\_init(50,50)} make a
   random star with 20 rays and a line-thickness of 3. Other parameters
   should be left at their default-values.
+
+  \textbf{Hint}: You'll probably use a loop to draw each ray of the
+  star. As you go through the loop, get a random ray-length using the
+  \texttt{runif()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{randomLength <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{min =} \DecValTok{5}\NormalTok{, }\DataTypeTok{max =} \DecValTok{25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Then have the turtle make the ray by moving forward and backward by
+  that amount.
 \item
   Make a new star function \texttt{turtle\_rstarColors()} that behaves
   like \texttt{turtle\_rstar()} except that instead of being determined
@@ -9636,6 +9649,23 @@ processes in nature.
   \texttt{turtle\_init(50,50)} make a random star with 20 rays and a
   line-thickness of 6. Other parameters should be left at their
   default-values.
+
+  \textbf{Hint}: You'll probably use a loop to draw each ray of the
+  star. As you go through the loop, get a new random color like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{randomColor <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\KeywordTok{colors}\NormalTok{(), }\DataTypeTok{size =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Then set the turtle's color accordingly:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{turtle_col}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ randomColor)}
+\end{Highlighting}
+\end{Shaded}
 \end{enumerate}
 
 \chapter{Simulation}\label{simulation}
@@ -22770,7 +22800,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13643e558"
+## [1] "0x11be8c2f8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -22784,7 +22814,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13643e558"
+## [1] "0x11be8c2f8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -22823,7 +22853,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13643e558"
+## [1] "0x11be8c2f8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -22836,7 +22866,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10b51dcf8"
+## [1] "0x136a25e68"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -22854,7 +22884,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13643e558"
+## [1] "0x11be8c2f8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -22898,7 +22928,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1241a4188" "0x1241a4188"
+## [1] "0x136ed25f0" "0x136ed25f0"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -22937,7 +22967,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1241a4188" "0x1241a4188"
+## [1] "0x136ed25f0" "0x136ed25f0"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -22979,7 +23009,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1241a4188" "0x11d3b5b48"
+## [1] "0x136ed25f0" "0x113f55840"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-10-07">
+<meta name="date" content="2017-10-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -451,7 +451,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 Figure 5.14: Sample Stars
 </p>
 </div>
-<p>Starting with <code>turtle_init()</code>, use your function to create a star with 10 rays each of length 20 units. The lines should be red and dashed. I’ll leave the thickness up to you.</p></li>
+<p>Starting with <code>turtle_init()</code>, use your function to create a star with 10 rays, each of length 20 units. The lines should be red and dashed. I’ll leave the thickness up to you.</p></li>
 <li><p>Make a new star function <code>turtle_rstar()</code> in which the lengths of the rays are not determined by the user but instead vary randomly from 5 to 25 units, as in Figure <a href="exercises-3.html#fig:next-turtle-star">5.15</a>:</p>
 <div class="figure" style="text-align: center"><span id="fig:next-turtle-star"></span>
 <img src="images/turtle-stars-2.png" alt="A star with rays of random lengths." width="60%" />
@@ -459,7 +459,10 @@ Figure 5.14: Sample Stars
 Figure 5.15: A star with rays of random lengths.
 </p>
 </div>
-<p>The defaults for the other parameters should be the same as in the previous exercise. Starting from <code>turtle_init(50,50)</code> make a random star with 20 rays and a line-thickness of 3. Other parameters should be left at their default-values.</p></li>
+<p>The defaults for the other parameters should be the same as in the previous exercise. Starting from <code>turtle_init(50,50)</code> make a random star with 20 rays and a line-thickness of 3. Other parameters should be left at their default-values.</p>
+<p><strong>Hint</strong>: You’ll probably use a loop to draw each ray of the star. As you go through the loop, get a random ray-length using the <code>runif()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">randomLength &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">5</span>, <span class="dt">max =</span> <span class="dv">25</span>)</code></pre></div>
+<p>Then have the turtle make the ray by moving forward and backward by that amount.</p></li>
 <li><p>Make a new star function <code>turtle_rstarColors()</code> that behaves like <code>turtle_rstar()</code> except that instead of being determined by the user the ray-color varies randomly from one ray to another, as in Figure <a href="exercises-3.html#fig:turtle-star-3">5.16</a>:</p>
 <div class="figure" style="text-align: center"><span id="fig:turtle-star-3"></span>
 <img src="images/turtle-stars-3.png" alt="A star with rays of random lengths and random colors." width="60%" />
@@ -467,7 +470,11 @@ Figure 5.15: A star with rays of random lengths.
 Figure 5.16: A star with rays of random lengths and random colors.
 </p>
 </div>
-<p>Each ray should have a color drawn randomly from the vector of all colors given by <code>colors()</code>. Starting from <code>turtle_init(50,50)</code> make a random star with 20 rays and a line-thickness of 6. Other parameters should be left at their default-values.</p></li>
+<p>Each ray should have a color drawn randomly from the vector of all colors given by <code>colors()</code>. Starting from <code>turtle_init(50,50)</code> make a random star with 20 rays and a line-thickness of 6. Other parameters should be left at their default-values.</p>
+<p><strong>Hint</strong>: You’ll probably use a loop to draw each ray of the star. As you go through the loop, get a new random color like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">randomColor &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">colors</span>(), <span class="dt">size =</span> <span class="dv">1</span>)</code></pre></div>
+<p>Then set the turtle’s color accordingly:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_col</span>(<span class="dt">col =</span> randomColor)</code></pre></div></li>
 </ol>
 
 </div>

@@ -653,7 +653,7 @@ knitr::include_graphics("images/thinking.png")
     ```
     
 
-    Starting with `turtle_init()`, use your function to create a star with 10 rays each of length 20 units.  The lines should be red and dashed.  I'll leave the thickness   up to you.
+    Starting with `turtle_init()`, use your function to create a star with 10 rays, each of length 20 units.  The lines should be red and dashed.  I'll leave the thickness   up to you.
 
 1. Make a new star function `turtle_rstar()` in which the lengths of the rays are not determined by the user but instead vary randomly from 5 to 25 units, as in Figure \@ref(fig:next-turtle-star): 
 
@@ -662,6 +662,14 @@ knitr::include_graphics("images/thinking.png")
     ```
 
     The defaults for the other parameters should be the same as in the previous exercise.  Starting from `turtle_init(50,50)` make a random star with 20 rays and a line-thickness of 3.  Other parameters should be left at their default-values.
+    
+    **Hint**:  You'll probably use a loop to draw each ray of the star.  As you go through the loop, get a random ray-length using the `runif()` function:
+    
+    ```{r eval=FALSE}
+    randomLength <- runif(1, min = 5, max = 25)
+    ```
+    
+    Then have the turtle make the ray by moving forward and backward by that amount.
 
 1. Make a new star function `turtle_rstarColors()` that behaves like `turtle_rstar()` except that instead of being determined by the user the ray-color varies randomly from one ray to another, as in Figure \@ref(fig:turtle-star-3): 
 
@@ -671,6 +679,17 @@ knitr::include_graphics("images/thinking.png")
 
     Each ray should have a color drawn randomly from the vector of all colors given by `colors()`. Starting from `turtle_init(50,50)` make a random star with 20 rays and a line-thickness of 6.  Other parameters should be left at their default-values.
 
-
+    **Hint**:  You'll probably use a loop to draw each ray of the star.  As you go through the loop, get a new random color like this:
+    
+    ```{r eval=FALSE}
+    randomColor <- sample(colors(), size = 1)
+    ```
+    
+    Then set the turtle's color accordingly:
+    
+    ```{r eval=FALSE}
+    turtle_col(col = randomColor)
+    ```
+    
 
 
