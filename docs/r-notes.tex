@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-18}
+  \date{2017-10-20}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5562,7 +5562,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10dd01f58>
+## <bytecode: 0x10dca2958>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -13804,6 +13804,24 @@ values cannot be expressed meaningfully by numbers.
   the same task on any given matrix. The function should take a single
   parameter called \texttt{mat}, the matrix to be transposed. \textbf{Of
   course you may NOT use \texttt{t()} in the code for your function!}
+
+  \textbf{Hints:} Your function will have to:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    break \texttt{mat} down into the vector of its elements, and then
+  \item
+    build the new matrix from those elements, with a number of rows
+    equal to the number of columns of \texttt{mat}.
+  \end{enumerate}
+
+  For the first task, \texttt{as.vector()} will be useful. For the
+  second task, recall that the function \texttt{nrow()} that returns the
+  number of rows of a given matrix. You will be interested to know that
+  there is also a function \texttt{ncol()} that computes the number of
+  columns of a given matrix.
 \item
   R has functions called \texttt{rowSums()} and \texttt{colSums()} that
   will respectively sum the rows and the columns of a matrix. Here is an
@@ -13850,6 +13868,20 @@ values cannot be expressed meaningfully by numbers.
 \begin{verbatim}
 ## [1]  21  57  93 129
 \end{verbatim}
+
+  \textbf{Hint}: To start, take it easy on yourself. Instead of writing
+  a function that sums rows or columns as per the user's request, write
+  a function called \texttt{myRowSums()} that will just find the
+  row-sums of any given matric. You could use a loop, here. Your
+  function can loop along the rows of the matrix, computing the row sums
+  and storing them in a results vector that you set up prior to the
+  loop.
+
+  Once you have \texttt{myRowSums()} working, write a function called
+  \texttt{myColSums()} that find the column-sums of any given matrix.
+
+  Finally, use the two previously-created functions to write the
+  function \texttt{dimsum()}.
 \item
   Starting with \texttt{m111survey} in the \textbf{tigerstats} package,
   write the code necessary to create a new data frame called
@@ -22800,7 +22832,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11d28b7a8"
+## [1] "0x104611048"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -22814,7 +22846,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11d28b7a8"
+## [1] "0x104611048"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -22853,7 +22885,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11d28b7a8"
+## [1] "0x104611048"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -22866,7 +22898,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ab15038"
+## [1] "0x1359aff28"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -22884,7 +22916,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11d28b7a8"
+## [1] "0x104611048"
 \end{verbatim}
 
 \begin{Shaded}
@@ -22928,7 +22960,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12611b4d0" "0x12611b4d0"
+## [1] "0x10c8fc308" "0x10c8fc308"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -22967,7 +22999,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12611b4d0" "0x12611b4d0"
+## [1] "0x10c8fc308" "0x10c8fc308"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -23009,7 +23041,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12611b4d0" "0x12bdde388"
+## [1] "0x10c8fc308" "0x135b3fb48"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

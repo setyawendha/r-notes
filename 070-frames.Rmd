@@ -784,6 +784,12 @@ myFrame$sex <- factor(myFrame$sex)
     ```
     
     Write your own function called `transpose()` that will perform the same task on any given matrix.  The function should take a single parameter called `mat`, the matrix to be transposed.  **Of course you may NOT use `t()` in the code for your function!**
+    
+    **Hints:**  Your function will have to:
+    1. break `mat` down into the vector of its elements, and then
+    2. build the new matrix from those elements, with a number of rows equal to the number of columns of `mat`.
+    
+    For the first task, `as.vector()` will be useful.  For the second task, recall that the function `nrow()` that returns the number of rows of a given matrix.  You will be interested to know that there is also a function `ncol()` that computes the number of columns of a given matrix.
 
 1. R has functions called `rowSums()` and `colSums()` that will respectively sum the rows and the columns of a matrix.  Here is an example:
 
@@ -802,6 +808,12 @@ myFrame$sex <- factor(myFrame$sex)
     myMatrix <- matrix(1:24, nrow = 6)
     dimSum(myMatrix, "c")
     ```
+    
+    **Hint**:  To start, take it easy on yourself.  Instead of writing a function that sums rows or columns as per the user's request, write a function called `myRowSums()` that will just find the row-sums of any given matric.  You could use a loop, here.  Your function can loop along the rows of the matrix, computing the row sums and storing them in a results vector that you set up prior to the loop.
+    
+    Once you have `myRowSums()` working, write a function called `myColSums()` that find the column-sums of any given matrix.
+    
+    Finally, use the two previously-created functions to write the function `dimsum()`.
 
 1. Starting with `m111survey` in the **tigerstats** package, write the code necessary to create a new data frame called `smaller` that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall.  The new data frame should contain all of the original variables except for `sex` and `extra_life`.
 
