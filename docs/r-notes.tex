@@ -5445,19 +5445,19 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:readr"          "package:tigerData"     
-##  [5] "package:tigerstats"     "package:abd"           
-##  [7] "package:mosaic"         "package:Matrix"        
-##  [9] "package:ggformula"      "package:dplyr"         
-## [11] "package:lattice"        "package:nlme"          
-## [13] "package:TurtleGraphics" "package:grid"          
-## [15] "package:ggplot2"        "package:mosaicData"    
-## [17] "tools:rstudio"          "package:stats"         
-## [19] "package:graphics"       "package:grDevices"     
-## [21] "package:utils"          "package:datasets"      
-## [23] "package:methods"        "Autoloads"             
-## [25] "package:base"
+##  [1] ".GlobalEnv"             "package:bindrcpp"      
+##  [3] "package:R6"             "package:readr"         
+##  [5] "package:tigerData"      "package:tigerstats"    
+##  [7] "package:abd"            "package:mosaic"        
+##  [9] "package:Matrix"         "package:ggformula"     
+## [11] "package:dplyr"          "package:lattice"       
+## [13] "package:nlme"           "package:TurtleGraphics"
+## [15] "package:grid"           "package:ggplot2"       
+## [17] "package:mosaicData"     "tools:rstudio"         
+## [19] "package:stats"          "package:graphics"      
+## [21] "package:grDevices"      "package:utils"         
+## [23] "package:datasets"       "package:methods"       
+## [25] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5563,7 +5563,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10ea9aa00>
+## <bytecode: 0x10e6fd8a8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -14878,7 +14878,11 @@ practice.
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"fastest speed ever driven (mph)"}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{"grade point average"}\NormalTok{,}
        \DataTypeTok{title =} \StringTok{"Dunno what to say, yet!"}\NormalTok{,}
-       \DataTypeTok{subtitle =} \StringTok{'A title should briefly indicate the main lesson the plot has for us.  Instead of: "Scatterplot of}\CharTok{\textbackslash{}n}\StringTok{GPA vs. fastest speed", say something like: "Speed and GPA are not strongly related."'}\NormalTok{)}
+       \DataTypeTok{subtitle =} \KeywordTok{paste0}\NormalTok{(}\StringTok{'A title should briefly indicate the main'}\NormalTok{,}
+                         \StringTok{' lesson the plot has for us.  Instead of:'}\NormalTok{,}
+                         \StringTok{' "Scatterplot of}\CharTok{\textbackslash{}n}\StringTok{GPA vs. fastest speed",'}\NormalTok{,}
+                         \StringTok{' say something like: "Speed and GPA are'}\NormalTok{,}
+                         \StringTok{' not strongly related."'}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22833,7 +22837,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f51d2b8"
+## [1] "0x10ce0be88"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -22847,7 +22851,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f51d2b8"
+## [1] "0x10ce0be88"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -22886,7 +22890,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f51d2b8"
+## [1] "0x10ce0be88"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -22899,7 +22903,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1207f3e08"
+## [1] "0x12b9889c8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -22917,7 +22921,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11f51d2b8"
+## [1] "0x10ce0be88"
 \end{verbatim}
 
 \begin{Shaded}
@@ -22961,7 +22965,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x135f12d50" "0x135f12d50"
+## [1] "0x1297401b8" "0x1297401b8"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -23000,7 +23004,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x135f12d50" "0x135f12d50"
+## [1] "0x1297401b8" "0x1297401b8"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -23042,7 +23046,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x135f12d50" "0x1190b6238"
+## [1] "0x1297401b8" "0x12a77eb90"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
