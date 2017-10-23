@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-10-21">
+<meta name="date" content="2017-10-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -485,7 +485,7 @@ Figure 8.15: You can always add some labels!
 </div>
 <div id="adding-a-type-of-glyph" class="section level3">
 <h3><span class="header-section-number">8.2.4</span> Adding a Type of Glyph</h3>
-<p>It is high time now to make some data appear on our plot, so let’s add some glyphs. In <strong>ggplot2</strong> syntax glyphs are added with function whose names are of the form:</p>
+<p>It is high time now to make some data appear on our plot, so let’s add some glyphs. In <strong>ggplot2</strong> syntax glyphs are added with functions whose names are of the form:</p>
 <blockquote>
 <p><code>geom_gylphType()</code></p>
 </blockquote>
@@ -495,7 +495,7 @@ Figure 8.15: You can always add some labels!
 <li><code>geom_bar()</code> for the bars of a bar graph;</li>
 <li><code>geom_histogram()</code> for the rectangles that make up a histogram;</li>
 <li><code>geom_density()</code> for the curve of a density plot;</li>
-<li>`geom_violin() for the violins of a violin plot;</li>
+<li><code>geom_violin()</code> for the violins of a violin plot;</li>
 <li><code>geom_jitter()</code> for jittered points representing individual cases;</li>
 <li><code>geom_rug()</code> for rug-ticks representing individual cases;</li>
 <li>and a number of other <code>geom</code>’s!</li>
@@ -530,7 +530,7 @@ Figure 8.16: Finally: the data appears!
 Figure 8.17: This is the target plot!
 </p>
 </div>
-<p>Points have other perceptual properties in besides their color. <em>Shape</em> is such a property. (From the point of view of the Grammar of Graphics, a point in itself is only an abstract location in space. Only when it assumes all of its perceptual properties does it actually “appear”, and when it does appear it shape may be other than circular, just as its color may be other than, for instance, black.) Thus alternative way to incorporate sex into the graph would have been to map shape to <code>sex</code>,as in the following code that results in Figure <a href="implementation-in-ggplot2.html#fig:impscatterplotshape">8.18</a>:</p>
+<p>Points have other perceptual properties in besides their color. <em>Shape</em> is such a property. (From the point of view of the Grammar of Graphics, a point in itself is only an abstract location in space. Only when it assumes all of its perceptual properties does it actually “appear”, and when it does appear its shape may be other than circular, just as its color may be other than, for instance, black.) Thus alternative way to incorporate sex into the graph would have been to map shape to <code>sex</code>,as in the following code that results in Figure <a href="implementation-in-ggplot2.html#fig:impscatterplotshape">8.18</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> fastest, <span class="dt">y =</span> GPA)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> sex)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;fastest speed ever driven (mph)&quot;</span>,
@@ -653,7 +653,7 @@ Figure 8.23: Violin plot of the fastest speed ever driven.
 <p>Note that the <code>width</code> parameter in the call to <code>geom_jitter()</code> determines how much the points are allowed to jitter horizontally.</p>
 <div id="jitter-it-yourself-jiy" class="section level4">
 <h4><span class="header-section-number">8.2.5.1</span> Jitter-It-Yourself (JIY)</h4>
-<p>“Rug” glyphs are excellent, in especially in conjunction with density curves, but they have a downside. Consider, for example Figure <a href="implementation-in-ggplot2.html#fig:densityfastestbadrug">8.24</a> produced by the code below. When you examine the plot you will see that there aren’t as many rug-ticks as there are students in the 1m111survey1 data. Many students reported driving at the same speed, so their rug-ticks plotted over each other.</p>
+<p>“Rug” glyphs are excellent, in especially in conjunction with density curves, but they have a downside. Consider, for example Figure <a href="implementation-in-ggplot2.html#fig:densityfastestbadrug">8.24</a> produced by the code below. When you examine the plot you will see that there aren’t as many rug-ticks as there are students in the <code>m111survey</code> data. Many students reported driving at the same speed, so their rug-ticks plotted over each other.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> fastest)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_rug</span>() <span class="op">+</span>
@@ -695,7 +695,20 @@ Figure 8.25: Density plot of the fastest speed ever driven. Rug glyphs are jitte
 <p>The data frame <code>mosaicData::RailTrail</code> has information on usage of a converted railroad trail every day from April 5 to November 15, 2005. Study the Help file:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(RailTrail)</code></pre></div>
 <p>Every row in the data frame represents a particular day between April 5 and November 15. Our goal is to study how the season (Spring, summer or Fall) and the time of week (weekday Mon-Fri vs. weekend Sat-Sun) relate to <code>volume</code> the number of people who use the trail on a given day.</p>
-<p>Infromation about the season in which the day occurs is spread over the three 0-1 numerical variables <code>spring</code>, <code>summer</code> and <code>fall</code>. We propose to construct a single factor variable <code>season</code> variable from these three variables, as follows:</p>
+<p>Inforomation about the season in which the day occurs is spread over the three 0-1 numerical variables <code>spring</code>, <code>summer</code> and <code>fall</code>. We propose to construct a single factor variable <code>season</code> variable from these three variables, as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(RailTrail)
+season &lt;-<span class="st"> </span><span class="kw">character</span>(n)
+<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n ) {
+  <span class="cf">if</span> ( RailTrail<span class="op">$</span>spring[i] ) {
+    season[i] &lt;-<span class="st"> &quot;spring&quot;</span>
+  } <span class="cf">else</span> <span class="cf">if</span> ( RailTrail<span class="op">$</span>summer[i] ) {
+    season[i] &lt;-<span class="st"> &quot;summer&quot;</span>
+  } <span class="cf">else</span> <span class="cf">if</span> ( RailTrail<span class="op">$</span>fall[i] ) {
+    season[i] &lt;-<span class="st"> &quot;fall&quot;</span>
+  }
+}
+RailTrail<span class="op">$</span>season &lt;-<span class="st"> </span><span class="kw">factor</span>(season,
+                           <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;spring&quot;</span>, <span class="st">&quot;summer&quot;</span>, <span class="st">&quot;fall&quot;</span>))</code></pre></div>
 <p>We’ll also make a variant of the “0”-“1” character-based variable <code>weekday</code> that has more informative values:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">RailTrail<span class="op">$</span>wkday &lt;-<span class="st"> </span><span class="kw">ifelse</span>(RailTrail<span class="op">$</span>weekday <span class="op">==</span><span class="st"> &quot;1&quot;</span>, 
                             <span class="st">&quot;Mon-Fri&quot;</span>, <span class="st">&quot;Sat-Sun&quot;</span>)</code></pre></div>

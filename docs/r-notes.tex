@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-21}
+  \date{2017-10-23}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5445,19 +5445,19 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:bindrcpp"      
-##  [3] "package:R6"             "package:readr"         
-##  [5] "package:tigerData"      "package:tigerstats"    
-##  [7] "package:abd"            "package:mosaic"        
-##  [9] "package:Matrix"         "package:ggformula"     
-## [11] "package:dplyr"          "package:lattice"       
-## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:ggplot2"       
-## [17] "package:mosaicData"     "tools:rstudio"         
-## [19] "package:stats"          "package:graphics"      
-## [21] "package:grDevices"      "package:utils"         
-## [23] "package:datasets"       "package:methods"       
-## [25] "Autoloads"              "package:base"
+##  [1] ".GlobalEnv"             "package:R6"            
+##  [3] "package:readr"          "package:tigerData"     
+##  [5] "package:tigerstats"     "package:abd"           
+##  [7] "package:mosaic"         "package:Matrix"        
+##  [9] "package:ggformula"      "package:dplyr"         
+## [11] "package:lattice"        "package:nlme"          
+## [13] "package:TurtleGraphics" "package:grid"          
+## [15] "package:ggplot2"        "package:mosaicData"    
+## [17] "tools:rstudio"          "package:stats"         
+## [19] "package:graphics"       "package:grDevices"     
+## [21] "package:utils"          "package:datasets"      
+## [23] "package:methods"        "Autoloads"             
+## [25] "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -5563,7 +5563,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10e6fd8a8>
+## <bytecode: 0x10f022580>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -14898,7 +14898,7 @@ practice.
 \subsection{Adding a Type of Glyph}\label{adding-a-type-of-glyph}
 
 It is high time now to make some data appear on our plot, so let's add
-some glyphs. In \textbf{ggplot2} syntax glyphs are added with function
+some glyphs. In \textbf{ggplot2} syntax glyphs are added with functions
 whose names are of the form:
 
 \begin{quote}
@@ -14919,7 +14919,7 @@ Thus we have such things as:
 \item
   \texttt{geom\_density()} for the curve of a density plot;
 \item
-  `geom\_violin() for the violins of a violin plot;
+  \texttt{geom\_violin()} for the violins of a violin plot;
 \item
   \texttt{geom\_jitter()} for jittered points representing individual
   cases;
@@ -14988,11 +14988,11 @@ Points have other perceptual properties in besides their color.
 \emph{Shape} is such a property. (From the point of view of the Grammar
 of Graphics, a point in itself is only an abstract location in space.
 Only when it assumes all of its perceptual properties does it actually
-``appear'', and when it does appear it shape may be other than circular,
-just as its color may be other than, for instance, black.) Thus
-alternative way to incorporate sex into the graph would have been to map
-shape to \texttt{sex},as in the following code that results in Figure
-\ref{fig:impscatterplotshape}:
+``appear'', and when it does appear its shape may be other than
+circular, just as its color may be other than, for instance, black.)
+Thus alternative way to incorporate sex into the graph would have been
+to map shape to \texttt{sex},as in the following code that results in
+Figure \ref{fig:impscatterplotshape}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -15207,8 +15207,9 @@ jitter horizontally.
 curves, but they have a downside. Consider, for example Figure
 \ref{fig:densityfastestbadrug} produced by the code below. When you
 examine the plot you will see that there aren't as many rug-ticks as
-there are students in the 1m111survey1 data. Many students reported
-driving at the same speed, so their rug-ticks plotted over each other.
+there are students in the \texttt{m111survey} data. Many students
+reported driving at the same speed, so their rug-ticks plotted over each
+other.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -15300,10 +15301,28 @@ Fall) and the time of week (weekday Mon-Fri vs.~weekend Sat-Sun) relate
 to \texttt{volume} the number of people who use the trail on a given
 day.
 
-Infromation about the season in which the day occurs is spread over the
+Inforomation about the season in which the day occurs is spread over the
 three 0-1 numerical variables \texttt{spring}, \texttt{summer} and
 \texttt{fall}. We propose to construct a single factor variable
 \texttt{season} variable from these three variables, as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(RailTrail)}
+\NormalTok{season <-}\StringTok{ }\KeywordTok{character}\NormalTok{(n)}
+\ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n ) \{}
+  \ControlFlowTok{if}\NormalTok{ ( RailTrail}\OperatorTok{$}\NormalTok{spring[i] ) \{}
+\NormalTok{    season[i] <-}\StringTok{ "spring"}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ ( RailTrail}\OperatorTok{$}\NormalTok{summer[i] ) \{}
+\NormalTok{    season[i] <-}\StringTok{ "summer"}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ ( RailTrail}\OperatorTok{$}\NormalTok{fall[i] ) \{}
+\NormalTok{    season[i] <-}\StringTok{ "fall"}
+\NormalTok{  \}}
+\NormalTok{\}}
+\NormalTok{RailTrail}\OperatorTok{$}\NormalTok{season <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(season,}
+                           \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"spring"}\NormalTok{, }\StringTok{"summer"}\NormalTok{, }\StringTok{"fall"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 We'll also make a variant of the ``0''-``1'' character-based variable
 \texttt{weekday} that has more informative values:
@@ -15594,6 +15613,10 @@ aesthetic mapping.
   below. (The points are all blue.)
 
   \begin{center}\includegraphics[width=0.6\linewidth]{r-notes_files/figure-latex/heightideal-1} \end{center}
+
+  \textbf{Hint}: For the points, map the aesthetic property
+  \texttt{shape} ot the variable \texttt{sex}. On the other hand, color
+  is a fixed property.
 \item
   Using the \texttt{mosaicData::Utilities} data frame, write the
   \textbf{ggplot2} code necessary to produce the graph in the figure
@@ -22837,7 +22860,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ce0be88"
+## [1] "0x1398d3a98"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -22851,7 +22874,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ce0be88"
+## [1] "0x1398d3a98"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -22890,7 +22913,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ce0be88"
+## [1] "0x1398d3a98"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -22903,7 +22926,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12b9889c8"
+## [1] "0x13592d368"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -22921,7 +22944,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10ce0be88"
+## [1] "0x1398d3a98"
 \end{verbatim}
 
 \begin{Shaded}
@@ -22965,7 +22988,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1297401b8" "0x1297401b8"
+## [1] "0x13a370140" "0x13a370140"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -23004,7 +23027,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1297401b8" "0x1297401b8"
+## [1] "0x13a370140" "0x13a370140"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -23046,7 +23069,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1297401b8" "0x12a77eb90"
+## [1] "0x13a370140" "0x11bc76c60"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

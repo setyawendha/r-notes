@@ -380,7 +380,7 @@ ggplot(m111survey, aes(x = fastest, y = GPA)) +
 
 ### Adding a Type of Glyph
 
-It is high time now to make some data appear on our plot, so let's add some glyphs.  In **ggplot2** syntax glyphs are added with function whose names are of the form:
+It is high time now to make some data appear on our plot, so let's add some glyphs.  In **ggplot2** syntax glyphs are added with functions whose names are of the form:
 
 >`geom_gylphType()`
 
@@ -390,7 +390,7 @@ Thus we have such things as:
 * `geom_bar()` for the bars of a bar graph;
 * `geom_histogram()` for the rectangles that make up a histogram;
 * `geom_density()` for the curve of a density plot;
-* `geom_violin() for the violins of a violin plot;
+* `geom_violin()` for the violins of a violin plot;
 * `geom_jitter()` for jittered points representing individual cases;
 * `geom_rug()` for rug-ticks representing individual cases;
 * and a number of other `geom`'s!
@@ -423,7 +423,7 @@ ggplot(m111survey, aes(x = fastest, y = GPA)) +
        subtitle = "(But guys tend to drive faster, and to have lower GPAs.)")
 ```
 
-Points have other perceptual properties in besides their color.  *Shape* is such a property.  (From the point of view of the Grammar of Graphics, a point in itself is only an abstract location in space.  Only when it assumes all of its perceptual properties does it actually "appear", and when it does appear it shape may be other than circular, just as its color may be other than, for instance, black.)  Thus alternative way to incorporate sex into the graph would have been to map shape to `sex`,as in the following code that results in Figure \@ref(fig:impscatterplotshape):
+Points have other perceptual properties in besides their color.  *Shape* is such a property.  (From the point of view of the Grammar of Graphics, a point in itself is only an abstract location in space.  Only when it assumes all of its perceptual properties does it actually "appear", and when it does appear its shape may be other than circular, just as its color may be other than, for instance, black.)  Thus alternative way to incorporate sex into the graph would have been to map shape to `sex`,as in the following code that results in Figure \@ref(fig:impscatterplotshape):
 
 ```{r impscatterplotshape, cache=TRUE, fig.cap = "Mapping shape to the variable sex."}
 ggplot(m111survey, aes(x = fastest, y = GPA)) +
@@ -523,7 +523,7 @@ Note that the `width` parameter in the call to `geom_jitter()` determines how mu
 
 #### Jitter-It-Yourself (JIY)
 
-"Rug" glyphs are excellent, in especially in conjunction with density curves, but they have a downside.  Consider, for example Figure \@ref(fig:densityfastestbadrug) produced by the code below.  When you examine the plot you will see that there aren't as many rug-ticks as there are students in the 1m111survey1 data.  Many students reported driving at the same speed, so their rug-ticks plotted over each other.
+"Rug" glyphs are excellent, in especially in conjunction with density curves, but they have a downside.  Consider, for example Figure \@ref(fig:densityfastestbadrug) produced by the code below.  When you examine the plot you will see that there aren't as many rug-ticks as there are students in the `m111survey` data.  Many students reported driving at the same speed, so their rug-ticks plotted over each other.
 
 ```{r densityfastestbadrug, cache=TRUE, fig.cap="Density plot of the fastest speed ever driven.  Some rug glyphs overplot each other."}
 ggplot(m111survey, aes(x = fastest)) + 
@@ -570,10 +570,10 @@ help(RailTrail)
 
 Every row in the data frame represents a particular day between April 5 and November 15.  Our goal is to study how the season (Spring, summer or Fall) and the time of week (weekday Mon-Fri vs. weekend Sat-Sun) relate to `volume` the number of people who use the trail on a given day.
 
-Infromation about the season in which the day occurs is spread over the three 0-1 numerical variables `spring`, `summer` and `fall`.  We propose to construct a single factor variable `season` variable from these three variables, as follows: 
+Inforomation about the season in which the day occurs is spread over the three 0-1 numerical variables `spring`, `summer` and `fall`.  We propose to construct a single factor variable `season` variable from these three variables, as follows: 
 
 
-```{r echo=FALSE}
+```{r}
 n <- nrow(RailTrail)
 season <- character(n)
 for ( i in 1:n ) {
@@ -743,6 +743,8 @@ knitr::include_graphics("images/thinking.png")
            y = "ideal height (in)",
            title = "The taller you are, the taller you wanna be!")
     ```
+    
+    **Hint**:  For the points, map the aesthetic property `shape` ot the variable `sex`.  On the other hand, color is a fixed property.
     
 1.  Using the `mosaicData::Utilities` data frame, write the **ggplot2** code necessary to produce the graph in the figure below.
 
