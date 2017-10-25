@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="reading-text-files-with-readr.html">
-<link rel="next" href="application-making-a-lexicon.html">
+<link rel="prev" href="a-case-study-us-births.html">
+<link rel="next" href="learn-more.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -293,7 +293,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.2.6" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#facets"><i class="fa fa-check"></i><b>8.2.6</b> Facets</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="a-case-study-us-births.html"><a href="a-case-study-us-births.html"><i class="fa fa-check"></i><b>8.3</b> A Case Study: US Births</a></li>
-<li class="chapter" data-level="8.4" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a></li>
+<li class="chapter" data-level="8.4" data-path="factor-variables-in-plotting.html"><a href="factor-variables-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a></li>
 <li class="chapter" data-level="8.5" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.5</b> Learn More</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="graphics-exercises.html"><a href="graphics-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
@@ -433,21 +433,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="writing-to-files" class="section level2">
-<h2><span class="header-section-number">12.4</span> Writing to Files</h2>
-<p>If you would like to send the data in a data frame to a colleague who does not use R, then you should convert it to a common text-file format such as CSV. For this purpose R provides the <code>write.csv()</code> command. The following code writes <code>m11survey</code> to a CSV file in your Home directory.</p>
-
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tigerstats)
-<span class="kw">write.csv</span>(m111survey, <span class="dt">file =</span> <span class="st">&quot;m111survey.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p>You may now transmit the file to your colleague.</p>
+<div id="factor-variables-in-plotting" class="section level2">
+<h2><span class="header-section-number">8.4</span> Factor Variables in Plotting</h2>
+<p>It is worthwhile to reconsider factor variables (see <a href="introduction-to-data-frames.html#factor-variables">7.4.3</a>) and to consider their role in the appearance of plots. We’ll do this by way of an example.</p>
+<p>Consider the data frame <code>firesetting</code> in the <strong>tigerData</strong> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;firesetting&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;tigerData&quot;</span>)
+?tigerData<span class="op">::</span>firesetting</code></pre></div>
+<p>As we see from the Help file, fire-setting offers information about a large sample of high-school students. Some of them are known to be arsonists, while of course most are not. The purpose for gathering the data was to determine what characteristics of a child might be risk factors in whether he/she would develop into a fire-setter. Among the variables of interest are:</p>
+<ul>
+<li><code>race</code>, the ethnicity of the student, a factor with three levels: “white”, “black”, and “other”; *<code>school.attitude</code>, a scaled score on a personality inventory in which high scores indicate a poor attitude towrd schooland</li>
+<li><code>fires</code>, a factor variable with levels “0” (does not set fires) and “1” (sets fires).</li>
+</ul>
+<p>We might study the relationship between these variables with some boxplots via the code below. The results appear as Figure <a href="#fig:firesetting1"><strong>??</strong></a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> births)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> weekend)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Day of the Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Number of U.S. Births&quot;</span>,
+       <span class="dt">title =</span> <span class="st">&quot;Daily U.S. Birth-Numbers in 1978&quot;</span>)</code></pre></div>
+<p><img src="r-notes_files/figure-html/firesetting1-1.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="reading-text-files-with-readr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="application-making-a-lexicon.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-case-study-us-births.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="learn-more.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

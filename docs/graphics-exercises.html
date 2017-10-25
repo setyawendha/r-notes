@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-10-23">
+<meta name="date" content="2017-10-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,7 +261,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
 <li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
-<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factor-variables"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-vectors"><i class="fa fa-check"></i><b>7.5.1</b> Creation from Vectors</a></li>
@@ -293,7 +293,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.2.6" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#facets"><i class="fa fa-check"></i><b>8.2.6</b> Facets</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="a-case-study-us-births.html"><a href="a-case-study-us-births.html"><i class="fa fa-check"></i><b>8.3</b> A Case Study: US Births</a></li>
-<li class="chapter" data-level="8.4" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.4</b> Learn More</a></li>
+<li class="chapter" data-level="8.4" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a></li>
+<li class="chapter" data-level="8.5" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.5</b> Learn More</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="graphics-exercises.html"><a href="graphics-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -437,10 +438,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img src="images/thinking.png" width="50%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><p>Using the <code>tigerstats::m111survey</code> data frame, write the <strong>ggplot2</strong> code necessary to produce the graph in the figure below. (The points are all blue.)</p>
-<p><img src="r-notes_files/figure-html/heightideal-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="r-notes_files/figure-html/heightideal-1.png" width="95%" style="display: block; margin: auto;" /></p>
 <p><strong>Hint</strong>: For the points, map the aesthetic property <code>shape</code> ot the variable <code>sex</code>. On the other hand, color is a fixed property.</p></li>
 <li><p>Using the <code>mosaicData::Utilities</code> data frame, write the <strong>ggplot2</strong> code necessary to produce the graph in the figure below.</p>
-<p><img src="r-notes_files/figure-html/utilitybills-1.png" width="60%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/utilitybills-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p><strong>Hint</strong>: The <code>month</code> variable in <code>Utilities</code> is given numerically: 0 for January, 1 for February, and so on. You’ll need to use <code>plyr::mapvalues()</code> to map the numbers from 1 to 12 to the abbreviated month names. (See section <a href="factors-in-plotting.html#factors-in-plotting">8.4</a> for a review fo this.) The special R-vector <code>month.abb</code> will render the re-mapping task easy:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">month.abb</code></pre></div>
+<pre><code>##  [1] &quot;Jan&quot; &quot;Feb&quot; &quot;Mar&quot; &quot;Apr&quot; &quot;May&quot; &quot;Jun&quot; &quot;Jul&quot; &quot;Aug&quot; &quot;Sep&quot; &quot;Oct&quot; &quot;Nov&quot;
+## [12] &quot;Dec&quot;</code></pre>
+<p>You also need to make sure that the months come in the right order along the x-axis of the graph. To do this consider resetting the levels of your new <code>month</code> variable. One way to accomplish this is to convert <code>month</code> to a character vector and then back to a factor with levels in the order you want, as done in Section <a href="factors-in-plotting.html#factors-in-plotting">8.4</a>.</p></li>
 <li><p>The next few exercises pertain to the data frame <code>CPS85</code> from the package <strong>mosaicData</strong>. Learn about it with <code>help(CPS85)</code>. We will use the <strong>ggplot2</strong> graphing package to explore whether men were being paid more than women in 1985.</p>
 <p>Make a density plot of the wages of the people in the study. As with all plots you make, it should have well-labelled axes (with units if possible). For a density plot you should label the horizontal axis, but you can let <strong>ggplo2</strong> provide the label for the “density” axis. As always, provide a descriptive title. Also provide a “rug” of individual values along the horizontal axis.</p></li>
 <li><p>Look at the plot you made in the previous exercise: you will notice that one person made a wage that was much higher than all the rest. In data analysis, when a value is much higher or lower than the rest of the values we call it an <em>outlier</em>.</p>

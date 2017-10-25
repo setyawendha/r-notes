@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-10-23">
+<meta name="date" content="2017-10-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,7 +261,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
 <li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
-<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factor-variables"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-vectors"><i class="fa fa-check"></i><b>7.5.1</b> Creation from Vectors</a></li>
@@ -293,7 +293,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.2.6" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#facets"><i class="fa fa-check"></i><b>8.2.6</b> Facets</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="a-case-study-us-births.html"><a href="a-case-study-us-births.html"><i class="fa fa-check"></i><b>8.3</b> A Case Study: US Births</a></li>
-<li class="chapter" data-level="8.4" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.4</b> Learn More</a></li>
+<li class="chapter" data-level="8.4" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a></li>
+<li class="chapter" data-level="8.5" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.5</b> Learn More</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="graphics-exercises.html"><a href="graphics-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -506,7 +507,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="dt">data =</span> m111survey, <span class="dt">expr =</span> fastest[fastest <span class="op">&gt;=</span><span class="dv">150</span>])</code></pre></div>
 <p>For the <code>data</code> parameter we can supply a data frame or any other R-object that can be used to construct an environment . In this case <code>m111survey</code> provides a miniature environment consisting of the names of its variables. For the <code>expr</code> parameter we supply an expression for R to evaluate. As R evaluates the expression, it encounters names (such as <code>fastest</code>). Now ordinarily R would first search whatever counts as the active environment—in this case it’s the Global Environment—for the names in the expression, but <code>with()</code> forces R to look first within the environment created by the <code>data</code> argument. In our example, R finds <code>fastest</code> inside <code>m111survey</code> and evaluates the expression on that basis. If it had not found <code>fastest</code> in <code>m111survey</code>, R would have moved on to the Global Environment and then the rest of the usual search path and (probably) would have found nothing, causing it to throw an “object not found” error message. In R, as in any other programming language, good programming depends very much on paying attention to how the language searches for the objects to which names refer.</p>
 </div>
-<div id="factors" class="section level3">
+<div id="factor-variables" class="section level3">
 <h3><span class="header-section-number">7.4.3</span> Factors</h3>
 <p>Some of the variables in <code>m111survey</code> are called <em>factors</em>; an example is <code>seat</code>, which pertains to where one prefers to sit in a classroom:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(m111survey<span class="op">$</span>seat)</code></pre></div>

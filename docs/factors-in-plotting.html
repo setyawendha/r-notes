@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="reading-text-files-with-readr.html">
-<link rel="next" href="application-making-a-lexicon.html">
+<link rel="prev" href="a-case-study-us-births.html">
+<link rel="next" href="learn-more.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -433,21 +433,114 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="writing-to-files" class="section level2">
-<h2><span class="header-section-number">12.4</span> Writing to Files</h2>
-<p>If you would like to send the data in a data frame to a colleague who does not use R, then you should convert it to a common text-file format such as CSV. For this purpose R provides the <code>write.csv()</code> command. The following code writes <code>m11survey</code> to a CSV file in your Home directory.</p>
-
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tigerstats)
-<span class="kw">write.csv</span>(m111survey, <span class="dt">file =</span> <span class="st">&quot;m111survey.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p>You may now transmit the file to your colleague.</p>
+<div id="factors-in-plotting" class="section level2">
+<h2><span class="header-section-number">8.4</span> Factor Variables in Plotting</h2>
+<p>It is worthwhile to reconsider factor variables (see <a href="introduction-to-data-frames.html#factor-variables">7.4.3</a>) and to consider their role in the appearance of plots. We’ll do this by way of an example.</p>
+<p>Consider the data frame <code>firesetting</code> in the <strong>tigerData</strong> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;firesetting&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;tigerData&quot;</span>)
+?tigerData<span class="op">::</span>firesetting</code></pre></div>
+<p>As we see from the Help file, fire-setting offers information about a large sample of high-school students. Some of them are known to be arsonists, while of course most are not. The purpose for gathering the data was to determine what characteristics of a child might be risk factors in whether he/she would develop into a fire-setter. Among the variables of interest are:</p>
+<ul>
+<li><code>race</code>, the ethnicity of the student, a factor with three levels: “white”, “black”, and “other”; *<code>school.attitude</code>, a scaled score on a personality inventory in which high scores indicate a poor attitude toward school;</li>
+<li><code>fires</code>, a factor variable with levels “0” (does not set fires) and “1” (sets fires).</li>
+</ul>
+<p>We might study the relationship between these variables with some box-plots via the code below. The results appear as Figure <a href="factors-in-plotting.html#fig:firesetting1">8.33</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> race, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>, 
+               <span class="dt">outlier.alpha =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.20</span>, <span class="dt">size =</span> <span class="fl">0.1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>fires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Ethnicity&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:firesetting1"></span>
+<img src="r-notes_files/figure-html/firesetting1-1.png" alt="Boxplots with jittered individual values.  School attitudes are generally worse among fire-setters." width="95%" />
+<p class="caption">
+Figure 8.33: Boxplots with jittered individual values. School attitudes are generally worse among fire-setters.
+</p>
+</div>
+<p>We could improve the appearance of the plot with respect to two of the variables involved:</p>
+<ul>
+<li><code>fires</code>: We should display values that are more meaningful to a human viewer than 0 and 1.</li>
+<li><code>race</code>: Let’s change the names of the values somewhat, keeping their current order along the x-axis.</li>
+</ul>
+<p>For <code>fires</code>, we simply need to map the current values onto others that we prefer. Currently the levels are:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(firesetting<span class="op">$</span>fires)</code></pre></div>
+<pre><code>## [1] &quot;0&quot; &quot;1&quot;</code></pre>
+<p>We can re-map as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fires &lt;-<span class="st"> </span>firesetting<span class="op">$</span>fires
+fires &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(fires, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>),
+                         <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;no fires&quot;</span>, <span class="st">&quot;sets fires&quot;</span>))
+firesetting<span class="op">$</span>fires &lt;-<span class="st"> </span>fires</code></pre></div>
+<p>For <code>race</code>, we’d like to substitute</p>
+<ul>
+<li>“White” for “white”;</li>
+<li>“AfrAm” for “black”</li>
+<li>“Other” for “other”</li>
+<li>“Unknown” instead of <code>NA</code></li>
+</ul>
+<p>We’d like the order along the horizontal axis to remain as it is.</p>
+<p>We might begin by replacing the <code>NA</code>-values with “Unknown”, as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race &lt;-<span class="st"> </span>firesetting<span class="op">$</span>race
+race[<span class="kw">is.na</span>(race)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre></div>
+<p>We get an error! That’s because <code>race</code> is a factor with only three “possible values”, as given by its levels:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(race)</code></pre></div>
+<pre><code>## [1] &quot;white&quot; &quot;black&quot; &quot;other&quot;</code></pre>
+<p>“Unknown” is not considered a “possible value” for <code>race</code>, any attempt to set that value in any elements of <code>race</code> will be resisted.</p>
+<p>We can overcome this resistance by coercing <code>race</code> into a mere character-vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race &lt;-<span class="st"> </span><span class="kw">as.character</span>(race)</code></pre></div>
+<p>Now <code>race</code> doesn’t come with a limit on its “possible values”. We try again:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race[<span class="kw">is.na</span>(race)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre></div>
+<p>This apparently worked. Let’s check:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(race)</code></pre></div>
+<pre><code>## [1] &quot;white&quot;   &quot;other&quot;   &quot;Unknown&quot; &quot;black&quot;</code></pre>
+<p>So far, so good. Now let’s re-map the other three values:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(race,
+                        <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;other&quot;</span>),
+                        <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;White&quot;</span>, <span class="st">&quot;AfrAm&quot;</span>, <span class="st">&quot;Other&quot;</span>))
+firesetting<span class="op">$</span>race &lt;-<span class="st"> </span>race</code></pre></div>
+<p>Let’s try it the graph again. Figure <a href="factors-in-plotting.html#fig:firesetting2">8.34</a> is the result.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> race, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>, 
+               <span class="dt">outlier.alpha =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.20</span>, <span class="dt">size =</span> <span class="fl">0.1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>fires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Ethnicity&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:firesetting2"></span>
+<img src="r-notes_files/figure-html/firesetting2-1.png" alt="We have re-mapped the fires and race variables." width="95%" />
+<p class="caption">
+Figure 8.34: We have re-mapped the fires and race variables.
+</p>
+</div>
+<p>This looks better, but now the order along the x-axis isn’t as we desired. Recall that <code>race</code> is now a character vector only. Since it doesn’t have levels that specify a particular order, <strong>ggplot2</strong> uses alphabetical order as the default ordering along the x-axis.</p>
+<p>Accordingly we should convert `race to a factor variable, and be careful to set the levels in the order that we want:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race &lt;-<span class="st"> </span>firesetting<span class="op">$</span>race
+race &lt;-<span class="st"> </span><span class="kw">factor</span>(race,
+               <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;White&quot;</span>, <span class="st">&quot;AfrAm&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Unknown&quot;</span>))
+firesetting<span class="op">$</span>race &lt;-<span class="st"> </span>race</code></pre></div>
+<p>Now try again (see Figure <a href="factors-in-plotting.html#fig:firesetting3">8.35</a>) for the result.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> race, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>, 
+               <span class="dt">outlier.alpha =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.20</span>, <span class="dt">size =</span> <span class="fl">0.1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>fires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Ethnicity&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:firesetting3"></span>
+<img src="r-notes_files/figure-html/firesetting3-1.png" alt="Now the order of the race-values is correct!" width="95%" />
+<p class="caption">
+Figure 8.35: Now the order of the race-values is correct!
+</p>
+</div>
+<p>This works!</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="reading-text-files-with-readr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="application-making-a-lexicon.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-case-study-us-births.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="learn-more.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

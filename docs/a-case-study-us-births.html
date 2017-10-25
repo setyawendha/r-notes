@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-10-23">
+<meta name="date" content="2017-10-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="implementation-in-ggplot2.html">
-<link rel="next" href="learn-more.html">
+<link rel="next" href="factors-in-plotting.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -261,7 +261,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
 <li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
-<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factor-variables"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-vectors"><i class="fa fa-check"></i><b>7.5.1</b> Creation from Vectors</a></li>
@@ -293,7 +293,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.2.6" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#facets"><i class="fa fa-check"></i><b>8.2.6</b> Facets</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="a-case-study-us-births.html"><a href="a-case-study-us-births.html"><i class="fa fa-check"></i><b>8.3</b> A Case Study: US Births</a></li>
-<li class="chapter" data-level="8.4" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.4</b> Learn More</a></li>
+<li class="chapter" data-level="8.4" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a></li>
+<li class="chapter" data-level="8.5" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.5</b> Learn More</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="graphics-exercises.html"><a href="graphics-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -436,7 +437,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">8.3</span> A Case Study: US Births</h2>
 <p>In Section <a href="idea-tour.html#idea-data">1.2.5</a>, we made a plot of the number of births in the United States for each day of that year (see Figure <a href="a-case-study-us-births.html#fig:birthsplotframes">8.30</a>). We noticed that there appear to be two clouds of points. What accounts for this phenomenon? By now we have the R-programming chops to take on this question.</p>
 <div class="figure" style="text-align: center"><span id="fig:birthsplotframes"></span>
-<img src="r-notes_files/figure-html/birthsplotframes-1.png" alt="Some of the days have significantly fewer births.  What's going on?" width="60%" />
+<img src="r-notes_files/figure-html/birthsplotframes-1.png" alt="Some of the days have significantly fewer births.  What's going on?" width="95%" />
 <p class="caption">
 Figure 8.30: Some of the days have significantly fewer births. What’s going on?
 </p>
@@ -452,7 +453,7 @@ Figure 8.30: Some of the days have significantly fewer births. What’s going on
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> wday, <span class="dt">y =</span> births)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_jitter</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:violinbirthswday"></span>
-<img src="r-notes_files/figure-html/violinbirthswday-1.png" alt="Violin plot of births, by day of the week." width="60%" />
+<img src="r-notes_files/figure-html/violinbirthswday-1.png" alt="Violin plot of births, by day of the week." width="95%" />
 <p class="caption">
 Figure 8.31: Violin plot of births, by day of the week.
 </p>
@@ -466,7 +467,7 @@ Births78<span class="op">$</span>weekend &lt;-<span class="st"> </span>weekend</
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Day of the Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Number of U.S. Births&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Daily U.S. Birth-Numbers in 1978&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:birthsplotframesweekend"></span>
-<img src="r-notes_files/figure-html/birthsplotframesweekend-1.png" alt="The days with fewer births are almost always weekend-days." width="60%" />
+<img src="r-notes_files/figure-html/birthsplotframesweekend-1.png" alt="The days with fewer births are almost always weekend-days." width="95%" />
 <p class="caption">
 Figure 8.32: The days with fewer births are almost always weekend-days.
 </p>
@@ -489,7 +490,7 @@ df</code></pre></div>
         </div>
       </div>
 <a href="implementation-in-ggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="learn-more.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="factors-in-plotting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

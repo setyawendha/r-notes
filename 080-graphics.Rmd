@@ -1,7 +1,8 @@
 # Graphics {#graphics}
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(message=FALSE, warning=FALSE,
+                      fig.align = 'center', out.width = "95%")
 ```
 
 
@@ -648,7 +649,7 @@ In the exercises of this Chapter we will meet a case in which "wrap-style" facet
 
 In Section \@ref(idea-data), we made a plot of the number of births in the United States for each day of that year (see Figure \@ref(fig:birthsplotframes)).  We noticed that there appear to be two clouds of points.  What accounts for this phenomenon?  By now we have the R-programming chops to take on this question.
 
-```{r echo =FALSE, cache=TRUE, birthsplotframes, fig.cap = "Some of the days have significantly fewer births.  What's going on?",fig.align="center", out.width = "60%"}
+```{r echo =FALSE, cache=TRUE, birthsplotframes, fig.cap = "Some of the days have significantly fewer births.  What's going on?"}
 ggplot(Births78, aes(x = date, y = births)) + geom_point() +
   labs(x = "Day of the Year", y = "Number of U.S. Births",
        title = "Daily U.S. Birth-Numbers in 1978")
@@ -663,7 +664,7 @@ str(Births78)
 
 We see that the variable `wday` gives the name of the day of the week, for each of the days in the year.  On a hunch, we make violin plots of the births for each of the days of the week.  The code appears below, and the resulting plot is shown in Figure \@ref(fig:violinbirthswday)
 
-```{r violinbirthswday, cache=TRUE, echo=TRUE, fig.cap = "Violin plot of births, by day of the week.",fig.align="center", out.width = "60%"}
+```{r violinbirthswday, cache=TRUE, echo=TRUE, fig.cap = "Violin plot of births, by day of the week."}
 ggplot(Births78, aes(x = wday, y = births)) + geom_violin(fill = "burlywood") +
   geom_jitter()
 ```
@@ -681,7 +682,7 @@ Births78$weekend <- weekend
 Note that we have added the new variable to the data frame, so that it will be easy in **ggplot2** to use that variable for grouping, as in the code below.  The results appear in Figure \@ref(fig:birthsplotframesweekend).
 
 
-```{r birthsplotframesweekend, echo =TRUE, cache=TRUE, fig.cap = "The days with fewer births are almost always weekend-days.",fig.align="center", out.width = "60%"}
+```{r birthsplotframesweekend, echo =TRUE, cache=TRUE, fig.cap = "The days with fewer births are almost always weekend-days."}
 ggplot(Births78, aes(x = date, y = births)) + geom_point(aes(color = weekend)) +
   labs(x = "Day of the Year", y = "Number of U.S. Births",
        title = "Daily U.S. Birth-Numbers in 1978")
@@ -695,6 +696,160 @@ df
 ```
 
 If you consult a calendar for the year 1978, you will find that every one of the above days was a major holiday.  Apparently doctors prefer not to deliver babies on weekend and holidays.  Scheduled births---induced births or births by non-emergency Cesarean section---are not usually set for weekends or holidays.  Perhaps this accounts for the two clouds we saw in the original scatter plot.
+
+## Factor Variables in Plotting {#factors-in-plotting}
+
+It is worthwhile to reconsider factor variables (see \@ref(factor-variables)) and to consider their role in the appearance of plots.  We'll do this by way of an example.
+
+Consider the data frame `firesetting` in the **tigerData** package:
+
+```{r eval=FALSE}
+data("firesetting", package = "tigerData")
+?tigerData::firesetting
+```
+
+As we see from the Help file, fire-setting offers information about a large sample of high-school students.  Some of them are known to be arsonists, while of course most are not.  The purpose for gathering the data was to determine what characteristics of a child might be risk factors in whether he/she would develop into a fire-setter.  Among the variables of interest are:
+
+* `race`, the ethnicity of the student, a factor with three levels:  "white", "black", and "other";
+*`school.attitude`, a scaled score on a personality inventory in which high scores indicate a poor attitude toward school;
+* `fires`, a factor variable with levels "0" (does not set fires) and "1" (sets fires).
+
+We might study the relationship between these variables with some box-plots via the code below.  The results appear as Figure \@ref(fig:firesetting1).
+
+```{r firesetting1, echo =TRUE, cache=TRUE, fig.cap = "Boxplots with jittered individual values.  School attitudes are generally worse among fire-setters."}
+ggplot(firesetting, aes(x = race, y = school.attitude)) +
+  geom_boxplot(fill = "burlywood", 
+               outlier.alpha = 0) + 
+  geom_jitter(width = 0.20, size = 0.1) +
+  facet_wrap(~ fires, nrow = 2) +
+  labs(x = "Ethnicity",
+       y = "School-Attitude Score")
+```
+
+We could improve the appearance of the plot with respect to two of the variables involved:
+
+* `fires`:  We should display values that are more meaningful to a human viewer than 0 and 1.
+* `race`:  Let's change the names of the values somewhat, keeping their current order along the x-axis.
+
+For `fires`, we simply need to map the current values onto others that we prefer.  Currently the levels are:
+
+```{r}
+levels(firesetting$fires)
+```
+
+We can re-map as follows:
+
+
+```{r}
+fires <- firesetting$fires
+fires <- plyr::mapvalues(fires, from = c("0", "1"),
+                         to = c("no fires", "sets fires"))
+firesetting$fires <- fires
+```
+
+For `race`, we'd like to substitute
+
+* "White" for "white";
+* "AfrAm" for "black"
+* "Other" for "other"
+* "Unknown" instead of `NA`
+
+We'd like the order along the horizontal axis to remain as it is.
+
+We might begin by replacing the `NA`-values with "Unknown", as follows:
+
+```{r echo=FALSE}
+race <- firesetting$race
+```
+
+
+```{r eval=FALSE}
+race <- firesetting$race
+race[is.na(race)] <- "Unknown"
+```
+
+We get an error!  That's because `race` is a factor with only three "possible values", as given by its levels:
+
+```{r}
+levels(race)
+```
+
+"Unknown" is not considered a "possible value" for `race`, any attempt to set that value in any elements of `race` will be resisted.
+
+We can overcome this resistance by coercing `race` into a mere character-vector:
+
+```{r}
+race <- as.character(race)
+```
+
+Now `race` doesn't come with a limit on its "possible values".  We try again:
+
+```{r}
+race[is.na(race)] <- "Unknown"
+```
+
+This apparently worked.  Let's check:
+
+```{r}
+unique(race)
+```
+
+So far, so good.  Now let's re-map the other three values:
+
+```{r}
+race <- plyr::mapvalues(race,
+                        from = c("white", "black", "other"),
+                        to = c("White", "AfrAm", "Other"))
+firesetting$race <- race
+```
+
+Let's try it the graph again.  Figure \@ref(fig:firesetting2) is the result.
+
+
+```{r firesetting2, echo =TRUE, cache=TRUE, fig.cap = "We have re-mapped the fires and race variables."}
+ggplot(firesetting, aes(x = race, y = school.attitude)) +
+  geom_boxplot(fill = "burlywood", 
+               outlier.alpha = 0) + 
+  geom_jitter(width = 0.20, size = 0.1) +
+  facet_wrap(~ fires, nrow = 2) +
+  labs(x = "Ethnicity",
+       y = "School-Attitude Score")
+```
+
+This looks better, but now the order along the x-axis isn't as we desired.  Recall that `race` is now a character vector only.  Since it doesn't have levels that specify a particular order, **ggplot2** uses alphabetical order as the default ordering along the x-axis.
+
+Accordingly we should convert `race to a factor variable, and be careful to set the levels in the order that we want:
+
+```{r}
+race <- firesetting$race
+race <- factor(race,
+               levels = c("White", "AfrAm", "Other", "Unknown"))
+firesetting$race <- race
+```
+
+Now try again (see Figure \@ref(fig:firesetting3)) for the result.
+
+```{r firesetting3, echo =TRUE, cache=TRUE, fig.cap = "Now the order of the race-values is correct!"}
+ggplot(firesetting, aes(x = race, y = school.attitude)) +
+  geom_boxplot(fill = "burlywood", 
+               outlier.alpha = 0) + 
+  geom_jitter(width = 0.20, size = 0.1) +
+  facet_wrap(~ fires, nrow = 2) +
+  labs(x = "Ethnicity",
+       y = "School-Attitude Score")
+```
+
+This works!
+
+
+
+
+
+
+
+
+
+
 
 ## Learn More
 
@@ -759,6 +914,15 @@ knitr::include_graphics("images/thinking.png")
       labs(x = "Month",
            y = "total bill ($)")
     ```
+    
+    **Hint**:  The `month` variable in `Utilities` is given numerically:  0 for January, 1 for February, and so on.  You'll need to use `plyr::mapvalues()` to map the numbers from 1 to 12 to the abbreviated month names.  (See section \@ref(factors-in-plotting) for a review fo this.)  The special R-vector `month.abb` will render the re-mapping task easy:
+    
+    ```{r}
+    month.abb
+    ```
+    
+    You also need to make sure that the months come in the right order along the x-axis of the graph.  To do this consider resetting the levels of your new `month` variable.  One way to accomplish this is to  convert `month` to a character vector and then back to a factor with levels in the order you want, as done in Section \@ref(factors-in-plotting).
+    
 
 1. The next few exercises pertain to the data frame `CPS85` from the package **mosaicData**.  Learn about it with `help(CPS85)`.  We will use the **ggplot2** graphing package to explore whether men were being paid more than women in 1985.
 

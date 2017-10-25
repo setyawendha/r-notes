@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-10-23">
+<meta name="date" content="2017-10-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,7 +261,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
 <li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
-<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factor-variables"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-vectors"><i class="fa fa-check"></i><b>7.5.1</b> Creation from Vectors</a></li>
@@ -293,7 +293,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.2.6" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#facets"><i class="fa fa-check"></i><b>8.2.6</b> Facets</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="a-case-study-us-births.html"><a href="a-case-study-us-births.html"><i class="fa fa-check"></i><b>8.3</b> A Case Study: US Births</a></li>
-<li class="chapter" data-level="8.4" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.4</b> Learn More</a></li>
+<li class="chapter" data-level="8.4" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a></li>
+<li class="chapter" data-level="8.5" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.5</b> Learn More</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="graphics-exercises.html"><a href="graphics-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -441,7 +442,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>It is possible call <code>ggplot()</code> with just the data, and indeed it is instructive to do so. The result is seen in Figure <a href="implementation-in-ggplot2.html#fig:impblank">8.13</a>: it is simply a blank window.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> m111survey)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impblank"></span>
-<img src="r-notes_files/figure-html/impblank-1.png" alt="A completely blank plot!" width="60%" />
+<img src="r-notes_files/figure-html/impblank-1.png" alt="A completely blank plot!" width="95%" />
 <p class="caption">
 Figure 8.13: A completely blank plot!
 </p>
@@ -454,7 +455,7 @@ Figure 8.13: A completely blank plot!
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> m111survey,
        <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> fastest, <span class="dt">y =</span> GPA))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impframe1"></span>
-<img src="r-notes_files/figure-html/impframe1-1.png" alt="Just the frame:  no glyphs yet!" width="60%" />
+<img src="r-notes_files/figure-html/impframe1-1.png" alt="Just the frame:  no glyphs yet!" width="95%" />
 <p class="caption">
 Figure 8.14: Just the frame: no glyphs yet!
 </p>
@@ -477,7 +478,7 @@ Figure 8.14: Just the frame: no glyphs yet!
                          <span class="st">&#39; say something like: &quot;Speed and GPA are&#39;</span>,
                          <span class="st">&#39; not strongly related.&quot;&#39;</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impframe2"></span>
-<img src="r-notes_files/figure-html/impframe2-1.png" alt="You can always add some labels!" width="60%" />
+<img src="r-notes_files/figure-html/impframe2-1.png" alt="You can always add some labels!" width="95%" />
 <p class="caption">
 Figure 8.15: You can always add some labels!
 </p>
@@ -509,7 +510,7 @@ Figure 8.15: You can always add some labels!
        <span class="dt">y =</span> <span class="st">&quot;grade point average&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Speed and GPA are not strongly related.&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impfastestGPA"></span>
-<img src="r-notes_files/figure-html/impfastestGPA-1.png" alt="Finally:  the data appears!" width="60%" />
+<img src="r-notes_files/figure-html/impfastestGPA-1.png" alt="Finally:  the data appears!" width="95%" />
 <p class="caption">
 Figure 8.16: Finally: the data appears!
 </p>
@@ -525,7 +526,7 @@ Figure 8.16: Finally: the data appears!
        <span class="dt">title =</span> <span class="st">&quot;Speed and GPA are not strongly related.&quot;</span>,
        <span class="dt">subtitle =</span> <span class="st">&quot;(But guys tend to drive faster, and to have lower GPAs.)&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:imptargetscatterplot"></span>
-<img src="r-notes_files/figure-html/imptargetscatterplot-1.png" alt="This is the target plot!" width="60%" />
+<img src="r-notes_files/figure-html/imptargetscatterplot-1.png" alt="This is the target plot!" width="95%" />
 <p class="caption">
 Figure 8.17: This is the target plot!
 </p>
@@ -538,7 +539,7 @@ Figure 8.17: This is the target plot!
        <span class="dt">title =</span> <span class="st">&quot;Speed and GPA are not strongly related.&quot;</span>,
        <span class="dt">subtitle =</span> <span class="st">&quot;(But guys tend to drive faster, and to have lower GPAs.)&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impscatterplotshape"></span>
-<img src="r-notes_files/figure-html/impscatterplotshape-1.png" alt="Mapping shape to the variable sex." width="60%" />
+<img src="r-notes_files/figure-html/impscatterplotshape-1.png" alt="Mapping shape to the variable sex." width="95%" />
 <p class="caption">
 Figure 8.18: Mapping shape to the variable sex.
 </p>
@@ -549,7 +550,7 @@ Figure 8.18: Mapping shape to the variable sex.
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Sex&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Males are more likely to prefer the Back!&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impsexseat"></span>
-<img src="r-notes_files/figure-html/impsexseat-1.png" alt="Seating preference, by sex." width="60%" />
+<img src="r-notes_files/figure-html/impsexseat-1.png" alt="Seating preference, by sex." width="95%" />
 <p class="caption">
 Figure 8.19: Seating preference, by sex.
 </p>
@@ -558,7 +559,7 @@ Figure 8.19: Seating preference, by sex.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> sex)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> seat), <span class="dt">position =</span><span class="st">&quot;dodge&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impsexseat2"></span>
-<img src="r-notes_files/figure-html/impsexseat2-1.png" alt="Seating preference, by sex---no stacking of bars.." width="60%" />
+<img src="r-notes_files/figure-html/impsexseat2-1.png" alt="Seating preference, by sex---no stacking of bars.." width="95%" />
 <p class="caption">
 Figure 8.20: Seating preference, by sex—no stacking of bars..
 </p>
@@ -609,7 +610,7 @@ Figure 8.20: Seating preference, by sex—no stacking of bars..
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
              <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impfastesthistogram"></span>
-<img src="r-notes_files/figure-html/impfastesthistogram-1.png" alt="Histogram of the fastest speed ever driven.  The fill-property of the curve is fixed to the ever-popular 'burlywood' color." width="60%" />
+<img src="r-notes_files/figure-html/impfastesthistogram-1.png" alt="Histogram of the fastest speed ever driven.  The fill-property of the curve is fixed to the ever-popular 'burlywood' color." width="95%" />
 <p class="caption">
 Figure 8.21: Histogram of the fastest speed ever driven. The fill-property of the curve is fixed to the ever-popular ‘burlywood’ color.
 </p>
@@ -634,7 +635,7 @@ Figure 8.21: Histogram of the fastest speed ever driven. The fill-property of th
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;fastest speed ever driven (mph)&quot;</span>,
        <span class="dt">y =</span> <span class="st">&quot;grade point average&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impscalemanual"></span>
-<img src="r-notes_files/figure-html/impscalemanual-1.png" alt="Color scale adjusted manually." width="60%" />
+<img src="r-notes_files/figure-html/impscalemanual-1.png" alt="Color scale adjusted manually." width="95%" />
 <p class="caption">
 Figure 8.22: Color scale adjusted manually.
 </p>
@@ -645,7 +646,7 @@ Figure 8.22: Color scale adjusted manually.
 <h3><span class="header-section-number">8.2.5</span> Layering: Adding Another Glyph Type</h3>
 <p>If you want to add another layer of glyphs, simply add on another call to a <code>geom</code>-function. In order to produce Figure <a href="implementation-in-ggplot2.html#fig:impviolinfastestseat">8.23</a>, for example, we use the code below:</p>
 <div class="figure" style="text-align: center"><span id="fig:impviolinfastestseat"></span>
-<img src="r-notes_files/figure-html/impviolinfastestseat-1.png" alt="Violin plot of the fastest speed ever driven." width="60%" />
+<img src="r-notes_files/figure-html/impviolinfastestseat-1.png" alt="Violin plot of the fastest speed ever driven." width="95%" />
 <p class="caption">
 Figure 8.23: Violin plot of the fastest speed ever driven.
 </p>
@@ -660,7 +661,7 @@ Figure 8.23: Violin plot of the fastest speed ever driven.
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
              <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:densityfastestbadrug"></span>
-<img src="r-notes_files/figure-html/densityfastestbadrug-1.png" alt="Density plot of the fastest speed ever driven.  Some rug glyphs overplot each other." width="60%" />
+<img src="r-notes_files/figure-html/densityfastestbadrug-1.png" alt="Density plot of the fastest speed ever driven.  Some rug glyphs overplot each other." width="95%" />
 <p class="caption">
 Figure 8.24: Density plot of the fastest speed ever driven. Some rug glyphs overplot each other.
 </p>
@@ -674,7 +675,7 @@ m111survey<span class="op">$</span>jitteredSpeeds &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
              <span class="dt">title =</span> <span class="st">&quot;For most students the fastest speed is around 100 mph&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impdensityfastest"></span>
-<img src="r-notes_files/figure-html/impdensityfastest-1.png" alt="Density plot of the fastest speed ever driven.  Rug glyphs are jittered." width="60%" />
+<img src="r-notes_files/figure-html/impdensityfastest-1.png" alt="Density plot of the fastest speed ever driven.  Rug glyphs are jittered." width="95%" />
 <p class="caption">
 Figure 8.25: Density plot of the fastest speed ever driven. Rug glyphs are jittered.
 </p>
@@ -717,7 +718,7 @@ RailTrail<span class="op">$</span>season &lt;-<span class="st"> </span><span cla
 <span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(season <span class="op">~</span><span class="st"> </span>wkday)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impfacetgrid"></span>
-<img src="r-notes_files/figure-html/impfacetgrid-1.png" alt="Volume of daily trail usage, by seaon and time of week." width="60%" />
+<img src="r-notes_files/figure-html/impfacetgrid-1.png" alt="Volume of daily trail usage, by seaon and time of week." width="95%" />
 <p class="caption">
 Figure 8.26: Volume of daily trail usage, by seaon and time of week.
 </p>
@@ -730,7 +731,7 @@ Figure 8.26: Volume of daily trail usage, by seaon and time of week.
        <span class="dt">fill =</span> <span class="st">&quot;Time of Week&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>, <span class="dt">legend.direction =</span> <span class="st">&quot;horizontal&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impfacetgrid2"></span>
-<img src="r-notes_files/figure-html/impfacetgrid2-1.png" alt="Striking a good balance between facet-ing and aesthetic mapping." width="60%" />
+<img src="r-notes_files/figure-html/impfacetgrid2-1.png" alt="Striking a good balance between facet-ing and aesthetic mapping." width="95%" />
 <p class="caption">
 Figure 8.27: Striking a good balance between facet-ing and aesthetic mapping.
 </p>
@@ -744,7 +745,7 @@ Figure 8.27: Striking a good balance between facet-ing and aesthetic mapping.
 <span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>sector, <span class="dt">nrow =</span> <span class="dv">3</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impfacetwrap"></span>
-<img src="r-notes_files/figure-html/impfacetwrap-1.png" alt="Age by sector." width="60%" />
+<img src="r-notes_files/figure-html/impfacetwrap-1.png" alt="Age by sector." width="95%" />
 <p class="caption">
 Figure 8.28: Age by sector.
 </p>
@@ -753,7 +754,7 @@ Figure 8.28: Age by sector.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(CPS85, <span class="kw">aes</span>(<span class="dt">x =</span> sector, <span class="dt">y =</span> age)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impbetterapproach"></span>
-<img src="r-notes_files/figure-html/impbetterapproach-1.png" alt="Aesthetic mapping is probably superior to facetting in this case." width="60%" />
+<img src="r-notes_files/figure-html/impbetterapproach-1.png" alt="Aesthetic mapping is probably superior to facetting in this case." width="95%" />
 <p class="caption">
 Figure 8.29: Aesthetic mapping is probably superior to facetting in this case.
 </p>

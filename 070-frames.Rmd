@@ -370,7 +370,7 @@ with(data = m111survey, expr = fastest[fastest >=150])
 
 For the `data` parameter we can supply a data frame or any other R-object that can be used to construct an environment \index{environment}.  In this case `m111survey` provides a miniature environment consisting of the names of its variables. For the `expr` parameter we supply an expression for R to evaluate.  As R evaluates the expression, it encounters names (such as `fastest`).  Now ordinarily R would first search whatever counts as the \index{active environment}active environment---in this case it's the \index{global environment}Global Environment---for the names in the expression, but `with()` forces R to look first within the environment created by the `data` argument.  In our example, R finds `fastest` inside `m111survey` and evaluates the expression on that basis.  If it had not found `fastest` in `m111survey`, R would have moved on to the Global Environment and then the rest of the usual search path and (probably) would have found nothing, causing it to throw an "object not found" error message.  In R, as in any other programming language, good programming depends very much on paying attention to how the language searches for the objects to which names refer.
 
-### Factors
+### Factors {#factor-variables}
 
 Some of the variables in `m111survey` are called *factors*; an example is `seat`, which pertains to where one prefers to sit in a classroom:
 

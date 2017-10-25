@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-10-23">
+<meta name="date" content="2017-10-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,7 +261,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
 <li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
-<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factors"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factor-variables"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-vectors"><i class="fa fa-check"></i><b>7.5.1</b> Creation from Vectors</a></li>
@@ -293,7 +293,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.2.6" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#facets"><i class="fa fa-check"></i><b>8.2.6</b> Facets</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="a-case-study-us-births.html"><a href="a-case-study-us-births.html"><i class="fa fa-check"></i><b>8.3</b> A Case Study: US Births</a></li>
-<li class="chapter" data-level="8.4" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.4</b> Learn More</a></li>
+<li class="chapter" data-level="8.4" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a></li>
+<li class="chapter" data-level="8.5" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.5</b> Learn More</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="graphics-exercises.html"><a href="graphics-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -506,7 +507,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">8.1.1</span> Example: a Scatterplot</h3>
 <p>We begin with a simple scatter plot based on the data. A scatter plot is often a good way to investigate graphically the relationship between two numerical variables. Figure <a href="the-grammar-of-graphics.html#fig:ggfastestgpasex">8.1</a> shows a scatter plot of student GPA vs. the fastest speed at which the student has ever driven a car.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggfastestgpasex"></span>
-<img src="r-notes_files/figure-html/ggfastestgpasex-1.png" alt="Scatterplot of fastest driving speed and GPA.  Points are colored by sex of the student." width="60%" />
+<img src="r-notes_files/figure-html/ggfastestgpasex-1.png" alt="Scatterplot of fastest driving speed and GPA.  Points are colored by sex of the student." width="95%" />
 <p class="caption">
 Figure 8.1: Scatterplot of fastest driving speed and GPA. Points are colored by sex of the student.
 </p>
@@ -591,7 +592,7 @@ Figure 8.1: Scatterplot of fastest driving speed and GPA. Points are colored by 
 <h3><span class="header-section-number">8.1.2</span> Example: Two Bar Graphs</h3>
 <p>Bar graphs are useful in the study of categorical variables, especially factor variables that have only a few possible values. Figure <a href="the-grammar-of-graphics.html#fig:ggseatbargraph">8.2</a> shows the distribution of the factor variable <code>seat</code> in the <code>mat111survey</code> data frame.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggseatbargraph"></span>
-<img src="r-notes_files/figure-html/ggseatbargraph-1.png" alt="Bar graph of seating preference.  The bars have a burlywood fill." width="60%" />
+<img src="r-notes_files/figure-html/ggseatbargraph-1.png" alt="Bar graph of seating preference.  The bars have a burlywood fill." width="95%" />
 <p class="caption">
 Figure 8.2: Bar graph of seating preference. The bars have a burlywood fill.
 </p>
@@ -613,7 +614,7 @@ Figure 8.2: Bar graph of seating preference. The bars have a burlywood fill.
 </ul>
 <p>Bar graphs can also be used to study the relationship between two categorical variables. Figure <a href="the-grammar-of-graphics.html#fig:ggsexseat">8.3</a> shows the relationship between sex and seating preference in the <code>m111survey</code> data.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggsexseat"></span>
-<img src="r-notes_files/figure-html/ggsexseat-1.png" alt="Seating preference, by sex." width="60%" />
+<img src="r-notes_files/figure-html/ggsexseat-1.png" alt="Seating preference, by sex." width="95%" />
 <p class="caption">
 Figure 8.3: Seating preference, by sex.
 </p>
@@ -627,7 +628,7 @@ Figure 8.3: Seating preference, by sex.
 <h4><span class="header-section-number">8.1.3.1</span> Histograms</h4>
 <p>How are the fastest speeds driven distributed, for students in the <code>m111survey</code> data? In order to investigate such a question graphically, we might make a <em>histogram</em> like the one in Figure <a href="the-grammar-of-graphics.html#fig:ggfastesthistogram">8.4</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggfastesthistogram"></span>
-<img src="r-notes_files/figure-html/ggfastesthistogram-1.png" alt="Histogram of the fastest speed ever driven." width="60%" />
+<img src="r-notes_files/figure-html/ggfastesthistogram-1.png" alt="Histogram of the fastest speed ever driven." width="95%" />
 <p class="caption">
 Figure 8.4: Histogram of the fastest speed ever driven.
 </p>
@@ -645,7 +646,7 @@ Figure 8.4: Histogram of the fastest speed ever driven.
 </ul>
 <p>Figure <a href="the-grammar-of-graphics.html#fig:ggfastesthistogramrug">8.5</a> is a variant, containing a second type of glyph: each student is now represented along the X-axis by a rug-tick located approximately at his or her fastest speed. (The ticks are actually “jittered” randomly so as to avoid over-plotting when two or more students report the same speed.) The addition of a second set of glyphs is called <em>layerng</em>, and is a common device to enhance the communicative power of a graph.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggfastesthistogramrug"></span>
-<img src="r-notes_files/figure-html/ggfastesthistogramrug-1.png" alt="Histogram of the fastest speed ever driven." width="60%" />
+<img src="r-notes_files/figure-html/ggfastesthistogramrug-1.png" alt="Histogram of the fastest speed ever driven." width="95%" />
 <p class="caption">
 Figure 8.5: Histogram of the fastest speed ever driven.
 </p>
@@ -655,21 +656,21 @@ Figure 8.5: Histogram of the fastest speed ever driven.
 <h4><span class="header-section-number">8.1.3.2</span> Density Plots</h4>
 <p>One may also study the distribution of numerical variable with a <em>density plot</em>, as in Figure <a href="the-grammar-of-graphics.html#fig:ggdensityfastest">8.6</a>. In this figure there is only one glyph, the curve itself, and it represents all of the cases. However, its height represents crowding (density) of values of <code>fastest</code> for the cases: when the curve is high, many values are crowded closely together on the x-axis, and for speeds where the curve is low the viewer knows that few (if any) students drive around that speed. The y-axis is again used along with a statistic: for density plots the vertical scale is chosen in such a way that the total area under the density curve is 1, so that the area under the curve between two given speeds is approximately equal to the proportion of students who had speeds within that range. For density plots a rug, provided again by slightly jittered ticks, is a useful additional layer to indicate crowding of values.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggdensityfastest"></span>
-<img src="r-notes_files/figure-html/ggdensityfastest-1.png" alt="Density plot of the fastest speed ever driven." width="60%" />
+<img src="r-notes_files/figure-html/ggdensityfastest-1.png" alt="Density plot of the fastest speed ever driven." width="95%" />
 <p class="caption">
 Figure 8.6: Density plot of the fastest speed ever driven.
 </p>
 </div>
 <p>Since they don’t take up much territory on a graph, density curves are especially useful when we want to study the relationship between a numerical and a categorical variable. For example, Figure <a href="the-grammar-of-graphics.html#fig:ggdensityfastestseat">8.7</a> shows density plots of the fastest speeds for each of the three possible seating preferences. The glyphs are again density curves, but since the color aesthetic has been mapped to <code>seat</code>, we get a separate and differently-colored glyphs, one for each seating-preference..</p>
 <div class="figure" style="text-align: center"><span id="fig:ggdensityfastestseat"></span>
-<img src="r-notes_files/figure-html/ggdensityfastestseat-1.png" alt="Density plot of the fastest speed ever driven." width="60%" />
+<img src="r-notes_files/figure-html/ggdensityfastestseat-1.png" alt="Density plot of the fastest speed ever driven." width="95%" />
 <p class="caption">
 Figure 8.7: Density plot of the fastest speed ever driven.
 </p>
 </div>
 <p>Another approach to the same graphing problem is to use a type of glyph known as a <em>violin</em>. Look at Figure <a href="the-grammar-of-graphics.html#fig:ggviolinfastestseat">8.8</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggviolinfastestseat"></span>
-<img src="r-notes_files/figure-html/ggviolinfastestseat-1.png" alt="Violin plot of the fastest speed ever driven." width="60%" />
+<img src="r-notes_files/figure-html/ggviolinfastestseat-1.png" alt="Violin plot of the fastest speed ever driven." width="95%" />
 <p class="caption">
 Figure 8.8: Violin plot of the fastest speed ever driven.
 </p>
@@ -677,7 +678,7 @@ Figure 8.8: Violin plot of the fastest speed ever driven.
 <p>A violin glyph is simply two mirror-images of the same density plot, pasted together along their bases. Thus the violin is thick where many values are clustered together and thin where data values are rare. In this plot, the frame is constituted by mapping x-location to <code>seat</code> and y-location to the variable <code>fastest</code>. For additional communicative power we have layered another set of glyphs–jittered points, one for each case–onto the plot.</p>
 <p>Suppose that one wished to incorporate a third variable, such as sex, into the graph? One possible way to to this is to divide the graphs into separate plots based on the values of one of the categorical variables in question. The separate plots are known as <em>facets</em>,  and are illustrated in Figure <a href="the-grammar-of-graphics.html#fig:ggviolinfastestseatsex">8.9</a>, where facet-ing has been done on the basis of the variable <code>seat</code>.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggviolinfastestseatsex"></span>
-<img src="r-notes_files/figure-html/ggviolinfastestseatsex-1.png" alt="Violin plots of the fastest speed ever driven, by sex and seating preference." width="60%" />
+<img src="r-notes_files/figure-html/ggviolinfastestseatsex-1.png" alt="Violin plots of the fastest speed ever driven, by sex and seating preference." width="95%" />
 <p class="caption">
 Figure 8.9: Violin plots of the fastest speed ever driven, by sex and seating preference.
 </p>
@@ -709,14 +710,14 @@ fnFastest</code></pre></div>
 </ul>
 <p>is flagged for individual plotting, and the corresponding hinge will be <span class="math inline">\(1.5 \times IQR\)</span> units long.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggboxplotsample"></span>
-<img src="r-notes_files/figure-html/ggboxplotsample-1.png" alt="Illustration of a simple box plot." width="60%" />
+<img src="r-notes_files/figure-html/ggboxplotsample-1.png" alt="Illustration of a simple box plot." width="95%" />
 <p class="caption">
 Figure 8.10: Illustration of a simple box plot.
 </p>
 </div>
 <p>A single box glyph on its own is not very interesting. Where box plots shine is in the study of the relationship between a numerical variable and a categorical with a large number of levels, as in Figure (fig:utitlitybills1). Here the glyphs are boxes, with each box being constructed from the bills that were issued in a particular month.</p>
 <div class="figure" style="text-align: center"><span id="fig:utitlitybills1"></span>
-<img src="r-notes_files/figure-html/utitlitybills1-1.png" alt="Utility bills throught the year." width="60%" />
+<img src="r-notes_files/figure-html/utitlitybills1-1.png" alt="Utility bills throught the year." width="95%" />
 <p class="caption">
 Figure 8.11: Utility bills throught the year.
 </p>
@@ -728,7 +729,7 @@ Figure 8.11: Utility bills throught the year.
 <p>The term “choropleth” derives from Greek and means “many regions.” A choropleth graph is a graph in which the frame is provided by some sort of map with regions that might be countries, cities or counties in the U.S. etc.</p>
 <p>In the choropleth map shown in Figure <a href="the-grammar-of-graphics.html#fig:ggchoropleth">8.12</a>, is based on a data frame in which ease case is a state in the U.S (along with the District of Columbia). One of the variables is <code>population</code>, the population of the state. The glyphs are the territories of each of the U.S. states. The frame is determined by mapping x and y-location to latitude and longitude. The aesthetic property <em>color</em> is mapped to the <code>population</code>, and a guide is provided to the right of the graph.</p>
 <div class="figure" style="text-align: center"><span id="fig:ggchoropleth"></span>
-<img src="r-notes_files/figure-html/ggchoropleth-1.png" alt="Choropleth map of state populations in the U.S." width="60%" />
+<img src="r-notes_files/figure-html/ggchoropleth-1.png" alt="Choropleth map of state populations in the U.S." width="95%" />
 <p class="caption">
 Figure 8.12: Choropleth map of state populations in the U.S.
 </p>
