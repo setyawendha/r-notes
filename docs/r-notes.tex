@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-25}
+  \date{2017-10-26}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5452,8 +5452,8 @@ number of other environments:
 ##  [9] "package:Matrix"         "package:ggformula"     
 ## [11] "package:dplyr"          "package:lattice"       
 ## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:mosaicData"    
-## [17] "package:ggplot2"        "tools:rstudio"         
+## [15] "package:grid"           "package:ggplot2"       
+## [17] "package:mosaicData"     "tools:rstudio"         
 ## [19] "package:stats"          "package:graphics"      
 ## [21] "package:grDevices"      "package:utils"         
 ## [23] "package:datasets"       "package:methods"       
@@ -5563,7 +5563,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10c4ba718>
+## <bytecode: 0x10e2d2868>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -13937,8 +13937,8 @@ values cannot be expressed meaningfully by numbers.
   \textbf{Hint}: Use the function \texttt{nrow()}, which gives the
   number of rows of a matrix or data frame.
 \item
-  Create your own data frame, named \texttt{myFrame}. The frame should
-  have 100 rows, along with the following variables:
+  (*) Create your own data frame, named \texttt{myFrame}. The frame
+  should have 100 rows, along with the following variables:
 
   \begin{itemize}
   \tightlist
@@ -14010,14 +14010,15 @@ values cannot be expressed meaningfully by numbers.
 ## [1] "gar"
 \end{verbatim}
 \item
-  Study the data frame \texttt{fuel} in the \textbf{tigerstats} package.
-  Note that the fuel efficiency is reported as the number of liters of
-  fuel required to travel 100 kilometers. Look up the conversion between
-  gallons and liters and between kilometers and miles, and use this
-  information to create a new variable called \texttt{mpg} that gives
-  the fuel efficiency as miles per gallon. While you are at it, create a
-  new variable \texttt{mph} that gives the speed in miles per hour.
-  Finally, add these new variables to the \texttt{fuel} data frame.
+  (*) Study the data frame \texttt{fuel} in the \textbf{tigerstats}
+  package. Note that the fuel efficiency is reported as the number of
+  liters of fuel required to travel 100 kilometers. Look up the
+  conversion between gallons and liters and between kilometers and
+  miles, and use this information to create a new variable called
+  \texttt{mpg} that gives the fuel efficiency as miles per gallon. While
+  you are at it, create a new variable \texttt{mph} that gives the speed
+  in miles per hour. Finally, add these new variables to the
+  \texttt{fuel} data frame.
 \item
   (*) Use matrices to generalize the simulation in the Appeals Court
   Paradox (see Section \ref{appeals-court-paradox}). Your goal is to
@@ -15875,7 +15876,7 @@ aesthetic mapping.
   given numerically: 0 for January, 1 for February, and so on. You'll
   need to use \texttt{plyr::mapvalues()} to map the numbers from 1 to 12
   to the abbreviated month names. (See section \ref{factors-in-plotting}
-  for a review fo this.) The special R-vector \texttt{month.abb} will
+  for a review of this.) The special R-vector \texttt{month.abb} will
   render the re-mapping task easy:
 
 \begin{Shaded}
@@ -23132,7 +23133,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13915cea8"
+## [1] "0x119d4b968"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -23146,7 +23147,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13915cea8"
+## [1] "0x119d4b968"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -23185,7 +23186,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13915cea8"
+## [1] "0x119d4b968"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -23198,7 +23199,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x128562128"
+## [1] "0x1145d6738"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -23216,7 +23217,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13915cea8"
+## [1] "0x119d4b968"
 \end{verbatim}
 
 \begin{Shaded}
@@ -23260,7 +23261,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1224b00d8" "0x1224b00d8"
+## [1] "0x114168958" "0x114168958"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -23299,7 +23300,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1224b00d8" "0x1224b00d8"
+## [1] "0x114168958" "0x114168958"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -23341,7 +23342,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1224b00d8" "0x10e30ef78"
+## [1] "0x114168958" "0x1239a0f48"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

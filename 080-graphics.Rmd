@@ -708,6 +708,11 @@ data("firesetting", package = "tigerData")
 ?tigerData::firesetting
 ```
 
+```{r echo = FALSE}
+data("firesetting", package = "tigerData")
+```
+
+
 As we see from the Help file, fire-setting offers information about a large sample of high-school students.  Some of them are known to be arsonists, while of course most are not.  The purpose for gathering the data was to determine what characteristics of a child might be risk factors in whether he/she would develop into a fire-setter.  Among the variables of interest are:
 
 * `race`, the ethnicity of the student, a factor with three levels:  "white", "black", and "other";
@@ -842,15 +847,6 @@ ggplot(firesetting, aes(x = race, y = school.attitude)) +
 This works!
 
 
-
-
-
-
-
-
-
-
-
 ## Learn More
 
 From time to time we will return to **gplot2** and deepen our study of this remarkable graphing system.  If you are impatient to learn more right way, you can explore the package's [documentation site](http://docs.ggplot2.org/current/index.html).  The site teaches the system by way of numerous examples that you can copy and modify.
@@ -915,7 +911,7 @@ knitr::include_graphics("images/thinking.png")
            y = "total bill ($)")
     ```
     
-    **Hint**:  The `month` variable in `Utilities` is given numerically:  0 for January, 1 for February, and so on.  You'll need to use `plyr::mapvalues()` to map the numbers from 1 to 12 to the abbreviated month names.  (See section \@ref(factors-in-plotting) for a review fo this.)  The special R-vector `month.abb` will render the re-mapping task easy:
+    **Hint**:  The `month` variable in `Utilities` is given numerically:  0 for January, 1 for February, and so on.  You'll need to use `plyr::mapvalues()` to map the numbers from 1 to 12 to the abbreviated month names.  (See section \@ref(factors-in-plotting) for a review of this.)  The special R-vector `month.abb` will render the re-mapping task easy:
     
     ```{r}
     month.abb
