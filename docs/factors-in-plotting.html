@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-10-26">
+<meta name="date" content="2017-10-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -283,6 +283,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.1.2" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#example-two-bar-graphs"><i class="fa fa-check"></i><b>8.1.2</b> Example: Two Bar Graphs</a></li>
 <li class="chapter" data-level="8.1.3" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#examples-histograms-density-plots-and-box-plots"><i class="fa fa-check"></i><b>8.1.3</b> Examples: Histograms, Density Plots and Box Plots</a></li>
 <li class="chapter" data-level="8.1.4" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#example-choropleth-maps"><i class="fa fa-check"></i><b>8.1.4</b> Example: Choropleth Maps</a></li>
+<li class="chapter" data-level="8.1.5" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#practice-exercises"><i class="fa fa-check"></i><b>8.1.5</b> Practice Exercises</a></li>
+<li class="chapter" data-level="8.1.6" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#solutions-to-practice-exercises"><i class="fa fa-check"></i><b>8.1.6</b> Solutions to Practice Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html"><i class="fa fa-check"></i><b>8.2</b> Implementation in <strong>ggplot2</strong></a><ul>
 <li class="chapter" data-level="8.2.1" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#basic-setup-the-data-frame"><i class="fa fa-check"></i><b>8.2.1</b> Basic Setup: the Data Frame</a></li>
@@ -291,9 +293,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.2.4" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#adding-a-type-of-glyph"><i class="fa fa-check"></i><b>8.2.4</b> Adding a Type of Glyph</a></li>
 <li class="chapter" data-level="8.2.5" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#layering-adding-another-glyph-type"><i class="fa fa-check"></i><b>8.2.5</b> Layering: Adding Another Glyph Type</a></li>
 <li class="chapter" data-level="8.2.6" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#facets"><i class="fa fa-check"></i><b>8.2.6</b> Facets</a></li>
+<li class="chapter" data-level="8.2.7" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#practice-exercises-1"><i class="fa fa-check"></i><b>8.2.7</b> Practice Exercises</a></li>
+<li class="chapter" data-level="8.2.8" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#solutions-to-practice-exercises-1"><i class="fa fa-check"></i><b>8.2.8</b> Solutions to Practice Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="a-case-study-us-births.html"><a href="a-case-study-us-births.html"><i class="fa fa-check"></i><b>8.3</b> A Case Study: US Births</a></li>
-<li class="chapter" data-level="8.4" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a></li>
+<li class="chapter" data-level="8.4" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html#practice-exercises-2"><i class="fa fa-check"></i><b>8.4.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="8.4.2" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html#solutions-to-practice-exercises-2"><i class="fa fa-check"></i><b>8.4.2</b> Solutions to Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="8.5" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.5</b> Learn More</a></li>
 <li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="graphics-exercises.html"><a href="graphics-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
@@ -513,7 +520,7 @@ Figure 8.34: We have re-mapped the fires and race variables.
 </p>
 </div>
 <p>This looks better, but now the order along the x-axis isn’t as we desired. Recall that <code>race</code> is now a character vector only. Since it doesn’t have levels that specify a particular order, <strong>ggplot2</strong> uses alphabetical order as the default ordering along the x-axis.</p>
-<p>Accordingly we should convert `race to a factor variable, and be careful to set the levels in the order that we want:</p>
+<p>Accordingly we should convert <code>race</code> to a factor variable, and be careful to set the levels in the order that we want:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race &lt;-<span class="st"> </span>firesetting<span class="op">$</span>race
 race &lt;-<span class="st"> </span><span class="kw">factor</span>(race,
                <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;White&quot;</span>, <span class="st">&quot;AfrAm&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Unknown&quot;</span>))
@@ -533,6 +540,67 @@ Figure 8.35: Now the order of the race-values is correct!
 </p>
 </div>
 <p>This works!</p>
+<div id="practice-exercises-2" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> Practice Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>With <code>mosaicData::KidsFeet</code>, make the following graph. (<strong>Hint</strong>: Use <code>plyr::mapvalues()</code>.)</p>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-582-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<li><p>With <code>mosaicData::TenMileRace</code>, make the following graph. (<strong>Hint</strong>: Use <code>cut()</code> to make age groups. The fill for the boxes is the ever-popular <code>&quot;burlywood&quot;</code>.)</p>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-583-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<li><p>With <code>mosaicData::Gestation</code>, make the following graph. (<strong>Hint</strong>: Use <code>!is.na()</code> to select the rows of <code>Gestation</code> where <code>smoke is not</code>NA<code>.  Then use</code>plyr::mapvalues()<code>on</code>smoke`.)</p>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-584-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+</ol>
+</div>
+<div id="solutions-to-practice-exercises-2" class="section level3">
+<h3><span class="header-section-number">8.4.2</span> Solutions to Practice Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Here’s the code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;KidsFeet&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
+biggerfoot &lt;-<span class="st"> </span>KidsFeet<span class="op">$</span>biggerfoot
+biggerfoot &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(biggerfoot, <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
+                     <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;left foot&quot;</span>, <span class="st">&quot;right foot&quot;</span>))
+KidsFeet<span class="op">$</span>biggerfoot &lt;-<span class="st"> </span>biggerfoot
+domhand &lt;-<span class="st"> </span>KidsFeet<span class="op">$</span>domhand
+domhand &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(domhand, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
+                     <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;left hand&quot;</span>, <span class="st">&quot;right hand&quot;</span>))
+KidsFeet<span class="op">$</span>domhand &lt;-<span class="st"> </span>domhand
+<span class="kw">ggplot</span>(KidsFeet, <span class="kw">aes</span>(<span class="dt">x =</span> biggerfoot)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> domhand), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;the bigger foot&quot;</span>,
+       <span class="dt">title =</span> <span class="st">&quot;Foot-size and Handedness for 39 Children&quot;</span>,
+       <span class="dt">subtitle =</span> <span class="kw">paste0</span>(<span class="st">&quot;When your right foot is bigger, &quot;</span>,
+                         <span class="st">&quot;are you more likely to be right-handed?&quot;</span>))</code></pre></div></li>
+<li><p>Here’s the code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;TenMileRace&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
+sex &lt;-<span class="st"> </span>TenMileRace<span class="op">$</span>sex
+sex &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(sex, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>),
+                       <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))
+TenMileRace<span class="op">$</span>sex &lt;-<span class="st"> </span>sex
+ageGroup &lt;-<span class="st"> </span><span class="kw">cut</span>(TenMileRace<span class="op">$</span>age,
+                <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="ot">Inf</span>),
+                <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;&lt;20&quot;</span>, <span class="st">&quot;20s&quot;</span>, <span class="st">&quot;30s&quot;</span>, <span class="st">&quot;40s&quot;</span>, 
+                           <span class="st">&quot;50s&quot;</span>, <span class="st">&quot;60s&quot;</span>, <span class="st">&quot;70+&quot;</span>))
+<span class="kw">ggplot</span>(TenMileRace, <span class="kw">aes</span>(<span class="dt">x =</span> ageGroup, <span class="dt">y =</span> time)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(sex <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age Group&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;net time to finish (sec)&quot;</span>,
+       <span class="dt">title =</span> <span class="st">&quot;Ten-Mile Race Times&quot;</span>)</code></pre></div></li>
+<li><p>Here’s the code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;Gestation&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
+Gestation &lt;-<span class="st"> </span><span class="kw">subset</span>(Gestation, <span class="op">!</span><span class="kw">is.na</span>(smoke))
+smoke &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(smoke, <span class="dt">from =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">3</span>,
+                         <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;never&quot;</span>, <span class="st">&quot;smokes now&quot;</span>,
+                                <span class="st">&quot;until curr. preg.&quot;</span>,
+                                <span class="st">&quot;once smoked&quot;</span>))
+Gestation<span class="op">$</span>smoke &lt;-<span class="st"> </span>smoke
+<span class="kw">ggplot</span>(Gestation, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(smoke), <span class="dt">y =</span> wt)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;smoking status of mother&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;birth weight (ounces)&quot;</span>,
+       <span class="dt">title =</span> <span class="st">&quot;Birth Weights&quot;</span>,
+       <span class="dt">subtitle =</span> <span class="st">&quot;Children of smoking mothers have lower birth-weights.&quot;</span>)</code></pre></div></li>
+</ol>
+</div>
 </div>
             </section>
 

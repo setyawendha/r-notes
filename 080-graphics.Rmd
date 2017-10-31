@@ -322,8 +322,80 @@ DataComputing::ZipGeography %>%
   DataComputing::USMap(key = State, fill = population)
 ```
 
+### Practice Exercises
+
+In each of the exercises below, consult the Help for the relevant data frame.  (You'll need to identify variables by their names in the data frame when you discuss aesthetic mappings.)
 
 
+1. The following graph is based on the data frame `mosaicData::SwimRecords`:
+
+    ```{r cache=TRUE, echo=FALSE}
+    ggplot(mosaicData::SwimRecords, aes(x = year, y = time)) +
+      geom_point(aes(color = sex)) +
+      geom_line(aes(color = sex)) +
+      labs(x = "year record was set",
+           y = "time (seconds)",
+           title = "100m record times have decreased, for both sexes.")
+    ```
+    * What variables are used to make the frame?
+    * What are the two types of glyphs?
+    * What other aesthetic(s) are there (besides the x and y-locations in the frame)?  To what variable(s) are they mapped?
+    * What guides do you see?
+    
+1. The following graph is based on the data frame `mosaicData::KidsFeet`:
+
+    ```{r cache=TRUE, echo=FALSE}
+    ggplot(mosaicData::KidsFeet, aes(x = biggerfoot)) +
+      geom_bar(aes(fill = domhand), position = "dodge") +
+      labs(x = "the bigger foot",
+           title = "Foot-size and Handedness for 39 Children",
+           subtitle = paste0("When your right foot is bigger, ",
+                             "are you more likely to be right-handed?"))
+    ```
+    * What variable(s) are used to make the frame?
+    * What are the two types of glyphs?
+    * What other aesthetic(s) are there (besides the frame)?  To what variable(s) are they mapped?
+    * What guides do you see?
+
+1. The following graph is based on the data frame `mosaicData::Galton`:
+
+    ```{r cache=TRUE, echo=FALSE}
+    data("Galton", package = "mosaicData")
+    jitteredFather <- Galton$father + runif(nrow(Galton), 0, 0.5)
+    Galton$jitteredFather <- jitteredFather
+    ggplot(mosaicData::Galton, aes(x = father)) +
+      geom_density(fill = "burlywood") +
+      geom_rug(x = jitteredFather) +
+      labs(x = "height of the father (inches)")
+    ```
+    * What variable(s) are used to make the frame?
+    * What are the two types of glyphs?
+    * What other aesthetic(s) are there (besides the frame)?  To what variable(s) are they mapped?
+    * What guides do you see?
+
+### Solutions to Practice Exercises
+
+1. Answers:
+
+    * Frame:  x -> `year`, y -> `time`;
+    * Glyphs:  points and line-segments between pairs of points;
+    * Other aesthetics:  point-color and line-color are both mapped to `sex`;
+    * Guides:  legend for `sex`, axis labels and ticks for `year` and `time`.
+
+1. Answers:
+
+    * Frame:  x -> `biggerfoot`;
+    * Glyphs:  bars;
+    * Other aesthetics:  bar fill -> `sex`;
+    * Guides:  legend for `sex`, axis labels and ticks for `biggerfoot`.
+    
+1. Answers:
+
+    * Frame:  x -> `father`;
+    * Glyphs:  density curve, jittered rug-ticks;
+    * Other aesthetics:  none;
+    * Guides:  axis labels and ticks for `father`.
+    
 ## Implementation in **ggplot2**
 
 In its syntax, the **ggplot2** package attempts to follow the Grammar of Graphics fairly closely.  Let's see how this works by building up, in step-by-step fashion, to our initial graph example---the scatter plot in Figure \@ref(fig:ggfastestgpasex).
@@ -388,6 +460,7 @@ It is high time now to make some data appear on our plot, so let's add some glyp
 Thus we have such things as:
 
 * `geom_point()` for points;
+* `geom_line()` for line segments between points;
 * `geom_bar()` for the bars of a bar graph;
 * `geom_histogram()` for the rectangles that make up a histogram;
 * `geom_density()` for the curve of a density plot;
@@ -634,7 +707,7 @@ ggplot(CPS85, aes(x = age)) +
 ```
 
 
-Once again, though, it may be wise to consider an approach that involves aesthetic mapping.  When the number of levels is large, violin plots or boxplots may better approaches for representing a numerical variable such as `age`, as in the code below.  The reuslting graph is shown in Figure \@ref(fig:impbetterapproach).
+Once again, though, it may be wise to consider an approach that involves aesthetic mapping.  When the number of levels is large, violin plots or boxplots may better approaches for representing a numerical variable such as `age`, as in the code below.  The resulting graph is shown in Figure \@ref(fig:impbetterapproach).
 
 ```{r impbetterapproach, cache=TRUE, fig.cap="Aesthetic mapping is probably superior to facetting in this case."}
 ggplot(CPS85, aes(x = sector, y = age)) +
@@ -643,6 +716,128 @@ ggplot(CPS85, aes(x = sector, y = age)) +
 
 In the exercises of this Chapter we will meet a case in which "wrap-style" facet-ing is quite useful.
 
+### Practice Exercises
+
+
+1. With `mosaicData::SwimRecords`, make the following graph:
+
+    ```{r cache=TRUE, echo=FALSE}
+    ggplot(mosaicData::SwimRecords, aes(x = year, y = time)) +
+      geom_point(aes(color = sex)) +
+      geom_line(aes(color = sex)) +
+      labs(x = "year record was set",
+           y = "time (seconds)",
+           title = "100m record times have decreased, for both sexes.")
+    ```
+1. With `mosaicData::KidsFeet`, make the following graph:
+
+    ```{r cache=TRUE, echo=FALSE}
+    ggplot(mosaicData::KidsFeet, aes(x = biggerfoot)) +
+      geom_bar(aes(fill = domhand), position = "dodge") +
+      labs(x = "the bigger foot",
+           title = "Foot-size and Handedness for 39 Children",
+           subtitle = paste0("When your right foot is bigger, ",
+                             "are you more likely to be right-handed?"))
+    ```
+1. With `mosaicData::TenMileRace`, make the following graph:
+
+    ```{r cache=TRUE, echo=FALSE}
+    ggplot(mosaicData::TenMileRace, aes(x = age, y = time)) +
+      geom_point(alpha = 0.2) +
+      facet_wrap(~ sex) +
+      labs(x = "age in years", y = "net time to finish (sec)",
+           title = "Ten-Mile Race Times")
+    ```
+    **Hint:**  Make the call `geom_point(alpha = 0.2)`.  The `alpha` parameter has a default-value of 1.  The lower you set it, the more "transparent" the points are.  Low values for `alpha` are helpful to deal with the effects of "over-plotting" when many points are crowded together.
+
+1. With `mosaicData::Gestation` make the following graph.  The fill for the boxes is set to `"burlywood"`.  The x-location is mapped to `factor(smoke)`, rather than to `smoke`.
+
+    ```{r cache=TRUE, echo=FALSE}
+    ggplot(mosaicData::Gestation, aes(x = factor(smoke), y = wt)) +
+      geom_boxplot(fill = "burlywood") +
+      labs(x = "smoking status of mother",
+           y = "birth weight (ounces)",
+           title = "Birth Weights",
+           subtitle = "Children of smoking mothers have lower birth-weights.")
+    ```
+
+1. With `mosaicData::Galton`, make the following graph:
+
+    ```{r cache=TRUE, echo=FALSE}
+    data("Galton", package = "mosaicData")
+    jitteredFather <- Galton$father + runif(nrow(Galton), 0, 0.5)
+    Galton$jitteredFather <- jitteredFather
+    ggplot(mosaicData::Galton, aes(x = father)) +
+      geom_density(fill = "burlywood") +
+      geom_rug(x = jitteredFather) +
+      labs(x = "height of the father (inches)")
+    ```
+    **Hint**:  The fill of the density plot is set to `"burlywood"`. The rug is made of randomly jittered father-heights.
+    
+### Solutions to Practice Exercises
+
+1. The call was:
+
+    ```{r eval=FALSE}
+    ggplot(mosaicData::SwimRecords, aes(x = year, y = time)) +
+      geom_point(aes(color = sex)) +
+      geom_line(aes(color = sex)) +
+      labs(x = "year record was set",
+           y = "time (seconds)",
+           title = "100m record times have decreased, for both sexes.")
+    ```
+1. The call was:
+
+    ```{r eval=FALSE}
+    ggplot(mosaicData::KidsFeet, aes(x = biggerfoot)) +
+      geom_bar(aes(fill = domhand), position = "dodge") +
+      labs(x = "the bigger foot",
+           title = "Foot-size and Handedness for 39 Children",
+           subtitle = paste0("When your right foot is bigger, ",
+                             "are you more likely to be right-handed?"))
+    ```
+1. The call was:
+
+    ```{r eval=FALSE}
+    ggplot(mosaicData::TenMileRace, aes(x = age, y = time)) +
+      geom_point(alpha = 0.2) +
+      facet_wrap(~ sex) +
+      labs(x = "age in years", y = "net time to finish (sec)",
+           title = "Ten-Mile Race Times")
+    ```
+
+1. The call was:
+
+    ```{r eval=FALSE}
+    ggplot(mosaicData::Gestation, aes(x = factor(smoke), y = wt)) +
+      geom_boxplot(fill = "burlywood") +
+      labs(x = "smoking status of mother",
+           y = "birth weight (ounces)",
+           title = "Birth Weights",
+           subtitle = "Children of smoking mothers have lower birth-weights.")
+    ```
+
+1. First, make the jittered points.  It's a good idea to load the data set directly, if you haven't already attached **mosaicData**:
+
+    ````{r eval=FALSE}
+    data("Galton", package = "mosaicData")
+    ```
+    
+    Now make the points:
+    
+    ````{r eval=FALSE}
+    jitteredFather <- Galton$father + runif(nrow(Galton), 0, 0.5)
+    Galton$jitteredFather <- jitteredFather
+    ```
+    
+    Finally, the graph:
+
+    ```{r eval=FALSE}
+    ggplot(mosaicData::Galton, aes(x = father)) +
+      geom_density(fill = "burlywood") +
+      geom_rug(x = jitteredFather) +
+      labs(x = "height of the father (inches)")
+    ```
 
 ## A Case Study:  US Births
 
@@ -823,7 +1018,7 @@ ggplot(firesetting, aes(x = race, y = school.attitude)) +
 
 This looks better, but now the order along the x-axis isn't as we desired.  Recall that `race` is now a character vector only.  Since it doesn't have levels that specify a particular order, **ggplot2** uses alphabetical order as the default ordering along the x-axis.
 
-Accordingly we should convert `race to a factor variable, and be careful to set the levels in the order that we want:
+Accordingly we should convert `race` to a factor variable, and be careful to set the levels in the order that we want:
 
 ```{r}
 race <- firesetting$race
@@ -845,6 +1040,126 @@ ggplot(firesetting, aes(x = race, y = school.attitude)) +
 ```
 
 This works!
+
+### Practice Exercises
+
+1. With `mosaicData::KidsFeet`, make the following graph.  (**Hint**:  Use `plyr::mapvalues()`.)
+
+    ```{r cache=TRUE, echo=FALSE}
+    data("KidsFeet", package = "mosaicData")
+    biggerfoot <- KidsFeet$biggerfoot
+    biggerfoot <- plyr::mapvalues(biggerfoot, c("L", "R"),
+                         to = c("left foot", "right foot"))
+    KidsFeet$biggerfoot <- biggerfoot
+    domhand <- KidsFeet$domhand
+    domhand <- plyr::mapvalues(domhand, from = c("L", "R"),
+                         to = c("left hand", "right hand"))
+    KidsFeet$domhand <- domhand
+    ggplot(KidsFeet, aes(x = biggerfoot)) +
+      geom_bar(aes(fill = domhand), position = "dodge") +
+      labs(x = "the bigger foot",
+           title = "Foot-size and Handedness for 39 Children",
+           subtitle = paste0("When your right foot is bigger, ",
+                             "are you more likely to be right-handed?"))
+    ```
+    
+1. With `mosaicData::TenMileRace`, make the following graph.  (**Hint**:  Use `cut()` to make age groups.  The fill for the boxes is the ever-popular `"burlywood"`.)
+
+    ```{r cache=TRUE, echo=FALSE}
+    data("TenMileRace", package = "mosaicData")
+    sex <- TenMileRace$sex
+    sex <- plyr::mapvalues(sex, from = c("F", "M"),
+                           to = c("female", "male"))
+    TenMileRace$sex <- sex
+    ageGroup <- cut(TenMileRace$age,
+                    breaks = c(-Inf, 20, 30, 40, 50, 60, 70, Inf),
+                    labels = c("<20", "20s", "30s", "40s", 
+                               "50s", "60s", "70+"))
+    ggplot(TenMileRace, aes(x = ageGroup, y = time)) +
+      geom_boxplot(fill = "burlywood") +
+      facet_grid(sex ~ .) +
+      labs(x = "Age Group", y = "net time to finish (sec)",
+           title = "Ten-Mile Race Times")
+    ```
+    
+1. With `mosaicData::Gestation`, make the following graph.  (**Hint**: Use `!is.na()` to select the rows of `Gestation` where `smoke is not `NA`.  Then use `plyr::mapvalues()` on `smoke`.) 
+
+    ```{r cache=TRUE, echo=FALSE}
+    data("Gestation", package = "mosaicData")
+    Gestation <- subset(Gestation, !is.na(smoke))
+    smoke <- Gestation$smoke
+    smoke <- plyr::mapvalues(smoke, from = 0:3,
+                             to = c("never", "smokes now",
+                                    "until curr. preg.",
+                                    "once smoked"))
+    Gestation$smoke <- smoke
+    ggplot(Gestation, aes(x = factor(smoke), y = wt)) +
+      geom_boxplot(fill = "burlywood") +
+      labs(x = "smoking status of mother",
+           y = "birth weight (ounces)",
+           title = "Birth Weights",
+           subtitle = "Children of smoking mothers have lower birth-weights.")
+    ```
+    
+### Solutions to Practice Exercises
+
+1. Here's the code:
+
+    ```{r eval=FALSE}
+    data("KidsFeet", package = "mosaicData")
+    biggerfoot <- KidsFeet$biggerfoot
+    biggerfoot <- plyr::mapvalues(biggerfoot, c("L", "R"),
+                         to = c("left foot", "right foot"))
+    KidsFeet$biggerfoot <- biggerfoot
+    domhand <- KidsFeet$domhand
+    domhand <- plyr::mapvalues(domhand, from = c("L", "R"),
+                         to = c("left hand", "right hand"))
+    KidsFeet$domhand <- domhand
+    ggplot(KidsFeet, aes(x = biggerfoot)) +
+      geom_bar(aes(fill = domhand), position = "dodge") +
+      labs(x = "the bigger foot",
+           title = "Foot-size and Handedness for 39 Children",
+           subtitle = paste0("When your right foot is bigger, ",
+                             "are you more likely to be right-handed?"))
+    ```
+    
+1. Here's the code:
+
+    ```{r eval=FALSE}
+    data("TenMileRace", package = "mosaicData")
+    sex <- TenMileRace$sex
+    sex <- plyr::mapvalues(sex, from = c("F", "M"),
+                           to = c("female", "male"))
+    TenMileRace$sex <- sex
+    ageGroup <- cut(TenMileRace$age,
+                    breaks = c(-Inf, 20, 30, 40, 50, 60, 70, Inf),
+                    labels = c("<20", "20s", "30s", "40s", 
+                               "50s", "60s", "70+"))
+    ggplot(TenMileRace, aes(x = ageGroup, y = time)) +
+      geom_boxplot(fill = "burlywood") +
+      facet_grid(sex ~ .) +
+      labs(x = "Age Group", y = "net time to finish (sec)",
+           title = "Ten-Mile Race Times")
+    ```
+    
+
+1. Here's the code: 
+
+    ```{r eval=FALSE}
+    data("Gestation", package = "mosaicData")
+    Gestation <- subset(Gestation, !is.na(smoke))
+    smoke <- plyr::mapvalues(smoke, from = 0:3,
+                             to = c("never", "smokes now",
+                                    "until curr. preg.",
+                                    "once smoked"))
+    Gestation$smoke <- smoke
+    ggplot(Gestation, aes(x = factor(smoke), y = wt)) +
+      geom_boxplot(fill = "burlywood") +
+      labs(x = "smoking status of mother",
+           y = "birth weight (ounces)",
+           title = "Birth Weights",
+           subtitle = "Children of smoking mothers have lower birth-weights.")
+    ``` 
 
 
 ## Learn More

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-26}
+  \date{2017-10-30}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5452,8 +5452,8 @@ number of other environments:
 ##  [9] "package:Matrix"         "package:ggformula"     
 ## [11] "package:dplyr"          "package:lattice"       
 ## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:ggplot2"       
-## [17] "package:mosaicData"     "tools:rstudio"         
+## [15] "package:grid"           "package:mosaicData"    
+## [17] "package:ggplot2"        "tools:rstudio"         
 ## [19] "package:stats"          "package:graphics"      
 ## [21] "package:grDevices"      "package:utils"         
 ## [23] "package:datasets"       "package:methods"       
@@ -5563,7 +5563,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10e2d2868>
+## <bytecode: 0x10be97320>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -14782,6 +14782,123 @@ graph.
 \caption{Choropleth map of state populations in the U.S.}\label{fig:ggchoropleth}
 \end{figure}
 
+\subsection{Practice Exercises}\label{practice-exercises}
+
+In each of the exercises below, consult the Help for the relevant data
+frame. (You'll need to identify variables by their names in the data
+frame when you discuss aesthetic mappings.)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The following graph is based on the data frame
+  \texttt{mosaicData::SwimRecords}:
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-547-1} \end{center}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    What variables are used to make the frame?
+  \item
+    What are the two types of glyphs?
+  \item
+    What other aesthetic(s) are there (besides the x and y-locations in
+    the frame)? To what variable(s) are they mapped?
+  \item
+    What guides do you see?
+  \end{itemize}
+\item
+  The following graph is based on the data frame
+  \texttt{mosaicData::KidsFeet}:
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-548-1} \end{center}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    What variable(s) are used to make the frame?
+  \item
+    What are the two types of glyphs?
+  \item
+    What other aesthetic(s) are there (besides the frame)? To what
+    variable(s) are they mapped?
+  \item
+    What guides do you see?
+  \end{itemize}
+\item
+  The following graph is based on the data frame
+  \texttt{mosaicData::Galton}:
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-549-1} \end{center}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    What variable(s) are used to make the frame?
+  \item
+    What are the two types of glyphs?
+  \item
+    What other aesthetic(s) are there (besides the frame)? To what
+    variable(s) are they mapped?
+  \item
+    What guides do you see?
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Answers:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Frame: x -\textgreater{} \texttt{year}, y -\textgreater{}
+    \texttt{time};
+  \item
+    Glyphs: points and line-segments between pairs of points;
+  \item
+    Other aesthetics: point-color and line-color are both mapped to
+    \texttt{sex};
+  \item
+    Guides: legend for \texttt{sex}, axis labels and ticks for
+    \texttt{year} and \texttt{time}.
+  \end{itemize}
+\item
+  Answers:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Frame: x -\textgreater{} \texttt{biggerfoot};
+  \item
+    Glyphs: bars;
+  \item
+    Other aesthetics: bar fill -\textgreater{} \texttt{sex};
+  \item
+    Guides: legend for \texttt{sex}, axis labels and ticks for
+    \texttt{biggerfoot}.
+  \end{itemize}
+\item
+  Answers:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Frame: x -\textgreater{} \texttt{father};
+  \item
+    Glyphs: density curve, jittered rug-ticks;
+  \item
+    Other aesthetics: none;
+  \item
+    Guides: axis labels and ticks for \texttt{father}.
+  \end{itemize}
+\end{enumerate}
+
 \section{\texorpdfstring{Implementation in
 \textbf{ggplot2}}{Implementation in ggplot2}}\label{implementation-in-ggplot2}
 
@@ -14912,6 +15029,8 @@ Thus we have such things as:
 \tightlist
 \item
   \texttt{geom\_point()} for points;
+\item
+  \texttt{geom\_line()} for line segments between points;
 \item
   \texttt{geom\_bar()} for the bars of a bar graph;
 \item
@@ -15429,7 +15548,7 @@ resulting plot appears as Figure \ref{fig:impfacetwrap}.
 Once again, though, it may be wise to consider an approach that involves
 aesthetic mapping. When the number of levels is large, violin plots or
 boxplots may better approaches for representing a numerical variable
-such as \texttt{age}, as in the code below. The reuslting graph is shown
+such as \texttt{age}, as in the code below. The resulting graph is shown
 in Figure \ref{fig:impbetterapproach}.
 
 \begin{Shaded}
@@ -15450,6 +15569,131 @@ in Figure \ref{fig:impbetterapproach}.
 
 In the exercises of this Chapter we will meet a case in which
 ``wrap-style'' facet-ing is quite useful.
+
+\subsection{Practice Exercises}\label{practice-exercises-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  With \texttt{mosaicData::SwimRecords}, make the following graph:
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-555-1} \end{center}
+\item
+  With \texttt{mosaicData::KidsFeet}, make the following graph:
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-556-1} \end{center}
+\item
+  With \texttt{mosaicData::TenMileRace}, make the following graph:
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-557-1} \end{center}
+
+  \textbf{Hint:} Make the call \texttt{geom\_point(alpha\ =\ 0.2)}. The
+  \texttt{alpha} parameter has a default-value of 1. The lower you set
+  it, the more ``transparent'' the points are. Low values for
+  \texttt{alpha} are helpful to deal with the effects of
+  ``over-plotting'' when many points are crowded together.
+\item
+  With \texttt{mosaicData::Gestation} make the following graph. The fill
+  for the boxes is set to \texttt{"burlywood"}. The x-location is mapped
+  to \texttt{factor(smoke)}, rather than to \texttt{smoke}.
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-558-1} \end{center}
+\item
+  With \texttt{mosaicData::Galton}, make the following graph:
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-559-1} \end{center}
+
+  \textbf{Hint}: The fill of the density plot is set to
+  \texttt{"burlywood"}. The rug is made of randomly jittered
+  father-heights.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The call was:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(mosaicData}\OperatorTok{::}\NormalTok{SwimRecords, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ time)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ sex)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ sex)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"year record was set"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"time (seconds)"}\NormalTok{,}
+       \DataTypeTok{title =} \StringTok{"100m record times have decreased, for both sexes."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  The call was:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(mosaicData}\OperatorTok{::}\NormalTok{KidsFeet, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ biggerfoot)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ domhand), }\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"the bigger foot"}\NormalTok{,}
+       \DataTypeTok{title =} \StringTok{"Foot-size and Handedness for 39 Children"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"When your right foot is bigger, "}\NormalTok{,}
+                         \StringTok{"are you more likely to be right-handed?"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\item
+  The call was:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(mosaicData}\OperatorTok{::}\NormalTok{TenMileRace, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ age, }\DataTypeTok{y =}\NormalTok{ time)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{sex) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"age in years"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"net time to finish (sec)"}\NormalTok{,}
+       \DataTypeTok{title =} \StringTok{"Ten-Mile Race Times"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  The call was:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(mosaicData}\OperatorTok{::}\NormalTok{Gestation, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{factor}\NormalTok{(smoke), }\DataTypeTok{y =}\NormalTok{ wt)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"smoking status of mother"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"birth weight (ounces)"}\NormalTok{,}
+       \DataTypeTok{title =} \StringTok{"Birth Weights"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Children of smoking mothers have lower birth-weights."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  First, make the jittered points. It's a good idea to load the data set
+  directly, if you haven't already attached \textbf{mosaicData}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"Galton"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"mosaicData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Now make the points:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{jitteredFather <-}\StringTok{ }\NormalTok{Galton}\OperatorTok{$}\NormalTok{father }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(Galton), }\DecValTok{0}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{Galton}\OperatorTok{$}\NormalTok{jitteredFather <-}\StringTok{ }\NormalTok{jitteredFather}
+\end{Highlighting}
+\end{Shaded}
+
+  Finally, the graph:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(mosaicData}\OperatorTok{::}\NormalTok{Galton, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ father)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_density}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_rug}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ jitteredFather) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"height of the father (inches)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \section{A Case Study: US Births}\label{a-case-study-us-births}
 
@@ -15779,8 +16023,8 @@ desired. Recall that \texttt{race} is now a character vector only. Since
 it doesn't have levels that specify a particular order, \textbf{ggplot2}
 uses alphabetical order as the default ordering along the x-axis.
 
-Accordingly we should convert `race to a factor variable, and be careful
-to set the levels in the order that we want:
+Accordingly we should convert \texttt{race} to a factor variable, and be
+careful to set the levels in the order that we want:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -15815,6 +16059,100 @@ Now try again (see Figure \ref{fig:firesetting3}) for the result.
 \end{figure}
 
 This works!
+
+\subsection{Practice Exercises}\label{practice-exercises-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  With \texttt{mosaicData::KidsFeet}, make the following graph.
+  (\textbf{Hint}: Use \texttt{plyr::mapvalues()}.)
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-582-1} \end{center}
+\item
+  With \texttt{mosaicData::TenMileRace}, make the following graph.
+  (\textbf{Hint}: Use \texttt{cut()} to make age groups. The fill for
+  the boxes is the ever-popular \texttt{"burlywood"}.)
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-583-1} \end{center}
+\item
+  With \texttt{mosaicData::Gestation}, make the following graph.
+  (\textbf{Hint}: Use \texttt{!is.na()} to select the rows of
+  \texttt{Gestation} where
+  \texttt{smoke\ is\ not}NA\texttt{.\ \ Then\ use}plyr::mapvalues()\texttt{on}smoke`.)
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-584-1} \end{center}
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"KidsFeet"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"mosaicData"}\NormalTok{)}
+\NormalTok{biggerfoot <-}\StringTok{ }\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{biggerfoot}
+\NormalTok{biggerfoot <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(biggerfoot, }\KeywordTok{c}\NormalTok{(}\StringTok{"L"}\NormalTok{, }\StringTok{"R"}\NormalTok{),}
+                     \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"left foot"}\NormalTok{, }\StringTok{"right foot"}\NormalTok{))}
+\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{biggerfoot <-}\StringTok{ }\NormalTok{biggerfoot}
+\NormalTok{domhand <-}\StringTok{ }\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{domhand}
+\NormalTok{domhand <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(domhand, }\DataTypeTok{from =} \KeywordTok{c}\NormalTok{(}\StringTok{"L"}\NormalTok{, }\StringTok{"R"}\NormalTok{),}
+                     \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"left hand"}\NormalTok{, }\StringTok{"right hand"}\NormalTok{))}
+\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{domhand <-}\StringTok{ }\NormalTok{domhand}
+\KeywordTok{ggplot}\NormalTok{(KidsFeet, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ biggerfoot)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ domhand), }\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"the bigger foot"}\NormalTok{,}
+       \DataTypeTok{title =} \StringTok{"Foot-size and Handedness for 39 Children"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"When your right foot is bigger, "}\NormalTok{,}
+                         \StringTok{"are you more likely to be right-handed?"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"TenMileRace"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"mosaicData"}\NormalTok{)}
+\NormalTok{sex <-}\StringTok{ }\NormalTok{TenMileRace}\OperatorTok{$}\NormalTok{sex}
+\NormalTok{sex <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(sex, }\DataTypeTok{from =} \KeywordTok{c}\NormalTok{(}\StringTok{"F"}\NormalTok{, }\StringTok{"M"}\NormalTok{),}
+                       \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"female"}\NormalTok{, }\StringTok{"male"}\NormalTok{))}
+\NormalTok{TenMileRace}\OperatorTok{$}\NormalTok{sex <-}\StringTok{ }\NormalTok{sex}
+\NormalTok{ageGroup <-}\StringTok{ }\KeywordTok{cut}\NormalTok{(TenMileRace}\OperatorTok{$}\NormalTok{age,}
+                \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{70}\NormalTok{, }\OtherTok{Inf}\NormalTok{),}
+                \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"<20"}\NormalTok{, }\StringTok{"20s"}\NormalTok{, }\StringTok{"30s"}\NormalTok{, }\StringTok{"40s"}\NormalTok{, }
+                           \StringTok{"50s"}\NormalTok{, }\StringTok{"60s"}\NormalTok{, }\StringTok{"70+"}\NormalTok{))}
+\KeywordTok{ggplot}\NormalTok{(TenMileRace, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ ageGroup, }\DataTypeTok{y =}\NormalTok{ time)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_grid}\NormalTok{(sex }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Age Group"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"net time to finish (sec)"}\NormalTok{,}
+       \DataTypeTok{title =} \StringTok{"Ten-Mile Race Times"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"Gestation"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"mosaicData"}\NormalTok{)}
+\NormalTok{Gestation <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(Gestation, }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(smoke))}
+\NormalTok{smoke <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(smoke, }\DataTypeTok{from =} \DecValTok{0}\OperatorTok{:}\DecValTok{3}\NormalTok{,}
+                         \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"never"}\NormalTok{, }\StringTok{"smokes now"}\NormalTok{,}
+                                \StringTok{"until curr. preg."}\NormalTok{,}
+                                \StringTok{"once smoked"}\NormalTok{))}
+\NormalTok{Gestation}\OperatorTok{$}\NormalTok{smoke <-}\StringTok{ }\NormalTok{smoke}
+\KeywordTok{ggplot}\NormalTok{(Gestation, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{factor}\NormalTok{(smoke), }\DataTypeTok{y =}\NormalTok{ wt)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"smoking status of mother"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"birth weight (ounces)"}\NormalTok{,}
+       \DataTypeTok{title =} \StringTok{"Birth Weights"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Children of smoking mothers have lower birth-weights."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \section{Learn More}\label{learn-more}
 
@@ -16256,7 +16594,16 @@ any one of the frames by its name, you will get an error:
 \end{verbatim}
 
 The reason is that variable names cannot begin with a number! You have
-to be content with
+two options, here. You could access a single frame by using the name in
+quotes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bySeat[[}\StringTok{"1_front"}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+Your second option is to use the index of the element you want:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -16267,7 +16614,7 @@ to be content with
 \section{Returning Multiple Values}\label{returning-multiple-values}
 
 Lists combine many different sorts of objects into one object. This
-makes them very useful in the context of some functions.
+makes them very useful in the context of certain functions.
 
 Consider, for example, the drunken-turtle simulation from Section
 \ref{drunken-turtle-sim}:
@@ -23133,7 +23480,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119d4b968"
+## [1] "0x122b3d528"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -23147,7 +23494,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119d4b968"
+## [1] "0x122b3d528"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -23186,7 +23533,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119d4b968"
+## [1] "0x122b3d528"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -23199,7 +23546,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1145d6738"
+## [1] "0x1363dfef8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -23217,7 +23564,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119d4b968"
+## [1] "0x122b3d528"
 \end{verbatim}
 
 \begin{Shaded}
@@ -23261,7 +23608,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x114168958" "0x114168958"
+## [1] "0x11f012920" "0x11f012920"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -23300,7 +23647,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x114168958" "0x114168958"
+## [1] "0x11f012920" "0x11f012920"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -23342,7 +23689,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x114168958" "0x1239a0f48"
+## [1] "0x11f012920" "0x1163dedb8"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
