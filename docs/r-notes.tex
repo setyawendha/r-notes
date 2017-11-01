@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-30}
+  \date{2017-11-01}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5452,8 +5452,8 @@ number of other environments:
 ##  [9] "package:Matrix"         "package:ggformula"     
 ## [11] "package:dplyr"          "package:lattice"       
 ## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:mosaicData"    
-## [17] "package:ggplot2"        "tools:rstudio"         
+## [15] "package:grid"           "package:ggplot2"       
+## [17] "package:mosaicData"     "tools:rstudio"         
 ## [19] "package:stats"          "package:graphics"      
 ## [21] "package:grDevices"      "package:utils"         
 ## [23] "package:datasets"       "package:methods"       
@@ -5563,7 +5563,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10be97320>
+## <bytecode: 0x1086cfaa0>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -15841,8 +15841,9 @@ variables of interest are:
 \item
   \texttt{race}, the ethnicity of the student, a factor with three
   levels: ``white'', ``black'', and ``other'';
-  *\texttt{school.attitude}, a scaled score on a personality inventory
-  in which high scores indicate a poor attitude toward school;
+\item
+  \texttt{school.attitude}, a scaled score on a personality inventory in
+  which high scores indicate a poor attitude toward school;
 \item
   \texttt{fires}, a factor variable with levels ``0'' (does not set
   fires) and ``1'' (sets fires).
@@ -16139,6 +16140,7 @@ Exercises}\label{solutions-to-practice-exercises-2}
 \begin{Highlighting}[]
 \KeywordTok{data}\NormalTok{(}\StringTok{"Gestation"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"mosaicData"}\NormalTok{)}
 \NormalTok{Gestation <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(Gestation, }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(smoke))}
+\NormalTok{smoke <-}\StringTok{ }\NormalTok{Gestation}\OperatorTok{$}\NormalTok{smoke}
 \NormalTok{smoke <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(smoke, }\DataTypeTok{from =} \DecValTok{0}\OperatorTok{:}\DecValTok{3}\NormalTok{,}
                          \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"never"}\NormalTok{, }\StringTok{"smokes now"}\NormalTok{,}
                                 \StringTok{"until curr. preg."}\NormalTok{,}
@@ -16417,6 +16419,61 @@ You can make an empty list, too:
 This is useful when you want to build up a list gradually, but you do
 not yet know what will go into it.
 
+\subsection{Practice Exercises}\label{practice-exercises-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Make a list called \texttt{ozStuff}. The list should contain three
+  elements:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The sequence of even numbers from 4 to 100. Its name should be
+    \texttt{lion}.
+  \item
+    The uppercase letters of the alphabet. Its name should be
+    \texttt{scarecrow}.
+  \item
+    The data frame \texttt{alcohol} from the \textbf{tigerstats}
+    package. Its name should be \texttt{wizard}.
+  \end{itemize}
+\item
+  Suppose that \texttt{ozStuff} has been created in the previous
+  problem. Describe in your own words what the following expression
+  does:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ozStuff <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ozStuff, }\KeywordTok{list}\NormalTok{(}\DataTypeTok{dorothy =} \StringTok{"Kansas"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's one way to do it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ozStuff <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{lion =} \KeywordTok{seq}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DataTypeTok{by =} \DecValTok{2}\NormalTok{),}
+                \DataTypeTok{scarecrow =}\NormalTok{ LETTERS,}
+                \DataTypeTok{wizard =}\NormalTok{ tigerstats}\OperatorTok{::}\NormalTok{alcohol)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  One way to describe it is as follows: the expression creates a new
+  list consisting of all the elements of \texttt{ozStuff} together with
+  a new element called \texttt{dorothy} (which is the string
+  \texttt{"Kansas"}), and then binds the name ``\texttt{ozStuff}'' to
+  that new four-element list.
+\end{enumerate}
+
 \section{Subsetting and Accessing}\label{subsetting-and-accessing}
 
 You can subset lists in the same way that you subset a vector: simply
@@ -16439,7 +16496,7 @@ elements of \texttt{lst3}:
 
 We get a new list consisting of the desired two elements.
 
-Suppose we want to pick out just one element from \texttt{lst3}: the
+Suppose we want to access just one element from \texttt{lst3}: the
 numbers, for instance. We could try this:
 
 \begin{Shaded}
@@ -16454,8 +16511,8 @@ numbers, for instance. We could try this:
 ##  [1] 10 11 12 13 14 15 16 17 18 19 20
 \end{verbatim}
 
-Now suppose that we want the third number in the \texttt{nums} vector.
-You might think this would work fine:
+Now suppose that we want to access the third number in the \texttt{nums}
+vector. You might think this would work fine:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -16515,8 +16572,8 @@ element of a list, then you need to use the double-bracket
 ##  [1] 10 11 12 13 14 15 16 17 18 19 20
 \end{verbatim}
 
-Of course if an element of a list is named, then you may also use the
-dollar sign:
+Of course if an element of a list is named, then you may also access it
+with the dollar sign:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -16549,6 +16606,82 @@ when it encounters values of different types then it has to coerce them
 to be of the same type. In the competition between \texttt{double} and
 \texttt{character} types, \texttt{character} wins, so you end up with a
 vector of strings.
+
+\subsection{Practice Exercises}\label{practice-exercises-4}
+
+These exercises involve the following list:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grabBag <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{letters =}\NormalTok{ letters,}
+                \KeywordTok{as.character}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{),}
+                \DataTypeTok{df =}\NormalTok{ tigerstats}\OperatorTok{::}\NormalTok{alcohol)}
+\end{Highlighting}
+\end{Shaded}
+
+Observe that the second element of this list was NOT given a name.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Describe in words what \texttt{grabBag{[}2:3{]}} is.
+\item
+  Describe in words what \texttt{grabBag{[}3{]}} is.
+\item
+  Describe in words what `grabBag{[}{[}3{]}{]} is.
+\item
+  Find two ways to access the letter \texttt{"d"} in the first element
+  of \texttt{grabBag}.
+\item
+  Find a way to access the last five elements of the second element of
+  \texttt{grabBag}.
+\item
+  Find two ways to access the variable \texttt{writeups} in the data
+  frame in \texttt{grabBag}.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{grabBag{[}2:3{]}} is a list containing two elements: the
+  vector of whole numbers from 1 to 10 turned into strings, and the data
+  frame \texttt{alcohol} from the \textbf{tigerstats} package.
+\item
+  \texttt{grabBag{[}3{]}} is a list containing just one element: the
+  data frame \texttt{alcohol} from the \textbf{tigerstats} package.
+\item
+  \texttt{grabBag{[}{[}3{]}{]}} is the data frame \texttt{alcohol} from
+  the \textbf{tigerstats} package.
+\item
+  Here are two ways:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grabBag}\OperatorTok{$}\NormalTok{letters[}\DecValTok{4}\NormalTok{]}
+\NormalTok{grabBag[[}\DecValTok{1}\NormalTok{]][}\DecValTok{4}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grabBag[[}\DecValTok{2}\NormalTok{]][}\DecValTok{6}\OperatorTok{:}\DecValTok{10}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here are two ways:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grabBag}\OperatorTok{$}\NormalTok{df}\OperatorTok{$}\NormalTok{writeups}
+\NormalTok{grabBag[[}\DecValTok{3}\NormalTok{]]}\OperatorTok{$}\NormalTok{writeups}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \section{Splitting}\label{lists-splitting}
 
@@ -17220,6 +17353,64 @@ and setting: \texttt{dimnames()}. Other popular attributes, such as
 dedicated access/set functions---\texttt{names()} and \texttt{levels()}
 respectively. But keep in mind that you can access and set the values
 for \emph{any attribute at all} with the \texttt{attr()} function.
+
+\subsection{Practice Exercises}\label{practice-exercises-5}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Consider the following matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myMat <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{24}\NormalTok{, }\DataTypeTok{nrow =} \DecValTok{4}\NormalTok{)}
+\KeywordTok{rownames}\NormalTok{(myMat) <-}\StringTok{ }\NormalTok{letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{]}
+\KeywordTok{colnames}\NormalTok{(myMat) <-}\StringTok{ }\NormalTok{LETTERS[}\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{]}
+\NormalTok{myMat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   A B  C  D  E  F
+## a 1 5  9 13 17 21
+## b 2 6 10 14 18 22
+## c 3 7 11 15 19 23
+## d 4 8 12 16 20 24
+\end{verbatim}
+
+  Find a way to change the row names of \texttt{myMAT} to ``x'', ``y'',
+  ``z'' and ``w'', using the \texttt{attr()} function rather than the
+  \texttt{rownames()} function.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  First, run \texttt{str(myMat)}. You find that it has an attribute
+  called \texttt{dimnames} that is a list of length 2. The first element
+  of this list is the vector of row names. Hence you need to assign new
+  row names to this element. You can do so as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{attr}\NormalTok{(myMat, }\DataTypeTok{which =} \StringTok{"dimnames"}\NormalTok{)[[}\DecValTok{1}\NormalTok{]] <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{, }\StringTok{"z"}\NormalTok{, }\StringTok{"w"}\NormalTok{)}
+\NormalTok{myMat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   A B  C  D  E  F
+## x 1 5  9 13 17 21
+## y 2 6 10 14 18 22
+## z 3 7 11 15 19 23
+## w 4 8 12 16 20 24
+\end{verbatim}
+
+  It worked!
+\end{enumerate}
 
 \newpage
 
@@ -23480,7 +23671,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122c69788"
+## [1] "0x115a4d238"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -23494,7 +23685,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122c69788"
+## [1] "0x115a4d238"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -23533,7 +23724,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122c69788"
+## [1] "0x115a4d238"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -23546,7 +23737,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13592aaf8"
+## [1] "0x11afaa308"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -23564,7 +23755,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122c69788"
+## [1] "0x115a4d238"
 \end{verbatim}
 
 \begin{Shaded}
@@ -23608,7 +23799,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1194a9098" "0x1194a9098"
+## [1] "0x127f35000" "0x127f35000"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -23647,7 +23838,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1194a9098" "0x1194a9098"
+## [1] "0x127f35000" "0x127f35000"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -23689,7 +23880,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1194a9098" "0x12d5a20d0"
+## [1] "0x127f35000" "0x11abffc98"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

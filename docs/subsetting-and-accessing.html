@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-10-30">
+<meta name="date" content="2017-11-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -306,8 +306,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="graphics-exercises.html"><a href="graphics-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>9</b> Lists</a><ul>
-<li class="chapter" data-level="9.1" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html"><i class="fa fa-check"></i><b>9.1</b> Introduction to Lists</a></li>
-<li class="chapter" data-level="9.2" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html"><i class="fa fa-check"></i><b>9.2</b> Subsetting and Accessing</a></li>
+<li class="chapter" data-level="9.1" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html"><i class="fa fa-check"></i><b>9.1</b> Introduction to Lists</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html#practice-exercises-3"><i class="fa fa-check"></i><b>9.1.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="9.1.2" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html#solutions-to-the-practice-exercises"><i class="fa fa-check"></i><b>9.1.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html"><i class="fa fa-check"></i><b>9.2</b> Subsetting and Accessing</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html#practice-exercises-4"><i class="fa fa-check"></i><b>9.2.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="9.2.2" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html#solutions-to-the-practice-exercises-1"><i class="fa fa-check"></i><b>9.2.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="9.3" data-path="lists-splitting.html"><a href="lists-splitting.html"><i class="fa fa-check"></i><b>9.3</b> Splitting</a></li>
 <li class="chapter" data-level="9.4" data-path="returning-multiple-values.html"><a href="returning-multiple-values.html"><i class="fa fa-check"></i><b>9.4</b> Returning Multiple Values</a></li>
 <li class="chapter" data-level="9.5" data-path="iterating-over-a-list.html"><a href="iterating-over-a-list.html"><i class="fa fa-check"></i><b>9.5</b> Iterating Over a List</a></li>
@@ -315,7 +321,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.6.1" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-1-passing-additional-arguments-to-functions-inside"><i class="fa fa-check"></i><b>9.6.1</b> Use #1: Passing Additional Arguments to Functions “Inside”</a></li>
 <li class="chapter" data-level="9.6.2" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-2-permitting-any-number-of-arguments"><i class="fa fa-check"></i><b>9.6.2</b> Use #2: Permitting Any Number of Arguments</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html"><i class="fa fa-check"></i><b>9.7</b> Investigate Your Object: <code>str()</code> and Lists</a></li>
+<li class="chapter" data-level="9.7" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html"><i class="fa fa-check"></i><b>9.7</b> Investigate Your Object: <code>str()</code> and Lists</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html#practice-exercises-5"><i class="fa fa-check"></i><b>9.7.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="9.7.2" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html#solutions-to-practice-exercises-3"><i class="fa fa-check"></i><b>9.7.2</b> Solutions to Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="glossary-7.html"><a href="glossary-7.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -450,12 +459,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## $bools
 ## [1]  TRUE FALSE FALSE</code></pre>
 <p>We get a new list consisting of the desired two elements.</p>
-<p>Suppose we want to pick out just one element from <code>lst3</code>: the numbers, for instance. We could try this:</p>
+<p>Suppose we want to access just one element from <code>lst3</code>: the numbers, for instance. We could try this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">justNumbers &lt;-<span class="st"> </span>lst3[<span class="dv">1</span>]
 justNumbers</code></pre></div>
 <pre><code>## $nums
 ##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
-<p>Now suppose that we want the third number in the <code>nums</code> vector. You might think this would work fine:</p>
+<p>Now suppose that we want to access the third number in the <code>nums</code> vector. You might think this would work fine:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">justNumbers[<span class="dv">3</span>]</code></pre></div>
 <pre><code>## $&lt;NA&gt;
 ## NULL</code></pre>
@@ -471,7 +480,7 @@ justNumbers</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reallyJustNumbers &lt;-<span class="st"> </span>lst3[[<span class="dv">1</span>]]
 reallyJustNumbers</code></pre></div>
 <pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
-<p>Of course if an element of a list is named, then you may also use the dollar sign:</p>
+<p>Of course if an element of a list is named, then you may also access it with the dollar sign:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst3<span class="op">$</span>nums</code></pre></div>
 <pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 <p>From time to time it’s useful to “flatten out” a list into a vector of values of its elements. This is accomplished by the function <code>unlist()</code> :</p>
@@ -479,6 +488,38 @@ reallyJustNumbers</code></pre></div>
 <pre><code>##      name       age 
 ## &quot;Dorothy&quot;      &quot;12&quot;</code></pre>
 <p>As the example above shows, you have to exercise caution with <code>unlist()</code>. Since <code>unlist()</code> returns an atomic vector, when it encounters values of different types then it has to coerce them to be of the same type. In the competition between <code>double</code> and <code>character</code> types, <code>character</code> wins, so you end up with a vector of strings.</p>
+<div id="practice-exercises-4" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> Practice Exercises</h3>
+<p>These exercises involve the following list:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grabBag &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">letters =</span> letters,
+                <span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>),
+                <span class="dt">df =</span> tigerstats<span class="op">::</span>alcohol)</code></pre></div>
+<p>Observe that the second element of this list was NOT given a name.</p>
+<ol style="list-style-type: decimal">
+<li><p>Describe in words what <code>grabBag[2:3]</code> is.</p></li>
+<li><p>Describe in words what <code>grabBag[3]</code> is.</p></li>
+<li><p>Describe in words what `grabBag[[3]] is.</p></li>
+<li><p>Find two ways to access the letter <code>&quot;d&quot;</code> in the first element of <code>grabBag</code>.</p></li>
+<li><p>Find a way to access the last five elements of the second element of <code>grabBag</code>.</p></li>
+<li><p>Find two ways to access the variable <code>writeups</code> in the data frame in <code>grabBag</code>.</p></li>
+</ol>
+</div>
+<div id="solutions-to-the-practice-exercises-1" class="section level3">
+<h3><span class="header-section-number">9.2.2</span> Solutions to the Practice Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p><code>grabBag[2:3]</code> is a list containing two elements: the vector of whole numbers from 1 to 10 turned into strings, and the data frame <code>alcohol</code> from the <strong>tigerstats</strong> package.</p></li>
+<li><p><code>grabBag[3]</code> is a list containing just one element: the data frame <code>alcohol</code> from the <strong>tigerstats</strong> package.</p></li>
+<li><p><code>grabBag[[3]]</code> is the data frame <code>alcohol</code> from the <strong>tigerstats</strong> package.</p></li>
+<li><p>Here are two ways:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grabBag<span class="op">$</span>letters[<span class="dv">4</span>]
+grabBag[[<span class="dv">1</span>]][<span class="dv">4</span>]</code></pre></div></li>
+<li><p>Try this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grabBag[[<span class="dv">2</span>]][<span class="dv">6</span><span class="op">:</span><span class="dv">10</span>]</code></pre></div></li>
+<li><p>Here are two ways:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grabBag<span class="op">$</span>df<span class="op">$</span>writeups
+grabBag[[<span class="dv">3</span>]]<span class="op">$</span>writeups</code></pre></div></li>
+</ol>
+</div>
 </div>
             </section>
 

@@ -56,6 +56,31 @@ emptyList <- list()
 
 This is useful when you want to build up a list gradually, but you do not yet know what will go into it.
 
+### Practice Exercises
+
+1. Make a list called `ozStuff`.  The list should contain three elements:
+
+    * The sequence of even numbers from 4 to 100.  Its name should be `lion`.
+    * The uppercase letters of the alphabet.  Its name should be `scarecrow`.
+    * The data frame `alcohol` from the **tigerstats** package.  Its name should be `wizard`.
+    
+1. Suppose that `ozStuff` has been created in the previous problem.  Describe in your own words what the following expression does:
+
+    ```{r eval=FALSE}
+    ozStuff <- c(ozStuff, list(dorothy = "Kansas"))
+    ```
+    
+### Solutions to the Practice Exercises
+
+1.  Here's one way to do it:
+
+    ```{r eval=FALSE}
+    ozStuff <- list(lion = seq(4, 100, by = 2),
+                    scarecrow = LETTERS,
+                    wizard = tigerstats::alcohol)
+    ```
+
+1. One way to describe it is as follows:  the expression creates a new list consisting of all the elements of `ozStuff` together with a new element called `dorothy` (which is the string `"Kansas"`), and then binds the name "`ozStuff`" to that new four-element list.
 
 ## Subsetting and Accessing
 
@@ -67,14 +92,14 @@ lst3[1:2]
 
 We get a new list consisting of the desired two elements.
 
-Suppose we want to pick out just one element from `lst3`:  the numbers, for instance.  We could try this:
+Suppose we want to access just one element from `lst3`:  the numbers, for instance.  We could try this:
 
 ```{r}
 justNumbers <- lst3[1]
 justNumbers
 ```
 
-Now suppose that we want the third number in the `nums` vector.  You might think this would work fine:
+Now suppose that we want to access the third number in the `nums` vector.  You might think this would work fine:
 
 ```{r}
 justNumbers[3]
@@ -101,7 +126,7 @@ reallyJustNumbers <- lst3[[1]]
 reallyJustNumbers
 ```
 
-Of course if an element of a list is named, then you may also use the dollar sign:
+Of course if an element of a list is named, then you may also access it with the dollar sign:
 
 ```{r}
 lst3$nums
@@ -114,6 +139,59 @@ unlist(lst1)
 ```
 
 As the example above shows, you have to exercise caution with `unlist()`.  Since `unlist()` returns an atomic vector, when it encounters values of different types then it has to coerce them to be of the same type.  In the competition between `double` and `character` types, `character` wins, so you end up with a vector of strings.
+
+### Practice Exercises
+
+These exercises involve the following list:
+
+```{r}
+grabBag <- list(letters = letters,
+                as.character(1:10),
+                df = tigerstats::alcohol)
+```
+
+Observe that the second element of this list was NOT given a name.
+
+1. Describe in words what `grabBag[2:3]` is.
+
+1. Describe in words what `grabBag[3]` is.
+
+1. Describe in words what `grabBag[[3]] is.
+
+1. Find two ways to access the letter `"d"` in the first element of `grabBag`.
+
+1. Find a way to access the last five elements of the second element of `grabBag`.
+
+1. Find two ways to access the variable `writeups` in the data frame in `grabBag`.
+
+### Solutions to the Practice Exercises
+
+1. `grabBag[2:3]` is a list containing two elements: the vector of whole numbers from 1 to 10 turned into strings, and the data frame `alcohol` from the **tigerstats** package.
+
+1. `grabBag[3]` is a list containing just one element:  the data frame `alcohol` from the **tigerstats** package.
+
+1. `grabBag[[3]]` is the data frame `alcohol` from the **tigerstats** package.
+
+1. Here are two ways:
+
+    ```{r eval=FALSE}
+    grabBag$letters[4]
+    grabBag[[1]][4]
+    ```
+
+1. Try this:
+
+    ```{r eval=FALSE}
+    grabBag[[2]][6:10]
+    ```
+
+1. Here are two ways:
+
+    ```{r eval=FALSE}
+    grabBag$df$writeups
+    grabBag[[3]]$writeups
+    ```
+
 
 ## Splitting {#lists-splitting}
 
@@ -541,6 +619,30 @@ The moral of the story is:
 >Make a habit of examining your objects with the `str()` function.  Combining `str()` with your abilities to manipulate lists allows you to access and set pieces of the object in helpful ways.
 
 **Note**:  the `dimnames` attribute for tables and matrices is so frequently used that it has its own special function for accessing and setting:  `dimnames()`.  Other popular attributes, such as `names` for a vector and `levels` for a factor, also have dedicated access/set functions---`names()` and `levels()` respectively.  But keep in mind that you can access and set the values for *any attribute at all* with the `attr()` function.
+
+### Practice Exercises
+
+1. Consider the following matrix:
+
+    ```{r}
+    myMat <- matrix(1:24, nrow = 4)
+    rownames(myMat) <- letters[1:4]
+    colnames(myMat) <- LETTERS[1:6]
+    myMat
+    ```
+    
+    Find a way to change the row names of `myMAT` to "x", "y", "z" and "w", using the `attr()` function rather than the `rownames()` function.
+    
+### Solutions to Practice Exercises
+
+1.  First, run `str(myMat)`.  You find that it has an attribute called `dimnames` that is a list of length 2.  The first element of this list is the vector of row names.  Hence you need to assign new row names to this element.  You can do so as follows:
+
+    ```{r}
+    attr(myMat, which = "dimnames")[[1]] <- c("x", "y", "z", "w")
+    myMat
+    ```
+    
+    It worked!
 
 \newpage
 
