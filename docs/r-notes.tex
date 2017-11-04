@@ -14231,6 +14231,101 @@ would like people to be arranged from shortest to tallest. Then call:
 ## 57 1_front     64
 \end{verbatim}
 
+\subsection{Practice Exercises}\label{practice-exercises-5}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Consider the following vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{creatures <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Mole"}\NormalTok{, }\StringTok{"Frog"}\NormalTok{, }\StringTok{"Rat"}\NormalTok{, }\StringTok{"Badger"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Write down what you think will be the result of the call:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{order}\NormalTok{(creatures)}
+\end{Highlighting}
+\end{Shaded}
+
+  Then check your answer by actually running:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{creatures <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Mole"}\NormalTok{, }\StringTok{"Frog"}\NormalTok{, }\StringTok{"Rat"}\NormalTok{, }\StringTok{"Badger"}\NormalTok{)}
+\KeywordTok{order}\NormalTok{(creatures)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  What will be the result of the following?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{order}\NormalTok{(creatures, }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Arrange the rows of the data frame \texttt{mosaicData::CPS85} in
+  order, from the lowest to the highest wage. Break ties by experience
+  (less experience coming before more experience).
+\item
+  Arrange the rows of the data frame \texttt{mosaicData::CPS85} in
+  order, from the lowest to the highest wage. Break ties by experience
+  (more experience coming before less experience).
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-4}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's what you get:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{order}\NormalTok{(creatures)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4 2 1 3
+\end{verbatim}
+\item
+  Here's what you get:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{order}\NormalTok{(creatures, }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 1 2 4
+\end{verbatim}
+\item
+  Here is one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85[}\KeywordTok{order}\NormalTok{(CPS85}\OperatorTok{$}\NormalTok{wage, CPS85}\OperatorTok{$}\NormalTok{exper), ]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here is one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85[}\KeywordTok{order}\NormalTok{(CPS85}\OperatorTok{$}\NormalTok{wage, CPS85}\OperatorTok{$}\NormalTok{exper, }
+            \DataTypeTok{decreasing =} \KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)), ]}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
 \section{New Variables from Old}\label{new-variables-from-old}
 
 Quite often you will want to \emph{transform} one or more variables in a
@@ -14385,6 +14480,83 @@ the value \texttt{NULL}.
 ##  [7] "extra_life"      "seat"            "GPA"            
 ## [10] "enough_Sleep"    "sex"             "diff.ideal.act."
 \end{verbatim}
+
+\subsection{Practice Exercises}\label{practice-exercises-6}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Remove the variables \texttt{hispanic} and \texttt{married} from the
+  \texttt{mosaicData::CPS85} data frame.
+\item
+  Change the units of \texttt{wage} in \texttt{mosaicData::CPS85} from
+  dollars per hour to dollars per day. Assume an eight-hour working day.
+\item
+  For \texttt{CPS85}, create a new variable \texttt{experGrp} that has
+  the following values
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{low} for experience less than 10 years;
+  \item
+    \texttt{medium} for experience of at least 10 years but less than 25
+    years;
+  \item
+    \texttt{high} for experience at least 25 years.
+  \end{itemize}
+\item
+  You've made some changes to \texttt{CPS85}, but in fact you haven't
+  changed the original data frame in the \textbf{mosaicData}
+  package---you've simply made your own copy, which should now be in
+  your Global Environment. Since the Global Environment comes before any
+  package on your search path, if you want to get to the original
+  \texttt{CPS85} you will either have to refer to it as
+  \texttt{mosaicData::CPS85}. Another option, though, is to remove the
+  modified copy from your Global Environment. Go ahead an remove it now.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-5}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's one way to do it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85}\OperatorTok{$}\NormalTok{hispanic <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{CPS85}\OperatorTok{$}\NormalTok{married <-}\StringTok{ }\OtherTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way to do it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85}\OperatorTok{$}\NormalTok{wage <-}\StringTok{ }\NormalTok{CPS85}\OperatorTok{$}\NormalTok{wage }\OperatorTok{*}\StringTok{ }\DecValTok{8}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way to do it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85}\OperatorTok{$}\NormalTok{experGrp <-}\StringTok{ }\KeywordTok{cut}\NormalTok{(CPS85}\OperatorTok{$}\NormalTok{exper,}
+                   \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{25}\NormalTok{, }\OtherTok{Inf}\NormalTok{),}
+                   \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"low"}\NormalTok{, }\StringTok{"medium"}\NormalTok{, }\StringTok{"high"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here' what to do:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(CPS85)}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \newpage
 
@@ -15435,7 +15607,7 @@ graph.
 \caption{Choropleth map of state populations in the U.S.}\label{fig:ggchoropleth}
 \end{figure}
 
-\subsection{Practice Exercises}\label{practice-exercises-5}
+\subsection{Practice Exercises}\label{practice-exercises-7}
 
 In each of the exercises below, consult the Help for the relevant data
 frame. (You'll need to identify variables by their names in the data
@@ -15447,7 +15619,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::SwimRecords}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-601-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-613-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -15465,7 +15637,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::KidsFeet}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-602-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-614-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -15483,7 +15655,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::Galton}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-603-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-615-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -15500,7 +15672,7 @@ frame when you discuss aesthetic mappings.)
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-4}
+Exercises}\label{solutions-to-practice-exercises-6}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16223,22 +16395,22 @@ in Figure \ref{fig:impbetterapproach}.
 In the exercises of this Chapter we will meet a case in which
 ``wrap-style'' facet-ing is quite useful.
 
-\subsection{Practice Exercises}\label{practice-exercises-6}
+\subsection{Practice Exercises}\label{practice-exercises-8}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   With \texttt{mosaicData::SwimRecords}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-609-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-621-1} \end{center}
 \item
   With \texttt{mosaicData::KidsFeet}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-610-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-622-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-611-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-623-1} \end{center}
 
   \textbf{Hint:} Make the call \texttt{geom\_point(alpha\ =\ 0.2)}. The
   \texttt{alpha} parameter has a default-value of 1. The lower you set
@@ -16250,11 +16422,11 @@ In the exercises of this Chapter we will meet a case in which
   for the boxes is set to \texttt{"burlywood"}. The x-location is mapped
   to \texttt{factor(smoke)}, rather than to \texttt{smoke}.
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-612-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-624-1} \end{center}
 \item
   With \texttt{mosaicData::Galton}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-613-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-625-1} \end{center}
 
   \textbf{Hint}: The fill of the density plot is set to
   \texttt{"burlywood"}. The rug is made of randomly jittered
@@ -16262,7 +16434,7 @@ In the exercises of this Chapter we will meet a case in which
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-5}
+Exercises}\label{solutions-to-practice-exercises-7}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16714,7 +16886,7 @@ Now try again (see Figure \ref{fig:firesetting3}) for the result.
 
 This works!
 
-\subsection{Practice Exercises}\label{practice-exercises-7}
+\subsection{Practice Exercises}\label{practice-exercises-9}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16722,24 +16894,24 @@ This works!
   With \texttt{mosaicData::KidsFeet}, make the following graph.
   (\textbf{Hint}: Use \texttt{plyr::mapvalues()}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-636-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-648-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph.
   (\textbf{Hint}: Use \texttt{cut()} to make age groups. The fill for
   the boxes is the ever-popular \texttt{"burlywood"}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-637-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-649-1} \end{center}
 \item
   With \texttt{mosaicData::Gestation}, make the following graph.
   (\textbf{Hint}: Use \texttt{!is.na()} to select the rows of
   \texttt{Gestation} where \texttt{smoke} is not \texttt{NA}. Then use
   \texttt{plyr::mapvalues()} on \texttt{smoke}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-638-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-650-1} \end{center}
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-6}
+Exercises}\label{solutions-to-practice-exercises-8}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17072,7 +17244,7 @@ You can make an empty list, too:
 This is useful when you want to build up a list gradually, but you do
 not yet know what will go into it.
 
-\subsection{Practice Exercises}\label{practice-exercises-8}
+\subsection{Practice Exercises}\label{practice-exercises-10}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17260,7 +17432,7 @@ to be of the same type. In the competition between \texttt{double} and
 \texttt{character} types, \texttt{character} wins, so you end up with a
 vector of strings.
 
-\subsection{Practice Exercises}\label{practice-exercises-9}
+\subsection{Practice Exercises}\label{practice-exercises-11}
 
 These exercises involve the following list:
 
@@ -18007,7 +18179,7 @@ dedicated access/set functions---\texttt{names()} and \texttt{levels()}
 respectively. But keep in mind that you can access and set the values
 for \emph{any attribute at all} with the \texttt{attr()} function.
 
-\subsection{Practice Exercises}\label{practice-exercises-10}
+\subsection{Practice Exercises}\label{practice-exercises-12}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18037,7 +18209,7 @@ for \emph{any attribute at all} with the \texttt{attr()} function.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-7}
+Exercises}\label{solutions-to-practice-exercises-9}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -24324,7 +24496,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118a4e308"
+## [1] "0x137ea68f8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -24338,7 +24510,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118a4e308"
+## [1] "0x137ea68f8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -24377,7 +24549,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118a4e308"
+## [1] "0x137ea68f8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -24390,7 +24562,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118954988"
+## [1] "0x11a1532d8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -24408,7 +24580,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118a4e308"
+## [1] "0x137ea68f8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -24452,7 +24624,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13965a830" "0x13965a830"
+## [1] "0x11ecd3b08" "0x11ecd3b08"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -24491,7 +24663,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13965a830" "0x13965a830"
+## [1] "0x11ecd3b08" "0x11ecd3b08"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -24533,7 +24705,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13965a830" "0x119718b80"
+## [1] "0x11ecd3b08" "0x10682d0e0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

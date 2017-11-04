@@ -1033,6 +1033,63 @@ df <- m111survey[ordering, ]
 head(df[, c("seat", "height")], n = 10)  # see if it worked
 ```
 
+### Practice Exercises
+
+1.  Consider the following vector:
+
+    ```{r}
+    creatures <- c("Mole", "Frog", "Rat", "Badger")
+    ```
+    Write down what you think will be the result of the call:
+    
+    ```{r eval = FALSE}
+    order(creatures)
+    ```
+    
+    Then check your answer by actually running:
+
+    ```{r eval = FALSE}
+    creatures <- c("Mole", "Frog", "Rat", "Badger")
+    order(creatures)
+    ```
+    
+2.  What will be the result of the following?
+
+    ```{r eval = FALSE}
+    order(creatures, decreasing = TRUE)
+    ```
+    
+3.  Arrange the rows of the data frame `mosaicData::CPS85` in order, from the lowest to the highest wage. Break ties by experience (less experience coming before more experience).
+
+4. Arrange the rows of the data frame `mosaicData::CPS85` in order, from the lowest to the highest wage. Break ties by experience (more experience coming before less experience).
+
+### Solutions to Practice Exercises
+
+1.  Here's what you get:
+
+    ```{r}
+    order(creatures)
+    ```
+
+2. Here's what you get:
+
+    ```{r}
+    order(creatures, decreasing = TRUE)
+    ```
+    
+3. Here is one way:
+
+    ```{r eval = FALSE}
+    CPS85[order(CPS85$wage, CPS85$exper), ]
+    ```
+
+4.  Here is one way:
+
+    ```{r eval = FALSE}
+    CPS85[order(CPS85$wage, CPS85$exper, 
+                decreasing = c(FALSE, TRUE)), ]
+    ```
+
 
 ## New Variables from Old
 
@@ -1117,6 +1174,49 @@ m111survey$seat2 <- NULL
 m111survey$seat3 <- NULL
 names(m111survey)  # the extra variables are gone
 ```
+
+### Practice Exercises
+
+1. Remove the variables `hispanic` and `married` from the `mosaicData::CPS85` data frame.
+
+2.  Change the units of `wage` in `mosaicData::CPS85` from dollars per hour to dollars per day.  Assume an eight-hour working day.
+
+3.  For `CPS85`, create a new variable `experGrp` that has the following values
+
+    * `low` for experience less than 10 years;
+    * `medium` for experience of at least 10 years but less than 25 years;
+    * `high` for experience at least 25 years.
+    
+4. You've made some changes to `CPS85`, but in fact you haven't changed the original data frame in the **mosaicData** package---you've simply made your own copy, which should now be in your Global Environment.  Since the Global Environment comes before any package on your search path, if you want to get to the original `CPS85` you will either have to refer to it as `mosaicData::CPS85`.  Another option, though, is to remove the modified copy from your Global Environment.  Go ahead an remove it now.
+
+### Solutions to Practice Exercises
+
+1.  Here's one way to do it:
+
+    ```{r eval = FALSE}
+    CPS85$hispanic <- NULL
+    CPS85$married <- NULL
+    ```
+    
+2. Here's one way to do it:
+
+    ```{r eval = FALSE}
+    CPS85$wage <- CPS85$wage * 8
+    ```
+    
+3. Here's one way to do it:
+
+    ```{r eval = FALSE}
+    CPS85$experGrp <- cut(CPS85$exper,
+                       breaks = c(-Inf, 10, 25, Inf),
+                       labels = c("low", "medium", "high"))
+    ```
+    
+4. Here' what to do:
+
+    ```{r eval = FALSE}
+    rm(CPS85)
+    ```
 
 \newpage
 
