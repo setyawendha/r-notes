@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-01}
+  \date{2017-11-04}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5563,7 +5563,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x1086cfaa0>
+## <bytecode: 0x10baca388>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -12263,6 +12263,155 @@ one-dimensional vector, you can do so:
 ## [24] 24
 \end{verbatim}
 
+\subsection{Practice Exercises}\label{practice-exercises}
+
+Let's work with the following vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dozen <-}\StringTok{ }\NormalTok{letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{12}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Starting with \texttt{dozen} write a command that produces the
+  following matrix:
+
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,] "a"  "d"  "g"  "j" 
+## [2,] "b"  "e"  "h"  "k" 
+## [3,] "c"  "f"  "i"  "l"
+\end{verbatim}
+\item
+  Starting with \texttt{dozen} write a command that produces the
+  following matrix:
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,] "a"  "e"  "i" 
+## [2,] "b"  "f"  "j" 
+## [3,] "c"  "g"  "k" 
+## [4,] "d"  "h"  "l"
+\end{verbatim}
+\item
+  Starting with \texttt{dozen} write a command that produces the
+  following matrix:
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,] "a"  "b"  "c" 
+## [2,] "d"  "e"  "f" 
+## [3,] "g"  "h"  "i" 
+## [4,] "j"  "k"  "l"
+\end{verbatim}
+\item
+  Starting with \texttt{dozen}, write commands that produce the
+  following matrix:
+
+\begin{verbatim}
+##    c1  c2  c3 
+## r1 "a" "b" "c"
+## r2 "d" "e" "f"
+## r3 "g" "h" "i"
+## r4 "j" "k" "l"
+\end{verbatim}
+\item
+  Suppose you make the following matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smallMat <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{), }\DataTypeTok{nrow =}\DecValTok{2}\NormalTok{)}
+\NormalTok{smallMat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    8    3
+## [2,]    5    4
+\end{verbatim}
+
+  What's a one-line command to get the folowing vector from
+  \texttt{smallMat}?
+
+\begin{verbatim}
+## [1] 8 5 3 4
+\end{verbatim}
+\item
+  \texttt{nrow()} is a function that, when given a matrix, will tell you
+  the number of rows in that matrix. Write a one-line command to find
+  the number of rows in a matrix called \texttt{mysteryMat}.
+\item
+  \texttt{ncol()} is a function that, when given a matrix, will tell you
+  the number of rows in that matrix. Write a one-line command to find
+  the number of columns in a matrix called \texttt{mysteryMat}.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's one way to do it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{matrix}\NormalTok{(dozen, }\DataTypeTok{nrow =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Here's another way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{matrix}\NormalTok{(dozen, }\DataTypeTok{ncol =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way to do it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{matrix}\NormalTok{(dozen, }\DataTypeTok{nrow =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way to do it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{matrix}\NormalTok{(dozen, }\DataTypeTok{nrow =} \DecValTok{4}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way to do it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{answerMatrix <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(dozen, }\DataTypeTok{nrow =} \DecValTok{4}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{rownames}\NormalTok{(answerMatrix) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"r1"}\NormalTok{, }\StringTok{"r2"}\NormalTok{, }\StringTok{"r3"}\NormalTok{, }\StringTok{"r4"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(answerMatrix) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"c1"}\NormalTok{, }\StringTok{"c2"}\NormalTok{, }\StringTok{"c3"}\NormalTok{)}
+\NormalTok{answerMatrix}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's how:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{as.vector}\NormalTok{(smallMat)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  The command \texttt{nrow(mysteryMat)} will work.
+\item
+  The command \texttt{ncol(mysteryMat)} will work.
+\end{enumerate}
+
 \section{Matrix Indexing}\label{matrix-indexing}
 
 Matrices are incredibly useful in data analysis, but the primary reason
@@ -12485,6 +12634,158 @@ matrix with six rows and one column, is found as follows:
 In most applications people want the simpler vector structure, so they
 usually leave \texttt{drop} at its default value.
 
+\subsection{Practice Exercises}\label{practice-exercises-1}
+
+In these exercises we'll work with the following matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{numbers <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{40}
+\NormalTok{practiceMatrix <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(numbers, }\DataTypeTok{nrow =} \DecValTok{4}\NormalTok{)}
+\KeywordTok{rownames}\NormalTok{(practiceMatrix) <-}\StringTok{ }\NormalTok{letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{]}
+\KeywordTok{colnames}\NormalTok{(practiceMatrix) <-}\StringTok{ }\NormalTok{LETTERS[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{]}
+\NormalTok{practiceMatrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   A B  C  D  E  F  G  H  I  J
+## a 1 5  9 13 17 21 25 29 33 37
+## b 2 6 10 14 18 22 26 30 34 38
+## c 3 7 11 15 19 23 27 31 35 39
+## d 4 8 12 16 20 24 28 32 36 40
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Write two different one-line commands to get this matrix:
+
+\begin{verbatim}
+##   B  C  D  E
+## a 5  9 13 17
+## c 7 11 15 19
+\end{verbatim}
+\item
+  Write a one-line command to get this matrix:
+
+\begin{verbatim}
+##   A  C  E  G  I
+## a 1  9 17 25 33
+## b 2 10 18 26 34
+## c 3 11 19 27 35
+## d 4 12 20 28 36
+\end{verbatim}
+\item
+  Write a one-line command to get this vector:
+
+\begin{verbatim}
+## a b c d 
+## 1 2 3 4
+\end{verbatim}
+\item
+  Write a one-line command to get this vector:
+
+\begin{verbatim}
+##  A  B  C  D  E  F  G  H  I  J 
+##  2  6 10 14 18 22 26 30 34 38
+\end{verbatim}
+\item
+  Write a one-line command to get this matrix:
+
+\begin{verbatim}
+##   A
+## a 1
+## b 2
+## c 3
+## d 4
+\end{verbatim}
+\item
+  Write a convenient one-line command to get this matrix:
+
+\begin{verbatim}
+##   A B  C  D  E  F  G  H  I
+## a 1 5  9 13 17 21 25 29 33
+## b 2 6 10 14 18 22 26 30 34
+## c 3 7 11 15 19 23 27 31 35
+## d 4 8 12 16 20 24 28 32 36
+\end{verbatim}
+\item
+  Write a convenient one-line command to get this matrix:
+
+\begin{verbatim}
+##   A  C  D  E  F  G  H  I
+## a 1  9 13 17 21 25 29 33
+## b 2 10 14 18 22 26 30 34
+## c 3 11 15 19 23 27 31 35
+## d 4 12 16 20 24 28 32 36
+\end{verbatim}
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here are two ways:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{practiceMatrix[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{), }\DecValTok{2}\OperatorTok{:}\DecValTok{5}\NormalTok{]}
+\NormalTok{practiceMatrix[}\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{,}\StringTok{"c"}\NormalTok{), }\DecValTok{2}\OperatorTok{:}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{practiceMatrix[ , }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DataTypeTok{by =} \DecValTok{2}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{practiceMatrix[ , }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{practiceMatrix[}\DecValTok{2}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{practiceMatrix[ , }\DecValTok{1}\NormalTok{, drop =}\StringTok{ }\OtherTok{FALSE}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{practiceMatrix[ , }\OperatorTok{-}\DecValTok{10}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{practiceMatrix[ , }\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{10}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
 \section{Operations on Matrices}\label{operations-on-matrices}
 
 Matrices can be involved in arithmetical and logical operations.
@@ -12680,6 +12981,174 @@ We can select elements from a matrix using a Boolean operator, too:
 \end{verbatim}
 
 Note that the result is an ordinary, one-dimensional vector.
+
+\subsection{Practice Exercises}\label{practice-exercises-2}
+
+We'll work with the following three matrices:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{), }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\NormalTok{a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    7    9
+## [2,]    4   10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\NormalTok{b}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{c <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{24}\NormalTok{], }\DataTypeTok{nrow =} \DecValTok{6}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{c}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,] "a"  "b"  "c"  "d" 
+## [2,] "e"  "f"  "g"  "h" 
+## [3,] "i"  "j"  "k"  "l" 
+## [4,] "m"  "n"  "o"  "p" 
+## [5,] "q"  "r"  "s"  "t" 
+## [6,] "u"  "v"  "w"  "x"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Find a one-line command using \texttt{a} that results in:
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   10   12
+## [2,]    7   13
+\end{verbatim}
+\item
+  Find a one-line command using \texttt{a} that results in:
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   14   18
+## [2,]    8   20
+\end{verbatim}
+\item
+  Find a one-line command using \texttt{a} that results in:
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   49   81
+## [2,]   16  100
+\end{verbatim}
+\item
+  Find a one-line command using \texttt{a} and \texttt{b} that results
+  in:
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    6    6
+## [2,]    2    6
+\end{verbatim}
+\item
+  Describe in words what the following command does:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OperatorTok{>}\StringTok{ }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Write a one-line command using \texttt{a} that tells you which
+  elements of \texttt{a} are one more than a multiple of 3.
+\item
+  Using \texttt{c}, write a one-line boolean expression that produces
+  the following:
+
+\begin{verbatim}
+##       [,1]  [,2]  [,3]  [,4]
+## [1,] FALSE FALSE FALSE FALSE
+## [2,] FALSE FALSE FALSE  TRUE
+## [3,]  TRUE  TRUE  TRUE  TRUE
+## [4,]  TRUE  TRUE  TRUE  TRUE
+## [5,]  TRUE  TRUE  TRUE  TRUE
+## [6,]  TRUE  TRUE  TRUE  TRUE
+\end{verbatim}
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OperatorTok{+}\StringTok{ }\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{a}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a}\OperatorTok{^}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OperatorTok{-}\StringTok{ }\NormalTok{b}
+\end{Highlighting}
+\end{Shaded}
+\item
+  It produces a logical matrix of the same dimensions as \texttt{a}. The
+  new matrix will have \texttt{TRUE} in a cell when the corresponding
+  cell of \texttt{a} is greater than 5. Otherwise, the cell will have
+  \texttt{FALSE} in it.
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OperatorTok{%%}\StringTok{ }\DecValTok{3} \OperatorTok{==}\StringTok{ }\DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{c }\OperatorTok{>=}\StringTok{ "h"}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \section{Introduction to Data Frames}\label{introduction-to-data-frames}
 
@@ -13065,6 +13534,82 @@ considered important.
 We will think more about how to deal with factor variables later on,
 when we begin data analysis in earnest.
 
+\subsection{Practice Exercises}\label{practice-exercises-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  How would you learn more about the data frame \texttt{RailTrail} from
+  the \textbf{mosaicData} package?
+\item
+  Write a one-line command to see the first 10 rows of
+  \texttt{RailTrail} in the Console.
+\item
+  Write a one-line command to get the names of all of the variables in
+  \texttt{mosaicData::RailTrail}.
+\item
+  Regarding \texttt{RailTrail}: write a one-line command to get the high
+  temperature on all the days when the precipitation was more than 0.5
+  inches.
+\item
+  Regarding \texttt{RailTrail}: write a one-line command to sort the
+  average temperatures from highest to lowest.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  One way is to attach, then then ask for help:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(mosaicData)}
+\KeywordTok{help}\NormalTok{(RailTrail)}
+\end{Highlighting}
+\end{Shaded}
+
+  Another way is to refer to the data frame through the package, with
+  double colons:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(mosaicData}\OperatorTok{::}\NormalTok{RailTrail)}
+\end{Highlighting}
+\end{Shaded}
+
+  That way you don't have to add all the items in \textbf{mosaicData} to
+  your search path.
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(mosaicData}\OperatorTok{::}\NormalTok{RailTrail, }\DataTypeTok{n =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  It's \texttt{names(mosaicData::RailTrail)}.
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{with}\NormalTok{(mosaicData}\OperatorTok{::}\NormalTok{RailTrail, hightemp[precip }\OperatorTok{>}\StringTok{ }\FloatTok{0.5}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sort}\NormalTok{(mosaicData}\OperatorTok{::}\NormalTok{RailTrail}\OperatorTok{$}\NormalTok{avgtemp, }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
 \section{Creating Data Frames}\label{creating-data-frames}
 
 There are many ways to create data frames in R. Here we will introduce
@@ -13390,6 +13935,114 @@ The Boolean sub-setting expressions can be quite complex:
 ## 53 female     69 3_back
 ## 70 female     65 3_back
 \end{verbatim}
+
+\subsection{Practice Exercises}\label{practice-exercises-4}
+
+We'll use the \texttt{CPS85} data frame from the \textbf{mosaicData}
+package. You should go ahead and load the package and then read about
+the data frame:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(mosaicData)}
+\NormalTok{?CPS85}
+\end{Highlighting}
+\end{Shaded}
+
+Each row in the data frame corresponds to an employee in the survey.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Write a command that gives the number of employees in the data frame.
+\item
+  Select the employees who are between 40 and 50 years old.
+\item
+  Select the employees who are married and have fewer than 30 years of
+  experience.
+\item
+  Select the nonunion employees who either live in the South or who have
+  more than 12 years of education (or both).
+\item
+  Select the employees who work in the clerical, construction,
+  management or professional sector.
+\item
+  Select the employees who make more than 30 dollars per hour, and keep
+  only their wage, sex and sector of employment
+\item
+  Select 10 employees at random, keeping only their wage and sex.
+\item
+  Select all of the employees, keeping all information about them except
+  for their union status and whether or not they are from the South.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The command is \texttt{nrow(CPS85)}.
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{subset}\NormalTok{(CPS85, age }\OperatorTok{>}\StringTok{ }\DecValTok{40} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<}\StringTok{ }\DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{subset}\NormalTok{(CPS85, married }\OperatorTok{==}\StringTok{ "Married"} \OperatorTok{&}\StringTok{ }\NormalTok{exper }\OperatorTok{<}\StringTok{ }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{subset}\NormalTok{(CPS85, union }\OperatorTok{==}\StringTok{ "Not"} \OperatorTok{&}\StringTok{ }\NormalTok{(south }\OperatorTok{==}\StringTok{ "S"} \OperatorTok{|}\StringTok{ }\NormalTok{educ }\OperatorTok{>}\StringTok{ }\DecValTok{12}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{subset}\NormalTok{(CPS85, sector }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"clerical"}\NormalTok{, }\StringTok{"construction"}\NormalTok{,}
+                            \StringTok{"management"}\NormalTok{, }\StringTok{"professional"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85[CPS85}\OperatorTok{$}\NormalTok{wage }\OperatorTok{>}\StringTok{ }\DecValTok{30}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"wage"}\NormalTok{, }\StringTok{"sex"}\NormalTok{, }\StringTok{"sector"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85[}\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(CPS85), }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{FALSE}\NormalTok{),}
+      \KeywordTok{c}\NormalTok{(}\StringTok{"wage"}\NormalTok{, }\StringTok{"sex"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this (\texttt{south} and \texttt{union} are columns 6 and 9,
+  respectively):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85[ , }\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \section{Ordering Data Frames}\label{ordering-data-frames}
 
@@ -14782,7 +15435,7 @@ graph.
 \caption{Choropleth map of state populations in the U.S.}\label{fig:ggchoropleth}
 \end{figure}
 
-\subsection{Practice Exercises}\label{practice-exercises}
+\subsection{Practice Exercises}\label{practice-exercises-5}
 
 In each of the exercises below, consult the Help for the relevant data
 frame. (You'll need to identify variables by their names in the data
@@ -14794,7 +15447,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::SwimRecords}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-547-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-601-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -14812,7 +15465,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::KidsFeet}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-548-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-602-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -14830,7 +15483,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::Galton}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-549-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-603-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -14847,7 +15500,7 @@ frame when you discuss aesthetic mappings.)
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises}
+Exercises}\label{solutions-to-practice-exercises-4}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15570,22 +16223,22 @@ in Figure \ref{fig:impbetterapproach}.
 In the exercises of this Chapter we will meet a case in which
 ``wrap-style'' facet-ing is quite useful.
 
-\subsection{Practice Exercises}\label{practice-exercises-1}
+\subsection{Practice Exercises}\label{practice-exercises-6}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   With \texttt{mosaicData::SwimRecords}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-555-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-609-1} \end{center}
 \item
   With \texttt{mosaicData::KidsFeet}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-556-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-610-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-557-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-611-1} \end{center}
 
   \textbf{Hint:} Make the call \texttt{geom\_point(alpha\ =\ 0.2)}. The
   \texttt{alpha} parameter has a default-value of 1. The lower you set
@@ -15597,11 +16250,11 @@ In the exercises of this Chapter we will meet a case in which
   for the boxes is set to \texttt{"burlywood"}. The x-location is mapped
   to \texttt{factor(smoke)}, rather than to \texttt{smoke}.
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-558-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-612-1} \end{center}
 \item
   With \texttt{mosaicData::Galton}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-559-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-613-1} \end{center}
 
   \textbf{Hint}: The fill of the density plot is set to
   \texttt{"burlywood"}. The rug is made of randomly jittered
@@ -15609,7 +16262,7 @@ In the exercises of this Chapter we will meet a case in which
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-1}
+Exercises}\label{solutions-to-practice-exercises-5}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16061,7 +16714,7 @@ Now try again (see Figure \ref{fig:firesetting3}) for the result.
 
 This works!
 
-\subsection{Practice Exercises}\label{practice-exercises-2}
+\subsection{Practice Exercises}\label{practice-exercises-7}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16069,24 +16722,24 @@ This works!
   With \texttt{mosaicData::KidsFeet}, make the following graph.
   (\textbf{Hint}: Use \texttt{plyr::mapvalues()}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-582-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-636-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph.
   (\textbf{Hint}: Use \texttt{cut()} to make age groups. The fill for
   the boxes is the ever-popular \texttt{"burlywood"}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-583-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-637-1} \end{center}
 \item
   With \texttt{mosaicData::Gestation}, make the following graph.
   (\textbf{Hint}: Use \texttt{!is.na()} to select the rows of
   \texttt{Gestation} where \texttt{smoke} is not \texttt{NA}. Then use
   \texttt{plyr::mapvalues()} on \texttt{smoke}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-584-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-638-1} \end{center}
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-2}
+Exercises}\label{solutions-to-practice-exercises-6}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16419,7 +17072,7 @@ You can make an empty list, too:
 This is useful when you want to build up a list gradually, but you do
 not yet know what will go into it.
 
-\subsection{Practice Exercises}\label{practice-exercises-3}
+\subsection{Practice Exercises}\label{practice-exercises-8}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16452,7 +17105,7 @@ not yet know what will go into it.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises}
+Exercises}\label{solutions-to-the-practice-exercises-1}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16607,7 +17260,7 @@ to be of the same type. In the competition between \texttt{double} and
 \texttt{character} types, \texttt{character} wins, so you end up with a
 vector of strings.
 
-\subsection{Practice Exercises}\label{practice-exercises-4}
+\subsection{Practice Exercises}\label{practice-exercises-9}
 
 These exercises involve the following list:
 
@@ -16641,7 +17294,7 @@ Observe that the second element of this list was NOT given a name.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-1}
+Exercises}\label{solutions-to-the-practice-exercises-2}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17354,7 +18007,7 @@ dedicated access/set functions---\texttt{names()} and \texttt{levels()}
 respectively. But keep in mind that you can access and set the values
 for \emph{any attribute at all} with the \texttt{attr()} function.
 
-\subsection{Practice Exercises}\label{practice-exercises-5}
+\subsection{Practice Exercises}\label{practice-exercises-10}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17384,7 +18037,7 @@ for \emph{any attribute at all} with the \texttt{attr()} function.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-3}
+Exercises}\label{solutions-to-practice-exercises-7}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -23671,7 +24324,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x115a4d238"
+## [1] "0x118a4e308"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -23685,7 +24338,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x115a4d238"
+## [1] "0x118a4e308"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -23724,7 +24377,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x115a4d238"
+## [1] "0x118a4e308"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -23737,7 +24390,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11afaa308"
+## [1] "0x118954988"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -23755,7 +24408,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x115a4d238"
+## [1] "0x118a4e308"
 \end{verbatim}
 
 \begin{Shaded}
@@ -23799,7 +24452,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127f35000" "0x127f35000"
+## [1] "0x13965a830" "0x13965a830"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -23838,7 +24491,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127f35000" "0x127f35000"
+## [1] "0x13965a830" "0x13965a830"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -23880,7 +24533,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x127f35000" "0x11abffc98"
+## [1] "0x13965a830" "0x119718b80"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
