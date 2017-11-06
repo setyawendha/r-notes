@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-04}
+  \date{2017-11-06}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -2022,6 +2022,81 @@ elements a vector has:
 ## [1] 6
 \end{verbatim}
 
+\subsection{Practice Exercises}\label{practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Consider the following vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{upperLower <-}\StringTok{ }\KeywordTok{c}\NormalTok{(LETTERS, letters)}
+\end{Highlighting}
+\end{Shaded}
+
+  What should the length of \texttt{upperLower} be? Check you answer
+  using the \texttt{length()} function.
+\item
+  True or False: \texttt{c("a",\ 2,\ TRUE)} yields a vector of length
+  three consisting of the string \texttt{"a"}, the number 2 and the
+  logical value \texttt{TRUE}.
+\item
+  The function \texttt{as.numeric()} tries to coerce its input into
+  numbers. How well can it pick out the ``numbers'' in strings. Try the
+  following calls. When did \texttt{as.numeric()} find the numbers that
+  was probably intended?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{as.numeric}\NormalTok{(}\StringTok{"3.214"}\NormalTok{)}
+\KeywordTok{as.numeric}\NormalTok{(}\StringTok{"3L"}\NormalTok{)}
+\KeywordTok{as.numeric}\NormalTok{(}\StringTok{"fifty"}\NormalTok{)}
+\KeywordTok{as.numeric}\NormalTok{(}\StringTok{"10 + 3"}\NormalTok{)}
+\KeywordTok{as.numeric}\NormalTok{(}\StringTok{"3.25e-3"}\NormalTok{)  }\CommentTok{# scientific notation:  3.25 times 10^(-2)}
+\KeywordTok{as.numeric}\NormalTok{(}\StringTok{"31,245"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  There are 26 letters, so the length of \texttt{upperlower} should be
+  \(2 \times 26 = 52\). Let's check:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(upperLower)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 52
+\end{verbatim}
+\item
+  \textbf{False!} The resulting vector will be atomic---all of its
+  elements will be the same data type. The non-strings will be coerced
+  to strings, yielding:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\DecValTok{2}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a"    "2"    "TRUE"
+\end{verbatim}
+\item
+  \texttt{as.numeric()} isn't very smart: it picked out the number in
+  \texttt{"3.214"} and \texttt{3.25e-3}, but in the other cases it
+  returned \texttt{NA}.
+\end{enumerate}
+
 \section{Constructing Patterned
 Vectors}\label{constructing-patterned-vectors}
 
@@ -2220,6 +2295,179 @@ In order to create fifty 10's followed by fifty 30's followed by fifty
 \KeywordTok{rep}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{20}\NormalTok{), }\DataTypeTok{each =} \DecValTok{50}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\subsection{Practice Exercises}\label{practice-exercises-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use \texttt{rep()} to make the following vector:
+
+\begin{verbatim}
+## [1] "Kansas" "Kansas" "Kansas" "Kansas" "Kansas"
+\end{verbatim}
+\item
+  Use \texttt{rep()} to make the following vector:
+
+\begin{verbatim}
+## [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE
+\end{verbatim}
+\item
+  Use \texttt{seq()} to make the following vector:
+
+\begin{verbatim}
+## [1]  5  8 11 14 17 20 23 26
+\end{verbatim}
+\item
+  Use \texttt{seq()} to make all of the multiples of 4, beginning with 8
+  and going down to -32.
+\item
+  Use the colon operator to make all of the whole numbers from 10 to 20.
+\item
+  Use the colon operator to make all of the whole numbers from 10 to
+  -30.
+\item
+  You have a vector named \texttt{myVec}. Use the colon operator and the
+  \texttt{length()} function to make all of the whole numbers from 1 to
+  the length of \texttt{myVec}.
+\item
+  Use \texttt{rep()} and \texttt{seq()} together to make the following
+  vector:
+
+\begin{verbatim}
+##  [1]  2  3  4  5  6  7  8  9 10  2  3  4  5  6  7  8  9 10  2  3  4  5  6
+## [24]  7  8  9 10
+\end{verbatim}
+\item
+  Use \texttt{rep()} and \texttt{seq()} together to make the following
+  vector:
+
+\begin{verbatim}
+##  [1]  2  2  2  3  3  3  4  4  4  5  5  5  6  6  6  7  7  7  8  8  8  9  9
+## [24]  9 10 10 10
+\end{verbatim}
+\item
+  Read the Help for \texttt{rep()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{?rep}
+\end{Highlighting}
+\end{Shaded}
+
+  It tells you that the first argument of \texttt{rep()} is the vector
+  that you want to repeat, and that it's called \texttt{x}. It goes on
+  to say that \texttt{times} is:
+
+  \begin{quote}
+  ``an integer-valued vector giving the (non-negative) number of times
+  to repeat each element if of length \texttt{length(x)}, or to repeat
+  the whole vector if of length 1.''
+  \end{quote}
+
+  Use this information to describe in words what will be the output of:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rep}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DataTypeTok{by =} \DecValTok{10}\NormalTok{), }\DataTypeTok{times =} \DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's how:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rep}\NormalTok{(}\StringTok{"Kansas"}\NormalTok{, }\DataTypeTok{times =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's how:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{), }\DataTypeTok{times =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's how:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{seq}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DataTypeTok{by =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's how:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{seq}\NormalTok{(}\DecValTok{8}\NormalTok{, }\OperatorTok{-}\DecValTok{32}\NormalTok{, }\DataTypeTok{by =} \OperatorTok{-}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's how:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10}\OperatorTok{:}\DecValTok{20}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's how:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{10}\OperatorTok{:-}\DecValTok{30}
+\end{Highlighting}
+\end{Shaded}
+\item
+  All you need is this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(myVec)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's how:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rep}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{10}\NormalTok{), }\DataTypeTok{times =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's how:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rep}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{10}\NormalTok{), }\DataTypeTok{each =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  You'll get one 10, two 20s, three 30s, \ldots{}, all the way up to ten
+  100s.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rep}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DataTypeTok{by =} \DecValTok{10}\NormalTok{), }\DataTypeTok{times =} \DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  10  20  20  30  30  30  40  40  40  40  50  50  50  50  50  60  60
+## [18]  60  60  60  60  70  70  70  70  70  70  70  80  80  80  80  80  80
+## [35]  80  80  90  90  90  90  90  90  90  90  90 100 100 100 100 100 100
+## [52] 100 100 100 100
+\end{verbatim}
+\end{enumerate}
 
 \section{Subsetting Vectors}\label{subsetting-vectors}
 
@@ -2452,6 +2700,93 @@ Consider the example below:
 ## [1] "Boq"    "Glinda" "Oz"     "Toto"
 \end{verbatim}
 
+\subsection{Practice Exercises}\label{practice-exercises-2}
+
+We'll work with the following vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{practiceVec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Select the fifth element of \texttt{practiceVec}.
+\item
+  Select the third and sixth elements of \texttt{practiceVec}.
+\item
+  Select the first, second, third and fourth elements of
+  \texttt{practiceVec}.
+\item
+  How would you select the last element of the vector
+  \texttt{mysteryVec} if you did not know how many elements it had?
+\item
+  Select all but the fourth element of \texttt{practiceVec}.
+\item
+  Select all but the fourth and sixth elements of \texttt{practiceVec}.
+\item
+  Select the even-numbered elements of \texttt{practiceVec}.
+\item
+  Replace the third element of \texttt{practiceVec} with the number 5.
+\item
+  Replace the even-numbered elements of \texttt{practiceVec} with
+  zeroes.
+\item
+  Replace the second, third and fifth elements of \texttt{practiceVec}
+  with 3, 10, and 20 respectively.
+\item
+  Reverse the order of the elements of \texttt{practiceVec}.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{practiceVec{[}5{]}}
+\item
+  \texttt{practiceVec{[}3,6{]}}
+\item
+  \texttt{practiceVec{[}1:4{]}}
+\item
+  \texttt{mysteryVec{[}length(mysteryVec){]}}
+\item
+  \texttt{practiceVec{[}-4{]}}
+\item
+  \texttt{practiceVec{[}-c(4,5){]}}
+\item
+  \texttt{practiceVec{[}seq(2,\ length(practiceVec),\ by\ =\ 2){]}}
+\item
+  \texttt{practiceVec{[}3{]}\ \textless{}-\ 5}
+\item
+  Here is one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zeroes <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DataTypeTok{times =} \KeywordTok{length}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{2} \KeywordTok{length}\NormalTok{(practiceVec))))}
+\NormalTok{practiceVec[}\KeywordTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, }\KeywordTok{length}\NormalTok{(practiceVec), }\DataTypeTok{by =} \DecValTok{2}\NormalTok{)] <-}\StringTok{ }\NormalTok{zeroes}
+\end{Highlighting}
+\end{Shaded}
+
+  Here's a quicker way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{practiceVec[}\KeywordTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, }\KeywordTok{length}\NormalTok{(practiceVec), }\DataTypeTok{by =} \DecValTok{2}\NormalTok{)] <-}\StringTok{ }\DecValTok{0}
+\end{Highlighting}
+\end{Shaded}
+
+  The latter approach involves ``recycling'' the zero. We'll discuss
+  recycling soon.
+\item
+  \texttt{practiceVec{[}c(2,\ 3,\ 5){]}\ \textless{}-\ c(3,\ 10,\ 20)}
+\item
+  \texttt{practiceVec{[}length(practiceVec):1{]}}
+\end{enumerate}
+
 \section{More on Logical Vectors}\label{more-on-logical-vectors}
 
 Consider the following expression:
@@ -2547,7 +2882,7 @@ Boolean operators. \index{R-operators!< (less than)}
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-101}The Boolean Operators}
+\caption{\label{tab:unnamed-chunk-125}The Boolean Operators}
 \centering
 \begin{tabular}[t]{l|l}
 \hline
@@ -2863,6 +3198,171 @@ function:
 \begin{verbatim}
 ## [1] FALSE FALSE FALSE FALSE  TRUE FALSE
 \end{verbatim}
+
+\subsection{Practice Exercises}\label{practice-exercises-3}
+
+We'll work with the following vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Dorothy"}\NormalTok{, }\StringTok{"Scarecrow"}\NormalTok{, }\StringTok{"Tin Man"}\NormalTok{, }\StringTok{"Lion"}\NormalTok{, }\StringTok{"Toto"}\NormalTok{)}
+\NormalTok{age <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\FloatTok{0.04}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\NormalTok{likesDogs <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Think of the vectors as having corresponding elements. Thus, there is a
+person named Dorothy who is 12 years old and likes dogs, a person named
+Tin Man who is 0.04 years old and doesn't like dogs, etc.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Write a Boolean expression that is \texttt{TRUE} when a person is less
+  than 14 years old and \texttt{FALSE} otherwise.
+\item
+  Write a Boolean expression that is \texttt{TRUE} when a person is
+  between 10 and 15 years old (not including 10 but not 15) and
+  \texttt{FALSE} otherwise.
+\item
+  Write a Boolean expression that is \texttt{TRUE} when a person is more
+  than 12 years old and likes dogs, and \texttt{FALSE} otherwise.
+\item
+  Write a Boolean expression that is \texttt{TRUE} when a person is more
+  than 12 years old and does not like dogs, and \texttt{FALSE}
+  otherwise.
+\item
+  Write a Boolean expression that is \texttt{TRUE} when a person is more
+  than 12 years old and or likes dogs, and \texttt{FALSE} otherwise.
+\item
+  Write a Boolean expression that is \texttt{TRUE} when the person is
+  Dorothy, and \texttt{FALSE} otherwise.
+\item
+  Write a Boolean expression that is \texttt{TRUE} when the person is
+  Dorothy or Tin Man, and \texttt{FALSE} otherwise.
+\item
+  Write a Boolean expression that is \texttt{TRUE} when the person's
+  name comes after the letter ``M'' in the alphabet, and \texttt{FALSE}
+  otherwise.
+\item
+  Write a Boolean expression that is \texttt{FALSE} when the person is
+  Dorothy, and \texttt{TRUE} otherwise.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OperatorTok{<}\StringTok{ }\DecValTok{14}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE  TRUE FALSE FALSE  TRUE
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OperatorTok{>=}\StringTok{ }\DecValTok{10} \OperatorTok{&}\StringTok{ }\NormalTok{age }\OperatorTok{<}\StringTok{ }\DecValTok{15}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE FALSE FALSE FALSE
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OperatorTok{>}\StringTok{ }\DecValTok{12} \OperatorTok{&}\StringTok{ }\NormalTok{likesDogs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE  TRUE FALSE FALSE
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OperatorTok{>}\StringTok{ }\DecValTok{12} \OperatorTok{&}\StringTok{ }\OperatorTok{!}\NormalTok{likesDogs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE FALSE  TRUE FALSE
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OperatorTok{>}\StringTok{ }\DecValTok{12} \OperatorTok{|}\StringTok{ }\NormalTok{likesDogs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE  TRUE  TRUE  TRUE
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person }\OperatorTok{==}\StringTok{ "Dorothy"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE FALSE FALSE FALSE
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person }\OperatorTok{==}\StringTok{ "Dorothy"} \OperatorTok{|}\StringTok{ }\NormalTok{person }\OperatorTok{==}\StringTok{ "Tin Man"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE  TRUE FALSE FALSE
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person }\OperatorTok{>}\StringTok{ "M"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE  TRUE  TRUE FALSE  TRUE
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person }\OperatorTok{!=}\StringTok{ "Dorothy"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE  TRUE  TRUE  TRUE  TRUE
+\end{verbatim}
+\end{enumerate}
 
 \section{Subsetting with Logical
 Vectors}\label{subsetting-with-logical-vectors}
@@ -3299,6 +3799,91 @@ Is everyone more than 40 inches tall?
 Everyone with a known height is taller than 40 inches, but because
 Toto's height is \texttt{NA} R can't say whether \emph{all} the heights
 are bigger than 40.
+
+\subsection{Practice Exercises}\label{practice-exercises-4}
+
+Consider the following vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Abe"}\NormalTok{, }\StringTok{"Bettina"}\NormalTok{, }\StringTok{"Candace"}\NormalTok{, }\StringTok{"Devadatta"}\NormalTok{, }\StringTok{"Esmeralda"}\NormalTok{)}
+\NormalTok{numberKids <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{yearsEducation <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{18}\NormalTok{)}
+\NormalTok{hasPets <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Think of these vectors as providing information about siz people.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Write a command that produces the names of people who have more than 1
+  child.
+\item
+  Write a command that produces the numbers of children of people who
+  have a pet.
+\item
+  Write a command that produces the years of education who have at least
+  13 years of education.
+\item
+  Write a command that produces the names of people who have more than
+  one child and fewer than 15 years od education.
+\item
+  Write a command that produces the names of people who don't have pets.
+\item
+  Write a command that produces the number of people who have pets.
+\item
+  Write a command that produces the number of people who don't have
+  pets.
+\item
+  Write a command that says whether or not there is someone who has more
+  15 years of education and at least one child, but doesn't have any
+  pets.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{person{[}numberKids\ \textgreater{}\ 1{]}}
+\item
+  \texttt{numberKids{[}hasPets{]}}
+\item
+  \texttt{yearsEducation{[}yearsEducation\ \textgreater{}=\ 13{]}}
+\item
+  \texttt{person{[}numberKids\ \textgreater{}\ 1\ \&\ yearsEducation\ \textless{}\ 15{]}}
+\item
+  \texttt{person{[}!hasPets{]}}
+\item
+  Here is one way. We'll learn an easier way in the next section.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(person[hasPets])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+\item
+  Here is one way. We'll learn an easier way in the next section.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(person[}\OperatorTok{!}\NormalTok{hasPets])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+\item
+  \texttt{any(yearsEducation\ \textgreater{}\ 15\ \&\ numberKids\ \textgreater{}=\ 1\ \&\ !hasPets)}
+\end{enumerate}
 
 \section{Basic Arithmetical Operations on
 Vectors}\label{basic-arithmetical-operations-on-vectors}
@@ -3773,6 +4358,92 @@ further computations:
 ## [1]      NaN 4.414214 5.000000
 \end{verbatim}
 
+\subsection{Practice Exercises}\label{practice-exercises-5}
+
+Consider the following vectors:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Write a command that produces the squares of the first 10 whole
+  numbers.
+\item
+  Write a command that produces the square roots of: the numbers from 1
+  to 100 that are one more than a multiple of 3.
+\item
+  Write a command that raises 2 to the second power, 3 to third power, 4
+  to the fourth power, \ldots{} up to 100 to the hundredth power.
+\item
+  Using the \texttt{sum()} function and the vector \texttt{hasPets} from
+  the practice exercises of the previous section, write a command that
+  says how many people have pets.
+\item
+  Using the \texttt{sum()} function and the vector \texttt{hasPets} from
+  the practice exercises of the previous section, write a command that
+  says how many people do not have pets.
+\item
+  Using the vectors from the practice exercises of the previous
+  question, find the name of the person who has the most education.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{(1:10)\^{}2}
+\item
+  Here are a couple of ways:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DataTypeTok{by =} \DecValTok{3}\NormalTok{))}
+\KeywordTok{sqrt}\NormalTok{((}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{)[}\DecValTok{1}\OperatorTok{:}\DecValTok{100} \OperatorTok{%%}\StringTok{ }\DecValTok{3} \OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \texttt{(2:100)\^{}(2:100)}
+\item
+  When given a logical vector, the \texttt{sum()} function converts
+  \texttt{TRUE} to 1 and \texttt{FALSE} to 0, and then adds.
+  Accordingly, you can count how many people have pets like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(hasPets)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+\item
+  Do this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\OperatorTok{!}\NormalTok{hasPets)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person[yearsEducation }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(yearsEducation)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Esmeralda"
+\end{verbatim}
+\end{enumerate}
+
 \section{Further Notes on Syntax}\label{further-notes-on-syntax}
 
 In the process of learning about R, you have been unconsciously imbibing
@@ -4189,6 +4860,119 @@ To be safe, never use \texttt{T} for \texttt{TRUE} or \texttt{F} for
 
 One final remark: variables together with reserved words constitute the
 part of the R language called \emph{identifiers}.
+
+\subsection{Practice Exercises}\label{practice-exercises-6}
+
+Suppose that you begin a new R session and that you run to following
+code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Abe"}\NormalTok{, }\StringTok{"Bettina"}\NormalTok{, }\StringTok{"Candace"}\NormalTok{, }\StringTok{"Devadatta"}\NormalTok{, }\StringTok{"Esmeralda"}\NormalTok{)}
+\NormalTok{numberKids <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{yearsEducation <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{18}\NormalTok{)}
+\NormalTok{hasPets <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What sort of error (syntax, runtime or semantic) is produced by the
+  this next piece of code, which is intended to produce the names of the
+  people with more than 15 years of education? Why?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{person}\NormalTok{(yearsEducation }\OperatorTok{>}\StringTok{ }\DecValTok{15}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  What sort of error (syntax, runtime or semantic) is produced by the
+  this next piece of code, which is intended to produce the names of the
+  people who don't have pets? Why?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{person}\NormalTok{(}\OperatorTok{!}\NormalTok{haspets]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  What sort of error (syntax, runtime or semantic) is produced by the
+  this next piece of code, which is intended to find out how many people
+  have pets? Why?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(hasPets)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Is \texttt{ThreeLittlePigs} a valid name for a variable? If not, why
+  not?
+\item
+  Is \texttt{3LittlePigs} a valid name for a variable? If not, why not?
+\item
+  Is \texttt{LittlePigs3} a valid name for a variable? If not, why not?
+\item
+  Is \texttt{Little-Pigs-3} a valid name for a variable? If not, why
+  not?
+\item
+  Is \texttt{Little\_Pigs\_3} a valid name for a variable? If not, why
+  not?
+\item
+  Is \texttt{three.little.pigs} a valid name for a variable? If not, why
+  not?
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  This will result in a syntax error. You need brackets to select and
+  you've got a parenthesis n the left. The correct syntax would be:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person[yearsEducation }\OperatorTok{>}\StringTok{ }\DecValTok{15}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  This will result in a runtime error. The variable \texttt{haspets} is
+  not defined, so R will issue a ``can't find'' erro when the code is
+  executed. Probably you meant:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{person[}\OperatorTok{!}\NormalTok{hasPets]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  This will result in a semantic error. You'll get 5 (the number of
+  elements in the vector \texttt{hasPets}) What you wnat can be
+  accomplished by either one of the following:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(}\OperatorTok{!}\NormalTok{hasPets)              }\CommentTok{# nice and snappy!}
+\KeywordTok{length}\NormalTok{(hasPets[}\OperatorTok{!}\NormalTok{hasPets])  }\CommentTok{# kinda awkward}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Yes.
+\item
+  No! Variables can't start with a number.
+\item
+  Yes.
+\item
+  No! Hyphens aren't allowed in variables.
+\item
+  Yes.
+\item
+  Yes.
+\end{enumerate}
 
 \newpage
 
@@ -5563,7 +6347,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10baca388>
+## <bytecode: 0x1024483f8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -12263,7 +13047,7 @@ one-dimensional vector, you can do so:
 ## [24] 24
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises}
+\subsection{Practice Exercises}\label{practice-exercises-7}
 
 Let's work with the following vector:
 
@@ -12351,7 +13135,7 @@ Let's work with the following vector:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises}
+Exercises}\label{solutions-to-practice-exercises-4}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -12634,7 +13418,7 @@ matrix with six rows and one column, is found as follows:
 In most applications people want the simpler vector structure, so they
 usually leave \texttt{drop} at its default value.
 
-\subsection{Practice Exercises}\label{practice-exercises-1}
+\subsection{Practice Exercises}\label{practice-exercises-8}
 
 In these exercises we'll work with the following matrix:
 
@@ -12723,7 +13507,7 @@ In these exercises we'll work with the following matrix:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-1}
+Exercises}\label{solutions-to-practice-exercises-5}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -12982,7 +13766,7 @@ We can select elements from a matrix using a Boolean operator, too:
 
 Note that the result is an ordinary, one-dimensional vector.
 
-\subsection{Practice Exercises}\label{practice-exercises-2}
+\subsection{Practice Exercises}\label{practice-exercises-9}
 
 We'll work with the following three matrices:
 
@@ -13091,7 +13875,7 @@ We'll work with the following three matrices:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-2}
+Exercises}\label{solutions-to-practice-exercises-6}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -13534,7 +14318,7 @@ considered important.
 We will think more about how to deal with factor variables later on,
 when we begin data analysis in earnest.
 
-\subsection{Practice Exercises}\label{practice-exercises-3}
+\subsection{Practice Exercises}\label{practice-exercises-10}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -13557,7 +14341,7 @@ when we begin data analysis in earnest.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises}
+Exercises}\label{solutions-to-the-practice-exercises-3}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -13936,7 +14720,7 @@ The Boolean sub-setting expressions can be quite complex:
 ## 70 female     65 3_back
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-4}
+\subsection{Practice Exercises}\label{practice-exercises-11}
 
 We'll use the \texttt{CPS85} data frame from the \textbf{mosaicData}
 package. You should go ahead and load the package and then read about
@@ -13977,7 +14761,7 @@ Each row in the data frame corresponds to an employee in the survey.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-3}
+Exercises}\label{solutions-to-practice-exercises-7}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14231,7 +15015,7 @@ would like people to be arranged from shortest to tallest. Then call:
 ## 57 1_front     64
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-5}
+\subsection{Practice Exercises}\label{practice-exercises-12}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14279,7 +15063,7 @@ would like people to be arranged from shortest to tallest. Then call:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-4}
+Exercises}\label{solutions-to-practice-exercises-8}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14481,7 +15265,7 @@ the value \texttt{NULL}.
 ## [10] "enough_Sleep"    "sex"             "diff.ideal.act."
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-6}
+\subsection{Practice Exercises}\label{practice-exercises-13}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14506,6 +15290,15 @@ the value \texttt{NULL}.
     \texttt{high} for experience at least 25 years.
   \end{itemize}
 \item
+  Using the \texttt{experGrp} variable in the previous exercise, create
+  the following tally of the ages of the employees:
+
+\begin{verbatim}
+## experGrp
+##    low medium   high 
+##    179    217    138
+\end{verbatim}
+\item
   You've made some changes to \texttt{CPS85}, but in fact you haven't
   changed the original data frame in the \textbf{mosaicData}
   package---you've simply made your own copy, which should now be in
@@ -14517,7 +15310,7 @@ the value \texttt{NULL}.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-5}
+Exercises}\label{solutions-to-practice-exercises-9}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14544,12 +15337,14 @@ Exercises}\label{solutions-to-practice-exercises-5}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{CPS85}\OperatorTok{$}\NormalTok{experGrp <-}\StringTok{ }\KeywordTok{cut}\NormalTok{(CPS85}\OperatorTok{$}\NormalTok{exper,}
-                   \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{25}\NormalTok{, }\OtherTok{Inf}\NormalTok{),}
-                   \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"low"}\NormalTok{, }\StringTok{"medium"}\NormalTok{, }\StringTok{"high"}\NormalTok{))}
+                      \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{25}\NormalTok{, }\OtherTok{Inf}\NormalTok{),}
+                      \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"low"}\NormalTok{, }\StringTok{"medium"}\NormalTok{, }\StringTok{"high"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 \item
-  Here' what to do:
+  Use \texttt{table(CPS85\$experGrp)}.
+\item
+  Here's what to do:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -15607,7 +16402,7 @@ graph.
 \caption{Choropleth map of state populations in the U.S.}\label{fig:ggchoropleth}
 \end{figure}
 
-\subsection{Practice Exercises}\label{practice-exercises-7}
+\subsection{Practice Exercises}\label{practice-exercises-14}
 
 In each of the exercises below, consult the Help for the relevant data
 frame. (You'll need to identify variables by their names in the data
@@ -15619,7 +16414,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::SwimRecords}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-613-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-662-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -15637,7 +16432,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::KidsFeet}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-614-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-663-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -15655,7 +16450,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::Galton}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-615-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-664-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -15672,7 +16467,7 @@ frame when you discuss aesthetic mappings.)
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-6}
+Exercises}\label{solutions-to-practice-exercises-10}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16395,22 +17190,22 @@ in Figure \ref{fig:impbetterapproach}.
 In the exercises of this Chapter we will meet a case in which
 ``wrap-style'' facet-ing is quite useful.
 
-\subsection{Practice Exercises}\label{practice-exercises-8}
+\subsection{Practice Exercises}\label{practice-exercises-15}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   With \texttt{mosaicData::SwimRecords}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-621-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-670-1} \end{center}
 \item
   With \texttt{mosaicData::KidsFeet}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-622-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-671-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-623-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-672-1} \end{center}
 
   \textbf{Hint:} Make the call \texttt{geom\_point(alpha\ =\ 0.2)}. The
   \texttt{alpha} parameter has a default-value of 1. The lower you set
@@ -16422,11 +17217,11 @@ In the exercises of this Chapter we will meet a case in which
   for the boxes is set to \texttt{"burlywood"}. The x-location is mapped
   to \texttt{factor(smoke)}, rather than to \texttt{smoke}.
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-624-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-673-1} \end{center}
 \item
   With \texttt{mosaicData::Galton}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-625-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-674-1} \end{center}
 
   \textbf{Hint}: The fill of the density plot is set to
   \texttt{"burlywood"}. The rug is made of randomly jittered
@@ -16434,7 +17229,7 @@ In the exercises of this Chapter we will meet a case in which
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-7}
+Exercises}\label{solutions-to-practice-exercises-11}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16886,7 +17681,7 @@ Now try again (see Figure \ref{fig:firesetting3}) for the result.
 
 This works!
 
-\subsection{Practice Exercises}\label{practice-exercises-9}
+\subsection{Practice Exercises}\label{practice-exercises-16}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16894,24 +17689,24 @@ This works!
   With \texttt{mosaicData::KidsFeet}, make the following graph.
   (\textbf{Hint}: Use \texttt{plyr::mapvalues()}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-648-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-697-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph.
   (\textbf{Hint}: Use \texttt{cut()} to make age groups. The fill for
   the boxes is the ever-popular \texttt{"burlywood"}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-649-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-698-1} \end{center}
 \item
   With \texttt{mosaicData::Gestation}, make the following graph.
   (\textbf{Hint}: Use \texttt{!is.na()} to select the rows of
   \texttt{Gestation} where \texttt{smoke} is not \texttt{NA}. Then use
   \texttt{plyr::mapvalues()} on \texttt{smoke}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-650-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-699-1} \end{center}
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-8}
+Exercises}\label{solutions-to-practice-exercises-12}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17244,7 +18039,7 @@ You can make an empty list, too:
 This is useful when you want to build up a list gradually, but you do
 not yet know what will go into it.
 
-\subsection{Practice Exercises}\label{practice-exercises-10}
+\subsection{Practice Exercises}\label{practice-exercises-17}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17277,7 +18072,7 @@ not yet know what will go into it.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-1}
+Exercises}\label{solutions-to-the-practice-exercises-4}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17432,7 +18227,7 @@ to be of the same type. In the competition between \texttt{double} and
 \texttt{character} types, \texttt{character} wins, so you end up with a
 vector of strings.
 
-\subsection{Practice Exercises}\label{practice-exercises-11}
+\subsection{Practice Exercises}\label{practice-exercises-18}
 
 These exercises involve the following list:
 
@@ -17466,7 +18261,7 @@ Observe that the second element of this list was NOT given a name.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-2}
+Exercises}\label{solutions-to-the-practice-exercises-5}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18179,7 +18974,7 @@ dedicated access/set functions---\texttt{names()} and \texttt{levels()}
 respectively. But keep in mind that you can access and set the values
 for \emph{any attribute at all} with the \texttt{attr()} function.
 
-\subsection{Practice Exercises}\label{practice-exercises-12}
+\subsection{Practice Exercises}\label{practice-exercises-19}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18209,7 +19004,7 @@ for \emph{any attribute at all} with the \texttt{attr()} function.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-9}
+Exercises}\label{solutions-to-practice-exercises-13}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -24496,7 +25291,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137ea68f8"
+## [1] "0x1202b6ac8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -24510,7 +25305,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137ea68f8"
+## [1] "0x1202b6ac8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -24549,7 +25344,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137ea68f8"
+## [1] "0x1202b6ac8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -24562,7 +25357,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11a1532d8"
+## [1] "0x140a44438"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -24580,7 +25375,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137ea68f8"
+## [1] "0x1202b6ac8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -24624,7 +25419,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ecd3b08" "0x11ecd3b08"
+## [1] "0x13b4d6870" "0x13b4d6870"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -24663,7 +25458,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ecd3b08" "0x11ecd3b08"
+## [1] "0x13b4d6870" "0x13b4d6870"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -24705,7 +25500,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ecd3b08" "0x10682d0e0"
+## [1] "0x13b4d6870" "0x121467278"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

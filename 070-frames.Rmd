@@ -1187,7 +1187,16 @@ names(m111survey)  # the extra variables are gone
     * `medium` for experience of at least 10 years but less than 25 years;
     * `high` for experience at least 25 years.
     
-4. You've made some changes to `CPS85`, but in fact you haven't changed the original data frame in the **mosaicData** package---you've simply made your own copy, which should now be in your Global Environment.  Since the Global Environment comes before any package on your search path, if you want to get to the original `CPS85` you will either have to refer to it as `mosaicData::CPS85`.  Another option, though, is to remove the modified copy from your Global Environment.  Go ahead an remove it now.
+4. Using the `experGrp` variable in the previous exercise, create the following tally of the ages of the employees:
+
+    ```{r echo=FALSE}
+    experGrp <- cut(mosaicData::CPS85$exper,
+                          breaks = c(-Inf, 10, 25, Inf),
+                          labels = c("low", "medium", "high"))
+    table(experGrp)
+    ```
+    
+5. You've made some changes to `CPS85`, but in fact you haven't changed the original data frame in the **mosaicData** package---you've simply made your own copy, which should now be in your Global Environment.  Since the Global Environment comes before any package on your search path, if you want to get to the original `CPS85` you will either have to refer to it as `mosaicData::CPS85`.  Another option, though, is to remove the modified copy from your Global Environment.  Go ahead an remove it now.
 
 ### Solutions to Practice Exercises
 
@@ -1208,11 +1217,13 @@ names(m111survey)  # the extra variables are gone
 
     ```{r eval = FALSE}
     CPS85$experGrp <- cut(CPS85$exper,
-                       breaks = c(-Inf, 10, 25, Inf),
-                       labels = c("low", "medium", "high"))
+                          breaks = c(-Inf, 10, 25, Inf),
+                          labels = c("low", "medium", "high"))
     ```
+
+4. Use `table(CPS85$experGrp)`.
     
-4. Here' what to do:
+5. Here's what to do:
 
     ```{r eval = FALSE}
     rm(CPS85)

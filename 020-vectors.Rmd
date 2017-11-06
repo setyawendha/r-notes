@@ -254,6 +254,45 @@ The `length()` function\index{R-functions!length()@\texttt{length()}} tells us h
 length(heights)
 ```
 
+### Practice Exercises
+
+1. Consider the following vector:
+
+    ```{r}
+    upperLower <- c(LETTERS, letters)
+    ```
+    
+    What should the length of `upperLower` be?  Check you answer using the `length()` function.
+    
+2. True or False:  `c("a", 2, TRUE)` yields a vector of length three consisting of the string `"a"`, the number 2 and the logical value `TRUE`.
+
+3. The function `as.numeric()` tries to coerce its input into numbers.  How well can it pick out the "numbers" in strings.  Try the following calls.  When did `as.numeric()` find the numbers that was probably intended?
+
+    ```{r eval = FALSE}
+    as.numeric("3.214")
+    as.numeric("3L")
+    as.numeric("fifty")
+    as.numeric("10 + 3")
+    as.numeric("3.25e-3")  # scientific notation:  3.25 times 10^(-2)
+    as.numeric("31,245")
+    ```
+
+### Solutions to Practice Exercises
+
+1. There are 26 letters, so the length of `upperlower` should be $2 \times 26 = 52$.  Let's check:
+
+    ```{r}
+    length(upperLower)
+    ```
+    
+2. **False!** The resulting vector will be atomic---all of its elements will be the same data type.  The non-strings will be coerced to strings, yielding:
+
+    ```{r}
+    c("a", 2, TRUE)
+    ```
+    
+3. `as.numeric()` isn't very smart:  it picked out the number in `"3.214"` and `3.25e-3`, but in the other cases it returned `NA`.
+
 ## Constructing Patterned Vectors
 
 Quite often we need to make lengthy vectors that follow simple patterns.  R has a few functions to assist us in these tasks.
@@ -350,6 +389,124 @@ In order to create fifty 10's followed by fifty 30's followed by fifty 50's I wo
 ```{r eval =FALSE}
 rep(seq(10, 50, 20), each = 50)
 ```
+
+### Practice Exercises
+
+1. Use `rep()` to make the following vector:
+
+    ```{r echo = FALSE}
+    rep("Kansas", times = 5)
+    ```
+
+1. Use `rep()` to make the following vector:
+
+    ```{r echo = FALSE}
+    rep(c(TRUE, FALSE), times = 4)
+    ```
+    
+1. Use `seq()` to make the following vector:
+
+    ```{r echo = FALSE}
+    seq(5, 26, by = 3)
+    ```
+    
+1. Use `seq()` to make all of the multiples of 4, beginning with 8 and going down to -32.
+
+1.  Use the colon operator to make all of the whole numbers from 10 to 20.
+
+1. Use the colon operator to make all of the whole numbers from 10 to -30.
+
+1. You have a vector named `myVec`.  Use the colon operator and the `length()` function to make all of the whole numbers from 1 to the length of `myVec`.
+
+1.  Use `rep()` and `seq()` together to make the following vector:
+
+    ```{r echo=FALSE}
+    rep(seq(2, 10), times = 3)
+    ```
+    
+1.  Use `rep()` and `seq()` together to make the following vector:
+
+    ```{r echo=FALSE}
+    rep(seq(2, 10), each = 3)
+    ```
+    
+1.  Read the Help for `rep()`
+
+    ```{r eval=FALSE}
+    ?rep
+    ```
+    
+    It tells you that the first argument of `rep()` is the vector that you want to repeat, and that it's called `x`.  It goes on to say that `times` is:
+    
+    >"an integer-valued vector giving the (non-negative) number of times to repeat each element if of length `length(x)`, or to repeat the whole vector if of length 1."
+    
+    Use this information to describe in words what will be the output of:
+
+    ```{r eval=FALSE}
+    rep(seq(10, 100, by = 10), times = 1:10)
+    ```
+    
+### Solutions to Practice Exercises
+
+1. Here's how:
+
+    ```{r eval = FALSE}
+    rep("Kansas", times = 5)
+    ```
+
+1. Here's how:
+
+    ```{r eval = FALSE}
+    rep(c(TRUE, FALSE), times = 4)
+    ```
+    
+1. Here's how:
+
+    ```{r eval = FALSE}
+    seq(5, 26, by = 3)
+    ```
+    
+1. Here's how:
+
+    ```{r eval = FALSE}
+    seq(8, -32, by = -4)
+    ```
+
+1. Here's how:
+
+    ```{r eval = FALSE}
+    10:20
+    ```
+
+1. Here's how:
+
+    ```{r eval = FALSE}
+    10:-30
+    ```
+
+1. All you need is this:
+
+    ```{r eval = FALSE}
+    1:length(myVec)
+    ```
+
+1.  Here's how:
+
+    ```{r eval=FALSE}
+    rep(seq(2, 10), times = 3)
+    ```
+    
+1.  Here's how:
+
+    ```{r eval=FALSE}
+    rep(seq(2, 10), each = 3)
+    ```
+    
+1.  You'll get one 10, two 20s, three 30s, ..., all the way up to ten 100s.
+
+    ```{r}
+    rep(seq(10, 100, by = 10), times = 1:10)
+    ```
 
 ## Subsetting Vectors
 
@@ -455,6 +612,73 @@ inhabitants <- c("Oz", "Toto", "Boq", "Glinda")
 permuted <- inhabitants[c(3,4,1,2)]
 permuted
 ```
+
+### Practice Exercises
+
+We'll work with the following vector:
+
+```{r}
+practiceVec <- c(4, 3, 7, 10, 5, 3, 8)
+```
+
+1. Select the fifth element of `practiceVec`.
+
+2. Select the third and sixth elements of `practiceVec`.
+
+3. Select the first, second, third and fourth elements of `practiceVec`.
+
+4. How would you select the last element of the vector `mysteryVec` if you did not know how many elements it had?
+
+5. Select all but the fourth element of `practiceVec`.
+
+6. Select all but the fourth and sixth elements of `practiceVec`.
+
+7. Select the even-numbered elements of `practiceVec`.
+
+8. Replace the third element of `practiceVec` with the number 5.
+
+9. Replace the even-numbered elements of `practiceVec` with zeroes.
+
+10.  Replace the second, third and fifth elements of `practiceVec` with 3, 10, and 20 respectively.
+
+11. Reverse the order of the elements of `practiceVec`.
+
+### Solutions to Practice Exercises
+
+1. `practiceVec[5]`
+
+2. `practiceVec[3,6]`
+
+3. `practiceVec[1:4]`
+
+4. `mysteryVec[length(mysteryVec)]`
+
+5. `practiceVec[-4]`
+
+6. `practiceVec[-c(4,5)]`
+
+7. `practiceVec[seq(2, length(practiceVec), by = 2)]`
+
+8. `practiceVec[3] <- 5`
+
+9. Here is one way:
+
+    ```{r eval = FALSE}
+    zeroes <- rep(0, times = length(seq(2 length(practiceVec))))
+    practiceVec[seq(2, length(practiceVec), by = 2)] <- zeroes
+    ```
+    
+    Here's a quicker way:
+
+    ```{r eval = FALSE}
+    practiceVec[seq(2, length(practiceVec), by = 2)] <- 0
+    ``` 
+    
+    The latter approach involves "recycling" the zero.  We'll discuss recycling soon.
+    
+10. `practiceVec[c(2, 3, 5)] <- c(3, 10, 20)`
+
+11. `practiceVec[length(practiceVec):1]`
 
 
 ## More on Logical Vectors
@@ -663,6 +887,91 @@ By the way, if you don't want to see the warning you can put the expression into
 suppressWarnings(vec2 > c(3, 8))
 ```
 
+### Practice Exercises
+
+We'll work with the following vectors:
+
+```{r}
+person <- c("Dorothy", "Scarecrow", "Tin Man", "Lion", "Toto")
+age <- c(12, 0.04, 15, 18, 6)
+likesDogs <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
+```
+
+Think of the vectors as having corresponding elements.  Thus, there is a person named Dorothy who is 12 years old and likes dogs, a person named Tin Man who is 0.04 years old and doesn't like dogs, etc.
+
+1. Write a Boolean expression that is `TRUE` when a person is less than 14 years old and `FALSE` otherwise.
+
+2. Write a Boolean expression that is `TRUE` when a person is between 10 and 15 years old (not including 10 but not 15) and `FALSE` otherwise.
+
+3. Write a Boolean expression that is `TRUE` when a person is more than 12 years old and likes dogs, and `FALSE` otherwise.
+
+4. Write a Boolean expression that is `TRUE` when a person is more than 12 years old and does not like dogs, and `FALSE` otherwise.
+
+5. Write a Boolean expression that is `TRUE` when a person is more than 12 years old and or likes dogs, and `FALSE` otherwise.
+
+6. Write a Boolean expression that is `TRUE` when the person is Dorothy, and `FALSE` otherwise.
+
+7. Write a Boolean expression that is `TRUE` when the person is Dorothy or Tin Man, and `FALSE` otherwise.
+
+8. Write a Boolean expression that is `TRUE` when the person's name comes after the letter "M" in the alphabet, and `FALSE` otherwise.
+
+9. Write a Boolean expression that is `FALSE` when the person is Dorothy, and `TRUE` otherwise.
+
+### Solutions to Practice Exercises
+
+1. Here's the code:
+
+    ```{r}
+    age < 14
+    ```
+
+2. Here's the code:
+
+    ```{r}
+    age >= 10 & age < 15
+    ```
+
+3. Here's the code:
+
+    ```{r}
+    age > 12 & likesDogs
+    ```
+
+4. Here's the code:
+
+    ```{r}
+    age > 12 & !likesDogs
+    ```
+
+5. Here's the code:
+
+    ```{r}
+    age > 12 | likesDogs
+    ```
+
+6. Here's the code:
+
+    ```{r}
+    person == "Dorothy"
+    ```
+
+7. Here's the code:
+
+    ```{r}
+    person == "Dorothy" | person == "Tin Man"
+    ```
+
+8. Here's the code:
+
+    ```{r}
+    person > "M"
+    ```
+    
+9. Here's the code:
+
+    ```{r}
+    person != "Dorothy"
+    ```
 
 ## Subsetting with Logical Vectors
 
@@ -684,8 +993,6 @@ heights[wanted]
 The `TRUE`'s at indices 1, 2, and 4 in `wanted` inform R that we want the heights vector at indices 1, 2 and 4.  The `FALSE`'s say:  "don't include this element!"
 
 Subsetting can be used powerfully along with logical vectors and Boolean operators.
-
-
 
 For example, in order to select those persons whose heights exceed a certain amount, we might say something like this:
 
@@ -865,6 +1172,62 @@ all(heights > 40)
 ```
 
 Everyone with a known height is taller than 40 inches, but because Toto's height is `NA` R can't say whether *all* the heights are bigger than 40.
+
+### Practice Exercises
+
+Consider the following vectors:
+
+```{r}
+person <- c("Abe", "Bettina", "Candace", "Devadatta", "Esmeralda")
+numberKids <- c(2, 1, 0, 2, 3)
+yearsEducation <- c(12, 16, 13, 14, 18)
+hasPets <- c(FALSE, FALSE, TRUE, TRUE, FALSE, TRUE)
+```
+
+Think of these vectors as providing information about siz people.
+
+1. Write a command that produces the names of people who have more than 1 child.
+
+2. Write a command that produces the numbers of children of people who have a pet.
+
+3. Write a command that produces the years of education who have at least 13 years of education.
+
+4. Write a command that produces the names of people who have more than one child and fewer than 15 years od education.
+
+5. Write a command that produces the names of people who don't have pets.
+
+6. Write a command that produces the number of people who have pets.
+
+7. Write a command that produces the number of people who don't have pets.
+
+8. Write a command that says whether or not there is someone who has more 15 years of education and at least one child, but doesn't have any pets.
+
+
+### Solutions to the Practice Exercises
+
+1. `person[numberKids > 1]`
+
+2. `numberKids[hasPets]`
+
+3. `yearsEducation[yearsEducation >= 13]`
+
+4. `person[numberKids > 1 & yearsEducation < 15]`
+
+5. `person[!hasPets]`
+
+6. Here is one way.  We'll learn an easier way in the next section.
+
+    ```{r}
+    length(person[hasPets])
+    ```
+
+7. Here is one way.  We'll learn an easier way in the next section.
+
+    ```{r}
+    length(person[!hasPets])
+    ```
+    
+8. `any(yearsEducation > 15 & numberKids >= 1 & !hasPets)`
 
 ## Basic Arithmetical Operations on Vectors
 
@@ -1073,6 +1436,53 @@ vec<- sqrt(c(-4, 2, 4))
 vec + 3
 ```
 
+### Practice Exercises
+
+Consider the following vectors:
+
+1.  Write a command that produces the squares of the first 10 whole numbers.
+
+2.  Write a command that produces the square roots of: the numbers from 1 to 100 that are one more than a multiple of 3.
+
+3.  Write a command that raises 2 to the second power, 3 to third power, 4 to the fourth power, ... up to 100 to the hundredth power.
+
+4. Using the `sum()` function and the vector `hasPets` from the practice exercises of the previous section, write a command that says how many people have pets.
+
+5. Using the `sum()` function and the vector `hasPets` from the practice exercises of the previous section, write a command that says how many people do not have pets.
+
+6. Using the vectors from the practice exercises of the previous question, find the name of the person who has the most education.
+
+
+### Solutions to the Practice Exercises
+
+1. `(1:10)^2`
+
+2.  Here are a couple of ways:
+
+    ```{r eval = FALSE}
+    sqrt(seq(1, 100, by = 3))
+    sqrt((1:100)[1:100 %% 3 == 1])
+    ```
+
+3. `(2:100)^(2:100)`
+
+4.  When given a logical vector, the `sum()` function converts `TRUE` to 1 and `FALSE` to 0, and then adds.  Accordingly, you can count how many people have pets like this:
+
+    ```{r}
+    sum(hasPets)
+    ```
+    
+5. Do this:
+
+    ```{r}
+    sum(!hasPets)
+    ```
+
+6. Try this:
+
+    ```{r}
+    person[yearsEducation == max(yearsEducation)]
+    ```
 
 ## Further Notes on Syntax
 
@@ -1294,11 +1704,82 @@ The moral of the story is:
 To be safe, never use `T` for `TRUE` or `F` for `FALSE`.
 ```
 
-
-
-
-
 One final remark:  variables together with reserved words constitute the part of the R language called *identifiers*.
+
+### Practice Exercises
+
+Suppose that you begin a new R session and that you run to following code:
+
+```{r}
+person <- c("Abe", "Bettina", "Candace", "Devadatta", "Esmeralda")
+numberKids <- c(2, 1, 0, 2, 3)
+yearsEducation <- c(12, 16, 13, 14, 18)
+hasPets <- c(FALSE, FALSE, TRUE, TRUE, FALSE, TRUE)
+```
+
+1.  What sort of error (syntax, runtime or semantic) is produced by the this next piece of code, which is intended to produce the names of the people with more than 15 years of education?  Why?
+
+    ```{r eval = FALSE}
+    person(yearsEducation > 15]
+    ```
+
+2. What sort of error (syntax, runtime or semantic) is produced by the this next piece of code, which is intended to produce the names of the people who don't have pets?  Why?
+
+    ```{r eval = FALSE}
+    person(!haspets]
+    ```
+    
+3. What sort of error (syntax, runtime or semantic) is produced by the this next piece of code, which is intended to find out how many people have pets?  Why?
+
+    ```{r eval = FALSE}
+    length(hasPets)
+    ```
+    
+4. Is `ThreeLittlePigs` a valid name for a variable?  If not, why not?
+
+5. Is `3LittlePigs` a valid name for a variable?  If not, why not?
+
+6. Is `LittlePigs3` a valid name for a variable?  If not, why not?
+
+7. Is `Little-Pigs-3` a valid name for a variable?  If not, why not?
+
+8. Is `Little_Pigs_3` a valid name for a variable?  If not, why not?
+
+9. Is `three.little.pigs` a valid name for a variable?  If not, why not?
+
+### Solutions to the Practice Exercises
+
+1.  This will result in a syntax error.  You need brackets to select and you've got a parenthesis n the left.  The correct syntax would be:
+
+    ```{r eval = FALSE}
+    person[yearsEducation > 15]
+    ```
+    
+2.  This will result in a runtime error.  The variable `haspets` is not defined, so R will issue a "can't find" erro when the code is executed.  Probably you meant:
+
+    ```{r eval = FALSE}
+    person[!hasPets]
+    ```
+    
+3.  This will result in a semantic error.  You'll get 5 (the number of elements in the vector `hasPets`)  What you wnat can be accomplished by either one of the following:
+
+    ```{r eval = FALSE}
+    sum(!hasPets)              # nice and snappy!
+    length(hasPets[!hasPets])  # kinda awkward
+    ```
+
+4. Yes.
+
+5. No!  Variables can't start with a number.
+
+6. Yes.
+
+7. No!  Hyphens aren't allowed in variables.
+
+8. Yes.
+
+9. Yes.
+
 
 \newpage
 
