@@ -5518,6 +5518,80 @@ Give it a try:
 What's printed to the screen is the code that defines the function. The
 function itself is not called.
 
+\subsection{Practice Exercises}\label{practice-exercises-7}
+
+Consider the following function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{addThree <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  n }\OperatorTok{+}\DecValTok{3}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+It adds three to any number you give it. Try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{addThree}\NormalTok{(}\DataTypeTok{n =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What, if anything, is wrong with the following code?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{addThree}\NormalTok{(}\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  What, if anything, is wrong with the following code?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{addThree}\NormalTok{(}\DataTypeTok{n =} \DecValTok{7}\NormalTok{, }\DataTypeTok{x =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  I'd like to add 3 to the number 15. What, if anything, is wrong with
+  the following code?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{addThree[}\DecValTok{15}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Nothing is wrong. You'll get a result of 10. You don't have to use the
+  parameter name \texttt{n} when you call the function: R will figure
+  out that you mean \texttt{n} to be 7.
+\item
+  There will be an error, because when the function was defined there
+  was no parameter \texttt{x}. You can only give a function arguments
+  for parameters that were included in its definition.
+\item
+  \texttt{addThree} is a function. The way you call it is to use
+  parentheses around the arguments, like this: \texttt{addThree(15)}.
+  When you use brackets R will assume that you are trying to pick the
+  third element out of a vector named \texttt{addThree}. When it can't
+  find such a vector, R will throw an error notifying you of that fact.
+\end{enumerate}
+
 \section{What a Function Returns}\label{what-a-function-returns}
 
 In this section we learn about return-values of functions.
@@ -5800,8 +5874,8 @@ Another possibility is to use the
 When R executes a call to \texttt{print()} it is forced to print
 something out to the console, even if it is in the midst of evaluating
 expressions in a function. The \texttt{print}-statement is not involved
-in what the function returns---that's all up to the expression
-\texttt{x\^{}2}---but it does cause a result \emph{outside of the
+in what the function returns---that's all up to the final expression,
+the \texttt{x\^{}2}---but it does cause a result \emph{outside of the
 function itself}. Any external result produced by a function (other than
 what the function returns) is called a \emph{side-effect}
 \index{side-effect}of the function. \texttt{cat()} and \texttt{print()}
@@ -5830,7 +5904,10 @@ actually evaluated the expression
 \texttt{print(2+2)}
 \end{quote}
 
-That's what got the 4 into the console!
+That's what got the 4 into the console! The fact is that whenever you
+make R evaluate an expression at ``top level'' (i.e., when you type the
+epxression into the Console) then R will call \texttt{print()} to put
+the value of the expression into the Console so you can see it.
 
 At this point we don't use \texttt{print()} explicitly very much---we
 just rely on R to call it for us when we are evaluating expressions at
@@ -5839,6 +5916,132 @@ the console. Later on we will find that it has other uses.\footnote{R is
   behind-the-scenes calls to a print function. In many other languages
   you have to call its print-function explicitly if you want the value
   of an expression to be displayed.}
+
+\subsection{Practice Exercises}\label{practice-exercises-8}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What, if anything, does the following function return?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+  \KeywordTok{cat}\NormalTok{(}\StringTok{"We have "}\NormalTok{, n, }\StringTok{" dogs.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  What, if anything, does the following function return?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  n }\OperatorTok{+}\StringTok{ }\DecValTok{3}
+  \StringTok{"Hello"}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  What, if anything, does the following function return?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{h <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+  \StringTok{"Hello"}
+\NormalTok{  n }\OperatorTok{+}\DecValTok{3}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-4}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Like any function, \texttt{f()} returns the value of the last
+  expression that it evaluates. This time the final (and only)
+  expression is the call to \texttt{cat()}. But what does \texttt{cat()}
+  return? It turns out that \texttt{cat()} always returns \texttt{NULL}.
+  You can see this in a couple of ways. One way is to store the result
+  of a call to \texttt{f()} in a variable, and then print the variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result <-}\StringTok{ }\KeywordTok{f}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## We have 4 dogs.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+  \texttt{result} got the value returned by the call \texttt{f(4)}.
+  \texttt{result} turned out to be 4. Hence the call \texttt{f(4)} must
+  have returned \texttt{NULL}.
+
+  Another way to see this is to rewrie the function so as to force the
+  final expression to return its result \emph{visibly} to the console.
+  This is done by placing parentheses arund the expression, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  (}\KeywordTok{cat}\NormalTok{(}\StringTok{"We have "}\NormalTok{, n, }\StringTok{" dogs.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Now let's call the functon:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{f}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## We have 4 dogs.
+\end{verbatim}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+  Yep, there's \texttt{NULL}, visible in the Console!
+\item
+  Well, let's give it a try an see:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result <-}\StringTok{ }\KeywordTok{g}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Hello"
+\end{verbatim}
+
+  Sure enough, \texttt{g()} returns the value of the last expression
+  that it evaluates. In this case, it's the expression \texttt{"Hello"}.
+\item
+  Like all functions, \texttt{h()} returns the value of the final
+  expression that ti evaluates. Hence it will return three more than the
+  value it was given for \texttt{n}.
+\end{enumerate}
 
 \section{More About Arguments}\label{more-about-arguments}
 
@@ -6161,6 +6364,130 @@ parameter. Its first element does, however, serve as the default value:
 \begin{verbatim}
 ## blue
 \end{verbatim}
+
+\subsection{Practice Exercises}\label{practice-exercises-9}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Write a function called \texttt{addSix()} that adds six to any number
+  that is is given. The function should have a single parameter named
+  \texttt{x}, and the default value of \texttt{x} should be 5.
+\item
+  Tin Man wants to write a function called \texttt{addTenAndSquare()}
+  that takes any given number, adds ten to it and then squares the
+  result. For example, given 5 the function will return
+  \((5 + 10)^2 = 225\). He decides that input value shall be called
+  \texttt{n} and that the default value of \texttt{n} shall be 4. Here
+  is Tin Man's code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{addTenAndSquare <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  n <-}\StringTok{ }\DecValTok{4}
+\NormalTok{  (n }\OperatorTok{+}\StringTok{ }\DecValTok{10}\NormalTok{)}\OperatorTok{^}\DecValTok{2}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Has Tin Man accomplished what he set out to do? Why or hy not?
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-5}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's the function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{addSix <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{x =} \DecValTok{5}\NormalTok{) \{}
+\NormalTok{  x }\OperatorTok{+}\StringTok{ }\DecValTok{6}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Let's test it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{addSix}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{addSix}\NormalTok{(}\DataTypeTok{x =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16
+\end{verbatim}
+\item
+  Tin Man's function does not work correctly. Consider the following
+  calls:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{addTenAndSquare}\NormalTok{(}\DecValTok{2}\NormalTok{)  }\CommentTok{# should give (2 + 10)^ 2 = 144}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 196
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{addTenAndSquare}\NormalTok{(}\DecValTok{5}\NormalTok{)  }\CommentTok{# should give (5 + 10)^ 2 = 225}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 196
+\end{verbatim}
+
+  The function only returns \((4 + 10)^2\),no matter what it is given!
+  The problem is that \texttt{n} is set to 4 within the body of the
+  function. The correct way to define the function would be:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{addTenAndSquare <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{n =} \DecValTok{4}\NormalTok{) \{}
+\NormalTok{  (n }\OperatorTok{+}\StringTok{ }\DecValTok{10}\NormalTok{)}\OperatorTok{^}\DecValTok{2}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  This works correctly:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{addTenAndSquare}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 196
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{addTenAndSquare}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 144
+\end{verbatim}
+\end{enumerate}
 
 \section{Environments and Scope}\label{environments-and-scope}
 
@@ -6867,6 +7194,86 @@ This is a very good thing. It would be very confusing if assignment to a
 variable within a function were to ``change the values'' of
 variables---happening to have the same name---that were declared outside
 of the function's environment.
+
+\subsection{Practice Exercises}\label{practice-exercises-10}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Starting from a new R session and an empty Global Environment, I run
+  the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m <-}\StringTok{ }\DecValTok{5}
+\NormalTok{f <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  m <-}\StringTok{ }\DecValTok{10}
+\NormalTok{  a <-}\StringTok{ }\NormalTok{m }\OperatorTok{+}\StringTok{ }\DecValTok{5}
+\NormalTok{  n}\OperatorTok{^}\DecValTok{2}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  What two items are now in my Global Environment?
+\item
+  I then run the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g <-}\StringTok{ }\KeywordTok{f}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  What items are now in my Global Environment? What is the value of
+  \texttt{g}? What is the value of \texttt{m}?
+\item
+  When \texttt{f()} was called, a runtime environment was created for
+  it. By the time it got down to the line \texttt{n\^{}2}, what items
+  were in that environment, and what were their values?
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-6}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  There are now two items in the Global Environment:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{m}: its value is 5
+  \item
+    \texttt{f}, the fuunction I defined.
+  \end{itemize}
+\item
+  Now there are three items in the Global Environment:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{m}: its value is still 5. (The \texttt{m} in the runtime
+    environment is not in the ``scope'' of the Global Environment.)
+  \item
+    \texttt{f}, the fuunction I defined is still there.
+  \item
+    I also have \texttt{g}: its value is \(10^2 = 100\).
+  \end{itemize}
+\item
+  The items in the runtime environment were:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    the parameter \texttt{n}, with a value of 10;
+  \item
+    \texttt{m}, with a value of 10;
+  \item
+    \texttt{a}, with a value of 15.
+  \end{itemize}
+\end{enumerate}
 
 \section{A Note on Packages}\label{note-on-packages}
 
@@ -13047,7 +13454,7 @@ one-dimensional vector, you can do so:
 ## [24] 24
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-7}
+\subsection{Practice Exercises}\label{practice-exercises-11}
 
 Let's work with the following vector:
 
@@ -13418,7 +13825,7 @@ matrix with six rows and one column, is found as follows:
 In most applications people want the simpler vector structure, so they
 usually leave \texttt{drop} at its default value.
 
-\subsection{Practice Exercises}\label{practice-exercises-8}
+\subsection{Practice Exercises}\label{practice-exercises-12}
 
 In these exercises we'll work with the following matrix:
 
@@ -13766,7 +14173,7 @@ We can select elements from a matrix using a Boolean operator, too:
 
 Note that the result is an ordinary, one-dimensional vector.
 
-\subsection{Practice Exercises}\label{practice-exercises-9}
+\subsection{Practice Exercises}\label{practice-exercises-13}
 
 We'll work with the following three matrices:
 
@@ -14318,7 +14725,7 @@ considered important.
 We will think more about how to deal with factor variables later on,
 when we begin data analysis in earnest.
 
-\subsection{Practice Exercises}\label{practice-exercises-10}
+\subsection{Practice Exercises}\label{practice-exercises-14}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14341,7 +14748,7 @@ when we begin data analysis in earnest.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-3}
+Exercises}\label{solutions-to-the-practice-exercises-7}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14720,7 +15127,7 @@ The Boolean sub-setting expressions can be quite complex:
 ## 70 female     65 3_back
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-11}
+\subsection{Practice Exercises}\label{practice-exercises-15}
 
 We'll use the \texttt{CPS85} data frame from the \textbf{mosaicData}
 package. You should go ahead and load the package and then read about
@@ -15015,7 +15422,7 @@ would like people to be arranged from shortest to tallest. Then call:
 ## 57 1_front     64
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-12}
+\subsection{Practice Exercises}\label{practice-exercises-16}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15265,7 +15672,7 @@ the value \texttt{NULL}.
 ## [10] "enough_Sleep"    "sex"             "diff.ideal.act."
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-13}
+\subsection{Practice Exercises}\label{practice-exercises-17}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16402,7 +16809,7 @@ graph.
 \caption{Choropleth map of state populations in the U.S.}\label{fig:ggchoropleth}
 \end{figure}
 
-\subsection{Practice Exercises}\label{practice-exercises-14}
+\subsection{Practice Exercises}\label{practice-exercises-18}
 
 In each of the exercises below, consult the Help for the relevant data
 frame. (You'll need to identify variables by their names in the data
@@ -16414,7 +16821,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::SwimRecords}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-662-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-682-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -16432,7 +16839,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::KidsFeet}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-663-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-683-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -16450,7 +16857,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::Galton}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-664-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-684-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -17190,22 +17597,22 @@ in Figure \ref{fig:impbetterapproach}.
 In the exercises of this Chapter we will meet a case in which
 ``wrap-style'' facet-ing is quite useful.
 
-\subsection{Practice Exercises}\label{practice-exercises-15}
+\subsection{Practice Exercises}\label{practice-exercises-19}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   With \texttt{mosaicData::SwimRecords}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-670-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-690-1} \end{center}
 \item
   With \texttt{mosaicData::KidsFeet}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-671-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-691-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-672-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-692-1} \end{center}
 
   \textbf{Hint:} Make the call \texttt{geom\_point(alpha\ =\ 0.2)}. The
   \texttt{alpha} parameter has a default-value of 1. The lower you set
@@ -17217,11 +17624,11 @@ In the exercises of this Chapter we will meet a case in which
   for the boxes is set to \texttt{"burlywood"}. The x-location is mapped
   to \texttt{factor(smoke)}, rather than to \texttt{smoke}.
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-673-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-693-1} \end{center}
 \item
   With \texttt{mosaicData::Galton}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-674-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-694-1} \end{center}
 
   \textbf{Hint}: The fill of the density plot is set to
   \texttt{"burlywood"}. The rug is made of randomly jittered
@@ -17681,7 +18088,7 @@ Now try again (see Figure \ref{fig:firesetting3}) for the result.
 
 This works!
 
-\subsection{Practice Exercises}\label{practice-exercises-16}
+\subsection{Practice Exercises}\label{practice-exercises-20}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17689,20 +18096,20 @@ This works!
   With \texttt{mosaicData::KidsFeet}, make the following graph.
   (\textbf{Hint}: Use \texttt{plyr::mapvalues()}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-697-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-717-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph.
   (\textbf{Hint}: Use \texttt{cut()} to make age groups. The fill for
   the boxes is the ever-popular \texttt{"burlywood"}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-698-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-718-1} \end{center}
 \item
   With \texttt{mosaicData::Gestation}, make the following graph.
   (\textbf{Hint}: Use \texttt{!is.na()} to select the rows of
   \texttt{Gestation} where \texttt{smoke} is not \texttt{NA}. Then use
   \texttt{plyr::mapvalues()} on \texttt{smoke}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-699-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-719-1} \end{center}
 \end{enumerate}
 
 \subsection{Solutions to Practice
@@ -18039,7 +18446,7 @@ You can make an empty list, too:
 This is useful when you want to build up a list gradually, but you do
 not yet know what will go into it.
 
-\subsection{Practice Exercises}\label{practice-exercises-17}
+\subsection{Practice Exercises}\label{practice-exercises-21}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18072,7 +18479,7 @@ not yet know what will go into it.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-4}
+Exercises}\label{solutions-to-the-practice-exercises-8}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18227,7 +18634,7 @@ to be of the same type. In the competition between \texttt{double} and
 \texttt{character} types, \texttt{character} wins, so you end up with a
 vector of strings.
 
-\subsection{Practice Exercises}\label{practice-exercises-18}
+\subsection{Practice Exercises}\label{practice-exercises-22}
 
 These exercises involve the following list:
 
@@ -18261,7 +18668,7 @@ Observe that the second element of this list was NOT given a name.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-5}
+Exercises}\label{solutions-to-the-practice-exercises-9}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18974,7 +19381,7 @@ dedicated access/set functions---\texttt{names()} and \texttt{levels()}
 respectively. But keep in mind that you can access and set the values
 for \emph{any attribute at all} with the \texttt{attr()} function.
 
-\subsection{Practice Exercises}\label{practice-exercises-19}
+\subsection{Practice Exercises}\label{practice-exercises-23}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -25291,7 +25698,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1202b6ac8"
+## [1] "0x115b300f8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -25305,7 +25712,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1202b6ac8"
+## [1] "0x115b300f8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -25344,7 +25751,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1202b6ac8"
+## [1] "0x115b300f8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -25357,7 +25764,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x140a44438"
+## [1] "0x11fedbc88"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -25375,7 +25782,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1202b6ac8"
+## [1] "0x115b300f8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -25419,7 +25826,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b4d6870" "0x13b4d6870"
+## [1] "0x11f1d2878" "0x11f1d2878"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -25458,7 +25865,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b4d6870" "0x13b4d6870"
+## [1] "0x11f1d2878" "0x11f1d2878"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -25500,7 +25907,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13b4d6870" "0x121467278"
+## [1] "0x11f1d2878" "0x1312c6660"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

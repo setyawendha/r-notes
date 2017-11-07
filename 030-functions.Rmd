@@ -186,6 +186,47 @@ manyCat
 
 What's printed to the screen is the code that defines the function.  The function itself is not called.
 
+### Practice Exercises
+
+Consider the following function:
+
+```{r}
+addThree <- function(n) {
+  n +3
+}
+```
+
+It adds three to any number you give it.  Try it out:
+
+```{r}
+addThree(n = 7)
+```
+
+1. What, if anything, is wrong with the following code?
+
+    ```{r eval = FALSE}
+    addThree(7)
+    ```
+    
+2. What, if anything, is wrong with the following code?
+
+    ```{r eval = FALSE}
+    addThree(n = 7, x = 5)
+    ```
+    
+3. I'd like to add 3 to the number 15.  What, if anything, is wrong with the following code?
+
+    ```{r eval = FALSE}
+    addThree[15]
+    ```
+
+### Solutions to the Practice Exercises
+
+1.  Nothing is wrong.  You'll get a result of 10.  You don't have to use the parameter name `n` when you call the function:  R will figure out that you mean `n` to be 7.
+
+2. There will be an error, because when the function was defined there was no parameter `x`.  You can only give a function arguments for parameters that were included in its definition.
+
+3. `addThree` is a function.  The way you call it is to use parentheses around the arguments, like this:  `addThree(15)`.  When you use brackets R will assume that you are trying to pick the third element out of a vector named `addThree`.  When it can't find such a vector, R will throw an error notifying you of that fact.
 
 ## What a Function Returns
 
@@ -335,7 +376,7 @@ grumpySquare <- function(x) {
 grumpySquare(4)
 ```
 
-When R executes a call to `print()` it is forced to print something out to the console, even if it is in the midst of evaluating expressions in a function.  The `print`-statement is not involved in what the function returns---that's all up to the expression `x^2`---but it does cause a result *outside of the function itself*.  Any external result produced by a function (other than what the function returns) is called a *side-effect* \index{side-effect}of the function.  `cat()` and `print()` are examples of functions that, when called inside of some other function, produce side-effects.
+When R executes a call to `print()` it is forced to print something out to the console, even if it is in the midst of evaluating expressions in a function.  The `print`-statement is not involved in what the function returns---that's all up to the final expression, the `x^2`---but it does cause a result *outside of the function itself*.  Any external result produced by a function (other than what the function returns) is called a *side-effect* \index{side-effect}of the function.  `cat()` and `print()` are examples of functions that, when called inside of some other function, produce side-effects.
 
 You should know that in R you have been calling the `print()` function quite a bit, without even knowing it.  Consider the following line of code:
 
@@ -347,10 +388,77 @@ R evaluates the expression `2+2`, arriving at the value 4.  But what makes the `
 
 >`print(2+2)`
 
-That's what got the 4 into the console!
+That's what got the 4 into the console!  The fact is that whenever you make R evaluate an expression at "top level" (i.e., when you type the epxression into the Console) then R will call `print()` to put the value of the expression into the Console so you can see it.
 
 At this point we don't use `print()` explicitly very much---we just rely on R to call it for us when we are evaluating expressions at the console.  Later on we will find that it has other uses.^[R is one of very few major programming languages that engage in behind-the-scenes calls to a print function.  In many other languages you have to call its print-function explicitly if you want the value of an expression to be displayed.]
 
+### Practice Exercises
+
+1.  What, if anything, does the following function return?
+
+    ```{r}
+    f <- function(n) {
+      cat("We have ", n, " dogs.\n", sep = "")
+    }
+    ```
+    
+2. What, if anything, does the following function return?
+
+    ```{r}
+    g <- function(n) {
+      n + 3
+      "Hello"
+    }
+    ```
+    
+3. What, if anything, does the following function return?
+
+    ```{r}
+    h <- function(n) {
+      "Hello"
+      n +3
+    }
+    ```
+
+### Solutions to the Practice Exercises
+
+1. Like any function, `f()` returns the value of the last expression that it evaluates.  This time the final (and only) expression is the call to `cat()`.  But what does `cat()` return?  It turns out that `cat()` always returns `NULL`.  You can see this in a couple of ways.  One way is to store the result of a call to `f()` in a variable, and then print the variable:
+
+    ```{r}
+    result <- f(4)
+    result
+    ```
+    
+    `result` got the value returned by the call `f(4)`.  `result` turned out to be 4.  Hence the call `f(4)` must have returned `NULL`.
+    
+    Another way to see this is to rewrie the function so as to force the final expression to return its result *visibly* to the console.  This is done by placing parentheses arund the expression, like this:
+    
+    ````{r}
+    f <- function(n) {
+      (cat("We have ", n, " dogs.\n", sep = ""))
+    }
+    ```
+    
+    Now let's call the functon:
+    
+    ```{r}
+    f(4)
+    ```
+    
+    Yep, there's `NULL`, visible in the Console!
+    
+2.  Well, let's give it a try an see:
+
+    ```{r}
+    result <- g(4)
+    result
+    ```
+    
+    Sure enough, `g()` returns the value of the last expression that it evaluates.  In this case, it's the expression `"Hello"`.
+   
+3.  Like all functions, `h()` returns the value of the final expression that ti evaluates.  Hence it will return three more than the value it was given for `n`.
+   
+   
 ## More About Arguments
 
 ### Default Arguments {#default-arguments}
@@ -509,6 +617,60 @@ Note that the default vector isn't really a default *value* for the parameter.  
 favColorReport()  # defaults to "Munchkin"
 ```
 
+### Practice Exercises
+
+1.  Write a function called `addSix()` that adds six to any number that is is given.  The function should have a single parameter named `x`, and the default value of `x` should be 5.
+
+2.  Tin Man wants to write a function called `addTenAndSquare()` that takes any given number, adds ten to it and then squares the result.  For example, given 5 the function will return $(5 + 10)^2 = 225$.  He decides that input value shall be called `n` and that the default value of `n` shall be 4.  Here is Tin Man's code:
+
+    ```{r}
+    addTenAndSquare <- function(n) {
+      n <- 4
+      (n + 10)^2
+    }
+    ```
+    
+    Has Tin Man accomplished what he set out to do?  Why or hy not?
+
+
+### Solutions to the Practice Exercises
+
+1. Here's the function:
+
+    ```{r}
+    addSix <- function(x = 5) {
+      x + 6
+    }
+    ```
+    
+    Let's test it:
+
+    ```{r}
+    addSix()
+    addSix(x = 10)
+    ```    
+    
+2.  Tin Man's function does not work correctly.  Consider the following calls:
+
+    ```{r}
+    addTenAndSquare(2)  # should give (2 + 10)^ 2 = 144
+    addTenAndSquare(5)  # should give (5 + 10)^ 2 = 225
+    ```
+    
+    The function only returns $(4 + 10)^2$,no matter what it is given!  The problem is that `n` is set to 4 within the body of the function.  The correct way to define the function would be:
+    
+    ```{r}
+    addTenAndSquare <- function(n = 4) {
+      (n + 10)^2
+    }
+    ```
+    
+    This works correctly:
+    
+    ```{r}
+    addTenAndSquare()
+    addTenAndSquare(2)
+    ```
 
 ## Environments and Scope
 
@@ -663,8 +825,6 @@ rm(cat)
 The vector `cat` is removed as well by the previous command.
 
 ### A Note on Parameters vs. Arguments
-
-
 
 It's important to keep in mind the distinction between a *parameter* of a function on the one hand and, on the other hand the *argument* that gets supplied to that parameter.
 
@@ -844,6 +1004,47 @@ a
 Nope, `a` is still 10.  
 
 This is a very good thing.  It would be very confusing if assignment to a variable within a function were to "change the values" of variables---happening to have the same name---that were declared outside of the function's environment.
+
+### Practice Exercises
+
+1. Starting from a new R session and an empty Global Environment, I run the following code:
+
+    ```{r}
+    m <- 5
+    f <- function(n) {
+      m <- 10
+      a <- m + 5
+      n^2
+    }
+    ```
+    
+    What two items are now in my Global Environment?
+    
+2. I then run the following code:
+    
+    ```{r eval = FALSE}
+    g <- f(10)
+    ```
+    
+    What items are now in my Global Environment?  What is the value of `g`?  What is the value of `m`?
+    
+3. When `f()` was called, a runtime environment was created for it.  By the time it got down to the line `n^2`, what items were in that environment, and what were their values?
+
+### Solutions to the Practice Exercises
+
+1.  There are now two items in the Global Environment:
+    * `m`:  its value is 5
+    * `f`, the fuunction I defined.
+
+2. Now there are three items in the Global Environment:
+    * `m`:  its value is still 5.  (The `m` in the runtime environment is not in the "scope" of the Global Environment.)
+    * `f`, the fuunction I defined is still there.
+    * I also have `g`:  its value is $10^2 = 100$.
+    
+3. The items in the runtime environment were:
+    * the parameter `n`, with a value of 10;
+    * `m`, with a value of 10;
+    * `a`, with a value of 15.
 
 ## A Note on Packages {#note-on-packages}
 
