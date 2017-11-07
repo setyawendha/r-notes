@@ -183,7 +183,7 @@ Figure \@ref(fig:ggfastesthistogramrug) is a variant, containing a second type o
 
 ```{r ggfastesthistogramrug, cache=TRUE, echo =FALSE, fig.cap = "Histogram of the fastest speed ever driven.", message=FALSE}
 n <- nrow(m111survey)
-m111survey$jitteredSpeeds <- m111survey$fastest + runif(n, 0, 2)
+m111survey$jitteredSpeeds <- m111survey$fastest + runif(n, -1, 1)
 ggplot(m111survey, aes(x = fastest)) + 
   geom_histogram(fill = "burlywood") +
   geom_rug(aes(x = jitteredSpeeds)) +
@@ -197,7 +197,7 @@ One may also study the distribution of numerical variable with a *density plot*,
 
 ```{r ggdensityfastest, cache=TRUE, echo=FALSE, fig.cap="Density plot of the fastest speed ever driven."}
 n <- nrow(m111survey)
-m111survey$jitteredSpeeds <- m111survey$fastest + runif(n, 0, 2)
+m111survey$jitteredSpeeds <- m111survey$fastest + runif(n, -1, 1)
 ggplot(m111survey, aes(x = fastest)) + 
   geom_density(fill = "burlywood") +
   geom_rug(aes(x = jitteredSpeeds)) +
@@ -361,7 +361,7 @@ In each of the exercises below, consult the Help for the relevant data frame.  (
 
     ```{r cache=TRUE, echo=FALSE}
     data("Galton", package = "mosaicData")
-    jitteredFather <- Galton$father + runif(nrow(Galton), 0, 0.5)
+    jitteredFather <- Galton$father + runif(nrow(Galton), -0.5, 0.5)
     Galton$jitteredFather <- jitteredFather
     ggplot(mosaicData::Galton, aes(x = father)) +
       geom_density(fill = "burlywood") +
@@ -612,7 +612,7 @@ It would be nice to solve the problem by jittering the rug-ticks, but unfortunat
 
 ```{r impdensityfastest, cache=TRUE, fig.cap="Density plot of the fastest speed ever driven.  Rug glyphs are jittered."}
 n <- nrow(m111survey)
-m111survey$jitteredSpeeds <- m111survey$fastest + runif(n, 0, 2)
+m111survey$jitteredSpeeds <- m111survey$fastest + runif(n, -1, 1)
 ggplot(m111survey, aes(x = fastest)) + 
   geom_density(fill = "burlywood") +
   geom_rug(aes(x = jitteredSpeeds)) +
@@ -765,7 +765,7 @@ In the exercises of this Chapter we will meet a case in which "wrap-style" facet
 
     ```{r cache=TRUE, echo=FALSE}
     data("Galton", package = "mosaicData")
-    jitteredFather <- Galton$father + runif(nrow(Galton), 0, 0.5)
+    jitteredFather <- Galton$father + runif(nrow(Galton), -0.5, 0.5)
     Galton$jitteredFather <- jitteredFather
     ggplot(mosaicData::Galton, aes(x = father)) +
       geom_density(fill = "burlywood") +
@@ -826,7 +826,7 @@ In the exercises of this Chapter we will meet a case in which "wrap-style" facet
     Now make the points:
     
     ````{r eval=FALSE}
-    jitteredFather <- Galton$father + runif(nrow(Galton), 0, 0.5)
+    jitteredFather <- Galton$father + runif(nrow(Galton), -0.5, 0.5)
     Galton$jitteredFather <- jitteredFather
     ```
     
