@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-07}
+  \date{2017-11-08}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -6674,7 +6674,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x112052a38>
+## <bytecode: 0x10bd55978>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -7682,12 +7682,10 @@ will learn how flow control is implemented in R.
 
 \newpage
 
-\section{Prologue: Prompting the
-User}\label{prologue-prompting-the-user}
+\section{Prompting the User}\label{prompting-the-user}
 
-Before we get started with flow control itself, let's address the
-question of how we might extract information from someone who runs our
-our code.
+One way to control the flow of a program is to arrange for it to pause
+and await information from the user who runs it.
 
 Up to this point any information that we have wanted to process has had
 to be entered into the code itself. For example, if we want to print out
@@ -7748,11 +7746,51 @@ this for you:
 ## The sum is:  25
 \end{verbatim}
 
+\subsection{Practice Exercises}\label{practice-exercises-11}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Try out the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pet <-}\StringTok{ }\KeywordTok{readline}\NormalTok{(}\StringTok{"Enter the name of your pet: "}\NormalTok{)}
+\NormalTok{type <-}\StringTok{ }\KeywordTok{readline}\NormalTok{(}\StringTok{"What kind of animal is it? (Dog, cat, etc.): "}\NormalTok{)}
+\KeywordTok{cat}\NormalTok{(pet, }\StringTok{" is a "}\NormalTok{, type, }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \textbf{Important}: Run the lines \emph{at at a time}, not all three
+  at once. R will stop after the first line, waiting for your answer. If
+  you try to run line 2 along with the \texttt{pet} line, then line 2
+  will become your attempted input for \texttt{pet}, resulting in an
+  error.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-7}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's one possible outcome in the Console:
+
+\begin{verbatim}
+> pet <- readline("Enter the name of your pet: ")
+Enter the name of your pet: Bo
+> type <- readline("What kind of animal is it? (Dog, cat, etc.): ")
+What kind of animal is it? (Dog, cat, etc.): dog
+> cat(pet, " is a ", type, ".\n", sep = "")
+Bo is a dog.
+\end{verbatim}
+\end{enumerate}
+
 \section{Making Decisions:
 Conditionals}\label{making-decisions-conditionals}
 
-We are now ready to begin addressing flow control itself. We'll begin by
-looking at the various facilities R has for making decisions.
+Another type of flow control involves determining \emph{which parts} of
+the program to execute, depending upon certain conditions.
 
 \subsection{If Statements}\label{if-statements}
 
@@ -8226,6 +8264,178 @@ argument. (It should NOT have a name.) Thus:
 \begin{verbatim}
 ## [1] "not a weekday!"
 \end{verbatim}
+
+\subsection{Practice Exercises}\label{practice-exercises-12}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Consider the following function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{computeSquare <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  x}\OperatorTok{^}\DecValTok{2}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Write a ``talky'' version of the above function that returns the
+  square invisibly.. It should be called \texttt{computeSquare2()} and
+  should take two parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{x}: the number to be squared
+  \item
+    \texttt{verbose}: whether or not to \texttt{cat()} out a report to
+    the Console.
+  \end{itemize}
+
+  Typical examples of use would be:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{computeSquare2}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## The square of 4 is 16.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mySquare <-}\StringTok{ }\KeywordTok{computeSquare2}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{mySquare}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 36
+\end{verbatim}
+\item
+  Write a function called \texttt{findKarl()} that takes a character
+  vector and returns a character vector that reports whether or not each
+  element of the given vector was equal to the string \texttt{"Karl"}.
+  It should work like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vec1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"three"}\NormalTok{, }\StringTok{"blowfish"}\NormalTok{, }\StringTok{"Karl"}\NormalTok{, }\StringTok{"Grindel"}\NormalTok{)}
+\KeywordTok{findKarl}\NormalTok{(vec1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Sorry, not our guy." "Sorry, not our guy." "Yep, that's Karl!"  
+## [4] "Sorry, not our guy."
+\end{verbatim}
+\item
+  Here's a function that is supposed to return \texttt{"small!"} when
+  given a number less than 100, and return \texttt{"big!"} when the
+  number if at least 100:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sizeComment <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \ControlFlowTok{if}\NormalTok{ ( x }\OperatorTok{<}\StringTok{ }\DecValTok{100}\NormalTok{ ) \{}
+    \StringTok{"small!"}
+\NormalTok{  \}}
+  \StringTok{"big!"}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  But it doesn't work:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sizeComment}\NormalTok{(}\DecValTok{200}\NormalTok{)  }\CommentTok{# this will br OK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "big!"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sizeComment}\NormalTok{(}\DecValTok{50}\NormalTok{)   }\CommentTok{# this won't be OK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "big!"
+\end{verbatim}
+
+  Fix the code.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-4}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's the desired function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{computeSquare2 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, }\DataTypeTok{verbose =} \OtherTok{TRUE}\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{ ( verbose ) \{}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"The square of "}\NormalTok{, x, }\StringTok{" is "}\NormalTok{, x}\OperatorTok{^}\DecValTok{2}\NormalTok{, }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  \}}
+  \KeywordTok{invisible}\NormalTok{(x}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's one way to write it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{findKarl <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{==}\StringTok{ "Karl"}\NormalTok{,}
+         \StringTok{"Yep, that's Karl!"}\NormalTok{,}
+         \StringTok{"Sorry, not our guy."}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  A function always returns the value of the last expression that it
+  evaluates. As it stands, the function will always end at the line
+  \texttt{"big!"}, so \texttt{"big"} will always be returned. One way to
+  get the desired behavior is to force the function to stop executing
+  once it prints out \texttt{"small!"}. You can do this with the
+  \texttt{return()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sizeComment <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \ControlFlowTok{if}\NormalTok{ ( x }\OperatorTok{<}\StringTok{ }\DecValTok{100}\NormalTok{ ) \{}
+    \KeywordTok{return}\NormalTok{(}\StringTok{"small!"}\NormalTok{)}
+\NormalTok{  \}}
+  \StringTok{"big!"}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Another way is to use the \texttt{if\ ...\ else} construction:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sizeComment <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \ControlFlowTok{if}\NormalTok{ ( x }\OperatorTok{<}\StringTok{ }\DecValTok{100}\NormalTok{ ) \{}
+    \StringTok{"small!"}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \StringTok{"big!"}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \section{Repeating Things: Looping}\label{repeating-things-looping}
 
@@ -8901,8 +9111,283 @@ never executed.
     \KeywordTok{return}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
 \NormalTok{  \}}
 \NormalTok{\}}
+
+\NormalTok{cheerleader <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(cheer) \{}
+  \ControlFlowTok{for}\NormalTok{ ( letter }\ControlFlowTok{in}\NormalTok{ cheer ) \{}
+    \ControlFlowTok{repeat}\NormalTok{ \{}
+\NormalTok{      call <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"Gimme a "}\NormalTok{, letter, }\StringTok{"!  "}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{      response <-}\StringTok{ }\KeywordTok{readline}\NormalTok{(call)}
+      \ControlFlowTok{if}\NormalTok{ ( response }\OperatorTok{==}\StringTok{ }\NormalTok{letter ) }\ControlFlowTok{break}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
+
+\subsection{Practice Problems}\label{practice-problems}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  You want to compute the square roots of the whole numbers from 1 to
+  10. You could do this quite easily as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751
+##  [8] 2.828427 3.000000 3.162278
+\end{verbatim}
+
+  However, you want to practice using \texttt{for}-loops. Write a small
+  program that uses a loop to compute the square roots of the whole
+  numbers from 1 to 10.
+\item
+  Think about the practice problem \texttt{findKarl()} from the previous
+  section. Write a new version that uses a loop.
+\item
+  You want to append \texttt{"the\ Dog"} to the end of each element of a
+  character vector of dog-names. Sadly, you have not yet realized that
+  the \texttt{paste()} function is very much up to the task:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{doggies <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Bo"}\NormalTok{, }\StringTok{"Gracie"}\NormalTok{, }\StringTok{"Rover"}\NormalTok{, }\StringTok{"Anya"}\NormalTok{)}
+\KeywordTok{paste}\NormalTok{(doggies, }\StringTok{"the Dog"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Bo the Dog"     "Gracie the Dog" "Rover the Dog"  "Anya the Dog"
+\end{verbatim}
+
+  You decide to use a \texttt{for}-loop. Write the code.
+\item
+  Write a function called \texttt{triangleOfStars()} that produces
+  patterns liks this:
+
+\begin{verbatim}
+****
+***
+**
+*
+\end{verbatim}
+
+  It should take a single parameter \texttt{n}, the number of asterisks
+  in the first ``line'' of the triangle. Use a \texttt{for}-loop in the
+  body of the function.
+\item
+  Rewrite \texttt{triangleOfStars()} so that it uses a
+  \texttt{while}-loop in its body.
+\item
+  Rewrite \texttt{triangleOfStars()} so that it still uses a
+  \texttt{while}-loop in its body, but produces output like this:
+
+\begin{verbatim}
+*
+**
+***
+****
+*****
+\end{verbatim}
+\item
+  Write a function called \texttt{cheerleader()} that badgers you for
+  each of the letters in a word until you give it all of the letters,
+  one by one. It should work like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{schoolMascot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"T"}\NormalTok{, }\StringTok{"I"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"E"}\NormalTok{, }\StringTok{"R"}\NormalTok{, }\StringTok{"S"}\NormalTok{)}
+\KeywordTok{cheerleader}\NormalTok{(}\DataTypeTok{cheer =}\NormalTok{ schoolMascot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+> cheerleader(cheer = schoolMascot)
+Gimme a T!  T
+Gimme a I!  i
+Gimme a I!  I
+Gimme a G!  gee
+Gimme a G!  I said gee!!
+Gimme a G!  G
+Gimme a E!  E
+Gimme a R!  Are you going to do this all day?
+Gimme a R!  R
+Gimme a S!  Stop it, please!
+Gimme a S!  S
+> 
+\end{verbatim}
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-8}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's a suitable program:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{roots <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{ ) \{}
+\NormalTok{  roots[i] <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(i)}
+\NormalTok{\}}
+\NormalTok{roots}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751
+##  [8] 2.828427 3.000000 3.162278
+\end{verbatim}
+\item
+  You could do this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{findKarl <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  results <-}\StringTok{ }\KeywordTok{character}\NormalTok{(}\KeywordTok{length}\NormalTok{(x))}
+  \ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\StringTok{ }\KeywordTok{length}\NormalTok{(x) ) \{}
+    \ControlFlowTok{if}\NormalTok{ ( x[i] }\OperatorTok{==}\StringTok{ "Karl"}\NormalTok{ ) \{}
+\NormalTok{      results[i] <-}\StringTok{ "Yep, that's Karl!"}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      results[i] <-}\StringTok{  "Sorry, not our guy."}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  results}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here you go:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{doggies <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Bo"}\NormalTok{, }\StringTok{"Gracie"}\NormalTok{, }\StringTok{"Rover"}\NormalTok{, }\StringTok{"Anya"}\NormalTok{)}
+\NormalTok{titledDoggies <-}\StringTok{ }\KeywordTok{character}\NormalTok{(}\KeywordTok{length}\NormalTok{(doggies))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(doggies) ) \{}
+\NormalTok{  titledDoggies[i] <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(doggies[i], }\StringTok{"the Dog"}\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{titledDoggies}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Bo the Dog"     "Gracie the Dog" "Rover the Dog"  "Anya the Dog"
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{triangleofStars <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+  \ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n ) \{}
+\NormalTok{    line <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\StringTok{"*"}\NormalTok{, }\DataTypeTok{times =}\NormalTok{ i)}
+    \KeywordTok{cat}\NormalTok{(line, }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{triangleofStars}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## *
+## **
+## ***
+## ****
+## *****
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{triangleofStars <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+  \ControlFlowTok{while}\NormalTok{ ( n }\OperatorTok{>=}\StringTok{ }\DecValTok{1}\NormalTok{ ) \{}
+\NormalTok{    line <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\StringTok{"*"}\NormalTok{, }\DataTypeTok{times =}\NormalTok{ n)}
+    \KeywordTok{cat}\NormalTok{(line, }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{    n <-}\StringTok{ }\NormalTok{n }\OperatorTok{-}\StringTok{ }\DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{triangleofStars}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## *****
+## ****
+## ***
+## **
+## *
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{triangleofStars <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  m <-}\StringTok{ }\DecValTok{1}
+  \ControlFlowTok{while}\NormalTok{ ( m }\OperatorTok{<=}\StringTok{ }\NormalTok{n ) \{}
+\NormalTok{    line <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\StringTok{"*"}\NormalTok{, }\DataTypeTok{times =}\NormalTok{ m)}
+    \KeywordTok{cat}\NormalTok{(line, }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{    m <-}\StringTok{ }\NormalTok{m }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{triangleofStars}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## *
+## **
+## ***
+## ****
+## *****
+\end{verbatim}
+\item
+  Here is the requested annoying function, using a \texttt{repeat}-loop
+  with \texttt{break} inside a \texttt{for}-loop:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cheerleader <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(cheer) \{}
+  \ControlFlowTok{for}\NormalTok{ ( letter }\ControlFlowTok{in}\NormalTok{ cheer ) \{}
+    \ControlFlowTok{repeat}\NormalTok{ \{}
+\NormalTok{      call <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"Gimme a "}\NormalTok{, letter, }\StringTok{"!  "}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{      response <-}\StringTok{ }\KeywordTok{readline}\NormalTok{(call)}
+      \ControlFlowTok{if}\NormalTok{ ( response }\OperatorTok{==}\StringTok{ }\NormalTok{letter ) }\ControlFlowTok{break}
+\NormalTok{   \}}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \section{Application: The Collatz Conjecture}\label{collatz-conjecture}
 
@@ -13454,7 +13939,7 @@ one-dimensional vector, you can do so:
 ## [24] 24
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-11}
+\subsection{Practice Exercises}\label{practice-exercises-13}
 
 Let's work with the following vector:
 
@@ -13542,7 +14027,7 @@ Let's work with the following vector:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-4}
+Exercises}\label{solutions-to-practice-exercises-5}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -13825,7 +14310,7 @@ matrix with six rows and one column, is found as follows:
 In most applications people want the simpler vector structure, so they
 usually leave \texttt{drop} at its default value.
 
-\subsection{Practice Exercises}\label{practice-exercises-12}
+\subsection{Practice Exercises}\label{practice-exercises-14}
 
 In these exercises we'll work with the following matrix:
 
@@ -13914,7 +14399,7 @@ In these exercises we'll work with the following matrix:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-5}
+Exercises}\label{solutions-to-practice-exercises-6}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14173,7 +14658,7 @@ We can select elements from a matrix using a Boolean operator, too:
 
 Note that the result is an ordinary, one-dimensional vector.
 
-\subsection{Practice Exercises}\label{practice-exercises-13}
+\subsection{Practice Exercises}\label{practice-exercises-15}
 
 We'll work with the following three matrices:
 
@@ -14282,7 +14767,7 @@ We'll work with the following three matrices:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-6}
+Exercises}\label{solutions-to-practice-exercises-7}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14725,7 +15210,7 @@ considered important.
 We will think more about how to deal with factor variables later on,
 when we begin data analysis in earnest.
 
-\subsection{Practice Exercises}\label{practice-exercises-14}
+\subsection{Practice Exercises}\label{practice-exercises-16}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14748,7 +15233,7 @@ when we begin data analysis in earnest.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-7}
+Exercises}\label{solutions-to-the-practice-exercises-9}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15127,7 +15612,7 @@ The Boolean sub-setting expressions can be quite complex:
 ## 70 female     65 3_back
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-15}
+\subsection{Practice Exercises}\label{practice-exercises-17}
 
 We'll use the \texttt{CPS85} data frame from the \textbf{mosaicData}
 package. You should go ahead and load the package and then read about
@@ -15168,7 +15653,7 @@ Each row in the data frame corresponds to an employee in the survey.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-7}
+Exercises}\label{solutions-to-practice-exercises-8}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15422,7 +15907,7 @@ would like people to be arranged from shortest to tallest. Then call:
 ## 57 1_front     64
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-16}
+\subsection{Practice Exercises}\label{practice-exercises-18}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15470,7 +15955,7 @@ would like people to be arranged from shortest to tallest. Then call:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-8}
+Exercises}\label{solutions-to-practice-exercises-9}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15672,7 +16157,7 @@ the value \texttt{NULL}.
 ## [10] "enough_Sleep"    "sex"             "diff.ideal.act."
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-17}
+\subsection{Practice Exercises}\label{practice-exercises-19}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15717,7 +16202,7 @@ the value \texttt{NULL}.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-9}
+Exercises}\label{solutions-to-practice-exercises-10}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16809,7 +17294,7 @@ graph.
 \caption{Choropleth map of state populations in the U.S.}\label{fig:ggchoropleth}
 \end{figure}
 
-\subsection{Practice Exercises}\label{practice-exercises-18}
+\subsection{Practice Exercises}\label{practice-exercises-20}
 
 In each of the exercises below, consult the Help for the relevant data
 frame. (You'll need to identify variables by their names in the data
@@ -16821,7 +17306,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::SwimRecords}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-682-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-706-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -16839,7 +17324,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::KidsFeet}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-683-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-707-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -16857,7 +17342,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::Galton}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-684-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-708-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -16874,7 +17359,7 @@ frame when you discuss aesthetic mappings.)
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-10}
+Exercises}\label{solutions-to-practice-exercises-11}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17597,22 +18082,22 @@ in Figure \ref{fig:impbetterapproach}.
 In the exercises of this Chapter we will meet a case in which
 ``wrap-style'' facet-ing is quite useful.
 
-\subsection{Practice Exercises}\label{practice-exercises-19}
+\subsection{Practice Exercises}\label{practice-exercises-21}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   With \texttt{mosaicData::SwimRecords}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-690-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-714-1} \end{center}
 \item
   With \texttt{mosaicData::KidsFeet}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-691-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-715-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-692-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-716-1} \end{center}
 
   \textbf{Hint:} Make the call \texttt{geom\_point(alpha\ =\ 0.2)}. The
   \texttt{alpha} parameter has a default-value of 1. The lower you set
@@ -17624,11 +18109,11 @@ In the exercises of this Chapter we will meet a case in which
   for the boxes is set to \texttt{"burlywood"}. The x-location is mapped
   to \texttt{factor(smoke)}, rather than to \texttt{smoke}.
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-693-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-717-1} \end{center}
 \item
   With \texttt{mosaicData::Galton}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-694-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-718-1} \end{center}
 
   \textbf{Hint}: The fill of the density plot is set to
   \texttt{"burlywood"}. The rug is made of randomly jittered
@@ -17636,7 +18121,7 @@ In the exercises of this Chapter we will meet a case in which
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-11}
+Exercises}\label{solutions-to-practice-exercises-12}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18088,7 +18573,7 @@ Now try again (see Figure \ref{fig:firesetting3}) for the result.
 
 This works!
 
-\subsection{Practice Exercises}\label{practice-exercises-20}
+\subsection{Practice Exercises}\label{practice-exercises-22}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18096,24 +18581,24 @@ This works!
   With \texttt{mosaicData::KidsFeet}, make the following graph.
   (\textbf{Hint}: Use \texttt{plyr::mapvalues()}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-717-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-741-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph.
   (\textbf{Hint}: Use \texttt{cut()} to make age groups. The fill for
   the boxes is the ever-popular \texttt{"burlywood"}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-718-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-742-1} \end{center}
 \item
   With \texttt{mosaicData::Gestation}, make the following graph.
   (\textbf{Hint}: Use \texttt{!is.na()} to select the rows of
   \texttt{Gestation} where \texttt{smoke} is not \texttt{NA}. Then use
   \texttt{plyr::mapvalues()} on \texttt{smoke}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-719-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-743-1} \end{center}
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-12}
+Exercises}\label{solutions-to-practice-exercises-13}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18446,7 +18931,7 @@ You can make an empty list, too:
 This is useful when you want to build up a list gradually, but you do
 not yet know what will go into it.
 
-\subsection{Practice Exercises}\label{practice-exercises-21}
+\subsection{Practice Exercises}\label{practice-exercises-23}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18479,7 +18964,7 @@ not yet know what will go into it.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-8}
+Exercises}\label{solutions-to-the-practice-exercises-10}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18634,7 +19119,7 @@ to be of the same type. In the competition between \texttt{double} and
 \texttt{character} types, \texttt{character} wins, so you end up with a
 vector of strings.
 
-\subsection{Practice Exercises}\label{practice-exercises-22}
+\subsection{Practice Exercises}\label{practice-exercises-24}
 
 These exercises involve the following list:
 
@@ -18668,7 +19153,7 @@ Observe that the second element of this list was NOT given a name.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-9}
+Exercises}\label{solutions-to-the-practice-exercises-11}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -19381,7 +19866,7 @@ dedicated access/set functions---\texttt{names()} and \texttt{levels()}
 respectively. But keep in mind that you can access and set the values
 for \emph{any attribute at all} with the \texttt{attr()} function.
 
-\subsection{Practice Exercises}\label{practice-exercises-23}
+\subsection{Practice Exercises}\label{practice-exercises-25}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -19411,7 +19896,7 @@ for \emph{any attribute at all} with the \texttt{attr()} function.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-13}
+Exercises}\label{solutions-to-practice-exercises-14}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -25698,7 +26183,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x113ee3b38"
+## [1] "0x122ebb068"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -25712,7 +26197,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x113ee3b38"
+## [1] "0x122ebb068"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -25751,7 +26236,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x113ee3b38"
+## [1] "0x122ebb068"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -25764,7 +26249,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1138e5b28"
+## [1] "0x11ab47188"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -25782,7 +26267,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x113ee3b38"
+## [1] "0x122ebb068"
 \end{verbatim}
 
 \begin{Shaded}
@@ -25826,7 +26311,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1415bc710" "0x1415bc710"
+## [1] "0x120f85630" "0x120f85630"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -25865,7 +26350,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1415bc710" "0x1415bc710"
+## [1] "0x120f85630" "0x120f85630"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -25907,7 +26392,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1415bc710" "0x11ab21238"
+## [1] "0x120f85630" "0x1283d9508"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

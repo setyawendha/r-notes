@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Beginning Computer Science with R</title>
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="github-repo" content="homerhanumat/r-notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  
+  <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  
+
+<meta name="author" content="Homer White">
+
+
+<meta name="date" content="2017-11-08">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="flow.html">
+<link rel="next" href="making-decisions-conditionals.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Beginning Computer Programming with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="the-why-of-these-notes-remarks-for-colleagues.html"><a href="the-why-of-these-notes-remarks-for-colleagues.html"><i class="fa fa-check"></i><b>0.1</b> The Why of these Notes: Remarks for Colleagues</a></li>
+<li class="chapter" data-level="0.2" data-path="history-of-r.html"><a href="history-of-r.html"><i class="fa fa-check"></i><b>0.2</b> History of R</a></li>
+<li class="chapter" data-level="0.3" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.4" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html"><i class="fa fa-check"></i><b>0.4</b> Miscellaneous Information</a><ul>
+<li class="chapter" data-level="0.4.1" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#typographical-conventions"><i class="fa fa-check"></i><b>0.4.1</b> Typographical Conventions</a></li>
+<li class="chapter" data-level="0.4.2" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#license"><i class="fa fa-check"></i><b>0.4.2</b> License</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="idea.html"><a href="idea.html"><i class="fa fa-check"></i><b>1</b> Our First Computer Programs</a><ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1.1</b> Hello, World!</a></li>
+<li class="chapter" data-level="1.2" data-path="idea-tour.html"><a href="idea-tour.html"><i class="fa fa-check"></i><b>1.2</b> A Quick Tour</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="idea-tour.html"><a href="idea-tour.html#idea-arithmetic"><i class="fa fa-check"></i><b>1.2.1</b> Basic Arithmetic</a></li>
+<li class="chapter" data-level="1.2.2" data-path="idea-tour.html"><a href="idea-tour.html#read-evaluate-print-loop"><i class="fa fa-check"></i><b>1.2.2</b> Read-Evaluate-Print-Loop</a></li>
+<li class="chapter" data-level="1.2.3" data-path="idea-tour.html"><a href="idea-tour.html#idea-variables"><i class="fa fa-check"></i><b>1.2.3</b> Variables</a></li>
+<li class="chapter" data-level="1.2.4" data-path="idea-tour.html"><a href="idea-tour.html#idea-functions"><i class="fa fa-check"></i><b>1.2.4</b> Functions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="idea-tour.html"><a href="idea-tour.html#idea-data"><i class="fa fa-check"></i><b>1.2.5</b> Data and Graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="idea-debugging.html"><a href="idea-debugging.html"><i class="fa fa-check"></i><b>1.3</b> Debugging</a></li>
+<li class="chapter" data-level="" data-path="idea-glossary.html"><a href="idea-glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="idea-exercises.html"><a href="idea-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html"><i class="fa fa-check"></i><b>2.1</b> What is a Vector?</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#types-of-atomic-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Types of Atomic Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#coercion"><i class="fa fa-check"></i><b>2.1.2</b> Coercion</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#combining-vectors"><i class="fa fa-check"></i><b>2.1.3</b> Combining Vectors</a></li>
+<li class="chapter" data-level="2.1.4" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#na-values"><i class="fa fa-check"></i><b>2.1.4</b> NA Values </a></li>
+<li class="chapter" data-level="2.1.5" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#everything-in-r-is-a-vector"><i class="fa fa-check"></i><b>2.1.5</b> “Everything in R is a Vector”</a></li>
+<li class="chapter" data-level="2.1.6" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#named-vectors"><i class="fa fa-check"></i><b>2.1.6</b> Named Vectors</a></li>
+<li class="chapter" data-level="2.1.7" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#special-character-vectors"><i class="fa fa-check"></i><b>2.1.7</b> Special Character Vectors</a></li>
+<li class="chapter" data-level="2.1.8" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#length-of-vectors"><i class="fa fa-check"></i><b>2.1.8</b> Length of Vectors</a></li>
+<li class="chapter" data-level="2.1.9" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#practice-exercises"><i class="fa fa-check"></i><b>2.1.9</b> Practice Exercises</a></li>
+<li class="chapter" data-level="2.1.10" data-path="what-is-a-vector.html"><a href="what-is-a-vector.html#solutions-to-practice-exercises"><i class="fa fa-check"></i><b>2.1.10</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html"><i class="fa fa-check"></i><b>2.2</b> Constructing Patterned Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#sequencing"><i class="fa fa-check"></i><b>2.2.1</b> Sequencing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#repeating"><i class="fa fa-check"></i><b>2.2.2</b> Repeating</a></li>
+<li class="chapter" data-level="2.2.3" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#practice-exercises-1"><i class="fa fa-check"></i><b>2.2.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="2.2.4" data-path="constructing-patterned-vectors.html"><a href="constructing-patterned-vectors.html#solutions-to-practice-exercises-1"><i class="fa fa-check"></i><b>2.2.4</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="subsetting-vectors.html"><a href="subsetting-vectors.html"><i class="fa fa-check"></i><b>2.3</b> Subsetting Vectors</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="subsetting-vectors.html"><a href="subsetting-vectors.html#practice-exercises-2"><i class="fa fa-check"></i><b>2.3.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="2.3.2" data-path="subsetting-vectors.html"><a href="subsetting-vectors.html#solutions-to-practice-exercises-2"><i class="fa fa-check"></i><b>2.3.2</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html"><i class="fa fa-check"></i><b>2.4</b> More on Logical Vectors</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="more-on-logical-vectors.html"><a href="more-on-logical-vectors.html#boolean-operators"><i class="fa fa-check"></i><b>2.4.1</b> Boolean Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="vector-recycling.html"><a href="vector-recycling.html"><i class="fa fa-check"></i><b>2.5</b> Vector Recycling </a><ul>
+<li class="chapter" data-level="2.5.1" data-path="vector-recycling.html"><a href="vector-recycling.html#practice-exercises-3"><i class="fa fa-check"></i><b>2.5.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="2.5.2" data-path="vector-recycling.html"><a href="vector-recycling.html#solutions-to-practice-exercises-3"><i class="fa fa-check"></i><b>2.5.2</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html"><i class="fa fa-check"></i><b>2.6</b> Subsetting with Logical Vectors</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#counting"><i class="fa fa-check"></i><b>2.6.1</b> Counting</a></li>
+<li class="chapter" data-level="2.6.2" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#cautions-about-na"><i class="fa fa-check"></i><b>2.6.2</b> Cautions about NA</a></li>
+<li class="chapter" data-level="2.6.3" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#which-any-all"><i class="fa fa-check"></i><b>2.6.3</b> Which, Any, All</a></li>
+<li class="chapter" data-level="2.6.4" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#practice-exercises-4"><i class="fa fa-check"></i><b>2.6.4</b> Practice Exercises</a></li>
+<li class="chapter" data-level="2.6.5" data-path="subsetting-with-logical-vectors.html"><a href="subsetting-with-logical-vectors.html#solutions-to-the-practice-exercises"><i class="fa fa-check"></i><b>2.6.5</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html"><i class="fa fa-check"></i><b>2.7</b> Basic Arithmetical Operations on Vectors</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#more-math-functions"><i class="fa fa-check"></i><b>2.7.1</b> More Math Functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#na-and-nan-considerations"><i class="fa fa-check"></i><b>2.7.2</b> NA and NaN Considerations</a></li>
+<li class="chapter" data-level="2.7.3" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#practice-exercises-5"><i class="fa fa-check"></i><b>2.7.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="2.7.4" data-path="basic-arithmetical-operations-on-vectors.html"><a href="basic-arithmetical-operations-on-vectors.html#solutions-to-the-practice-exercises-1"><i class="fa fa-check"></i><b>2.7.4</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html"><i class="fa fa-check"></i><b>2.8</b> Further Notes on Syntax</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#syntax-errors-vs.run-time-errors-vs.semantic-errors"><i class="fa fa-check"></i><b>2.8.1</b> Syntax Errors vs. Run-time Errors vs. Semantic Errors</a></li>
+<li class="chapter" data-level="2.8.2" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#the-assignment-operator"><i class="fa fa-check"></i><b>2.8.2</b> The Assignment Operator</a></li>
+<li class="chapter" data-level="2.8.3" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#multiple-expressions"><i class="fa fa-check"></i><b>2.8.3</b> Multiple Expressions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#variable-names-and-reserved-words"><i class="fa fa-check"></i><b>2.8.4</b> Variable Names and Reserved Words</a></li>
+<li class="chapter" data-level="2.8.5" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#practice-exercises-6"><i class="fa fa-check"></i><b>2.8.5</b> Practice Exercises</a></li>
+<li class="chapter" data-level="2.8.6" data-path="further-notes-on-syntax.html"><a href="further-notes-on-syntax.html#solutions-to-the-practice-exercises-2"><i class="fa fa-check"></i><b>2.8.6</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="motivation-for-functions.html"><a href="motivation-for-functions.html"><i class="fa fa-check"></i><b>3.1</b> Motivation for Functions</a></li>
+<li class="chapter" data-level="3.2" data-path="function-syntax.html"><a href="function-syntax.html"><i class="fa fa-check"></i><b>3.2</b> Function Syntax</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="function-syntax.html"><a href="function-syntax.html#practice-exercises-7"><i class="fa fa-check"></i><b>3.2.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="3.2.2" data-path="function-syntax.html"><a href="function-syntax.html#solutions-to-the-practice-exercises-3"><i class="fa fa-check"></i><b>3.2.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html"><i class="fa fa-check"></i><b>3.3</b> What a Function Returns</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-final-expression-evaluated"><i class="fa fa-check"></i><b>3.3.1</b> The Final Expression Evaluated</a></li>
+<li class="chapter" data-level="3.3.2" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-return-function"><i class="fa fa-check"></i><b>3.3.2</b> The <code>return()</code> Function</a></li>
+<li class="chapter" data-level="3.3.3" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#writing-a-talky-function"><i class="fa fa-check"></i><b>3.3.3</b> Writing a “Talky” Function</a></li>
+<li class="chapter" data-level="3.3.4" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#the-print-function"><i class="fa fa-check"></i><b>3.3.4</b> The <code>print()</code> Function</a></li>
+<li class="chapter" data-level="3.3.5" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#practice-exercises-8"><i class="fa fa-check"></i><b>3.3.5</b> Practice Exercises</a></li>
+<li class="chapter" data-level="3.3.6" data-path="what-a-function-returns.html"><a href="what-a-function-returns.html#solutions-to-the-practice-exercises-4"><i class="fa fa-check"></i><b>3.3.6</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="more-about-arguments.html"><a href="more-about-arguments.html"><i class="fa fa-check"></i><b>3.4</b> More About Arguments</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="more-about-arguments.html"><a href="more-about-arguments.html#default-arguments"><i class="fa fa-check"></i><b>3.4.1</b> Default Arguments</a></li>
+<li class="chapter" data-level="3.4.2" data-path="more-about-arguments.html"><a href="more-about-arguments.html#argument-matching"><i class="fa fa-check"></i><b>3.4.2</b> Argument-Matching</a></li>
+<li class="chapter" data-level="3.4.3" data-path="more-about-arguments.html"><a href="more-about-arguments.html#practice-exercises-9"><i class="fa fa-check"></i><b>3.4.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="3.4.4" data-path="more-about-arguments.html"><a href="more-about-arguments.html#solutions-to-the-practice-exercises-5"><i class="fa fa-check"></i><b>3.4.4</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html"><i class="fa fa-check"></i><b>3.5</b> Environments and Scope</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="environments-and-scope.html"><a href="environments-and-scope.html#environments-and-searching"><i class="fa fa-check"></i><b>3.5.1</b> Environments and Searching</a></li>
+<li class="chapter" data-level="3.5.2" data-path="environments-and-scope.html"><a href="environments-and-scope.html#a-note-on-parameters-vs.arguments"><i class="fa fa-check"></i><b>3.5.2</b> A Note on Parameters vs. Arguments</a></li>
+<li class="chapter" data-level="3.5.3" data-path="environments-and-scope.html"><a href="environments-and-scope.html#function-environments"><i class="fa fa-check"></i><b>3.5.3</b> Function Environments</a></li>
+<li class="chapter" data-level="3.5.4" data-path="environments-and-scope.html"><a href="environments-and-scope.html#practice-exercises-10"><i class="fa fa-check"></i><b>3.5.4</b> Practice Exercises</a></li>
+<li class="chapter" data-level="3.5.5" data-path="environments-and-scope.html"><a href="environments-and-scope.html#solutions-to-the-practice-exercises-6"><i class="fa fa-check"></i><b>3.5.5</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="note-on-packages.html"><a href="note-on-packages.html"><i class="fa fa-check"></i><b>3.6</b> A Note on Packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="note-on-packages.html"><a href="note-on-packages.html#installed-packages"><i class="fa fa-check"></i><b>3.6.1</b> Installed Packages</a></li>
+<li class="chapter" data-level="3.6.2" data-path="note-on-packages.html"><a href="note-on-packages.html#learning-about-a-package"><i class="fa fa-check"></i><b>3.6.2</b> Learning About a Package</a></li>
+<li class="chapter" data-level="3.6.3" data-path="note-on-packages.html"><a href="note-on-packages.html#installing-packages"><i class="fa fa-check"></i><b>3.6.3</b> Installing Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="more-to-learn.html"><a href="more-to-learn.html"><i class="fa fa-check"></i><b>3.7</b> More to Learn</a></li>
+<li class="chapter" data-level="" data-path="glossary-1.html"><a href="glossary-1.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="flow.html"><a href="flow.html"><i class="fa fa-check"></i><b>4</b> Flow-Control</a><ul>
+<li class="chapter" data-level="4.1" data-path="prompting-the-user.html"><a href="prompting-the-user.html"><i class="fa fa-check"></i><b>4.1</b> Prompting the User</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="prompting-the-user.html"><a href="prompting-the-user.html#practice-exercises-11"><i class="fa fa-check"></i><b>4.1.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="4.1.2" data-path="prompting-the-user.html"><a href="prompting-the-user.html#solutions-to-the-practice-exercises-7"><i class="fa fa-check"></i><b>4.1.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
+<li class="chapter" data-level="4.2.5" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#practice-exercises-12"><i class="fa fa-check"></i><b>4.2.5</b> Practice Exercises</a></li>
+<li class="chapter" data-level="4.2.6" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#solutions-to-practice-exercises-4"><i class="fa fa-check"></i><b>4.2.6</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
+<li class="chapter" data-level="4.3.2" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loop-caution"><i class="fa fa-check"></i><b>4.3.2</b> For-Loop Caution</a></li>
+<li class="chapter" data-level="4.3.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#breaking-out-of-a-loop"><i class="fa fa-check"></i><b>4.3.3</b> Breaking Out of a Loop</a></li>
+<li class="chapter" data-level="4.3.4" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#solving-the-empty-vector-problem-in-for-loops-with-seq_along"><i class="fa fa-check"></i><b>4.3.4</b> Solving the Empty-Vector Problem in <code>for</code>-Loops with <code>seq_along()</code></a></li>
+<li class="chapter" data-level="4.3.5" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#skipping-ahead-in-a-loop"><i class="fa fa-check"></i><b>4.3.5</b> Skipping Ahead in a Loop</a></li>
+<li class="chapter" data-level="4.3.6" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#repeat"><i class="fa fa-check"></i><b>4.3.6</b> Repeat</a></li>
+<li class="chapter" data-level="4.3.7" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#while"><i class="fa fa-check"></i><b>4.3.7</b> While</a></li>
+<li class="chapter" data-level="4.3.8" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#practice-problems"><i class="fa fa-check"></i><b>4.3.8</b> Practice Problems</a></li>
+<li class="chapter" data-level="4.3.9" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#solutions-to-the-practice-exercises-8"><i class="fa fa-check"></i><b>4.3.9</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="collatz-conjecture.html"><a href="collatz-conjecture.html"><i class="fa fa-check"></i><b>4.4</b> Application: The Collatz Conjecture</a></li>
+<li class="chapter" data-level="" data-path="glossary-2.html"><a href="glossary-2.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="turtle.html"><a href="turtle.html"><i class="fa fa-check"></i><b>5</b> Turtle Graphics</a><ul>
+<li class="chapter" data-level="5.1" data-path="basic-movements.html"><a href="basic-movements.html"><i class="fa fa-check"></i><b>5.1</b> Basic Movements</a></li>
+<li class="chapter" data-level="5.2" data-path="making-many-movements-an-introduction-to-looping.html"><a href="making-many-movements-an-introduction-to-looping.html"><i class="fa fa-check"></i><b>5.2</b> Making Many Movements: An Introduction to Looping</a></li>
+<li class="chapter" data-level="5.3" data-path="writing-turtle-functions.html"><a href="writing-turtle-functions.html"><i class="fa fa-check"></i><b>5.3</b> Writing Turtle Functions</a></li>
+<li class="chapter" data-level="5.4" data-path="random-moves.html"><a href="random-moves.html"><i class="fa fa-check"></i><b>5.4</b> Random Moves</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="random-moves.html"><a href="random-moves.html#sampling-from-a-vector"><i class="fa fa-check"></i><b>5.4.1</b> Sampling from a Vector</a></li>
+<li class="chapter" data-level="5.4.2" data-path="random-moves.html"><a href="random-moves.html#application-a-bouncing-turtle"><i class="fa fa-check"></i><b>5.4.2</b> Application: a Bouncing Turtle</a></li>
+<li class="chapter" data-level="5.4.3" data-path="random-moves.html"><a href="random-moves.html#uniform-random-numbers"><i class="fa fa-check"></i><b>5.4.3</b> Uniform Random Numbers</a></li>
+<li class="chapter" data-level="5.4.4" data-path="random-moves.html"><a href="random-moves.html#pseudo-randomness-and-setting-a-seed"><i class="fa fa-check"></i><b>5.4.4</b> Pseudo-Randomness and Setting a Seed</a></li>
+<li class="chapter" data-level="5.4.5" data-path="random-moves.html"><a href="random-moves.html#drunken-turtle-intro"><i class="fa fa-check"></i><b>5.4.5</b> Application: a Drunken Turtle</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="more-complex-turtle-graphs.html"><a href="more-complex-turtle-graphs.html"><i class="fa fa-check"></i><b>5.5</b> More Complex Turtle Graphs</a></li>
+<li class="chapter" data-level="" data-path="glossary-3.html"><a href="glossary-3.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>6</b> Simulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability-and-random-variables.html"><a href="probability-and-random-variables.html"><i class="fa fa-check"></i><b>6.1</b> Probability and Random Variables</a></li>
+<li class="chapter" data-level="6.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>6.2</b> Monte Carlo Simulation</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-a-probability"><i class="fa fa-check"></i><b>6.2.1</b> Estimating a Probability</a></li>
+<li class="chapter" data-level="6.2.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#estimating-an-expected-value"><i class="fa fa-check"></i><b>6.2.2</b> Estimating an Expected Value</a></li>
+<li class="chapter" data-level="6.2.3" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#the-law-of-large-numbers"><i class="fa fa-check"></i><b>6.2.3</b> The Law of Large Numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="triangle-chance.html"><a href="triangle-chance.html"><i class="fa fa-check"></i><b>6.3</b> Example: Chance of a Triangle</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="triangle-chance.html"><a href="triangle-chance.html#setting-a-seed"><i class="fa fa-check"></i><b>6.3.1</b> Setting a Seed</a></li>
+<li class="chapter" data-level="6.3.2" data-path="triangle-chance.html"><a href="triangle-chance.html#program-development"><i class="fa fa-check"></i><b>6.3.2</b> Program Development</a></li>
+<li class="chapter" data-level="6.3.3" data-path="triangle-chance.html"><a href="triangle-chance.html#number-of-repetitions"><i class="fa fa-check"></i><b>6.3.3</b> Number of Repetitions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="simulation-connect.html"><a href="simulation-connect.html"><i class="fa fa-check"></i><b>6.4</b> Example: Will They Connect?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="simulation-connect.html"><a href="simulation-connect.html#vectorization-vs.looping"><i class="fa fa-check"></i><b>6.4.1</b> Vectorization vs. Looping</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="appeals-court-paradox.html"><a href="appeals-court-paradox.html"><i class="fa fa-check"></i><b>6.5</b> Example: the Appeals Court Paradox</a></li>
+<li class="chapter" data-level="6.6" data-path="simulation-number-needed.html"><a href="simulation-number-needed.html"><i class="fa fa-check"></i><b>6.6</b> Example: How Many Numbers Needed?</a></li>
+<li class="chapter" data-level="6.7" data-path="example-dental-floss.html"><a href="example-dental-floss.html"><i class="fa fa-check"></i><b>6.7</b> Example: Dental Floss</a></li>
+<li class="chapter" data-level="6.8" data-path="drunken-turtle-sim.html"><a href="drunken-turtle-sim.html"><i class="fa fa-check"></i><b>6.8</b> Example: The Drunken Turtle</a></li>
+<li class="chapter" data-level="" data-path="glossary-4.html"><a href="glossary-4.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="frames.html"><a href="frames.html"><i class="fa fa-check"></i><b>7</b> Data Frames</a><ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-matrices.html"><a href="introduction-to-matrices.html"><i class="fa fa-check"></i><b>7.1</b> Introduction to Matrices</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="introduction-to-matrices.html"><a href="introduction-to-matrices.html#practice-exercises-13"><i class="fa fa-check"></i><b>7.1.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="7.1.2" data-path="introduction-to-matrices.html"><a href="introduction-to-matrices.html#solutions-to-practice-exercises-5"><i class="fa fa-check"></i><b>7.1.2</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="matrix-indexing.html"><a href="matrix-indexing.html"><i class="fa fa-check"></i><b>7.2</b> Matrix Indexing</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="matrix-indexing.html"><a href="matrix-indexing.html#to-drop-or-not"><i class="fa fa-check"></i><b>7.2.1</b> To Drop or Not?</a></li>
+<li class="chapter" data-level="7.2.2" data-path="matrix-indexing.html"><a href="matrix-indexing.html#practice-exercises-14"><i class="fa fa-check"></i><b>7.2.2</b> Practice Exercises</a></li>
+<li class="chapter" data-level="7.2.3" data-path="matrix-indexing.html"><a href="matrix-indexing.html#solutions-to-practice-exercises-6"><i class="fa fa-check"></i><b>7.2.3</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html"><i class="fa fa-check"></i><b>7.3</b> Operations on Matrices</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#arithmetical-operations"><i class="fa fa-check"></i><b>7.3.1</b> Arithmetical Operations</a></li>
+<li class="chapter" data-level="7.3.2" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>7.3.2</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="7.3.3" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#logical-operations"><i class="fa fa-check"></i><b>7.3.3</b> Logical Operations</a></li>
+<li class="chapter" data-level="7.3.4" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#practice-exercises-15"><i class="fa fa-check"></i><b>7.3.4</b> Practice Exercises</a></li>
+<li class="chapter" data-level="7.3.5" data-path="operations-on-matrices.html"><a href="operations-on-matrices.html#solutions-to-practice-exercises-7"><i class="fa fa-check"></i><b>7.3.5</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html"><i class="fa fa-check"></i><b>7.4</b> Introduction to Data Frames</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#viewing-a-data-frame"><i class="fa fa-check"></i><b>7.4.1</b> Viewing a Data Frame</a></li>
+<li class="chapter" data-level="7.4.2" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#the-stucture-of-a-data-frame"><i class="fa fa-check"></i><b>7.4.2</b> The Stucture of a Data Frame</a></li>
+<li class="chapter" data-level="7.4.3" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#factor-variables"><i class="fa fa-check"></i><b>7.4.3</b> Factors</a></li>
+<li class="chapter" data-level="7.4.4" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#practice-exercises-16"><i class="fa fa-check"></i><b>7.4.4</b> Practice Exercises</a></li>
+<li class="chapter" data-level="7.4.5" data-path="introduction-to-data-frames.html"><a href="introduction-to-data-frames.html#solutions-to-the-practice-exercises-9"><i class="fa fa-check"></i><b>7.4.5</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="creating-data-frames.html"><a href="creating-data-frames.html"><i class="fa fa-check"></i><b>7.5</b> Creating Data Frames</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-vectors"><i class="fa fa-check"></i><b>7.5.1</b> Creation from Vectors</a></li>
+<li class="chapter" data-level="7.5.2" data-path="creating-data-frames.html"><a href="creating-data-frames.html#creation-from-other-frames"><i class="fa fa-check"></i><b>7.5.2</b> Creation From Other Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html"><i class="fa fa-check"></i><b>7.6</b> Subsetting Data Frames</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html#boolean-expressions"><i class="fa fa-check"></i><b>7.6.1</b> Boolean Expressions</a></li>
+<li class="chapter" data-level="7.6.2" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html#practice-exercises-17"><i class="fa fa-check"></i><b>7.6.2</b> Practice Exercises</a></li>
+<li class="chapter" data-level="7.6.3" data-path="subsetting-data-frames.html"><a href="subsetting-data-frames.html#solutions-to-practice-exercises-8"><i class="fa fa-check"></i><b>7.6.3</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="ordering-data-frames.html"><a href="ordering-data-frames.html"><i class="fa fa-check"></i><b>7.7</b> Ordering Data Frames</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="ordering-data-frames.html"><a href="ordering-data-frames.html#practice-exercises-18"><i class="fa fa-check"></i><b>7.7.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="7.7.2" data-path="ordering-data-frames.html"><a href="ordering-data-frames.html#solutions-to-practice-exercises-9"><i class="fa fa-check"></i><b>7.7.2</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html"><i class="fa fa-check"></i><b>7.8</b> New Variables from Old</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html#getting-rid-of-variables"><i class="fa fa-check"></i><b>7.8.1</b> Getting Rid of Variables</a></li>
+<li class="chapter" data-level="7.8.2" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html#practice-exercises-19"><i class="fa fa-check"></i><b>7.8.2</b> Practice Exercises</a></li>
+<li class="chapter" data-level="7.8.3" data-path="new-variables-from-old.html"><a href="new-variables-from-old.html#solutions-to-practice-exercises-10"><i class="fa fa-check"></i><b>7.8.3</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-5.html"><a href="glossary-5.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="frames-exercises.html"><a href="frames-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>8</b> Graphics</a><ul>
+<li class="chapter" data-level="8.1" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html"><i class="fa fa-check"></i><b>8.1</b> The Grammar of Graphics</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#example-a-scatterplot"><i class="fa fa-check"></i><b>8.1.1</b> Example: a Scatterplot</a></li>
+<li class="chapter" data-level="8.1.2" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#example-two-bar-graphs"><i class="fa fa-check"></i><b>8.1.2</b> Example: Two Bar Graphs</a></li>
+<li class="chapter" data-level="8.1.3" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#examples-histograms-density-plots-and-box-plots"><i class="fa fa-check"></i><b>8.1.3</b> Examples: Histograms, Density Plots and Box Plots</a></li>
+<li class="chapter" data-level="8.1.4" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#example-choropleth-maps"><i class="fa fa-check"></i><b>8.1.4</b> Example: Choropleth Maps</a></li>
+<li class="chapter" data-level="8.1.5" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#practice-exercises-20"><i class="fa fa-check"></i><b>8.1.5</b> Practice Exercises</a></li>
+<li class="chapter" data-level="8.1.6" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#solutions-to-practice-exercises-11"><i class="fa fa-check"></i><b>8.1.6</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html"><i class="fa fa-check"></i><b>8.2</b> Implementation in <strong>ggplot2</strong></a><ul>
+<li class="chapter" data-level="8.2.1" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#basic-setup-the-data-frame"><i class="fa fa-check"></i><b>8.2.1</b> Basic Setup: the Data Frame</a></li>
+<li class="chapter" data-level="8.2.2" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#more-setup-establishing-the-frame"><i class="fa fa-check"></i><b>8.2.2</b> More Setup: Establishing the Frame</a></li>
+<li class="chapter" data-level="8.2.3" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#labels"><i class="fa fa-check"></i><b>8.2.3</b> Labels</a></li>
+<li class="chapter" data-level="8.2.4" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#adding-a-type-of-glyph"><i class="fa fa-check"></i><b>8.2.4</b> Adding a Type of Glyph</a></li>
+<li class="chapter" data-level="8.2.5" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#layering-adding-another-glyph-type"><i class="fa fa-check"></i><b>8.2.5</b> Layering: Adding Another Glyph Type</a></li>
+<li class="chapter" data-level="8.2.6" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#facets"><i class="fa fa-check"></i><b>8.2.6</b> Facets</a></li>
+<li class="chapter" data-level="8.2.7" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#practice-exercises-21"><i class="fa fa-check"></i><b>8.2.7</b> Practice Exercises</a></li>
+<li class="chapter" data-level="8.2.8" data-path="implementation-in-ggplot2.html"><a href="implementation-in-ggplot2.html#solutions-to-practice-exercises-12"><i class="fa fa-check"></i><b>8.2.8</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="a-case-study-us-births.html"><a href="a-case-study-us-births.html"><i class="fa fa-check"></i><b>8.3</b> A Case Study: US Births</a></li>
+<li class="chapter" data-level="8.4" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html"><i class="fa fa-check"></i><b>8.4</b> Factor Variables in Plotting</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html#practice-exercises-22"><i class="fa fa-check"></i><b>8.4.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="8.4.2" data-path="factors-in-plotting.html"><a href="factors-in-plotting.html#solutions-to-practice-exercises-13"><i class="fa fa-check"></i><b>8.4.2</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="learn-more.html"><a href="learn-more.html"><i class="fa fa-check"></i><b>8.5</b> Learn More</a></li>
+<li class="chapter" data-level="" data-path="glossary-6.html"><a href="glossary-6.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="graphics-exercises.html"><a href="graphics-exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>9</b> Lists</a><ul>
+<li class="chapter" data-level="9.1" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html"><i class="fa fa-check"></i><b>9.1</b> Introduction to Lists</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html#practice-exercises-23"><i class="fa fa-check"></i><b>9.1.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="9.1.2" data-path="introduction-to-lists.html"><a href="introduction-to-lists.html#solutions-to-the-practice-exercises-10"><i class="fa fa-check"></i><b>9.1.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html"><i class="fa fa-check"></i><b>9.2</b> Subsetting and Accessing</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html#practice-exercises-24"><i class="fa fa-check"></i><b>9.2.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="9.2.2" data-path="subsetting-and-accessing.html"><a href="subsetting-and-accessing.html#solutions-to-the-practice-exercises-11"><i class="fa fa-check"></i><b>9.2.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="lists-splitting.html"><a href="lists-splitting.html"><i class="fa fa-check"></i><b>9.3</b> Splitting</a></li>
+<li class="chapter" data-level="9.4" data-path="returning-multiple-values.html"><a href="returning-multiple-values.html"><i class="fa fa-check"></i><b>9.4</b> Returning Multiple Values</a></li>
+<li class="chapter" data-level="9.5" data-path="iterating-over-a-list.html"><a href="iterating-over-a-list.html"><i class="fa fa-check"></i><b>9.5</b> Iterating Over a List</a></li>
+<li class="chapter" data-level="9.6" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html"><i class="fa fa-check"></i><b>9.6</b> A Note on Ellipses</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-1-passing-additional-arguments-to-functions-inside"><i class="fa fa-check"></i><b>9.6.1</b> Use #1: Passing Additional Arguments to Functions “Inside”</a></li>
+<li class="chapter" data-level="9.6.2" data-path="a-note-on-ellipses.html"><a href="a-note-on-ellipses.html#use-2-permitting-any-number-of-arguments"><i class="fa fa-check"></i><b>9.6.2</b> Use #2: Permitting Any Number of Arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html"><i class="fa fa-check"></i><b>9.7</b> Investigate Your Object: <code>str()</code> and Lists</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html#practice-exercises-25"><i class="fa fa-check"></i><b>9.7.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="9.7.2" data-path="investigate-your-object-str-and-lists.html"><a href="investigate-your-object-str-and-lists.html#solutions-to-practice-exercises-14"><i class="fa fa-check"></i><b>9.7.2</b> Solutions to Practice Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-7.html"><a href="glossary-7.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-5.html"><a href="exercises-5.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>10</b> Strings</a><ul>
+<li class="chapter" data-level="10.1" data-path="character-vectors-strings.html"><a href="character-vectors-strings.html"><i class="fa fa-check"></i><b>10.1</b> Character Vectors: Strings</a></li>
+<li class="chapter" data-level="10.2" data-path="characters-and-special-characters.html"><a href="characters-and-special-characters.html"><i class="fa fa-check"></i><b>10.2</b> Characters and Special Characters</a></li>
+<li class="chapter" data-level="10.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html"><i class="fa fa-check"></i><b>10.3</b> Basic String Operations</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="basic-string-operations.html"><a href="basic-string-operations.html#is-and-as"><i class="fa fa-check"></i><b>10.3.1</b> Is and As</a></li>
+<li class="chapter" data-level="10.3.2" data-path="basic-string-operations.html"><a href="basic-string-operations.html#number-of-characters"><i class="fa fa-check"></i><b>10.3.2</b> Number of Characters</a></li>
+<li class="chapter" data-level="10.3.3" data-path="basic-string-operations.html"><a href="basic-string-operations.html#substrings-and-trimming"><i class="fa fa-check"></i><b>10.3.3</b> Substrings and Trimming</a></li>
+<li class="chapter" data-level="10.3.4" data-path="basic-string-operations.html"><a href="basic-string-operations.html#changing-cases"><i class="fa fa-check"></i><b>10.3.4</b> Changing Cases</a></li>
+<li class="chapter" data-level="10.3.5" data-path="basic-string-operations.html"><a href="basic-string-operations.html#splitting-strings"><i class="fa fa-check"></i><b>10.3.5</b> Splitting Strings</a></li>
+<li class="chapter" data-level="10.3.6" data-path="basic-string-operations.html"><a href="basic-string-operations.html#pasting-and-joining-strings"><i class="fa fa-check"></i><b>10.3.6</b> Pasting and Joining Strings</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="formatted-printing.html"><a href="formatted-printing.html"><i class="fa fa-check"></i><b>10.4</b> Formatted Printing</a></li>
+<li class="chapter" data-level="" data-path="glossary-8.html"><a href="glossary-8.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="regex.html"><a href="regex.html"><i class="fa fa-check"></i><b>11</b> Regular Expressions</a><ul>
+<li class="chapter" data-level="11.1" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i><b>11.1</b> Motivation</a></li>
+<li class="chapter" data-level="11.2" data-path="regex-practice-sites.html"><a href="regex-practice-sites.html"><i class="fa fa-check"></i><b>11.2</b> Regex Practice Sites</a></li>
+<li class="chapter" data-level="11.3" data-path="regex-syntax.html"><a href="regex-syntax.html"><i class="fa fa-check"></i><b>11.3</b> Regex Syntax</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="regex-syntax.html"><a href="regex-syntax.html#matching-a-specific-sequence"><i class="fa fa-check"></i><b>11.3.1</b> Matching a Specific Sequence</a></li>
+<li class="chapter" data-level="11.3.2" data-path="regex-syntax.html"><a href="regex-syntax.html#character-classes"><i class="fa fa-check"></i><b>11.3.2</b> Character Classes</a></li>
+<li class="chapter" data-level="11.3.3" data-path="regex-syntax.html"><a href="regex-syntax.html#quantification"><i class="fa fa-check"></i><b>11.3.3</b> Quantification</a></li>
+<li class="chapter" data-level="11.3.4" data-path="regex-syntax.html"><a href="regex-syntax.html#greedy-vs.lazy"><i class="fa fa-check"></i><b>11.3.4</b> Greedy vs. Lazy</a></li>
+<li class="chapter" data-level="11.3.5" data-path="regex-syntax.html"><a href="regex-syntax.html#grouping"><i class="fa fa-check"></i><b>11.3.5</b> Grouping</a></li>
+<li class="chapter" data-level="11.3.6" data-path="regex-syntax.html"><a href="regex-syntax.html#alternation"><i class="fa fa-check"></i><b>11.3.6</b> Alternation</a></li>
+<li class="chapter" data-level="11.3.7" data-path="regex-syntax.html"><a href="regex-syntax.html#anchors"><i class="fa fa-check"></i><b>11.3.7</b> Anchors</a></li>
+<li class="chapter" data-level="11.3.8" data-path="regex-syntax.html"><a href="regex-syntax.html#regex-captures"><i class="fa fa-check"></i><b>11.3.8</b> Captures</a></li>
+<li class="chapter" data-level="11.3.9" data-path="regex-syntax.html"><a href="regex-syntax.html#looking-around"><i class="fa fa-check"></i><b>11.3.9</b> Looking Around</a></li>
+<li class="chapter" data-level="11.3.10" data-path="regex-syntax.html"><a href="regex-syntax.html#more-to-learn-1"><i class="fa fa-check"></i><b>11.3.10</b> More to Learn</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>11.4</b> Entering a Regex in R</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>11.4.1</b> String to Regex</a></li>
+<li class="chapter" data-level="11.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-substitution"><i class="fa fa-check"></i><b>11.4.2</b> Substitution</a></li>
+<li class="chapter" data-level="11.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>11.4.3</b> A Note on Perl</a></li>
+<li class="chapter" data-level="11.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>11.4.4</b> Patterned Replacement</a></li>
+<li class="chapter" data-level="11.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>11.4.5</b> Grepping</a></li>
+<li class="chapter" data-level="11.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>11.4.6</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="11.4.7" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>11.4.7</b> Regex Modes</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>11.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-7.html"><a href="exercises-7.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="files.html"><a href="files.html"><i class="fa fa-check"></i><b>12</b> Files</a><ul>
+<li class="chapter" data-level="12.1" data-path="downloading-files.html"><a href="downloading-files.html"><i class="fa fa-check"></i><b>12.1</b> Downloading Files</a></li>
+<li class="chapter" data-level="12.2" data-path="reading-text-files-with-readlines.html"><a href="reading-text-files-with-readlines.html"><i class="fa fa-check"></i><b>12.2</b> Reading Text Files with <code>readLines()</code></a></li>
+<li class="chapter" data-level="12.3" data-path="reading-text-files-with-readr.html"><a href="reading-text-files-with-readr.html"><i class="fa fa-check"></i><b>12.3</b> Reading Text Files with <strong>readr</strong></a></li>
+<li class="chapter" data-level="12.4" data-path="writing-to-files.html"><a href="writing-to-files.html"><i class="fa fa-check"></i><b>12.4</b> Writing to Files</a></li>
+<li class="chapter" data-level="12.5" data-path="application-making-a-lexicon.html"><a href="application-making-a-lexicon.html"><i class="fa fa-check"></i><b>12.5</b> Application: Making a Lexicon</a></li>
+<li class="chapter" data-level="" data-path="glossary-10.html"><a href="glossary-10.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>13</b> Functional Programming in R</a><ul>
+<li class="chapter" data-level="13.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html"><i class="fa fa-check"></i><b>13.1</b> Programming Paradigms</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html#procedural-programming"><i class="fa fa-check"></i><b>13.1.1</b> Procedural Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html"><i class="fa fa-check"></i><b>13.2</b> The Functional Programming Paradigm</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#the-ubiquity-of-functions-in-r"><i class="fa fa-check"></i><b>13.2.1</b> The Ubiquity of Functions in R</a></li>
+<li class="chapter" data-level="13.2.2" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#functions-as-first-class-citizens"><i class="fa fa-check"></i><b>13.2.2</b> Functions as First-Class Citizens</a></li>
+<li class="chapter" data-level="13.2.3" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#minimize-side-effects"><i class="fa fa-check"></i><b>13.2.3</b> Minimize Side Effects</a></li>
+<li class="chapter" data-level="13.2.4" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#procedures-as-higher-order-function-calls"><i class="fa fa-check"></i><b>13.2.4</b> Procedures as Higher-Order Function Calls</a></li>
+<li class="chapter" data-level="13.2.5" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#functional-programming-a-summary"><i class="fa fa-check"></i><b>13.2.5</b> Functional Programming: A Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html"><i class="fa fa-check"></i><b>13.3</b> <code>lapply()</code> and Friends</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#lapply"><i class="fa fa-check"></i><b>13.3.1</b> <code>lapply()</code></a></li>
+<li class="chapter" data-level="13.3.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#sapply"><i class="fa fa-check"></i><b>13.3.2</b> <code>sapply()</code></a></li>
+<li class="chapter" data-level="13.3.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#tapply"><i class="fa fa-check"></i><b>13.3.3</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="13.3.4" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#map"><i class="fa fa-check"></i><b>13.3.4</b> <code>Map()</code></a></li>
+<li class="chapter" data-level="13.3.5" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#replicate"><i class="fa fa-check"></i><b>13.3.5</b> <code>replicate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="filter-and-reduce.html"><a href="filter-and-reduce.html"><i class="fa fa-check"></i><b>13.4</b> <code>Filter()</code> and <code>Reduce()</code></a></li>
+<li class="chapter" data-level="13.5" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>13.5</b> Functionals vs. Loops</a></li>
+<li class="chapter" data-level="13.6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>13.6</b> Conclusion</a></li>
+<li class="chapter" data-level="" data-path="glossary-11.html"><a href="glossary-11.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-9.html"><a href="exercises-9.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="oo.html"><a href="oo.html"><i class="fa fa-check"></i><b>14</b> Object-Oriented Programming in R</a><ul>
+<li class="chapter" data-level="14.1" data-path="the-object-oriented-programming-paradigm.html"><a href="the-object-oriented-programming-paradigm.html"><i class="fa fa-check"></i><b>14.1</b> The Object-Oriented Programming Paradigm</a></li>
+<li class="chapter" data-level="14.2" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html"><i class="fa fa-check"></i><b>14.2</b> Reference Classes with Package R6</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#defining-a-class"><i class="fa fa-check"></i><b>14.2.1</b> Defining a Class</a></li>
+<li class="chapter" data-level="14.2.2" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#instantiation-initializing-objects"><i class="fa fa-check"></i><b>14.2.2</b> Instantiation: Initializing Objects</a></li>
+<li class="chapter" data-level="14.2.3" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#getting-and-setting-attributes"><i class="fa fa-check"></i><b>14.2.3</b> Getting and Setting Attributes</a></li>
+<li class="chapter" data-level="14.2.4" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#calling-methods"><i class="fa fa-check"></i><b>14.2.4</b> Calling Methods</a></li>
+<li class="chapter" data-level="14.2.5" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#holding-a-reference-not-a-value"><i class="fa fa-check"></i><b>14.2.5</b> Holding a Reference, not a Value</a></li>
+<li class="chapter" data-level="14.2.6" data-path="reference-classes-with-package-r6.html"><a href="reference-classes-with-package-r6.html#cloning-an-object"><i class="fa fa-check"></i><b>14.2.6</b> Cloning an Object</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="inheritance.html"><a href="inheritance.html"><i class="fa fa-check"></i><b>14.3</b> Inheritance</a></li>
+<li class="chapter" data-level="14.4" data-path="adding-members-to-a-class.html"><a href="adding-members-to-a-class.html"><i class="fa fa-check"></i><b>14.4</b> Adding Members to a Class</a></li>
+<li class="chapter" data-level="14.5" data-path="method-chaining.html"><a href="method-chaining.html"><i class="fa fa-check"></i><b>14.5</b> Method Chaining</a></li>
+<li class="chapter" data-level="14.6" data-path="application-whales-in-an-ocean.html"><a href="application-whales-in-an-ocean.html"><i class="fa fa-check"></i><b>14.6</b> Application: Whales in an Ocean</a></li>
+<li class="chapter" data-level="14.7" data-path="generic-function-oo.html"><a href="generic-function-oo.html"><i class="fa fa-check"></i><b>14.7</b> Generic-Function OO</a><ul>
+<li class="chapter" data-level="14.7.1" data-path="generic-function-oo.html"><a href="generic-function-oo.html#motivating-examples"><i class="fa fa-check"></i><b>14.7.1</b> Motivating Examples</a></li>
+<li class="chapter" data-level="14.7.2" data-path="generic-function-oo.html"><a href="generic-function-oo.html#terminology"><i class="fa fa-check"></i><b>14.7.2</b> Terminology</a></li>
+<li class="chapter" data-level="14.7.3" data-path="generic-function-oo.html"><a href="generic-function-oo.html#common-generic-functions"><i class="fa fa-check"></i><b>14.7.3</b> Common Generic Functions</a></li>
+<li class="chapter" data-level="14.7.4" data-path="generic-function-oo.html"><a href="generic-function-oo.html#writing-your-own-methods"><i class="fa fa-check"></i><b>14.7.4</b> Writing Your Own Methods</a></li>
+<li class="chapter" data-level="14.7.5" data-path="generic-function-oo.html"><a href="generic-function-oo.html#writing-a-generic-function"><i class="fa fa-check"></i><b>14.7.5</b> Writing a Generic Function</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary-12.html"><a href="glossary-12.html"><i class="fa fa-check"></i>Glossary</a></li>
+<li class="chapter" data-level="" data-path="exercises-10.html"><a href="exercises-10.html"><i class="fa fa-check"></i>Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Beginning Computer Science with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="prompting-the-user" class="section level2">
+<h2><span class="header-section-number">4.1</span> Prompting the User</h2>
+<p>One way to control the flow of a program is to arrange for it to pause and await information from the user who runs it.</p>
+<p>Up to this point any information that we have wanted to process has had to be entered into the code itself. For example, if we want to print out a name to the console, we have to provide that name in the code, like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">person &lt;-<span class="st"> &quot;Dorothy&quot;</span>
+<span class="kw">cat</span>(<span class="st">&quot;Hello, &quot;</span>, person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<pre><code>## Hello, Dorothy!</code></pre>
+<p>We can get any printout we like as long as we assign the desired string to <code>person</code>—but we have to do that <em>in the code itself</em>. But what if we don’t know the name of the person whom we want to greet? How can we be assured of printing out the correct name?</p>
+<p>The <code>readline()</code> function will be helpful, here. It reads input directly from the console and produces a character vector (of length one) that we may use as we like. Thus</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">person &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;What is your name?  &quot;</span>)
+<span class="co"># Type your name before running the next line!</span>
+<span class="kw">cat</span>(<span class="st">&quot;Hello, &quot;</span>, person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<pre><code>## What is your name?  Cowardly Lion
+## Hello, Cowardly Lion!</code></pre>
+<p>Note that the input obtained from <code>readline()</code> is always a character vector of length one—a single string—so if you plan to use it as a number then you need to convert it to a number. The <code>as.numeric()</code> function will do this for you:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Give me a number, and I&#39;ll add 10 to it:  &quot;</span>)
+<span class="co"># Give R your number before you run the next line!</span>
+<span class="kw">cat</span>(<span class="st">&quot;The sum is:  &quot;</span>, <span class="kw">as.numeric</span>(number) <span class="op">+</span><span class="st"> </span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## Give me a number, and I&#39;ll add 10 to it:  15
+## The sum is:  25</code></pre>
+<div id="practice-exercises-11" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Practice Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Try out the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pet &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Enter the name of your pet: &quot;</span>)
+type &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;What kind of animal is it? (Dog, cat, etc.): &quot;</span>)
+<span class="kw">cat</span>(pet, <span class="st">&quot; is a &quot;</span>, type, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<p><strong>Important</strong>: Run the lines <em>at at a time</em>, not all three at once. R will stop after the first line, waiting for your answer. If you try to run line 2 along with the <code>pet</code> line, then line 2 will become your attempted input for <code>pet</code>, resulting in an error.</p></li>
+</ol>
+</div>
+<div id="solutions-to-the-practice-exercises-7" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Solutions to the Practice Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Here’s one possible outcome in the Console:</p>
+<pre><code>&gt; pet &lt;- readline(&quot;Enter the name of your pet: &quot;)
+Enter the name of your pet: Bo
+&gt; type &lt;- readline(&quot;What kind of animal is it? (Dog, cat, etc.): &quot;)
+What kind of animal is it? (Dog, cat, etc.): dog
+&gt; cat(pet, &quot; is a &quot;, type, &quot;.\n&quot;, sep = &quot;&quot;)
+Bo is a dog.</code></pre></li>
+</ol>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="flow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="making-decisions-conditionals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["r-notes.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

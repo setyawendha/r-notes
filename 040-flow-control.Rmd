@@ -10,9 +10,9 @@ Flow control encompasses the tools in a programming language that allow the comp
 
 \newpage
 
-## Prologue:  Prompting the User
+## Prompting the User
 
-Before we get started with flow control itself, let's address the question of how we might extract information from someone who runs our our code.
+One way to control the flow of a program is to arrange for it to pause and await information from the user who runs it.
 
 Up to this point any information that we have wanted to process has had to be entered into the code itself.  For example, if we want to print out a name to the console, we have to provide that name in the code, like this:
 
@@ -49,9 +49,35 @@ cat("The sum is:  ", as.numeric(number) + 10)
 ## The sum is:  25
 ```
 
+### Practice Exercises
+
+1. Try out the following code:
+
+    ```{r eval = FALSE}
+    pet <- readline("Enter the name of your pet: ")
+    type <- readline("What kind of animal is it? (Dog, cat, etc.): ")
+    cat(pet, " is a ", type, ".\n", sep = "")
+    ```
+    
+    **Important**:  Run the lines *at at a time*, not all three at once.  R will stop after the first line, waiting for your answer. If you try to run line 2 along with the `pet` line, then line 2 will become your attempted input for `pet`, resulting in an error.
+    
+### Solutions to the Practice Exercises
+
+1.  Here's one possible outcome in the Console:
+
+    ```
+    > pet <- readline("Enter the name of your pet: ")
+    Enter the name of your pet: Bo
+    > type <- readline("What kind of animal is it? (Dog, cat, etc.): ")
+    What kind of animal is it? (Dog, cat, etc.): dog
+    > cat(pet, " is a ", type, ".\n", sep = "")
+    Bo is a dog.
+    ```
+
+
 ## Making Decisions:  Conditionals
 
-We are now ready to begin addressing flow control itself.  We'll begin by looking at the various facilities R has for making decisions.
+Another type of flow control involves determining *which parts* of the program to execute, depending upon certain conditions.
 
 ### If Statements {#if-statements}
 
@@ -348,6 +374,117 @@ abbrDay("Wednesday")
 abbrDay("Neptune")
 ```
 
+### Practice Exercises
+
+```{r echo = FALSE}
+computeSquare2 <- function(x, verbose = TRUE) {
+  if ( verbose ) {
+    cat("The square of ", x, " is ", x^2, ".\n", sep = "")
+  }
+  invisible(x^2)
+}
+findKarl <- function(x) {
+  ifelse(x == "Karl",
+         "Yep, that's Karl!",
+         "Sorry, not our guy.")
+}
+```
+
+
+1. Consider the following function:
+
+    ```{r}
+    computeSquare <- function(x) {
+      x^2
+    }
+    ```
+    
+    Write a "talky" version of the above function that returns the square invisibly..  It should be called `computeSquare2()` and should take two parameters:
+    
+    * `x`:  the number to be squared
+    * `verbose`:  whether or not to `cat()` out a report to the Console.
+    
+    Typical examples of use would be:
+    
+    ```{r}
+    computeSquare2(4)
+    mySquare <- computeSquare2(6, verbose = FALSE)
+    mySquare
+    ```
+
+2. Write a function called `findKarl()` that takes a character vector and returns a character vector that reports whether or not each element of the given vector was equal to the string `"Karl"`.  It should work like this:
+
+    ```{r}
+    vec1 <- c("three", "blowfish", "Karl", "Grindel")
+    findKarl(vec1)
+    ```
+
+3. Here's a function that is supposed to return `"small!"` when given a number less than 100, and return `"big!"` when the number if at least 100:
+
+    ```{r}
+    sizeComment <- function(x) {
+      if ( x < 100 ) {
+        "small!"
+      }
+      "big!"
+    }
+    ```
+    
+    But it doesn't work:
+    
+    ```{r}
+    sizeComment(200)  # this will br OK
+    sizeComment(50)   # this won't be OK
+    ```
+    
+    Fix the code.
+
+### Solutions to Practice Exercises
+
+1.  Here's the desired function:
+
+    ```{r eval = FALSE}
+    computeSquare2 <- function(x, verbose = TRUE) {
+      if ( verbose ) {
+        cat("The square of ", x, " is ", x^2, ".\n", sep = "")
+      }
+      invisible(x^2)
+    }
+    ```
+
+2.  Here's one way to write it:
+
+    ```{r eval = FALSE}
+    findKarl <- function(x) {
+      ifelse(x == "Karl",
+             "Yep, that's Karl!",
+             "Sorry, not our guy.")
+    }
+    ```
+
+3. A function always returns the value of the last expression that it evaluates.  As it stands, the function will always end at the line `"big!"`, so `"big"` will always be returned.  One way to get the desired behavior is to force the function to stop executing once it prints out `"small!"`.  You can do this with the `return()` function:
+
+    ```{r}
+    sizeComment <- function(x) {
+      if ( x < 100 ) {
+        return("small!")
+      }
+      "big!"
+    }
+    ```
+    
+    Another way is to use the `if ... else` construction:
+    
+    ```{r}
+    sizeComment <- function(x) {
+      if ( x < 100 ) {
+        "small!"
+      } else {
+        "big!"
+      }
+    }
+    ```    
+    
 
 ## Repeating Things:  Looping
 
@@ -763,7 +900,191 @@ verboseSearch <- function(elem, vec) {
     return(-1)
   }
 }
+
+cheerleader <- function(cheer) {
+  for ( letter in cheer ) {
+    repeat {
+      call <- paste("Gimme a ", letter, "!  ", sep = "")
+      response <- readline(call)
+      if ( response == letter ) break
+    }
+  }
+}
 ```
+
+### Practice Problems
+
+1. You want to compute the square roots of the whole numbers from 1 to 10.  You could do this quite easily as follows:
+
+    ```{r}
+    sqrt(1:10)
+    ```
+    
+    However, you want to practice using `for`-loops.  Write a small program that uses a loop to compute the square roots of the whole numbers from 1 to 10.
+
+2. Think about the practice problem `findKarl()` from the previous section. Write a new version that uses a loop.
+
+3.  You want to append `"the Dog"` to the end of each element of a character vector of dog-names.  Sadly, you have not yet realized that the  `paste()` function is very much up to the task:
+
+    ```{r}
+    doggies <- c("Bo", "Gracie", "Rover", "Anya")
+    paste(doggies, "the Dog")
+    ```
+    
+    You decide to use a `for`-loop.  Write the code.
+
+4. Write a function called `triangleOfStars()` that produces patterns liks this:
+
+    ```
+    ****
+    ***
+    **
+    *
+    ```
+    
+    It should take a single parameter `n`, the number of asterisks in the first "line" of the triangle.  Use a `for`-loop in the body of the function.
+    
+5. Rewrite `triangleOfStars()` so that it uses a `while`-loop in its body.
+
+6. Rewrite `triangleOfStars()` so that it still uses a `while`-loop in its body, but produces output like this:
+
+    ```
+    *
+    **
+    ***
+    ****
+    *****
+    ```
+
+7. Write a function called `cheerleader()` that badgers you for each of the letters in a word until you give it all of the letters, one by one.  It should work like this:
+
+    ```{r eval = FALSE}
+    schoolMascot <- c("T", "I", "G", "E", "R", "S")
+    cheerleader(cheer = schoolMascot)
+    ```
+    
+    ```
+    > cheerleader(cheer = schoolMascot)
+    Gimme a T!  T
+    Gimme a I!  i
+    Gimme a I!  I
+    Gimme a G!  gee
+    Gimme a G!  I said gee!!
+    Gimme a G!  G
+    Gimme a E!  E
+    Gimme a R!  Are you going to do this all day?
+    Gimme a R!  R
+    Gimme a S!  Stop it, please!
+    Gimme a S!  S
+    > 
+    ```
+
+### Solutions to the Practice Exercises
+
+1.  Here's a suitable program:
+
+    ```{r}
+    roots <- numeric(10)
+    for ( i in 1:10 ) {
+      roots[i] <- sqrt(i)
+    }
+    roots
+    ```
+
+2.  You could do this:
+
+    ```{r eval = FALSE}
+    findKarl <- function(x) {
+      results <- character(length(x))
+      for ( i in 1: length(x) ) {
+        if ( x[i] == "Karl" ) {
+          results[i] <- "Yep, that's Karl!"
+        } else {
+          results[i] <-  "Sorry, not our guy."
+        }
+      }
+      results
+    }
+    ```
+
+3. Here you go:
+
+    ```{r}
+    doggies <- c("Bo", "Gracie", "Rover", "Anya")
+    titledDoggies <- character(length(doggies))
+    for (i in 1:length(doggies) ) {
+      titledDoggies[i] <- paste(doggies[i], "the Dog")
+    }
+    titledDoggies
+    ```
+
+4.  Here's the code:
+
+    ```{r}
+    triangleofStars <- function(n) {
+      for ( i in 1:n ) {
+        line <- rep("*", times = i)
+        cat(line, "\n", sep = "")
+      }
+    }
+    ```
+    
+    Try it out:
+    
+    ```{r}
+    triangleofStars(5)
+    ```
+    
+5.  Here's the code:
+
+    ```{r}
+    triangleofStars <- function(n) {
+      while ( n >= 1 ) {
+        line <- rep("*", times = n)
+        cat(line, "\n", sep = "")
+        n <- n - 1
+      }
+    }
+    ```
+    
+    Try it out:
+    
+    ```{r}
+    triangleofStars(5)
+    ```
+
+6. Here's the code:
+
+    ```{r}
+    triangleofStars <- function(n) {
+      m <- 1
+      while ( m <= n ) {
+        line <- rep("*", times = m)
+        cat(line, "\n", sep = "")
+        m <- m + 1
+      }
+    }
+    ```
+    
+    Try it out:
+    
+    ```{r}
+    triangleofStars(5)
+    ```
+    
+7.  Here is the requested annoying function, using a `repeat`-loop with `break` inside a `for`-loop:
+
+    ```{r eval = FALSE}
+    cheerleader <- function(cheer) {
+      for ( letter in cheer ) {
+        repeat {
+          call <- paste("Gimme a ", letter, "!  ", sep = "")
+          response <- readline(call)
+          if ( response == letter ) break
+       }
+      }
+    }
+    ```
 
 ## Application:  The Collatz Conjecture  {#collatz-conjecture}
 
