@@ -11157,6 +11157,98 @@ It is natural to wonder how likely the turtle is to wander back close to
 where it started, and to wonder how often that will happen. We will
 address questions like these in Chapter \ref{simulation}.
 
+\subsection{Practice Exercises}\label{practice-exercises-13}
+
+These exercises don't deal directly with turtles, but instead drill you
+on the \texttt{sample()} and runif()` functions.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Write a call to the \texttt{sample()} function so that it will pick a
+  whole number at random from 1 to 10. Each number should have the same
+  chance to be selected.
+\item
+  Write a call to the \texttt{sample()} function that will pick five
+  numbers at random from the whole numbers from 1 to 10. On each pick,
+  each of the ten numbers should have a 1-in-10 chance to be selected.
+\item
+  Write a call to the \texttt{sample()} function that will pick five
+  numbers at random from the whole numbers from 1 to 10. It should not
+  be possible to get the same number twice.
+\item
+  Write a call to the \texttt{sample()} function that scrambles the
+  whole numbers from 1 to 10 in a random order.
+\item
+  Write a call to the \texttt{sample()} functions that randomly
+  re-orders the lowercase letters of the English alphabet.
+\item
+  The function \texttt{color()} produces a character vector of the named
+  colors that R is prepared to draw. Run it at the Console:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colors}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+  How many named colors are there? Let's let R find out for us:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(}\KeywordTok{colors}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 657
+\end{verbatim}
+
+  Write a call to the \texttt{samplr()} function that will pick a single
+  named color at random.
+\item
+  Write a call to \texttt{runif()} that will produce a single random
+  real number between 0 and 1.
+\item
+  Write a call to \texttt{runif()} that will produce 20 random real
+  numbers between 0 and 1.
+\item
+  Write a call to \texttt{runif()} that will produce 30 random real
+  numbers, each of them between 10 and 15.
+\item
+  You enter a forest where there are many sticks on the ground. Each of
+  them is equally likely to be anywhere between 0 and 10 feet long. You
+  pick up five sticks at random. Write a one-line R-command that
+  produces the length of shortest stick that you pick up.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-9}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{sample(1:10,\ size\ =\ 1)}
+\item
+  \texttt{sample(1:10,\ size\ =\ 5,\ replace\ =\ TRUE)}
+\item
+  \texttt{sample(1:10,\ size\ =\ 5,\ replace\ =\ FALSE)}
+\item
+  \texttt{sample(1:10,\ size\ =\ 10,\ replace\ =\ FALSE)}
+\item
+  \texttt{sample(letters,\ size\ =\ length(letters),\ replace\ =\ FALSE)}
+\item
+  \texttt{sample(colors(),\ size\ =\ 1)}
+\item
+  \texttt{runif()}
+\item
+  \texttt{runif(20)}
+\item
+  \texttt{runif(30,\ min\ =\ 10,\ max\ =\ 15)}
+\item
+  \texttt{min(runif(5,\ min\ =\ 0,\ max\ =\ 10))}
+\end{enumerate}
+
 \section{More Complex Turtle Graphs}\label{more-complex-turtle-graphs}
 
 Simple instructions, when combined with looping, can produce quite
@@ -11682,6 +11774,136 @@ precisely---much less prove it---but we can take the rough statement
 given here as an assurance that the more repetitions we include in our
 simulation, the more accurate the resulting estimate is liable to be.
 
+\subsection{Practice Exercises}\label{practice-exercises-14}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Consider the following game: you roll a fair die. If you get one or
+  two spots, then you lose a dollar. If you get three, four, or five
+  spots then nothing happens. If you get six spots then you win three
+  dollars. You would like to know how much money you can expect to win
+  per play of the game, on average.
+
+  Write a function called \texttt{diceGameSim()} that will help you
+  answer the question. The function should take the following parameter:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{reps}: the number of times to repeat the simulation. The
+    default value should be 10000.
+  \end{itemize}
+
+  The function should return an estimate of the expected value of the
+  game.
+\item
+  You command a Klingon vessel, and you are shooting photon torpedoes at
+  the Starship \emph{USS Enterprise}. Every torpedo you fire has a
+  strength \(s\) that is a random real number between 0 and 12. If the
+  strength of the torpedo is less than or equal to 5, then the
+  Enterprise's shields will ward off any damage. However, if the
+  strength \(s\) exceeds 5, then the damage inflicted on the Enterprise
+  will be \(12-s\) units. What is the expected amount of damage done to
+  the Enterprise, per shot? Write a function called
+  \texttt{photonTorpedoSim()} that estimates the expected damage. The
+  function should take the following parameter:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{reps}: the number of times to repeat the process of firing
+    at the Enterprise. The default value should be 10000.
+  \end{itemize}
+
+  The function should return the estimated expected value.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-10}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diceGameSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(reps) \{}
+\NormalTok{  w <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{  pw <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\OperatorTok{/}\DecValTok{6}\NormalTok{, }\DecValTok{3}\OperatorTok{/}\DecValTok{6}\NormalTok{, }\DecValTok{1}\OperatorTok{/}\DecValTok{6}\NormalTok{)}
+\NormalTok{  winnings <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(w, }\DataTypeTok{size =}\NormalTok{ reps, }
+                     \DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{,}
+                     \DataTypeTok{prob =}\NormalTok{ pw)}
+  \KeywordTok{mean}\NormalTok{(winnings)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Let's try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{3838}\NormalTok{)}
+\KeywordTok{diceGameSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.16548
+\end{verbatim}
+
+  Our estimate, based on one hundred thousand repetitions of the game,
+  is that you can expect to win about 16.55 cents per game. (In fact the
+  exact expected value is \(1/6\) of a dollar.)
+\item
+  Here's the code, if you use the \texttt{pmax()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{photonTorpedoSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(reps) \{}
+\NormalTok{  strengths <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =} \DecValTok{12}\NormalTok{)}
+\NormalTok{  damage <-}\StringTok{ }\KeywordTok{pmax}\NormalTok{(}\DecValTok{0}\NormalTok{, strengths }\OperatorTok{-}\StringTok{ }\DecValTok{5}\NormalTok{)}
+  \KeywordTok{mean}\NormalTok{(damage)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Let's try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{3838}\NormalTok{)}
+\KeywordTok{photonTorpedoSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.043227
+\end{verbatim}
+
+  You can expect to do about 2.04 points worth of damage per shot. (In
+  fact the exact expected value is \(49/24 \approx 2.04167\).)
+
+  Here's the code if you used a loop instead:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{photonTorpedoSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(reps) \{}
+\NormalTok{  damage <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(reps)}
+  \ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{reps )}
+\NormalTok{    strength <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =} \DecValTok{12}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{ ( shot }\OperatorTok{>}\StringTok{ }\DecValTok{5}\NormalTok{ ) \{}
+\NormalTok{      damage[i] <-}\StringTok{ }\NormalTok{strength }\OperatorTok{-}\StringTok{ }\DecValTok{5}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      damage[i] <-}\StringTok{ }\DecValTok{0}
+\NormalTok{    \}}
+  \KeywordTok{mean}\NormalTok{(damage)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
 \section{Example: Chance of a Triangle}\label{triangle-chance}
 
 In the examples considered so far, intuition or a simple calculation
@@ -12075,6 +12297,173 @@ The estimates are indeed getting closer to the theoretical value of
   you should increase the number of repetitions by a factor of 4. If you
   want the likely size to be one-third as big, increase repetitions by a
   factor of 9, and so on.}
+
+\subsection{Practice Exercises}\label{practice-exercises-15}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Rewrite the \texttt{diceGameSim()} function from the previous section
+  so that, just as we did with the \texttt{triangleSim()} function in
+  this section:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    it allows the user to set a seed;
+  \item
+    it returns the estimated expected value invisibly, and has a
+    \texttt{verbose} option to \texttt{cat} the estimate out to the
+    Console.
+  \end{itemize}
+\item
+  Rewrite the \texttt{photonTorpedoSim()} function from the previous
+  section so that, just as we did with the \texttt{triangleSim()}
+  function in this section:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    it allows the user to set a seed;
+  \item
+    it returns the estimated expected value invisibly, and has a
+    \texttt{verbose} option to \texttt{cat} the estimate out to the
+    Console.
+  \end{itemize}
+\item
+  Extend the \texttt{photonTorpedoSim()} just a bit more, by adding two
+  new parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{shield}: the level at which the Enterpise's shields are set.
+    (If the strength of the torpedo is less than \texttt{shield}, then
+    there is zero damage.) The default value of \texttt{shield} should
+    be 5.
+  \item
+    \texttt{upper}: the upper bound on the strenght of a torpedo-shot.
+    (That is, a tropedo shot will be a random real number from 0 to
+    \texttt{upper}.) The default value of \texttt{upper} should be 10.
+  \end{itemize}
+
+  The program should stop with a helpful message if the user sets
+  \texttt{upper} or \texttt{shield} to a negative number.`
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-5}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diceGameSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(reps, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{verbose =} \OtherTok{TRUE}\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
+\NormalTok{  \}}
+\NormalTok{  w <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{  pw <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\OperatorTok{/}\DecValTok{6}\NormalTok{, }\DecValTok{3}\OperatorTok{/}\DecValTok{6}\NormalTok{, }\DecValTok{1}\OperatorTok{/}\DecValTok{6}\NormalTok{)}
+\NormalTok{  winnings <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(w, }\DataTypeTok{size =}\NormalTok{ reps, }
+                     \DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{,}
+                     \DataTypeTok{prob =}\NormalTok{ pw)}
+  \ControlFlowTok{if}\NormalTok{ ( verbose ) \{}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"The expected amount to win is about "}\NormalTok{,}
+        \KeywordTok{mean}\NormalTok{(winnings), }\StringTok{".}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  \}}
+  \KeywordTok{invisible}\NormalTok{(}\KeywordTok{mean}\NormalTok{(winnings))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Let's try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{diceGameSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{5252}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## The expected amount to win is about 0.17503.
+\end{verbatim}
+\item
+  Here's the code, if you use the \texttt{pmax()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{photonTorpedoSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(reps, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{verbose =} \OtherTok{TRUE}\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
+\NormalTok{  \}}
+\NormalTok{  strengths <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =} \DecValTok{12}\NormalTok{)}
+\NormalTok{  damage <-}\StringTok{ }\KeywordTok{pmax}\NormalTok{(}\DecValTok{0}\NormalTok{, strengths }\OperatorTok{-}\StringTok{ }\DecValTok{5}\NormalTok{)}
+  \ControlFlowTok{if}\NormalTok{ ( verbose ) \{}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"The expected damage is about "}\NormalTok{,}
+        \KeywordTok{mean}\NormalTok{(damage), }\StringTok{" units.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  \}}
+  \KeywordTok{invisible}\NormalTok{(}\KeywordTok{mean}\NormalTok{(damage))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Let's try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{photonTorpedoSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{4040}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## The expected damage is about 2.034732 units.
+\end{verbatim}
+\item
+  Here's the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{photonTorpedoSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(reps, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{verbose =} \OtherTok{TRUE}\NormalTok{,}
+                             \DataTypeTok{shield =} \DecValTok{5}\NormalTok{, }\DataTypeTok{upper =} \DecValTok{10}\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
+\NormalTok{  \}}
+  \ControlFlowTok{if}\NormalTok{ ( upper }\OperatorTok{<}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+    \KeywordTok{return}\NormalTok{(}\KeywordTok{cat}\NormalTok{(}\StringTok{"Upper bound on torpedo strength cannot be a negative number!"}\NormalTok{))}
+\NormalTok{  \}}
+  \ControlFlowTok{if}\NormalTok{ ( shield }\OperatorTok{<}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+    \KeywordTok{return}\NormalTok{(}\KeywordTok{cat}\NormalTok{(}\StringTok{"Shield strength cannot be set to a negative number!"}\NormalTok{))}
+\NormalTok{  \}}
+  \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
+\NormalTok{  \}}
+\NormalTok{  strengths <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(reps, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =}\NormalTok{ upper)}
+\NormalTok{  damage <-}\StringTok{ }\KeywordTok{pmax}\NormalTok{(}\DecValTok{0}\NormalTok{, strengths }\OperatorTok{-}\StringTok{ }\NormalTok{shield)}
+  \ControlFlowTok{if}\NormalTok{ ( verbose ) \{}
+    \KeywordTok{cat}\NormalTok{(}\StringTok{"The expected damage is about "}\NormalTok{,}
+        \KeywordTok{mean}\NormalTok{(damage), }\StringTok{" units.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  \}}
+  \KeywordTok{invisible}\NormalTok{(}\KeywordTok{mean}\NormalTok{(damage))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Let's try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{photonTorpedoSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{4040}\NormalTok{,}
+                 \DataTypeTok{upper =} \DecValTok{15}\NormalTok{, }\DataTypeTok{shield =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## The expected damage is about 0.2991273 units.
+\end{verbatim}
+\end{enumerate}
 
 \section{Example: Will They Connect?}\label{simulation-connect}
 
@@ -12642,6 +13031,129 @@ called the Appeals Court Paradox, but it occurs in many other practical
 situations. More often than you might think, the benefit of independent
 voting can outweigh the advantage associated with relying solely on a
 small number of ``experts.''
+
+\subsection{Practice Exercises}\label{practice-exercises-16}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use \texttt{rbinom()} to simulate taking twenty free throws, where you
+  have a 70\% chance to make each shot. Your simulation should produce a
+  vector of 20 ones and zeros, where 1 stands for making the shot and 0
+  stands for missing it.
+\item
+  Use \texttt{rbinom()} to simulate taking twenty free throws, where you
+  have a 70\% chance to make each shot, and counting up how many shots
+  you make. Your simulation should produce a vector of length one that
+  represents the number of shots you made.
+\item
+  Every morning for 100 mornings in a row you take twenty free throws.
+  You have a 70\% chance to make each shot, and you alway count up how
+  many shots you make. Use \texttt{rbinom()} to simulate the counts.
+  Your simulation should produce a vector of length 100 where the first
+  element represents the number of shots you made on day 1, the second
+  element represents the number of shots you made on day 2, etc.
+\item
+  You have a 70\% chance to make each free throw shot you take. Your
+  friend Lester has a 60\% chance to make each shot. Both of you will
+  take 20 shots. You are interested in knowing the probability that you
+  will make more shots than Lester does. Write a function called
+  \texttt{freeThrowSim()} that will help you estimate this probability.
+  The function should take two parameters:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{seed}, so that the user can set a seed;
+  \item
+    \texttt{reps}, the number of times to simulate a competition between
+    you and Lester.
+  \end{itemize}
+
+  The function should return the estimated probability.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-11}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rbinom}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DataTypeTok{size =} \DecValTok{1}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.70}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 0 0 0 0 1 0 1 0 1 1 1 0 0 1 0 0 1 1 1 1
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rbinom}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{size =} \DecValTok{20}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.70}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 14
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rbinom}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DataTypeTok{size =} \DecValTok{20}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.70}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's the function if you decide to use a loop:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freeThrowSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(reps, seed) \{}
+\NormalTok{  youWin <-}\StringTok{ }\KeywordTok{logical}\NormalTok{(reps)}
+  \ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{reps ) \{}
+\NormalTok{    youMake <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{size =} \DecValTok{20}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.70}\NormalTok{)}
+\NormalTok{    lesterMakes <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{size =} \DecValTok{20}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.60}\NormalTok{)}
+\NormalTok{    youWin[i] <-}\StringTok{ }\NormalTok{(youMake }\OperatorTok{>}\StringTok{ }\NormalTok{lesterMakes)}
+\NormalTok{  \}}
+  \KeywordTok{mean}\NormalTok{(youWin)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Here's the function if you vectorize:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freeThrowSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(reps, seed) \{}
+\NormalTok{  youMake <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(reps, }\DataTypeTok{size =} \DecValTok{20}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.70}\NormalTok{)}
+\NormalTok{  lesterMakes <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(reps, }\DataTypeTok{size =} \DecValTok{20}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.60}\NormalTok{)}
+\NormalTok{  youWin<-}\StringTok{ }\NormalTok{(youMake }\OperatorTok{>}\StringTok{ }\NormalTok{lesterMakes)}
+  \KeywordTok{mean}\NormalTok{(youWin)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Let's try it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{freeThrowSim}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{100000}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{3535}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.69132
+\end{verbatim}
+
+  You have nearly a 70\% chance to make more shots than Lester.
+\end{enumerate}
 
 \section{Example: How Many Numbers
 Needed?}\label{simulation-number-needed}
@@ -13939,7 +14451,7 @@ one-dimensional vector, you can do so:
 ## [24] 24
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-13}
+\subsection{Practice Exercises}\label{practice-exercises-17}
 
 Let's work with the following vector:
 
@@ -14027,7 +14539,7 @@ Let's work with the following vector:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-5}
+Exercises}\label{solutions-to-practice-exercises-6}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14310,7 +14822,7 @@ matrix with six rows and one column, is found as follows:
 In most applications people want the simpler vector structure, so they
 usually leave \texttt{drop} at its default value.
 
-\subsection{Practice Exercises}\label{practice-exercises-14}
+\subsection{Practice Exercises}\label{practice-exercises-18}
 
 In these exercises we'll work with the following matrix:
 
@@ -14399,7 +14911,7 @@ In these exercises we'll work with the following matrix:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-6}
+Exercises}\label{solutions-to-practice-exercises-7}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -14658,7 +15170,7 @@ We can select elements from a matrix using a Boolean operator, too:
 
 Note that the result is an ordinary, one-dimensional vector.
 
-\subsection{Practice Exercises}\label{practice-exercises-15}
+\subsection{Practice Exercises}\label{practice-exercises-19}
 
 We'll work with the following three matrices:
 
@@ -14767,7 +15279,7 @@ We'll work with the following three matrices:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-7}
+Exercises}\label{solutions-to-practice-exercises-8}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15210,7 +15722,7 @@ considered important.
 We will think more about how to deal with factor variables later on,
 when we begin data analysis in earnest.
 
-\subsection{Practice Exercises}\label{practice-exercises-16}
+\subsection{Practice Exercises}\label{practice-exercises-20}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15233,7 +15745,7 @@ when we begin data analysis in earnest.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-9}
+Exercises}\label{solutions-to-the-practice-exercises-12}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15612,7 +16124,7 @@ The Boolean sub-setting expressions can be quite complex:
 ## 70 female     65 3_back
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-17}
+\subsection{Practice Exercises}\label{practice-exercises-21}
 
 We'll use the \texttt{CPS85} data frame from the \textbf{mosaicData}
 package. You should go ahead and load the package and then read about
@@ -15653,7 +16165,7 @@ Each row in the data frame corresponds to an employee in the survey.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-8}
+Exercises}\label{solutions-to-practice-exercises-9}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15907,7 +16419,7 @@ would like people to be arranged from shortest to tallest. Then call:
 ## 57 1_front     64
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-18}
+\subsection{Practice Exercises}\label{practice-exercises-22}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -15955,7 +16467,7 @@ would like people to be arranged from shortest to tallest. Then call:
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-9}
+Exercises}\label{solutions-to-practice-exercises-10}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16157,7 +16669,7 @@ the value \texttt{NULL}.
 ## [10] "enough_Sleep"    "sex"             "diff.ideal.act."
 \end{verbatim}
 
-\subsection{Practice Exercises}\label{practice-exercises-19}
+\subsection{Practice Exercises}\label{practice-exercises-23}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -16202,7 +16714,7 @@ the value \texttt{NULL}.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-10}
+Exercises}\label{solutions-to-practice-exercises-11}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -17294,7 +17806,7 @@ graph.
 \caption{Choropleth map of state populations in the U.S.}\label{fig:ggchoropleth}
 \end{figure}
 
-\subsection{Practice Exercises}\label{practice-exercises-20}
+\subsection{Practice Exercises}\label{practice-exercises-24}
 
 In each of the exercises below, consult the Help for the relevant data
 frame. (You'll need to identify variables by their names in the data
@@ -17306,7 +17818,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::SwimRecords}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-706-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-725-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -17324,7 +17836,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::KidsFeet}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-707-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-726-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -17342,7 +17854,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::Galton}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-708-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-727-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -17359,7 +17871,7 @@ frame when you discuss aesthetic mappings.)
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-11}
+Exercises}\label{solutions-to-practice-exercises-12}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18082,22 +18594,22 @@ in Figure \ref{fig:impbetterapproach}.
 In the exercises of this Chapter we will meet a case in which
 ``wrap-style'' facet-ing is quite useful.
 
-\subsection{Practice Exercises}\label{practice-exercises-21}
+\subsection{Practice Exercises}\label{practice-exercises-25}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   With \texttt{mosaicData::SwimRecords}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-714-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-733-1} \end{center}
 \item
   With \texttt{mosaicData::KidsFeet}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-715-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-734-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-716-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-735-1} \end{center}
 
   \textbf{Hint:} Make the call \texttt{geom\_point(alpha\ =\ 0.2)}. The
   \texttt{alpha} parameter has a default-value of 1. The lower you set
@@ -18109,11 +18621,11 @@ In the exercises of this Chapter we will meet a case in which
   for the boxes is set to \texttt{"burlywood"}. The x-location is mapped
   to \texttt{factor(smoke)}, rather than to \texttt{smoke}.
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-717-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-736-1} \end{center}
 \item
   With \texttt{mosaicData::Galton}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-718-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-737-1} \end{center}
 
   \textbf{Hint}: The fill of the density plot is set to
   \texttt{"burlywood"}. The rug is made of randomly jittered
@@ -18121,7 +18633,7 @@ In the exercises of this Chapter we will meet a case in which
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-12}
+Exercises}\label{solutions-to-practice-exercises-13}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18573,7 +19085,7 @@ Now try again (see Figure \ref{fig:firesetting3}) for the result.
 
 This works!
 
-\subsection{Practice Exercises}\label{practice-exercises-22}
+\subsection{Practice Exercises}\label{practice-exercises-26}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18581,24 +19093,24 @@ This works!
   With \texttt{mosaicData::KidsFeet}, make the following graph.
   (\textbf{Hint}: Use \texttt{plyr::mapvalues()}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-741-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-760-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph.
   (\textbf{Hint}: Use \texttt{cut()} to make age groups. The fill for
   the boxes is the ever-popular \texttt{"burlywood"}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-742-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-761-1} \end{center}
 \item
   With \texttt{mosaicData::Gestation}, make the following graph.
   (\textbf{Hint}: Use \texttt{!is.na()} to select the rows of
   \texttt{Gestation} where \texttt{smoke} is not \texttt{NA}. Then use
   \texttt{plyr::mapvalues()} on \texttt{smoke}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-743-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-762-1} \end{center}
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-13}
+Exercises}\label{solutions-to-practice-exercises-14}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18931,7 +19443,7 @@ You can make an empty list, too:
 This is useful when you want to build up a list gradually, but you do
 not yet know what will go into it.
 
-\subsection{Practice Exercises}\label{practice-exercises-23}
+\subsection{Practice Exercises}\label{practice-exercises-27}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -18964,7 +19476,7 @@ not yet know what will go into it.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-10}
+Exercises}\label{solutions-to-the-practice-exercises-13}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -19119,7 +19631,7 @@ to be of the same type. In the competition between \texttt{double} and
 \texttt{character} types, \texttt{character} wins, so you end up with a
 vector of strings.
 
-\subsection{Practice Exercises}\label{practice-exercises-24}
+\subsection{Practice Exercises}\label{practice-exercises-28}
 
 These exercises involve the following list:
 
@@ -19153,7 +19665,7 @@ Observe that the second element of this list was NOT given a name.
 \end{enumerate}
 
 \subsection{Solutions to the Practice
-Exercises}\label{solutions-to-the-practice-exercises-11}
+Exercises}\label{solutions-to-the-practice-exercises-14}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -19866,7 +20378,7 @@ dedicated access/set functions---\texttt{names()} and \texttt{levels()}
 respectively. But keep in mind that you can access and set the values
 for \emph{any attribute at all} with the \texttt{attr()} function.
 
-\subsection{Practice Exercises}\label{practice-exercises-25}
+\subsection{Practice Exercises}\label{practice-exercises-29}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -19896,7 +20408,7 @@ for \emph{any attribute at all} with the \texttt{attr()} function.
 \end{enumerate}
 
 \subsection{Solutions to Practice
-Exercises}\label{solutions-to-practice-exercises-14}
+Exercises}\label{solutions-to-practice-exercises-15}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -26183,7 +26695,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122ebb068"
+## [1] "0x12033c368"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -26197,7 +26709,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122ebb068"
+## [1] "0x12033c368"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -26236,7 +26748,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122ebb068"
+## [1] "0x12033c368"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -26249,7 +26761,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11ab47188"
+## [1] "0x11a22faf8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -26267,7 +26779,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x122ebb068"
+## [1] "0x12033c368"
 \end{verbatim}
 
 \begin{Shaded}
@@ -26311,7 +26823,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120f85630" "0x120f85630"
+## [1] "0x1226b6298" "0x1226b6298"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -26350,7 +26862,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120f85630" "0x120f85630"
+## [1] "0x1226b6298" "0x1226b6298"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -26392,7 +26904,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120f85630" "0x1283d9508"
+## [1] "0x1226b6298" "0x1116f9740"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

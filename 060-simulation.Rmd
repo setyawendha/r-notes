@@ -156,6 +156,81 @@ In our Monte Carlo simulations so far, we have seen that the more times we repea
 
 This is no accident: in fact, it is a consequence of a theorem in the subject of probability that is known as the *Law of Large Numbers*.  We do not possess the mathematical machinery necessary to state the Law precisely---much less prove it---but we can take the rough statement given here as an assurance that the more repetitions we include in our simulation, the more accurate the resulting estimate is liable to be.
 
+### Practice Exercises
+
+1. Consider the following game:  you roll a fair die.  If you get one or two spots, then you lose a dollar.  If you get three, four, or five spots then nothing happens.  If you get six spots then you win three dollars.  You would like to know how much money you can expect to win per play of the game, on average.
+
+    Write a function called `diceGameSim()` that will help you answer the question.  The function should take the following parameter:
+    
+    * `reps`:  the number of times to repeat the simulation.  The default value should be 10000.
+    
+    The function should return an estimate of the expected value of the game.
+    
+2. You command a Klingon vessel, and you are shooting photon torpedoes at the Starship *USS Enterprise*.  Every torpedo you fire has a strength $s$ that is a random real number between 0 and 12.  If the strength of the torpedo is less than or equal to 5, then the Enterprise's shields will ward off any damage.  However, if the strength $s$ exceeds 5, then the damage inflicted on the Enterprise will be $12-s$ units.  What is the expected amount of damage done to the Enterprise, per shot?  Write a function called `photonTorpedoSim()` that estimates the expected damage.  The function should take the following parameter:
+
+    * `reps`:  the number of times to repeat the process of firing at the Enterprise.  The default value should be 10000.
+    
+    The function should return the estimated expected value.
+    
+### Solutions to the Practice Exercises
+
+1.  Here's the code:
+
+    ```{r}
+    diceGameSim <- function(reps) {
+      w <- c(-1, 0, 3)
+      pw <- c(2/6, 3/6, 1/6)
+      winnings <- sample(w, size = reps, 
+                         replace = TRUE,
+                         prob = pw)
+      mean(winnings)
+    }
+    ```
+    
+    Let's try it out:
+    
+    ```{r cache = TRUE}
+    set.seed(3838)
+    diceGameSim(reps = 100000)
+    ```
+    
+    Our estimate, based on one hundred thousand repetitions of the game, is that you can expect to win about 16.55 cents per game.  (In fact the exact expected value is $1/6$ of a dollar.)
+    
+2. Here's the code, if you use the `pmax()` function:
+
+    ```{r}
+    photonTorpedoSim <- function(reps) {
+      strengths <- runif(reps, min = 0, max = 12)
+      damage <- pmax(0, strengths - 5)
+      mean(damage)
+    }
+    ```
+    
+    Let's try it out:
+    
+    ```{r cache = TRUE}
+    set.seed(3838)
+    photonTorpedoSim(reps = 100000)
+    ```
+    
+    You can expect to do about 2.04 points worth of damage per shot.  (In fact the exact expected value is $49/24 \approx 2.04167$.)
+    
+    Here's the code if you used a loop instead:
+
+    ```{r}
+    photonTorpedoSim <- function(reps) {
+      damage <- numeric(reps)
+      for ( i in 1:reps )
+        strength <- runif(1, min = 0, max = 12)
+        if ( shot > 5 ) {
+          damage[i] <- strength - 5
+        } else {
+          damage[i] <- 0
+        }
+      mean(damage)
+    }
+    ```    
+
 ## Example:  Chance of a Triangle {#triangle-chance}
 
 In the examples considered so far, intuition or a simple calculation suggests what the exact value of the probability or expected value should be.  The true power of the Monte Carlo simulation method shines forth in situations where it is difficult or impossible to compute a value mathematically.
@@ -386,6 +461,110 @@ estimates
 ```
 
 The estimates are indeed getting closer to the theoretical value of $1/4$.^[Statistical theory tells us that when we use Monte Carlo simulation to estimate a probability or an expected value, then the likely size of the error in the approximation is inversely proportional to the square root of the number of repetitions we use.  From this it follows that to cut the likely size of the error in half you should increase the number of repetitions by a factor of 4.  If you want the likely size to be one-third as big, increase repetitions by a factor of 9, and so on.]
+
+### Practice Exercises
+
+1. Rewrite the `diceGameSim()` function from the previous section so that, just as we did with the `triangleSim()` function in this section:
+
+    * it allows the user to set a seed;
+    * it returns the estimated expected value invisibly, and has a `verbose` option to `cat` the estimate out to the Console.
+    
+2. Rewrite the `photonTorpedoSim()` function from the previous section so that, just as we did with the `triangleSim()` function in this section:
+
+    * it allows the user to set a seed;
+    * it returns the estimated expected value invisibly, and has a `verbose` option to `cat` the estimate out to the Console.
+    
+3. Extend the `photonTorpedoSim()` just a bit more, by adding two new parameters:
+
+    * `shield`:  the level at which the Enterpise's shields are set.  (If the strength of the torpedo is less than `shield`, then there is zero damage.)  The default value of `shield` should be 5.
+    * `upper`:  the upper bound on the strenght of a torpedo-shot.  (That is, a tropedo shot will be a random real number from 0 to `upper`.)  The default value of `upper` should be 10.
+    
+    The program should stop with a helpful message if the user sets `upper` or `shield` to a negative number.`
+
+### Solutions to Practice Exercises
+
+1.  Here's the code:
+
+    ```{r}
+    diceGameSim <- function(reps, seed = NULL, verbose = TRUE) {
+      if (!is.null(seed) ) {
+        set.seed(seed)
+      }
+      w <- c(-1, 0, 3)
+      pw <- c(2/6, 3/6, 1/6)
+      winnings <- sample(w, size = reps, 
+                         replace = TRUE,
+                         prob = pw)
+      if ( verbose ) {
+        cat("The expected amount to win is about ",
+            mean(winnings), ".\n", sep = "")
+      }
+      invisible(mean(winnings))
+    }
+    ```
+    
+    Let's try it out:
+    
+    ```{r cache = TRUE}
+    diceGameSim(reps = 100000, seed = 5252)
+    ```
+    
+2. Here's the code, if you use the `pmax()` function:
+
+    ```{r}
+    photonTorpedoSim <- function(reps, seed = NULL, verbose = TRUE) {
+      if (!is.null(seed) ) {
+        set.seed(seed)
+      }
+      strengths <- runif(reps, min = 0, max = 12)
+      damage <- pmax(0, strengths - 5)
+      if ( verbose ) {
+        cat("The expected damage is about ",
+            mean(damage), " units.\n", sep = "")
+      }
+      invisible(mean(damage))
+    }
+    ```
+    
+    Let's try it out:
+    
+    ```{r cache = TRUE}
+    photonTorpedoSim(reps = 100000, seed = 4040)
+    ```
+    
+3.  Here's the code:
+
+    ```{r}
+    photonTorpedoSim <- function(reps, seed = NULL, verbose = TRUE,
+                                 shield = 5, upper = 10) {
+      if (!is.null(seed) ) {
+        set.seed(seed)
+      }
+      if ( upper < 0 ) {
+        return(cat("Upper bound on torpedo strength cannot be a negative number!"))
+      }
+      if ( shield < 0 ) {
+        return(cat("Shield strength cannot be set to a negative number!"))
+      }
+      if (!is.null(seed) ) {
+        set.seed(seed)
+      }
+      strengths <- runif(reps, min = 0, max = upper)
+      damage <- pmax(0, strengths - shield)
+      if ( verbose ) {
+        cat("The expected damage is about ",
+            mean(damage), " units.\n", sep = "")
+      }
+      invisible(mean(damage))
+    }
+    ```
+    
+    Let's try it out:
+    
+    ```{r cache = TRUE}
+    photonTorpedoSim(reps = 100000, seed = 4040,
+                     upper = 15, shield = 12)
+    ```
 
 ## Example:  Will They Connect? {#simulation-connect}
 
@@ -711,6 +890,75 @@ courtSim2(reps = 100000, seed = 3838, table = TRUE)
 ```
 
 Hey!  That's a *lower* chance of success than before!  The difference is small but significant:  compelling the weakest judge to vote with the strongest judge actually *decreased* the court's chance of rendering a correct verdict overall.  This circumstance is sometimes called the Appeals Court Paradox, but it occurs in many other practical situations.  More often than you might think, the benefit of independent voting can outweigh the advantage associated with relying solely on a small number of "experts."
+
+### Practice Exercises
+
+1.  Use `rbinom()` to simulate taking twenty free throws, where you have a 70% chance to make each shot.  Your simulation should produce a vector of 20 ones and zeros, where  1 stands for making the shot and 0 stands for missing it.
+
+2. Use `rbinom()` to simulate taking twenty free throws, where you have a 70% chance to make each shot, and counting up how many shots you make.  Your simulation should produce a vector of length one that represents the number of shots you made.
+
+3. Every morning  for 100 mornings in a row you take twenty free throws.  You have a 70% chance to make each shot, and you alway count up how many shots you make.  Use `rbinom()` to simulate the counts.  Your simulation should produce a vector of length 100 where the first element represents the number of shots you made on day 1, the second element represents the number of shots you made on day 2, etc.
+
+4.  You have a 70% chance to make each free throw shot you take.  Your friend Lester has a 60% chance to make each shot.  Both of you will take 20 shots.  You are interested in knowing the probability that you will make more shots than Lester does.  Write a function called `freeThrowSim()` that will help you estimate this probability.  The function should take two parameters:
+
+    * `seed`, so that the user can set a seed;
+    * `reps`, the number of times to simulate a competition between you and Lester.
+    
+    The function should return the estimated probability.
+
+### Solutions to the Practice Exercises
+
+1. Try this:
+
+    ```{r}
+    rbinom(20, size = 1, prob = 0.70)
+    ```
+    
+2. Try this:
+
+    ```{r}
+    rbinom(1, size = 20, prob = 0.70)
+    ```
+    
+3. Try this:
+
+    ```{r eval = FALSE}
+    rbinom(100, size = 20, prob = 0.70)
+    ```
+
+4. Here's the function if you decide to use a loop:
+
+    ```{r}
+    freeThrowSim <- function(reps, seed) {
+      youWin <- logical(reps)
+      for ( i in 1:reps ) {
+        youMake <- rbinom(1, size = 20, prob = 0.70)
+        lesterMakes <- rbinom(1, size = 20, prob = 0.60)
+        youWin[i] <- (youMake > lesterMakes)
+      }
+      mean(youWin)
+    }
+    ```
+    
+    Here's the function if you vectorize:
+
+    ```{r}
+    freeThrowSim <- function(reps, seed) {
+      youMake <- rbinom(reps, size = 20, prob = 0.70)
+      lesterMakes <- rbinom(reps, size = 20, prob = 0.60)
+      youWin<- (youMake > lesterMakes)
+      mean(youWin)
+    }
+    ```
+    
+    Let's try it:
+    
+    ```{r cache = TRUE}
+    freeThrowSim(reps = 100000, seed = 3535)
+    ```
+    
+    You have nearly a 70% chance to make more shots than Lester.
+    
 
 ## Example:  How Many Numbers Needed? {#simulation-number-needed}
 

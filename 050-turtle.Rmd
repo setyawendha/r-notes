@@ -586,6 +586,65 @@ turtle_drunk(100, 5)
 
 It is natural to wonder how likely the turtle is to wander back close to where it started, and to wonder how often that will happen.  We will address questions like these in Chapter \@ref(simulation).
 
+### Practice Exercises
+
+These exercises don't deal directly with turtles, but instead drill you on the `sample()` and runif()` functions.
+
+1. Write a call to the `sample()` function so that it will pick a whole number at random from 1 to 10.  Each number should have the same chance to be selected.
+
+1. Write a call to the `sample()` function that will pick five numbers at random from the whole numbers from 1 to 10.  On each pick, each of the ten numbers should have a 1-in-10 chance to be selected.
+
+1. Write a call to the `sample()` function that will pick five numbers at random from the whole numbers from 1 to 10.  It should not be possible to get the same number twice.
+
+1. Write a call to the `sample()` function that scrambles the whole numbers from 1 to 10 in a random order.
+
+1. Write a call to the `sample()` functions that randomly re-orders the lowercase letters of the English alphabet.
+
+1.  The function `color()` produces a character vector of the named colors that R is prepared to draw.  Run it at the Console:
+
+    ```{r eval=FALSE}
+    colors()
+    ```
+    
+    How many named colors are there?  Let's let R find out for us:
+    
+    ```{r}
+    length(colors())
+    ```
+    
+    Write a call to the `samplr()` function that will pick a single named color at random.
+    
+1. Write a call to `runif()` that will produce a single random real number between 0 and 1.
+
+1. Write a call to `runif()` that will produce 20 random real numbers between 0 and 1.
+
+1. Write a call to `runif()` that will produce 30 random real numbers, each of them between 10 and 15.
+
+1. You enter a forest where there are many sticks on the ground.  Each of them is equally likely to be anywhere between 0 and 10 feet long.  You pick up five sticks at random. Write a one-line R-command that produces the length of shortest stick that you pick up.
+
+
+### Solutions to the Practice Exercises
+
+1. `sample(1:10, size = 1)`
+
+1. `sample(1:10, size = 5, replace = TRUE)`
+
+1. `sample(1:10, size = 5, replace = FALSE)`
+
+1. `sample(1:10, size = 10, replace = FALSE)`
+
+1. `sample(letters, size = length(letters), replace = FALSE)`
+
+1. `sample(colors(), size = 1)`
+
+1. `runif()`
+
+1. `runif(20)`
+
+1. `runif(30, min = 10, max = 15)`
+
+1. `min(runif(5, min = 0, max = 10))`
+
 ## More Complex Turtle Graphs
 
 Simple instructions, when combined with looping, can produce quite complex patterns.  Consider the following process (with results shown in Figure \@ref(fig:turtle-zany)):
