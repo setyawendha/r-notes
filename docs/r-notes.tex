@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-08}
+  \date{2017-11-14}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -6563,8 +6563,8 @@ number of other environments:
 ##  [9] "package:Matrix"         "package:ggformula"     
 ## [11] "package:dplyr"          "package:lattice"       
 ## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:ggplot2"       
-## [17] "package:mosaicData"     "tools:rstudio"         
+## [15] "package:grid"           "package:mosaicData"    
+## [17] "package:ggplot2"        "tools:rstudio"         
 ## [19] "package:stats"          "package:graphics"      
 ## [21] "package:grDevices"      "package:utils"         
 ## [23] "package:datasets"       "package:methods"       
@@ -6674,7 +6674,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10bd55978>
+## <bytecode: 0x114fb53b8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -10664,23 +10664,6 @@ code for a function that makes squares:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{turtle_square <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(side) \{ }
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{) \{}
-    \KeywordTok{turtle_forward}\NormalTok{(side)}
-    \KeywordTok{turtle_right}\NormalTok{(}\DecValTok{90}\NormalTok{) }
-\NormalTok{  \}}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-Note that the user can vary the length of a side.
-
-Functions are nice, but note that \texttt{turtle\_do()} cannot be used
-freely inside of them. For example, suppose you were to write the
-square-making function as follows:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{turtle_square <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(side) \{ }
   \KeywordTok{turtle_do}\NormalTok{(\{}
     \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{) \{}
       \KeywordTok{turtle_forward}\NormalTok{(side)}
@@ -10691,24 +10674,15 @@ square-making function as follows:
 \end{Highlighting}
 \end{Shaded}
 
-Attempting to use the function would result in an error:
+Note that the user can vary the length of a side. You would use it like
+this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{turtle_init}\NormalTok{()}
-\KeywordTok{turtle_square}\NormalTok{(}\DecValTok{50}\NormalTok{)}
+\KeywordTok{turtle_init}\NormalTok{(}\DataTypeTok{mode =} \StringTok{"clip"}\NormalTok{)}
+\KeywordTok{turtle_square}\NormalTok{(}\DataTypeTok{side =} \DecValTok{30}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
- Error in stopifnot(is.numeric(distance), 
-   length(distance) == 1, is.finite(distance)) : 
-  object 'side' not found 
-\end{verbatim}
-
-\texttt{turtle\_do()} cannot find the side-length argument that was
-passed into the function. Although \texttt{turtle\_do()} can appear
-inside of functions, it has to work on literal values, not on variables.
 
 \section{Random Moves}\label{random-moves}
 
@@ -16710,7 +16684,8 @@ the value \texttt{NULL}.
   package on your search path, if you want to get to the original
   \texttt{CPS85} you will either have to refer to it as
   \texttt{mosaicData::CPS85}. Another option, though, is to remove the
-  modified copy from your Global Environment. Go ahead an remove it now.
+  modified copy from your Global Environment. Go ahead and remove it
+  now.
 \end{enumerate}
 
 \subsection{Solutions to Practice
@@ -17818,7 +17793,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::SwimRecords}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-725-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-724-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -17836,7 +17811,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::KidsFeet}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-726-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-725-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -17854,7 +17829,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::Galton}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-727-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-726-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -18601,15 +18576,15 @@ In the exercises of this Chapter we will meet a case in which
 \item
   With \texttt{mosaicData::SwimRecords}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-733-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-732-1} \end{center}
 \item
   With \texttt{mosaicData::KidsFeet}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-734-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-733-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-735-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-734-1} \end{center}
 
   \textbf{Hint:} Make the call \texttt{geom\_point(alpha\ =\ 0.2)}. The
   \texttt{alpha} parameter has a default-value of 1. The lower you set
@@ -18621,11 +18596,11 @@ In the exercises of this Chapter we will meet a case in which
   for the boxes is set to \texttt{"burlywood"}. The x-location is mapped
   to \texttt{factor(smoke)}, rather than to \texttt{smoke}.
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-736-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-735-1} \end{center}
 \item
   With \texttt{mosaicData::Galton}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-737-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-736-1} \end{center}
 
   \textbf{Hint}: The fill of the density plot is set to
   \texttt{"burlywood"}. The rug is made of randomly jittered
@@ -18928,10 +18903,9 @@ We can re-map as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{fires <-}\StringTok{ }\NormalTok{firesetting}\OperatorTok{$}\NormalTok{fires}
-\NormalTok{fires <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(fires, }\DataTypeTok{from =} \KeywordTok{c}\NormalTok{(}\StringTok{"0"}\NormalTok{, }\StringTok{"1"}\NormalTok{),}
+\NormalTok{betterFires <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(firesetting}\OperatorTok{$}\NormalTok{fires, }\DataTypeTok{from =} \KeywordTok{c}\NormalTok{(}\StringTok{"0"}\NormalTok{, }\StringTok{"1"}\NormalTok{),}
                          \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"no fires"}\NormalTok{, }\StringTok{"sets fires"}\NormalTok{))}
-\NormalTok{firesetting}\OperatorTok{$}\NormalTok{fires <-}\StringTok{ }\NormalTok{fires}
+\NormalTok{firesetting}\OperatorTok{$}\NormalTok{betterFires <-}\StringTok{ }\NormalTok{betterFires}
 \end{Highlighting}
 \end{Shaded}
 
@@ -18956,8 +18930,8 @@ follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{race <-}\StringTok{ }\NormalTok{firesetting}\OperatorTok{$}\NormalTok{race}
-\NormalTok{race[}\KeywordTok{is.na}\NormalTok{(race)] <-}\StringTok{ "Unknown"}
+\NormalTok{tempRace <-}\StringTok{ }\NormalTok{firesetting}\OperatorTok{$}\NormalTok{race}
+\NormalTok{tempRace[}\KeywordTok{is.na}\NormalTok{(tempRace)] <-}\StringTok{ "Unknown"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -18966,7 +18940,7 @@ three ``possible values'', as given by its levels:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{levels}\NormalTok{(race)}
+\KeywordTok{levels}\NormalTok{(tempRace)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -18974,25 +18948,25 @@ three ``possible values'', as given by its levels:
 ## [1] "white" "black" "other"
 \end{verbatim}
 
-``Unknown'' is not considered a ``possible value'' for \texttt{race},
-any attempt to set that value in any elements of \texttt{race} will be
-resisted.
+``Unknown'' is not considered a ``possible value'' for
+\texttt{tempRace}, any attempt to set that value in any elements of
+\texttt{tempRace} will be resisted.
 
-We can overcome this resistance by coercing \texttt{race} into a mere
-character-vector:
+We can overcome this resistance by coercing \texttt{tempRace} into a
+mere character-vector:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{race <-}\StringTok{ }\KeywordTok{as.character}\NormalTok{(race)}
+\NormalTok{tempRace <-}\StringTok{ }\KeywordTok{as.character}\NormalTok{(tempRace)}
 \end{Highlighting}
 \end{Shaded}
 
-Now \texttt{race} doesn't come with a limit on its ``possible values''.
-We try again:
+Now \texttt{tempRace} doesn't come with a limit on its ``possible
+values''. We try again:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{race[}\KeywordTok{is.na}\NormalTok{(race)] <-}\StringTok{ "Unknown"}
+\NormalTok{tempRace[}\KeywordTok{is.na}\NormalTok{(tempRace)] <-}\StringTok{ "Unknown"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -19000,7 +18974,7 @@ This apparently worked. Let's check:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{unique}\NormalTok{(race)}
+\KeywordTok{unique}\NormalTok{(tempRace)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -19012,23 +18986,46 @@ So far, so good. Now let's re-map the other three values:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{race <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(race,}
+\NormalTok{tempRace2 <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(tempRace,}
                         \DataTypeTok{from =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"other"}\NormalTok{),}
                         \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"White"}\NormalTok{, }\StringTok{"AfrAm"}\NormalTok{, }\StringTok{"Other"}\NormalTok{))}
-\NormalTok{firesetting}\OperatorTok{$}\NormalTok{race <-}\StringTok{ }\NormalTok{race}
 \end{Highlighting}
 \end{Shaded}
 
-Let's try it the graph again. Figure \ref{fig:firesetting2} is the
-result.
+Let's check that it worked:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(firesetting, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ race, }\DataTypeTok{y =}\NormalTok{ school.attitude)) }\OperatorTok{+}
+\KeywordTok{unique}\NormalTok{(tempRace2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "White"   "Other"   "Unknown" "AfrAm"
+\end{verbatim}
+
+Great. Now let's add \texttt{tempRace2} as a new variable into
+\texttt{firsetting}. In that data frame, it will be called
+\texttt{betterRace}. Here's the code to do this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{firesetting}\OperatorTok{$}\NormalTok{betterRace <-}\StringTok{ }\NormalTok{tempRace2}
+\end{Highlighting}
+\end{Shaded}
+
+Let's try the graph again. We will need to modify the code a bit, so
+that we're using the new and improved variable \texttt{betterRace}, as
+well as the new variable \texttt{betterFires}. Figure
+\ref{fig:firesetting2} is the result.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(firesetting, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ betterRace, }\DataTypeTok{y =}\NormalTok{ school.attitude)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{, }
                \DataTypeTok{outlier.alpha =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_jitter}\NormalTok{(}\DataTypeTok{width =} \FloatTok{0.20}\NormalTok{, }\DataTypeTok{size =} \FloatTok{0.1}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{fires, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{betterFires, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Ethnicity"}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{"School-Attitude Score"}\NormalTok{)}
 \end{Highlighting}
@@ -19048,27 +19045,29 @@ desired. Recall that \texttt{race} is now a character vector only. Since
 it doesn't have levels that specify a particular order, \textbf{ggplot2}
 uses alphabetical order as the default ordering along the x-axis.
 
-Accordingly we should convert \texttt{race} to a factor variable, and be
-careful to set the levels in the order that we want:
+Accordingly we should convert \texttt{betterRace} to a factor variable,
+and be careful to set the levels in the order that we want:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{race <-}\StringTok{ }\NormalTok{firesetting}\OperatorTok{$}\NormalTok{race}
-\NormalTok{race <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(race,}
+\NormalTok{tempRace <-}\StringTok{ }\NormalTok{firesetting}\OperatorTok{$}\NormalTok{betterRace}
+\NormalTok{betterRace2 <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(tempRace,}
                \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"White"}\NormalTok{, }\StringTok{"AfrAm"}\NormalTok{, }\StringTok{"Other"}\NormalTok{, }\StringTok{"Unknown"}\NormalTok{))}
-\NormalTok{firesetting}\OperatorTok{$}\NormalTok{race <-}\StringTok{ }\NormalTok{race}
+\NormalTok{firesetting}\OperatorTok{$}\NormalTok{evenBetterRace <-}\StringTok{ }\NormalTok{betterRace2}
 \end{Highlighting}
 \end{Shaded}
 
-Now try again (see Figure \ref{fig:firesetting3}) for the result.
+Now try again. Note that in the code below we switch to
+\texttt{evenBetterRace}. See Figure \ref{fig:firesetting3} for the
+result.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(firesetting, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ race, }\DataTypeTok{y =}\NormalTok{ school.attitude)) }\OperatorTok{+}
+\KeywordTok{ggplot}\NormalTok{(firesetting, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ evenBetterRace, }\DataTypeTok{y =}\NormalTok{ school.attitude)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{, }
                \DataTypeTok{outlier.alpha =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_jitter}\NormalTok{(}\DataTypeTok{width =} \FloatTok{0.20}\NormalTok{, }\DataTypeTok{size =} \FloatTok{0.1}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{fires, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{betterFires, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Ethnicity"}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{"School-Attitude Score"}\NormalTok{)}
 \end{Highlighting}
@@ -19093,20 +19092,20 @@ This works!
   With \texttt{mosaicData::KidsFeet}, make the following graph.
   (\textbf{Hint}: Use \texttt{plyr::mapvalues()}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-760-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-761-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph.
   (\textbf{Hint}: Use \texttt{cut()} to make age groups. The fill for
   the boxes is the ever-popular \texttt{"burlywood"}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-761-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-762-1} \end{center}
 \item
   With \texttt{mosaicData::Gestation}, make the following graph.
   (\textbf{Hint}: Use \texttt{!is.na()} to select the rows of
   \texttt{Gestation} where \texttt{smoke} is not \texttt{NA}. Then use
   \texttt{plyr::mapvalues()} on \texttt{smoke}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-762-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-763-1} \end{center}
 \end{enumerate}
 
 \subsection{Solutions to Practice
@@ -19120,16 +19119,16 @@ Exercises}\label{solutions-to-practice-exercises-14}
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{data}\NormalTok{(}\StringTok{"KidsFeet"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"mosaicData"}\NormalTok{)}
-\NormalTok{biggerfoot <-}\StringTok{ }\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{biggerfoot}
-\NormalTok{biggerfoot <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(biggerfoot, }\KeywordTok{c}\NormalTok{(}\StringTok{"L"}\NormalTok{, }\StringTok{"R"}\NormalTok{),}
+\NormalTok{tempBiggerfoot <-}\StringTok{ }\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{biggerfoot}
+\NormalTok{biggerfoot2 <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(tempBiggerfoot, }\KeywordTok{c}\NormalTok{(}\StringTok{"L"}\NormalTok{, }\StringTok{"R"}\NormalTok{),}
                      \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"left foot"}\NormalTok{, }\StringTok{"right foot"}\NormalTok{))}
-\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{biggerfoot <-}\StringTok{ }\NormalTok{biggerfoot}
-\NormalTok{domhand <-}\StringTok{ }\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{domhand}
-\NormalTok{domhand <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(domhand, }\DataTypeTok{from =} \KeywordTok{c}\NormalTok{(}\StringTok{"L"}\NormalTok{, }\StringTok{"R"}\NormalTok{),}
+\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{betterBiggerfoot <-}\StringTok{ }\NormalTok{biggerfoot2}
+\NormalTok{tempDomhand <-}\StringTok{ }\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{domhand}
+\NormalTok{domhand2 <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(tempDomhand, }\DataTypeTok{from =} \KeywordTok{c}\NormalTok{(}\StringTok{"L"}\NormalTok{, }\StringTok{"R"}\NormalTok{),}
                      \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"left hand"}\NormalTok{, }\StringTok{"right hand"}\NormalTok{))}
-\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{domhand <-}\StringTok{ }\NormalTok{domhand}
-\KeywordTok{ggplot}\NormalTok{(KidsFeet, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ biggerfoot)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ domhand), }\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\NormalTok{KidsFeet}\OperatorTok{$}\NormalTok{betterDomhand <-}\StringTok{ }\NormalTok{domhand2}
+\KeywordTok{ggplot}\NormalTok{(KidsFeet, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ betterBiggerfoot)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ betterDomhand), }\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"the bigger foot"}\NormalTok{,}
        \DataTypeTok{title =} \StringTok{"Foot-size and Handedness for 39 Children"}\NormalTok{,}
        \DataTypeTok{subtitle =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"When your right foot is bigger, "}\NormalTok{,}
@@ -19142,17 +19141,18 @@ Exercises}\label{solutions-to-practice-exercises-14}
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{data}\NormalTok{(}\StringTok{"TenMileRace"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"mosaicData"}\NormalTok{)}
-\NormalTok{sex <-}\StringTok{ }\NormalTok{TenMileRace}\OperatorTok{$}\NormalTok{sex}
-\NormalTok{sex <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(sex, }\DataTypeTok{from =} \KeywordTok{c}\NormalTok{(}\StringTok{"F"}\NormalTok{, }\StringTok{"M"}\NormalTok{),}
+\NormalTok{tempSex <-}\StringTok{ }\NormalTok{TenMileRace}\OperatorTok{$}\NormalTok{sex}
+\NormalTok{sex2 <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(tempSex, }\DataTypeTok{from =} \KeywordTok{c}\NormalTok{(}\StringTok{"F"}\NormalTok{, }\StringTok{"M"}\NormalTok{),}
                        \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"female"}\NormalTok{, }\StringTok{"male"}\NormalTok{))}
-\NormalTok{TenMileRace}\OperatorTok{$}\NormalTok{sex <-}\StringTok{ }\NormalTok{sex}
+\NormalTok{TenMileRace}\OperatorTok{$}\NormalTok{betterSex <-}\StringTok{ }\NormalTok{sex2}
 \NormalTok{ageGroup <-}\StringTok{ }\KeywordTok{cut}\NormalTok{(TenMileRace}\OperatorTok{$}\NormalTok{age,}
                 \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{70}\NormalTok{, }\OtherTok{Inf}\NormalTok{),}
                 \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"<20"}\NormalTok{, }\StringTok{"20s"}\NormalTok{, }\StringTok{"30s"}\NormalTok{, }\StringTok{"40s"}\NormalTok{, }
                            \StringTok{"50s"}\NormalTok{, }\StringTok{"60s"}\NormalTok{, }\StringTok{"70+"}\NormalTok{))}
+\NormalTok{TenMileRace}\OperatorTok{$}\NormalTok{ageGroup <-}\StringTok{ }\NormalTok{ageGroup}
 \KeywordTok{ggplot}\NormalTok{(TenMileRace, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ ageGroup, }\DataTypeTok{y =}\NormalTok{ time)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_grid}\NormalTok{(sex }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_grid}\NormalTok{(betterSex }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Age Group"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"net time to finish (sec)"}\NormalTok{,}
        \DataTypeTok{title =} \StringTok{"Ten-Mile Race Times"}\NormalTok{)}
 \end{Highlighting}
@@ -19164,13 +19164,13 @@ Exercises}\label{solutions-to-practice-exercises-14}
 \begin{Highlighting}[]
 \KeywordTok{data}\NormalTok{(}\StringTok{"Gestation"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"mosaicData"}\NormalTok{)}
 \NormalTok{Gestation <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(Gestation, }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(smoke))}
-\NormalTok{smoke <-}\StringTok{ }\NormalTok{Gestation}\OperatorTok{$}\NormalTok{smoke}
-\NormalTok{smoke <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(smoke, }\DataTypeTok{from =} \DecValTok{0}\OperatorTok{:}\DecValTok{3}\NormalTok{,}
+\NormalTok{tempSmoke <-}\StringTok{ }\NormalTok{Gestation}\OperatorTok{$}\NormalTok{smoke}
+\NormalTok{smoke2 <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{mapvalues}\NormalTok{(tempSmoke, }\DataTypeTok{from =} \DecValTok{0}\OperatorTok{:}\DecValTok{3}\NormalTok{,}
                          \DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\StringTok{"never"}\NormalTok{, }\StringTok{"smokes now"}\NormalTok{,}
                                 \StringTok{"until curr. preg."}\NormalTok{,}
                                 \StringTok{"once smoked"}\NormalTok{))}
-\NormalTok{Gestation}\OperatorTok{$}\NormalTok{smoke <-}\StringTok{ }\NormalTok{smoke}
-\KeywordTok{ggplot}\NormalTok{(Gestation, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{factor}\NormalTok{(smoke), }\DataTypeTok{y =}\NormalTok{ wt)) }\OperatorTok{+}
+\NormalTok{Gestation}\OperatorTok{$}\NormalTok{betterSmoke <-}\StringTok{ }\NormalTok{smoke2}
+\KeywordTok{ggplot}\NormalTok{(Gestation, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{factor}\NormalTok{(betterSmoke), }\DataTypeTok{y =}\NormalTok{ wt)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"smoking status of mother"}\NormalTok{,}
        \DataTypeTok{y =} \StringTok{"birth weight (ounces)"}\NormalTok{,}
@@ -26695,7 +26695,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12033c368"
+## [1] "0x118139088"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -26709,7 +26709,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12033c368"
+## [1] "0x118139088"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -26748,7 +26748,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12033c368"
+## [1] "0x118139088"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -26761,7 +26761,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11a22faf8"
+## [1] "0x128b574c8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -26779,7 +26779,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12033c368"
+## [1] "0x118139088"
 \end{verbatim}
 
 \begin{Shaded}
@@ -26823,7 +26823,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1226b6298" "0x1226b6298"
+## [1] "0x129cf0cd8" "0x129cf0cd8"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -26862,7 +26862,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1226b6298" "0x1226b6298"
+## [1] "0x129cf0cd8" "0x129cf0cd8"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -26904,7 +26904,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1226b6298" "0x1116f9740"
+## [1] "0x129cf0cd8" "0x1149fa5b8"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
@@ -28856,7 +28856,7 @@ or the type of object to which it is applied.
   distance from the origin is \(\sqrt{x^2 + y^2}\).)
 \end{enumerate}
 
-\bibliography{packages.bib,book.bib}
+\bibliography{book.bib,packages.bib}
 
 \backmatter
 \printindex

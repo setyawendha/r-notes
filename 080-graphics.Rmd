@@ -941,10 +941,9 @@ We can re-map as follows:
 
 
 ```{r}
-fires <- firesetting$fires
-fires <- plyr::mapvalues(fires, from = c("0", "1"),
+betterFires <- plyr::mapvalues(firesetting$fires, from = c("0", "1"),
                          to = c("no fires", "sets fires"))
-firesetting$fires <- fires
+firesetting$betterFires <- betterFires
 ```
 
 For `race`, we'd like to substitute
@@ -959,82 +958,93 @@ We'd like the order along the horizontal axis to remain as it is.
 We might begin by replacing the `NA`-values with "Unknown", as follows:
 
 ```{r echo=FALSE}
-race <- firesetting$race
+tempRace <- firesetting$race
 ```
 
 
 ```{r eval=FALSE}
-race <- firesetting$race
-race[is.na(race)] <- "Unknown"
+tempRace <- firesetting$race
+tempRace[is.na(tempRace)] <- "Unknown"
 ```
 
 We get an error!  That's because `race` is a factor with only three "possible values", as given by its levels:
 
 ```{r}
-levels(race)
+levels(tempRace)
 ```
 
-"Unknown" is not considered a "possible value" for `race`, any attempt to set that value in any elements of `race` will be resisted.
+"Unknown" is not considered a "possible value" for `tempRace`, any attempt to set that value in any elements of `tempRace` will be resisted.
 
-We can overcome this resistance by coercing `race` into a mere character-vector:
+We can overcome this resistance by coercing `tempRace` into a mere character-vector:
 
 ```{r}
-race <- as.character(race)
+tempRace <- as.character(tempRace)
 ```
 
-Now `race` doesn't come with a limit on its "possible values".  We try again:
+Now `tempRace` doesn't come with a limit on its "possible values".  We try again:
 
 ```{r}
-race[is.na(race)] <- "Unknown"
+tempRace[is.na(tempRace)] <- "Unknown"
 ```
 
 This apparently worked.  Let's check:
 
 ```{r}
-unique(race)
+unique(tempRace)
 ```
 
 So far, so good.  Now let's re-map the other three values:
 
 ```{r}
-race <- plyr::mapvalues(race,
+tempRace2 <- plyr::mapvalues(tempRace,
                         from = c("white", "black", "other"),
                         to = c("White", "AfrAm", "Other"))
-firesetting$race <- race
 ```
 
-Let's try it the graph again.  Figure \@ref(fig:firesetting2) is the result.
+Let's check that it worked:
+
+```{r}
+unique(tempRace2)
+```
+
+Great.  Now let's add `tempRace2` as a new variable into `firsetting`.  In that data frame, it will be called `betterRace`.  Here's the code to do this:
+
+```{r}
+firesetting$betterRace <- tempRace2
+```
+
+Let's try the graph again.  We will need to modify the code a bit, so that we're using the new and improved variable `betterRace`, as well as the new variable `betterFires`.  Figure \@ref(fig:firesetting2) is the result.
 
 
 ```{r firesetting2, echo =TRUE, cache=TRUE, fig.cap = "We have re-mapped the fires and race variables."}
-ggplot(firesetting, aes(x = race, y = school.attitude)) +
+ggplot(firesetting, aes(x = betterRace, y = school.attitude)) +
   geom_boxplot(fill = "burlywood", 
                outlier.alpha = 0) + 
   geom_jitter(width = 0.20, size = 0.1) +
-  facet_wrap(~ fires, nrow = 2) +
+  facet_wrap(~ betterFires, nrow = 2) +
   labs(x = "Ethnicity",
        y = "School-Attitude Score")
 ```
 
 This looks better, but now the order along the x-axis isn't as we desired.  Recall that `race` is now a character vector only.  Since it doesn't have levels that specify a particular order, **ggplot2** uses alphabetical order as the default ordering along the x-axis.
 
-Accordingly we should convert `race` to a factor variable, and be careful to set the levels in the order that we want:
+Accordingly we should convert `betterRace` to a factor variable, and be careful to set the levels in the order that we want:
 
 ```{r}
-race <- firesetting$race
-race <- factor(race,
+tempRace <- firesetting$betterRace
+betterRace2 <- factor(tempRace,
                levels = c("White", "AfrAm", "Other", "Unknown"))
-firesetting$race <- race
+firesetting$evenBetterRace <- betterRace2
 ```
 
-Now try again (see Figure \@ref(fig:firesetting3)) for the result.
+Now try again.  Note that in the code below we switch to `evenBetterRace`.  See Figure \@ref(fig:firesetting3) for the result.
 
 ```{r firesetting3, echo =TRUE, cache=TRUE, fig.cap = "Now the order of the race-values is correct!"}
-ggplot(firesetting, aes(x = race, y = school.attitude)) +
+ggplot(firesetting, aes(x = evenBetterRace, y = school.attitude)) +
   geom_boxplot(fill = "burlywood", 
                outlier.alpha = 0) + 
   geom_jitter(width = 0.20, size = 0.1) +
-  facet_wrap(~ fires, nrow = 2) +
+  facet_wrap(~ betterFires, nrow = 2) +
   labs(x = "Ethnicity",
        y = "School-Attitude Score")
 ```
@@ -1047,16 +1057,16 @@ This works!
 
     ```{r cache=TRUE, echo=FALSE}
     data("KidsFeet", package = "mosaicData")
-    biggerfoot <- KidsFeet$biggerfoot
-    biggerfoot <- plyr::mapvalues(biggerfoot, c("L", "R"),
+    tempBiggerfoot <- KidsFeet$biggerfoot
+    biggerfoot2 <- plyr::mapvalues(tempBiggerfoot, c("L", "R"),
                          to = c("left foot", "right foot"))
-    KidsFeet$biggerfoot <- biggerfoot
-    domhand <- KidsFeet$domhand
-    domhand <- plyr::mapvalues(domhand, from = c("L", "R"),
+    KidsFeet$betterBiggerfoot <- biggerfoot2
+    tempDomhand <- KidsFeet$domhand
+    domhand2 <- plyr::mapvalues(tempDomhand, from = c("L", "R"),
                          to = c("left hand", "right hand"))
-    KidsFeet$domhand <- domhand
-    ggplot(KidsFeet, aes(x = biggerfoot)) +
-      geom_bar(aes(fill = domhand), position = "dodge") +
+    KidsFeet$betterDomhand <- domhand2
+    ggplot(KidsFeet, aes(x = betterBiggerfoot)) +
+      geom_bar(aes(fill = betterDomhand), position = "dodge") +
       labs(x = "the bigger foot",
            title = "Foot-size and Handedness for 39 Children",
            subtitle = paste0("When your right foot is bigger, ",
@@ -1067,17 +1077,18 @@ This works!
 
     ```{r cache=TRUE, echo=FALSE}
     data("TenMileRace", package = "mosaicData")
-    sex <- TenMileRace$sex
-    sex <- plyr::mapvalues(sex, from = c("F", "M"),
+    tempSex <- TenMileRace$sex
+    sex2 <- plyr::mapvalues(tempSex, from = c("F", "M"),
                            to = c("female", "male"))
-    TenMileRace$sex <- sex
+    TenMileRace$betterSex <- sex2
     ageGroup <- cut(TenMileRace$age,
                     breaks = c(-Inf, 20, 30, 40, 50, 60, 70, Inf),
                     labels = c("<20", "20s", "30s", "40s", 
                                "50s", "60s", "70+"))
+    TenMileRace$ageGroup <- ageGroup
     ggplot(TenMileRace, aes(x = ageGroup, y = time)) +
       geom_boxplot(fill = "burlywood") +
-      facet_grid(sex ~ .) +
+      facet_grid(betterSex ~ .) +
       labs(x = "Age Group", y = "net time to finish (sec)",
            title = "Ten-Mile Race Times")
     ```
@@ -1087,13 +1098,13 @@ This works!
     ```{r cache=TRUE, echo=FALSE}
     data("Gestation", package = "mosaicData")
     Gestation <- subset(Gestation, !is.na(smoke))
-    smoke <- Gestation$smoke
-    smoke <- plyr::mapvalues(smoke, from = 0:3,
+    tempSmoke <- Gestation$smoke
+    smoke2 <- plyr::mapvalues(tempSmoke, from = 0:3,
                              to = c("never", "smokes now",
                                     "until curr. preg.",
                                     "once smoked"))
-    Gestation$smoke <- smoke
-    ggplot(Gestation, aes(x = factor(smoke), y = wt)) +
+    Gestation$betterSmoke <- smoke2
+    ggplot(Gestation, aes(x = factor(betterSmoke), y = wt)) +
       geom_boxplot(fill = "burlywood") +
       labs(x = "smoking status of mother",
            y = "birth weight (ounces)",
@@ -1107,16 +1118,16 @@ This works!
 
     ```{r eval=FALSE}
     data("KidsFeet", package = "mosaicData")
-    biggerfoot <- KidsFeet$biggerfoot
-    biggerfoot <- plyr::mapvalues(biggerfoot, c("L", "R"),
+    tempBiggerfoot <- KidsFeet$biggerfoot
+    biggerfoot2 <- plyr::mapvalues(tempBiggerfoot, c("L", "R"),
                          to = c("left foot", "right foot"))
-    KidsFeet$biggerfoot <- biggerfoot
-    domhand <- KidsFeet$domhand
-    domhand <- plyr::mapvalues(domhand, from = c("L", "R"),
+    KidsFeet$betterBiggerfoot <- biggerfoot2
+    tempDomhand <- KidsFeet$domhand
+    domhand2 <- plyr::mapvalues(tempDomhand, from = c("L", "R"),
                          to = c("left hand", "right hand"))
-    KidsFeet$domhand <- domhand
-    ggplot(KidsFeet, aes(x = biggerfoot)) +
-      geom_bar(aes(fill = domhand), position = "dodge") +
+    KidsFeet$betterDomhand <- domhand2
+    ggplot(KidsFeet, aes(x = betterBiggerfoot)) +
+      geom_bar(aes(fill = betterDomhand), position = "dodge") +
       labs(x = "the bigger foot",
            title = "Foot-size and Handedness for 39 Children",
            subtitle = paste0("When your right foot is bigger, ",
@@ -1127,17 +1138,18 @@ This works!
 
     ```{r eval=FALSE}
     data("TenMileRace", package = "mosaicData")
-    sex <- TenMileRace$sex
-    sex <- plyr::mapvalues(sex, from = c("F", "M"),
+    tempSex <- TenMileRace$sex
+    sex2 <- plyr::mapvalues(tempSex, from = c("F", "M"),
                            to = c("female", "male"))
-    TenMileRace$sex <- sex
+    TenMileRace$betterSex <- sex2
     ageGroup <- cut(TenMileRace$age,
                     breaks = c(-Inf, 20, 30, 40, 50, 60, 70, Inf),
                     labels = c("<20", "20s", "30s", "40s", 
                                "50s", "60s", "70+"))
+    TenMileRace$ageGroup <- ageGroup
     ggplot(TenMileRace, aes(x = ageGroup, y = time)) +
       geom_boxplot(fill = "burlywood") +
-      facet_grid(sex ~ .) +
+      facet_grid(betterSex ~ .) +
       labs(x = "Age Group", y = "net time to finish (sec)",
            title = "Ten-Mile Race Times")
     ```
@@ -1148,13 +1160,13 @@ This works!
     ```{r eval=FALSE}
     data("Gestation", package = "mosaicData")
     Gestation <- subset(Gestation, !is.na(smoke))
-    smoke <- Gestation$smoke
-    smoke <- plyr::mapvalues(smoke, from = 0:3,
+    tempSmoke <- Gestation$smoke
+    smoke2 <- plyr::mapvalues(tempSmoke, from = 0:3,
                              to = c("never", "smokes now",
                                     "until curr. preg.",
                                     "once smoked"))
-    Gestation$smoke <- smoke
-    ggplot(Gestation, aes(x = factor(smoke), y = wt)) +
+    Gestation$betterSmoke <- smoke2
+    ggplot(Gestation, aes(x = factor(betterSmoke), y = wt)) +
       geom_boxplot(fill = "burlywood") +
       labs(x = "smoking status of mother",
            y = "birth weight (ounces)",

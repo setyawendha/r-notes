@@ -282,19 +282,6 @@ Once you have designed some shapes that you think you might want to draw again, 
 
 ```{r}
 turtle_square <- function(side) { 
-  for (i in 1:4) {
-    turtle_forward(side)
-    turtle_right(90) 
-  }
-}
-```
-
-Note that the user can vary the length of a side.
-
-Functions are nice, but note that `turtle_do()` cannot be used freely inside of them.  For example, suppose you were to write the square-making function as follows:
-
-```{r eval =FALSE}
-turtle_square <- function(side) { 
   turtle_do({
     for (i in 1:4) {
       turtle_forward(side)
@@ -304,20 +291,13 @@ turtle_square <- function(side) {
 }
 ```
 
-Attempting to use the function would result in an error:
+Note that the user can vary the length of a side.  You would use it like this:
 
 ```{r eval=FALSE}
-turtle_init()
-turtle_square(50)
+turtle_init(mode = "clip")
+turtle_square(side = 30)
 ```
 
-```
- Error in stopifnot(is.numeric(distance), 
-   length(distance) == 1, is.finite(distance)) : 
-  object 'side' not found 
-```
-
-`turtle_do()` cannot find the side-length argument that was passed into the function.  Although `turtle_do()` can appear inside of functions, it has to work on literal values, not on variables.
 
 ## Random Moves
 

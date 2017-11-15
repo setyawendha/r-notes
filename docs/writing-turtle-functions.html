@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-11-08">
+<meta name="date" content="2017-11-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -510,14 +510,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">5.3</span> Writing Turtle Functions</h2>
 <p>Once you have designed some shapes that you think you might want to draw again, you should write them up as functions. Here for example, is the code for a function that makes squares:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_square &lt;-<span class="st"> </span><span class="cf">function</span>(side) { 
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {
-    <span class="kw">turtle_forward</span>(side)
-    <span class="kw">turtle_right</span>(<span class="dv">90</span>) 
-  }
-}</code></pre></div>
-<p>Note that the user can vary the length of a side.</p>
-<p>Functions are nice, but note that <code>turtle_do()</code> cannot be used freely inside of them. For example, suppose you were to write the square-making function as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_square &lt;-<span class="st"> </span><span class="cf">function</span>(side) { 
   <span class="kw">turtle_do</span>({
     <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {
       <span class="kw">turtle_forward</span>(side)
@@ -525,13 +517,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     }
   })
 }</code></pre></div>
-<p>Attempting to use the function would result in an error:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>()
-<span class="kw">turtle_square</span>(<span class="dv">50</span>)</code></pre></div>
-<pre><code> Error in stopifnot(is.numeric(distance), 
-   length(distance) == 1, is.finite(distance)) : 
-  object &#39;side&#39; not found </code></pre>
-<p><code>turtle_do()</code> cannot find the side-length argument that was passed into the function. Although <code>turtle_do()</code> can appear inside of functions, it has to work on literal values, not on variables.</p>
+<p>Note that the user can vary the length of a side. You would use it like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
+<span class="kw">turtle_square</span>(<span class="dt">side =</span> <span class="dv">30</span>)</code></pre></div>
 </div>
             </section>
 

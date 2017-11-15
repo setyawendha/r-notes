@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-11-08">
+<meta name="date" content="2017-11-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -541,10 +541,9 @@ Figure 8.33: Boxplots with jittered individual values. School attitudes are gene
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(firesetting<span class="op">$</span>fires)</code></pre></div>
 <pre><code>## [1] &quot;0&quot; &quot;1&quot;</code></pre>
 <p>We can re-map as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fires &lt;-<span class="st"> </span>firesetting<span class="op">$</span>fires
-fires &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(fires, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>),
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">betterFires &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(firesetting<span class="op">$</span>fires, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>),
                          <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;no fires&quot;</span>, <span class="st">&quot;sets fires&quot;</span>))
-firesetting<span class="op">$</span>fires &lt;-<span class="st"> </span>fires</code></pre></div>
+firesetting<span class="op">$</span>betterFires &lt;-<span class="st"> </span>betterFires</code></pre></div>
 <p>For <code>race</code>, we’d like to substitute</p>
 <ul>
 <li>“White” for “white”;</li>
@@ -554,30 +553,34 @@ firesetting<span class="op">$</span>fires &lt;-<span class="st"> </span>fires</c
 </ul>
 <p>We’d like the order along the horizontal axis to remain as it is.</p>
 <p>We might begin by replacing the <code>NA</code>-values with “Unknown”, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race &lt;-<span class="st"> </span>firesetting<span class="op">$</span>race
-race[<span class="kw">is.na</span>(race)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace &lt;-<span class="st"> </span>firesetting<span class="op">$</span>race
+tempRace[<span class="kw">is.na</span>(tempRace)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre></div>
 <p>We get an error! That’s because <code>race</code> is a factor with only three “possible values”, as given by its levels:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(race)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(tempRace)</code></pre></div>
 <pre><code>## [1] &quot;white&quot; &quot;black&quot; &quot;other&quot;</code></pre>
-<p>“Unknown” is not considered a “possible value” for <code>race</code>, any attempt to set that value in any elements of <code>race</code> will be resisted.</p>
-<p>We can overcome this resistance by coercing <code>race</code> into a mere character-vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race &lt;-<span class="st"> </span><span class="kw">as.character</span>(race)</code></pre></div>
-<p>Now <code>race</code> doesn’t come with a limit on its “possible values”. We try again:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race[<span class="kw">is.na</span>(race)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre></div>
+<p>“Unknown” is not considered a “possible value” for <code>tempRace</code>, any attempt to set that value in any elements of <code>tempRace</code> will be resisted.</p>
+<p>We can overcome this resistance by coercing <code>tempRace</code> into a mere character-vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace &lt;-<span class="st"> </span><span class="kw">as.character</span>(tempRace)</code></pre></div>
+<p>Now <code>tempRace</code> doesn’t come with a limit on its “possible values”. We try again:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace[<span class="kw">is.na</span>(tempRace)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre></div>
 <p>This apparently worked. Let’s check:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(race)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(tempRace)</code></pre></div>
 <pre><code>## [1] &quot;white&quot;   &quot;other&quot;   &quot;Unknown&quot; &quot;black&quot;</code></pre>
 <p>So far, so good. Now let’s re-map the other three values:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(race,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempRace,
                         <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;other&quot;</span>),
-                        <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;White&quot;</span>, <span class="st">&quot;AfrAm&quot;</span>, <span class="st">&quot;Other&quot;</span>))
-firesetting<span class="op">$</span>race &lt;-<span class="st"> </span>race</code></pre></div>
-<p>Let’s try it the graph again. Figure <a href="factors-in-plotting.html#fig:firesetting2">8.34</a> is the result.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> race, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
+                        <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;White&quot;</span>, <span class="st">&quot;AfrAm&quot;</span>, <span class="st">&quot;Other&quot;</span>))</code></pre></div>
+<p>Let’s check that it worked:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(tempRace2)</code></pre></div>
+<pre><code>## [1] &quot;White&quot;   &quot;Other&quot;   &quot;Unknown&quot; &quot;AfrAm&quot;</code></pre>
+<p>Great. Now let’s add <code>tempRace2</code> as a new variable into <code>firsetting</code>. In that data frame, it will be called <code>betterRace</code>. Here’s the code to do this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">firesetting<span class="op">$</span>betterRace &lt;-<span class="st"> </span>tempRace2</code></pre></div>
+<p>Let’s try the graph again. We will need to modify the code a bit, so that we’re using the new and improved variable <code>betterRace</code>, as well as the new variable <code>betterFires</code>. Figure <a href="factors-in-plotting.html#fig:firesetting2">8.34</a> is the result.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> betterRace, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>, 
                <span class="dt">outlier.alpha =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.20</span>, <span class="dt">size =</span> <span class="fl">0.1</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>fires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>betterFires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Ethnicity&quot;</span>,
        <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:firesetting2"></span>
@@ -587,17 +590,17 @@ Figure 8.34: We have re-mapped the fires and race variables.
 </p>
 </div>
 <p>This looks better, but now the order along the x-axis isn’t as we desired. Recall that <code>race</code> is now a character vector only. Since it doesn’t have levels that specify a particular order, <strong>ggplot2</strong> uses alphabetical order as the default ordering along the x-axis.</p>
-<p>Accordingly we should convert <code>race</code> to a factor variable, and be careful to set the levels in the order that we want:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">race &lt;-<span class="st"> </span>firesetting<span class="op">$</span>race
-race &lt;-<span class="st"> </span><span class="kw">factor</span>(race,
+<p>Accordingly we should convert <code>betterRace</code> to a factor variable, and be careful to set the levels in the order that we want:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace &lt;-<span class="st"> </span>firesetting<span class="op">$</span>betterRace
+betterRace2 &lt;-<span class="st"> </span><span class="kw">factor</span>(tempRace,
                <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;White&quot;</span>, <span class="st">&quot;AfrAm&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Unknown&quot;</span>))
-firesetting<span class="op">$</span>race &lt;-<span class="st"> </span>race</code></pre></div>
-<p>Now try again (see Figure <a href="factors-in-plotting.html#fig:firesetting3">8.35</a>) for the result.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> race, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
+firesetting<span class="op">$</span>evenBetterRace &lt;-<span class="st"> </span>betterRace2</code></pre></div>
+<p>Now try again. Note that in the code below we switch to <code>evenBetterRace</code>. See Figure <a href="factors-in-plotting.html#fig:firesetting3">8.35</a> for the result.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> evenBetterRace, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>, 
                <span class="dt">outlier.alpha =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.20</span>, <span class="dt">size =</span> <span class="fl">0.1</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>fires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>betterFires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Ethnicity&quot;</span>,
        <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:firesetting3"></span>
@@ -611,11 +614,11 @@ Figure 8.35: Now the order of the race-values is correct!
 <h3><span class="header-section-number">8.4.1</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>With <code>mosaicData::KidsFeet</code>, make the following graph. (<strong>Hint</strong>: Use <code>plyr::mapvalues()</code>.)</p>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-771-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-764-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 <li><p>With <code>mosaicData::TenMileRace</code>, make the following graph. (<strong>Hint</strong>: Use <code>cut()</code> to make age groups. The fill for the boxes is the ever-popular <code>&quot;burlywood&quot;</code>.)</p>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-772-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-765-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 <li><p>With <code>mosaicData::Gestation</code>, make the following graph. (<strong>Hint</strong>: Use <code>!is.na()</code> to select the rows of <code>Gestation</code> where <code>smoke</code> is not <code>NA</code>. Then use <code>plyr::mapvalues()</code> on <code>smoke</code>.)</p>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-773-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-766-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 </ol>
 </div>
 <div id="solutions-to-practice-exercises-14" class="section level3">
@@ -623,45 +626,46 @@ Figure 8.35: Now the order of the race-values is correct!
 <ol style="list-style-type: decimal">
 <li><p>Here’s the code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;KidsFeet&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
-biggerfoot &lt;-<span class="st"> </span>KidsFeet<span class="op">$</span>biggerfoot
-biggerfoot &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(biggerfoot, <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
+tempBiggerfoot &lt;-<span class="st"> </span>KidsFeet<span class="op">$</span>biggerfoot
+biggerfoot2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempBiggerfoot, <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
                      <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;left foot&quot;</span>, <span class="st">&quot;right foot&quot;</span>))
-KidsFeet<span class="op">$</span>biggerfoot &lt;-<span class="st"> </span>biggerfoot
-domhand &lt;-<span class="st"> </span>KidsFeet<span class="op">$</span>domhand
-domhand &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(domhand, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
+KidsFeet<span class="op">$</span>betterBiggerfoot &lt;-<span class="st"> </span>biggerfoot2
+tempDomhand &lt;-<span class="st"> </span>KidsFeet<span class="op">$</span>domhand
+domhand2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempDomhand, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
                      <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;left hand&quot;</span>, <span class="st">&quot;right hand&quot;</span>))
-KidsFeet<span class="op">$</span>domhand &lt;-<span class="st"> </span>domhand
-<span class="kw">ggplot</span>(KidsFeet, <span class="kw">aes</span>(<span class="dt">x =</span> biggerfoot)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> domhand), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+KidsFeet<span class="op">$</span>betterDomhand &lt;-<span class="st"> </span>domhand2
+<span class="kw">ggplot</span>(KidsFeet, <span class="kw">aes</span>(<span class="dt">x =</span> betterBiggerfoot)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> betterDomhand), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;the bigger foot&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Foot-size and Handedness for 39 Children&quot;</span>,
        <span class="dt">subtitle =</span> <span class="kw">paste0</span>(<span class="st">&quot;When your right foot is bigger, &quot;</span>,
                          <span class="st">&quot;are you more likely to be right-handed?&quot;</span>))</code></pre></div></li>
 <li><p>Here’s the code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;TenMileRace&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
-sex &lt;-<span class="st"> </span>TenMileRace<span class="op">$</span>sex
-sex &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(sex, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>),
+tempSex &lt;-<span class="st"> </span>TenMileRace<span class="op">$</span>sex
+sex2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempSex, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>),
                        <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))
-TenMileRace<span class="op">$</span>sex &lt;-<span class="st"> </span>sex
+TenMileRace<span class="op">$</span>betterSex &lt;-<span class="st"> </span>sex2
 ageGroup &lt;-<span class="st"> </span><span class="kw">cut</span>(TenMileRace<span class="op">$</span>age,
                 <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="ot">Inf</span>),
                 <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;&lt;20&quot;</span>, <span class="st">&quot;20s&quot;</span>, <span class="st">&quot;30s&quot;</span>, <span class="st">&quot;40s&quot;</span>, 
                            <span class="st">&quot;50s&quot;</span>, <span class="st">&quot;60s&quot;</span>, <span class="st">&quot;70+&quot;</span>))
+TenMileRace<span class="op">$</span>ageGroup &lt;-<span class="st"> </span>ageGroup
 <span class="kw">ggplot</span>(TenMileRace, <span class="kw">aes</span>(<span class="dt">x =</span> ageGroup, <span class="dt">y =</span> time)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(sex <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(betterSex <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age Group&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;net time to finish (sec)&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Ten-Mile Race Times&quot;</span>)</code></pre></div></li>
 <li><p>Here’s the code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;Gestation&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
 Gestation &lt;-<span class="st"> </span><span class="kw">subset</span>(Gestation, <span class="op">!</span><span class="kw">is.na</span>(smoke))
-smoke &lt;-<span class="st"> </span>Gestation<span class="op">$</span>smoke
-smoke &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(smoke, <span class="dt">from =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">3</span>,
+tempSmoke &lt;-<span class="st"> </span>Gestation<span class="op">$</span>smoke
+smoke2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempSmoke, <span class="dt">from =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">3</span>,
                          <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;never&quot;</span>, <span class="st">&quot;smokes now&quot;</span>,
                                 <span class="st">&quot;until curr. preg.&quot;</span>,
                                 <span class="st">&quot;once smoked&quot;</span>))
-Gestation<span class="op">$</span>smoke &lt;-<span class="st"> </span>smoke
-<span class="kw">ggplot</span>(Gestation, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(smoke), <span class="dt">y =</span> wt)) <span class="op">+</span>
+Gestation<span class="op">$</span>betterSmoke &lt;-<span class="st"> </span>smoke2
+<span class="kw">ggplot</span>(Gestation, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(betterSmoke), <span class="dt">y =</span> wt)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;smoking status of mother&quot;</span>,
        <span class="dt">y =</span> <span class="st">&quot;birth weight (ounces)&quot;</span>,
