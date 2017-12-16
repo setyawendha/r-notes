@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-14}
+  \date{2017-12-16}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -270,10 +270,8 @@
 
 Welcome to \emph{Beginning Computer Science with R}! These notes will be
 your primary source for CSC 115: Computer Science I, offered at
-Georgetown College. They will also carry you part of the way through CSC
-215. A supplementary text, \emph{Hands-On Programming with R} by Garrett
-Grolemund \citep{Grolemund2014}, will be used in CSC 115 so you should
-make sure that you have a copy.
+Georgetown College. They will also carry you most of the way through CSC
+215.
 
 For the first semester you won't need a computer of your own: you can do
 all of your work on the R Studio Server, which you will access with your
@@ -293,73 +291,41 @@ time on this YouTube Channel:
 \url{https://www.youtube.com/user/GCstats}, in the CSC playlist.
 
 These notes are about the R programming language as such, so although in
-the class we will work within the R Studio Integrated Deveopment
+the class we will work within the R Studio Integrated Development
 Environment right from the start, R Studio is not directly covered here.
 Eventually we will begin to write documents in R Markdown, which is also
 not treated in these Notes. For a resource on these topics in written
-form that will supplement class instructon and the videos on our YouTube
-Channel, you might want to consult the excellent little book
+form that will supplement class instruction and the videos on our
+YouTube Channel, you might want to consult the excellent little book
 \href{https://bookdown.org/chesterismay/rbasics/}{\emph{Getting used to
 R, RStudio, and R Markdown}} \citep{Ismay2016}.
 
-\section{The Why of these Notes: Remarks for
+\section{The Why of These Notes: Remarks for
 Colleagues}\label{the-why-of-these-notes-remarks-for-colleagues}
 
 There is a plethora of books on R, covering pretty much every domain of
 application of the language, from ecology to spatial statistics to
 machine learning and data science. There are even some books---among the
-very finest of R-books, in my view---on R as a a programming language.
-Why then, write yet another book?
+very finest of R-books, in my view---on R as a programming language.
 
-It all has to do with my particular situation. As Fate and the vagueries
-of small-college staffing would have it, I find myself preparing to
-teach the minor in Computer Science at the liberal arts College where
-for many years I had previously taught mathematics and statistics. As I
-considered how to redesign a minor lean enough to be staffed by one
-not-quite-full-time person (I still handle some mathematics) and at the
-same offer something of absorbing interest to a reasonable number of
-undergraduates, I realized that it could not simply be a truncated
-version of a major: a year of programming in a strongly-typed, compiled,
-large-scale programming language such as C++ or Java, followed by
-algorithms, data structures, compilers and perhaps a bit of theory. For
-one thing, I shy away from large-scale languages: I tend to want my
-results fast and I want to build something interesting as soon as
-possible, and for the most part beginning students feel the same way.
-About the only thing a minor as a curtailed major would prepare them for
-is, well, \emph{completion} of the major---which unfortunately we do not
-have. For another thing, my background simply isn't in Computer Science.
-I am by training a mathematician with a specialty in ergodic theory,
-which could be considered an extreme generalization of probability
-theory. Computer programming, with its fetish for the careful
-organization of information and its stress on practices to manage
-complexity, simply isn't in my theoretical blood.
-
-On the other hand in my years of teaching and practicing statistics I
-have gotten to be a half-good programmer by recognizing, through hard
-experience, the value of learning to program well from the ground up. I
-have become increasingly fascinated by the computational aspects of
-statistics and by the entire computer-based workflow of data
-analysis---from data collection and data munging to analysis and
-reporting---and by the paradigm of reproducible research that can be
-incorporated into nearly every stage of that workflow. With the tendency
-of data analysis to move toward the web I'm also seeing the utility of
-being aware of web design issues as a data analyst, and, as a web
-designer and developer, of being cognizant of trends in internet-based
-data collection and data reporting.
-
-Accordingly the minor will have a dual focus: data analysis and web
-design, with a bit of back-end web development thrown in to unify the
-two domains. Students will undertake a serious study of two major
+These Notes are not intended to supersede or to compete with any of the
+existing literature on R. Instead they are intended to serve the
+curricular needs of the Computer Science minor at the College where I
+teach---a minor that emphasizes data analysis primarily, but with a
+strong focus also on web design and on the increasingly important
+interfaces between these two areas (e.g., interactive graphics and web
+apps for working with data and/or reporting the results of data
+analysis). Students will undertake a serious study of two major
 scripting languages: R for data analysis and JavaScript for web
 programming, both from a fairly systematic programming point of view,
-with due attention to procedural, object-oriented and (to a lesser
-extent) functional programming paradigms.
+with due attention to procedural, functional and (to a lesser extent)
+object-oriented programming paradigms.
 
 The question is: which language to use in the freshman year? Some
 institutions are moving toward JavaScript: in fact Stanford University
-will pilot JavaScript in several sections of its introductory CS course
-in the Fall of 2017. There are certainly considerations in favor of a
-JavaScript-first approach: it's a popular language with Node available
+piloted JavaScript in several sections of its introductory CS course in
+the Fall of 2017. There are certainly considerations in favor of a
+JavaScript-first approach: it's a popular language, with Node available
 as an interactive run-time environment and the browser as a environment
 in which exciting applications can be built quickly. And whereas R is
 less widely-used and is still considered a domain-specific language,
@@ -378,21 +344,26 @@ other major languages and yet is still relatively lightweight and
 accessible to beginners. The Server version of R Studio is especially
 useful for new programmers, as it saves them from having to deal with
 installation and other IT issues on their own machines, permitting them
-to focus on coding. It's also easy, in a server setting, to make class
-materials available and to collect and return assignments. R Markdown is
-fine platform for producing course notes (this book is written in R
-Markdown with the excellent \textbf{bookdown} package
+to focus on coding. It's also quite convenient, in a server setting, to
+make class materials available and to collect and return assignments. R
+Markdown is fine platform for producing course notes (this book is
+written in R Markdown with the excellent \textbf{bookdown} package
 \citep{R-bookdown}) and slides as well. Students, too, can use R
 Markdown to both write and discuss their programs in a single document.
 The \textbf{blogdown} package \citep{R-blogdown} permits students to
 begin writing for the public about technical programming issues---or
 about anything at all, really, as more than a few of them are taking
-majors in the Humanities---thus building up an professional resume of
-online work. Finally, the \textbf{shiny} package \citep{R-shiny} permits
-students to build simple interactive web apps for data analysis that can
-be used by non-coders. Both \textbf{blogdown} and \textbf{shiny} prompt
-students to consider early on---even in the first year, if the pacing is
-right---concepts of web design, the other primary focus of the minor.
+majors in the Humanities---thus building up a professional resume of
+online work. When it's time to learn about databases, students can
+leverage a body of recent work (see
+\href{https://db.rstudio.com/}{Databases Using R}) that renders the R
+Studio environment nearly as friendly for interaction with databases as
+dedicated tools such as MySQL Workbench. Finally, the \textbf{shiny}
+package \citep{R-shiny} permits students to build simple interactive web
+apps for data analysis that can be used by non-coders. Both
+\textbf{blogdown} and \textbf{shiny} prompt students to consider early
+on---even in the first year, if the pacing is right---concepts of web
+design, the other focus of the minor.
 
 Hence the choice was made to teach a first-year computer science course,
 to beginning programmers, with R. As I pointed out earlier, there do
@@ -404,26 +375,24 @@ other language or else possesses sufficient computational maturity,
 acquired perhaps through extensive prior training in the mathematical
 sciences. Another great text is Garrett Grolemund's \emph{Hands-on
 Programming with R} \citep{Grolemund2014}. Grolemund's book is lively
-and to-the-point and starts off with excellent motivating examples.
+and to-the-point, and starts off with excellent motivating examples.
 Grolemund is also a master explainer, and he has put considerable effort
 into visual representation of programming concepts such as element-wise
 operations on vectors and the enclosure-relationships between
-environments; for that reason his text is being used as a supplementary
-textbook for this course. On the other hand, even though he doesn't
-assume that the reader has prior coding experience, Grolemund does
-assume some prior background in data analysis and a strong motivation,
-on the reader's part, to persevere with nontrivial R-programming issues
-such as lexical scoping in the hopes of eventual payoffs in programming
-for data science. In short, Grolemund also assumes more computational
-maturity than will be usually be found among beginning programmers at
-many small liberal arts colleges.
+environments. On the other hand, even though he doesn't assume that the
+reader has prior coding experience, Grolemund does assume some prior
+background in data analysis and a strong motivation, on the reader's
+part, to persevere with nontrivial R-programming issues such as lexical
+scoping in the hopes of eventual payoffs in programming for data
+science. In short, Grolemund also assumes more computational maturity
+than will be usually be found among beginning programmers at many small
+liberal arts colleges.
 
-Hence the niche for the notes (or perhaps text-under-development)
-offered here. I aim to be a bit more copious and slow-paced than
-Grolemund and a bit less sophisticated than Matloff. These notes will
-also contain a more extensive set of problems, ranging in difficulty
-from practice exercises to fairly extended projects that students might
-write up in R Markdown documents.
+Hence the niche for the Notes offered here. I aim to be more copious and
+slower-paced than Grolemund and less sophisticated than Matloff. These
+notes will also contain a more extensive set of problems, ranging in
+difficulty from practice exercises to fairly extended projects that
+students might write up in R Markdown documents.
 
 Experienced programmers and R enthusiasts will be struck by the absence
 of certain topics. Programmers will observe that there is no real
@@ -435,13 +404,26 @@ thinking skills, but it's not likely that a web developer or data
 analyst would have the need to write a recursive function. Time spent on
 recursion and on various efficient algorithms for sorting and searching
 may be better spent, in my view, on extended programming projects, Shiny
-apps and blogging, and introductions to tools of the programmer's trade
-such as version control and GitHub. I hope by the end of the first year
-to have made time for all of these ``extra'' topics. R-specific tools
-such as \textbf{dplyr} for data manipulation, the various packages for
-web scraping and database interface, as well as packages for machine
-learning, are considered in later courses in the minor that are more
-specifically concerned with data analysis.
+apps and blogging, and the introduction of programmer's trade-tools such
+as version control and GitHub. I hope by the end of the first year to
+have made time for all of these out-of-book topics.
+
+The Notes give more attention to base R functions than other
+introductory texts directed to data analysts, but we do introduce
+elements of the \textbf{tidyverse} \citep{R-tidyverse} as appropriate.
+The pipe operator is introduced in connection with data frames,
+\textbf{ggplot2} and graphing are treated in some detail, string
+operations and regular expressions are managed primarily with
+\textbf{stringr}, and the approach to higher-order functions is through
+\textbf{purrr}. Full treatment of the data wrangling is deferred,
+however, to later courses.
+
+The first-semester course is required for mathematics and physics majors
+and for students in our pre-engineering program, so a central
+application of the early material is simulation of random processes. I
+believe that this makes the Notes relevant for students in other
+disciplines---e.g., biology and finance---in a way that complements
+their use of R for data analysis.
 
 Two of the most fundamental topics in any comprehensive discussion of
 the R language---lexical scoping and computing on the language---are
@@ -486,8 +468,8 @@ because:
 \end{itemize}
 
 As for the numerous Wizard of Oz-themed examples, I can offer no defense
-other than haste. Perhaps a future version will be built around
-something more suitable---the Harry Potter series, say.
+other than haste in composition and the fact that the Wizard of Oz is
+now in the public domain.
 
 \section{History of R}\label{history-of-r}
 
@@ -502,19 +484,18 @@ Zealand was making a study of the Scheme language as described in the
 classic MIT textbook \emph{Structure and Interpretation of Computer
 Programs} \citep{AbelsonSussman}, and was impressed with the
 possibilities of the language for data analysis applications. Desiring
-to build a free analysis tool for his graduate students, Ihaka teamed up
-with his Auckland colleague Robert Gentleman and the two gradually
-developed a language with an external syntax similar to S but with an
-underlying engine based heavily upon Scheme. Because of the similarity
-with the better-known S---or, by some account, because of the initial
-letter in the first names of both men---they named their new language
-``R''.
+to build a free analysis tool for his graduate students, Ihaka recruited
+his Auckland colleague Robert Gentleman in the project of developing a
+language with an external syntax similar to S but with an underlying
+engine based heavily upon Scheme. Because of the similarity with the
+better-known S---or, by some accounts, because of the initial letter in
+the first names of both men---they named their new language ``R''.
 
-Initially the two men believed that their work on the new language was
-scarcely more than ``playing games'' and that it would not be used
-outside of the University of Auckland. Eventually, though, the two
-placed a small announcement of their project on the email list
-\emph{s-news} and began to draw the interest of other statisticians,
+Initially the Ihaka and Gentleman assumed that their work on the new
+language was scarcely more than ``playing games'' and that it would not
+be used outside of the University of Auckland. Eventually, though, the
+two placed a small announcement of their project on the \emph{s-news}
+email list and began to draw the interest of other statisticians,
 including Martin Machler of the Swiss Federal Institute of Technology in
 Zurich, Switzerland. Machler saw great potential for R, and in 1995
 persuaded Ihaka and Gentleman to release it as ``free software'' under a
@@ -531,7 +512,7 @@ dozen computer languages overall.
 
 Many people have contributed to the development of R. As of the
 composition of this History, the Comprehensive R Archive Network (CRAN)
-now hosts 10,633 contributed packages, each of which aims to extend the
+hosted 10,633 contributed packages, each of which aims to extend the
 capabilities of R in a specific way. R is usually the platform in which
 new statistical techniques are first implemented by the researchers who
 develop them. It is widely used in the sciences, business and finance.
@@ -568,11 +549,11 @@ incipient stages of my journey as an R-developer. Nick has been a great
 encourager of everyone associated with the Mosaic community.
 
 My former colleague \emph{Rebekah Robinson} who, upon learning of Mosaic
-and R Markdown, insisted that at Georgetown we should figure out how to
-teach elementary statistics with R.
+and R Markdown, insisted that at Georgetown College we take up the
+challenge of teaching elementary statistics with R.
 
 My colleagues \emph{William Harris} and \emph{Christine Leverenz}, who
-learned to teach in the R way.
+patiently learned to teach in the R way.
 
 My students, especially \emph{Woody Burchett}, \emph{Luke Garnett},
 \emph{Shawn Marcom}, \emph{Jacob Townsend} and \emph{Andrew Giles}, for
@@ -594,8 +575,11 @@ enough about programming.
 Computer code, whether within a line of text or as displayed text,
 appears like this: \texttt{code\ snippet}.
 
-Identifiers are represented as is (e.g., \texttt{variableName},
-if\texttt{,}else\texttt{,}while\texttt{,\ etc.)\ except\ for\ the\ names\ of\ functions,\ whihc\ are\ followed\ by\ a\ pair\ of\ parentheses\ in\ order\ to\ stress\ their\ status\ as\ functions.\ \ Thus\ we\ write}length()\texttt{for\ the}length`-function.
+Identifiers and are represented as is (e.g., \texttt{variableName},
+\texttt{if}, \texttt{else}, \texttt{while}, etc.) except for the names
+of functions, which are followed by a pair of parentheses in order to
+stress their status as functions. Thus we write \texttt{length()} for
+the \texttt{length}-function.
 
 Displayed text representing output to the console appears with double
 hash-tags at the beginning of each line, thus:
@@ -606,7 +590,7 @@ hash-tags at the beginning of each line, thus:
 ## Type 'license()' or 'licence()' for distribution details.
 \end{verbatim}
 
-The hashtags themsevles are not present in the output itself.
+The hash-tags themselves are not present in the output itself.
 
 Names of R-package are in boldface, thus: package \textbf{devtools}.
 
@@ -623,6 +607,8 @@ Attribution-ShareAlike 4.0 International Public License:
 \begin{quote}
 \url{https://creativecommons.org/licenses/by-sa/4.0/legalcode}.
 \end{quote}
+
+\part{CSC 115}\label{part-csc-115}
 
 \chapter{Our First Computer Programs}\label{idea}
 
@@ -6556,19 +6542,22 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:bindrcpp"      
-##  [3] "package:R6"             "package:readr"         
-##  [5] "package:tigerData"      "package:tigerstats"    
-##  [7] "package:abd"            "package:mosaic"        
-##  [9] "package:Matrix"         "package:ggformula"     
-## [11] "package:dplyr"          "package:lattice"       
-## [13] "package:nlme"           "package:TurtleGraphics"
-## [15] "package:grid"           "package:mosaicData"    
-## [17] "package:ggplot2"        "tools:rstudio"         
-## [19] "package:stats"          "package:graphics"      
-## [21] "package:grDevices"      "package:utils"         
-## [23] "package:datasets"       "package:methods"       
-## [25] "Autoloads"              "package:base"
+##  [1] ".GlobalEnv"             "package:R6"            
+##  [3] "package:tigerData"      "package:tigerstats"    
+##  [5] "package:abd"            "package:mosaic"        
+##  [7] "package:Matrix"         "package:ggformula"     
+##  [9] "package:lattice"        "package:nlme"          
+## [11] "package:TurtleGraphics" "package:grid"          
+## [13] "package:mosaicData"     "package:babynames"     
+## [15] "package:bindrcpp"       "package:dplyr"         
+## [17] "package:purrr"          "package:readr"         
+## [19] "package:tidyr"          "package:tibble"        
+## [21] "package:ggplot2"        "package:tidyverse"     
+## [23] "tools:rstudio"          "package:stats"         
+## [25] "package:graphics"       "package:grDevices"     
+## [27] "package:utils"          "package:datasets"      
+## [29] "package:methods"        "Autoloads"             
+## [31] "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -6674,7 +6663,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x114fb53b8>
+## <bytecode: 0x10ba196d8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -19334,7 +19323,7 @@ aesthetic mapping.
 
   One of the variables in \texttt{imagpop} is \texttt{kkardashtemp}, the
   rating given by each person to the celebrity Kim Kardashian. Make a
-  density plot of the ratings. Compute the mean Kim Kardashian raintg
+  density plot of the ratings. Compute the mean Kim Kardashian rating
   for all the people in \texttt{imagpop}. Finally, compute the
   percentage of people in the population who gave a rating more than 40
   but less than 60.
@@ -20567,6 +20556,888 @@ any sort of R-object.
 \end{verbatim}
 \end{enumerate}
 
+\part{CSC 215}\label{part-csc-215}
+
+\chapter{Basic Tidyverse Concepts}\label{tidyverse-concepts}
+
+\begin{figure}[!h]
+
+{\centering \includegraphics[width=0.4\linewidth]{images/pipe} 
+
+}
+
+\caption{The Treachery of Images (Rene Magritte, 1948).}\label{fig:magritte-image}
+\end{figure}
+
+In this chapter we will introduce a few tools from the
+\textbf{tidyverse} \citep{R-tidyverse} set of R-packages:
+
+\begin{itemize}
+\tightlist
+\item
+  the pipe operator \texttt{\%\textgreater{}\%} for chaining function
+  calls in a convenient and readable way;
+\item
+  the \texttt{tibble} class, a variant of the data frame that is
+  especially suitable for large data sets;
+\item
+  data manipulation functions from the **dplyr* package suitable for use
+  with the pipe operator:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{filter()} and \texttt{select()} for sub-setting;
+  \item
+    \texttt{mutate()} for transforming variables;
+  \item
+    \texttt{group\_by()} \texttt{summarise()} for numerical summaries of
+    data.
+  \end{itemize}
+\end{itemize}
+
+\newpage
+
+\section{The Tidyverse}\label{tidyverse}
+
+The \textbf{tidyverse} isn't a package, exactly---it's a collection of
+packages. Go ahead and attach it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading tidyverse: ggplot2
+## Loading tidyverse: tibble
+## Loading tidyverse: tidyr
+## Loading tidyverse: readr
+## Loading tidyverse: purrr
+## Loading tidyverse: dplyr
+## Conflicts with tidy packages -----------------------
+## filter(): dplyr, stats
+## lag():    dplyr, stats
+\end{verbatim}
+
+You get an account of the packages that have been attached. We have
+worked before with \textbf{ggplot} and by the end of CSC 215 we will
+have worked with all of the others. You need not worry about the fact
+that \texttt{filter()} and \texttt{lag()} mask functions from the
+\textbf{stats} package.
+
+\newpage
+
+\section{The Pipe Operator}\label{the-pipe-operator}
+
+The pipe operator looks like this: \texttt{\%\textgreater{}\%}. It comes
+from the \textbf{magrittr} package.\footnote{\textbf{magrittr} is not
+  attached in the tidy-verse, but most of the capability of this package
+  is imported by \textbf{dplyr}.}
+
+The piper operator connect two function calls by making the the value
+returned by the first call the first argument of the second call. Here's
+an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"hello"} \OperatorTok{%>%}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DataTypeTok{times =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "hello" "hello" "hello" "hello"
+\end{verbatim}
+
+This is the same as the more familiar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rep}\NormalTok{(}\StringTok{"hello"}\NormalTok{, }\DataTypeTok{times =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "hello" "hello" "hello" "hello"
+\end{verbatim}
+
+Here's another example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# same as nrow(tigerstats::m111survey)}
+\NormalTok{tigerstats}\OperatorTok{::}\NormalTok{m111survey }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 71
+\end{verbatim}
+
+Here's two pipes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"hello"} \OperatorTok{%>%}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DataTypeTok{times =} \DecValTok{4}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{length}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+By default the value of the left-hand call is piped into the right-hand
+call as the \emph{first} argument. You can make it some other argument
+by referring to it as the dot \texttt{.}, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{4} \OperatorTok{%>%}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\StringTok{"hello"}\NormalTok{, }\DataTypeTok{times =}\NormalTok{ .)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "hello" "hello" "hello" "hello"
+\end{verbatim}
+
+Since sub-setting is actually a function call under the hood, you can
+use the dot there, too:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# gets the third element of the sequence 1, 4, 9, ..., 97:}
+\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DataTypeTok{by =} \DecValTok{4}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\NormalTok{.[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9
+\end{verbatim}
+
+The pipe operator isn't all that useful when you only use it once or
+twice in succession. Its true value becomes apparent in the chaining
+together of many manipulations involving data frames.
+
+\subsection{Practice Exercises}\label{practice-exercises-30}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Rewrite the following call with the pipe operator, in three different
+  ways:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DataTypeTok{by =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  2  6 10 14 18 22
+\end{verbatim}
+\item
+  Consider \texttt{mosaicData::CPS85}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"CPS85"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"mosaicData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Use the pipe operator with \texttt{subset()} to the row of
+  \texttt{mosaicData::CPS85} containing the worker who made more than 40
+  dollars per hour. Display only the sex, age and wage of the worker.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-15}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here are three ways:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \OperatorTok{%>%}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DataTypeTok{by =} \DecValTok{4}\NormalTok{)}
+\DecValTok{22} \OperatorTok{%>%}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, ., }\DataTypeTok{by =} \DecValTok{4}\NormalTok{)}
+\DecValTok{4} \OperatorTok{%>%}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DataTypeTok{by =}\NormalTok{ .)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{subset}\NormalTok{(wage }\OperatorTok{>}\StringTok{ }\DecValTok{40}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{.[, }\KeywordTok{c}\NormalTok{(}\StringTok{"sex"}\NormalTok{, }\StringTok{"age"}\NormalTok{, }\StringTok{"wage"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     sex age wage
+## 249   F  21 44.5
+\end{verbatim}
+\end{enumerate}
+
+\newpage
+
+\section{Tibbles}\label{tibbles}
+
+The \textbf{tibble} package gives us tibbles, which are very nearly the
+same thing as a data frame. Indeed, the name ``tibble'' is supposed to
+remind us of a data ``table.''
+
+Consider the class of \texttt{tigerstats::m111survey}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(tigerstats}\OperatorTok{::}\NormalTok{m111survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "data.frame"
+\end{verbatim}
+
+Yep, it's a data frame. But we can convert it to a tibble, as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey <-}\StringTok{ }\KeywordTok{as_tibble}\NormalTok{(tigerstats}\OperatorTok{::}\NormalTok{m111survey)}
+\KeywordTok{class}\NormalTok{(survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "tbl_df"     "tbl"        "data.frame"
+\end{verbatim}
+
+You can treat tibbles like data frames. For now the primary practical
+difference is manifest when you print a tibble to the Console:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 71 x 12
+##    height ideal_ht sleep fastest   weight_feel love_first extra_life
+##     <dbl>    <dbl> <dbl>   <int>        <fctr>     <fctr>     <fctr>
+##  1   76.0       78   9.5     119 1_underweight         no        yes
+##  2   74.0       76   7.0     110 2_about_right         no        yes
+##  3   64.0       NA   9.0      85 2_about_right         no         no
+##  4   62.0       65   7.0     100 1_underweight         no         no
+##  5   72.0       72   8.0      95 1_underweight         no        yes
+##  6   70.8       NA  10.0     100  3_overweight         no         no
+##  7   70.0       72   4.0      85 2_about_right         no        yes
+##  8   79.0       76   6.0     160 2_about_right         no        yes
+##  9   59.0       61   7.0      90 2_about_right         no        yes
+## 10   67.0       67   7.0      90  3_overweight         no         no
+## # ... with 61 more rows, and 5 more variables: seat <fctr>, GPA <dbl>,
+## #   enough_Sleep <fctr>, sex <fctr>, diff.ideal.act. <dbl>
+\end{verbatim}
+
+The output is automatically truncated, and the number of columns printed
+is determined by the width of your screen. This is a great convenience
+when one is dealing with larger data sets.
+
+Many larger data tables in packages will come to you as tibbles.
+
+\newpage
+
+\section{Subsetting with dplyr}\label{subsetting-with-dplyr}
+
+The \textbf{dplyr} function
+\texttt{filter()}\index{R-functions!filter()@\texttt{filter()}} is the
+rough equivalent of \texttt{select()}: it picks out rows of a data frame
+(or similar objects such as a tibble). The \textbf{dplyr} function
+\texttt{select()}\index{R-functions!select()@\texttt{select()}} subsets
+for columns.
+
+Thus you can use the two functions together to do perform sub-setting.
+With the pipe operator, your code can be quite easy to read:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{((sex }\OperatorTok{==}\StringTok{ "male"} \OperatorTok{&}\StringTok{ }\NormalTok{height }\OperatorTok{>}\StringTok{ }\DecValTok{70}\NormalTok{) }\OperatorTok{|}\StringTok{ }\NormalTok{(sex }\OperatorTok{==}\StringTok{"female"} \OperatorTok{&}\StringTok{ }\NormalTok{height }\OperatorTok{<}\StringTok{ }\DecValTok{55}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(sex, height, fastest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 22 x 3
+##       sex height fastest
+##    <fctr>  <dbl>   <int>
+##  1   male   76.0     119
+##  2   male   74.0     110
+##  3   male   72.0      95
+##  4   male   70.8     100
+##  5   male   79.0     160
+##  6   male   73.0     110
+##  7   male   73.0     120
+##  8 female   54.0     130
+##  9   male   74.0     119
+## 10   male   72.0     125
+## # ... with 12 more rows
+\end{verbatim}
+
+Note that \textbf{dplyr} data-functions like \texttt{filter()} and
+\texttt{select()} take a data table as their first argument, and return
+a data table as well. Hence they may be chained together as we saw in
+the above example.
+
+With \texttt{select()} it's easy to leave out columns, too:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{ideal_ht, }\OperatorTok{-}\NormalTok{love_first)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 71 x 10
+##    height sleep fastest   weight_feel extra_life     seat   GPA
+##     <dbl> <dbl>   <int>        <fctr>     <fctr>   <fctr> <dbl>
+##  1   76.0   9.5     119 1_underweight        yes  1_front  3.56
+##  2   74.0   7.0     110 2_about_right        yes 2_middle  2.50
+##  3   64.0   9.0      85 2_about_right         no 2_middle  3.80
+##  4   62.0   7.0     100 1_underweight         no  1_front  3.50
+##  5   72.0   8.0      95 1_underweight        yes   3_back  3.20
+##  6   70.8  10.0     100  3_overweight         no  1_front  3.10
+##  7   70.0   4.0      85 2_about_right        yes  1_front  3.68
+##  8   79.0   6.0     160 2_about_right        yes   3_back  2.70
+##  9   59.0   7.0      90 2_about_right        yes   3_back  2.80
+## 10   67.0   7.0      90  3_overweight         no 2_middle    NA
+## # ... with 61 more rows, and 3 more variables: enough_Sleep <fctr>,
+## #   sex <fctr>, diff.ideal.act. <dbl>
+\end{verbatim}
+
+\subsection{Practice Exercises}\label{practice-exercises-31}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Can you use the pipe to chain \textbf{dplyr} functions along with
+  \texttt{nrow()} to find out how many people in \texttt{survey} believe
+  in love at first sight and drove more than 120 miles per hour?
+\item
+  Find the three largest heights of the males who drove more than 120
+  miles per hour.
+\item
+  Use the pipe and \texttt{filter()} to make violin plots of the wages
+  of men and women in \texttt{CPS85}, where the outlier-person (whose
+  wage was more than 40 dollars per hour) has been eliminated prior to
+  making the graph.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-16}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(love_first }\OperatorTok{==}\StringTok{ "yes"} \OperatorTok{&}\StringTok{ }\NormalTok{fastest }\OperatorTok{>}\StringTok{ }\DecValTok{120}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+\item
+  Here's one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(sex }\OperatorTok{==}\StringTok{ "male"} \OperatorTok{&}\StringTok{ }\NormalTok{fastest }\OperatorTok{>}\StringTok{ }\DecValTok{120}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{.}\OperatorTok{$}\NormalTok{height }\OperatorTok{%>%}\StringTok{                 }\CommentTok{# this is just a vector}
+\StringTok{  }\KeywordTok{sort}\NormalTok{(}\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# so you can sort it ... }
+\StringTok{  }\NormalTok{.[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{]                       }\CommentTok{# then get its first three elements}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 79 75 75
+\end{verbatim}
+\item
+  Try this code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(wage }\OperatorTok{<=}\StringTok{ }\DecValTok{40}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sex, }\DataTypeTok{y =}\NormalTok{ wage)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_violin}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\newpage
+
+\section{Transforming Variables with
+dplyr}\label{transforming-variables-with-dplyr}
+
+In \textbf{dplyr} you transform variables with the function
+\texttt{mutate()}\index{R-functions!mutate()@\texttt{mutate()}}. Here is
+an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dareDevil =}\NormalTok{ fastest }\OperatorTok{>}\StringTok{ }\DecValTok{125}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(sex, fastest, dareDevil)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 71 x 3
+##       sex fastest dareDevil
+##    <fctr>   <int>     <lgl>
+##  1   male     119     FALSE
+##  2   male     110     FALSE
+##  3 female      85     FALSE
+##  4 female     100     FALSE
+##  5   male      95     FALSE
+##  6   male     100     FALSE
+##  7   male      85     FALSE
+##  8   male     160      TRUE
+##  9 female      90     FALSE
+## 10 female      90     FALSE
+## # ... with 61 more rows
+\end{verbatim}
+
+In \texttt{mutate()} there is always a variable-name on the left-hand
+side of the \texttt{=} sign. It could be the same as an existing
+variable in the table if you are content to overwrite that variable. On
+the right side of the \texttt{=} is a function that can depend on
+variables in the data table.
+
+You can transform more than one variable in a single call to
+\texttt{mutate()}, as in the code below. The output is shown in
+\ref{fig:mutatefastest}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dareDevil =}\NormalTok{ fastest }\OperatorTok{>}\StringTok{ }\DecValTok{125}\NormalTok{,}
+         \DataTypeTok{speedKmHr =}\NormalTok{ fastest }\OperatorTok{*}\StringTok{ }\FloatTok{1.60934}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ dareDevil, }\DataTypeTok{y =}\NormalTok{ GPA)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{, }\DataTypeTok{out.alpha =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_jitter}\NormalTok{(}\DataTypeTok{width =} \FloatTok{0.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/mutatefastest-1} 
+
+}
+
+\caption{Graph produced after mutation.}\label{fig:mutatefastest}
+\end{figure}
+
+\subsection{Practice Exercises}\label{practice-exercises-32}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  In \texttt{mosaicData::CPS85} transform the \texttt{wage} variable to
+  units of dollars per day. (Assume an 8-hour working day.)
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-17}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{as_tibble}\NormalTok{() }\OperatorTok{%>%}\StringTok{                   }\CommentTok{# for display in Console}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dailyWage =}\NormalTok{ wage }\OperatorTok{*}\StringTok{ }\DecValTok{8}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(sex, sector, dailyWage)    }\CommentTok{# for display in Console}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 534 x 3
+##       sex   sector dailyWage
+##    <fctr>   <fctr>     <dbl>
+##  1      M    const     72.00
+##  2      M    sales     44.00
+##  3      F    sales     30.40
+##  4      F clerical     84.00
+##  5      M    const    120.00
+##  6      F clerical     72.00
+##  7      F  service     76.56
+##  8      M    sales    120.00
+##  9      M    manuf     88.00
+## 10      F    sales     40.00
+## # ... with 524 more rows
+\end{verbatim}
+\end{enumerate}
+
+\section{Grouping and Summaries}\label{grouping-and-summaries}
+
+\index{R-functions!group\_by()@\texttt{group_by()}}
+\index{R-functions!summarise()@\texttt{summarise()}}
+
+The next two \textbf{dplyr} data-functions are useful for generating
+numerical summaries of data.
+
+Consider, for example, \texttt{CPS85}. We know from graphical studies
+that the men in the study are paid more than women, but how might we
+verify this fact numerically? One approach would be to separate the men
+and the women into two different groups and compute the mean wage for
+each group. This is accomplished by calling \texttt{group\_by()} and
+\texttt{summarise()} in succession:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sex) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{meanWage =} \KeywordTok{mean}\NormalTok{(wage))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##      sex meanWage
+##   <fctr>    <dbl>
+## 1      F 7.878857
+## 2      M 9.994913
+\end{verbatim}
+
+It's possible to create more than one summary variable in a single call
+to \texttt{summarise()}, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sex) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{meanWage =} \KeywordTok{mean}\NormalTok{(wage),}
+            \DataTypeTok{n =} \KeywordTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##      sex meanWage     n
+##   <fctr>    <dbl> <int>
+## 1      F 7.878857   245
+## 2      M 9.994913   289
+\end{verbatim}
+
+In the previous example, \texttt{dplyr::n()}
+\index{R-functions!n()@\texttt{n()}}was used to count the number of
+cases in each group.
+
+For a more complete account of a numerical variable, one might consider
+the \emph{five-number summary}:
+
+\begin{itemize}
+\tightlist
+\item
+  the minimum value
+\item
+  the first quartile (Q1)
+\item
+  the median
+\item
+  the third quartile (Q3)
+\item
+  the maximum value
+\end{itemize}
+
+These quantities are conveniently computed by R's \texttt{fivenum()}
+\index{R-functions!fivenum()@\texttt{fivenum()}} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{.}\OperatorTok{$}\NormalTok{wage }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{fivenum}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  1.00  5.25  7.78 11.25 44.50
+\end{verbatim}
+
+Let's find the five number summaries for the wages of men and women:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sex) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{min =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{1}\NormalTok{],}
+            \DataTypeTok{Q1 =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{2}\NormalTok{],}
+            \DataTypeTok{median =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{3}\NormalTok{],}
+            \DataTypeTok{Q3 =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{4}\NormalTok{],}
+            \DataTypeTok{max =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{5}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 7
+##      sex     n   min    Q1 median    Q3   max
+##   <fctr> <int> <dbl> <dbl>  <dbl> <dbl> <dbl>
+## 1      F   245  1.75  4.75   6.80    10 44.50
+## 2      M   289  1.00  6.00   8.93    13 26.29
+\end{verbatim}
+
+It's also possible to group by more than one variable at a time. For
+example, suppose that we wish to compare the wages of men and women in
+the various sectors of employment. All we need to do is group by both
+\texttt{sex} and \texttt{sector}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CPS85 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sector, sex) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{min =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{1}\NormalTok{],}
+            \DataTypeTok{Q1 =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{2}\NormalTok{],}
+            \DataTypeTok{median =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{3}\NormalTok{],}
+            \DataTypeTok{Q3 =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{4}\NormalTok{],}
+            \DataTypeTok{max =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{5}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 15 x 8
+## # Groups:   sector [?]
+##      sector    sex     n   min    Q1 median     Q3   max
+##      <fctr> <fctr> <int> <dbl> <dbl>  <dbl>  <dbl> <dbl>
+##  1 clerical      F    76  3.00 5.100  7.000  9.550 15.03
+##  2 clerical      M    21  3.35 6.000  7.690  9.000 12.00
+##  3    const      M    20  3.75 7.150  9.750 11.825 15.00
+##  4    manag      F    21  3.64 6.880 10.000 11.250 44.50
+##  5    manag      M    34  1.00 8.800 13.990 18.160 26.29
+##  6    manuf      F    24  3.00 4.360  4.900  6.050 18.50
+##  7    manuf      M    44  3.35 6.585  8.945 11.250 22.20
+##  8    other      F     6  3.75 4.000  5.625  6.880  8.93
+##  9    other      M    62  2.85 5.250  7.500 11.250 26.00
+## 10     prof      F    52  4.35 7.025 10.000 12.275 24.98
+## 11     prof      M    53  5.00 8.000 12.000 16.420 24.98
+## 12    sales      F    17  3.35 3.800  4.550  5.650 14.29
+## 13    sales      M    21  3.50 5.560  9.420 12.500 19.98
+## 14  service      F    49  1.75 3.750  5.000  8.000 13.12
+## 15  service      M    34  2.01 4.150  5.890  8.750 25.00
+\end{verbatim}
+
+Note that there were no women in the construction sector, so that group
+did not appear in the summary.
+
+\subsection{Note on Binding}\label{note-on-binding}
+
+Keep in mind that you can always ``save'' the results of any computation
+by binding them to a variable name, thus:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sexSector <-}
+\StringTok{  }\NormalTok{CPS85 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(sector, sex) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{min =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{1}\NormalTok{],}
+            \DataTypeTok{Q1 =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{2}\NormalTok{],}
+            \DataTypeTok{median =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{3}\NormalTok{],}
+            \DataTypeTok{Q3 =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{4}\NormalTok{],}
+            \DataTypeTok{max =} \KeywordTok{fivenum}\NormalTok{(wage)[}\DecValTok{5}\NormalTok{])}
+\KeywordTok{class}\NormalTok{(sexSector)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "grouped_df" "tbl_df"     "tbl"        "data.frame"
+\end{verbatim}
+
+Note that the result has \texttt{data.frame} as one of its classes, so
+you may extract components in any of the ways you have learned. The old
+ways, for instance, are fine:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# minimum wage among male professionals:}
+\KeywordTok{with}\NormalTok{(sexSector, min[sex }\OperatorTok{==}\StringTok{ "M"} \OperatorTok{&}\StringTok{ }\NormalTok{sector }\OperatorTok{==}\StringTok{ "prof"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\subsection{Practice Exercises}\label{practice-exercises-33}
+
+These exercises deal with flight data from the \textbf{nycflights13}
+data frame:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"flights"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"nycflights13"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The \texttt{flights} table gives information about each departure in
+  the year 2013 from one of the three major airports near New York City:
+  John F. Kennedy (JFK), LaGuardia (LGA) or Newark (EWR). The airport
+  from which the plane departed is recorded in the variable
+  \texttt{origin}. The variable \texttt{dep\_delay} gives the delay in
+  departure, in minutes. (This is a negative number if the plane left
+  early). Find the number of departures and the mean departure delay for
+  each of the three airports. (Note that \texttt{dep\_delay} for
+  cancelled flights will be \texttt{NA}.)
+\item
+  The variable \texttt{distance} gives the distance, in miles, between
+  an origin and destination airport. For July 26, 2013, make a violin
+  plot of the distances traveled by the departing planes from the each
+  of the three New York airports. Use the pipe and \texttt{filter()} to
+  take \texttt{flights} into the desired plot.
+\item
+  Examine the plot you made in the previous problem: two of the flights
+  appear to be about 5000 miles. Use the pipe, \texttt{filter()} and
+  \texttt{select()} to display the origin, destination and distance for
+  these two flights.
+\end{enumerate}
+
+\subsection{Solutions to Practice
+Exercises}\label{solutions-to-practice-exercises-18}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Flights that were cancelled have \texttt{NA} for their departure
+  delay, so we need to filter out these cases first, in order to
+  correctly count the number of flights that actually left the airport.
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(dep_delay)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(origin) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{departures =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{meanDelay =} \KeywordTok{mean}\NormalTok{(dep_delay))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 3
+##   origin departures meanDelay
+##    <chr>      <int>     <dbl>
+## 1    EWR     117596  15.10795
+## 2    JFK     109416  12.11216
+## 3    LGA     101509  10.34688
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(month }\OperatorTok{==}\StringTok{ }\DecValTok{6} \OperatorTok{&}\StringTok{ }\NormalTok{day }\OperatorTok{==}\StringTok{ }\DecValTok{26}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ origin, }\DataTypeTok{y =}\NormalTok{ distance)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_violin}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_jitter}\NormalTok{(}\DataTypeTok{width =} \FloatTok{0.25}\NormalTok{, }\DataTypeTok{size =} \FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(month }\OperatorTok{==}\StringTok{ }\DecValTok{6} \OperatorTok{&}\StringTok{ }\NormalTok{day }\OperatorTok{==}\StringTok{ }\DecValTok{26} \OperatorTok{&}\StringTok{ }\NormalTok{distance }\OperatorTok{>}\StringTok{ }\DecValTok{4000}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(origin, dest, distance)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   origin  dest distance
+##    <chr> <chr>    <dbl>
+## 1    JFK   HNL     4983
+## 2    EWR   HNL     4963
+\end{verbatim}
+\end{enumerate}
+
+\newpage
+
+\section*{Exercises}\label{exercises-6}
+\addcontentsline{toc}{section}{Exercises}
+
+\begin{center}\includegraphics[width=0.5\linewidth]{images/thinking} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use the pipe operator to rewrite the following command in three ways:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Rewrite the following command using two pipe operators in succession:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{paste}\NormalTok{(}\StringTok{"hello"}\NormalTok{, }\StringTok{"there"}\NormalTok{, }\StringTok{"Bella"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "hello there Bella"
+\end{verbatim}
+\item
+  Use the pipe operator and \textbf{dplyr} functions to rewrite the
+  following command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{subset}\NormalTok{(m111survey, sex }\OperatorTok{==}\StringTok{ "female"}\NormalTok{)[, }\KeywordTok{c}\NormalTok{(}\StringTok{"height"}\NormalTok{, }\StringTok{"fastest"}\NormalTok{)],}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{quote}
+  The next few exercises are about the \texttt{babynames} data frame
+  from the \textbf{babynames} package \citep{R-babynames}.
+  \end{quote}
+\item
+  Find the names for females born in 2015 that were given to more than
+  1\% of female applicants (i.e., \texttt{prop} is bigger than 0.01).
+\item
+  Use the pipe operator and \textbf{dplyr} functions to produce the
+  following graph of the popularity of ``Mary'' and ``Mia'' as
+  girl-names over the years. Note that popularity is given as number per
+  one thousand applicants, i.e., as \texttt{prop\ *\ 1000}.
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-866-1} \end{center}
+\end{enumerate}
+
 \chapter{Strings}\label{strings}
 
 \begin{figure}[!h]
@@ -21636,7 +22507,7 @@ most of the world's written languages.
 
 \newpage
 
-\section*{Exercises}\label{exercises-6}
+\section*{Exercises}\label{exercises-7}
 \addcontentsline{toc}{section}{Exercises}
 
 \begin{center}\includegraphics[width=0.5\linewidth]{images/thinking} \end{center}
@@ -21712,7 +22583,7 @@ most of the world's written languages.
     \texttt{str}: a character-vector of length 1 (a single string);
   \item
     \texttt{n}: the minimum number of characters a substring should have
-    in order to be includes in the vector.
+    in order to be included in the vector.
   \end{itemize}
 
   Validate the input: if the argument for \texttt{n} is less than 1 or
@@ -23667,7 +24538,7 @@ instead has a special role in specifying the overall pattern.
 
 \newpage
 
-\section*{Exercises}\label{exercises-7}
+\section*{Exercises}\label{exercises-8}
 \addcontentsline{toc}{section}{Exercises}
 
 \begin{center}\includegraphics[width=0.5\linewidth]{images/thinking} \end{center}
@@ -24518,7 +25389,7 @@ sending or receiving data.
 
 \newpage
 
-\section*{Exercises}\label{exercises-8}
+\section*{Exercises}\label{exercises-9}
 \addcontentsline{toc}{section}{Exercises}
 
 \begin{center}\includegraphics[width=0.5\linewidth]{images/thinking} \end{center}
@@ -24662,14 +25533,13 @@ frame consisting of just the numerical variables:
 \end{Shaded}
 
 \begin{verbatim}
-## 'data.frame':    71 obs. of  7 variables:
+## 'data.frame':    71 obs. of  6 variables:
 ##  $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
 ##  $ ideal_ht       : num  78 76 NA 65 72 NA 72 76 61 67 ...
 ##  $ sleep          : num  9.5 7 9 7 8 10 4 6 7 7 ...
 ##  $ fastest        : int  119 110 85 100 95 100 85 160 90 90 ...
 ##  $ GPA            : num  3.56 2.5 3.8 3.5 3.2 3.1 3.68 2.7 2.8 NA ...
 ##  $ diff.ideal.act.: num  2 2 NA 3 0 NA 2 -3 2 0 ...
-##  $ jitteredSpeeds : num  118.8 110.8 85.3 100.4 95.9 ...
 \end{verbatim}
 
 By now there is nothing mysterious about the above code-snippet. What we
@@ -25401,9 +26271,7 @@ would be nice to have the results in a vector rather than a list, and
 ##     weight_feel      love_first      extra_life            seat 
 ##               0               0               0               0 
 ##             GPA    enough_Sleep             sex diff.ideal.act. 
-##               1               0               0               2 
-##  jitteredSpeeds 
-##               0
+##               1               0               0               2
 \end{verbatim}
 
 \texttt{sapply()} resembles \texttt{lapply()} in its operation, but
@@ -26019,7 +26887,7 @@ more human-readable or to make it perform the task more quickly.)
 
 \newpage
 
-\section*{Exercises}\label{exercises-9}
+\section*{Exercises}\label{exercises-10}
 \addcontentsline{toc}{section}{Exercises}
 
 \begin{center}\includegraphics[width=0.5\linewidth]{images/thinking} \end{center}
@@ -26695,7 +27563,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118139088"
+## [1] "0x12ee3af28"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -26709,7 +27577,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118139088"
+## [1] "0x12ee3af28"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -26748,7 +27616,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118139088"
+## [1] "0x12ee3af28"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -26761,7 +27629,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x128b574c8"
+## [1] "0x115117568"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -26779,7 +27647,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x118139088"
+## [1] "0x12ee3af28"
 \end{verbatim}
 
 \begin{Shaded}
@@ -26823,7 +27691,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x129cf0cd8" "0x129cf0cd8"
+## [1] "0x1144e2c40" "0x1144e2c40"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -26862,7 +27730,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x129cf0cd8" "0x129cf0cd8"
+## [1] "0x1144e2c40" "0x1144e2c40"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -26904,7 +27772,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x129cf0cd8" "0x1149fa5b8"
+## [1] "0x1144e2c40" "0x1089b7580"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
@@ -28707,7 +29575,7 @@ or the type of object to which it is applied.
 
 \newpage
 
-\section*{Exercises}\label{exercises-10}
+\section*{Exercises}\label{exercises-11}
 \addcontentsline{toc}{section}{Exercises}
 
 \begin{center}\includegraphics[width=0.5\linewidth]{images/thinking} \end{center}
