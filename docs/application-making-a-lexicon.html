@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-17">
+<meta name="date" content="2017-12-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -538,23 +538,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="application-making-a-lexicon" class="section level2">
 <h2><span class="header-section-number">13.5</span> Application: Making a Lexicon</h2>
 <p>A <em>lexicon</em> is any list of words—usually the words of a language or of some body of texts produced in that language. In this Section we’ll combine our file-handling skills with regular expressions to create a lexicon for L. Frank Bloom’s classic <em>The Wizard of Oz</em>.</p>
-<p>First you need to get hold of the text itself. <em>The Wizrd of Oz</em> has been in the public domain for many years now, and is available from the <a href="https://www.gutenberg.org/">Gutenberg Project</a>. You could look it up there and download it manually, but we’ll practice doing it all within R. This creates a bit of a problem, since the Gutenberg Project does not permit automated file-requests, so I have installed a copy of the file at a URL that you can access:</p>
+<p>First you need to get hold of the text itself. <em>The Wizrd of Oz</em> has been in the public domain for many years now, and is available from the <a href="https://www.gutenberg.org/">Gutenberg Project</a>. You could look it up there and find the URL for download:</p>
 <blockquote>
-<p><a href="http://homerhanumat.github.io/r-notes/downloads/oz.txt" class="uri">http://homerhanumat.github.io/r-notes/downloads/oz.txt</a></p>
+<p><a href="http://www.gutenberg.org/cache/epub/55/pg55.txt" class="uri">http://www.gutenberg.org/cache/epub/55/pg55.txt</a></p>
 </blockquote>
 <p>Go ahead and download the file: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( <span class="op">!</span>(<span class="kw">file.exists</span>(<span class="st">&quot;downloads/oz.txt&quot;</span>)) ) {
-  <span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;homerhanmat.github.io/r-notes/downloads/oz.txt&quot;</span>,
-              <span class="dt">destfile =</span> <span class="st">&quot;downloads/oz.txt&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozURL &lt;-<span class="st"> &quot;http://www.gutenberg.org/cache/epub/55/pg55.txt&quot;</span>
+<span class="cf">if</span> ( <span class="op">!</span>(<span class="kw">file.exists</span>(<span class="st">&quot;downloads/oz.txt&quot;</span>)) ) {
+  <span class="kw">download.file</span>(<span class="dt">url =</span> ozURL,
+                <span class="dt">destfile =</span> <span class="st">&quot;downloads/oz.txt&quot;</span>)
 }</code></pre></div>
 <p>Next, read in the file, line by line: </p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">oz &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">con =</span> <span class="st">&quot;downloads/oz.txt&quot;</span>)</code></pre></div>
-<p>Examine <code>oz.txt</code> for a bit. If we plan to make a lexicon for the book, then we probably don’t want to include Gutenberg’s header material or their discussion of licensing at the end. We’ll need to cut this material out of <code>oz</code>:</p>
+<p>Take some time to look through <code>oz.txt</code>. If we plan to make a lexicon for the book, then we probably don’t want to include Gutenberg’s header material or their discussion of licensing at the end. We’ll need to cut this material out of <code>oz</code>:</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a helper function</span>
 findIndex &lt;-<span class="st"> </span><span class="cf">function</span>(pattern, text) {
-  inText &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">pattern =</span> pattern, <span class="dt">x =</span> text, <span class="dt">perl =</span> <span class="ot">TRUE</span>)
-  <span class="kw">which</span>(inText)
+  <span class="kw">str_detect</span>(text, <span class="dt">pattern =</span> pattern) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">which</span>()
 }
 
 <span class="co"># now find lines to start and end at:</span>
@@ -565,11 +565,17 @@ lastLine &lt;-<span class="st"> </span><span class="kw">findIndex</span>(<span c
 oz2 &lt;-<span class="st"> </span>oz[firstLine<span class="op">:</span>lastLine]</code></pre></div>
 <p>Let us now take a first pass at splitting the text into all of its “words.” Our first thought is that words are the parts of the text that are separated by one or more white-space characters, so we might try this:</p>
 <p> </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozwds &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">strsplit</span>(oz2, <span class="dt">split =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s+&quot;</span>, <span class="dt">perl =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozwds &lt;-<span class="st"> </span>
+<span class="st">  </span>oz2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s+&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>()</code></pre></div>
 <p>Next, let’s convert all of the words to lowercase, then make a new word-list with no repeats, then sort that list:</p>
 <p>  </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozwds &lt;-<span class="st"> </span><span class="kw">tolower</span>(ozwds)
-ozWords &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(ozwds))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozWords &lt;-<span class="st"> </span>
+<span class="st">  </span>ozwds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_to_lower</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_sort</span>()</code></pre></div>
 <p>It’s time now to examine our prospective lexicon. Look around a bit in <code>ozWords</code>.</p>
 <ul>
 <li>There are some numbers. We’ll get rid of them.</li>
@@ -602,33 +608,28 @@ ozWords &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="
 <p>This causes such strings as “gently--for” and “cyclone--in” to appear in our lexicon. We don’t want that, so we need to split on double-hyphens.</p></li>
 </ul>
 <p>Let’s go back and try the splitting again: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozwds &lt;-<span class="st"> </span><span class="kw">unlist</span>(
-  <span class="kw">strsplit</span>(oz2, 
-           <span class="dt">split =</span> <span class="st">&quot;(?x)     # allow comments in regex!</span>
-<span class="st">                    (-{2,})  # two or more hyphens</span>
-<span class="st">                    |        # or </span>
-<span class="st">                    (</span><span class="ch">\\</span><span class="st">s+)   # one or more white-space</span>
-<span class="st">                   &quot;</span>, 
-           <span class="dt">perl =</span> <span class="ot">TRUE</span>))</code></pre></div>
-<p>Now let’s strip off any leading or trailing punctuation. In PCRE2, <code>\p{P}</code> is a shortcut for any punctuation character:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozwds &lt;-
+<span class="st">  </span>oz2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;(?x)    # allow comments</span>
+<span class="st">                      (-{2,})  # two or more hyphens</span>
+<span class="st">                      |        # or</span>
+<span class="st">                      (</span><span class="ch">\\</span><span class="st">s+)   # whitespace</span>
+<span class="st">                      &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>()</code></pre></div>
+<p>Now let’s strip off any leading or trailing punctuation. In ICU Unicode, <code>\p{P}</code> is a shortcut for any punctuation character:</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first strip leading punctuation:</span>
-ozwds &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">p{P}+&quot;</span>,
-                <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>,
-                <span class="dt">x =</span> ozwds,
-                <span class="dt">perl =</span> <span class="ot">TRUE</span>)
-<span class="co"># then trailing:</span>
-ozwds &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">p{P}+$&quot;</span>,
-                <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>,
-                <span class="dt">x =</span> ozwds,
-                <span class="dt">perl =</span> <span class="ot">TRUE</span>)
-<span class="co"># lowercase, remove duplicates, sort:</span>
-ozWords &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">unique</span>(<span class="kw">tolower</span>(ozwds)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozWords &lt;-
+<span class="st">  </span>ozwds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="dt">pattern =</span> <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">p{P}+&quot;</span>,
+              <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># strip leading punctuation</span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">p{P}+$&quot;</span>,
+              <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># strip trailing punctuation</span>
+<span class="st">  </span><span class="kw">str_to_lower</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_sort</span>()</code></pre></div>
 <p>Taking a second look at <code>ozWords</code>, we see that we need to get rid of some numbers and a spurious empty string:</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isNumber &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d+&quot;</span>,
-                  <span class="dt">x =</span> ozWords,
-                  <span class="dt">perl =</span> <span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">isNumber &lt;-<span class="st"> </span><span class="kw">str_detect</span>(ozWords, <span class="dt">pattern =</span> <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d+&quot;</span>)
 isEmpty &lt;-<span class="st"> </span>ozWords <span class="op">==</span><span class="st"> &quot;&quot;</span>
 validWord &lt;-<span class="st"> </span><span class="op">!</span>isNumber <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>isEmpty
 ozWords &lt;-<span class="st"> </span>ozWords[validWord]</code></pre></div>
@@ -641,7 +642,7 @@ ozWords &lt;-<span class="st"> </span>ozWords[validWord]</code></pre></div>
   <span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">length</span>(lexicon)) ) {
     word &lt;-<span class="st"> </span>lexicon[i]
     pattern &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;(?i)&quot;</span>, word)
-    hasWord &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">pattern =</span> pattern, <span class="dt">x =</span> fileLines, <span class="dt">perl =</span> <span class="ot">TRUE</span>)
+    hasWord &lt;-<span class="st"> </span><span class="kw">str_detect</span>(fileLines, <span class="dt">pattern =</span> pattern)
     index[[word]] &lt;-<span class="st"> </span><span class="kw">which</span>(hasWord)
   }
   index

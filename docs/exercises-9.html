@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-17">
+<meta name="date" content="2017-12-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -539,17 +539,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Exercises</h2>
 <p><img src="images/thinking.png" width="50%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
-<li><p>The word “caracara” is in <code>words</code>. Note that it in this word a sequence of four letters is immediately repeated. Write a that uses a regular expression to find all of the words in <code>words</code> that contain a doublet like this: specifically, a sequence of <em>four or more</em> letters that are immediately repeated. (The repeated sequence need NOT make up the entire word, as in the case of “caracara.”) The program should <code>cat()</code> the words to the console, one per line.</p></li>
+<li><p>The word “caracara” is in <code>words</code>. Note that it in this word a sequence of four letters is immediately repeated. Write a function that uses a regular expression to find all of the words in <code>words</code> that contain a doublet like this: specifically, a sequence of <em>four or more</em> letters that are immediately repeated. (The repeated sequence need NOT make up the entire word, as in the case of “caracara.”) The program should <code>cat()</code> the words to the console, one per line.</p></li>
 <li><p>Write a program that uses a regular expression to find all of the words in <code>words</code> that contain a “q” that is not immediately followed by a “u”. The program should <code>cat()</code> the words to the console, one per line.</p></li>
 <li><p>Write a program that uses a regular expression to find all of the words in <code>words</code> that are 4-letter or 5-letter palindromes. The program should <code>cat()</code> the words to the console, one per line. (<strong>Hint:</strong> consult Section <a href="regex-syntax.html#regex-captures">12.3.8</a>.)</p></li>
 <li><p>It can be proven mathematically that there is no regular expression, no matter how complex, that matches all and only the palindromes. We can write regular expressions to match all and only the palindromes that are less than some fixed number of characters, but we can’t match palindromes of arbitrary length. Write a program to find all of the palindromes in <code>words</code>. Obviously this program won’t have to use a regular expression!</p></li>
 <li><p>Gutenburg’s version of Jane Austin’s classic novel <em>Pride and Prejudice</em> may be downloaded from the URL:</p>
 <blockquote>
-<p><a href="https://homerhanumat.github.io/r-notes/downloads/pride.txt" class="uri">https://homerhanumat.github.io/r-notes/downloads/pride.txt</a></p>
+<p><a href="https://www.gutenberg.org/files/1342/1342-0.txt" class="uri">https://www.gutenberg.org/files/1342/1342-0.txt</a></p>
 </blockquote>
-<p>Your mission is to create a lexicon for Austin’s novel. Follow the pattern of the work done in the text to make a lexicon for <em>The Wizard of Oz</em>. You will have to make different choices, though, about what constitutes a “word”. For example, Austin’s prose is complex and “grown-up”in comparison to the prose of <em>Oz</em>, so the parts of hyphenated words probably constitute valid words in and of themselves. Austin has a habit of concealing certain place-names with dashes; occasionally in letters to each other Austin’s characters will refer to a person by an initial. Should initials and sequences of dashes count as words? And what about “12th” as in “the 12th of December”? As you examine the text and your initial word list you will have to make decisions about these and other matters.</p>
+<p>Your mission is to create a lexicon for Austin’s novel. Follow the pattern of the work done in the text to make a lexicon for <em>The Wizard of Oz</em>. You will have to make different choices, though, about what constitutes a “word”. For example, Austin’s prose is complex and “grown-up”in comparison to the prose of <em>Oz</em>, so the parts of hyphenated words probably constitute valid words in and of themselves. Austin has a habit of concealing certain place-names with dashes, and occasionally in letters to each other Austin’s characters will refer to a person by an initial. Should initials and sequences of dashes count as words? And what about “12th” as in “the 12th of December”? As you examine the text and your initial word list you will have to make decisions about these and other matters.</p>
 <p>Write a report in R Markdown in which you create the lexicon. Include the code for all of your work—beginning from the file-download—so that a person who runs all of the code in the document will create the very same lexicon you made. As you develop the lexicon, explain your code and the rationale for your choices about what counts as a “word” in Austin’s novel.</p>
 <p>Conclude the report with a data frame of the twenty most common words in Austin’s novel that are more than eight letters long. The frame should have two variables: one for the words and another for the number of occurrences. The frame should be sorted so that the words appear in decreasing order of frequency (i.e., most common word comes first).</p></li>
+<li><p>(<em>) Install the <strong>tidytext</strong> and <strong>gutenbergr</strong> packages. <strong>gutenbergr</strong> simplifies the task of downloading a Project Gutenberg text, stripping off the spurious leading and trailing material. <strong>tidytext</strong> automates a number fo basic text-analysis tasks. Read the Vignette in the <strong>gutenberg</strong> packages and learn how to find the words in a text. Find the unique words in </em>The Wizard of Oz* as determined by <strong>tidytext</strong>, and use the <code>setdiff()</code> function to compare the <code>ozWords</code> in this Chapter with the word-list according to <strong>tidytext</strong>. What are the primary differences?</p></li>
 </ol>
 
 </div>

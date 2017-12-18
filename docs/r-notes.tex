@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-12-17}
+  \date{2017-12-18}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -6543,21 +6543,22 @@ number of other environments:
 
 \begin{verbatim}
 ##  [1] ".GlobalEnv"             "package:babynames"     
-##  [3] "package:R6"             "package:tigerstats"    
-##  [5] "package:abd"            "package:mosaic"        
-##  [7] "package:Matrix"         "package:ggformula"     
-##  [9] "package:lattice"        "package:nlme"          
-## [11] "package:TurtleGraphics" "package:grid"          
-## [13] "package:mosaicData"     "package:stringr"       
-## [15] "package:bindrcpp"       "package:tigerData"     
+##  [3] "package:R6"             "package:tigerData"     
+##  [5] "package:tigerstats"     "package:abd"           
+##  [7] "package:mosaic"         "package:Matrix"        
+##  [9] "package:ggformula"      "package:lattice"       
+## [11] "package:nlme"           "package:TurtleGraphics"
+## [13] "package:grid"           "package:mosaicData"    
+## [15] "package:tidytext"       "package:bindrcpp"      
 ## [17] "package:dplyr"          "package:purrr"         
 ## [19] "package:readr"          "package:tidyr"         
 ## [21] "package:tibble"         "package:ggplot2"       
-## [23] "package:tidyverse"      "tools:rstudio"         
-## [25] "package:stats"          "package:graphics"      
-## [27] "package:grDevices"      "package:utils"         
-## [29] "package:datasets"       "package:methods"       
-## [31] "Autoloads"              "package:base"
+## [23] "package:tidyverse"      "package:stringr"       
+## [25] "package:magrittr"       "tools:rstudio"         
+## [27] "package:stats"          "package:graphics"      
+## [29] "package:grDevices"      "package:utils"         
+## [31] "package:datasets"       "package:methods"       
+## [33] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -6663,7 +6664,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x104832cd8>
+## <bytecode: 0x107edafc8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -21424,7 +21425,7 @@ Exercises}\label{solutions-to-practice-exercises-18}
 
   \begin{quote}
   The next few exercises are about the \texttt{babynames} data frame
-  from the \textbf{babynames} package \citep{R-babynames}.
+  from the \textbf{babynames} package.
   \end{quote}
 \item
   Find the names for females born in 2015 that were given to more than
@@ -24472,10 +24473,8 @@ Exercises}\label{solutions-to-the-practice-exercises-16}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{twoWordName <-}
-\StringTok{  }\NormalTok{fruit }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{str_count}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+"}\NormalTok{) }\OperatorTok{==}\StringTok{ }\DecValTok{2}
-  \KeywordTok{sum}\NormalTok{(twoWordName)}
+\NormalTok{wordCount <-}\StringTok{ }\NormalTok{fruit }\OperatorTok{%>%}\StringTok{ }\KeywordTok{str_count}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+"}\NormalTok{)}
+\KeywordTok{sum}\NormalTok{(wordCount }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -25172,8 +25171,8 @@ future use, and exporting it for use by others.
 \section{Downloading Files}\label{downloading-files}
 
 First we'll deal with the situation in which the data we want is in a
-file somewhere on the Internet. We will download the file to our
-computer.
+file somewhere on the Internet. In this case we need only download the
+file to our computer.
 
 It's a good idea to keep one's work organized. Since we plan to begin
 downloading data files, we might as well create a directory dedicated to
@@ -25258,9 +25257,13 @@ used in the past to get a single line of input from the user.
   connection with files stored locally on one's computer, with URL
   addresses on the internet, with databases, and so on.} with any file.
 In the code above, we set the connection to be the file
-\texttt{words.txt}. By default \texttt{readLines()} reads the file one
-line line at a time as a string, creating a character vector along the
-way. The resulting character vector is named \texttt{words}.
+\texttt{words.txt}. By default \texttt{readLines()} reads the file---one
+line at a time as a string. The resulting character vector is named
+\texttt{words}.\footnote{Note that the \textbf{stringr} package contains
+  a vector named \texttt{words} that is used for practicing with regular
+  expressions. This vector is now masked by the \texttt{words} vector
+  you have created, but you can still access it as
+  \texttt{stringr::words}.}
 
 Let's look at words to see if it came out the way we expected. The
 \texttt{head()} function \index{R-functions!head()@\texttt{head()}}
@@ -25297,9 +25300,10 @@ line. It made sense to read it into a vector. Most of the files that we
 encounter have a more complex structure. In many cases it is best to
 incorporate them into R as data frames.
 
-R has many tools for reading data into data frames; one of the most
+R has several tools for reading data into data frames. One of the most
 convenient---and most popular---is the set of functions in the
-\textbf{readr} package \citep{R-readr}.
+\textbf{readr} package \citep{R-readr}. It's attached automatically when
+you load the tidy-verse, but you can also attach it separately:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -25397,21 +25401,9 @@ Now take a look at the frame:
 person in each country, and \texttt{GDP} is the country's Gross Domestic
 Product in millions of dollars.
 
-The output looks a bit different from the usual data-frame listing.
-That's because \texttt{alcGDP} isn't actually a data frame.
-\texttt{read\_csv()} brought the data into R as a \texttt{tibble}, which
-is an object like a data frame but specially tailored for dealing with
-data in the context of a collection of R-packages that are commonly used
-by data scientists. Tibbles have many virtues, but if they make you
-nervous then you can get the data frame as follows:
-
-\index{R-functions!as.data.frame()@\texttt{as.data.frame()}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{alcGDP <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(alcGDP)}
-\end{Highlighting}
-\end{Shaded}
+From the Console output you can tell that \texttt{alcGDP} is a tibble
+rather than a data frame. (The default behavior for \texttt{read\_csv()}
+is to import data as tibbles.)
 
 We won't analyze \texttt{alcGDP} here, but you might want to look at it
 later. You can save it permanently to your Home directory with the
@@ -25440,16 +25432,15 @@ environment later on, you can reload \texttt{alcGDP} as follows:
 
 If you would like to send the data in a data frame to a colleague who
 does not use R, then you should convert it to a common text-file format
-such as CSV. For this purpose R provides the \texttt{write.csv()}
-command. The following code writes \texttt{m11survey} to a CSV file in
-your Home directory.
+such as CSV. For this purpose \textbf{readr} provides the
+\texttt{write\_csv()} command. The following code writes
+\texttt{m11survey} to a CSV file in your Home directory.
 
 \index{R-functions!write.csv()@\texttt{write.csv()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tigerstats)}
-\KeywordTok{write.csv}\NormalTok{(m111survey, }\DataTypeTok{file =} \StringTok{"m111survey.csv"}\NormalTok{, }\DataTypeTok{row.names =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{write_csv}\NormalTok{(tigerstats}\OperatorTok{::}\NormalTok{m111survey, }\DataTypeTok{file =} \StringTok{"m111survey.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -25466,13 +25457,10 @@ create a lexicon for L. Frank Bloom's classic \emph{The Wizard of Oz}.
 First you need to get hold of the text itself. \emph{The Wizrd of Oz}
 has been in the public domain for many years now, and is available from
 the \href{https://www.gutenberg.org/}{Gutenberg Project}. You could look
-it up there and download it manually, but we'll practice doing it all
-within R. This creates a bit of a problem, since the Gutenberg Project
-does not permit automated file-requests, so I have installed a copy of
-the file at a URL that you can access:
+it up there and find the URL for download:
 
 \begin{quote}
-\url{http://homerhanumat.github.io/r-notes/downloads/oz.txt}
+\url{http://www.gutenberg.org/cache/epub/55/pg55.txt}
 \end{quote}
 
 Go ahead and download the file:
@@ -25480,9 +25468,10 @@ Go ahead and download the file:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{ozURL <-}\StringTok{ "http://www.gutenberg.org/cache/epub/55/pg55.txt"}
 \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\NormalTok{(}\KeywordTok{file.exists}\NormalTok{(}\StringTok{"downloads/oz.txt"}\NormalTok{)) ) \{}
-  \KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"homerhanmat.github.io/r-notes/downloads/oz.txt"}\NormalTok{,}
-              \DataTypeTok{destfile =} \StringTok{"downloads/oz.txt"}\NormalTok{)}
+  \KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =}\NormalTok{ ozURL,}
+                \DataTypeTok{destfile =} \StringTok{"downloads/oz.txt"}\NormalTok{)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -25496,10 +25485,10 @@ Next, read in the file, line by line:
 \end{Highlighting}
 \end{Shaded}
 
-Examine \texttt{oz.txt} for a bit. If we plan to make a lexicon for the
-book, then we probably don't want to include Gutenberg's header material
-or their discussion of licensing at the end. We'll need to cut this
-material out of \texttt{oz}:
+Take some time to look through \texttt{oz.txt}. If we plan to make a
+lexicon for the book, then we probably don't want to include Gutenberg's
+header material or their discussion of licensing at the end. We'll need
+to cut this material out of \texttt{oz}:
 
 \index{R-functions!which()@\texttt{which()}}
 
@@ -25507,8 +25496,7 @@ material out of \texttt{oz}:
 \begin{Highlighting}[]
 \CommentTok{# a helper function}
 \NormalTok{findIndex <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(pattern, text) \{}
-\NormalTok{  inText <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ pattern, }\DataTypeTok{x =}\NormalTok{ text, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
-  \KeywordTok{which}\NormalTok{(inText)}
+  \KeywordTok{str_detect}\NormalTok{(text, }\DataTypeTok{pattern =}\NormalTok{ pattern) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{which}\NormalTok{()}
 \NormalTok{\}}
 
 \CommentTok{# now find lines to start and end at:}
@@ -25526,25 +25514,31 @@ that are separated by one or more white-space characters, so we might
 try this:
 
 \index{R-functions!unlist()@\texttt{unlist()}}
-\index{R-functions!strsplit()@\texttt{strsplit()}}
+\index{R-functions!str\_split()@\texttt{str\_split()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ozwds <-}\StringTok{ }\KeywordTok{unlist}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(oz2, }\DataTypeTok{split =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+"}\NormalTok{, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{))}
+\NormalTok{ozwds <-}\StringTok{ }
+\StringTok{  }\NormalTok{oz2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 Next, let's convert all of the words to lowercase, then make a new
 word-list with no repeats, then sort that list:
 
-\index{R-functions!tolower()@\texttt{tolower()}}
-\index{R-functions!sort()@\texttt{sort()}}
+\index{R-functions!str\_to\_lower()@\texttt{str\_to\_lower()}}
+\index{R-functions!str\_sort()@\texttt{str\_sort()}}
 \index{R-functions!unique()@\texttt{unique()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ozwds <-}\StringTok{ }\KeywordTok{tolower}\NormalTok{(ozwds)}
-\NormalTok{ozWords <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(}\KeywordTok{unique}\NormalTok{(ozwds))}
+\NormalTok{ozWords <-}\StringTok{ }
+\StringTok{  }\NormalTok{ozwds }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_to_lower}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_sort}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -25621,37 +25615,34 @@ Let's go back and try the splitting again:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ozwds <-}\StringTok{ }\KeywordTok{unlist}\NormalTok{(}
-  \KeywordTok{strsplit}\NormalTok{(oz2, }
-           \DataTypeTok{split =} \StringTok{"(?x)     # allow comments in regex!}
-\StringTok{                    (-\{2,\})  # two or more hyphens}
-\StringTok{                    |        # or }
-\StringTok{                    (}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+)   # one or more white-space}
-\StringTok{                   "}\NormalTok{, }
-           \DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{))}
+\NormalTok{ozwds <-}
+\StringTok{  }\NormalTok{oz2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"(?x)    # allow comments}
+\StringTok{                      (-\{2,\})  # two or more hyphens}
+\StringTok{                      |        # or}
+\StringTok{                      (}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+)   # whitespace}
+\StringTok{                      "}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-Now let's strip off any leading or trailing punctuation. In PCRE2,
+Now let's strip off any leading or trailing punctuation. In ICU Unicode,
 \texttt{\textbackslash{}p\{P\}} is a shortcut for any punctuation
 character:
 
-\index{R-functions!gsub()@\texttt{gsub()}}
+\index{R-functions!str\_replace()@\texttt{str\_replace()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# first strip leading punctuation:}
-\NormalTok{ozwds <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"^}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{p\{P\}+"}\NormalTok{,}
-                \DataTypeTok{replacement =} \StringTok{""}\NormalTok{,}
-                \DataTypeTok{x =}\NormalTok{ ozwds,}
-                \DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
-\CommentTok{# then trailing:}
-\NormalTok{ozwds <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{p\{P\}+$"}\NormalTok{,}
-                \DataTypeTok{replacement =} \StringTok{""}\NormalTok{,}
-                \DataTypeTok{x =}\NormalTok{ ozwds,}
-                \DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
-\CommentTok{# lowercase, remove duplicates, sort:}
-\NormalTok{ozWords <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(}\KeywordTok{unique}\NormalTok{(}\KeywordTok{tolower}\NormalTok{(ozwds)))}
+\NormalTok{ozWords <-}
+\StringTok{  }\NormalTok{ozwds }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_replace}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"^}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{p\{P\}+"}\NormalTok{,}
+              \DataTypeTok{replacement =} \StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{   }\CommentTok{# strip leading punctuation}
+\StringTok{  }\KeywordTok{str_replace}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{p\{P\}+$"}\NormalTok{,}
+              \DataTypeTok{replacement =} \StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{   }\CommentTok{# strip trailing punctuation}
+\StringTok{  }\KeywordTok{str_to_lower}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_sort}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -25662,9 +25653,7 @@ of some numbers and a spurious empty string:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{isNumber <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d+"}\NormalTok{,}
-                  \DataTypeTok{x =}\NormalTok{ ozWords,}
-                  \DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{isNumber <-}\StringTok{ }\KeywordTok{str_detect}\NormalTok{(ozWords, }\DataTypeTok{pattern =} \StringTok{"^}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d+"}\NormalTok{)}
 \NormalTok{isEmpty <-}\StringTok{ }\NormalTok{ozWords }\OperatorTok{==}\StringTok{ ""}
 \NormalTok{validWord <-}\StringTok{ }\OperatorTok{!}\NormalTok{isNumber }\OperatorTok{&}\StringTok{ }\OperatorTok{!}\NormalTok{isEmpty}
 \NormalTok{ozWords <-}\StringTok{ }\NormalTok{ozWords[validWord]}
@@ -25687,7 +25676,7 @@ function:
   \ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \KeywordTok{seq_len}\NormalTok{(}\KeywordTok{length}\NormalTok{(lexicon)) ) \{}
 \NormalTok{    word <-}\StringTok{ }\NormalTok{lexicon[i]}
 \NormalTok{    pattern <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"(?i)"}\NormalTok{, word)}
-\NormalTok{    hasWord <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ pattern, }\DataTypeTok{x =}\NormalTok{ fileLines, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{    hasWord <-}\StringTok{ }\KeywordTok{str_detect}\NormalTok{(fileLines, }\DataTypeTok{pattern =}\NormalTok{ pattern)}
 \NormalTok{    index[[word]] <-}\StringTok{ }\KeywordTok{which}\NormalTok{(hasWord)}
 \NormalTok{  \}}
 \NormalTok{  index}
@@ -25801,12 +25790,13 @@ sending or receiving data.
 \def\labelenumi{\arabic{enumi}.}
 \item
   The word ``caracara'' is in \texttt{words}. Note that it in this word
-  a sequence of four letters is immediately repeated. Write a that uses
-  a regular expression to find all of the words in \texttt{words} that
-  contain a doublet like this: specifically, a sequence of \emph{four or
-  more} letters that are immediately repeated. (The repeated sequence
-  need NOT make up the entire word, as in the case of ``caracara.'') The
-  program should \texttt{cat()} the words to the console, one per line.
+  a sequence of four letters is immediately repeated. Write a function
+  that uses a regular expression to find all of the words in
+  \texttt{words} that contain a doublet like this: specifically, a
+  sequence of \emph{four or more} letters that are immediately repeated.
+  (The repeated sequence need NOT make up the entire word, as in the
+  case of ``caracara.'') The program should \texttt{cat()} the words to
+  the console, one per line.
 \item
   Write a program that uses a regular expression to find all of the
   words in \texttt{words} that contain a ``q'' that is not immediately
@@ -25830,7 +25820,7 @@ sending or receiving data.
   Prejudice} may be downloaded from the URL:
 
   \begin{quote}
-  \url{https://homerhanumat.github.io/r-notes/downloads/pride.txt}
+  \url{https://www.gutenberg.org/files/1342/1342-0.txt}
   \end{quote}
 
   Your mission is to create a lexicon for Austin's novel. Follow the
@@ -25840,8 +25830,8 @@ sending or receiving data.
   and ``grown-up''in comparison to the prose of \emph{Oz}, so the parts
   of hyphenated words probably constitute valid words in and of
   themselves. Austin has a habit of concealing certain place-names with
-  dashes; occasionally in letters to each other Austin's characters will
-  refer to a person by an initial. Should initials and sequences of
+  dashes, and occasionally in letters to each other Austin's characters
+  will refer to a person by an initial. Should initials and sequences of
   dashes count as words? And what about ``12th'' as in ``the 12th of
   December''? As you examine the text and your initial word list you
   will have to make decisions about these and other matters.
@@ -25859,6 +25849,17 @@ sending or receiving data.
   number of occurrences. The frame should be sorted so that the words
   appear in decreasing order of frequency (i.e., most common word comes
   first).
+\item
+  (\emph{) Install the \textbf{tidytext} and \textbf{gutenbergr}
+  packages. \textbf{gutenbergr} simplifies the task of downloading a
+  Project Gutenberg text, stripping off the spurious leading and
+  trailing material. \textbf{tidytext} automates a number fo basic
+  text-analysis tasks. Read the Vignette in the \textbf{gutenberg}
+  packages and learn how to find the words in a text. Find the unique
+  words in }The Wizard of Oz* as determined by \textbf{tidytext}, and
+  use the \texttt{setdiff()} function to compare the \texttt{ozWords} in
+  this Chapter with the word-list according to \textbf{tidytext}. What
+  are the primary differences?
 \end{enumerate}
 
 \chapter{Functional Programming in R}\label{functional}
@@ -27966,7 +27967,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13f203308"
+## [1] "0x11e828928"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -27980,7 +27981,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13f203308"
+## [1] "0x11e828928"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -28019,7 +28020,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13f203308"
+## [1] "0x11e828928"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -28032,7 +28033,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x138ef1078"
+## [1] "0x11c2c40b8"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -28050,7 +28051,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13f203308"
+## [1] "0x11e828928"
 \end{verbatim}
 
 \begin{Shaded}
@@ -28094,7 +28095,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10e2fc0a0" "0x10e2fc0a0"
+## [1] "0x120cb41b8" "0x120cb41b8"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -28133,7 +28134,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10e2fc0a0" "0x10e2fc0a0"
+## [1] "0x120cb41b8" "0x120cb41b8"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -28175,7 +28176,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x10e2fc0a0" "0x11c6d8870"
+## [1] "0x120cb41b8" "0x1475dac38"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

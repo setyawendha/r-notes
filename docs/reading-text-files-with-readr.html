@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-17">
+<meta name="date" content="2017-12-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -538,7 +538,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="reading-text-files-with-readr" class="section level2">
 <h2><span class="header-section-number">13.3</span> Reading Text Files with <strong>readr</strong></h2>
 <p><code>words.txt</code> was unusually simple—just one piece of data per line. It made sense to read it into a vector. Most of the files that we encounter have a more complex structure. In many cases it is best to incorporate them into R as data frames.</p>
-<p>R has many tools for reading data into data frames; one of the most convenient—and most popular—is the set of functions in the <strong>readr</strong> package <span class="citation">(Wickham, Hester, and Francois <a href="#ref-R-readr">2017</a>)</span>.</p>
+<p>R has several tools for reading data into data frames. One of the most convenient—and most popular—is the set of functions in the <strong>readr</strong> package <span class="citation">(Wickham, Hester, and Francois <a href="#ref-R-readr">2017</a>)</span>. It’s attached automatically when you load the tidy-verse, but you can also attach it separately:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)</code></pre></div>
 <p>Let’s practice reading in a file from the Internet. The URL is:</p>
 <blockquote>
@@ -574,9 +574,7 @@ alcGDP<span class="op">$</span>SexDisplay &lt;-<span class="st"> </span><span cl
 ## 5      Malawi    1.5   4258
 ## 6    Malaysia    0.3 326933</code></pre>
 <p><code>liters</code> gives the mean total liters of alcohol consumed per person in each country, and <code>GDP</code> is the country’s Gross Domestic Product in millions of dollars.</p>
-<p>The output looks a bit different from the usual data-frame listing. That’s because <code>alcGDP</code> isn’t actually a data frame. <code>read_csv()</code> brought the data into R as a <code>tibble</code>, which is an object like a data frame but specially tailored for dealing with data in the context of a collection of R-packages that are commonly used by data scientists. Tibbles have many virtues, but if they make you nervous then you can get the data frame as follows:</p>
-
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alcGDP &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(alcGDP)</code></pre></div>
+<p>From the Console output you can tell that <code>alcGDP</code> is a tibble rather than a data frame. (The default behavior for <code>read_csv()</code> is to import data as tibbles.)</p>
 <p>We won’t analyze <code>alcGDP</code> here, but you might want to look at it later. You can save it permanently to your Home directory with the <code>save()</code> function:</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save</span>(alcGDP, <span class="dt">file =</span> <span class="st">&quot;downloads/alcGDP.rda&quot;</span>)</code></pre></div>

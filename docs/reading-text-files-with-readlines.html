@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-17">
+<meta name="date" content="2017-12-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -539,7 +539,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">13.2</span> Reading Text Files with <code>readLines()</code></h2>
 <p>Let’s transfer the contents of <code>words.txt</code> to a character vector in R. The function for this is <code>readLines()</code>: </p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">words &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">con =</span> <span class="st">&quot;downloads/words.txt&quot;</span>)</code></pre></div>
-<p><code>readLines()</code> is similar to <code>readline()</code>, which we have used in the past to get a single line of input from the user. <code>readLines()</code> can also read from the console—this is called <em>standard input</em>—but it can also make a <em>connection</em><a href="#fn35" class="footnoteRef" id="fnref35"><sup>35</sup></a> with any file. In the code above, we set the connection to be the file <code>words.txt</code>. By default <code>readLines()</code> reads the file one line line at a time as a string, creating a character vector along the way. The resulting character vector is named <code>words</code>.</p>
+<p><code>readLines()</code> is similar to <code>readline()</code>, which we have used in the past to get a single line of input from the user. <code>readLines()</code> can also read from the console—this is called <em>standard input</em>—but it can also make a <em>connection</em><a href="#fn35" class="footnoteRef" id="fnref35"><sup>35</sup></a> with any file. In the code above, we set the connection to be the file <code>words.txt</code>. By default <code>readLines()</code> reads the file—one line at a time as a string. The resulting character vector is named <code>words</code>.<a href="#fn36" class="footnoteRef" id="fnref36"><sup>36</sup></a></p>
 <p>Let’s look at words to see if it came out the way we expected. The <code>head()</code> function  works not only on data frames but also on vectors:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(words)</code></pre></div>
 <pre><code>## [1] &quot;aa&quot;     &quot;aah&quot;    &quot;aahed&quot;  &quot;aahing&quot; &quot;aahs&quot;   &quot;aal&quot;</code></pre>
@@ -551,6 +551,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <hr />
 <ol start="35">
 <li id="fn35"><p>A <em>connection</em>, also known to R-programmers as a “generalized file”, is any one of a wide range of interfaces that can be established with the world outside of the R-session for the purpose of sending or receiving data. One can make a connection with files stored locally on one’s computer, with URL addresses on the internet, with databases, and so on.<a href="reading-text-files-with-readlines.html#fnref35">↩</a></p></li>
+<li id="fn36"><p>Note that the <strong>stringr</strong> package contains a vector named <code>words</code> that is used for practicing with regular expressions. This vector is now masked by the <code>words</code> vector you have created, but you can still access it as <code>stringr::words</code>.<a href="reading-text-files-with-readlines.html#fnref36">↩</a></p></li>
 </ol>
 </div>
             </section>
