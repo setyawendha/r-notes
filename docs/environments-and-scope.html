@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-16">
+<meta name="date" content="2017-12-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -442,13 +442,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>12.4</b> Entering a Regex in R</a><ul>
 <li class="chapter" data-level="12.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>12.4.1</b> String to Regex</a></li>
 <li class="chapter" data-level="12.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-substitution"><i class="fa fa-check"></i><b>12.4.2</b> Substitution</a></li>
-<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>12.4.3</b> A Note on Perl</a></li>
-<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.4</b> Patterned Replacement</a></li>
-<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>12.4.5</b> Grepping</a></li>
-<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>12.4.6</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.3</b> Patterned Replacement</a></li>
+<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#detecting-matches"><i class="fa fa-check"></i><b>12.4.4</b> Detecting Matches</a></li>
+<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extracting-matches"><i class="fa fa-check"></i><b>12.4.5</b> Extracting Matches</a></li>
+<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extraction-in-data-frames"><i class="fa fa-check"></i><b>12.4.6</b> Extraction in Data Frames</a></li>
 <li class="chapter" data-level="12.4.7" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>12.4.7</b> Regex Modes</a></li>
+<li class="chapter" data-level="12.4.8" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#practice-exercises-34"><i class="fa fa-check"></i><b>12.4.8</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.4.9" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#solutions-to-the-practice-exercises-16"><i class="fa fa-check"></i><b>12.4.9</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#practice-exercises-35"><i class="fa fa-check"></i><b>12.5.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.5.2" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#solutions-to-the-practice-exercises-17"><i class="fa fa-check"></i><b>12.5.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -544,22 +549,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
 <p>As we mentioned previously, the Global Environment is only one of many environments that exist in R. The <code>search()</code> function will show you a number of other environments:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">search</span>()</code></pre></div>
-<pre><code>##  [1] &quot;.GlobalEnv&quot;             &quot;package:R6&quot;            
-##  [3] &quot;package:tigerData&quot;      &quot;package:tigerstats&quot;    
+<pre><code>##  [1] &quot;.GlobalEnv&quot;             &quot;package:babynames&quot;     
+##  [3] &quot;package:R6&quot;             &quot;package:tigerstats&quot;    
 ##  [5] &quot;package:abd&quot;            &quot;package:mosaic&quot;        
 ##  [7] &quot;package:Matrix&quot;         &quot;package:ggformula&quot;     
 ##  [9] &quot;package:lattice&quot;        &quot;package:nlme&quot;          
 ## [11] &quot;package:TurtleGraphics&quot; &quot;package:grid&quot;          
-## [13] &quot;package:mosaicData&quot;     &quot;package:babynames&quot;     
-## [15] &quot;package:bindrcpp&quot;       &quot;package:dplyr&quot;         
-## [17] &quot;package:purrr&quot;          &quot;package:readr&quot;         
-## [19] &quot;package:tidyr&quot;          &quot;package:tibble&quot;        
-## [21] &quot;package:ggplot2&quot;        &quot;package:tidyverse&quot;     
-## [23] &quot;tools:rstudio&quot;          &quot;package:stats&quot;         
-## [25] &quot;package:graphics&quot;       &quot;package:grDevices&quot;     
-## [27] &quot;package:utils&quot;          &quot;package:datasets&quot;      
-## [29] &quot;package:methods&quot;        &quot;Autoloads&quot;             
-## [31] &quot;package:base&quot;</code></pre>
+## [13] &quot;package:mosaicData&quot;     &quot;package:stringr&quot;       
+## [15] &quot;package:bindrcpp&quot;       &quot;package:tigerData&quot;     
+## [17] &quot;package:dplyr&quot;          &quot;package:purrr&quot;         
+## [19] &quot;package:readr&quot;          &quot;package:tidyr&quot;         
+## [21] &quot;package:tibble&quot;         &quot;package:ggplot2&quot;       
+## [23] &quot;package:tidyverse&quot;      &quot;tools:rstudio&quot;         
+## [25] &quot;package:stats&quot;          &quot;package:graphics&quot;      
+## [27] &quot;package:grDevices&quot;      &quot;package:utils&quot;         
+## [29] &quot;package:datasets&quot;       &quot;package:methods&quot;       
+## [31] &quot;Autoloads&quot;              &quot;package:base&quot;</code></pre>
 <p><code>search()</code> returns a character vector of names of environments. The first element is the Global Environment itself. The second element is an environment that is associated with last <em>package</em> that R loaded, the third is an environment associated with the next-to-last package, and so on. Each item on the list is considered to be the <em>parent</em> of the environment that came before it. Thus, the Global Environment has a parent environment, a grandparent environment, and so on. The complete sequence of environments is called the <em>search path</em>. </p>
 <p>Just as the Global Environment has names for objects, so also the packages have names available for use. When you write code that contains a name, R will search for that name: first in your Global Environment, then in its parent environment—the environment of the last package loaded—and so on until it reaches the final package on the list: package <strong>base</strong>. If it can’t find the name anywhere, then it will throw an error, telling you that the object “cannot be found.”</p>
 <p>Let’s try this with a few examples. First, define a (hopefully) new variable:</p>
@@ -596,7 +601,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## &lt;bytecode: 0x10ba196d8&gt;
+## &lt;bytecode: 0x104832cd8&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>I got the definition of the <code>cat()</code> function, all the way up in package <strong>base</strong>.</p>
 <p>Now try:</p>

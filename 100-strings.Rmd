@@ -4,6 +4,11 @@
 knitr::include_graphics("images/xkcd-rtl.png")
 ```
 
+```{r include = FALSE}
+library(stringr)
+```
+
+
 In this chapter we will take a closer look at character-vectors, and in particular at character vectors of length one, which are commonly called "strings."  The ability to manipulate strings is the foundation for all text-processing in computer programming.
 
 \newpage
@@ -102,7 +107,7 @@ Another example:
 cat("C:\\\\Inetpub\\\\vhosts\\\\example.com")
 ```
 
-So much for "ordinary" characters.  But there are special characters, too, sometimes called *control* characters, that do not represent written symbols.  \index{control character}We have seen a couple of them already:  the newline character `\n` is one:
+So much for "ordinary" characters.  But there are special characters, too, sometimes called *control* characters, that do not represent written symbols.  \index{control character}We have seen a couple of them already;  the newline character `\n` is one:
 
 ```{r eval = FALSE}
 bye <- "Farewell!\n\n"
@@ -156,7 +161,12 @@ cat("Hello\u{202e}there, Friend!")
 
 ## Basic String Operations
 
-We now introduce a few basic operations for examining, splitting and combining strings.
+We now introduce a few basic operations for examining, splitting and combining strings.  Some of the functions we discuss come from the **stringer** [@R-stringr] package, which is installed along with the tidyverse but is not automatically attached.  Make sure you attach it when you work with strings:
+
+```{r eval = FALSE}
+library(stringr)
+```
+
 
 ### Is and As
 
@@ -182,25 +192,25 @@ How many characters are in the word "hello"?   Let's try:
 length("hello")
 ```
 
-Oh, right, strings don't exist alone: `"hello"` is actually a character-vector of length 1.  Instead we must use the `nchar()` \index{R-functions!nchar()@\texttt{nchar()}}function:
+Oh, right, strings don't exist alone: `"hello"` is actually a character-vector of length 1.  Instead we should use the `str_sub()` \index{R-functions!str\_length()@\texttt{str\_length()}}function:
 
 ```{r}
-nchar("hello")
+str_length("hello")
 ```
 
 ### Substrings and Trimming
 
-We can pull out pieces of a string with the `substr()` \index{R-functions!substr()@\texttt{substr()}}function:
+We can pull out pieces of a string with the `str_sub()` \index{R-functions!str\_sub()@\texttt{str\_sub()}}function:
 
 ```{r}
 poppins <- "Supercalifragilisticexpialidocious"
-substr(poppins, start = 10, stop = 20)
+str_sub(poppins, start = 10, end = 20)
 ```
 
 One can also use `substr()` to replace part of a string with some other string^[In some other computer languages, strings are *immutable*\index{immutable}, meaning that once set they cannot be changed.  This is not so in R.]:
 
 ```{r}
-substr(poppins, start = 10, stop = 20) <- "ABCDEFGHIJK"
+str_sub(poppins, start = 10, end = 20) <- "ABCDEFGHIJK"
 poppins
 ```
 
@@ -208,8 +218,8 @@ Don't forget: "vector-in, vector-out" usually applies:
 
 ```{r}
 words <- c("Mary", "Poppins", "practically", "perfect")
-nchar(words)
-substr(words, 1, 3)
+str_length(words)
+str_sub(words, 1, 3)
 ```
 
 
@@ -217,30 +227,30 @@ In practical data-analysis situations you'll often have to work with strings tha
 
 ```{r}
 lastWord <- "farewell\r\n"
-nchar(lastWord)
+str_length(lastWord)
 cat(lastWord)
 ```
 
-From its display on the console, you might infer that `lastWord` consists of only the eight characters: f, a, r, e, w, e, l, and l.  (You can't see the carriage return followed by the newline.)
+From its display on the console, you might infer that `lastWord` consists of only the eight characters: f, a, r, e, w, e, l, and l.  (You can't see the carriage return followed by the newline.)  But `str_length()` clearly shows that it's got two characters after the final "l", even if you can't see them.
 
-If you think your strings might contain unnecessary leading or trailing white-space, you can remove it with `trimws()`: \index{R-functions!trimws()@\texttt{trimws()}}
+If you think your strings might contain unnecessary leading or trailing white-space, you can remove it with `str_trim()`: \index{R-functions!str\_trim()@\texttt{str\_trim()}}
 
 ```{r}
-trimws(lastWord)
+str_trim(lastWord)
 ```
 
 ### Changing Cases
 
-You can make all of the letters in a string lowercase: \index{R-functions!tolower()@\texttt{tolower()}}
+You can make all of the letters in a string lowercase: \index{R-functions!str\_to\_lower()@\texttt{str\_to\_lower()}}
 
 ```{r}
-tolower("My name is Rhonda.")
+str_to_lower("My name is Rhonda.")
 ```
 
-You can make them all uppercase: \index{R-functions!toupper()@\texttt{toupper()}}
+You can make them all uppercase: \index{R-functions!str\_to\_upper()@\texttt{str\_to\_upper()}}
 
 ```{r}
-toupper("It makes me wanna holler!")
+str_to_upper("It makes me wanna holler!")
 ```
 
 
@@ -254,27 +264,23 @@ dates <- c("3-14-1963", "04-01-1965", "12-2-1983")
 
 You might want to print them out in some uniform way, using the full name of the month, perhaps.  Then you would need to gain access to the elements of each date separately, so that you could transform month-numbers to month-names.
 
-`strsplit()` will do the job for you: \index{R-functions!strsplit()@\texttt{strsplit()}}
+`str_split()` will do the job for you: \index{R-functions!str\_split()@\texttt{str\_split()}}
 
 ```{r}
-strsplit(dates, split = "-")
+str_split(dates, pattern = "-")
 ```
 
-The result is a list with one element for each date in `dates`.  Each element of the list is a character vector containing the elements---month-number, day-number and year---that were demarcated in the original strings by the hyphen `-`, the value given to the `split` parameter.
+The result is a list with one element for each date in `dates`.  Each element of the list is a character vector containing the elements---month-number, day-number and year---that were demarcated in the original strings by the hyphen `-`, the value given to the `pattern` parameter.
 
 If we wish, we may now access the elements of the list and process them in any way we like.  We might report the months, for example:
 
 ```{r}
-splitDates <- strsplit(dates, split = "-")
-for ( i in 1:length(splitDates) ) {
-  thisDate <- splitDates[[i]]
-  thisMonth <- as.numeric(thisDate[1])
-  # now use special R-constant month.names, which is a
-  # character vector consisting of the full names of the months of
-  # the year:
-  cat(month.name[thisMonth])
-  cat("\n")
-}
+dates %>% 
+  str_split(pattern = "-") %>% 
+  unlist() %>% 
+  .[c(1, 4, 7)] %>% 
+  as.numeric() %>% 
+  month.name[.]
 ```
 
 (Note the use in the code above of the `months.name` \index{R-constants!months.name@\texttt{months.name}} constant provided by R.)
@@ -282,15 +288,17 @@ for ( i in 1:length(splitDates) ) {
 Sometimes it's handy to split a string word-by-word:
 
 ```{r}
-message <- "you have won the lottery"
-unlist(strsplit(message, split = " "))
+"you have won the lottery" %>% 
+  str_split(pattern = " ") %>% 
+  unlist()
 ```
 
 Of course splitting on the space would not have worked if some of the words had been separated by more than one space:
 
 ```{r}
-message <- "you have won the  lottery" # two spaces betwen 'the' and 'lottery'
-unlist(strsplit(message, split = " "))
+"you have won the  lottery" %>% # two spaces betwen 'the' and 'lottery'
+  str_split(pattern = " ") %>% 
+  unlist()
 ```
 
 We'll address this problem soon.
@@ -298,15 +306,19 @@ We'll address this problem soon.
 In order to split a string into its constituent characters, split on the string with no characters:
 
 ```{r}
-animal <- "aardvark"
-animSplit <- unlist(strsplit(animal, split = ""))
-animSplit
+"aardvark" %>% 
+  str_split(pattern = "") %>% 
+  unlist()
 ```
 
 This would be useful if you wanted to, say, count the number of occurrences of "a" in a word:
 
 ```{r}
-length(animSplit[animSplit == "a"])
+"aardvark" %>% 
+  str_split(pattern = "") %>% 
+  unlist() %>% 
+  .[. == "a"] %>% 
+  length()
 ```
 
 
@@ -331,6 +343,13 @@ If you want the separator to be the empty string by default, then you could use 
 paste0("Yabba","dabba","doo!")
 ```
 
+The **stringr** version of `paste0()` is `str_c()`\index{R-functions!str\_c()@\texttt{str\_c()}}:
+
+```{r}
+str_c("Yabba","dabba","doo!")
+```
+
+
 What if you had a character-vector whose elements you wanted to paste together?  For example, consider:
 
 ```{r}
@@ -338,33 +357,27 @@ poppins <- c("practically", "perfect", "in",
              "every", "way")
 ```
 
-Now suppose you want to paste the elements of `poppins` together into one string where the words are separated by spaces.  You might be tempted to try:
+Now suppose you want to paste the elements of `poppins` together into one string where the words are separated by spaces.  `str_c()` will do the job for you, if you use its `collapse` parameter:
 
 ```{r}
-paste(poppins)
+poppins %>% 
+  str_c(collapse = " ")
 ```
 
-That didn't work at all.  And then you remember:  "Yeah, right---vector in, vector out."
-
-There is a way, though, to get `paste()` to  concatenate the elements of the resulting vector.  Just use the `collapse` parameter:
-
-```{r}
-paste(poppins, collapse = " ")
-```
 
 We'll call this process *joining*. \index{joining strings}
 
 In an atomic vector all of the elements have to be of the same data type (all character, all numerical, etc.).  What if you want to join objects of different types?  If there are only a few, feel free to type them in as separate arguments to `paste()`:
 
 ```{r}
-paste("March", 14, 1963, collapse = " ")
+str_c("March", 14, 1963, sep = " ")
 ```
 
 If the objects are many, then you could arrange for them appear as the elements of a list:
 
 ```{r}
-toJoin <- list("Mary", 343, "Poppins", FALSE)
-paste(toJoin, collapse = " ")
+list("Mary", 343, "Poppins", FALSE) %>% 
+  str_c(collapse = " ")
 ```
 
 Joining appears to be the opposite of splitting, but in R that's not quite so.  Suppose, for instance, that you have dates where the month, day and year are separated by hyphens and you want to replace the hyphens with forward slashes:
@@ -377,23 +390,25 @@ Joining appears to be the opposite of splitting, but in R that's not quite so.  
 You could try this:
 
 ```{r}
-date <- "3-14-1963"
-splitDate <- strsplit(date, split = "-")
-paste(splitDate, collapse = "/")
+"3-14-1963" %>% 
+  str_split(pattern = "-") %>% 
+  str_c(collapse = "/")
 ```
 
-That's not what we want.  We have to remember than the result of applying `strsplit()` is a list:
+That's not what we want.  We have to remember than the result of applying `str_split()` is a list:
 
 ```{r}
-splitDate
+"3-14-1963" %>% 
+  str_split(pattern = "-")
 ```
 
 We need to unlist prior to the join.  The correct procedure is:
 
 ```{r}
-date <- "3-14-1963"
-splitDate <- strsplit(date, split = "-")
-paste(unlist(splitDate), collapse = "/")
+"3-14-1963" %>% 
+  str_split(pattern = "-") %>% 
+  unlist() %>% 
+  str_c(collapse = "/")
 ```
 
 Now all is well.  Soon, though, we'll learn a superior method for performing substitutions in strings.
@@ -417,7 +432,8 @@ sprintf(fmt = "%10s%20s", first, last)
 Here is the result, `cat`ed out:
 
 ```{r}
-cat(sprintf(fmt = "%10s%20s", first, last))
+sprintf(fmt = "%10s%20s", first, last) %>% 
+  cat()
 ```
 
 The "s" in the the `fmt` argument is called a *conversion character*.  \index{conversion character}It tells `sprintf()` to expect a string. Each percent sign indicates the beginning of a new field.   For each field, the desired field-width should appear between the percent-sign and the conversion character for the field.
@@ -426,7 +442,7 @@ In the text above, the names are *right-justified*, meaning that they appear at 
 
 ```{r}
 # left-justify both fields:
-cat(sprintf(fmt = "%-10s%-20s", first, last))
+sprintf(fmt = "%-10s%-20s", first, last) %>% cat()
 ```
 
 Other common conversion characters are:
@@ -438,19 +454,20 @@ Other common conversion characters are:
 Here is another example:
 
 ```{r}
-cat(sprintf(fmt = "%-10s%-10d%-10f", "Mary", 1955, 3.2))
+sprintf(fmt = "%-10s%-10d%-10f", "Mary", 1955, 3.2) %>% cat()
 ```
 
 The following example is the same as above, except that we retain only the significant figures in the 3.2:
 
 ```{r}
-cat(sprintf(fmt = "%-10s%-10d%-10g", "Mary", 1955, 3.2))
+sprintf(fmt = "%-10s%-10d%-10g", "Mary", 1955, 3.2) %>% cat()
 ```
 
 When you are creating a field for a decimal number, you can specify both the total field-width and the precision together if you separate them with a `.`.   Thus, if you want the number 234.5647 to appear right-justified in a field of width 10, showing only the first three decimal places, then try:
 
 ```{r}
-cat(sprintf(fmt = "%-10s%-10d%-10.3f", "Mary", 1955, 234.5647))
+sprintf(fmt = "%-10s%-10d%-10.3f", "Mary", 1955, 234.5647) %>% 
+  cat()
 ```
 
 `sprintf()` comes in handy when you want your output to appear in nicely-aligned, tabular fashion.  Consider this example:
@@ -462,8 +479,9 @@ lastName <- c("Duck", "Gentorious", "Lancaster")
 age <- c(17, 19, 20)
 gpa <- c(3.7, 3.9, 3.823)
 for (i in 1:3) {
-  cat(sprintf("%-15s%-20s%-5d%-5.2f\n", 
-              firstName[i], lastName[i], age[i], gpa[i]))
+  sprintf("%-15s%-20s%-5d%-5.2f\n", 
+          firstName[i], lastName[i], age[i], gpa[i]) %>% 
+    cat()
 }
 ```
 
@@ -472,16 +490,17 @@ Note the use of "\\n" in the `fmt` argument to ensure that the output appears on
 You could take advantage of vectorization to avoid the loop:
 
 ```{r}
-cat(sprintf("%-15s%-20s%5-d%-5.2f\n", 
-            firstName, lastName, age, gpa))
+sprintf("%-15s%-20s%5-d%-5.2f\n", 
+        firstName, lastName, age, gpa) %>% 
+  cat()
 ```
 
 Well, that's not quite right:  the second and third lines begin with a space.  This happens because `cat()` separates its input with a space by default.  You can prevent this, however, with the `sep` parameter of `cat()`:
 
 ```{r}
-cat(sprintf("%-15s%-20s%-5d%-5.2f\n", 
-            firstName, lastName, age, gpa),
-    sep = "")
+sprintf("%-15s%-20s%-5d%-5.2f\n", 
+        firstName, lastName, age, gpa) %>% 
+  cat(sep = "")
 ```
 
 \newpage

@@ -4,7 +4,12 @@
 knitr::include_graphics("images/xkcd-regex-save-day.png")
 ```
 
-In this Chapter we introduce  the concept of *regular expressions*, a powerful tool that enables you to search for complex patterns in text.
+```{r include = FALSE}
+library(stringr)
+```
+
+
+In this Chapter we introduce  the concept of *regular expressions*, a powerful tool that enables you to search for complex patterns in text.  We will continue to use functions from the **stringr** package, so make sure you have it attached.
 
 \newpage
 
@@ -15,8 +20,8 @@ Suppose you wish to determine how many times the string "ab" appears within some
 ```{r}
 occurrences <- function(string) {
   count <- 0
-  for (i in 1:nchar(string)) {
-    stringPart <- substr(string, i, i+1)
+  for (i in 1:str_length(string)) {
+    stringPart <- str_sub(string, i, i+1)
     if ( stringPart == "ab" ) {
       count <- count +1
     }
@@ -46,11 +51,11 @@ How might we handle this task?  Again we could write a function.  This time we w
 # substrings are given as patterns
 occurrences2 <- function(string, patterns) {
   count <- 0
-  for (i in 1:nchar(string)) {
+  for (i in 1:str_length(string)) {
     for (j in 1:length(patterns)) {
       pattern <- patterns[j]
-      len <- nchar(pattern)
-      stringPart <- substr(string, i, i + len - 1)
+      len <- str_length(pattern)
+      stringPart <- str_sub(string, i, i + len - 1)
       if ( stringPart == pattern ) {
         count <- count +1
       }
@@ -81,39 +86,16 @@ In practice, regular expressions are like a miniature programming language withi
 
 The rules for regular expressions vary a bit from one language to another, but the general idea is essentially the same for all of them.  In the remainder of this Chapter we'll learn enough of the principles of regular expressions to describe basic, useful patterns, and we'll also study R-functions that make use of them.
 
-First of all, here's a quick example to show the power of regular expressions.  The work done by `occurences2()` may also be done in one line with the `gregexpr()` \index{R-functions!gregexpr()@\texttt{gregexpr()}} function, as follows:
+First of all, here's a quick example to show the power of regular expressions.  The work done by `occurences2()` may also be done in one line with the `str_count()` \index{R-functions!str\_count()@\texttt{str\_count()}} function, as follows:
 
 ```{r}
-gregexpr(pattern = "[Aa]b|foo",
-         text = "This Labrador is a fool, Abba.")
+str_count(string = "This Labrador is a fool, Abba.",
+         pattern = "[Aa]b|foo")
 ```
 
-We must learn to interpret output like this.  The `str()` function will be helpful, here:
+Wow, that was quick.  But what in the world is that `"[Aa]b|foo"` argument to the `pattern` parameter?
 
-```{r}
-str(gregexpr(pattern = "[Aa]b|foo",
-             text = "This Labrador is a fool, Abba."))
-```
-
-We see that the result is a list with only one item in it.  That item is a vector consisting of three numbers:  7, 20 and 26.  Looking back at the text-string, we see that:
-
-* "ab" was present beginning at position 7;
-* "foo" was present beginning at position 20;
-* "Ab" was present beginning at position 26.
-
-The vector also has two attributes.  The "useBytes" attribute will not concern us; our interest lies in the "match.length" attribute, which is yet another vector that gives the number of characters in the matching sub-strings.
-
-R provides the convenient `regmatches()` \index{R-functions!regmatches()@\texttt{regmatches()}} function, which uses the beginning match position and the match lengths to fetch the matching sub-strings themselves:
-
-```{r}
-results <- gregexpr(pattern = "[Aa]b|foo",
-                    text = "This Labrador is a fool, Abba.")
-regmatches("This Labrador is a fool, Abba.", m = results)
-```
-
-`gregexpr` is short for "global regular expression".  It searches the entire`text` string for all possible matches.  There is lazier function `regexpr()` \index{R-functions!regexpr()@\texttt{regexpr()}}that stops after the first match (if any).
-
-What should still be mysterious is the value given to `pattern` in the call to `gregexpr()`, namely the string "[Aa]b|foo".  This is the regular expression!  It tells R to look for sub-strings that EITHER:
+It's a regular expression!  It tells R to look for sub-strings that EITHER:
 
 * start with either "A" or "a", and are then followed by a "b", OR
 * consist of "foo"
@@ -122,7 +104,7 @@ Clearly it is high time that we learn a bit of regular-expression syntax.
 
 ## Regex Practice Sites
 
-As we introduce regex syntax in the next few sections, it's a good idea to try them out yourself and to come up with your own variations.  The easiest way to do this is not to work directly in R; instead, consider using an online regex practice site.  I especially recommend [Regular Expressions 101](https://regex101.com/).^[If you go on to learn JavaScript, you might want to switch to [RegExr](http://regexr.com/), which I think has a very nice documentation interface.]  Keep the regex flavor set at **pcre**, as this is the variant of regular expression syntax that is closest to the one implemented in R.
+As we introduce regex syntax in the next few sections, it's a good idea to try them out yourself and to come up with your own variations.  The easiest way to do this is not to work directly in R at the outset; instead, consider using an online regex practice site.  I especially recommend [RegExr](http://regexr.com/), which has a nice documentation interface.  Set the regex flavor to PCRE, as this is the variant of regular expression syntax that is closest to the ICU regex variant used by the **stringr** package.  If you go on to Web Programming course then you can switch to the JavaScript flavor.
 
 Bear in mind also that as we learn regex syntax, we'll focus on the standard, language-independent syntax itself.  There are some differences between this standard syntax and the way in which you would actually enter a regex pattern in R.
 
@@ -190,7 +172,7 @@ Inside of square brackets it can matter whether you escape the hyphen.  Thus:
 * `[a-]` matches a and - (the machine can tell that the hyphen was not being used in a range);
 * `[a\-]` also matches just a and -, not a, \ and -.  (Apparently the regex syntax takes into account the fact that some folks will worry that they might have to escape the hyphen).
 
-Of course since the backslash plays a role in escaping metacharacters, it too acts as a metacharacter at times.  Hence if you want to match a backslash you'll have to escape *it*!  How?  By preceding the blackslash with a backslash!  Thus:
+Of course since the backslash plays a role in escaping metacharacters, it too acts as a metacharacter at times.  Hence if you want to match a backslash you'll have to escape *it*!  How?  By preceding the black-slash with a backslash!  Thus:
 
 * `a\\b` matches "a\\b";
 * `a\\\\b` matches "a\\\\b".
@@ -434,7 +416,7 @@ If you want to match a palindrome^[Recall that a *palindrome* is a word that is 
 
 ### Looking Around
 
-Suppose that you have a string containing a number of words involving "bed", and you would like to find all occurences of "bed" that begin a word, except for the word "bedtime".  With the tools we have so far this is a difficult task.  Fortunately there are *look-aheads* \index{look-ahead} to simplify our work.
+Suppose that you have a string containing a number of words involving "bed", and you would like to find all occurrences of "bed" that begin a word, except for the word "bedtime".  With the tools we have so far this is a difficult task.  Fortunately there are *look-aheads* \index{look-ahead} to simplify our work.
 
 The regex `\bbed(?!time\b)` will do the job.  Here's how it works:
 
@@ -469,7 +451,7 @@ The `regex2` expression in look-aheads can be any regex at all.  For look-behind
 
 ### More to Learn
 
-We have not come near to exhausting the syntax of regular expressions. Readers who would like to delve into the subject more deeply should next consult online tutorials on the topics of non-capture groups, conditionals and more.  However, we now have enough background to express some fairly complex patterns quite concisely, so it is now time to learn how to work with them in R.
+We have not come near to exhausting the syntax of regular expressions. Readers who would like to delve into the subject more deeply should next consult online tutorials on the topics of non-capture groups, conditionals and more.  It would also be good to look at the brief overview of the ICU regex engine provide in `stringi-search-regex` in the documentation for the **stringi** package on which **stringr** is based.  However, we now have enough background to express some fairly complex patterns quite concisely, so it is now time to learn how to work with them in R.
 
 ## Entering a Regex in R
 
@@ -480,9 +462,9 @@ We now return to the R-language and consider how to apply regular expressions wi
 Regular expressions actually play a role in one of the functions you already know, namely the function `strsplit()`.  Recall that you can use the `split` parameter to specify the sub-string that separates the strings you want to split up.  It works like this:
 
 ```{r}
-myString <- "hello there Mary Poppins"
-# split on the spaces, then unlist:
-unlist(strsplit(myString, split = " "))
+"hello there Mary Poppins" %>% 
+  str_split(pattern = " ") %>% 
+  unlist()
 ```
 
 The task of splitting would appear to a quite challenging if the words are separated in more complex ways, with any amount of white-space.  Consider, for example:
@@ -495,25 +477,27 @@ cat(myString)
 But really it's not any more difficult, because the `split` parameter actually takes the string it is given and converts it to a regular expression, splitting on anything that matches.  Watch this:
 
 ```{r}
-myString <- "hello\t\tthere\n\nMary  \t Poppins"
-unlist(strsplit(myString, split = "\\s+"))
+myString %>% 
+  str_split(pattern = "\\s+") %>% 
+  unlist()
 ```
 
-We can almost see how this works.  Recall from the last section that the regex `\s` is a character class shortcut for any white-space character, so `\s+` stands for one or more white-spaces in succession:  precisely the mixtures of tab, spaces and newlines that separated the words in our string.  `strsplit()` must be splitting on matches to the regex `\s+`.
+We can almost see how this works.  Recall from the last section that the regex `\s` is a character class shortcut for any white-space character, so `\s+` stands for one or more white-spaces in succession:  precisely the mixtures of tab, spaces and newlines that separated the words in our string.  `str_split()` must be splitting on matches to the regex `\s+`.
 
-So why did we set `split = "\\s+"`?  What's with the extra backslash?
+So why did we set `pattern = "\\s+"`?  What's with the extra backslash?
 
-The reason is that the argument passed with `split` is a string, not a regular expression object.  It starts out life, as if were, as a string, and R converts it to a regular expression, then hands the regex over to its regular expression engine to locate the matches in `myString` that in turn determine how `myString` is to be split up.  Since in R's string-world "\\s" is not a recognized character in the way that newline ("\\n"), tab ("\\t") and other control-characters are, R won't accept "\\s+" as a valid string.  Try it for your self:
+The reason is that the argument passed with `pattern` is a string, not a regular expression object.  It starts out life, as if were, as a string, and R converts it to a regular expression, then hands the regex over to its regular expression engine to locate the matches in `myString` that in turn determine how `myString` is to be split up.  Since in R's string-world "\\s" is not a recognized character in the way that newline ("\\n"), tab ("\\t") and other control-characters are, R won't accept "\\s+" as a valid string.  Try it for your self:
 
 ```{r eval=FALSE}
-strsplit(myString, split = "\s+")
+myString %>% 
+  str_split(pattern = "\s+")
 ```
 
 ```
 ## Error: '\s' is an unrecognized escape in character string starting ""\s"
 ```
 
-It follows that when you enter regular expressions as strings in R, you'll have to remember to escape the backslashed tokens that are used in a regular expression.  Table \@ref(tab:regex-string-escape-examples) gives several examples of this.
+It follows that when you enter regular expressions as strings in R, you'll have to remember to escape the back-slashed tokens that are used in a regular expression.  Table \@ref(tab:regex-string-escape-examples) gives several examples of this.
 
 ```{r regex-string-escape-examples, echo=FALSE}
 regex <- c("\\\\s+", "find\\\\.dot", "^\\\\w*\\\\d{1,3}$")
@@ -537,13 +521,12 @@ dates <- c("3 - 14 - 1963", "4/13/ 2005",
            "12-1-1997", "11 / 11 / 1918")
 ```
 
-It seems that the folks who entered the dates were not consistent in how to format them.  In order to make analysis easier, it would be better if all the dates had exactly the same format.  With the function `gsub()` \index{R-functions!gsub()@\texttt{gsub()}}and regular expressions, this is not difficult:
+It seems that the folks who entered the dates were not consistent in how to format them.  In order to make analysis easier, it would be better if all the dates had exactly the same format.  With the function `str_replace_all()` \index{R-functions!str\_replace\_all()@\texttt{str\_replace\_all()}}and regular expressions, this is not difficult:
 
 ```{r}
-tidyDates <- gsub(pattern = "[- /]+",
-                  replacement = "/",
-                  x = dates)
-tidyDates
+dates %>% 
+  str_replace_all(pattern = "[- /]+",
+              replacement = "/")
 ```
 
 Here:
@@ -552,57 +535,64 @@ Here:
 * `replacment` is what we want to replace matches of the pattern with;
 * `x` is the text in which the substitution occurs.
 
-The "g" in `gsub()` stands for "global":  we want to replace *all* occurrences of the pattern with the replacement text.  There is also a `sub()` \index{R-functions!sub()@\texttt{sub()}}function that performs replacement only with the *first* match (if any) that it finds:
+The `all` in the name of the function means that we want to replace *all* occurrences of the pattern with the replacement text.  There is also a `str_replace()` \index{R-functions!str\_replace()@\texttt{str\_replace()}}function that performs replacement only with the *first* match (if any) that it finds:
 
 ```{r}
-replaceFirst <- sub(pattern = "[- /]+",
-                  replacement = "/",
-                  x = dates)
-replaceFirst
+dates %>% 
+  str_replace(pattern = "[- /]+",
+              replacement = "/")
 ```
 
-In our application, that's certainly NOT what we need. However, in cases where you happen to know that there will be at most one match, `sub()` gets the job done faster than `gsub()`, which is forced to search through the entire string.
-
-
-### A Note on Perl
-
-R has access to a two different regular expression engines:
-
-* POSIX 1003.2 extended regular expressions, and
-* PCRE2.
-
-POSIX 1003.2 is the default engine.  "PCRE2" stands for Version 2 of the engine known as Perl-Compatible Regular Expressions.^[Perl is a scripting language that is known for its regular expression engine and for its text-processing capabilities in general.  See the [PCRE2 Syntax Page](http://www.pcre.org/current/doc/html/pcre2syntax.html) for the official description of how PCRE2 works.] It's not what R uses by default but it more closely resembles regex engines found in other major languages and is therefore the better one to use if you rely heavily on web tutorials for learning complex regular expressions.  In any of R's regex functions you can access this engine with the argument:
-
->`perl = TRUE`
-
-From here on out we'll use it, simply as a matter of caution.
+In our application, that's certainly NOT what we need. However, in cases where you happen to know that there will be at most one match, `str_replace()` gets the job done faster than `str_replace_all()`, which is forced to search through the entire string.
 
 ### Patterned Replacement
 
-In the dates example from Section \@ref(regex-substitution) the replacement string (the argument for the parameter `replacement`) was constant:  no matter what sort of match we found for the pattern `[- /]+`, we replaced it with  the string "/".  It is important to note, however, that if we set `perl` to `TRUE` then the argument provided for `replacement` can vary depending on the match found.  In particular:
+In the dates example from Section \@ref(regex-substitution) the replacement string (the argument for the parameter `replacement`) was constant:  no matter what sort of match we found for the pattern `[- /]+`, we replaced it with  the string "/".  It is important to note, however, that the argument provided for `replacement` can cause the replacement to vary depending upon the match found.  In particular:
 
 * It can include the back-references `\1`, `\2`, ..., `\9`.
-* It can include special tokens for case-conversion:
-    * `\U` converts the rest of the replacement to upper-case (or ceases conversion when `\E` or `\L` occur).
-    * `\L` converts the rest of the replacement to lower-case (or ceases conversion when `\E` or `\U` occur).
-    * `\E` signals the end of any case-conversion that is in effect.
+* It can be a defined function of the match.
     
-Let's look at an example.  Here is a function that, given a string,  will capitalize all of the vowels that it finds:
+Let's look at an example.  Here is a function that, given a string,  will double all of the vowels that it finds:
 
 ```{r}
-capVowels <- function(str) {
-  gsub(pattern = "([aeiou])", replacement = "\\U\\1\\E", x = str, perl = TRUE)
+doubleVowels <- function(str) {
+  str %>% 
+    str_replace_all(pattern = "([aeiou])", 
+                    replacement = "\\1\\1")
 }
-capVowels("Far and away the best!")
+doubleVowels("Far and away the best!")
 ```
 
 Note that the pattern `[aeiou]` for vowels had to be enclosed in parentheses so that it could be captured and referred to by the back-reference `\1`.  Also note that, since R converts the replacement string into a pattern, extra backslash escapes are required, just as in regular expressions.
+
+Here is a function to capitalize every vowel found:
+
+```{r}
+capVowels <- function(str) {
+  str %>% 
+    str_replace_all(pattern = "[aeiou]", 
+                    replacement = function(x) str_to_upper(x))
+}
+capVowels("Far and away the best!")
+```
 
 Here is another function that searches for repeated words and encloses each pair in asterisks:
 
 ```{r}
 starRepeats <- function(str) {
   gsub(pattern = "(\\b(\\w+) \\2\\b)", replacement = "*\\1*", x = str, perl = TRUE)
+}
+starRepeats("I have a boo boo on my knee knee.")
+```
+
+```{r}
+starRepeats <- function(str) {
+  str %>% 
+    str_replace_all(pattern = "(\\b(\\w+) \\2\\b)",
+                    replacement = function(x) {
+                      str_c("*", x, "*")
+                    }
+                    )
 }
 starRepeats("I have a boo boo on my knee knee.")
 ```
@@ -632,9 +622,23 @@ The above substitution is tricky, and merits step-by-step analysis:
     
 Whew!
 
-### Grepping
+A function-replacement version is also possible:
 
-If you have many strings---in a character-vector, say---and you want to know which of them contain a match to a particular pattern, then you want to use `grep()`. \index{R-functions!grep()@\texttt{grep()}}^[`grep` can be thought of as short for:  "Global search for Regular Expression and Print".]
+```{r}
+starRepeats <- function(str) {
+  str %>% 
+    str_replace_all(pattern = "(\\b(\\w+) \\2\\b)",
+                    replacement = function(x) {
+                      str_c("*", x, "*")
+                    }
+                    )
+}
+starRepeats("I have a boo boo on my knee knee.")
+```
+
+### Detecting Matches
+
+If you have many strings---in a character-vector, say---and you want to know which of them contain a match to a particular pattern, then you want to use `str_subset()`. \index{R-functions!str\_subset()@\texttt{str\_subset()}}
 
 Consider, for example, the vector of strings:
 
@@ -647,53 +651,117 @@ sentences <- c("My name is Tom, Sir",
 If we would like to find the strings that contain a word beginning with capital T, we could proceed as follows:
 
 ```{r}
-grep(pattern = "\\bT\\w*\\b", x = sentences, perl = TRUE)
+sentences %>% 
+  str_subset(pattern = "\\bT\\w*\\b")
 ```
 
-`grep()` returns a vector consisting of the indices of the vector `sentences` where the string contains at least one word beginning with "T".
+`str_subset()` returns a vector consisting of the elements of the vector `sentences` where the string contains at least one word beginning with "T".
 
-A related function is `grepl()`: \index{R-functions!grepl()@\texttt{grepl()}}
+A related function is `str_detect()`: \index{R-functions!str\_detect()@\texttt{str\_detect()}}
 
 ```{r}
-grepl(pattern = "\\bT\\w*\\b", x = sentences, perl = TRUE)
+sentences %>% 
+  str_detect(pattern = "\\bT\\w*\\b")
 ```
 
-`grepl()` returns a logical vector with `TRUE` where `sentences` has a capital-T word, `FALSE` otherwise.  We can get a look at the T-word-containing sentences themselves as follows:
+`str_detect()` returns a logical vector with `TRUE` where `sentences` has a capital-T word, `FALSE` otherwise.
+
+Finally, `str_locate()` \index{R-functions!str\_detect()@\texttt{str\_detect()}} gives the *positions* in each string where a match begins:
 
 ```{r}
-hasTWord <- grepl(pattern = "\\bT\\w*\\b", x = sentences, perl = TRUE)
-sentences[hasTWord]
+sentences %>% 
+  str_locate(pattern = "\\bT\\w*\\b")
 ```
 
-### More Information with `gregexpr()`
-\index{R-functions!gregexpr()@\texttt{gregexpr()}} \index{R-functions!regexpr()@\texttt{regexpr()}}
-If you require more information about the matches within each string you are processing, then you'll want to use either `gregexpr() or `regexpr()`.
 
-We started our regular-expression journey with `gregexpr()`, but let's check in on it once more, this time looking for capital-T words in `sentences`:
+### Extracting Matches
+
+If you require what is actually matched within each string you are processing, then you should look into `str_extract()` and `str_extract_all()`.
+\index{R-functions!str\_extract()@\texttt{str\_extract()}}
+\index{R-functions!str\_extract\_all()@\texttt{str\_extract\_all()}}
+
+As an example, let's extract pairs of words beginning with the same letter in `sentences2` defined below:
 
 ```{r}
-matchInfo <- gregexpr(pattern = "\\bT\\w*\\b", text = sentences, perl = TRUE)
-str(matchInfo)
+sentences2 <- c("The big bad wolf is walking warily to the cottage.",
+                "He huffs and he puffs peevishly.",
+                "He wears gnarly gargantuan bell bottoms!")
+sentences2 %>% 
+  str_extract(pattern = "\\b(\\w)\\w*\\W+\\1\\w*")
 ```
 
-From `str()` we see that `matchInfo` is a list of length three, one for each string in `sentences`.  Each vector gives the starting-positions of matches in the string to which it corresponds.  Since the third string contains no match the value of of the vector is set to -1.
+The results are returned as a character vector, in which each element is the first matching pair in the corresponding sentence.
 
-Don't forget the convenience-function `regmatches()`, which permits us to recover the matches themselves: \index{R-functions!regmatches()@\texttt{regmatches()}}
+If we want all of the matches in each sentence, then we use `str_extract_all()`:
 
 ```{r}
-capTNames <- regmatches(x = sentences, m = matchInfo)
-capTNames
+sentences2 %>% 
+  str_extract_all(pattern = "\\b(\\w)\\w*\\W+\\1\\w*")
 ```
 
-If we require any particular match, we can locate it easily:
+Sometimes we want even more information.  Suppose, for example, that we want not only the first matching word-pair, but also the repeated initial letter that permitted the match in the first place.  In that case we need `str_match()`:
+\index{R-functions!str\_match()@\texttt{str\_match()}}
 
 ```{r}
-capTNames[[2]][1]
+sentences2 %>% 
+  str_match(pattern = "\\b(\\w)\\w*\\W+\\1\\w*")
 ```
+
+`str_match()` returns a matrix, each row of which corresponds to an element of `sentences`.  The first column gives the value of the entire match, and the second column gives value of the capture-group in the regular expression.  If the regular expression had used more capture groups, then the matrix would have had additional columns showing the values of the captures, in order.
+
+If you want an analysis of all the matches in a string, then use `str_match_all()`:
+\index{R-functions!str\_match\_all()@\texttt{str\_match\_all()}}
+
+
+```{r}
+sentences2 %>% 
+  str_match_all(pattern = "\\b(\\w)\\w*\\W+\\1\\w*")
+```
+
+The returned structure is a list and hence more complex, but you can query it for the values you need.
+
+### Extraction in Data Frames
+
+Quite often you will want to manipulate strings in the context of working with a data frame.  For this regex functions we have examined so far will be quite useful, but you should also know about the `extract()` function from the **tidyr** package, which is among the packages attached by the tidy-verse.
+
+Imagine a data table that contains some names and phone numbers:
+
+```{r}
+people <- data.frame(
+  name = c("Lauf, Bettina", "Bachchan, Abhishek", "Jones,  Jenna"),
+  phone = c("(202) 415-3785", "4133372100", "310-231-4453")
+)
+```
+
+Each person has a standard ten-digit phone number, consisting of:
+
+* the three-digit *area code*;
+* the three digit *central office* number;
+* the four-digit *line* number.
+
+Suppose we would like to create three new variables in the data table, one for each of the three components of the phone number.  For this, `tidy::extract()` comes in handy: \index{R-functions!extract()@\texttt{extract()}}
+
+```{r}
+people %>% 
+  extract(col = phone,
+          into = c("area", "office", "line"),
+          regex = "(?x)        # for comments
+                  .*           # in case of opening paren, etc.
+                  (\\d{3})     # capture 1:  area code
+                  .*           # possible separators
+                  (\\d{3})     # capture 2:  central office
+                  .*           # possible separators
+                  (\\d{4})     # capture 3:  line number
+                  ")
+```
+
+By default `extract()` removes the original column, but you can preserve it with `remove = FALSE`.  (For the format of the regular expression in the above call, see the next sub-section.)
+
+
 
 ### Regex Modes
 \index{mode (regular expressions)}
-If you have been practicing consistently with an online regex site, you will have noticed by now that a regex can be accompanied by various options.  In most implementations these will appear as letters after the closing regex delimiter, like this:
+If you have been practicing consistently with an online regex site, you will have noticed by now that a regex can be accompanied by various options.  In most implementations they appear as letters after the closing regex delimiter, like this:
 
 >`/regex/gm`
 
@@ -702,9 +770,9 @@ Some of the most popular options are:
 * `g`:  "global", looking for all possible matches in the string;
 * `i`:  "case-insensitive" mode, so that letter-characters in the regex match both their upper and lower-case versions;
 * `m`:  "multiline" mode, so that the anchors `^` and `$` are attached to newlines *within* the string rather than to the absolute beginning and end of the string;
-* `x`:  "whitespace" mode, where whitespaces in the regex are ignored unless they are escaped (useful for lining out the regex and inserting comments to explain its operation).
+* `x`:  "white-space" mode, where white-spaces in the regex are ignored unless they are escaped (useful for lining out the regex and inserting comments to explain its operation).
 
-Since R has both global and non-global versions of regex functions you probably will not bother with `g`, but the various *modes* can sometimes be useful.
+Since **stringr** has both global and non-global versions of regex functions you probably will not bother with `g`, but the other options---known technically as *modes*---can sometimes be useful.
 
 If you would like to set modes to apply to your entire regex, insert it (or them) like this at the beginning of the expression:
 
@@ -712,22 +780,124 @@ If you would like to set modes to apply to your entire regex, insert it (or them
 
 In the example above, we are in both case-insensitive and multiline mode, and we are looking for t or T followed by 1, 2 or 3 vowels (upper or lower) at the end of any line in a (possibly) multiline string.
 
-Following is an example of the mode to ignore white-space:
+Following is an example of the mode to ignore white-space and to ignore case:
 
 ```{r}
-myPattern <-  "(?x)        # Ignore whitespace in regex!
-               \\b         # Begin the word.
-               [tT]        # Upper or lower T to start,
-               \\w+        # then at least one word-char,
-               (?<!s)\\b   # but not ending in s.
-              "
-myString <- "the tars temper Tanzania"
-m <- gregexpr(myPattern, myString, perl = TRUE)
-regmatches(myString, m)
+myPattern <-
+  "(?xi)       # ignore whitespace (x) and ignore case (i)
+  \\b          # assert a word-boundary
+  (\\w)        # capture the first letter of the first word
+  \\w*         # rest of the first word
+  \\W+         # one or more non-word characters
+  \\1          # repeat the letter captured previously
+  \\w*         # rest of the second word
+  "
+sentences2 %>% 
+  str_match_all(pattern = myPattern)
 ```
 
-Since R knows to ignore material after `#` in any line, it does not pass the comments to the regex engine; it only passes the regex with the whitespace.  Due to the presence of `(?x)` at the very beginning of the regex, the regex engine knows to ignore white-space throughout.
+Due to the presence of `x`-flag at the very beginning of the regex, the regex engine knows to ignore white-space throughout, and it will also ignore hash-tags and whatever comes after them on a line.  This permits the placement of comments within the regular expression.  The `i`-flag directs the regex engine to ignore case when looking for matches.  Accordingly, in the example we pick up the extra match "he huffs".
 
+Some people prefer to control regular-expression modes by means of **stringr**'s `regex()` function: \index{R-functions!regex()@\texttt{regex()}}
+
+```{r}
+myPattern <- regex(
+  pattern = "
+  \\b          # assert a word-boundary
+  (\\w)        # capture the first letter of the first word
+  \\w*         # rest of the first word
+  \\W+         # one or more non-word characters
+  \\1          # repeat the letter captured previously
+  \\w*         # rest of the second word
+  ",
+  comments = TRUE,
+  ignore_case = TRUE
+)
+sentences2 %>% 
+  str_match_all(pattern = myPattern)
+```
+
+### Practice Exercises
+
+The **stringr** package comes with `fruit`, a character-vector of giving the names of 80 fruits.
+
+1.  Determine how many fruit-names consist of exactly two words.
+
+2.  Find the two-word fruit-names.
+
+3.  Find the indices of the two-word fruit names.
+
+4.  Find the one-word fruit-names that end in "berry".
+
+5.  Find the fruit-names that contain more than three vowels.
+
+6.  In the word "banana" the string "an" appears twice in succession, as does the string "na".  Find the fruit-names containing at least one string of length two or more that appears twice in succession.
+
+7. To the `people` data frame from this section, add two new variables:  `first` for the first name and `last` for the last name.  The original `name` variable should be removed.
+
+### Solutions to the Practice Exercises
+
+1. Try this:
+
+    ```{r}
+    twoWordName <-
+      fruit %>% 
+      str_count("\\w+") == 2
+      sum(twoWordName)
+    ```
+
+2.  Try this:
+
+    ```{r}
+    fruit %>% .[str_count(., "\\w+") == 2]
+    ```
+    
+    Another way is as follows:
+
+    ```{r}
+    fruit %>% 
+      str_subset("^\\w+\\s+\\w+$")
+    ```    
+    
+3. Try this:
+
+    ```{r}
+    fruit %>% 
+      str_detect("^\\w+\\s+\\w+$") %>% 
+      which()
+    ```
+
+4. Try this:
+
+    ```{r}
+    fruit %>% 
+      str_subset("\\w+berry$")
+    ```
+
+5. Try this:
+
+    ```{r}
+    vowelCount <- 
+      fruit %>% 
+      str_count("[aeiou]")
+    fruit[vowelCount > 3]
+    ```
+    
+6. Try this:
+
+    ```{r}
+    fruit %>% 
+      str_subset("(\\w{2,})\\1")
+    ```
+
+7. Try this:
+
+    ```{r}
+    people %>% 
+      extract(col = name,
+              into = c("last", "first"),
+              regex = "(\\w+)\\W+(\\w+)")
+    ```
 
 ## Application:  Amazon Book Reviews
 
@@ -785,7 +955,7 @@ The author has linked to another book sold on Amazon, Susan Beth Pfeffer's *Life
 
 We might be curious to know what other books on Amazon our reviewers link to when they are discussing the *Hunger Games*. Regular expressions can help us to extract the links from the mass of text in `hunger$content`.
 
-All of the Amazon links are generated for the user by the computer, so they will all have the same format.  Hence we can use a look-behind and a look-ahead to construct a regex will be matched by any URL-fragment within such an anchor:
+All of the Amazon links are generated for the user by the computer, so they will all have the same format.  Hence we can use a look-behind and a look-ahead to construct a regex that will be matched by any URL-fragment within such an anchor:
 
 >(?<=\<a class=\\"\\"a-link-normal\\"\\" href=\\"\\"/)(.+?)(?=\\"\\"\>)
 
@@ -795,51 +965,93 @@ Checking carefully, we see that none of the tokens require extra escaping:  we c
 linkPattern <- "(?<=<a class=\"\"a-link-normal\"\" href=\"\"/)(.+?)(?=\"\">)"
 ```
 
-We now construct a list of character-vectors containing the links (if any) in each review:
-
-```{r anchor-links, cache =TRUE}
-links <- list()
-for (i in 1:nrow(hunger)) {
-  text <- reviews$content[i]
-  m <- gregexpr(linkPattern, text = text, perl=TRUE)
-  links[[i]] <- unlist(regmatches(text, m))
-}
+```{r cache=TRUE}
+hungerLinks <-
+  hunger %>% 
+  mutate(linkCount = str_count(content, linkPattern))
 ```
-
-If we are interested in *how many* books each reviewer links to, we can make a vector of these links:
-
-```{r number-links, cache =TRUE}
-numberOfLinks <- numeric()
-for (i in 1:nrow(hunger)) {
-  numberOfLinks[i] <- length(links[[i]])
-}
-```
-
-
-We can tabulate the link-numbers with R's `table()` function:
 
 ```{r}
-table(numberOfLinks)
+hungerLinks %>% 
+  group_by(linkCount) %>% 
+  summarise(n = n())
 ```
 
-A better-looking table appears in Table \@ref(tab:tabulated-link-numbers).
 
-```{r tabulated-link-numbers, echo=FALSE}
-tab <- table(numberOfLinks)
-numbers <- names(tab)
-tab2 <- cbind(as.numeric(numbers), tab)
-rownames(tab2) <- NULL
-colnames(tab2) <- c("Number of Links", "Reviews")
-knitr::kable(tab2, caption="Table showing number of links made by reviewers of the Hunger Games series.")
+If you are generating a report with R Markdown, then a better-looking table (see Table \@ref(tab:tabulated-link-numbers) can be produced as follows:
+
+```{r tabulated-link-numbers}
+hungerLinks %>% 
+  group_by(linkCount) %>% 
+  summarise(n = n()) %>% 
+  knitr::kable(caption=str_c("Table showing number of links ",
+                             "made by reviewers of the Hunger ",
+                             "Games series."))
 ```
 
-Most of the reviewers didn't link at all, but 173 of them did provide at least one link.  One reviewer linked to nine books!  Here they are:
+Most of the reviewers didn't link at all, but 173 of them did provide at least one link.  One reviewer linked to nine books!  Let's find them and add the base URL `http://www.amazon.com/`:
 
 ```{r}
-unlist(links[numberOfLinks == 9])
+hungerLinks %>% 
+  filter(linkCount == max(linkCount)) %>%  # get the case having most links
+  .$content %>%    # get just the content of the review,
+                   # a character vector (of length 1 since there
+                   # is only one review with the max number of lengths)
+  str_extract_all(pattern = linkPattern) %>% # get the matches,
+                                             # but this is a list of
+                                             # length 1 ...
+  unlist() %>%     # ... so unlist it into a character vector
+  str_c("http://www.amazon.com/", .)  # prepend the base URL to each link
 ```
+
 
 As we learn more about R's data-analysis functions we'll be able to explore a wide variety of interesting questions about the attitudes and practices of Amazon reviewers.  This will involve plowing through a lot more text, but now that we know regular expressions we are sure to "save the day"!
+
+### Practice Exercises
+
+1.  Use `reviews` to generate a table of the the number of Amazon links in reviews of John Greene's book *The Fault in our Stars*.
+
+2.  How many times did a reviewer link to *Looking for Alaska* (another well-known book by John Greene)?
+
+3.  From `reviews`, make a data frame called shades that contains the reviews of *Fifty Shades of Gray*.  This bestseller received an unusually high proportion of low ratings.  Think of a few choice words that might show up in a negative review and create a logical variable called `dislikes` that is `TRUE` when one or more of these words appears in the review, and is `FALSE` otherwise.  Convert the numerical variable `rating` to a factor variable.  Make a bar graph that shows the relation between `dislikes` and `rating`.
+
+### Solutions to the Practice Exercises
+
+1. Try this:
+
+    ```{r cache = TRUE}
+    linkPattern <- "(?<=<a class=\"\"a-link-normal\"\" href=\"\"/)(.+?)(?=\"\">)"
+    fault <-
+      reviews %>% 
+      filter(book == "fault")
+    fault %>% 
+      mutate(linkCount = str_count(content, linkPattern)) %>% 
+      group_by(linkCount) %>% 
+      summarise(n = n())
+    ```
+
+2. Try this:
+
+    ```{r cache = TRUE}
+    fault %>% 
+      .$content %>%
+      str_extract_all(pattern = linkPattern) %>%
+      unlist() %>%
+      str_detect("(?i)Looking-For-Alaska") %>% 
+      sum()
+    ```
+
+3.  Here is one possibility:
+
+    ```{r cache = TRUE}
+    reviews %>% 
+      filter(book == "shades") %>% 
+      mutate(dislikes = str_detect(content, 
+                                   "bad|awful|terrible|waste")) %>% 
+      mutate(rating = factor(rating)) %>% 
+      ggplot(aes(x = rating)) +
+      geom_bar(aes(fill = dislikes), position = "dodge")
+    ```
 
 \newpage
 
@@ -877,32 +1089,37 @@ knitr::include_graphics("images/thinking.png")
 
 ```{r echo =FALSE}
 findMister <- function(str) {
-  #mister <- "((\\w+)\\b)(?<=Mr\\.\\b)"
   mister <- "(?<=Mister )\\w+\\b"
-  results <- gregexpr(pattern = mister, text = str, perl = TRUE)
-  unlist(regmatches(x = str, m = results))
+  str %>%
+    str_extract_all(pattern = mister) %>% 
+    unlist()
 }
 findMr <- function(str) {
-  #mister <- "((\\w+)\\b)(?<=Mr\\.\\b)"
-  mister <- "(?<=Mr\\. )\\w+\\b"
-  results <- gregexpr(pattern = mister, text = str, perl = TRUE)
-  unlist(regmatches(x = str, m = results))
+  mr <- "(?<=Mr\\. )\\w+\\b"
+  str %>%
+    str_extract_all(pattern = mr) %>% 
+    unlist()
 }
 findTitled <- function(str) {
-  pattern <- "(?<=Mr\\. |Mrs\\. |Ms\\. |Mister |Missus |Miss )\\w+\\b"
-  results <- gregexpr(pattern, text = str, perl = TRUE)
-  unlist(regmatches(x = str, m = results))
+  titled <- "(?<=Mr\\. |Mrs\\. |Ms\\. |Mister |Missus |Miss )\\w+\\b"
+  str %>%
+    str_extract_all(pattern = titled) %>% 
+    unlist()
 }
 capRepeats <- function(str) {
-  gsub(pattern = "(\\b(\\w+)\\s+\\2\\b)", replacement = "\\U\\1\\E", x = str, perl =TRUE)
+  pattern <- "(\\b(\\w+)\\s+\\2\\b)"
+  str_replace_all(str, pattern,
+              replacement = function(x) {
+                str_to_upper(x)
+              })
 }
 longWord <- function(strs) {
-  indices <- grep("\\b\\w{8,}\\b", strs, perl = TRUE)
-  strs[indices]
+  pattern <- "\\b\\w{8,}\\b"
+  str_subset(strs, pattern)
 }
 longWord2 <- function(strs) {
-  results <- gregexpr("\\b\\w{8,}\\b", strs, perl = TRUE)
-  regmatches(x = strs, m = results)
+  pattern <- "\\b\\w{8,}\\b"
+  str_extract_all(strs, pattern)
 }
 phoneNumber <- function(strs) {
   pattern <- "(?x)      # ignore whitespace in regex
@@ -912,11 +1129,11 @@ phoneNumber <- function(strs) {
               \\1       # same separator as before
               \\d{4}    # four-digit extension
               "
-  grepl(pattern, strs, perl = TRUE)
+  str_detect(strs, pattern)
 }
 ```
 
-1. Write a function called `findMister()` that, when given any string, will return a character vector of all words following the string "Mister", with exactly one space in between.  The function should take a single argument called `str`, the string to search.  A typical example of use is as follows:
+1. Write a function called `findMister()` that, when given any string, will return a character vector of the words that immediately follow the string "Mister", with exactly one space in between.  The function should take a single argument called `str`, the string to search.  A typical example of use is as follows:
 
     ```{r}
     text <- "Here are Mister Tom, MisterJerry, Mister Mister, and Mister\tJoe."
@@ -931,13 +1148,13 @@ phoneNumber <- function(strs) {
     ```
 
 1.  For each of the following expressions, write a regular expression to test whether any of the sub-string(s) described occur in a given string.  The regular expression should match any of the sub-strings described, and should not match any other sub-string.  Try to make the regular expression as short as possible.  Write the regular expression as a string that could be used in one of R's regex functions (i.e. extra backslash escapes as needed).  The first item is done for you, as an example.
-    * *box* and *bat*.  Regex string:  `"b[oa]t"`.  (This is the one to submit, because it's shorter than other alternatives such as`"box|bat"`).
+    * *bot* and *bat*.  Regex string:  `"b[oa]t"`.  (This is the one to submit, because it's shorter than other alternatives such as`"box|bat"`).
     * *cart* and *cars* and *carp*.
     * *slick* and *sick*
     * Any word ending in *ity* (such as *velocity* and *ferocity*).  Be sure to pay attention to word-boundaries.  You should match *velocity* but not *\ velocity* (includes a space before the "v") or *velocity;*.
     * A whole number consisting of more than six digits.
     * A word that is between 3 and 6 characters long.  Pay attention to word-boundaries.
-    * One or more whitespace characters, followed by a hyphen or a semicolon or a colon.
+    * One or more white-space characters, followed by a hyphen or a semicolon or a colon.
 
 1. Write a function called `findTitled()` that, when given any string, will return a character vector of all words following any one of these titles:
     * "Mr."
@@ -954,7 +1171,7 @@ phoneNumber <- function(strs) {
     findTitled(text)
     ```
     
-1. Write a function called `capRepeats()` that, when given a string, searches for all repeated-word pairs (with at least one character of whitespace in between) and replaces them with the same pair where all letters are capitalized.  The function should take a single argument called `str`, the string to be searched.  A typical example of use would be as follows:
+1. Write a function called `capRepeats()` that, when given a string, searches for all repeated-word pairs (with at least one character of white-space in between) and replaces them with the same pair where all letters are capitalized.  The function should take a single argument called `str`, the string to be searched.  A typical example of use would be as follows:
 
     ```{r}
     capRepeats("I have a boo boo on my knee    \tknee!")
@@ -974,7 +1191,7 @@ phoneNumber <- function(strs) {
     longWord2(strs = myText)
     ```
     
-1.  Write a function called `phoneNumber()` that, when given a vector of strings returns a logical vector indicating which of the strings contain a a valid phone number.  For our purposes a valid phone number shall be any string of the form
+1.  Write a function called `phoneNumber()` that, when given a vector of strings returns a logical vector indicating which of the strings contain a valid phone number.  For our purposes a valid phone number shall be any string of the form
 
     >xxx-xxx-xxxx
     

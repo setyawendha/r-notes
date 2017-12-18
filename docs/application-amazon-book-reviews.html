@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-16">
+<meta name="date" content="2017-12-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -442,13 +442,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>12.4</b> Entering a Regex in R</a><ul>
 <li class="chapter" data-level="12.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>12.4.1</b> String to Regex</a></li>
 <li class="chapter" data-level="12.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-substitution"><i class="fa fa-check"></i><b>12.4.2</b> Substitution</a></li>
-<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>12.4.3</b> A Note on Perl</a></li>
-<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.4</b> Patterned Replacement</a></li>
-<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>12.4.5</b> Grepping</a></li>
-<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>12.4.6</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.3</b> Patterned Replacement</a></li>
+<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#detecting-matches"><i class="fa fa-check"></i><b>12.4.4</b> Detecting Matches</a></li>
+<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extracting-matches"><i class="fa fa-check"></i><b>12.4.5</b> Extracting Matches</a></li>
+<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extraction-in-data-frames"><i class="fa fa-check"></i><b>12.4.6</b> Extraction in Data Frames</a></li>
 <li class="chapter" data-level="12.4.7" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>12.4.7</b> Regex Modes</a></li>
+<li class="chapter" data-level="12.4.8" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#practice-exercises-34"><i class="fa fa-check"></i><b>12.4.8</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.4.9" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#solutions-to-the-practice-exercises-16"><i class="fa fa-check"></i><b>12.4.9</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#practice-exercises-35"><i class="fa fa-check"></i><b>12.5.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.5.2" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#solutions-to-the-practice-exercises-17"><i class="fa fa-check"></i><b>12.5.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -561,36 +566,44 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><a href="http://www.amazon.com/Life-As-We-Knew-It/dp/0152061541" class="uri">http://www.amazon.com/Life-As-We-Knew-It/dp/0152061541</a></p>
 </blockquote>
 <p>We might be curious to know what other books on Amazon our reviewers link to when they are discussing the <em>Hunger Games</em>. Regular expressions can help us to extract the links from the mass of text in <code>hunger$content</code>.</p>
-<p>All of the Amazon links are generated for the user by the computer, so they will all have the same format. Hence we can use a look-behind and a look-ahead to construct a regex will be matched by any URL-fragment within such an anchor:</p>
+<p>All of the Amazon links are generated for the user by the computer, so they will all have the same format. Hence we can use a look-behind and a look-ahead to construct a regex that will be matched by any URL-fragment within such an anchor:</p>
 <blockquote>
 <p>(?&lt;=&lt;a class=\“\”a-link-normal\“\” href=\“\”/)(.+?)(?=\“\”&gt;)</p>
 </blockquote>
 <p>Checking carefully, we see that none of the tokens require extra escaping: we can use this text as our pattern in regex function in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linkPattern &lt;-<span class="st"> &quot;(?&lt;=&lt;a class=</span><span class="ch">\&quot;\&quot;</span><span class="st">a-link-normal</span><span class="ch">\&quot;\&quot;</span><span class="st"> href=</span><span class="ch">\&quot;\&quot;</span><span class="st">/)(.+?)(?=</span><span class="ch">\&quot;\&quot;</span><span class="st">&gt;)&quot;</span></code></pre></div>
-<p>We now construct a list of character-vectors containing the links (if any) in each review:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">links &lt;-<span class="st"> </span><span class="kw">list</span>()
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hunger)) {
-  text &lt;-<span class="st"> </span>reviews<span class="op">$</span>content[i]
-  m &lt;-<span class="st"> </span><span class="kw">gregexpr</span>(linkPattern, <span class="dt">text =</span> text, <span class="dt">perl=</span><span class="ot">TRUE</span>)
-  links[[i]] &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">regmatches</span>(text, m))
-}</code></pre></div>
-<p>If we are interested in <em>how many</em> books each reviewer links to, we can make a vector of these links:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numberOfLinks &lt;-<span class="st"> </span><span class="kw">numeric</span>()
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hunger)) {
-  numberOfLinks[i] &lt;-<span class="st"> </span><span class="kw">length</span>(links[[i]])
-}</code></pre></div>
-<p>We can tabulate the link-numbers with R’s <code>table()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(numberOfLinks)</code></pre></div>
-<pre><code>## numberOfLinks
-##     0     1     2     3     4     5     6     7     8     9 
-## 23854   110    34    15     7     3     1     1     1     1</code></pre>
-<p>A better-looking table appears in Table <a href="application-amazon-book-reviews.html#tab:tabulated-link-numbers">12.4</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hungerLinks &lt;-
+<span class="st">  </span>hunger <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">linkCount =</span> <span class="kw">str_count</span>(content, linkPattern))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</code></pre></div>
+<pre><code>## # A tibble: 10 x 2
+##    linkCount     n
+##        &lt;int&gt; &lt;int&gt;
+##  1         0 23854
+##  2         1   110
+##  3         2    34
+##  4         3    15
+##  5         4     7
+##  6         5     3
+##  7         6     1
+##  8         7     1
+##  9         8     1
+## 10         9     1</code></pre>
+<p>If you are generating a report with R Markdown, then a better-looking table (see Table <a href="application-amazon-book-reviews.html#tab:tabulated-link-numbers">12.4</a> can be produced as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">caption=</span><span class="kw">str_c</span>(<span class="st">&quot;Table showing number of links &quot;</span>,
+                             <span class="st">&quot;made by reviewers of the Hunger &quot;</span>,
+                             <span class="st">&quot;Games series.&quot;</span>))</code></pre></div>
 <table>
 <caption><span id="tab:tabulated-link-numbers">Table 12.4: </span>Table showing number of links made by reviewers of the Hunger Games series.</caption>
 <thead>
 <tr class="header">
-<th align="right">Number of Links</th>
-<th align="right">Reviews</th>
+<th align="right">linkCount</th>
+<th align="right">n</th>
 </tr>
 </thead>
 <tbody>
@@ -636,19 +649,76 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-<p>Most of the reviewers didn’t link at all, but 173 of them did provide at least one link. One reviewer linked to nine books! Here they are:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(links[numberOfLinks <span class="op">==</span><span class="st"> </span><span class="dv">9</span>])</code></pre></div>
-<pre><code>## [1] &quot;Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
-## [2] &quot;The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
-## [3] &quot;The-Long-Walk/dp/0451196716&quot;                                
-## [4] &quot;Battle-Royale-The-Novel/dp/1421527723&quot;                      
-## [5] &quot;Battle-Royale-The-Complete-Collection-Blu-ray/dp/B006L4MX4A&quot;
-## [6] &quot;The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
-## [7] &quot;Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
-## [8] &quot;Abarat/dp/0062094106&quot;                                       
-## [9] &quot;lord-of-the-flies/dp/B0073SQWWC&quot;</code></pre>
+<p>Most of the reviewers didn’t link at all, but 173 of them did provide at least one link. One reviewer linked to nine books! Let’s find them and add the base URL <code>http://www.amazon.com/</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(linkCount <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(linkCount)) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># get the case having most links</span>
+<span class="st">  </span>.<span class="op">$</span>content <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># get just the content of the review,</span>
+<span class="st">                   </span><span class="co"># a character vector (of length 1 since there</span>
+<span class="st">                   </span><span class="co"># is only one review with the max number of lengths)</span>
+<span class="st">  </span><span class="kw">str_extract_all</span>(<span class="dt">pattern =</span> linkPattern) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># get the matches,</span>
+<span class="st">                                             </span><span class="co"># but this is a list of</span>
+<span class="st">                                             </span><span class="co"># length 1 ...</span>
+<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st">     </span><span class="co"># ... so unlist it into a character vector</span>
+<span class="st">  </span><span class="kw">str_c</span>(<span class="st">&quot;http://www.amazon.com/&quot;</span>, .)  <span class="co"># prepend the base URL to each link</span></code></pre></div>
+<pre><code>## [1] &quot;http://www.amazon.com/Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
+## [2] &quot;http://www.amazon.com/The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
+## [3] &quot;http://www.amazon.com/The-Long-Walk/dp/0451196716&quot;                                
+## [4] &quot;http://www.amazon.com/Battle-Royale-The-Novel/dp/1421527723&quot;                      
+## [5] &quot;http://www.amazon.com/Battle-Royale-The-Complete-Collection-Blu-ray/dp/B006L4MX4A&quot;
+## [6] &quot;http://www.amazon.com/The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
+## [7] &quot;http://www.amazon.com/Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
+## [8] &quot;http://www.amazon.com/Abarat/dp/0062094106&quot;                                       
+## [9] &quot;http://www.amazon.com/lord-of-the-flies/dp/B0073SQWWC&quot;</code></pre>
 <p>As we learn more about R’s data-analysis functions we’ll be able to explore a wide variety of interesting questions about the attitudes and practices of Amazon reviewers. This will involve plowing through a lot more text, but now that we know regular expressions we are sure to “save the day”!</p>
+<div id="practice-exercises-35" class="section level3">
+<h3><span class="header-section-number">12.5.1</span> Practice Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Use <code>reviews</code> to generate a table of the the number of Amazon links in reviews of John Greene’s book <em>The Fault in our Stars</em>.</p></li>
+<li><p>How many times did a reviewer link to <em>Looking for Alaska</em> (another well-known book by John Greene)?</p></li>
+<li><p>From <code>reviews</code>, make a data frame called shades that contains the reviews of <em>Fifty Shades of Gray</em>. This bestseller received an unusually high proportion of low ratings. Think of a few choice words that might show up in a negative review and create a logical variable called <code>dislikes</code> that is <code>TRUE</code> when one or more of these words appears in the review, and is <code>FALSE</code> otherwise. Convert the numerical variable <code>rating</code> to a factor variable. Make a bar graph that shows the relation between <code>dislikes</code> and <code>rating</code>.</p></li>
+</ol>
+</div>
+<div id="solutions-to-the-practice-exercises-17" class="section level3">
+<h3><span class="header-section-number">12.5.2</span> Solutions to the Practice Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Try this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linkPattern &lt;-<span class="st"> &quot;(?&lt;=&lt;a class=</span><span class="ch">\&quot;\&quot;</span><span class="st">a-link-normal</span><span class="ch">\&quot;\&quot;</span><span class="st"> href=</span><span class="ch">\&quot;\&quot;</span><span class="st">/)(.+?)(?=</span><span class="ch">\&quot;\&quot;</span><span class="st">&gt;)&quot;</span>
+fault &lt;-
+<span class="st">  </span>reviews <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(book <span class="op">==</span><span class="st"> &quot;fault&quot;</span>)
+fault <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">linkCount =</span> <span class="kw">str_count</span>(content, linkPattern)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   linkCount     n
+##       &lt;int&gt; &lt;int&gt;
+## 1         0 35827
+## 2         1    10
+## 3         2     3
+## 4         3     2
+## 5         6     1
+## 6         7     1</code></pre></li>
+<li><p>Try this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fault <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>.<span class="op">$</span>content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_extract_all</span>(<span class="dt">pattern =</span> linkPattern) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_detect</span>(<span class="st">&quot;(?i)Looking-For-Alaska&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">sum</span>()</code></pre></div>
+<pre><code>## [1] 5</code></pre></li>
+<li><p>Here is one possibility:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reviews <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(book <span class="op">==</span><span class="st"> &quot;shades&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dislikes =</span> <span class="kw">str_detect</span>(content, 
+                               <span class="st">&quot;bad|awful|terrible|waste&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rating =</span> <span class="kw">factor</span>(rating)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rating)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> dislikes), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-978-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+</ol>
 
+</div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">

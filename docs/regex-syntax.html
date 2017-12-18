@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-16">
+<meta name="date" content="2017-12-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -442,13 +442,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>12.4</b> Entering a Regex in R</a><ul>
 <li class="chapter" data-level="12.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>12.4.1</b> String to Regex</a></li>
 <li class="chapter" data-level="12.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-substitution"><i class="fa fa-check"></i><b>12.4.2</b> Substitution</a></li>
-<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>12.4.3</b> A Note on Perl</a></li>
-<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.4</b> Patterned Replacement</a></li>
-<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>12.4.5</b> Grepping</a></li>
-<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>12.4.6</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.3</b> Patterned Replacement</a></li>
+<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#detecting-matches"><i class="fa fa-check"></i><b>12.4.4</b> Detecting Matches</a></li>
+<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extracting-matches"><i class="fa fa-check"></i><b>12.4.5</b> Extracting Matches</a></li>
+<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extraction-in-data-frames"><i class="fa fa-check"></i><b>12.4.6</b> Extraction in Data Frames</a></li>
 <li class="chapter" data-level="12.4.7" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>12.4.7</b> Regex Modes</a></li>
+<li class="chapter" data-level="12.4.8" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#practice-exercises-34"><i class="fa fa-check"></i><b>12.4.8</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.4.9" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#solutions-to-the-practice-exercises-16"><i class="fa fa-check"></i><b>12.4.9</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#practice-exercises-35"><i class="fa fa-check"></i><b>12.5.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.5.2" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#solutions-to-the-practice-exercises-17"><i class="fa fa-check"></i><b>12.5.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -589,7 +594,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>[a-]</code> matches a and - (the machine can tell that the hyphen was not being used in a range);</li>
 <li><code>[a\-]</code> also matches just a and -, not a,  and -. (Apparently the regex syntax takes into account the fact that some folks will worry that they might have to escape the hyphen).</li>
 </ul>
-<p>Of course since the backslash plays a role in escaping metacharacters, it too acts as a metacharacter at times. Hence if you want to match a backslash you’ll have to escape <em>it</em>! How? By preceding the blackslash with a backslash! Thus:</p>
+<p>Of course since the backslash plays a role in escaping metacharacters, it too acts as a metacharacter at times. Hence if you want to match a backslash you’ll have to escape <em>it</em>! How? By preceding the black-slash with a backslash! Thus:</p>
 <ul>
 <li><code>a\\b</code> matches “a\b”;</li>
 <li><code>a\\\\b</code> matches “a\\b”.</li>
@@ -791,7 +796,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><em>Anchors</em> help us accomplish this. The most important anchors to remember are:</p>
 <ul>
 <li><code>^</code>, which indicates (in technical terms, <em>asserts</em>) the beginning of a string;</li>
-<li><code>$</code>, which asserts the end of a string;<a href="#fn33" class="footnoteRef" id="fnref33"><sup>33</sup></a></li>
+<li><code>$</code>, which asserts the end of a string;<a href="#fn32" class="footnoteRef" id="fnref32"><sup>32</sup></a></li>
 <li><code>\b</code>, which asserts the presence of any type word-boundary (a space, tab, comma, semicolon, etc.).</li>
 </ul>
 <p>Here are some examples:</p>
@@ -870,14 +875,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>… followed by the contents of the second group …</li>
 <li>… at a word-boundary.</li>
 </ul>
-<p>If you want to match a palindrome<a href="#fn34" class="footnoteRef" id="fnref34"><sup>34</sup></a>consisting of five characters (“abcba”, “x444x”, etc.) then use:</p>
+<p>If you want to match a palindrome<a href="#fn33" class="footnoteRef" id="fnref33"><sup>33</sup></a>consisting of five characters (“abcba”, “x444x”, etc.) then use:</p>
 <blockquote>
 <p><code>\b(\w)(\w)\w\2\1\b</code></p>
 </blockquote>
 </div>
 <div id="looking-around" class="section level3">
 <h3><span class="header-section-number">12.3.9</span> Looking Around</h3>
-<p>Suppose that you have a string containing a number of words involving “bed”, and you would like to find all occurences of “bed” that begin a word, except for the word “bedtime”. With the tools we have so far this is a difficult task. Fortunately there are <em>look-aheads</em>  to simplify our work.</p>
+<p>Suppose that you have a string containing a number of words involving “bed”, and you would like to find all occurrences of “bed” that begin a word, except for the word “bedtime”. With the tools we have so far this is a difficult task. Fortunately there are <em>look-aheads</em>  to simplify our work.</p>
 <p>The regex <code>\bbed(?!time\b)</code> will do the job. Here’s how it works:</p>
 <ul>
 <li>It begins by asserting a word-boundary.</li>
@@ -909,14 +914,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="more-to-learn-1" class="section level3">
 <h3><span class="header-section-number">12.3.10</span> More to Learn</h3>
-<p>We have not come near to exhausting the syntax of regular expressions. Readers who would like to delve into the subject more deeply should next consult online tutorials on the topics of non-capture groups, conditionals and more. However, we now have enough background to express some fairly complex patterns quite concisely, so it is now time to learn how to work with them in R.</p>
+<p>We have not come near to exhausting the syntax of regular expressions. Readers who would like to delve into the subject more deeply should next consult online tutorials on the topics of non-capture groups, conditionals and more. It would also be good to look at the brief overview of the ICU regex engine provide in <code>stringi-search-regex</code> in the documentation for the <strong>stringi</strong> package on which <strong>stringr</strong> is based. However, we now have enough background to express some fairly complex patterns quite concisely, so it is now time to learn how to work with them in R.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="33">
-<li id="fn33"><p>Well, actually it asserts the end of the string when we are not in “multiline mode.” In multiline mode it asserts the end of a line within a multiline string. This will be explained shortly.<a href="regex-syntax.html#fnref33">↩</a></p></li>
-<li id="fn34"><p>Recall that a <em>palindrome</em> is a word that is the same when spelled backwards.<a href="regex-syntax.html#fnref34">↩</a></p></li>
+<ol start="32">
+<li id="fn32"><p>Well, actually it asserts the end of the string when we are not in “multiline mode.” In multiline mode it asserts the end of a line within a multiline string. This will be explained shortly.<a href="regex-syntax.html#fnref32">↩</a></p></li>
+<li id="fn33"><p>Recall that a <em>palindrome</em> is a word that is the same when spelled backwards.<a href="regex-syntax.html#fnref33">↩</a></p></li>
 </ol>
 </div>
             </section>

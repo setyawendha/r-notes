@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-12-16}
+  \date{2017-12-17}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -6542,22 +6542,22 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:tigerData"      "package:tigerstats"    
+##  [1] ".GlobalEnv"             "package:babynames"     
+##  [3] "package:R6"             "package:tigerstats"    
 ##  [5] "package:abd"            "package:mosaic"        
 ##  [7] "package:Matrix"         "package:ggformula"     
 ##  [9] "package:lattice"        "package:nlme"          
 ## [11] "package:TurtleGraphics" "package:grid"          
-## [13] "package:mosaicData"     "package:babynames"     
-## [15] "package:bindrcpp"       "package:dplyr"         
-## [17] "package:purrr"          "package:readr"         
-## [19] "package:tidyr"          "package:tibble"        
-## [21] "package:ggplot2"        "package:tidyverse"     
-## [23] "tools:rstudio"          "package:stats"         
-## [25] "package:graphics"       "package:grDevices"     
-## [27] "package:utils"          "package:datasets"      
-## [29] "package:methods"        "Autoloads"             
-## [31] "package:base"
+## [13] "package:mosaicData"     "package:stringr"       
+## [15] "package:bindrcpp"       "package:tigerData"     
+## [17] "package:dplyr"          "package:purrr"         
+## [19] "package:readr"          "package:tidyr"         
+## [21] "package:tibble"         "package:ggplot2"       
+## [23] "package:tidyverse"      "tools:rstudio"         
+## [25] "package:stats"          "package:graphics"      
+## [27] "package:grDevices"      "package:utils"         
+## [29] "package:datasets"       "package:methods"       
+## [31] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -6663,7 +6663,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10ba196d8>
+## <bytecode: 0x104832cd8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -17733,16 +17733,16 @@ is flagged for individual plotting, and the corresponding hinge will be
 A single box glyph on its own is not very interesting. Where box plots
 shine is in the study of the relationship between a numerical variable
 and a categorical with a large number of levels, as in Figure
-\ref(fig:utitlitybills1). Here the glyphs are boxes, with each box being
+\ref{fig:utilitybills1}. Here the glyphs are boxes, with each box being
 constructed from the bills that were issued in a particular month.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/utitlitybills1-1} 
+{\centering \includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/utilitybills1-1} 
 
 }
 
-\caption{Utility bills throught the year.}\label{fig:utitlitybills1}
+\caption{Utility bills through the year.}\label{fig:utilitybills1}
 \end{figure}
 
 \subsection{Example: Choropleth Maps}\label{example-choropleth-maps}
@@ -20591,8 +20591,8 @@ In this chapter we will introduce a few tools from the
   \item
     \texttt{mutate()} for transforming variables;
   \item
-    \texttt{group\_by()} \texttt{summarise()} for numerical summaries of
-    data.
+    \texttt{group\_by()} and \texttt{summarise()} for numerical
+    summaries of data.
   \end{itemize}
 \end{itemize}
 
@@ -21096,7 +21096,7 @@ Exercises}\label{solutions-to-practice-exercises-17}
 
 \section{Grouping and Summaries}\label{grouping-and-summaries}
 
-\index{R-functions!group\_by()@\texttt{group_by()}}
+\index{R-functions!group\_by()@\texttt{group\_by()}}
 \index{R-functions!summarise()@\texttt{summarise()}}
 
 The next two \textbf{dplyr} data-functions are useful for generating
@@ -21674,7 +21674,7 @@ Another example:
 So much for ``ordinary'' characters. But there are special characters,
 too, sometimes called \emph{control} characters, that do not represent
 written symbols. \index{control character}We have seen a couple of them
-already: the newline character \texttt{\textbackslash{}n} is one:
+already; the newline character \texttt{\textbackslash{}n} is one:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -21790,7 +21790,16 @@ Or, for something zanier:
 \section{Basic String Operations}\label{basic-string-operations}
 
 We now introduce a few basic operations for examining, splitting and
-combining strings.
+combining strings. Some of the functions we discuss come from the
+\textbf{stringer} \citep{R-stringr} package, which is installed along
+with the tidyverse but is not automatically attached. Make sure you
+attach it when you work with strings:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(stringr)}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Is and As}\label{is-and-as}
 
@@ -21857,12 +21866,13 @@ How many characters are in the word ``hello''? Let's try:
 \end{verbatim}
 
 Oh, right, strings don't exist alone: \texttt{"hello"} is actually a
-character-vector of length 1. Instead we must use the \texttt{nchar()}
-\index{R-functions!nchar()@\texttt{nchar()}}function:
+character-vector of length 1. Instead we should use the
+\texttt{str\_sub()}
+\index{R-functions!str\_length()@\texttt{str\_length()}}function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{nchar}\NormalTok{(}\StringTok{"hello"}\NormalTok{)}
+\KeywordTok{str_length}\NormalTok{(}\StringTok{"hello"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21872,13 +21882,13 @@ character-vector of length 1. Instead we must use the \texttt{nchar()}
 
 \subsection{Substrings and Trimming}\label{substrings-and-trimming}
 
-We can pull out pieces of a string with the \texttt{substr()}
-\index{R-functions!substr()@\texttt{substr()}}function:
+We can pull out pieces of a string with the \texttt{str\_sub()}
+\index{R-functions!str\_sub()@\texttt{str\_sub()}}function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{poppins <-}\StringTok{ "Supercalifragilisticexpialidocious"}
-\KeywordTok{substr}\NormalTok{(poppins, }\DataTypeTok{start =} \DecValTok{10}\NormalTok{, }\DataTypeTok{stop =} \DecValTok{20}\NormalTok{)}
+\KeywordTok{str_sub}\NormalTok{(poppins, }\DataTypeTok{start =} \DecValTok{10}\NormalTok{, }\DataTypeTok{end =} \DecValTok{20}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21893,7 +21903,7 @@ other string\footnote{In some other computer languages, strings are
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{substr}\NormalTok{(poppins, }\DataTypeTok{start =} \DecValTok{10}\NormalTok{, }\DataTypeTok{stop =} \DecValTok{20}\NormalTok{) <-}\StringTok{ "ABCDEFGHIJK"}
+\KeywordTok{str_sub}\NormalTok{(poppins, }\DataTypeTok{start =} \DecValTok{10}\NormalTok{, }\DataTypeTok{end =} \DecValTok{20}\NormalTok{) <-}\StringTok{ "ABCDEFGHIJK"}
 \NormalTok{poppins}
 \end{Highlighting}
 \end{Shaded}
@@ -21907,7 +21917,7 @@ Don't forget: ``vector-in, vector-out'' usually applies:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{words <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Mary"}\NormalTok{, }\StringTok{"Poppins"}\NormalTok{, }\StringTok{"practically"}\NormalTok{, }\StringTok{"perfect"}\NormalTok{)}
-\KeywordTok{nchar}\NormalTok{(words)}
+\KeywordTok{str_length}\NormalTok{(words)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21917,7 +21927,7 @@ Don't forget: ``vector-in, vector-out'' usually applies:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{substr}\NormalTok{(words, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\KeywordTok{str_sub}\NormalTok{(words, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21933,7 +21943,7 @@ in a text file. For example, consider:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{lastWord <-}\StringTok{ "farewell}\CharTok{\textbackslash{}r\textbackslash{}n}\StringTok{"}
-\KeywordTok{nchar}\NormalTok{(lastWord)}
+\KeywordTok{str_length}\NormalTok{(lastWord)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21953,15 +21963,17 @@ in a text file. For example, consider:
 
 From its display on the console, you might infer that \texttt{lastWord}
 consists of only the eight characters: f, a, r, e, w, e, l, and l. (You
-can't see the carriage return followed by the newline.)
+can't see the carriage return followed by the newline.) But
+\texttt{str\_length()} clearly shows that it's got two characters after
+the final ``l'', even if you can't see them.
 
 If you think your strings might contain unnecessary leading or trailing
-white-space, you can remove it with \texttt{trimws()}:
-\index{R-functions!trimws()@\texttt{trimws()}}
+white-space, you can remove it with \texttt{str\_trim()}:
+\index{R-functions!str\_trim()@\texttt{str\_trim()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{trimws}\NormalTok{(lastWord)}
+\KeywordTok{str_trim}\NormalTok{(lastWord)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21972,11 +21984,11 @@ white-space, you can remove it with \texttt{trimws()}:
 \subsection{Changing Cases}\label{changing-cases}
 
 You can make all of the letters in a string lowercase:
-\index{R-functions!tolower()@\texttt{tolower()}}
+\index{R-functions!str\_to\_lower()@\texttt{str\_to\_lower()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tolower}\NormalTok{(}\StringTok{"My name is Rhonda."}\NormalTok{)}
+\KeywordTok{str_to_lower}\NormalTok{(}\StringTok{"My name is Rhonda."}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -21985,11 +21997,11 @@ You can make all of the letters in a string lowercase:
 \end{verbatim}
 
 You can make them all uppercase:
-\index{R-functions!toupper()@\texttt{toupper()}}
+\index{R-functions!str\_to\_upper()@\texttt{str\_to\_upper()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{toupper}\NormalTok{(}\StringTok{"It makes me wanna holler!"}\NormalTok{)}
+\KeywordTok{str_to_upper}\NormalTok{(}\StringTok{"It makes me wanna holler!"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22012,12 +22024,12 @@ name of the month, perhaps. Then you would need to gain access to the
 elements of each date separately, so that you could transform
 month-numbers to month-names.
 
-\texttt{strsplit()} will do the job for you:
-\index{R-functions!strsplit()@\texttt{strsplit()}}
+\texttt{str\_split()} will do the job for you:
+\index{R-functions!str\_split()@\texttt{str\_split()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{strsplit}\NormalTok{(dates, }\DataTypeTok{split =} \StringTok{"-"}\NormalTok{)}
+\KeywordTok{str_split}\NormalTok{(dates, }\DataTypeTok{pattern =} \StringTok{"-"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22036,30 +22048,24 @@ The result is a list with one element for each date in \texttt{dates}.
 Each element of the list is a character vector containing the
 elements---month-number, day-number and year---that were demarcated in
 the original strings by the hyphen \texttt{-}, the value given to the
-\texttt{split} parameter.
+\texttt{pattern} parameter.
 
 If we wish, we may now access the elements of the list and process them
 in any way we like. We might report the months, for example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{splitDates <-}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(dates, }\DataTypeTok{split =} \StringTok{"-"}\NormalTok{)}
-\ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(splitDates) ) \{}
-\NormalTok{  thisDate <-}\StringTok{ }\NormalTok{splitDates[[i]]}
-\NormalTok{  thisMonth <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(thisDate[}\DecValTok{1}\NormalTok{])}
-  \CommentTok{# now use special R-constant month.names, which is a}
-  \CommentTok{# character vector consisting of the full names of the months of}
-  \CommentTok{# the year:}
-  \KeywordTok{cat}\NormalTok{(month.name[thisMonth])}
-  \KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\NormalTok{\}}
+\NormalTok{dates }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"-"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{.[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{7}\NormalTok{)] }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{as.numeric}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{month.name[.]}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## March
-## April
-## December
+## [1] "March"    "April"    "December"
 \end{verbatim}
 
 (Note the use in the code above of the \texttt{months.name}
@@ -22070,8 +22076,9 @@ Sometimes it's handy to split a string word-by-word:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{message <-}\StringTok{ "you have won the lottery"}
-\KeywordTok{unlist}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(message, }\DataTypeTok{split =} \StringTok{" "}\NormalTok{))}
+\StringTok{"you have won the lottery"} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{" "}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22084,8 +22091,9 @@ words had been separated by more than one space:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{message <-}\StringTok{ "you have won the  lottery"} \CommentTok{# two spaces betwen 'the' and 'lottery'}
-\KeywordTok{unlist}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(message, }\DataTypeTok{split =} \StringTok{" "}\NormalTok{))}
+\StringTok{"you have won the  lottery"} \OperatorTok{%>%}\StringTok{ }\CommentTok{# two spaces betwen 'the' and 'lottery'}
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{" "}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22100,9 +22108,9 @@ string with no characters:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{animal <-}\StringTok{ "aardvark"}
-\NormalTok{animSplit <-}\StringTok{ }\KeywordTok{unlist}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(animal, }\DataTypeTok{split =} \StringTok{""}\NormalTok{))}
-\NormalTok{animSplit}
+\StringTok{"aardvark"} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22115,7 +22123,11 @@ occurrences of ``a'' in a word:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{length}\NormalTok{(animSplit[animSplit }\OperatorTok{==}\StringTok{ "a"}\NormalTok{])}
+\StringTok{"aardvark"} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{.[. }\OperatorTok{==}\StringTok{ "a"}\NormalTok{] }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{length}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22175,6 +22187,19 @@ could use \texttt{paste0()}:
 ## [1] "Yabbadabbadoo!"
 \end{verbatim}
 
+The \textbf{stringr} version of \texttt{paste0()} is
+\texttt{str\_c()}\index{R-functions!str\_c()@\texttt{str\_c()}}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str_c}\NormalTok{(}\StringTok{"Yabba"}\NormalTok{,}\StringTok{"dabba"}\NormalTok{,}\StringTok{"doo!"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Yabbadabbadoo!"
+\end{verbatim}
+
 What if you had a character-vector whose elements you wanted to paste
 together? For example, consider:
 
@@ -22186,29 +22211,14 @@ together? For example, consider:
 \end{Shaded}
 
 Now suppose you want to paste the elements of \texttt{poppins} together
-into one string where the words are separated by spaces. You might be
-tempted to try:
+into one string where the words are separated by spaces.
+\texttt{str\_c()} will do the job for you, if you use its
+\texttt{collapse} parameter:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{paste}\NormalTok{(poppins)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "practically" "perfect"     "in"          "every"       "way"
-\end{verbatim}
-
-That didn't work at all. And then you remember: ``Yeah, right---vector
-in, vector out.''
-
-There is a way, though, to get \texttt{paste()} to concatenate the
-elements of the resulting vector. Just use the \texttt{collapse}
-parameter:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{paste}\NormalTok{(poppins, }\DataTypeTok{collapse =} \StringTok{" "}\NormalTok{)}
+\NormalTok{poppins }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_c}\NormalTok{(}\DataTypeTok{collapse =} \StringTok{" "}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22225,7 +22235,7 @@ as separate arguments to \texttt{paste()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{paste}\NormalTok{(}\StringTok{"March"}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{1963}\NormalTok{, }\DataTypeTok{collapse =} \StringTok{" "}\NormalTok{)}
+\KeywordTok{str_c}\NormalTok{(}\StringTok{"March"}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{1963}\NormalTok{, }\DataTypeTok{sep =} \StringTok{" "}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22238,8 +22248,8 @@ elements of a list:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{toJoin <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\StringTok{"Mary"}\NormalTok{, }\DecValTok{343}\NormalTok{, }\StringTok{"Poppins"}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
-\KeywordTok{paste}\NormalTok{(toJoin, }\DataTypeTok{collapse =} \StringTok{" "}\NormalTok{)}
+\KeywordTok{list}\NormalTok{(}\StringTok{"Mary"}\NormalTok{, }\DecValTok{343}\NormalTok{, }\StringTok{"Poppins"}\NormalTok{, }\OtherTok{FALSE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_c}\NormalTok{(}\DataTypeTok{collapse =} \StringTok{" "}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22261,9 +22271,9 @@ You could try this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{date <-}\StringTok{ "3-14-1963"}
-\NormalTok{splitDate <-}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(date, }\DataTypeTok{split =} \StringTok{"-"}\NormalTok{)}
-\KeywordTok{paste}\NormalTok{(splitDate, }\DataTypeTok{collapse =} \StringTok{"/"}\NormalTok{)}
+\StringTok{"3-14-1963"} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"-"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_c}\NormalTok{(}\DataTypeTok{collapse =} \StringTok{"/"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22272,11 +22282,12 @@ You could try this:
 \end{verbatim}
 
 That's not what we want. We have to remember than the result of applying
-\texttt{strsplit()} is a list:
+\texttt{str\_split()} is a list:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{splitDate}
+\StringTok{"3-14-1963"} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"-"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22289,9 +22300,10 @@ We need to unlist prior to the join. The correct procedure is:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{date <-}\StringTok{ "3-14-1963"}
-\NormalTok{splitDate <-}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(date, }\DataTypeTok{split =} \StringTok{"-"}\NormalTok{)}
-\KeywordTok{paste}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(splitDate), }\DataTypeTok{collapse =} \StringTok{"/"}\NormalTok{)}
+\StringTok{"3-14-1963"} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"-"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_c}\NormalTok{(}\DataTypeTok{collapse =} \StringTok{"/"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22346,7 +22358,8 @@ Here is the result, \texttt{cat}ed out:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%10s%20s"}\NormalTok{, first, last))}
+\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%10s%20s"}\NormalTok{, first, last) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{cat}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22368,7 +22381,7 @@ and the conversion character, like so:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# left-justify both fields:}
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-20s"}\NormalTok{, first, last))}
+\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-20s"}\NormalTok{, first, last) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cat}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22393,7 +22406,7 @@ Here is another example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-10d%-10f"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{3.2}\NormalTok{))}
+\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-10d%-10f"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{3.2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cat}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22406,7 +22419,7 @@ the significant figures in the 3.2:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-10d%-10g"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{3.2}\NormalTok{))}
+\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-10d%-10g"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{3.2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cat}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22422,7 +22435,8 @@ decimal places, then try:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-10d%-10.3f"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{234.5647}\NormalTok{))}
+\KeywordTok{sprintf}\NormalTok{(}\DataTypeTok{fmt =} \StringTok{"%-10s%-10d%-10.3f"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\FloatTok{234.5647}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{cat}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22441,8 +22455,9 @@ nicely-aligned, tabular fashion. Consider this example:
 \NormalTok{age <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{17}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{20}\NormalTok{)}
 \NormalTok{gpa <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{3.7}\NormalTok{, }\FloatTok{3.9}\NormalTok{, }\FloatTok{3.823}\NormalTok{)}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{) \{}
-  \KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%-15s%-20s%-5d%-5.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
-\NormalTok{              firstName[i], lastName[i], age[i], gpa[i]))}
+  \KeywordTok{sprintf}\NormalTok{(}\StringTok{"%-15s%-20s%-5d%-5.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
+\NormalTok{          firstName[i], lastName[i], age[i], gpa[i]) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{cat}\NormalTok{()}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -22460,8 +22475,9 @@ You could take advantage of vectorization to avoid the loop:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%-15s%-20s%5-d%-5.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
-\NormalTok{            firstName, lastName, age, gpa))}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%-15s%-20s%5-d%-5.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
+\NormalTok{        firstName, lastName, age, gpa) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{cat}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22478,9 +22494,9 @@ parameter of \texttt{cat()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%-15s%-20s%-5d%-5.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
-\NormalTok{            firstName, lastName, age, gpa),}
-    \DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%-15s%-20s%-5d%-5.2f}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }
+\NormalTok{        firstName, lastName, age, gpa) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{cat}\NormalTok{(}\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -22721,6 +22737,8 @@ most of the world's written languages.
 
 In this Chapter we introduce the concept of \emph{regular expressions},
 a powerful tool that enables you to search for complex patterns in text.
+We will continue to use functions from the \textbf{stringr} package, so
+make sure you have it attached.
 
 \newpage
 
@@ -22734,8 +22752,8 @@ task.
 \begin{Highlighting}[]
 \NormalTok{occurrences <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(string) \{}
 \NormalTok{  count <-}\StringTok{ }\DecValTok{0}
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nchar}\NormalTok{(string)) \{}
-\NormalTok{    stringPart <-}\StringTok{ }\KeywordTok{substr}\NormalTok{(string, i, i}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{str_length}\NormalTok{(string)) \{}
+\NormalTok{    stringPart <-}\StringTok{ }\KeywordTok{str_sub}\NormalTok{(string, i, i}\OperatorTok{+}\DecValTok{1}\NormalTok{)}
     \ControlFlowTok{if}\NormalTok{ ( stringPart }\OperatorTok{==}\StringTok{ "ab"}\NormalTok{ ) \{}
 \NormalTok{      count <-}\StringTok{ }\NormalTok{count }\OperatorTok{+}\DecValTok{1}
 \NormalTok{    \}}
@@ -22784,11 +22802,11 @@ the string to be searched, a vector of the sub-strings of interest.
 \CommentTok{# substrings are given as patterns}
 \NormalTok{occurrences2 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(string, patterns) \{}
 \NormalTok{  count <-}\StringTok{ }\DecValTok{0}
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nchar}\NormalTok{(string)) \{}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{str_length}\NormalTok{(string)) \{}
     \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(patterns)) \{}
 \NormalTok{      pattern <-}\StringTok{ }\NormalTok{patterns[j]}
-\NormalTok{      len <-}\StringTok{ }\KeywordTok{nchar}\NormalTok{(pattern)}
-\NormalTok{      stringPart <-}\StringTok{ }\KeywordTok{substr}\NormalTok{(string, i, i }\OperatorTok{+}\StringTok{ }\NormalTok{len }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{      len <-}\StringTok{ }\KeywordTok{str_length}\NormalTok{(pattern)}
+\NormalTok{      stringPart <-}\StringTok{ }\KeywordTok{str_sub}\NormalTok{(string, i, i }\OperatorTok{+}\StringTok{ }\NormalTok{len }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}
       \ControlFlowTok{if}\NormalTok{ ( stringPart }\OperatorTok{==}\StringTok{ }\NormalTok{pattern ) \{}
 \NormalTok{        count <-}\StringTok{ }\NormalTok{count }\OperatorTok{+}\DecValTok{1}
 \NormalTok{      \}}
@@ -22852,89 +22870,27 @@ study R-functions that make use of them.
 
 First of all, here's a quick example to show the power of regular
 expressions. The work done by \texttt{occurences2()} may also be done in
-one line with the \texttt{gregexpr()}
-\index{R-functions!gregexpr()@\texttt{gregexpr()}} function, as follows:
+one line with the \texttt{str\_count()}
+\index{R-functions!str\_count()@\texttt{str\_count()}} function, as
+follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{gregexpr}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"[Aa]b|foo"}\NormalTok{,}
-         \DataTypeTok{text =} \StringTok{"This Labrador is a fool, Abba."}\NormalTok{)}
+\KeywordTok{str_count}\NormalTok{(}\DataTypeTok{string =} \StringTok{"This Labrador is a fool, Abba."}\NormalTok{,}
+         \DataTypeTok{pattern =} \StringTok{"[Aa]b|foo"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [[1]]
-## [1]  7 20 26
-## attr(,"match.length")
-## [1] 2 3 2
-## attr(,"useBytes")
-## [1] TRUE
+## [1] 3
 \end{verbatim}
 
-We must learn to interpret output like this. The \texttt{str()} function
-will be helpful, here:
+Wow, that was quick. But what in the world is that
+\texttt{"{[}Aa{]}b\textbar{}foo"} argument to the \texttt{pattern}
+parameter?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{str}\NormalTok{(}\KeywordTok{gregexpr}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"[Aa]b|foo"}\NormalTok{,}
-             \DataTypeTok{text =} \StringTok{"This Labrador is a fool, Abba."}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## List of 1
-##  $ : atomic [1:3] 7 20 26
-##   ..- attr(*, "match.length")= int [1:3] 2 3 2
-##   ..- attr(*, "useBytes")= logi TRUE
-\end{verbatim}
-
-We see that the result is a list with only one item in it. That item is
-a vector consisting of three numbers: 7, 20 and 26. Looking back at the
-text-string, we see that:
-
-\begin{itemize}
-\tightlist
-\item
-  ``ab'' was present beginning at position 7;
-\item
-  ``foo'' was present beginning at position 20;
-\item
-  ``Ab'' was present beginning at position 26.
-\end{itemize}
-
-The vector also has two attributes. The ``useBytes'' attribute will not
-concern us; our interest lies in the ``match.length'' attribute, which
-is yet another vector that gives the number of characters in the
-matching sub-strings.
-
-R provides the convenient \texttt{regmatches()}
-\index{R-functions!regmatches()@\texttt{regmatches()}} function, which
-uses the beginning match position and the match lengths to fetch the
-matching sub-strings themselves:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{results <-}\StringTok{ }\KeywordTok{gregexpr}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"[Aa]b|foo"}\NormalTok{,}
-                    \DataTypeTok{text =} \StringTok{"This Labrador is a fool, Abba."}\NormalTok{)}
-\KeywordTok{regmatches}\NormalTok{(}\StringTok{"This Labrador is a fool, Abba."}\NormalTok{, }\DataTypeTok{m =}\NormalTok{ results)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [[1]]
-## [1] "ab"  "foo" "Ab"
-\end{verbatim}
-
-\texttt{gregexpr} is short for ``global regular expression''. It
-searches the entire\texttt{text} string for all possible matches. There
-is lazier function \texttt{regexpr()}
-\index{R-functions!regexpr()@\texttt{regexpr()}}that stops after the
-first match (if any).
-
-What should still be mysterious is the value given to \texttt{pattern}
-in the call to \texttt{gregexpr()}, namely the string
-``{[}Aa{]}b\textbar{}foo''. This is the regular expression! It tells R
-to look for sub-strings that EITHER:
+It's a regular expression! It tells R to look for sub-strings that
+EITHER:
 
 \begin{itemize}
 \tightlist
@@ -22951,14 +22907,13 @@ syntax.
 
 As we introduce regex syntax in the next few sections, it's a good idea
 to try them out yourself and to come up with your own variations. The
-easiest way to do this is not to work directly in R; instead, consider
-using an online regex practice site. I especially recommend
-\href{https://regex101.com/}{Regular Expressions 101}.\footnote{If you
-  go on to learn JavaScript, you might want to switch to
-  \href{http://regexr.com/}{RegExr}, which I think has a very nice
-  documentation interface.} Keep the regex flavor set at \textbf{pcre},
-as this is the variant of regular expression syntax that is closest to
-the one implemented in R.
+easiest way to do this is not to work directly in R at the outset;
+instead, consider using an online regex practice site. I especially
+recommend \href{http://regexr.com/}{RegExr}, which has a nice
+documentation interface. Set the regex flavor to PCRE, as this is the
+variant of regular expression syntax that is closest to the ICU regex
+variant used by the \textbf{stringr} package. If you go on to Web
+Programming course then you can switch to the JavaScript flavor.
 
 Bear in mind also that as we learn regex syntax, we'll focus on the
 standard, language-independent syntax itself. There are some differences
@@ -23101,7 +23056,7 @@ Thus:
 Of course since the backslash plays a role in escaping metacharacters,
 it too acts as a metacharacter at times. Hence if you want to match a
 backslash you'll have to escape \emph{it}! How? By preceding the
-blackslash with a backslash! Thus:
+black-slash with a backslash! Thus:
 
 \begin{itemize}
 \tightlist
@@ -23666,9 +23621,9 @@ of five characters (``abcba'', ``x444x'', etc.) then use:
 \subsection{Looking Around}\label{looking-around}
 
 Suppose that you have a string containing a number of words involving
-``bed'', and you would like to find all occurences of ``bed'' that begin
-a word, except for the word ``bedtime''. With the tools we have so far
-this is a difficult task. Fortunately there are \emph{look-aheads}
+``bed'', and you would like to find all occurrences of ``bed'' that
+begin a word, except for the word ``bedtime''. With the tools we have so
+far this is a difficult task. Fortunately there are \emph{look-aheads}
 \index{look-ahead} to simplify our work.
 
 The regex \texttt{\textbackslash{}bbed(?!time\textbackslash{}b)} will do
@@ -23752,9 +23707,12 @@ matching strings of arbitrary length.
 We have not come near to exhausting the syntax of regular expressions.
 Readers who would like to delve into the subject more deeply should next
 consult online tutorials on the topics of non-capture groups,
-conditionals and more. However, we now have enough background to express
-some fairly complex patterns quite concisely, so it is now time to learn
-how to work with them in R.
+conditionals and more. It would also be good to look at the brief
+overview of the ICU regex engine provide in
+\texttt{stringi-search-regex} in the documentation for the
+\textbf{stringi} package on which \textbf{stringr} is based. However, we
+now have enough background to express some fairly complex patterns quite
+concisely, so it is now time to learn how to work with them in R.
 
 \section{Entering a Regex in R}\label{entering-a-regex-in-r}
 
@@ -23770,9 +23728,9 @@ separates the strings you want to split up. It works like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myString <-}\StringTok{ "hello there Mary Poppins"}
-\CommentTok{# split on the spaces, then unlist:}
-\KeywordTok{unlist}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(myString, }\DataTypeTok{split =} \StringTok{" "}\NormalTok{))}
+\StringTok{"hello there Mary Poppins"} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{" "}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -23803,8 +23761,9 @@ regular expression, splitting on anything that matches. Watch this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myString <-}\StringTok{ "hello}\CharTok{\textbackslash{}t\textbackslash{}t}\StringTok{there}\CharTok{\textbackslash{}n\textbackslash{}n}\StringTok{Mary  }\CharTok{\textbackslash{}t}\StringTok{ Poppins"}
-\KeywordTok{unlist}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(myString, }\DataTypeTok{split =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+"}\NormalTok{))}
+\NormalTok{myString }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unlist}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -23816,17 +23775,18 @@ We can almost see how this works. Recall from the last section that the
 regex \texttt{\textbackslash{}s} is a character class shortcut for any
 white-space character, so \texttt{\textbackslash{}s+} stands for one or
 more white-spaces in succession: precisely the mixtures of tab, spaces
-and newlines that separated the words in our string. \texttt{strsplit()}
-must be splitting on matches to the regex \texttt{\textbackslash{}s+}.
+and newlines that separated the words in our string.
+\texttt{str\_split()} must be splitting on matches to the regex
+\texttt{\textbackslash{}s+}.
 
 So why did we set
-\texttt{split\ =\ "\textbackslash{}\textbackslash{}s+"}? What's with the
-extra backslash?
+\texttt{pattern\ =\ "\textbackslash{}\textbackslash{}s+"}? What's with
+the extra backslash?
 
-The reason is that the argument passed with \texttt{split} is a string,
-not a regular expression object. It starts out life, as if were, as a
-string, and R converts it to a regular expression, then hands the regex
-over to its regular expression engine to locate the matches in
+The reason is that the argument passed with \texttt{pattern} is a
+string, not a regular expression object. It starts out life, as if were,
+as a string, and R converts it to a regular expression, then hands the
+regex over to its regular expression engine to locate the matches in
 \texttt{myString} that in turn determine how \texttt{myString} is to be
 split up. Since in R's string-world ``\textbackslash{}s'' is not a
 recognized character in the way that newline (``\textbackslash{}n''),
@@ -23835,7 +23795,8 @@ accept ``\textbackslash{}s+'' as a valid string. Try it for your self:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{strsplit}\NormalTok{(myString, }\DataTypeTok{split =} \StringTok{"\textbackslash{}s+"}\NormalTok{)}
+\NormalTok{myString }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_split}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"\textbackslash{}s+"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -23844,7 +23805,7 @@ accept ``\textbackslash{}s+'' as a valid string. Try it for your self:
 \end{verbatim}
 
 It follows that when you enter regular expressions as strings in R,
-you'll have to remember to escape the backslashed tokens that are used
+you'll have to remember to escape the back-slashed tokens that are used
 in a regular expression. Table \ref{tab:regex-string-escape-examples}
 gives several examples of this.
 
@@ -23883,15 +23844,15 @@ substitution. Suppose that we have a vector of dates:
 It seems that the folks who entered the dates were not consistent in how
 to format them. In order to make analysis easier, it would be better if
 all the dates had exactly the same format. With the function
-\texttt{gsub()} \index{R-functions!gsub()@\texttt{gsub()}}and regular
-expressions, this is not difficult:
+\texttt{str\_replace\_all()}
+\index{R-functions!str\_replace\_all()@\texttt{str\_replace\_all()}}and
+regular expressions, this is not difficult:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tidyDates <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"[- /]+"}\NormalTok{,}
-                  \DataTypeTok{replacement =} \StringTok{"/"}\NormalTok{,}
-                  \DataTypeTok{x =}\NormalTok{ dates)}
-\NormalTok{tidyDates}
+\NormalTok{dates }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_replace_all}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"[- /]+"}\NormalTok{,}
+              \DataTypeTok{replacement =} \StringTok{"/"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -23913,18 +23874,18 @@ Here:
   \texttt{x} is the text in which the substitution occurs.
 \end{itemize}
 
-The ``g'' in \texttt{gsub()} stands for ``global'': we want to replace
-\emph{all} occurrences of the pattern with the replacement text. There
-is also a \texttt{sub()}
-\index{R-functions!sub()@\texttt{sub()}}function that performs
-replacement only with the \emph{first} match (if any) that it finds:
+The \texttt{all} in the name of the function means that we want to
+replace \emph{all} occurrences of the pattern with the replacement text.
+There is also a \texttt{str\_replace()}
+\index{R-functions!str\_replace()@\texttt{str\_replace()}}function that
+performs replacement only with the \emph{first} match (if any) that it
+finds:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{replaceFirst <-}\StringTok{ }\KeywordTok{sub}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"[- /]+"}\NormalTok{,}
-                  \DataTypeTok{replacement =} \StringTok{"/"}\NormalTok{,}
-                  \DataTypeTok{x =}\NormalTok{ dates)}
-\NormalTok{replaceFirst}
+\NormalTok{dates }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_replace}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"[- /]+"}\NormalTok{,}
+              \DataTypeTok{replacement =} \StringTok{"/"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -23934,38 +23895,9 @@ replacement only with the \emph{first} match (if any) that it finds:
 
 In our application, that's certainly NOT what we need. However, in cases
 where you happen to know that there will be at most one match,
-\texttt{sub()} gets the job done faster than \texttt{gsub()}, which is
-forced to search through the entire string.
-
-\subsection{A Note on Perl}\label{a-note-on-perl}
-
-R has access to a two different regular expression engines:
-
-\begin{itemize}
-\tightlist
-\item
-  POSIX 1003.2 extended regular expressions, and
-\item
-  PCRE2.
-\end{itemize}
-
-POSIX 1003.2 is the default engine. ``PCRE2'' stands for Version 2 of
-the engine known as Perl-Compatible Regular Expressions.\footnote{Perl
-  is a scripting language that is known for its regular expression
-  engine and for its text-processing capabilities in general. See the
-  \href{http://www.pcre.org/current/doc/html/pcre2syntax.html}{PCRE2
-  Syntax Page} for the official description of how PCRE2 works.} It's
-not what R uses by default but it more closely resembles regex engines
-found in other major languages and is therefore the better one to use if
-you rely heavily on web tutorials for learning complex regular
-expressions. In any of R's regex functions you can access this engine
-with the argument:
-
-\begin{quote}
-\texttt{perl\ =\ TRUE}
-\end{quote}
-
-From here on out we'll use it, simply as a matter of caution.
+\texttt{str\_replace()} gets the job done faster than
+\texttt{str\_replace\_all()}, which is forced to search through the
+entire string.
 
 \subsection{Patterned Replacement}\label{patterned-replacement}
 
@@ -23973,9 +23905,9 @@ In the dates example from Section \ref{regex-substitution} the
 replacement string (the argument for the parameter \texttt{replacement})
 was constant: no matter what sort of match we found for the pattern
 \texttt{{[}-\ /{]}+}, we replaced it with the string ``/''. It is
-important to note, however, that if we set \texttt{perl} to
-\texttt{TRUE} then the argument provided for \texttt{replacement} can
-vary depending on the match found. In particular:
+important to note, however, that the argument provided for
+\texttt{replacement} can cause the replacement to vary depending upon
+the match found. In particular:
 
 \begin{itemize}
 \tightlist
@@ -23983,31 +23915,41 @@ vary depending on the match found. In particular:
   It can include the back-references \texttt{\textbackslash{}1},
   \texttt{\textbackslash{}2}, \ldots{}, \texttt{\textbackslash{}9}.
 \item
-  It can include special tokens for case-conversion:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \texttt{\textbackslash{}U} converts the rest of the replacement to
-    upper-case (or ceases conversion when \texttt{\textbackslash{}E} or
-    \texttt{\textbackslash{}L} occur).
-  \item
-    \texttt{\textbackslash{}L} converts the rest of the replacement to
-    lower-case (or ceases conversion when \texttt{\textbackslash{}E} or
-    \texttt{\textbackslash{}U} occur).
-  \item
-    \texttt{\textbackslash{}E} signals the end of any case-conversion
-    that is in effect.
-  \end{itemize}
+  It can be a defined function of the match.
 \end{itemize}
 
 Let's look at an example. Here is a function that, given a string, will
-capitalize all of the vowels that it finds:
+double all of the vowels that it finds:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{doubleVowels <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(str) \{}
+\NormalTok{  str }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"([aeiou])"}\NormalTok{, }
+                    \DataTypeTok{replacement =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{)}
+\NormalTok{\}}
+\KeywordTok{doubleVowels}\NormalTok{(}\StringTok{"Far and away the best!"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Faar aand aawaay thee beest!"
+\end{verbatim}
+
+Note that the pattern \texttt{{[}aeiou{]}} for vowels had to be enclosed
+in parentheses so that it could be captured and referred to by the
+back-reference \texttt{\textbackslash{}1}. Also note that, since R
+converts the replacement string into a pattern, extra backslash escapes
+are required, just as in regular expressions.
+
+Here is a function to capitalize every vowel found:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{capVowels <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(str) \{}
-  \KeywordTok{gsub}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"([aeiou])"}\NormalTok{, }\DataTypeTok{replacement =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{U}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{E"}\NormalTok{, }\DataTypeTok{x =}\NormalTok{ str, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{  str }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"[aeiou]"}\NormalTok{, }
+                    \DataTypeTok{replacement =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{str_to_upper}\NormalTok{(x))}
 \NormalTok{\}}
 \KeywordTok{capVowels}\NormalTok{(}\StringTok{"Far and away the best!"}\NormalTok{)}
 \end{Highlighting}
@@ -24017,12 +23959,6 @@ capitalize all of the vowels that it finds:
 ## [1] "FAr And AwAy thE bEst!"
 \end{verbatim}
 
-Note that the pattern \texttt{{[}aeiou{]}} for vowels had to be enclosed
-in parentheses so that it could be captured and referred to by the
-back-reference \texttt{\textbackslash{}1}. Also note that, since R
-converts the replacement string into a pattern, extra backslash escapes
-are required, just as in regular expressions.
-
 Here is another function that searches for repeated words and encloses
 each pair in asterisks:
 
@@ -24030,6 +23966,24 @@ each pair in asterisks:
 \begin{Highlighting}[]
 \NormalTok{starRepeats <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(str) \{}
   \KeywordTok{gsub}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+) }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{2}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b)"}\NormalTok{, }\DataTypeTok{replacement =} \StringTok{"*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1*"}\NormalTok{, }\DataTypeTok{x =}\NormalTok{ str, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+\KeywordTok{starRepeats}\NormalTok{(}\StringTok{"I have a boo boo on my knee knee."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "I have a *boo boo* on my *knee knee*."
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{starRepeats <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(str) \{}
+\NormalTok{  str }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+) }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{2}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b)"}\NormalTok{,}
+                    \DataTypeTok{replacement =} \ControlFlowTok{function}\NormalTok{(x) \{}
+                      \KeywordTok{str_c}\NormalTok{(}\StringTok{"*"}\NormalTok{, x, }\StringTok{"*"}\NormalTok{)}
+\NormalTok{                    \}}
+\NormalTok{                    )}
 \NormalTok{\}}
 \KeywordTok{starRepeats}\NormalTok{(}\StringTok{"I have a boo boo on my knee knee."}\NormalTok{)}
 \end{Highlighting}
@@ -24088,14 +24042,32 @@ The above substitution is tricky, and merits step-by-step analysis:
 
 Whew!
 
-\subsection{Grepping}\label{grepping}
+A function-replacement version is also possible:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{starRepeats <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(str) \{}
+\NormalTok{  str }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{str_replace_all}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+) }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{2}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b)"}\NormalTok{,}
+                    \DataTypeTok{replacement =} \ControlFlowTok{function}\NormalTok{(x) \{}
+                      \KeywordTok{str_c}\NormalTok{(}\StringTok{"*"}\NormalTok{, x, }\StringTok{"*"}\NormalTok{)}
+\NormalTok{                    \}}
+\NormalTok{                    )}
+\NormalTok{\}}
+\KeywordTok{starRepeats}\NormalTok{(}\StringTok{"I have a boo boo on my knee knee."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "I have a *boo boo* on my *knee knee*."
+\end{verbatim}
+
+\subsection{Detecting Matches}\label{detecting-matches}
 
 If you have many strings---in a character-vector, say---and you want to
 know which of them contain a match to a particular pattern, then you
-want to use \texttt{grep()}.
-\index{R-functions!grep()@\texttt{grep()}}\footnote{\texttt{grep} can be
-  thought of as short for: ``Global search for Regular Expression and
-  Print''.}
+want to use \texttt{str\_subset()}.
+\index{R-functions!str\_subset()@\texttt{str\_subset()}}
 
 Consider, for example, the vector of strings:
 
@@ -24112,39 +24084,8 @@ capital T, we could proceed as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{grep}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{bT}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b"}\NormalTok{, }\DataTypeTok{x =}\NormalTok{ sentences, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2
-\end{verbatim}
-
-\texttt{grep()} returns a vector consisting of the indices of the vector
-\texttt{sentences} where the string contains at least one word beginning
-with ``T''.
-
-A related function is \texttt{grepl()}:
-\index{R-functions!grepl()@\texttt{grepl()}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{bT}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b"}\NormalTok{, }\DataTypeTok{x =}\NormalTok{ sentences, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1]  TRUE  TRUE FALSE
-\end{verbatim}
-
-\texttt{grepl()} returns a logical vector with \texttt{TRUE} where
-\texttt{sentences} has a capital-T word, \texttt{FALSE} otherwise. We
-can get a look at the T-word-containing sentences themselves as follows:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{hasTWord <-}\StringTok{ }\KeywordTok{grepl}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{bT}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b"}\NormalTok{, }\DataTypeTok{x =}\NormalTok{ sentences, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{sentences[hasTWord]}
+\NormalTok{sentences }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_subset}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{bT}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -24152,84 +24093,221 @@ can get a look at the T-word-containing sentences themselves as follows:
 ## [1] "My name is Tom, Sir" "And I'm Tulip!"
 \end{verbatim}
 
-\subsection{\texorpdfstring{More Information with
-\texttt{gregexpr()}}{More Information with gregexpr()}}\label{more-information-with-gregexpr}
+\texttt{str\_subset()} returns a vector consisting of the elements of
+the vector \texttt{sentences} where the string contains at least one
+word beginning with ``T''.
 
-\index{R-functions!gregexpr()@\texttt{gregexpr()}}
-\index{R-functions!regexpr()@\texttt{regexpr()}} If you require more
-information about the matches within each string you are processing,
-then you'll want to use either \texttt{gregexpr()\ or}regexpr()`.
-
-We started our regular-expression journey with \texttt{gregexpr()}, but
-let's check in on it once more, this time looking for capital-T words in
-\texttt{sentences}:
+A related function is \texttt{str\_detect()}:
+\index{R-functions!str\_detect()@\texttt{str\_detect()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{matchInfo <-}\StringTok{ }\KeywordTok{gregexpr}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{bT}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b"}\NormalTok{, }\DataTypeTok{text =}\NormalTok{ sentences, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{str}\NormalTok{(matchInfo)}
+\NormalTok{sentences }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_detect}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{bT}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## List of 3
-##  $ : atomic [1:1] 12
-##   ..- attr(*, "match.length")= int 3
-##   ..- attr(*, "useBytes")= logi TRUE
-##  $ : atomic [1:1] 9
-##   ..- attr(*, "match.length")= int 5
-##   ..- attr(*, "useBytes")= logi TRUE
-##  $ : atomic [1:1] -1
-##   ..- attr(*, "match.length")= int -1
-##   ..- attr(*, "useBytes")= logi TRUE
+## [1]  TRUE  TRUE FALSE
 \end{verbatim}
 
-From \texttt{str()} we see that \texttt{matchInfo} is a list of length
-three, one for each string in \texttt{sentences}. Each vector gives the
-starting-positions of matches in the string to which it corresponds.
-Since the third string contains no match the value of of the vector is
-set to -1.
+\texttt{str\_detect()} returns a logical vector with \texttt{TRUE} where
+\texttt{sentences} has a capital-T word, \texttt{FALSE} otherwise.
 
-Don't forget the convenience-function \texttt{regmatches()}, which
-permits us to recover the matches themselves:
-\index{R-functions!regmatches()@\texttt{regmatches()}}
+Finally, \texttt{str\_locate()}
+\index{R-functions!str\_detect()@\texttt{str\_detect()}} gives the
+\emph{positions} in each string where a match begins:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{capTNames <-}\StringTok{ }\KeywordTok{regmatches}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sentences, }\DataTypeTok{m =}\NormalTok{ matchInfo)}
-\NormalTok{capTNames}
+\NormalTok{sentences }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_locate}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{bT}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      start end
+## [1,]    12  14
+## [2,]     9  13
+## [3,]    NA  NA
+\end{verbatim}
+
+\subsection{Extracting Matches}\label{extracting-matches}
+
+If you require what is actually matched within each string you are
+processing, then you should look into \texttt{str\_extract()} and
+\texttt{str\_extract\_all()}.
+\index{R-functions!str\_extract()@\texttt{str\_extract()}}
+\index{R-functions!str\_extract\_all()@\texttt{str\_extract\_all()}}
+
+As an example, let's extract pairs of words beginning with the same
+letter in \texttt{sentences2} defined below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sentences2 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"The big bad wolf is walking warily to the cottage."}\NormalTok{,}
+                \StringTok{"He huffs and he puffs peevishly."}\NormalTok{,}
+                \StringTok{"He wears gnarly gargantuan bell bottoms!"}\NormalTok{)}
+\NormalTok{sentences2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_extract}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{W+}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "big bad"           "puffs peevishly"   "gnarly gargantuan"
+\end{verbatim}
+
+The results are returned as a character vector, in which each element is
+the first matching pair in the corresponding sentence.
+
+If we want all of the matches in each sentence, then we use
+\texttt{str\_extract\_all()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sentences2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_extract_all}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{W+}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## [[1]]
-## [1] "Tom"
+## [1] "big bad"        "walking warily" "to the"        
 ## 
 ## [[2]]
-## [1] "Tulip"
+## [1] "puffs peevishly"
 ## 
 ## [[3]]
-## character(0)
+## [1] "gnarly gargantuan" "bell bottoms"
 \end{verbatim}
 
-If we require any particular match, we can locate it easily:
+Sometimes we want even more information. Suppose, for example, that we
+want not only the first matching word-pair, but also the repeated
+initial letter that permitted the match in the first place. In that case
+we need \texttt{str\_match()}:
+\index{R-functions!str\_match()@\texttt{str\_match()}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{capTNames[[}\DecValTok{2}\NormalTok{]][}\DecValTok{1}\NormalTok{]}
+\NormalTok{sentences2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_match}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{W+}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Tulip"
+##      [,1]                [,2]
+## [1,] "big bad"           "b" 
+## [2,] "puffs peevishly"   "p" 
+## [3,] "gnarly gargantuan" "g"
 \end{verbatim}
+
+\texttt{str\_match()} returns a matrix, each row of which corresponds to
+an element of \texttt{sentences}. The first column gives the value of
+the entire match, and the second column gives value of the capture-group
+in the regular expression. If the regular expression had used more
+capture groups, then the matrix would have had additional columns
+showing the values of the captures, in order.
+
+If you want an analysis of all the matches in a string, then use
+\texttt{str\_match\_all()}:
+\index{R-functions!str\_match\_all()@\texttt{str\_match\_all()}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sentences2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_match_all}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{W+}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+##      [,1]             [,2]
+## [1,] "big bad"        "b" 
+## [2,] "walking warily" "w" 
+## [3,] "to the"         "t" 
+## 
+## [[2]]
+##      [,1]              [,2]
+## [1,] "puffs peevishly" "p" 
+## 
+## [[3]]
+##      [,1]                [,2]
+## [1,] "gnarly gargantuan" "g" 
+## [2,] "bell bottoms"      "b"
+\end{verbatim}
+
+The returned structure is a list and hence more complex, but you can
+query it for the values you need.
+
+\subsection{Extraction in Data Frames}\label{extraction-in-data-frames}
+
+Quite often you will want to manipulate strings in the context of
+working with a data frame. For this regex functions we have examined so
+far will be quite useful, but you should also know about the
+\texttt{extract()} function from the \textbf{tidyr} package, which is
+among the packages attached by the tidy-verse.
+
+Imagine a data table that contains some names and phone numbers:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{people <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+  \DataTypeTok{name =} \KeywordTok{c}\NormalTok{(}\StringTok{"Lauf, Bettina"}\NormalTok{, }\StringTok{"Bachchan, Abhishek"}\NormalTok{, }\StringTok{"Jones,  Jenna"}\NormalTok{),}
+  \DataTypeTok{phone =} \KeywordTok{c}\NormalTok{(}\StringTok{"(202) 415-3785"}\NormalTok{, }\StringTok{"4133372100"}\NormalTok{, }\StringTok{"310-231-4453"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Each person has a standard ten-digit phone number, consisting of:
+
+\begin{itemize}
+\tightlist
+\item
+  the three-digit \emph{area code};
+\item
+  the three digit \emph{central office} number;
+\item
+  the four-digit \emph{line} number.
+\end{itemize}
+
+Suppose we would like to create three new variables in the data table,
+one for each of the three components of the phone number. For this,
+\texttt{tidy::extract()} comes in handy:
+\index{R-functions!extract()@\texttt{extract()}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{people }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{extract}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ phone,}
+          \DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"area"}\NormalTok{, }\StringTok{"office"}\NormalTok{, }\StringTok{"line"}\NormalTok{),}
+          \DataTypeTok{regex =} \StringTok{"(?x)        # for comments}
+\StringTok{                  .*           # in case of opening paren, etc.}
+\StringTok{                  (}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{3\})     # capture 1:  area code}
+\StringTok{                  .*           # possible separators}
+\StringTok{                  (}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{3\})     # capture 2:  central office}
+\StringTok{                  .*           # possible separators}
+\StringTok{                  (}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{4\})     # capture 3:  line number}
+\StringTok{                  "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 name area office line
+## 1      Lauf, Bettina  202    415 3785
+## 2 Bachchan, Abhishek  413    337 2100
+## 3      Jones,  Jenna  310    231 4453
+\end{verbatim}
+
+By default \texttt{extract()} removes the original column, but you can
+preserve it with \texttt{remove\ =\ FALSE}. (For the format of the
+regular expression in the above call, see the next sub-section.)
 
 \subsection{Regex Modes}\label{regex-modes}
 
 \index{mode (regular expressions)} If you have been practicing
 consistently with an online regex site, you will have noticed by now
 that a regex can be accompanied by various options. In most
-implementations these will appear as letters after the closing regex
+implementations they appear as letters after the closing regex
 delimiter, like this:
 
 \begin{quote}
@@ -24251,14 +24329,14 @@ Some of the most popular options are:
   \texttt{\$} are attached to newlines \emph{within} the string rather
   than to the absolute beginning and end of the string;
 \item
-  \texttt{x}: ``whitespace'' mode, where whitespaces in the regex are
+  \texttt{x}: ``white-space'' mode, where white-spaces in the regex are
   ignored unless they are escaped (useful for lining out the regex and
   inserting comments to explain its operation).
 \end{itemize}
 
-Since R has both global and non-global versions of regex functions you
-probably will not bother with \texttt{g}, but the various \emph{modes}
-can sometimes be useful.
+Since \textbf{stringr} has both global and non-global versions of regex
+functions you probably will not bother with \texttt{g}, but the other
+options---known technically as \emph{modes}---can sometimes be useful.
 
 If you would like to set modes to apply to your entire regex, insert it
 (or them) like this at the beginning of the expression:
@@ -24271,32 +24349,254 @@ In the example above, we are in both case-insensitive and multiline
 mode, and we are looking for t or T followed by 1, 2 or 3 vowels (upper
 or lower) at the end of any line in a (possibly) multiline string.
 
-Following is an example of the mode to ignore white-space:
+Following is an example of the mode to ignore white-space and to ignore
+case:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myPattern <-}\StringTok{  "(?x)        # Ignore whitespace in regex!}
-\StringTok{               }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b         # Begin the word.}
-\StringTok{               [tT]        # Upper or lower T to start,}
-\StringTok{               }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+        # then at least one word-char,}
-\StringTok{               (?<!s)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b   # but not ending in s.}
-\StringTok{              "}
-\NormalTok{myString <-}\StringTok{ "the tars temper Tanzania"}
-\NormalTok{m <-}\StringTok{ }\KeywordTok{gregexpr}\NormalTok{(myPattern, myString, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{regmatches}\NormalTok{(myString, m)}
+\NormalTok{myPattern <-}
+\StringTok{  "(?xi)       # ignore whitespace (x) and ignore case (i)}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b          # assert a word-boundary}
+\StringTok{  (}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w)        # capture the first letter of the first word}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*         # rest of the first word}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{W+         # one or more non-word characters}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1          # repeat the letter captured previously}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*         # rest of the second word}
+\StringTok{  "}
+\NormalTok{sentences2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_match_all}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ myPattern)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## [[1]]
-## [1] "the"      "temper"   "Tanzania"
+##      [,1]             [,2]
+## [1,] "big bad"        "b" 
+## [2,] "walking warily" "w" 
+## [3,] "to the"         "t" 
+## 
+## [[2]]
+##      [,1]              [,2]
+## [1,] "He huffs"        "H" 
+## [2,] "puffs peevishly" "p" 
+## 
+## [[3]]
+##      [,1]                [,2]
+## [1,] "gnarly gargantuan" "g" 
+## [2,] "bell bottoms"      "b"
 \end{verbatim}
 
-Since R knows to ignore material after \texttt{\#} in any line, it does
-not pass the comments to the regex engine; it only passes the regex with
-the whitespace. Due to the presence of \texttt{(?x)} at the very
-beginning of the regex, the regex engine knows to ignore white-space
-throughout.
+Due to the presence of \texttt{x}-flag at the very beginning of the
+regex, the regex engine knows to ignore white-space throughout, and it
+will also ignore hash-tags and whatever comes after them on a line. This
+permits the placement of comments within the regular expression. The
+\texttt{i}-flag directs the regex engine to ignore case when looking for
+matches. Accordingly, in the example we pick up the extra match ``he
+huffs''.
+
+Some people prefer to control regular-expression modes by means of
+\textbf{stringr}'s \texttt{regex()} function:
+\index{R-functions!regex()@\texttt{regex()}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myPattern <-}\StringTok{ }\KeywordTok{regex}\NormalTok{(}
+  \DataTypeTok{pattern =} \StringTok{"}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b          # assert a word-boundary}
+\StringTok{  (}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w)        # capture the first letter of the first word}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*         # rest of the first word}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{W+         # one or more non-word characters}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1          # repeat the letter captured previously}
+\StringTok{  }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w*         # rest of the second word}
+\StringTok{  "}\NormalTok{,}
+  \DataTypeTok{comments =} \OtherTok{TRUE}\NormalTok{,}
+  \DataTypeTok{ignore_case =} \OtherTok{TRUE}
+\NormalTok{)}
+\NormalTok{sentences2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_match_all}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ myPattern)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+##      [,1]             [,2]
+## [1,] "big bad"        "b" 
+## [2,] "walking warily" "w" 
+## [3,] "to the"         "t" 
+## 
+## [[2]]
+##      [,1]              [,2]
+## [1,] "He huffs"        "H" 
+## [2,] "puffs peevishly" "p" 
+## 
+## [[3]]
+##      [,1]                [,2]
+## [1,] "gnarly gargantuan" "g" 
+## [2,] "bell bottoms"      "b"
+\end{verbatim}
+
+\subsection{Practice Exercises}\label{practice-exercises-34}
+
+The \textbf{stringr} package comes with \texttt{fruit}, a
+character-vector of giving the names of 80 fruits.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Determine how many fruit-names consist of exactly two words.
+\item
+  Find the two-word fruit-names.
+\item
+  Find the indices of the two-word fruit names.
+\item
+  Find the one-word fruit-names that end in ``berry''.
+\item
+  Find the fruit-names that contain more than three vowels.
+\item
+  In the word ``banana'' the string ``an'' appears twice in succession,
+  as does the string ``na''. Find the fruit-names containing at least
+  one string of length two or more that appears twice in succession.
+\item
+  To the \texttt{people} data frame from this section, add two new
+  variables: \texttt{first} for the first name and \texttt{last} for the
+  last name. The original \texttt{name} variable should be removed.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-16}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{twoWordName <-}
+\StringTok{  }\NormalTok{fruit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_count}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+"}\NormalTok{) }\OperatorTok{==}\StringTok{ }\DecValTok{2}
+  \KeywordTok{sum}\NormalTok{(twoWordName)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fruit }\OperatorTok{%>%}\StringTok{ }\NormalTok{.[}\KeywordTok{str_count}\NormalTok{(., }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+"}\NormalTok{) }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "bell pepper"       "blood orange"      "canary melon"     
+##  [4] "chili pepper"      "goji berry"        "kiwi fruit"       
+##  [7] "purple mangosteen" "rock melon"        "salal berry"      
+## [10] "star fruit"        "ugli fruit"
+\end{verbatim}
+
+  Another way is as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fruit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_subset}\NormalTok{(}\StringTok{"^}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+$"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "bell pepper"       "blood orange"      "canary melon"     
+##  [4] "chili pepper"      "goji berry"        "kiwi fruit"       
+##  [7] "purple mangosteen" "rock melon"        "salal berry"      
+## [10] "star fruit"        "ugli fruit"
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fruit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_detect}\NormalTok{(}\StringTok{"^}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{s+}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+$"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{which}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  5  9 13 17 32 42 66 72 73 75 79
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fruit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_subset}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+berry$"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "bilberry"    "blackberry"  "blueberry"   "boysenberry" "cloudberry" 
+##  [6] "cranberry"   "elderberry"  "gooseberry"  "huckleberry" "mulberry"   
+## [11] "raspberry"   "strawberry"
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vowelCount <-}\StringTok{ }
+\StringTok{  }\NormalTok{fruit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_count}\NormalTok{(}\StringTok{"[aeiou]"}\NormalTok{)}
+\NormalTok{fruit[vowelCount }\OperatorTok{>}\StringTok{ }\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "avocado"           "blood orange"      "breadfruit"       
+##  [4] "canary melon"      "cantaloupe"        "cherimoya"        
+##  [7] "chili pepper"      "clementine"        "dragonfruit"      
+## [10] "feijoa"            "gooseberry"        "grapefruit"       
+## [13] "kiwi fruit"        "mandarine"         "nectarine"        
+## [16] "passionfruit"      "pineapple"         "pomegranate"      
+## [19] "purple mangosteen" "tamarillo"         "tangerine"        
+## [22] "ugli fruit"        "watermelon"
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fruit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str_subset}\NormalTok{(}\StringTok{"(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w\{2,\})}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "banana"      "coconut"     "cucumber"    "jujube"      "papaya"     
+## [6] "salal berry"
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{people }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{extract}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ name,}
+          \DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"last"}\NormalTok{, }\StringTok{"first"}\NormalTok{),}
+          \DataTypeTok{regex =} \StringTok{"(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{W+(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       last    first          phone
+## 1     Lauf  Bettina (202) 415-3785
+## 2 Bachchan Abhishek     4133372100
+## 3    Jones    Jenna   310-231-4453
+\end{verbatim}
+\end{enumerate}
 
 \section{Application: Amazon Book
 Reviews}\label{application-amazon-book-reviews}
@@ -24395,7 +24695,7 @@ expressions can help us to extract the links from the mass of text in
 
 All of the Amazon links are generated for the user by the computer, so
 they will all have the same format. Hence we can use a look-behind and a
-look-ahead to construct a regex will be matched by any URL-fragment
+look-ahead to construct a regex that will be matched by any URL-fragment
 within such an anchor:
 
 \begin{quote}
@@ -24413,48 +24713,52 @@ escaping: we can use this text as our pattern in regex function in R:
 \end{Highlighting}
 \end{Shaded}
 
-We now construct a list of character-vectors containing the links (if
-any) in each review:
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{links <-}\StringTok{ }\KeywordTok{list}\NormalTok{()}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(hunger)) \{}
-\NormalTok{  text <-}\StringTok{ }\NormalTok{reviews}\OperatorTok{$}\NormalTok{content[i]}
-\NormalTok{  m <-}\StringTok{ }\KeywordTok{gregexpr}\NormalTok{(linkPattern, }\DataTypeTok{text =}\NormalTok{ text, }\DataTypeTok{perl=}\OtherTok{TRUE}\NormalTok{)}
-\NormalTok{  links[[i]] <-}\StringTok{ }\KeywordTok{unlist}\NormalTok{(}\KeywordTok{regmatches}\NormalTok{(text, m))}
-\NormalTok{\}}
+\NormalTok{hungerLinks <-}
+\StringTok{  }\NormalTok{hunger }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{linkCount =} \KeywordTok{str_count}\NormalTok{(content, linkPattern))}
 \end{Highlighting}
 \end{Shaded}
 
-If we are interested in \emph{how many} books each reviewer links to, we
-can make a vector of these links:
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{numberOfLinks <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{()}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(hunger)) \{}
-\NormalTok{  numberOfLinks[i] <-}\StringTok{ }\KeywordTok{length}\NormalTok{(links[[i]])}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-We can tabulate the link-numbers with R's \texttt{table()} function:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{table}\NormalTok{(numberOfLinks)}
+\NormalTok{hungerLinks }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(linkCount) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## numberOfLinks
-##     0     1     2     3     4     5     6     7     8     9 
-## 23854   110    34    15     7     3     1     1     1     1
+## # A tibble: 10 x 2
+##    linkCount     n
+##        <int> <int>
+##  1         0 23854
+##  2         1   110
+##  3         2    34
+##  4         3    15
+##  5         4     7
+##  6         5     3
+##  7         6     1
+##  8         7     1
+##  9         8     1
+## 10         9     1
 \end{verbatim}
 
-A better-looking table appears in Table
-\ref{tab:tabulated-link-numbers}.
+If you are generating a report with R Markdown, then a better-looking
+table (see Table \ref{tab:tabulated-link-numbers} can be produced as
+follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hungerLinks }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(linkCount) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}\DataTypeTok{caption=}\KeywordTok{str_c}\NormalTok{(}\StringTok{"Table showing number of links "}\NormalTok{,}
+                             \StringTok{"made by reviewers of the Hunger "}\NormalTok{,}
+                             \StringTok{"Games series."}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{table}
 
@@ -24462,7 +24766,7 @@ A better-looking table appears in Table
 \centering
 \begin{tabular}[t]{r|r}
 \hline
-Number of Links & Reviews\\
+linkCount & n\\
 \hline
 0 & 23854\\
 \hline
@@ -24488,24 +24792,34 @@ Number of Links & Reviews\\
 \end{table}
 
 Most of the reviewers didn't link at all, but 173 of them did provide at
-least one link. One reviewer linked to nine books! Here they are:
+least one link. One reviewer linked to nine books! Let's find them and
+add the base URL \texttt{http://www.amazon.com/}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{unlist}\NormalTok{(links[numberOfLinks }\OperatorTok{==}\StringTok{ }\DecValTok{9}\NormalTok{])}
+\NormalTok{hungerLinks }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(linkCount }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(linkCount)) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# get the case having most links}
+\StringTok{  }\NormalTok{.}\OperatorTok{$}\NormalTok{content }\OperatorTok{%>%}\StringTok{    }\CommentTok{# get just the content of the review,}
+\StringTok{                   }\CommentTok{# a character vector (of length 1 since there}
+\StringTok{                   }\CommentTok{# is only one review with the max number of lengths)}
+\StringTok{  }\KeywordTok{str_extract_all}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ linkPattern) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# get the matches,}
+\StringTok{                                             }\CommentTok{# but this is a list of}
+\StringTok{                                             }\CommentTok{# length 1 ...}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{     }\CommentTok{# ... so unlist it into a character vector}
+\StringTok{  }\KeywordTok{str_c}\NormalTok{(}\StringTok{"http://www.amazon.com/"}\NormalTok{, .)  }\CommentTok{# prepend the base URL to each link}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076"     
-## [2] "The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243"           
-## [3] "The-Long-Walk/dp/0451196716"                                
-## [4] "Battle-Royale-The-Novel/dp/1421527723"                      
-## [5] "Battle-Royale-The-Complete-Collection-Blu-ray/dp/B006L4MX4A"
-## [6] "The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243"           
-## [7] "Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076"     
-## [8] "Abarat/dp/0062094106"                                       
-## [9] "lord-of-the-flies/dp/B0073SQWWC"
+## [1] "http://www.amazon.com/Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076"     
+## [2] "http://www.amazon.com/The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243"           
+## [3] "http://www.amazon.com/The-Long-Walk/dp/0451196716"                                
+## [4] "http://www.amazon.com/Battle-Royale-The-Novel/dp/1421527723"                      
+## [5] "http://www.amazon.com/Battle-Royale-The-Complete-Collection-Blu-ray/dp/B006L4MX4A"
+## [6] "http://www.amazon.com/The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243"           
+## [7] "http://www.amazon.com/Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076"     
+## [8] "http://www.amazon.com/Abarat/dp/0062094106"                                       
+## [9] "http://www.amazon.com/lord-of-the-flies/dp/B0073SQWWC"
 \end{verbatim}
 
 As we learn more about R's data-analysis functions we'll be able to
@@ -24513,6 +24827,95 @@ explore a wide variety of interesting questions about the attitudes and
 practices of Amazon reviewers. This will involve plowing through a lot
 more text, but now that we know regular expressions we are sure to
 ``save the day''!
+
+\subsection{Practice Exercises}\label{practice-exercises-35}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use \texttt{reviews} to generate a table of the the number of Amazon
+  links in reviews of John Greene's book \emph{The Fault in our Stars}.
+\item
+  How many times did a reviewer link to \emph{Looking for Alaska}
+  (another well-known book by John Greene)?
+\item
+  From \texttt{reviews}, make a data frame called shades that contains
+  the reviews of \emph{Fifty Shades of Gray}. This bestseller received
+  an unusually high proportion of low ratings. Think of a few choice
+  words that might show up in a negative review and create a logical
+  variable called \texttt{dislikes} that is \texttt{TRUE} when one or
+  more of these words appears in the review, and is \texttt{FALSE}
+  otherwise. Convert the numerical variable \texttt{rating} to a factor
+  variable. Make a bar graph that shows the relation between
+  \texttt{dislikes} and \texttt{rating}.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-17}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linkPattern <-}\StringTok{ "(?<=<a class=}\CharTok{\textbackslash{}"\textbackslash{}"}\StringTok{a-link-normal}\CharTok{\textbackslash{}"\textbackslash{}"}\StringTok{ href=}\CharTok{\textbackslash{}"\textbackslash{}"}\StringTok{/)(.+?)(?=}\CharTok{\textbackslash{}"\textbackslash{}"}\StringTok{>)"}
+\NormalTok{fault <-}
+\StringTok{  }\NormalTok{reviews }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(book }\OperatorTok{==}\StringTok{ "fault"}\NormalTok{)}
+\NormalTok{fault }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{linkCount =} \KeywordTok{str_count}\NormalTok{(content, linkPattern)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(linkCount) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   linkCount     n
+##       <int> <int>
+## 1         0 35827
+## 2         1    10
+## 3         2     3
+## 4         3     2
+## 5         6     1
+## 6         7     1
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fault }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{.}\OperatorTok{$}\NormalTok{content }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{str_extract_all}\NormalTok{(}\DataTypeTok{pattern =}\NormalTok{ linkPattern) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{str_detect}\NormalTok{(}\StringTok{"(?i)Looking-For-Alaska"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{sum}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+\item
+  Here is one possibility:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reviews }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(book }\OperatorTok{==}\StringTok{ "shades"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dislikes =} \KeywordTok{str_detect}\NormalTok{(content, }
+                               \StringTok{"bad|awful|terrible|waste"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{rating =} \KeywordTok{factor}\NormalTok{(rating)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ rating)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ dislikes), }\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-978-1} \end{center}
+\end{enumerate}
 
 \newpage
 
@@ -24547,10 +24950,10 @@ instead has a special role in specifying the overall pattern.
 \def\labelenumi{\arabic{enumi}.}
 \item
   Write a function called \texttt{findMister()} that, when given any
-  string, will return a character vector of all words following the
-  string ``Mister'', with exactly one space in between. The function
-  should take a single argument called \texttt{str}, the string to
-  search. A typical example of use is as follows:
+  string, will return a character vector of the words that immediately
+  follow the string ``Mister'', with exactly one space in between. The
+  function should take a single argument called \texttt{str}, the string
+  to search. A typical example of use is as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -24592,7 +24995,7 @@ instead has a special role in specifying the overall pattern.
   \begin{itemize}
   \tightlist
   \item
-    \emph{box} and \emph{bat}. Regex string: \texttt{"b{[}oa{]}t"}.
+    \emph{bot} and \emph{bat}. Regex string: \texttt{"b{[}oa{]}t"}.
     (This is the one to submit, because it's shorter than other
     alternatives such as\texttt{"box\textbar{}bat"}).
   \item
@@ -24610,7 +25013,7 @@ instead has a special role in specifying the overall pattern.
     A word that is between 3 and 6 characters long. Pay attention to
     word-boundaries.
   \item
-    One or more whitespace characters, followed by a hyphen or a
+    One or more white-space characters, followed by a hyphen or a
     semicolon or a colon.
   \end{itemize}
 \item
@@ -24651,7 +25054,7 @@ instead has a special role in specifying the overall pattern.
 \item
   Write a function called \texttt{capRepeats()} that, when given a
   string, searches for all repeated-word pairs (with at least one
-  character of whitespace in between) and replaces them with the same
+  character of white-space in between) and replaces them with the same
   pair where all letters are capitalized. The function should take a
   single argument called \texttt{str}, the string to be searched. A
   typical example of use would be as follows:
@@ -24709,7 +25112,7 @@ instead has a special role in specifying the overall pattern.
 \item
   Write a function called \texttt{phoneNumber()} that, when given a
   vector of strings returns a logical vector indicating which of the
-  strings contain a a valid phone number. For our purposes a valid phone
+  strings contain a valid phone number. For our purposes a valid phone
   number shall be any string of the form
 
   \begin{quote}
@@ -26015,11 +26418,11 @@ a loop, as follows:
 
 \begin{verbatim}
 ## List of 5
-##  $ : num [1:10] 0.977 0.546 0.271 0.189 0.267 ...
-##  $ : num [1:10] 0.7842 0.0384 0.5677 0.9629 0.5131 ...
-##  $ : num [1:10] 0.967 0.184 0.268 0.477 0.263 ...
-##  $ : num [1:10] 0.1517 0.9318 0.2411 0.3267 0.0647 ...
-##  $ : num [1:10] 0.879 0.573 0.364 0.524 0.604 ...
+##  $ : num [1:10] 0.546 0.271 0.189 0.267 0.956 ...
+##  $ : num [1:10] 0.0384 0.5677 0.9629 0.5131 0.0181 ...
+##  $ : num [1:10] 0.184 0.268 0.477 0.263 0.107 ...
+##  $ : num [1:10] 0.9318 0.2411 0.3267 0.0647 0.1426 ...
+##  $ : num [1:10] 0.573 0.364 0.524 0.604 0.119 ...
 \end{verbatim}
 
 If we wanted the vectors to have length \(1, 4, 9, 16,\) and 25, then we
@@ -27563,7 +27966,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12ee3af28"
+## [1] "0x13f203308"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -27577,7 +27980,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12ee3af28"
+## [1] "0x13f203308"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -27616,7 +28019,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12ee3af28"
+## [1] "0x13f203308"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -27629,7 +28032,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x115117568"
+## [1] "0x138ef1078"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -27647,7 +28050,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x12ee3af28"
+## [1] "0x13f203308"
 \end{verbatim}
 
 \begin{Shaded}
@@ -27691,7 +28094,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1144e2c40" "0x1144e2c40"
+## [1] "0x10e2fc0a0" "0x10e2fc0a0"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -27730,7 +28133,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1144e2c40" "0x1144e2c40"
+## [1] "0x10e2fc0a0" "0x10e2fc0a0"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -27772,7 +28175,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1144e2c40" "0x1089b7580"
+## [1] "0x10e2fc0a0" "0x11c6d8870"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-16">
+<meta name="date" content="2017-12-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -442,13 +442,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>12.4</b> Entering a Regex in R</a><ul>
 <li class="chapter" data-level="12.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>12.4.1</b> String to Regex</a></li>
 <li class="chapter" data-level="12.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-substitution"><i class="fa fa-check"></i><b>12.4.2</b> Substitution</a></li>
-<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>12.4.3</b> A Note on Perl</a></li>
-<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.4</b> Patterned Replacement</a></li>
-<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>12.4.5</b> Grepping</a></li>
-<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>12.4.6</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.3</b> Patterned Replacement</a></li>
+<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#detecting-matches"><i class="fa fa-check"></i><b>12.4.4</b> Detecting Matches</a></li>
+<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extracting-matches"><i class="fa fa-check"></i><b>12.4.5</b> Extracting Matches</a></li>
+<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extraction-in-data-frames"><i class="fa fa-check"></i><b>12.4.6</b> Extraction in Data Frames</a></li>
 <li class="chapter" data-level="12.4.7" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>12.4.7</b> Regex Modes</a></li>
+<li class="chapter" data-level="12.4.8" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#practice-exercises-34"><i class="fa fa-check"></i><b>12.4.8</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.4.9" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#solutions-to-the-practice-exercises-16"><i class="fa fa-check"></i><b>12.4.9</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#practice-exercises-35"><i class="fa fa-check"></i><b>12.5.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.5.2" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#solutions-to-the-practice-exercises-17"><i class="fa fa-check"></i><b>12.5.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -532,7 +537,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="basic-string-operations" class="section level2">
 <h2><span class="header-section-number">11.3</span> Basic String Operations</h2>
-<p>We now introduce a few basic operations for examining, splitting and combining strings.</p>
+<p>We now introduce a few basic operations for examining, splitting and combining strings. Some of the functions we discuss come from the <strong>stringer</strong> <span class="citation">(Wickham <a href="#ref-R-stringr">2017</a><a href="#ref-R-stringr">c</a>)</span> package, which is installed along with the tidyverse but is not automatically attached. Make sure you attach it when you work with strings:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)</code></pre></div>
 <div id="is-and-as" class="section level3">
 <h3><span class="header-section-number">11.3.1</span> Is and As</h3>
 <p>Recall from Chapter <a href="vectors.html#vectors">2</a> that <code>as.character()</code> coerces other data types into strings:</p>
@@ -551,44 +557,44 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>How many characters are in the word “hello”? Let’s try:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="st">&quot;hello&quot;</span>)</code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<p>Oh, right, strings don’t exist alone: <code>&quot;hello&quot;</code> is actually a character-vector of length 1. Instead we must use the <code>nchar()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nchar</span>(<span class="st">&quot;hello&quot;</span>)</code></pre></div>
+<p>Oh, right, strings don’t exist alone: <code>&quot;hello&quot;</code> is actually a character-vector of length 1. Instead we should use the <code>str_sub()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_length</span>(<span class="st">&quot;hello&quot;</span>)</code></pre></div>
 <pre><code>## [1] 5</code></pre>
 </div>
 <div id="substrings-and-trimming" class="section level3">
 <h3><span class="header-section-number">11.3.3</span> Substrings and Trimming</h3>
-<p>We can pull out pieces of a string with the <code>substr()</code> function:</p>
+<p>We can pull out pieces of a string with the <code>str_sub()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">poppins &lt;-<span class="st"> &quot;Supercalifragilisticexpialidocious&quot;</span>
-<span class="kw">substr</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">stop =</span> <span class="dv">20</span>)</code></pre></div>
+<span class="kw">str_sub</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">end =</span> <span class="dv">20</span>)</code></pre></div>
 <pre><code>## [1] &quot;fragilistic&quot;</code></pre>
 <p>One can also use <code>substr()</code> to replace part of a string with some other string<a href="#fn29" class="footnoteRef" id="fnref29"><sup>29</sup></a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">substr</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">stop =</span> <span class="dv">20</span>) &lt;-<span class="st"> &quot;ABCDEFGHIJK&quot;</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_sub</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">end =</span> <span class="dv">20</span>) &lt;-<span class="st"> &quot;ABCDEFGHIJK&quot;</span>
 poppins</code></pre></div>
 <pre><code>## [1] &quot;SupercaliABCDEFGHIJKexpialidocious&quot;</code></pre>
 <p>Don’t forget: “vector-in, vector-out” usually applies:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">words &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Poppins&quot;</span>, <span class="st">&quot;practically&quot;</span>, <span class="st">&quot;perfect&quot;</span>)
-<span class="kw">nchar</span>(words)</code></pre></div>
+<span class="kw">str_length</span>(words)</code></pre></div>
 <pre><code>## [1]  4  7 11  7</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">substr</span>(words, <span class="dv">1</span>, <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_sub</span>(words, <span class="dv">1</span>, <span class="dv">3</span>)</code></pre></div>
 <pre><code>## [1] &quot;Mar&quot; &quot;Pop&quot; &quot;pra&quot; &quot;per&quot;</code></pre>
 <p>In practical data-analysis situations you’ll often have to work with strings that include unexpected non-printed characters at the beginning or the end, especially if the string once occurred at the end of a line in a text file. For example, consider:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lastWord &lt;-<span class="st"> &quot;farewell</span><span class="ch">\r\n</span><span class="st">&quot;</span>
-<span class="kw">nchar</span>(lastWord)</code></pre></div>
+<span class="kw">str_length</span>(lastWord)</code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(lastWord)</code></pre></div>
 <pre><code>## farewell</code></pre>
-<p>From its display on the console, you might infer that <code>lastWord</code> consists of only the eight characters: f, a, r, e, w, e, l, and l. (You can’t see the carriage return followed by the newline.)</p>
-<p>If you think your strings might contain unnecessary leading or trailing white-space, you can remove it with <code>trimws()</code>: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trimws</span>(lastWord)</code></pre></div>
+<p>From its display on the console, you might infer that <code>lastWord</code> consists of only the eight characters: f, a, r, e, w, e, l, and l. (You can’t see the carriage return followed by the newline.) But <code>str_length()</code> clearly shows that it’s got two characters after the final “l”, even if you can’t see them.</p>
+<p>If you think your strings might contain unnecessary leading or trailing white-space, you can remove it with <code>str_trim()</code>: </p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_trim</span>(lastWord)</code></pre></div>
 <pre><code>## [1] &quot;farewell&quot;</code></pre>
 </div>
 <div id="changing-cases" class="section level3">
 <h3><span class="header-section-number">11.3.4</span> Changing Cases</h3>
 <p>You can make all of the letters in a string lowercase: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tolower</span>(<span class="st">&quot;My name is Rhonda.&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_to_lower</span>(<span class="st">&quot;My name is Rhonda.&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;my name is rhonda.&quot;</code></pre>
 <p>You can make them all uppercase: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">toupper</span>(<span class="st">&quot;It makes me wanna holler!&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_to_upper</span>(<span class="st">&quot;It makes me wanna holler!&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;IT MAKES ME WANNA HOLLER!&quot;</code></pre>
 </div>
 <div id="splitting-strings" class="section level3">
@@ -596,8 +602,8 @@ poppins</code></pre></div>
 <p>Consider the following character vector that records several dates:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dates &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;3-14-1963&quot;</span>, <span class="st">&quot;04-01-1965&quot;</span>, <span class="st">&quot;12-2-1983&quot;</span>)</code></pre></div>
 <p>You might want to print them out in some uniform way, using the full name of the month, perhaps. Then you would need to gain access to the elements of each date separately, so that you could transform month-numbers to month-names.</p>
-<p><code>strsplit()</code> will do the job for you: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">strsplit</span>(dates, <span class="dt">split =</span> <span class="st">&quot;-&quot;</span>)</code></pre></div>
+<p><code>str_split()</code> will do the job for you: </p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_split</span>(dates, <span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>)</code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;3&quot;    &quot;14&quot;   &quot;1963&quot;
 ## 
@@ -606,38 +612,38 @@ poppins</code></pre></div>
 ## 
 ## [[3]]
 ## [1] &quot;12&quot;   &quot;2&quot;    &quot;1983&quot;</code></pre>
-<p>The result is a list with one element for each date in <code>dates</code>. Each element of the list is a character vector containing the elements—month-number, day-number and year—that were demarcated in the original strings by the hyphen <code>-</code>, the value given to the <code>split</code> parameter.</p>
+<p>The result is a list with one element for each date in <code>dates</code>. Each element of the list is a character vector containing the elements—month-number, day-number and year—that were demarcated in the original strings by the hyphen <code>-</code>, the value given to the <code>pattern</code> parameter.</p>
 <p>If we wish, we may now access the elements of the list and process them in any way we like. We might report the months, for example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">splitDates &lt;-<span class="st"> </span><span class="kw">strsplit</span>(dates, <span class="dt">split =</span> <span class="st">&quot;-&quot;</span>)
-<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(splitDates) ) {
-  thisDate &lt;-<span class="st"> </span>splitDates[[i]]
-  thisMonth &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(thisDate[<span class="dv">1</span>])
-  <span class="co"># now use special R-constant month.names, which is a</span>
-  <span class="co"># character vector consisting of the full names of the months of</span>
-  <span class="co"># the year:</span>
-  <span class="kw">cat</span>(month.name[thisMonth])
-  <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-}</code></pre></div>
-<pre><code>## March
-## April
-## December</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dates <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>.[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">7</span>)] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.numeric</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>month.name[.]</code></pre></div>
+<pre><code>## [1] &quot;March&quot;    &quot;April&quot;    &quot;December&quot;</code></pre>
 <p>(Note the use in the code above of the <code>months.name</code>  constant provided by R.)</p>
 <p>Sometimes it’s handy to split a string word-by-word:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">message &lt;-<span class="st"> &quot;you have won the lottery&quot;</span>
-<span class="kw">unlist</span>(<span class="kw">strsplit</span>(message, <span class="dt">split =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;you have won the lottery&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>()</code></pre></div>
 <pre><code>## [1] &quot;you&quot;     &quot;have&quot;    &quot;won&quot;     &quot;the&quot;     &quot;lottery&quot;</code></pre>
 <p>Of course splitting on the space would not have worked if some of the words had been separated by more than one space:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">message &lt;-<span class="st"> &quot;you have won the  lottery&quot;</span> <span class="co"># two spaces betwen &#39;the&#39; and &#39;lottery&#39;</span>
-<span class="kw">unlist</span>(<span class="kw">strsplit</span>(message, <span class="dt">split =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;you have won the  lottery&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># two spaces betwen &#39;the&#39; and &#39;lottery&#39;</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>()</code></pre></div>
 <pre><code>## [1] &quot;you&quot;     &quot;have&quot;    &quot;won&quot;     &quot;the&quot;     &quot;&quot;        &quot;lottery&quot;</code></pre>
 <p>We’ll address this problem soon.</p>
 <p>In order to split a string into its constituent characters, split on the string with no characters:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animal &lt;-<span class="st"> &quot;aardvark&quot;</span>
-animSplit &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">strsplit</span>(animal, <span class="dt">split =</span> <span class="st">&quot;&quot;</span>))
-animSplit</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;aardvark&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>()</code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;a&quot; &quot;r&quot; &quot;d&quot; &quot;v&quot; &quot;a&quot; &quot;r&quot; &quot;k&quot;</code></pre>
 <p>This would be useful if you wanted to, say, count the number of occurrences of “a” in a word:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(animSplit[animSplit <span class="op">==</span><span class="st"> &quot;a&quot;</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;aardvark&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>.[. <span class="op">==</span><span class="st"> &quot;a&quot;</span>] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">length</span>()</code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
 <div id="pasting-and-joining-strings" class="section level3">
@@ -653,42 +659,50 @@ animSplit</code></pre></div>
 <p>If you want the separator to be the empty string by default, then you could use <code>paste0()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;Yabba&quot;</span>,<span class="st">&quot;dabba&quot;</span>,<span class="st">&quot;doo!&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Yabbadabbadoo!&quot;</code></pre>
+<p>The <strong>stringr</strong> version of <code>paste0()</code> is <code>str_c()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_c</span>(<span class="st">&quot;Yabba&quot;</span>,<span class="st">&quot;dabba&quot;</span>,<span class="st">&quot;doo!&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;Yabbadabbadoo!&quot;</code></pre>
 <p>What if you had a character-vector whose elements you wanted to paste together? For example, consider:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">poppins &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;practically&quot;</span>, <span class="st">&quot;perfect&quot;</span>, <span class="st">&quot;in&quot;</span>,
              <span class="st">&quot;every&quot;</span>, <span class="st">&quot;way&quot;</span>)</code></pre></div>
-<p>Now suppose you want to paste the elements of <code>poppins</code> together into one string where the words are separated by spaces. You might be tempted to try:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(poppins)</code></pre></div>
-<pre><code>## [1] &quot;practically&quot; &quot;perfect&quot;     &quot;in&quot;          &quot;every&quot;       &quot;way&quot;</code></pre>
-<p>That didn’t work at all. And then you remember: “Yeah, right—vector in, vector out.”</p>
-<p>There is a way, though, to get <code>paste()</code> to concatenate the elements of the resulting vector. Just use the <code>collapse</code> parameter:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(poppins, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</code></pre></div>
+<p>Now suppose you want to paste the elements of <code>poppins</code> together into one string where the words are separated by spaces. <code>str_c()</code> will do the job for you, if you use its <code>collapse</code> parameter:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">poppins <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;practically perfect in every way&quot;</code></pre>
 <p>We’ll call this process <em>joining</em>. </p>
 <p>In an atomic vector all of the elements have to be of the same data type (all character, all numerical, etc.). What if you want to join objects of different types? If there are only a few, feel free to type them in as separate arguments to <code>paste()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;March&quot;</span>, <span class="dv">14</span>, <span class="dv">1963</span>, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_c</span>(<span class="st">&quot;March&quot;</span>, <span class="dv">14</span>, <span class="dv">1963</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;March 14 1963&quot;</code></pre>
 <p>If the objects are many, then you could arrange for them appear as the elements of a list:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">toJoin &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;Mary&quot;</span>, <span class="dv">343</span>, <span class="st">&quot;Poppins&quot;</span>, <span class="ot">FALSE</span>)
-<span class="kw">paste</span>(toJoin, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="st">&quot;Mary&quot;</span>, <span class="dv">343</span>, <span class="st">&quot;Poppins&quot;</span>, <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Mary 343 Poppins FALSE&quot;</code></pre>
 <p>Joining appears to be the opposite of splitting, but in R that’s not quite so. Suppose, for instance, that you have dates where the month, day and year are separated by hyphens and you want to replace the hyphens with forward slashes:</p>
 <pre><code>3-14-1963  # you have this
 3/14/1963  # you want this</code></pre>
 <p>You could try this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">date &lt;-<span class="st"> &quot;3-14-1963&quot;</span>
-splitDate &lt;-<span class="st"> </span><span class="kw">strsplit</span>(date, <span class="dt">split =</span> <span class="st">&quot;-&quot;</span>)
-<span class="kw">paste</span>(splitDate, <span class="dt">collapse =</span> <span class="st">&quot;/&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;3-14-1963&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;/&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;c(\&quot;3\&quot;, \&quot;14\&quot;, \&quot;1963\&quot;)&quot;</code></pre>
-<p>That’s not what we want. We have to remember than the result of applying <code>strsplit()</code> is a list:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">splitDate</code></pre></div>
+<p>That’s not what we want. We have to remember than the result of applying <code>str_split()</code> is a list:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;3-14-1963&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>)</code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;3&quot;    &quot;14&quot;   &quot;1963&quot;</code></pre>
 <p>We need to unlist prior to the join. The correct procedure is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">date &lt;-<span class="st"> &quot;3-14-1963&quot;</span>
-splitDate &lt;-<span class="st"> </span><span class="kw">strsplit</span>(date, <span class="dt">split =</span> <span class="st">&quot;-&quot;</span>)
-<span class="kw">paste</span>(<span class="kw">unlist</span>(splitDate), <span class="dt">collapse =</span> <span class="st">&quot;/&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;3-14-1963&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;/&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;3/14/1963&quot;</code></pre>
 <p>Now all is well. Soon, though, we’ll learn a superior method for performing substitutions in strings.</p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-stringr">
+<p>Wickham, Hadley. 2017c. <em>Stringr: Simple, Consistent Wrappers for Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr" class="uri">https://CRAN.R-project.org/package=stringr</a>.</p>
 </div>
 </div>
 <div class="footnotes">

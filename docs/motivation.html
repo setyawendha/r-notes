@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-16">
+<meta name="date" content="2017-12-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -442,13 +442,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html"><i class="fa fa-check"></i><b>12.4</b> Entering a Regex in R</a><ul>
 <li class="chapter" data-level="12.4.1" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#string-to-regex"><i class="fa fa-check"></i><b>12.4.1</b> String to Regex</a></li>
 <li class="chapter" data-level="12.4.2" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-substitution"><i class="fa fa-check"></i><b>12.4.2</b> Substitution</a></li>
-<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#a-note-on-perl"><i class="fa fa-check"></i><b>12.4.3</b> A Note on Perl</a></li>
-<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.4</b> Patterned Replacement</a></li>
-<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#grepping"><i class="fa fa-check"></i><b>12.4.5</b> Grepping</a></li>
-<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#more-information-with-gregexpr"><i class="fa fa-check"></i><b>12.4.6</b> More Information with <code>gregexpr()</code></a></li>
+<li class="chapter" data-level="12.4.3" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#patterned-replacement"><i class="fa fa-check"></i><b>12.4.3</b> Patterned Replacement</a></li>
+<li class="chapter" data-level="12.4.4" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#detecting-matches"><i class="fa fa-check"></i><b>12.4.4</b> Detecting Matches</a></li>
+<li class="chapter" data-level="12.4.5" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extracting-matches"><i class="fa fa-check"></i><b>12.4.5</b> Extracting Matches</a></li>
+<li class="chapter" data-level="12.4.6" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#extraction-in-data-frames"><i class="fa fa-check"></i><b>12.4.6</b> Extraction in Data Frames</a></li>
 <li class="chapter" data-level="12.4.7" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#regex-modes"><i class="fa fa-check"></i><b>12.4.7</b> Regex Modes</a></li>
+<li class="chapter" data-level="12.4.8" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#practice-exercises-34"><i class="fa fa-check"></i><b>12.4.8</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.4.9" data-path="entering-a-regex-in-r.html"><a href="entering-a-regex-in-r.html#solutions-to-the-practice-exercises-16"><i class="fa fa-check"></i><b>12.4.9</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a></li>
+<li class="chapter" data-level="12.5" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html"><i class="fa fa-check"></i><b>12.5</b> Application: Amazon Book Reviews</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#practice-exercises-35"><i class="fa fa-check"></i><b>12.5.1</b> Practice Exercises</a></li>
+<li class="chapter" data-level="12.5.2" data-path="application-amazon-book-reviews.html"><a href="application-amazon-book-reviews.html#solutions-to-the-practice-exercises-17"><i class="fa fa-check"></i><b>12.5.2</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="glossary-9.html"><a href="glossary-9.html"><i class="fa fa-check"></i>Glossary</a></li>
 <li class="chapter" data-level="" data-path="exercises-8.html"><a href="exercises-8.html"><i class="fa fa-check"></i>Exercises</a></li>
 </ul></li>
@@ -535,8 +540,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Suppose you wish to determine how many times the string “ab” appears within some given string. You could write a function to perform this task.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">occurrences &lt;-<span class="st"> </span><span class="cf">function</span>(string) {
   count &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nchar</span>(string)) {
-    stringPart &lt;-<span class="st"> </span><span class="kw">substr</span>(string, i, i<span class="op">+</span><span class="dv">1</span>)
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">str_length</span>(string)) {
+    stringPart &lt;-<span class="st"> </span><span class="kw">str_sub</span>(string, i, i<span class="op">+</span><span class="dv">1</span>)
     <span class="cf">if</span> ( stringPart <span class="op">==</span><span class="st"> &quot;ab&quot;</span> ) {
       count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="dv">1</span>
     }
@@ -558,11 +563,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co"># substrings are given as patterns</span>
 occurrences2 &lt;-<span class="st"> </span><span class="cf">function</span>(string, patterns) {
   count &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nchar</span>(string)) {
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">str_length</span>(string)) {
     <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(patterns)) {
       pattern &lt;-<span class="st"> </span>patterns[j]
-      len &lt;-<span class="st"> </span><span class="kw">nchar</span>(pattern)
-      stringPart &lt;-<span class="st"> </span><span class="kw">substr</span>(string, i, i <span class="op">+</span><span class="st"> </span>len <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+      len &lt;-<span class="st"> </span><span class="kw">str_length</span>(pattern)
+      stringPart &lt;-<span class="st"> </span><span class="kw">str_sub</span>(string, i, i <span class="op">+</span><span class="st"> </span>len <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
       <span class="cf">if</span> ( stringPart <span class="op">==</span><span class="st"> </span>pattern ) {
         count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="dv">1</span>
       }
@@ -583,37 +588,12 @@ occurrences2 &lt;-<span class="st"> </span><span class="cf">function</span>(stri
 <p>Fortunately, regular expressions are there to help us out. A <em>regular expression</em>  is defined as a sequence of characters that represents a pattern that might or might not be present in any given string. A computer will rely on a <em>regular expression engine</em>—a specific implementation of a system of regular expressions—to use a given regular expression to search in text for matches to the pattern that the expression represents.</p>
 <p>In practice, regular expressions are like a miniature programming language within a programming language. They are a feature of most major programming languages, including R. With regular expressions we can describe complex string-patterns concisely, and can perform rapid searches for these patterns in a given body of text.</p>
 <p>The rules for regular expressions vary a bit from one language to another, but the general idea is essentially the same for all of them. In the remainder of this Chapter we’ll learn enough of the principles of regular expressions to describe basic, useful patterns, and we’ll also study R-functions that make use of them.</p>
-<p>First of all, here’s a quick example to show the power of regular expressions. The work done by <code>occurences2()</code> may also be done in one line with the <code>gregexpr()</code>  function, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gregexpr</span>(<span class="dt">pattern =</span> <span class="st">&quot;[Aa]b|foo&quot;</span>,
-         <span class="dt">text =</span> <span class="st">&quot;This Labrador is a fool, Abba.&quot;</span>)</code></pre></div>
-<pre><code>## [[1]]
-## [1]  7 20 26
-## attr(,&quot;match.length&quot;)
-## [1] 2 3 2
-## attr(,&quot;useBytes&quot;)
-## [1] TRUE</code></pre>
-<p>We must learn to interpret output like this. The <code>str()</code> function will be helpful, here:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(<span class="kw">gregexpr</span>(<span class="dt">pattern =</span> <span class="st">&quot;[Aa]b|foo&quot;</span>,
-             <span class="dt">text =</span> <span class="st">&quot;This Labrador is a fool, Abba.&quot;</span>))</code></pre></div>
-<pre><code>## List of 1
-##  $ : atomic [1:3] 7 20 26
-##   ..- attr(*, &quot;match.length&quot;)= int [1:3] 2 3 2
-##   ..- attr(*, &quot;useBytes&quot;)= logi TRUE</code></pre>
-<p>We see that the result is a list with only one item in it. That item is a vector consisting of three numbers: 7, 20 and 26. Looking back at the text-string, we see that:</p>
-<ul>
-<li>“ab” was present beginning at position 7;</li>
-<li>“foo” was present beginning at position 20;</li>
-<li>“Ab” was present beginning at position 26.</li>
-</ul>
-<p>The vector also has two attributes. The “useBytes” attribute will not concern us; our interest lies in the “match.length” attribute, which is yet another vector that gives the number of characters in the matching sub-strings.</p>
-<p>R provides the convenient <code>regmatches()</code>  function, which uses the beginning match position and the match lengths to fetch the matching sub-strings themselves:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw">gregexpr</span>(<span class="dt">pattern =</span> <span class="st">&quot;[Aa]b|foo&quot;</span>,
-                    <span class="dt">text =</span> <span class="st">&quot;This Labrador is a fool, Abba.&quot;</span>)
-<span class="kw">regmatches</span>(<span class="st">&quot;This Labrador is a fool, Abba.&quot;</span>, <span class="dt">m =</span> results)</code></pre></div>
-<pre><code>## [[1]]
-## [1] &quot;ab&quot;  &quot;foo&quot; &quot;Ab&quot;</code></pre>
-<p><code>gregexpr</code> is short for “global regular expression”. It searches the entire<code>text</code> string for all possible matches. There is lazier function <code>regexpr()</code> that stops after the first match (if any).</p>
-<p>What should still be mysterious is the value given to <code>pattern</code> in the call to <code>gregexpr()</code>, namely the string “[Aa]b|foo”. This is the regular expression! It tells R to look for sub-strings that EITHER:</p>
+<p>First of all, here’s a quick example to show the power of regular expressions. The work done by <code>occurences2()</code> may also be done in one line with the <code>str_count()</code>  function, as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_count</span>(<span class="dt">string =</span> <span class="st">&quot;This Labrador is a fool, Abba.&quot;</span>,
+         <span class="dt">pattern =</span> <span class="st">&quot;[Aa]b|foo&quot;</span>)</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>Wow, that was quick. But what in the world is that <code>&quot;[Aa]b|foo&quot;</code> argument to the <code>pattern</code> parameter?</p>
+<p>It’s a regular expression! It tells R to look for sub-strings that EITHER:</p>
 <ul>
 <li>start with either “A” or “a”, and are then followed by a “b”, OR</li>
 <li>consist of “foo”</li>
