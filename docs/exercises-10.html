@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-18">
+<meta name="date" content="2017-12-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -477,14 +477,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="14.2.4" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#procedures-as-higher-order-function-calls"><i class="fa fa-check"></i><b>14.2.4</b> Procedures as Higher-Order Function Calls</a></li>
 <li class="chapter" data-level="14.2.5" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#functional-programming-a-summary"><i class="fa fa-check"></i><b>14.2.5</b> Functional Programming: A Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html"><i class="fa fa-check"></i><b>14.3</b> <code>lapply()</code> and Friends</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#lapply"><i class="fa fa-check"></i><b>14.3.1</b> <code>lapply()</code></a></li>
-<li class="chapter" data-level="14.3.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#sapply"><i class="fa fa-check"></i><b>14.3.2</b> <code>sapply()</code></a></li>
-<li class="chapter" data-level="14.3.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#tapply"><i class="fa fa-check"></i><b>14.3.3</b> <code>tapply()</code></a></li>
-<li class="chapter" data-level="14.3.4" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#map"><i class="fa fa-check"></i><b>14.3.4</b> <code>Map()</code></a></li>
-<li class="chapter" data-level="14.3.5" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#replicate"><i class="fa fa-check"></i><b>14.3.5</b> <code>replicate()</code></a></li>
+<li class="chapter" data-level="14.3" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html"><i class="fa fa-check"></i><b>14.3</b> <strong>purrr</strong> Higher-Order Functions for Iteration</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#map-and-variations"><i class="fa fa-check"></i><b>14.3.1</b> <code>map()</code> and Variations</a></li>
+<li class="chapter" data-level="14.3.2" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#walk-and-variations"><i class="fa fa-check"></i><b>14.3.2</b> <code>walk()</code> and Variations</a></li>
+<li class="chapter" data-level="14.3.3" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#practice-exercises-36"><i class="fa fa-check"></i><b>14.3.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="14.3.4" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#solutions-to-the-practice-exercises-18"><i class="fa fa-check"></i><b>14.3.4</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="filter-and-reduce.html"><a href="filter-and-reduce.html"><i class="fa fa-check"></i><b>14.4</b> <code>Filter()</code> and <code>Reduce()</code></a></li>
+<li class="chapter" data-level="14.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html"><i class="fa fa-check"></i><b>14.4</b> Other <strong>purr</strong> Higher-Order Functions</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#keep-and-discard"><i class="fa fa-check"></i><b>14.4.1</b> <code>keep()</code> and <code>discard()</code></a></li>
+<li class="chapter" data-level="14.4.2" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#reduce"><i class="fa fa-check"></i><b>14.4.2</b> <code>reduce()</code></a></li>
+<li class="chapter" data-level="14.4.3" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#practice-exercises-37"><i class="fa fa-check"></i><b>14.4.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="14.4.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#solutions-to-the-practice-exercises-19"><i class="fa fa-check"></i><b>14.4.4</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="14.5" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>14.5</b> Functionals vs. Loops</a></li>
 <li class="chapter" data-level="14.6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>14.6</b> Conclusion</a></li>
 <li class="chapter" data-level="" data-path="glossary-11.html"><a href="glossary-11.html"><i class="fa fa-check"></i>Glossary</a></li>
@@ -539,29 +543,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Exercises</h2>
 <p><img src="images/thinking.png" width="50%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
-<li><p>Use <code>tapply()</code> to compare the median fastest speeds of the front-sitters, middle-sitters and back-sitters in the <code>m111survey</code> data from the <strong>tigerstats</strong> package. Which group has the highest median?</p></li>
-<li><p>The 25th percentile of a numerical vector <code>x</code> is a number such that about 25% of the values in <code>x</code> are less than that number. This number is called the <em>first quartile</em> of <code>x</code>. The 75th percentile of <code>x</code>, also called the <em>third quartile</em>, is a number so that about 75% of the values of <code>x</code> are less than that number.</p>
-<p>It follows that about 50% of the values of <code>x</code> lie between its first and third quartiles. The difference between the two quartiles (third quartile minus first quartile) is called the <em>interquartile range</em> (IQR) of <code>x</code>. It’s a measure of how “spread out” typical values of <code>x</code> are: the bigger the IQR, the more the spread.</p>
-<p>Study the function <code>quantile()</code> from the <strong>stats</strong> package. Notice that you can get the first and third quartiles of <code>x</code> with the command</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(x, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</code></pre></div>
-<p>Your task is to use <code>quantile()</code> to write a function called <code>iqRange()</code> that will return the interquartile range of any given numerical vector. Then use that function with <code>tapply()</code> to get the interquartile ranges for the fastest speeds in the <code>m111survey</code> data, where the students are broken into groups according to both seating preference and sex.</p></li>
-<li><p>This exercise continues the study of sex discrimination in wages that was begun in the <a href="frames-exercises.html#frames-exercises">Exercises</a> from Chapter <a href="frames.html#frames">7</a>. In those exercises our approach was graphical, but we would like to check our conclusions with a numerical approach as well. Working from the <code>cpsSmall</code> data frame, use <code>tappply()</code> to compare mean wages when the subjects are broken into groups according to both sex and sector of employment. (This corresponds to the graph with eight violin-plots from the Chapter <a href="frames.html#frames">7</a> Exercises.)</p>
-Examine the “table” you got with <code>tapply()</code>.
-<ul>
-<li>Are there any sectors in which it seems that women typically make more than men. If so, what sectors are they?</li>
-<li>On the other hand, are there any sectors where men typically make more than women? If so, what sectors are they?</li>
-<li>Based on your analysis, does it seem plausible that women made less than men simply because they chose lower-paying sectors of employment?</li>
-</ul></li>
-<li><p>Explain in words what the following line of code produces when given a vector <code>y</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Map</span>(<span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>, y)</code></pre></div>
+<li><p>Explain in words what the following line of code produces when given a numerical vector <code>y</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(y, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
 <p>In the course of your explanation, say whether the result is a vector or a list.</p></li>
 <li><p>Which do you think works faster for a given numerical vector <code>y</code>? This code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Map</span>(<span class="cf">function</span>(x) <span class="kw">sqrt</span>(x), y)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(y, <span class="cf">function</span>(x) <span class="kw">sqrt</span>(x))</code></pre></div>
 <p>Or this code?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">sqrt</span>(y)</code></pre></div>
 <p>Justify your answer with a convincing example, using <code>system.time()</code>. What moral do you draw from this?</p></li>
-<li><p>To <em>refactor</em> computer code is to rewrite the code so that is does the same thing, but in a different way. We might refactor code in order to make it more readable by humans, or to make it perform its task more quickly.</p>
-<p>Refactor the following code so that it uses <code>Map()</code> instead of a loop:</p>
+<li><p>To <em>refactor</em> computer code is to rewrite the code so that it does the same thing, but in a different way. We might refactor code in order to make it more readable by humans, or to make it perform its task more quickly.</p>
+<p>Refactor the following code so that it uses <code>keep()</code> instead of a loop:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>tigerstats<span class="op">::</span>m111survey
 keepVariable &lt;-<span class="st"> </span><span class="kw">logical</span>(<span class="kw">length</span>(<span class="kw">names</span>(df)))
 <span class="cf">for</span> ( col <span class="cf">in</span> <span class="kw">seq_along</span>(keepVariable) ) {
@@ -575,10 +566,9 @@ newFrame &lt;-<span class="st"> </span>df[, keepVariable]
 <li><p>The following function produces a list of vectors of uniform random numbers, where the lower and upper bounds of the numbers are given by the arguments to the parameters <code>lower</code> and <code>upper</code> respectively, and the number of vectors in the list and the number of random numbers in each vector are given by a vector supplied to the parameter <code>vecs</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">randomSims &lt;-<span class="st"> </span><span class="cf">function</span>(vecs, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper=</span> <span class="dv">1</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   <span class="co"># set seed if none is provided by the user</span>
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
-  <span class="kw">set.seed</span>(seed)
 
   lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="kw">length</span>(vecs))
   <span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(vecs) ) {
@@ -586,7 +576,7 @@ newFrame &lt;-<span class="st"> </span>df[, keepVariable]
   }
   lst
 }</code></pre></div>
-<p>Refactor the code for <code>randomSims()</code> so that it uses <code>lapply()</code> instead of a loop.</p></li>
+<p>Refactor the code for <code>randomSims()</code> so that it uses <code>map()</code> instead of a loop.</p></li>
 <li><p>The following enhanced version of <code>randomSims()</code> is even more flexible, as it allows both the upper and lower limits for the randomly-generated numbers to vary with each vector of numbers that is produced.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">randomSims2 &lt;-<span class="st"> </span><span class="cf">function</span>(vecs, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper=</span> <span class="dv">1</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   <span class="co"># validate input</span>
@@ -598,10 +588,9 @@ newFrame &lt;-<span class="st"> </span>df[, keepVariable]
                       <span class="st">&quot;big as the corresponding lower bound.&quot;</span>)))
   }
   <span class="co"># set seed if none is provided by the user</span>
-  <span class="cf">if</span> ( <span class="kw">is.null</span>(seed) ) {
-    seed &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">Sys.time</span>())
+  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
+    <span class="kw">set.seed</span>(seed)
   }
-  <span class="kw">set.seed</span>(seed)
 
   lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="kw">length</span>(vecs))
   <span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(vecs) ) {
@@ -609,11 +598,11 @@ newFrame &lt;-<span class="st"> </span>df[, keepVariable]
   }
   lst
 }</code></pre></div>
-<p>Use <code>Map()</code> to refactor the code for <code>randomSims2()</code> so as to avoid using the loop.</p></li>
+<p>Use <code>map()</code> to refactor the code for <code>randomSims2()</code> so as to avoid using the loop.</p></li>
 <li><p>Supposing that <code>y</code> is a numerical vector, explain in words what the following code produces:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Filter</span>(<span class="cf">function</span>(x) x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4</span>, y)</code></pre></div></li>
-<li><p>Write a line of code using the sub-setting operator <code>[</code> produces the same result as the code in the previous problem.</p></li>
-<li><p>Use <code>Filter()</code> to write a function called <code>oddMembers()</code> that, given any numerical vector, returns a vector containing the odd numbers of the given vector. Your function should take a single argument called <code>vec</code>, the given vector. A typical example of use would be as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">keep</span>(<span class="cf">function</span>(x) x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4</span>)</code></pre></div></li>
+<li><p>Write a line of code using the sub-setting operator <code>[</code> that produces the same result as the code in the previous problem.</p></li>
+<li><p>Use <code>keep()</code> to write a function called <code>oddMembers()</code> that, given any numerical vector, returns a vector containing the odd numbers of the given vector. Your function should take a single argument called <code>vec</code>, the given vector. A typical example of use would be as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">oddMembers</span>(<span class="dt">vec =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
 <pre><code>## [1] 1 3 5 7 9</code></pre></li>
 <li><p>You are given the following list of character vectors:</p>
@@ -621,7 +610,38 @@ newFrame &lt;-<span class="st"> </span>df[, keepVariable]
         <span class="kw">c</span>(<span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Vikram&quot;</span>, <span class="st">&quot;Sita&quot;</span>, <span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Chandra&quot;</span>),
         <span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Chandra&quot;</span>, <span class="st">&quot;Bipan&quot;</span>, <span class="st">&quot;Lila&quot;</span>),
         <span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Vikram&quot;</span>, <span class="st">&quot;Devadata&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Lila&quot;</span>))</code></pre></div>
-<p>Use <code>Reduce()</code> and the <code>union()</code> function to obtain a character vector that is the union of all the vectors in <code>lst</code>.</p></li>
+<p>Use <code>reduce()</code> and the <code>union()</code> function to obtain a character vector that is the union of all the vectors in <code>lst</code>.</p></li>
+<li><p>(*) Run the following code to see what it does. Then analyse the code and explain in detail how it works. Along the way you will have to study some unfamiliar R-functions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataDir &lt;-<span class="st"> &quot;datafiles&quot;</span>
+<span class="cf">if</span> ( <span class="op">!</span><span class="kw">dir.exists</span>(dataDir) ) <span class="kw">dir.create</span>(dataDir)
+
+urls &lt;-<span class="st"> </span><span class="kw">c</span>(
+  <span class="st">&quot;https://data.cityofnewyork.us/api/views/25th-nujf/rows.csv&quot;</span>,
+  <span class="st">&quot;https://data.seattle.gov/api/views/cf52-s8er/rows.csv&quot;</span>,
+  <span class="st">&quot;https://data.ct.gov/api/views/kbxi-4ia7/rows.csv&quot;</span>
+)
+
+fileNameFrags &lt;-
+<span class="st">  </span>urls <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_match</span>(<span class="st">&quot;data</span><span class="ch">\\</span><span class="st">.(</span><span class="ch">\\</span><span class="st">w+)</span><span class="ch">\\</span><span class="st">.&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>.[, <span class="dv">2</span>]
+
+processFiles &lt;-<span class="st"> </span><span class="cf">function</span>(url, frag) {
+  csvDest &lt;-<span class="st"> </span><span class="kw">file.path</span>(dataDir,
+                       <span class="kw">paste0</span>(frag, <span class="st">&quot;.csv&quot;</span>))
+  <span class="kw">download.file</span>(url, csvDest)
+  <span class="kw">assign</span>(frag, <span class="kw">read_csv</span>(csvDest))
+  <span class="kw">do.call</span>(
+    save,
+    <span class="dt">args =</span> <span class="kw">list</span>(
+      frag,
+      <span class="dt">file =</span> <span class="kw">file.path</span>(
+        dataDir,
+        <span class="kw">paste0</span>(frag, <span class="st">&quot;.rda&quot;</span>))))
+}
+
+<span class="kw">list</span>(urls, fileNameFrags) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pwalk</span>(processFiles)</code></pre></div></li>
 </ol>
 
 </div>

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-12-18}
+  \date{2017-12-19}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -410,13 +410,12 @@ have made time for all of these out-of-book topics.
 
 The Notes give more attention to base R functions than other
 introductory texts directed to data analysts, but we do introduce
-elements of the \textbf{tidyverse} \citep{R-tidyverse} as appropriate.
-The pipe operator is introduced in connection with data frames,
-\textbf{ggplot2} and graphing are treated in some detail, string
-operations and regular expressions are managed primarily with
-\textbf{stringr}, and the approach to higher-order functions is through
-\textbf{purrr}. Full treatment of the data wrangling is deferred,
-however, to later courses.
+elements of the \textbf{tidyverse} as appropriate. The pipe operator is
+introduced in connection with data frames, \textbf{ggplot2} and graphing
+are treated in some detail, string operations and regular expressions
+are managed primarily with \textbf{stringr}, and the approach to
+higher-order functions is through \textbf{purrr}. Full treatment of the
+data wrangling is deferred, however, to later courses.
 
 The first-semester course is required for mathematics and physics majors
 and for students in our pre-engineering program, so a central
@@ -6542,23 +6541,22 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:babynames"     
-##  [3] "package:R6"             "package:tigerData"     
-##  [5] "package:tigerstats"     "package:abd"           
-##  [7] "package:mosaic"         "package:Matrix"        
-##  [9] "package:ggformula"      "package:lattice"       
-## [11] "package:nlme"           "package:TurtleGraphics"
-## [13] "package:grid"           "package:mosaicData"    
-## [15] "package:tidytext"       "package:bindrcpp"      
-## [17] "package:dplyr"          "package:purrr"         
-## [19] "package:readr"          "package:tidyr"         
-## [21] "package:tibble"         "package:ggplot2"       
-## [23] "package:tidyverse"      "package:stringr"       
-## [25] "package:magrittr"       "tools:rstudio"         
-## [27] "package:stats"          "package:graphics"      
-## [29] "package:grDevices"      "package:utils"         
-## [31] "package:datasets"       "package:methods"       
-## [33] "Autoloads"              "package:base"
+##  [1] ".GlobalEnv"             "package:R6"            
+##  [3] "package:tigerData"      "package:stringr"       
+##  [5] "package:bindrcpp"       "package:purrr"         
+##  [7] "package:readr"          "package:tidyr"         
+##  [9] "package:tibble"         "package:tidyverse"     
+## [11] "package:babynames"      "package:tigerstats"    
+## [13] "package:abd"            "package:mosaic"        
+## [15] "package:Matrix"         "package:ggformula"     
+## [17] "package:dplyr"          "package:lattice"       
+## [19] "package:nlme"           "package:TurtleGraphics"
+## [21] "package:grid"           "package:ggplot2"       
+## [23] "package:mosaicData"     "tools:rstudio"         
+## [25] "package:stats"          "package:graphics"      
+## [27] "package:grDevices"      "package:utils"         
+## [29] "package:datasets"       "package:methods"       
+## [31] "Autoloads"              "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -6664,7 +6662,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x107edafc8>
+## <bytecode: 0x10c8c20d0>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -16747,7 +16745,7 @@ values cannot be expressed meaningfully by numbers.
 
 \newpage
 
-\hypertarget{frames-exercises}{\section*{Exercises}\label{frames-exercises}}
+\section*{Exercises}\label{frames-exercises}
 \addcontentsline{toc}{section}{Exercises}
 
 \begin{center}\includegraphics[width=0.5\linewidth]{images/thinking} \end{center}
@@ -20571,7 +20569,7 @@ any sort of R-object.
 \end{figure}
 
 In this chapter we will introduce a few tools from the
-\textbf{tidyverse} \citep{R-tidyverse} set of R-packages:
+\textbf{tidyverse} set of R-packages:
 
 \begin{itemize}
 \tightlist
@@ -21792,9 +21790,9 @@ Or, for something zanier:
 
 We now introduce a few basic operations for examining, splitting and
 combining strings. Some of the functions we discuss come from the
-\textbf{stringer} \citep{R-stringr} package, which is installed along
-with the tidyverse but is not automatically attached. Make sure you
-attach it when you work with strings:
+\textbf{stringer} package, which is installed along with the tidyverse
+but is not automatically attached. Make sure you attach it when you work
+with strings:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -24273,7 +24271,7 @@ Each person has a standard ten-digit phone number, consisting of:
 
 Suppose we would like to create three new variables in the data table,
 one for each of the three components of the phone number. For this,
-\texttt{tidy::extract()} comes in handy:
+\texttt{tidyr::extract()} comes in handy:
 \index{R-functions!extract()@\texttt{extract()}}
 
 \begin{Shaded}
@@ -25877,16 +25875,16 @@ programming paradigm known as \emph{functional programming}. We will
 examine a set of R-functions for which functions themselves are supplied
 as arguments. These functions allow us to accomplish a great deal of
 computation in rather concise and expressive code. Not only are they
-useful in R itself, but they help you reason abstractly about
-computation and prepare you for functional programming approaches in
-other programming languages.
+useful in R itself, but they help you to reason abstractly about
+computation and prepare you for functional-programming aspects of other
+programming languages.
 
 \newpage
 
 \section{Programming Paradigms}\label{programming-paradigms}
 
 Let us begin by exploring the notion of a \emph{programming paradigm} in
-general. We will go on in this Chapter to consider will two programming
+general. We will go on in this Chapter to consider two programming
 paradigms for which R provides considerable support. In the next Chapter
 we will consider a third programming paradigm that exists in R.
 
@@ -25899,7 +25897,7 @@ programming practice.
 \subsection{Procedural Programming}\label{procedural-programming}
 
 One of the older programming paradigms in existence is \emph{procedural
-prograaming}. It is supported in many popular languages and is often the
+programming}. It is supported in many popular languages and is often the
 first paradigm within which beginners learn to program. In fact, if
 one's programming does not progress beyond a rudimentary level, one may
 never become aware that one is working within the procedural
@@ -26020,7 +26018,7 @@ There don't appear to be any functions being called, here! But in fact
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\StringTok{"<-"}\NormalTok{(variable, value)}
+\StringTok{`}\DataTypeTok{<-}\StringTok{`}\NormalTok{(variable, value)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -26029,7 +26027,7 @@ There don't appear to be any functions being called, here! But in fact
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\StringTok{"<-"}\NormalTok{(a, }\DecValTok{3}\NormalTok{)}
+\StringTok{`}\DataTypeTok{<-}\StringTok{`}\NormalTok{(a, }\DecValTok{3}\NormalTok{)}
 \NormalTok{a   }\CommentTok{# check that a is really 3}
 \end{Highlighting}
 \end{Shaded}
@@ -26045,7 +26043,7 @@ There don't appear to be any functions being called, here! But in fact
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\StringTok{"["}\NormalTok{(m111survey, isNumerical)}
+\StringTok{`}\DataTypeTok{[}\StringTok{`}\NormalTok{(m111survey, isNumerical)}
 \end{Highlighting}
 \end{Shaded}
 \end{enumerate}
@@ -26206,15 +26204,17 @@ Example of the first type of function included:
 \item
   \texttt{is.numeric()}
 \item
-  the extraction-function \texttt{"{[}"()}
+  the extraction-function
+  \texttt{\textasciigrave{}{[}\textasciigrave{}()}
 \end{itemize}
 
 A function that produced output to the console was \texttt{str()}.
 
-The assignment function \texttt{"\textless{}-"()} added \texttt{cols},
-\texttt{isNumerical} and \texttt{numsm111} to the Global Environment,
-and also made changes to \texttt{isNumerical} in the course of the
-\texttt{for}-loop.
+The assignment function
+\texttt{\textasciigrave{}\textless{}-\textasciigrave{}()} added
+\texttt{cols}, \texttt{isNumerical} and \texttt{numsm111} to the Global
+Environment, and also made changes to \texttt{isNumerical} in the course
+of the \texttt{for}-loop.
 
 Of course we have seen examples of functions that do two of these things
 at once, for example:
@@ -26330,18 +26330,18 @@ parent environment is the Global Environment and the function has made a
 change to it: a side-effect.
 
 Except in the case of explicit assignment functions like
-\texttt{"\textless{}-"()}, changes made by functions to the Global
-Environment can be quite problematic. After all, we are used to using
-functions without having to look inside them to see how they do their
-work. Even if we once wrote the function ourselves, we may not remember
-how it works, so if it creates side effects we may not remember that it
-does, and calling them could interfere with other important work that
-the program is doing. (If the program already has \texttt{heavenlyHash}
-in the Global Environment and the we call a function that changes it
-value, we could be in for big trouble.) Accordingly, R supports the
-third principle of functional programming to the extent of making it
-easy for you to avoid function calls that change your Global
-Environment.
+\texttt{\textasciigrave{}\textless{}-\textasciigrave{}()}, changes made
+by functions to the Global Environment can be quite problematic. After
+all, we are used to using functions without having to look inside them
+to see how they do their work. Even if we once wrote the function
+ourselves, we may not remember how it works, so if it creates side
+effects we may not remember that it does, and calling them could
+interfere with other important work that the program is doing. (If the
+program already has \texttt{heavenlyHash} in the Global Environment and
+the we call a function that changes it value, we could be in for big
+trouble.) Accordingly, R supports the third principle of functional
+programming to the extent of making it easy for you to avoid function
+calls that change your Global Environment.
 
 \subsection{Procedures as Higher-Order Function
 Calls}\label{procedures-as-higher-order-function-calls}
@@ -26392,15 +26392,19 @@ are as follows:
   higher-order functions.
 \end{itemize}
 
-\section{\texorpdfstring{\texttt{lapply()} and
-Friends}{lapply() and Friends}}\label{lapply-and-friends}
+\section{\texorpdfstring{\textbf{purrr} Higher-Order Functions for
+Iteration}{purrr Higher-Order Functions for Iteration}}\label{purrr-higher-order-functions-for-iteration}
 
 In the remainder of the Chapter we will study important higher-order
 functions: functions that take a function as an argument and apply that
 function to each element of another data structure. As we have said
 previously, such functions often serve as alternatives to loops.
 
-\subsection{\texorpdfstring{\texttt{lapply()}}{lapply()}}\label{lapply}
+The higher-order functions we study come from the package
+\textbf{purrr}, which is attached whenever we load the tidy-verse.
+
+\subsection{\texorpdfstring{\texttt{map()} and
+Variations}{map() and Variations}}\label{map-and-variations}
 
 Suppose that we want to generate five vectors, each of which consists of
 ten numbers randomly chosen between 0 and 1. We accomplish the task with
@@ -26477,13 +26481,12 @@ this:
 
 If we can apply \texttt{runif()} to each element of a vector, why not
 apply \emph{an arbitrary function} to each element? That's what the
-function \texttt{lapply()}
-\index{R-functions!lapply()@\texttt{lapply()}} will do for us. The
-general form of \texttt{lapply()} is:
+function \texttt{map()} \index{R-functions!map()@\texttt{map()}} will do
+for us. The general form of \texttt{map()} is:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{lapply}\NormalTok{(X, FUN, ...)}
+\KeywordTok{map}\NormalTok{(.x, .f, ...)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -26492,29 +26495,30 @@ In the template above:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{X} can be any vector (including the one-dimensional
-  heterogeneous vectors known as lists);
+  \texttt{.x} can be a list or any atomic vector;
 \item
-  \texttt{FUN} is a function that is to be applied to each element of
-  \texttt{X}. In the default operation of \texttt{lapply()}, each
-  element of \texttt{X} becomes in turn the \emph{first} argument of
-  \texttt{FUN}.
+  \texttt{.f} is a function that is to be applied to each element of
+  \texttt{.x}. In the default operation of \texttt{map()}, each element
+  of \texttt{.x} becomes in turn the \emph{first} argument of
+  \texttt{.f}.
 \item
   \texttt{...} consists of other arguments that are supplied as
-  arguments for the \texttt{FUN} function, in case you have to set other
+  arguments for the \texttt{.f} function, in case you have to set other
   parameters of the function in order to get it to perform in the way
   you would like.
 \end{itemize}
 
 The result is always a list.
 
-With \texttt{lapply()} we can get the list in our second example as
+With \texttt{map()} we can get the list in our second example as
 follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{)}
-\NormalTok{lst <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ vec, }\DataTypeTok{FUN =}\NormalTok{ runif)}
+\NormalTok{howMany <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+\NormalTok{lst <-}\StringTok{ }
+\StringTok{  }\NormalTok{howMany }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(runif)}
 \KeywordTok{str}\NormalTok{(lst)}
 \end{Highlighting}
 \end{Shaded}
@@ -26533,8 +26537,9 @@ we would supply extra arguments to \texttt{runif()} as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{)}
-\NormalTok{lst <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ vec, }\DataTypeTok{FUN =}\NormalTok{ runif, }\DataTypeTok{min =} \DecValTok{4}\NormalTok{, }\DataTypeTok{max =} \DecValTok{8}\NormalTok{)}
+\NormalTok{lst <-}\StringTok{ }
+\StringTok{  }\NormalTok{howMany }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(runif, }\DataTypeTok{min =} \DecValTok{4}\NormalTok{, }\DataTypeTok{max =} \DecValTok{8}\NormalTok{)}
 \KeywordTok{str}\NormalTok{(lst)}
 \end{Highlighting}
 \end{Shaded}
@@ -26548,124 +26553,252 @@ we would supply extra arguments to \texttt{runif()} as follows:
 ##  $ : num [1:9] 7.27 7.77 7.54 4.66 5.42 ...
 \end{verbatim}
 
-The default behavior of \texttt{lapply()} is that the \texttt{X} vector
-supplies the first argument of \texttt{FUN}. However, if some
-\texttt{...} parameters are supplied then \texttt{X} substitutes for the
-first parameter that is not mentioned in \texttt{...}. In the above
+The default behavior of \texttt{map()} is that the \texttt{.x} vector
+supplies the first argument of \texttt{.f}. However, if some
+\texttt{...} parameters are supplied then \texttt{.x} substitutes for
+the first parameter that is not mentioned in \texttt{...}. In the above
 example, the \texttt{min} and \texttt{max}parameters are the second and
-third parameters for \texttt{runif()} so \texttt{X} substitutes for the
+third parameters for \texttt{runif()} so \texttt{.x} substitutes for the
 first parameter---the one that determines how many random numbers will
-be generated. Later on we'll see an example where \texttt{X} substitutes
-for a non-first parameter.
-
-By the way: most people don't bother to include the names of the
-\texttt{X} and \texttt{FUN} parameters when using \texttt{lapply()}:
+be generated. In the example below, the vector \texttt{lowerBounds}
+substitutes for \texttt{min}, the second parameter of \texttt{runif()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{)}
-\NormalTok{lst <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(vec, runif, }\DataTypeTok{min =} \DecValTok{4}\NormalTok{, }\DataTypeTok{max =} \DecValTok{8}\NormalTok{)}
-\KeywordTok{str}\NormalTok{(lst)}
+\NormalTok{lowerBounds <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{3}
+\NormalTok{lowerBounds }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(runif, }\DataTypeTok{n =} \DecValTok{2}\NormalTok{, }\DataTypeTok{max =} \DecValTok{8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## List of 5
-##  $ : num [1:5] 6.59 5.58 6.47 5.91 4.54
-##  $ : num [1:7] 4.27 4.52 5.57 4.01 6.48 ...
-##  $ : num [1:8] 7.3 5.69 5.64 6.16 7.84 ...
-##  $ : num [1:2] 4.79 4.31
-##  $ : num [1:9] 7.27 7.77 7.54 4.66 5.42 ...
-\end{verbatim}
-
-If you want to use \texttt{lapply()} to get the results of our first
-example, in which each vector was of length 10, then you have to get
-around the fact that by default each element in the vector becomes the
-first argument of \texttt{FUN}. One way to do this is by setting
-\texttt{FUN} to be a function that you write on the spot yourself:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{lst <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{))}
-\KeywordTok{str}\NormalTok{(lst)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## List of 5
-##  $ : num [1:10] 0.647 0.394 0.619 0.477 0.136 ...
-##  $ : num [1:10] 0.764 0.744 0.826 0.423 0.409 ...
-##  $ : num [1:10] 0.1968 0.0779 0.8184 0.9424 0.8842 ...
-##  $ : num [1:10] 0.96407 0.07147 0.95581 0.94798 0.00119 ...
-##  $ : num [1:10] 0.985 0.225 0.864 0.885 0.625 ...
-\end{verbatim}
-
-In the code above, \texttt{FUN} has been set to an \emph{anonymous}
-function that returns \texttt{runif(10)} no matter what value was
-supplied to it. In computer programming a function is called
-\emph{anonymous} when it is not given a name.
-\index{anonymous function}We could have used a regular ``named''
-function, but we would have needed an extra line of code:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{myfun <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\NormalTok{lst <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, myFun)}
-\end{Highlighting}
-\end{Shaded}
-
-We lied a little bit when we said earlier that \texttt{X} was a vector:
-\texttt{X} could also be what in R is called an \emph{expression}. We
-won't get into the topic of exactly what constitutes an expression (see
-\texttt{help(expression)} for more on the topic), but suffice to say
-that an expression is a combination of object-names and function calls.
-In particular---and this is a very common application of
-\texttt{lapply()}---\texttt{X} could be the name of a data frame. For
-example, suppose that you want to find the number of elements in each
-column of \texttt{mat111survery} that are \texttt{NA}. with
-\texttt{lapply()} this is not difficult:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tigerstats)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{numberNA <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(m111survey, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(x)))}
-\NormalTok{numberNA[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]   }\CommentTok{# show results just for the first two variables}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $height
-## [1] 0
+## [[1]]
+## [1] 3.008575 5.964877
 ## 
-## $ideal_ht
-## [1] 2
+## [[2]]
+## [1] 6.514459 6.282105
+## 
+## [[3]]
+## [1] 6.688118 7.431739
 \end{verbatim}
 
-In code above, the \texttt{X} variable in the function is, in turn, each
-\emph{column} of \texttt{mat111survey}. R ``knows'' that for a data
-frame that's probably what we want!
-
-\subsection{\texorpdfstring{\texttt{sapply()}}{sapply()}}\label{sapply}
-
-\texttt{lapply()} always returns a list. Sometimes you would prefer that
-the result be something more ``compact'': a matrix, perhaps, or even a
-vector. In that case you should look into \texttt{sapply()},
-\index{R-functions!sapply()@\texttt{sapply()}}which you make think of as
-short for ``simplify-apply.''
-
-Consider the problem we brought up in the previous section: finding out
-how many \texttt{NA}s there are in each variable of a data frame. It
-would be nice to have the results in a vector rather than a list, and
-\texttt{sapply()} can return a vector in this case:
+Sometimes we wish to vary two or more of the parameters of function. In
+that case we use \texttt{pmap()}. The first parameter of \texttt{pmap()}
+is named \texttt{.l} and takes a list of vectors (or lists). For
+example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{sapply}\NormalTok{(m111survey, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(x)), }\DataTypeTok{simplify =} \StringTok{"vector"}\NormalTok{)}
+\NormalTok{howMany <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\NormalTok{upperBounds <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\KeywordTok{list}\NormalTok{(howMany, upperBounds) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{pmap}\NormalTok{(runif, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [1] 0.4142409 0.5140328 0.6190231
+## 
+## [[2]]
+## [1] 0.193564
+## 
+## [[3]]
+## [1] 3.0889976 7.4509632 3.6170952 0.2348365
+\end{verbatim}
+
+Observe that \texttt{pmap()} knows to interpret the first element of the
+input-list---the vector \texttt{howmany} as giving the values of the
+first argument of \texttt{runif()}. The second parameter of
+\texttt{runif()} (\texttt{min}) is set at 0, so \texttt{pmap()} deduces
+that \texttt{upperBounds}---the second element of the input-list---gives
+the values for the next next parameter in line, the parameter
+\texttt{max}.
+
+One might just as well use \texttt{pmap()} to vary all three parameters:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{howMany <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\NormalTok{lowerBounds <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{upperBounds <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{args <-}\StringTok{ }\KeywordTok{list}\NormalTok{(howMany, lowerBounds, upperBounds)}
+\NormalTok{args }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{pmap}\NormalTok{(runif) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 3
+##  $ : num [1:3] -0.00743 -2.35882 -3.90104
+##  $ : num 1.01
+##  $ : num [1:4] 5.38 9.16 8.45 9.67
+\end{verbatim}
+
+The \texttt{.f} parameter can be any function, including one that you
+define yourself. Here's an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rLetters <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, upper) \{}
+  \ControlFlowTok{if}\NormalTok{ ( upper ) \{}
+    \KeywordTok{sample}\NormalTok{(LETTERS, }\DataTypeTok{size =}\NormalTok{ n, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \KeywordTok{sample}\NormalTok{(letters, }\DataTypeTok{size =}\NormalTok{ n, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\NormalTok{n <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{)                }\CommentTok{# vary number of letters to pick}
+\NormalTok{upper <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)  }\CommentTok{# vary the case (upper, lower)}
+\KeywordTok{list}\NormalTok{(n, upper) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pmap}\NormalTok{(rLetters)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [1] "U" "D" "C"
+## 
+## [[2]]
+## [1] "j" "a" "s" "d" "m" "k"
+## 
+## [[3]]
+## [1] "S" "S" "R" "A" "V" "P" "A" "N" "B"
+\end{verbatim}
+
+You could also set \texttt{f} to be a function that you write on the
+spot, without even bothering to give it a name:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{runif}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =}\NormalTok{ x))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [1] 0.4170589 0.5614115 0.6146708
+## 
+## [[2]]
+## [1] 1.0992127 0.4576997 0.6006109
+## 
+## [[3]]
+## [1] 1.134999 2.752574 2.083488
+\end{verbatim}
+
+In computer programming a function is called \emph{anonymous} when it is
+not the value bound to some name. \index{anonymous function}.
+
+\texttt{map()} allows a shortcut for defining anonymous functions. The
+above call could have been written as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{runif}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =}\NormalTok{ .))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [1] 0.1435887 0.8404723 0.9722919
+## 
+## [[2]]
+## [1] 1.217995 1.631378 1.481980
+## 
+## [[3]]
+## [1] 4.475972 3.900816 4.272925
+\end{verbatim}
+
+The \texttt{\textasciitilde{}} indicates that the body of the function
+is about to be begin. The \texttt{.} stands for the parameter of the
+function.
+
+When we introduced \texttt{map()} we said that \texttt{.x} was a vector
+or a list, In fact \texttt{.x} could be an object that can be coerced
+into a list. Hence it is quite common to use \texttt{map()} with the
+data frames: the frame is turned into a list, each element of which is a
+column of the frame. Here is an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"m111survey"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"tigerstats"}\NormalTok{)}
+\NormalTok{numberNA <-}
+\StringTok{  }\NormalTok{m111survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(.)))}
+\KeywordTok{str}\NormalTok{(numberNA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 12
+##  $ height         : int 0
+##  $ ideal_ht       : int 2
+##  $ sleep          : int 0
+##  $ fastest        : int 0
+##  $ weight_feel    : int 0
+##  $ love_first     : int 0
+##  $ extra_life     : int 0
+##  $ seat           : int 0
+##  $ GPA            : int 1
+##  $ enough_Sleep   : int 0
+##  $ sex            : int 0
+##  $ diff.ideal.act.: int 2
+\end{verbatim}
+
+Note that the elements of the returned list inherit the names of the
+input data frame. This holds for any named input:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{numbers <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(numbers) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"one"}\NormalTok{, }\StringTok{"three"}\NormalTok{, }\StringTok{"five"}\NormalTok{)}
+\NormalTok{numbers }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{runif}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =}\NormalTok{ .))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $one
+## [1] 0.2331179 0.9318823 0.9580263
+## 
+## $three
+## [1] 2.9757873 1.5267223 0.6133808
+## 
+## $five
+## [1] 0.07197437 4.77782735 3.19760884
+\end{verbatim}
+
+Observe also that each element of the returned list \texttt{numberNA}
+was an integer vector of length 1. Hence no real purpose was served by
+the complex list structure: the information could have just as well been
+conveyed as a integer vector.
+
+When the result can take on a form more simple than a list, it is
+possible to use variants of \texttt{map()} such as:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{map\_int()}
+\item
+  \texttt{map\_dbl()}
+\item
+  \texttt{map\_lgl()}
+\item
+  \texttt{map\_chr()}
+\end{itemize}
+
+Thus we could obtain a named integer vector of the number of
+\texttt{NA}-values for each variable in \texttt{m11survey} as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{numberNA <-}
+\StringTok{  }\NormalTok{m111survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map_int}\NormalTok{(}\OperatorTok{~}\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(.)))}
+\NormalTok{numberNA}
 \end{Highlighting}
 \end{Shaded}
 
@@ -26678,335 +26811,346 @@ would be nice to have the results in a vector rather than a list, and
 ##               1               0               0               2
 \end{verbatim}
 
-\texttt{sapply()} resembles \texttt{lapply()} in its operation, but
-takes the additional parameter \texttt{simplify} that specifies what the
-user would like the results to be in the end. If the parameter is not
-set, then \texttt{sapply()} follow some internal rules to simplify the
-results ``as much as possible.'' In some cases, nothing simpler than a
-list can be obtained, so \texttt{sapply()} will end up returning the
-same things as \texttt{lapply()}. As a rule it is best to specify the
-result you want. If \texttt{sapply()} can't deliver the desired result
-then it will give you an error message so you can fix things, whereas if
-you leave\texttt{simplify} unspecified then you'll get the unexpected
-results without knowing it, which could lead to bugs in your code that
-are very difficult to diagnose.
-
-Earlier we mentioned that in \texttt{lapply()} the \texttt{X} parameter
-substitutes for the first argument of \texttt{FUN} that is not covered
-by the arguments supplied in \texttt{...}. The same goes for
-\texttt{sapply()}.
-
-The following is an example in which---due to what's supplied in
-\texttt{...}, the \texttt{X} parameter goes with a non-first parameter
-of \texttt{FUN}.
-
-You may recall an Exercise in Chapter \ref{frames} where you were asked
-to use vectorization to simulate the decisions of judges in the Appeals
-Court Paradox. You can \texttt{sapply()} to produce the simulated
-decisions, too: as follows:
+Here are the types of each variable:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{probs <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.95}\NormalTok{, }\FloatTok{0.90}\NormalTok{, }\FloatTok{0.90}\NormalTok{, }\FloatTok{0.90}\NormalTok{, }\FloatTok{0.80}\NormalTok{)}
-\NormalTok{reps <-}\StringTok{ }\DecValTok{10000}
-\NormalTok{decisions <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(probs, rbinom, }\DataTypeTok{n =}\NormalTok{ reps, }\DataTypeTok{size =} \DecValTok{1}\NormalTok{, }
-                    \DataTypeTok{simplify =} \StringTok{"matrix"}\NormalTok{)}
-\KeywordTok{str}\NormalTok{(decisions)  }\CommentTok{# a reps-by-5 matrix}
+\NormalTok{m111survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map_chr}\NormalTok{(typeof)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  int [1:10000, 1:5] 1 1 1 1 1 1 1 1 1 1 ...
+##          height        ideal_ht           sleep         fastest 
+##        "double"        "double"        "double"       "integer" 
+##     weight_feel      love_first      extra_life            seat 
+##       "integer"       "integer"       "integer"       "integer" 
+##             GPA    enough_Sleep             sex diff.ideal.act. 
+##        "double"       "integer"       "integer"        "double"
 \end{verbatim}
 
-Note that for \texttt{rbinom()}:
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{n} is the first parameter;
-\item
-  \texttt{size} is the second parameter.
-\end{itemize}
-
-Therefore the elements of \texttt{probs}---which is the value assigned
-to the \texttt{X} parameter of \texttt{sapply()}---substitute for the
-\emph{third} parameter of \texttt{rbinom()}, which is indeed the
-\texttt{prob} parameter that controls the chance of a correct decision.
-
-\subsection{\texorpdfstring{\texttt{tapply()}}{tapply()}}\label{tapply}
-
-As a motivator for learning about \texttt{tapply()},
-\index{R-functions!tapply()@\texttt{tapply()}}the next member of the
-\texttt{apply} family, consider the question from Chapter \ref{graphics}
-about the \texttt{m111survey} data: \emph{Who tends to drive the
-fastest: people who prefer to sit in the Front, the Middle, or the
-Back?}
-
-You will recall that we investigated this question---a question about
-the relationship between the numerical variable \texttt{fastest} and the
-factor-variable \texttt{seat}---with a graph, which is reproduced here
-as Figure \ref{fig:fastestseatviolinagain}. Comparing the relative
-positions of the violins and looking at the locations of individual
-values, it appears that folks who prefer to sit in the Back tend to
-drive faster than front and middle-sitters do, especially since there
-seems to be a reasonable number of back-sitters who drive quite fast
-(the back-sitter violin has a long upper ``neck'').
+Here is a statement of whether or not each variable is a factor:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(m111survey, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ seat, }\DataTypeTok{y =}\NormalTok{ fastest))}
-\NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_violin}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.6\linewidth]{r-notes_files/figure-latex/fastestseatviolinagain-1} 
-
-}
-
-\caption{It kinds looks like the back-sitters drive faster, on the whole.}\label{fig:fastestseatviolinagain}
-\end{figure}
-
-It would be nice, though, to be able to base our judgement on something
-other than mere eye-balling. Should we not undertake a numerical
-investigation of our question?
-
-One possible numerical approach is to compare the \emph{mean} fastest
-speeds of the three groups of students. We could use the
-\texttt{split()} \index{R-functions!split()@\texttt{split()}}function
-from Section \ref{lists-splitting} to split the vector \texttt{fastest}
-into a list of three vectors, one for each value of the factor
-\texttt{seat}. We can then compute the mean of each vector in the list
-and display them together for easy comparison. The following code
-accomplishes this:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\NormalTok{tigerstats}\OperatorTok{::}\NormalTok{m111survey}
-\NormalTok{splitSpeeds <-}\StringTok{ }\KeywordTok{with}\NormalTok{(df, }\KeywordTok{split}\NormalTok{(fastest, }\DataTypeTok{f =}\NormalTok{ seat))}
-\NormalTok{means <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(splitSpeeds, }\DataTypeTok{FUN =}\NormalTok{ mean, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{means}
+\NormalTok{m111survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{map_lgl}\NormalTok{(is.factor)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  1_front 2_middle   3_back 
-## 102.2593 102.9688 121.9167
+##          height        ideal_ht           sleep         fastest 
+##           FALSE           FALSE           FALSE           FALSE 
+##     weight_feel      love_first      extra_life            seat 
+##            TRUE            TRUE            TRUE            TRUE 
+##             GPA    enough_Sleep             sex diff.ideal.act. 
+##           FALSE            TRUE            TRUE           FALSE
 \end{verbatim}
 
-Sure enough, the back-sitters have a much higher mean fastest speed!
+\subsection{\texorpdfstring{\texttt{walk()} and
+Variations}{walk() and Variations}}\label{walk-and-variations}
 
-The \texttt{tapply()} function is designed to handle these splitting
-situations automatically.
+\texttt{walk()} is similar to \texttt{map()}, but is used when we are
+interested in producing side-effects. It applies its \texttt{.f}
+argument to each element of \texttt{.x} is was given, but also returns
+the \texttt{.x} in case we want to pipe it int some other function.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{with}\NormalTok{(df, }\KeywordTok{tapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ fastest, }\DataTypeTok{INDEX =}\NormalTok{ seat, }\DataTypeTok{FUN =}\NormalTok{ mean, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  1_front 2_middle   3_back 
-## 102.2593 102.9688 121.9167
-\end{verbatim}
-
-Here's how the interface to \texttt{tapply()} works:
-
-\begin{itemize}
-\tightlist
-\item
-  The \texttt{X} parameter \texttt{tapply()} is the vector you would
-  like to split.
-\item
-  The \texttt{INDEX} parameter gives the variable you plan to split by.
-  It should be a factor (or something that R can coerce to a factor) and
-  it must have the same length as \texttt{X}.
-\item
-  The \texttt{FUN} parameter is the function you plan to apply to each
-  of the vectors in the list obtained by the split.
-\item
-  You can pass in other arguments that \texttt{FUN} will use. In this
-  case we set \texttt{na.rm} to \texttt{TRUE} so that the
-  \texttt{mean()} function will ignore missing values in any of the
-  vectors of the split.
-\end{itemize}
-
-As it stands, \texttt{tapply()} appears to save only a line or two of
-code-writing. The real power of \texttt{tapply()}, however, lies in the
-\texttt{INDEX} parameter. \texttt{INDEX} need not be a single vector: it
-could be a \emph{list} of factors, in which case \texttt{tapply()} will
-split up the elements of \texttt{X} into groups determined by all
-possible combinations of levels of the factors in \texttt{INDEX}. The
-best way to understand this is with an example:
+Here we use \texttt{walk()} only for its side-effect: we re-write a
+familiar function to print a pattern to the Console without using a
+loop.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{with}\NormalTok{(df, }\KeywordTok{tapply}\NormalTok{(fastest, }\DataTypeTok{INDEX =} \KeywordTok{list}\NormalTok{(sex, seat), }\DataTypeTok{FUN =}\NormalTok{ mean, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##          1_front 2_middle   3_back
-## female  99.63158  94.9375 118.0000
-## male   108.50000 111.0000 124.7143
-\end{verbatim}
-
-\texttt{tapply()} has returned a matrix with named rows and columns.
-(This resembles a table, hence the letter \texttt{t} in the name of the
-function.) Each cell of the matrix contains the mean speed for the group
-of people specified by the row and column names. From this ``table'' we
-can see that for each seating preference males tend to drive faster than
-females do, on average.
-
-\subsection{\texorpdfstring{\texttt{Map()}}{Map()}}\label{map}
-
-\index{R-functions!Map()@\texttt{Map()}}
-
-The apply-family of functions are quite flexible, but they are subject
-to the limitation that the arguments specified in \texttt{...} apply in
-the same way in each iteration of the \texttt{FUN}, even as the object
-passed in for \texttt{X} provides a \emph{different} value to
-\texttt{FUN} each time. What if we would like \emph{two or more}
-parameters to vary? In that case we should look to the \texttt{Map()}
-function.
-
-Can you figure out what the following code does? Think about it before
-reading on in the text.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{reps <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{5}
-\NormalTok{probs <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.20}\NormalTok{, }\FloatTok{0.30}\NormalTok{, }\FloatTok{0.50}\NormalTok{, }\FloatTok{0.70}\NormalTok{, }\FloatTok{0.90}\NormalTok{)}
-\NormalTok{sizes <-}\StringTok{ }\DecValTok{5}\OperatorTok{:}\DecValTok{1} \OperatorTok{*}\StringTok{ }\DecValTok{1000}
-\NormalTok{sims <-}\StringTok{ }\KeywordTok{Map}\NormalTok{(rbinom, }\DataTypeTok{n =}\NormalTok{ reps, }\DataTypeTok{size =}\NormalTok{ sizes, }\DataTypeTok{prob =}\NormalTok{ probs)}
-\end{Highlighting}
-\end{Shaded}
-
-Ready to read on? The code simulates what might happen if:
-
-\begin{itemize}
-\tightlist
-\item
-  there are five coins;
-\item
-  the probability of Heads on each flip, for each coin, is given by the
-  vector \texttt{probs};
-\item
-  The first coin is to be flipped 5000 times, the second coin 4000
-  times, the third coin 3000 times, the fourth coin 2000 times and the
-  last coin 1000 times (as specified by \texttt{sizes}), and for each
-  coin the number of Heads will be counted;
-\item
-  For the first coin, the 5000 flips happens once, for the second coin
-  the 4000 flips happens twice, \ldots{}, and for the fifth coin the
-  1000 flips happens five times. (This behavior is determined by
-  \texttt{n\ =\ reps}.)
-\end{itemize}
-
-In \texttt{Map()} the function to be applied is the first argument. The
-remaining arguments will become parameters for the function. They should
-be vectors of the same length, but if they are not then R will attempt
-to recycle the shorter ones. The result of \texttt{Map()} is always a
-list:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{sims}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [[1]]
-## [1] 1039
-## 
-## [[2]]
-## [1] 1118 1238
-## 
-## [[3]]
-## [1] 1499 1506 1465
-## 
-## [[4]]
-## [1] 1421 1359 1393 1408
-## 
-## [[5]]
-## [1] 904 896 907 897 917
-\end{verbatim}
-
-Here is an application of \texttt{Map()} to the simulation
-problem---Section \ref{triangle-chance}---of making a triangle out of a
-randomly-split stick:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{isTriangle <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y, z) \{}
-\NormalTok{  (x }\OperatorTok{+}\StringTok{ }\NormalTok{y }\OperatorTok{>}\StringTok{ }\NormalTok{z) }\OperatorTok{&}\StringTok{ }\NormalTok{(x }\OperatorTok{+}\NormalTok{z }\OperatorTok{>}\StringTok{ }\NormalTok{y) }\OperatorTok{&}\StringTok{ }\NormalTok{(y }\OperatorTok{+}\StringTok{ }\NormalTok{z }\OperatorTok{>}\StringTok{ }\NormalTok{x)}
+\NormalTok{pattern <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{char =} \StringTok{"*"}\NormalTok{, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{) \{}
+\NormalTok{  lineLength <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n, (n}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\DecValTok{1}\NormalTok{)}
+\NormalTok{  theLine <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(char, n) \{}
+    \KeywordTok{cat}\NormalTok{(}\KeywordTok{rep}\NormalTok{(char, }\DataTypeTok{times =}\NormalTok{ n), }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{  lineLength }\OperatorTok{%>%}\StringTok{ }\KeywordTok{walk}\NormalTok{(theLine, }\DataTypeTok{char =}\NormalTok{ char)}
 \NormalTok{\}}
 
-\NormalTok{makesTriangle <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y) \{}
-\NormalTok{  a <-}\StringTok{ }\KeywordTok{pmin}\NormalTok{(x, y)}
-\NormalTok{  b <-}\StringTok{ }\KeywordTok{pmax}\NormalTok{(x, y)}
-\NormalTok{  side1 <-}\StringTok{ }\NormalTok{a}
-\NormalTok{  side2 <-}\StringTok{ }\NormalTok{b}\OperatorTok{-}\NormalTok{a}
-\NormalTok{  side3 <-}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{b}
-  \KeywordTok{isTriangle}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ side1, }\DataTypeTok{y =}\NormalTok{ side2, }\DataTypeTok{z =}\NormalTok{ side3)}
+\KeywordTok{pattern}\NormalTok{(}\DataTypeTok{char =} \StringTok{"a"}\NormalTok{, }\DataTypeTok{n =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## a
+## aa
+## aaa
+## aaaa
+## aaaaa
+## aaaaaa
+## aaaaaaa
+## aaaaaa
+## aaaaa
+## aaaa
+## aaa
+## aa
+## a
+\end{verbatim}
+
+The next example illustrates the use of the return-value of
+\texttt{walk()}. We would like to save plots of all numerical from the
+data frame \texttt{m111survey}, and also print summaries of them to the
+Console.
+
+First we create a directory to hold the plots:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{dir.exists}\NormalTok{(}\StringTok{"plots"}\NormalTok{) ) }\KeywordTok{dir.create}\NormalTok{(}\StringTok{"plots"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Next, we get the names of the numerical variables in
+\texttt{m111survey}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{numNames <-}
+\StringTok{  }\NormalTok{m111survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{keep}\NormalTok{(is.numeric) }\OperatorTok{%>%}\StringTok{   }\CommentTok{# purrr::keep()}
+\StringTok{  }\KeywordTok{names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+We used \texttt{purrr::keep()}, which retains only the elements of its
+input \texttt{.x} such that the \texttt{.f} function returns
+\texttt{TRUE}.
+
+We need a function to save the density plot of a single numerical
+variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{saveGraph <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(var, varname) \{}
+\NormalTok{  p <-}
+\StringTok{    }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \OtherTok{NULL}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ var)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_density}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"Density plot for "}\NormalTok{,}
+\NormalTok{                        varname, }\StringTok{"."}\NormalTok{))}
+  \KeywordTok{ggsave}\NormalTok{(}\DataTypeTok{filename =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"plots/density_"}\NormalTok{, varname, }\StringTok{".png"}\NormalTok{),}
+         \DataTypeTok{plot =}\NormalTok{ p, }\DataTypeTok{device =} \StringTok{"png"}\NormalTok{)}
 \NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
-\KeywordTok{mean}\NormalTok{(}\KeywordTok{simplify2array}\NormalTok{(}
-  \KeywordTok{Map}\NormalTok{(makesTriangle, }
-      \DataTypeTok{x =} \KeywordTok{runif}\NormalTok{(}\DecValTok{10000}\NormalTok{), }
-      \DataTypeTok{y =} \KeywordTok{runif}\NormalTok{(}\DecValTok{10000}\NormalTok{))))  }\CommentTok{# estimate the chance of a triangle}
+We also need a function to produce a summary of a single numerical
+variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{makeSummary <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, varname) \{}
+\NormalTok{  five <-}\StringTok{ }\KeywordTok{fivenum}\NormalTok{(x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+  \KeywordTok{list}\NormalTok{(}\DataTypeTok{variable =}\NormalTok{ varname,}
+       \DataTypeTok{min =}\NormalTok{ five[}\DecValTok{1}\NormalTok{],}
+       \DataTypeTok{Q1 =}\NormalTok{ five[}\DecValTok{2}\NormalTok{],}
+       \DataTypeTok{median =}\NormalTok{ five[}\DecValTok{3}\NormalTok{],}
+       \DataTypeTok{Q3 =}\NormalTok{ five[}\DecValTok{4}\NormalTok{],}
+       \DataTypeTok{max =}\NormalTok{ five[}\DecValTok{5}\NormalTok{])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Now we walk through the process. We will actually use the
+function\texttt{walk2()}, which takes the following inputs:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{.x} (the data frame consisting of the numerical variables) and
+\item
+  \texttt{.y} (the names of these variables)
+\item
+  \texttt{.f} (the function \texttt{saveGraph}, to make and save a
+  density plot)
+\end{itemize}
+
+We also use \texttt{pmap\_dfr()}, which takes a list consisting of the
+data frame and variable-names and constructs a data frame row-by-row,
+with each row summarizing one of the variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m111survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{keep}\NormalTok{(is.numeric) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{walk2}\NormalTok{(}\DataTypeTok{.y =}\NormalTok{ numNames,}
+        \DataTypeTok{.f =}\NormalTok{ saveGraph) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# returns the df of numerical variables}
+\StringTok{  }\KeywordTok{list}\NormalTok{(., numNames) }\OperatorTok{%>%}\StringTok{      }\CommentTok{# creating the list (df, numNames)}
+\StringTok{  }\KeywordTok{pmap_dfr}\NormalTok{(makeSummary)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.2503
+## # A tibble: 6 x 6
+##          variable   min    Q1  median     Q3   max
+##             <chr> <dbl> <dbl>   <dbl>  <dbl> <dbl>
+## 1          height  51.0  65.0  68.000  71.75    79
+## 2        ideal_ht  54.0  67.0  68.000  75.00    90
+## 3           sleep   2.0   5.0   7.000   7.00    10
+## 4         fastest  60.0  90.5 102.000 119.50   190
+## 5             GPA   1.9   2.9   3.225   3.56     4
+## 6 diff.ideal.act.  -4.0   0.0   2.000   3.00    18
 \end{verbatim}
 
-Note the use of the function \texttt{simplify2array()}
-\index{R-functions!simplify2array()@\texttt{simplify2array()}}which
-turns the list of \texttt{TRUE}s and \texttt{FALSE}s returned by
-\texttt{Map()} into a logical vector. The mean of this vector gives the
-proportion of times in our simulation that a triangle was formed.
+Check the \texttt{plots} directory; it should contain these files:
 
-\subsection{\texorpdfstring{\texttt{replicate()}}{replicate()}}\label{replicate}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{density\_diff.ideal.act.png}
+\item
+  \texttt{density\_fastest.png}
+\item
+  \texttt{density.GPA.png}
+\item
+  \texttt{density\_height.png}
+\item
+  \texttt{density\_ideal\_ht.png}
+\item
+  \texttt{density\_sleep.png}
+\end{itemize}
 
-\index{R-functions!replicate()()@\texttt{replicate()}}
+\subsection{Practice Exercises}\label{practice-exercises-36}
 
-\texttt{replicate()} evaluates a given expression a specified number of
-times. By default it simplifies the results to an array, if possible:
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use \texttt{map\_dbl()} to produce the squares of the whole numbers
+  form 1 to 10.
+\item
+  Use \texttt{map\_chr} to state the type of each element of the
+  following list:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sims <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}\DecValTok{10}\NormalTok{, }\KeywordTok{runif}\NormalTok{(}\DecValTok{5}\NormalTok{))}
-\KeywordTok{str}\NormalTok{(sims)}
+\NormalTok{lst <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+\NormalTok{  letters,}
+  \KeywordTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DataTypeTok{by =} \DecValTok{2}\NormalTok{),}
+  \KeywordTok{c}\NormalTok{(1L, 5L, 7L),}
+  \DecValTok{1}\OperatorTok{:}\DecValTok{10} \OperatorTok{>}\StringTok{ }\FloatTok{5.5}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here are some people:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{people <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Bettina"}\NormalTok{, }\StringTok{"Raj"}\NormalTok{, }\StringTok{"Isabella"}\NormalTok{, }\StringTok{"Khalil"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  The following vector tells whether or not each person is a Grand
+  Poo-Bah:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{status <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"humble"}\NormalTok{, }\StringTok{"poobah"}\NormalTok{, }\StringTok{"poobah"}\NormalTok{, }\StringTok{"humble"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Use \texttt{pwalk()} to properly greet each person. The result in the
+  console should be as follows:
+
+\begin{verbatim}
+## Yo, dawg.
+## Hail, O Grand Poo-Bah Raj!
+## Hail, O Grand Poo-Bah Isabella!
+## Yo, dawg.
+\end{verbatim}
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-18}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{map_dbl}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\OperatorTok{~}\NormalTok{.}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  num [1:5, 1:10] 0.822 0.864 0.803 0.813 0.886 ...
+##  [1]   1   4   9  16  25  36  49  64  81 100
 \end{verbatim}
 
-\section{\texorpdfstring{\texttt{Filter()} and
-\texttt{Reduce()}}{Filter() and Reduce()}}\label{filter-and-reduce}
-
-\index{R-functions!filter()()@\texttt{filter()}}
-
-R provides support for several ``higher-order'' functions commonly-used
-in functional programming languages. (See \texttt{help(funprog)}.)
-Within this family of functions we have already met \texttt{Map()}.
-Another useful member is \texttt{Filter()}, which can do sub-setting
-work in situations when R's usual vector-based sub-setting falls short.
-
-Suppose, for example, that you want to select from \texttt{mat111survey}
-only those variables that are factors. This can be accomplished as
-follows:
+  This is more verbose, but works just as well:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{m111Factors <-}\StringTok{ }\KeywordTok{Filter}\NormalTok{(is.factor, m111survey)}
-\KeywordTok{str}\NormalTok{(m111Factors)}
+\KeywordTok{map_dbl}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) x}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]   1   4   9  16  25  36  49  64  81 100
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{map_chr}\NormalTok{(lst, typeof)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character" "double"    "integer"   "logical"
+\end{verbatim}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{list}\NormalTok{(people, status) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pwalk}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(person, type) \{}
+    \ControlFlowTok{if}\NormalTok{ ( type }\OperatorTok{==}\StringTok{ "poobah"}\NormalTok{ ) \{}
+      \KeywordTok{cat}\NormalTok{(}\StringTok{"Hail, O Grand Poo-Bah "}\NormalTok{,}
+\NormalTok{          person, }\StringTok{"!}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+      \KeywordTok{cat}\NormalTok{(}\StringTok{"Yo, dawg.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{    \}}
+\NormalTok{  \})}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\section{\texorpdfstring{Other \textbf{purr} Higher-Order
+Functions}{Other purr Higher-Order Functions}}\label{other-purr-higher-order-functions}
+
+\subsection{\texorpdfstring{\texttt{keep()} and
+\texttt{discard()}}{keep() and discard()}}\label{keep-and-discard}
+
+\texttt{keep()} is similar to \textbf{dplyr}'s \texttt{filter()}, but
+whereas \texttt{filter()} chooses rows of a data frame based on a given
+conditions, \texttt{keep()} chooses the elements of the input list or
+vector \texttt{.x} based on a condition named \texttt{.p}.
+
+Examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# keep the numbers that are 1 more than a multiple of 3}
+\DecValTok{1}\OperatorTok{:}\DecValTok{20} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{keep}\NormalTok{(}\DataTypeTok{.p =} \OperatorTok{~}\StringTok{ }\NormalTok{. }\OperatorTok{%%}\StringTok{ }\DecValTok{3} \OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  1  4  7 10 13 16 19
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# keep the factors in m111survey}
+\NormalTok{m111survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{keep}\NormalTok{(is.factor) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -27020,31 +27164,63 @@ follows:
 ##  $ sex         : Factor w/ 2 levels "female","male": 2 2 1 1 2 2 2 2 1 1 ...
 \end{verbatim}
 
-Note that with \texttt{Filter()} as well as with \texttt{Map()}, the
-function is the first argument. This is the case for all members of R's
-\texttt{funprog} family.
+\texttt{discard(.x,,\ .\ p\ =\ condition)} is equivalent to
+\texttt{keep(.x,\ .p\ =\ !condition)}. Thus:
 
-Another important member of the \texttt{funprog} family is
-\texttt{Reduce()} \index{R-functions!Reduce()()@\texttt{Reduce()}}.
-Given a function \texttt{f} that takes two inputs and a vector
-\texttt{v}, \texttt{Reduce()}:
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# discard numbers that are 1 more than a multiple of 3}
+\DecValTok{1}\OperatorTok{:}\DecValTok{20} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{discard}\NormalTok{(}\DataTypeTok{.p =} \OperatorTok{~}\StringTok{ }\NormalTok{. }\OperatorTok{%%}\StringTok{ }\DecValTok{3} \OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  2  3  5  6  8  9 11 12 14 15 17 18 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# discard the factors in m111survey}
+\NormalTok{m111survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{discard}\NormalTok{(is.factor) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{str}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    71 obs. of  6 variables:
+##  $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
+##  $ ideal_ht       : num  78 76 NA 65 72 NA 72 76 61 67 ...
+##  $ sleep          : num  9.5 7 9 7 8 10 4 6 7 7 ...
+##  $ fastest        : int  119 110 85 100 95 100 85 160 90 90 ...
+##  $ GPA            : num  3.56 2.5 3.8 3.5 3.2 3.1 3.68 2.7 2.8 NA ...
+##  $ diff.ideal.act.: num  2 2 NA 3 0 NA 2 -3 2 0 ...
+\end{verbatim}
+
+\subsection{\texorpdfstring{\texttt{reduce()}}{reduce()}}\label{reduce}
+
+Another important member of the \textbf{purrr} family is
+\texttt{reduce()} \index{R-functions!reduce()()@\texttt{reduce()}}.
+Given a vector \texttt{.x} and a function \texttt{.f} that takes two
+inputs, \texttt{reduce()} does the following:
 
 \begin{itemize}
 \tightlist
 \item
-  applies \texttt{f} to elements 1 and 2 of the \texttt{v}, getting a
+  applies \texttt{f} to elements 1 and 2 of \texttt{.x}, getting a
   result;
 \item
-  applies \texttt{f} to the result and element 3 of \texttt{v}, getting
-  another result;
+  applies \texttt{f} to the result and to element 3 of \texttt{.x},
+  getting another result;
 \item
-  applies \texttt{f} to this new result and element 4 of \texttt{v},
+  applies \texttt{f} to this new result and to element 4 of \texttt{.x},
   getting yet another result \ldots{}
 \item
-  \ldots{} and so on until all of the elements of \texttt{v} have been
+  \ldots{} and so on until all of the elements of \texttt{.x} have been
   exhausted.
 \item
-  then \texttt{Reduce()} returns the final result in the above series of
+  then \texttt{reduce()} returns the final result in the above series of
   operations.
 \end{itemize}
 
@@ -27085,11 +27261,12 @@ might you proceed? You could:
   then return 14.
 \end{itemize}
 
-\texttt{Reduce()} operates in this way.
+\texttt{reduce()} operates in this way.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{Reduce}\NormalTok{(sum, vec)}
+\NormalTok{vec }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{reduce}\NormalTok{(}\DataTypeTok{.f =}\NormalTok{ sum)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -27097,7 +27274,7 @@ might you proceed? You could:
 ## [1] 14
 \end{verbatim}
 
-Hence a common application of \texttt{Reduce} is to take an operation
+Hence a common application of \texttt{reduce} is to take an operation
 that is defined on only two items and extend it to operate on any number
 of items. Consider, for example, the function \texttt{intersect()},
 \index{R-functions!intersect()()@\texttt{intersect()}}, which will find
@@ -27127,7 +27304,7 @@ You cannot intersect three or more vectors at once:
 ## Error in base::intersect(x, y, ...) : unused argument (c(4, 7, 9))
 \end{verbatim}
 
-With \texttt{Reduce()} you can intersect as many vectors as you like,
+With \texttt{reduce()} you can intersect as many vectors as you like,
 provided that they are first stored in a list.
 
 \begin{Shaded}
@@ -27136,7 +27313,8 @@ provided that they are first stored in a list.
             \KeywordTok{c}\NormalTok{(}\StringTok{"Raj"}\NormalTok{, }\StringTok{"Vikram"}\NormalTok{, }\StringTok{"Sita"}\NormalTok{, }\StringTok{"Akash"}\NormalTok{, }\StringTok{"Chandra"}\NormalTok{),}
             \KeywordTok{c}\NormalTok{(}\StringTok{"Akash"}\NormalTok{, }\StringTok{"Raj"}\NormalTok{, }\StringTok{"Chandra"}\NormalTok{, }\StringTok{"Bipan"}\NormalTok{, }\StringTok{"Lila"}\NormalTok{),}
             \KeywordTok{c}\NormalTok{(}\StringTok{"Akash"}\NormalTok{, }\StringTok{"Vikram"}\NormalTok{, }\StringTok{"Devadata"}\NormalTok{, }\StringTok{"Raj"}\NormalTok{, }\StringTok{"Lila"}\NormalTok{))}
-\KeywordTok{Reduce}\NormalTok{(intersect, lst)}
+\NormalTok{lst }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{reduce}\NormalTok{(intersect)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -27144,12 +27322,365 @@ provided that they are first stored in a list.
 ## [1] "Akash" "Raj"
 \end{verbatim}
 
+\texttt{reduce()} can take an argument called \texttt{.init}. When this
+argument is given a value, operation begins by applying to \texttt{.f}
+to \texttt{.init} and the first element of \texttt{.x}.
+
+Let's apply \texttt{reduce()} with \texttt{.init} to the task of making
+a \emph{truth table}: the set of all \(2^n\) logical vectors of a given
+length \(n\).
+
+The set \(S_1\) of vectors of length \(n = 1\) consists of only two
+vectors:
+
+\begin{verbatim}
+##           
+## vec1  TRUE
+## vec2 FALSE
+\end{verbatim}
+
+Now consider a systematic way to construct the set \(S_2\) of all the
+vectors of length two. We know that there are four such vectors:
+
+\begin{verbatim}
+##                 
+## vec1  TRUE  TRUE
+## vec2  TRUE FALSE
+## vec3 FALSE  TRUE
+## vec4 FALSE FALSE
+\end{verbatim}
+
+Observe that the first two of them begin with \texttt{TRUE} and end with
+the set \(S_1\) of vectors of length one:
+
+\begin{verbatim}
+##                
+## vec1 TRUE  TRUE
+## vec2 TRUE FALSE
+\end{verbatim}
+
+The last two of them begin with \texttt{FALSE} and \emph{also} end with
+\(S_1\):
+
+\begin{verbatim}
+##                 
+## vec3 FALSE  TRUE
+## vec4 FALSE FALSE
+\end{verbatim}
+
+Now consider \(S_3\), the set of all eight vectors of length three:
+
+\begin{verbatim}
+##                       
+## vec1  TRUE  TRUE  TRUE
+## vec2  TRUE  TRUE FALSE
+## vec3  TRUE FALSE  TRUE
+## vec4  TRUE FALSE FALSE
+## vec5 FALSE  TRUE  TRUE
+## vec6 FALSE  TRUE FALSE
+## vec7 FALSE FALSE  TRUE
+## vec8 FALSE FALSE FALSE
+\end{verbatim}
+
+Observe that the first four of them end begin with \texttt{TRUE} and and
+with the vectors of \(S_2\):
+
+\begin{verbatim}
+##                           
+## vec1 TRUE TRUE  TRUE  TRUE
+## vec2 TRUE TRUE  TRUE FALSE
+## vec3 TRUE TRUE FALSE  TRUE
+## vec4 TRUE TRUE FALSE FALSE
+\end{verbatim}
+
+The last two of them begin with \texttt{FALSE} and \emph{also} end with
+the vectors of \(S_2\):
+
+\begin{verbatim}
+##                       
+## vec5 FALSE  TRUE  TRUE
+## vec6 FALSE  TRUE FALSE
+## vec7 FALSE FALSE  TRUE
+## vec8 FALSE FALSE FALSE
+\end{verbatim}
+
+The pattern is now clear. If for any \(m \ge 1\) you are in possession
+of the \(2^m \times m\) matrix \(S_m\) of all possible vectors of length
+\(m\), then to obtain the \(2^{m+1} \times (m+1)\) matrix \(S_{m+1}\) of
+all possible vectors of length \(m+1\) you should:
+
+\begin{itemize}
+\tightlist
+\item
+  stack \(2^m\) \texttt{TRUE}s on top of \(2^m\) \texttt{FALSE}s,
+  creating a \(2^{m+1} \times 1\) matrix \(U\);
+\item
+  stack the \(S_m\) underneath itself, creating a \(2^{m+1} \times m\)
+  matrix \(V\);
+\item
+  place \(U\) next to \(V\).
+\end{itemize}
+
+\texttt{reduce()} with \texttt{.init} set to \(S_1\) is appropriate for
+this iterative building process. Here is an implementation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{makeTable <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n, }\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{) \{}
+  \CommentTok{# make .init (S_1)}
+\NormalTok{  s1 <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{), }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{)}
+  \KeywordTok{rownames}\NormalTok{(s1) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"vec1"}\NormalTok{, }\StringTok{"vec2"}\NormalTok{)}
+  \KeywordTok{colnames}\NormalTok{(s1) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{""}\NormalTok{)}
+  
+  \CommentTok{# make .f}
+\NormalTok{  buildNext <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(accum, value) \{}
+    \ControlFlowTok{if}\NormalTok{ ( verbose ) \{}
+      \KeywordTok{cat}\NormalTok{(}\StringTok{"On value "}\NormalTok{, value, }
+          \StringTok{" with accumalated material:"}\NormalTok{,}
+          \DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+      \KeywordTok{print}\NormalTok{(accum)}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ ( value }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{ ) }\KeywordTok{return}\NormalTok{(accum)}
+\NormalTok{    r <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(accum)}
+\NormalTok{    u <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{times =}\NormalTok{ r),}
+           \KeywordTok{rep}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{times =}\NormalTok{ r))}
+\NormalTok{    v <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(accum, accum)}
+\NormalTok{    nextMatrix <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(u, v)}
+    \KeywordTok{colnames}\NormalTok{(nextMatrix) <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{, }\DataTypeTok{times =}\NormalTok{ value)}
+    \KeywordTok{rownames}\NormalTok{(nextMatrix) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"vec"}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\NormalTok{(}\DecValTok{2}\OperatorTok{^}\NormalTok{value), }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{ ( verbose ) \{}
+      \KeywordTok{cat}\NormalTok{(}\StringTok{"Finishing value"}\NormalTok{, value, }
+          \StringTok{", and I've built:"}\NormalTok{,}
+          \DataTypeTok{sep =} \StringTok{""}\NormalTok{)}
+      \KeywordTok{print}\NormalTok{(nextMatrix)}
+      \KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{    \}}
+\NormalTok{    nextMatrix}
+\NormalTok{  \}}
+  
+  \CommentTok{# build from .init to the final product S_n}
+  \KeywordTok{reduce}\NormalTok{(}\DataTypeTok{.x =} \DecValTok{1}\OperatorTok{:}\NormalTok{n, }\DataTypeTok{.f =}\NormalTok{ buildNext, }\DataTypeTok{.init =}\NormalTok{ s1)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+We have included a \texttt{verbose} option so we can watch the process
+as it unfolds.
+
+Note also that the parameters for the \texttt{.f} function are named:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{acc} (what has been ``accumulated'' up to the current step),
+  and
+\item
+  \texttt{value} (the value of \texttt{.x} at the current step).
+\end{itemize}
+
+It's conventional to give these or similar names to the parameters of
+the building-function.
+
+Let's try it out:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{makeTable}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DataTypeTok{verbose =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## On value 1 with accumalated material:          
+## vec1  TRUE
+## vec2 FALSE
+## On value 2 with accumalated material:          
+## vec1  TRUE
+## vec2 FALSE
+## Finishing value2, and I've built:                
+## vec1  TRUE  TRUE
+## vec2  TRUE FALSE
+## vec3 FALSE  TRUE
+## vec4 FALSE FALSE
+## 
+## 
+## On value 3 with accumalated material:                
+## vec1  TRUE  TRUE
+## vec2  TRUE FALSE
+## vec3 FALSE  TRUE
+## vec4 FALSE FALSE
+## Finishing value3, and I've built:                      
+## vec1  TRUE  TRUE  TRUE
+## vec2  TRUE  TRUE FALSE
+## vec3  TRUE FALSE  TRUE
+## vec4  TRUE FALSE FALSE
+## vec5 FALSE  TRUE  TRUE
+## vec6 FALSE  TRUE FALSE
+## vec7 FALSE FALSE  TRUE
+## vec8 FALSE FALSE FALSE
+\end{verbatim}
+
+\begin{verbatim}
+##                       
+## vec1  TRUE  TRUE  TRUE
+## vec2  TRUE  TRUE FALSE
+## vec3  TRUE FALSE  TRUE
+## vec4  TRUE FALSE FALSE
+## vec5 FALSE  TRUE  TRUE
+## vec6 FALSE  TRUE FALSE
+## vec7 FALSE FALSE  TRUE
+## vec8 FALSE FALSE FALSE
+\end{verbatim}
+
+Of course in practice we would not turn on the \texttt{verbose} option:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{makeTable}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                              
+## vec1   TRUE  TRUE  TRUE  TRUE
+## vec2   TRUE  TRUE  TRUE FALSE
+## vec3   TRUE  TRUE FALSE  TRUE
+## vec4   TRUE  TRUE FALSE FALSE
+## vec5   TRUE FALSE  TRUE  TRUE
+## vec6   TRUE FALSE  TRUE FALSE
+## vec7   TRUE FALSE FALSE  TRUE
+## vec8   TRUE FALSE FALSE FALSE
+## vec9  FALSE  TRUE  TRUE  TRUE
+## vec10 FALSE  TRUE  TRUE FALSE
+## vec11 FALSE  TRUE FALSE  TRUE
+## vec12 FALSE  TRUE FALSE FALSE
+## vec13 FALSE FALSE  TRUE  TRUE
+## vec14 FALSE FALSE  TRUE FALSE
+## vec15 FALSE FALSE FALSE  TRUE
+## vec16 FALSE FALSE FALSE FALSE
+\end{verbatim}
+
+\subsection{Practice Exercises}\label{practice-exercises-37}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The operator \texttt{*} (multiplication) is really a function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{`}\DataTypeTok{*}\StringTok{`}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 15
+\end{verbatim}
+
+  But it can only multiply two numbers at once. The R-function
+  \texttt{prod()} cna handle as many numbers as you like:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{prod}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 210
+\end{verbatim}
+
+  Use \texttt{reduce()} and \texttt{*} to write your own function
+  \texttt{product()} that takes a numerical vector \texttt{vec} and
+  returns the product of the elements of the vector. It should work liek
+  this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{product}\NormalTok{(}\DataTypeTok{vec =} \KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 60
+\end{verbatim}
+
+  (\textbf{Hint}: in the call to \texttt{reduce()} you will have to the
+  refer to the \texttt{*}-function as
+  \texttt{\textasciigrave{}*\textasciigrave{}}.)
+\item
+  Modify the function \texttt{product()} so that it in a single call to
+  \texttt{reduce()} it multiplies the number 2 by the product of the
+  elements of \texttt{vec}. (\textbf{Hint}: set \texttt{.init} to an
+  appropriate value.)
+\item
+  The data frame \textbf{iris} gives information on 150 irises. Use
+  \texttt{keep()} to create a new data frame that includes only the
+  numerical variables having a mean greater than 3.5.
+\end{enumerate}
+
+\subsection{Solutions to the Practice
+Exercises}\label{solutions-to-the-practice-exercises-19}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{product <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(vec) \{}
+  \KeywordTok{reduce}\NormalTok{(vec, }\DataTypeTok{.f =} \StringTok{`}\DataTypeTok{*}\StringTok{`}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{product <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(vec) \{}
+  \KeywordTok{reduce}\NormalTok{(vec, }\DataTypeTok{.f =} \StringTok{`}\DataTypeTok{*}\StringTok{`}\NormalTok{, }\DataTypeTok{.init =} \DecValTok{2}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Try this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bigIris <-}
+\StringTok{  }\NormalTok{iris }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{keep}\NormalTok{(is.numeric) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{keep}\NormalTok{(}\OperatorTok{~}\KeywordTok{mean}\NormalTok{(.) }\OperatorTok{>}\StringTok{ }\FloatTok{3.5}\NormalTok{)}
+\KeywordTok{str}\NormalTok{(bigIris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    150 obs. of  2 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+\end{verbatim}
+
+  The following does not work. Why?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bigIris <-}
+\StringTok{  }\NormalTok{iris }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{keep}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) \{}
+    \KeywordTok{is.numeric}\NormalTok{(x) }\OperatorTok{&}\StringTok{ }\KeywordTok{mean}\NormalTok{(x) }\OperatorTok{>}\StringTok{ }\FloatTok{3.5}
+\NormalTok{  \})}
+\ErrorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
 \section{Functionals vs.~Loops}\label{functionals-vs.loops}
 
-The functions we have studied in this chapter are often called
-\emph{functionals} or \emph{higher-order} functions because they take a
-function as an input. As we pointed out earlier, they deliver results
-that could have been produced by a writing a loop of some sort.
+The higher-order functions we have studied in this chapter are often
+called \emph{functionals.} As we pointed out earlier, they deliver
+results that could have been produced by a writing a loop of some sort.
 
 Once you get used to functionals, you will find that they are often more
 ``expressive'' than loops---easier for others to read and to understand,
@@ -27161,7 +27692,7 @@ vectors, each of which contains 100 randomly-generated numbers.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lst <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10000}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+\NormalTok{lst <-}\StringTok{ }\KeywordTok{map}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{10000}\NormalTok{), runif)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -27180,7 +27711,7 @@ Or we could use \texttt{sapply()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{means <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(lst, mean)}
+\NormalTok{means <-}\StringTok{ }\KeywordTok{map_dbl}\NormalTok{(lst, mean)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -27190,13 +27721,13 @@ I got:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{system.time}\NormalTok{(means <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(lst, mean))}
+\KeywordTok{system.time}\NormalTok{(means <-}\StringTok{ }\KeywordTok{map_dbl}\NormalTok{(lst, mean))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##   user  system elapsed 
-##  1.640   0.009   1.649 
+##  1.557   0.073   1.630 
 \end{verbatim}
 
 For the loop, I get:
@@ -27214,16 +27745,15 @@ For the loop, I get:
 
 \begin{verbatim}
 ##   user  system elapsed 
-##  1.744   0.008   1.752 
+##  1.653   0.075   1.730 
 \end{verbatim}
 
-The apply-function is a bit faster. The difference is not too
-considerable, though.
+The map-function is a bit faster, but the difference is small.
 
 Remember also that vectorization is \emph{much} faster than looping, and
 is also usually quite expressive, so don't struggle to take a functional
 approach when vectorization is possible. (This advice applies to a
-number of examples from this Chapter, in which the desired computations
+several examples from this Chapter, in which the desired computations
 had already been accomplished in earlier chapters by some form of
 vectorization.)
 
@@ -27299,75 +27829,12 @@ more human-readable or to make it perform the task more quickly.)
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Use \texttt{tapply()} to compare the median fastest speeds of the
-  front-sitters, middle-sitters and back-sitters in the
-  \texttt{m111survey} data from the \textbf{tigerstats} package. Which
-  group has the highest median?
-\item
-  The 25th percentile of a numerical vector \texttt{x} is a number such
-  that about 25\% of the values in \texttt{x} are less than that number.
-  This number is called the \emph{first quartile} of \texttt{x}. The
-  75th percentile of \texttt{x}, also called the \emph{third quartile},
-  is a number so that about 75\% of the values of \texttt{x} are less
-  than that number.
-
-  It follows that about 50\% of the values of \texttt{x} lie between its
-  first and third quartiles. The difference between the two quartiles
-  (third quartile minus first quartile) is called the
-  \emph{interquartile range} (IQR) of \texttt{x}. It's a measure of how
-  ``spread out'' typical values of \texttt{x} are: the bigger the IQR,
-  the more the spread.
-
-  Study the function \texttt{quantile()}
-  \index{R-functions()!quantile()@\texttt{quantile()}}from the
-  \textbf{stats} package. Notice that you can get the first and third
-  quartiles of \texttt{x} with the command
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{quantile}\NormalTok{(x, }\DataTypeTok{probs =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.75}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-  Your task is to use \texttt{quantile()} to write a function called
-  \texttt{iqRange()} that will return the interquartile range of any
-  given numerical vector. Then use that function with \texttt{tapply()}
-  to get the interquartile ranges for the fastest speeds in the
-  \texttt{m111survey} data, where the students are broken into groups
-  according to both seating preference and sex.
-\item
-  This exercise continues the study of sex discrimination in wages that
-  was begun in the \protect\hyperlink{frames-exercises}{Exercises} from
-  Chapter \ref{frames}. In those exercises our approach was graphical,
-  but we would like to check our conclusions with a numerical approach
-  as well. Working from the \texttt{cpsSmall} data frame, use
-  \texttt{tappply()} to compare mean wages when the subjects are broken
-  into groups according to both sex and sector of employment. (This
-  corresponds to the graph with eight violin-plots from the Chapter
-  \ref{frames} Exercises.)
-
-  Examine the ``table'' you got with \texttt{tapply()}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Are there any sectors in which it seems that women typically make
-    more than men. If so, what sectors are they?
-  \item
-    On the other hand, are there any sectors where men typically make
-    more than women? If so, what sectors are they?
-  \item
-    Based on your analysis, does it seem plausible that women made less
-    than men simply because they chose lower-paying sectors of
-    employment?
-  \end{itemize}
-\item
   Explain in words what the following line of code produces when given a
-  vector \texttt{y}:
+  numerical vector \texttt{y}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{Map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) x}\OperatorTok{^}\DecValTok{2}\NormalTok{, y)}
+\KeywordTok{map}\NormalTok{(y, }\ControlFlowTok{function}\NormalTok{(x) x}\OperatorTok{^}\DecValTok{3} \OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -27379,7 +27846,7 @@ more human-readable or to make it perform the task more quickly.)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{Map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{sqrt}\NormalTok{(x), y)}
+\KeywordTok{map}\NormalTok{(y, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{sqrt}\NormalTok{(x))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -27395,11 +27862,11 @@ more human-readable or to make it perform the task more quickly.)
   \texttt{system.time()}. What moral do you draw from this?
 \item
   To \emph{refactor} \index{refactoring}computer code is to rewrite the
-  code so that is does the same thing, but in a different way. We might
+  code so that it does the same thing, but in a different way. We might
   refactor code in order to make it more readable by humans, or to make
   it perform its task more quickly.
 
-  Refactor the following code so that it uses \texttt{Map()} instead of
+  Refactor the following code so that it uses \texttt{keep()} instead of
   a loop:
 
 \begin{Shaded}
@@ -27428,10 +27895,9 @@ more human-readable or to make it perform the task more quickly.)
 \begin{Highlighting}[]
 \NormalTok{randomSims <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(vecs, }\DataTypeTok{lower =} \DecValTok{0}\NormalTok{, }\DataTypeTok{upper=} \DecValTok{1}\NormalTok{, }\DataTypeTok{seed =} \OtherTok{NULL}\NormalTok{) \{}
   \CommentTok{# set seed if none is provided by the user}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
 
 \NormalTok{  lst <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\DataTypeTok{mode =} \StringTok{"list"}\NormalTok{, }\DataTypeTok{length =} \KeywordTok{length}\NormalTok{(vecs))}
   \ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(vecs) ) \{}
@@ -27443,7 +27909,7 @@ more human-readable or to make it perform the task more quickly.)
 \end{Shaded}
 
   Refactor the code for \texttt{randomSims()} so that it uses
-  \texttt{lapply()} instead of a loop.
+  \texttt{map()} instead of a loop.
 \item
   The following enhanced version of \texttt{randomSims()} is even more
   flexible, as it allows both the upper and lower limits for the
@@ -27462,10 +27928,9 @@ more human-readable or to make it perform the task more quickly.)
                       \StringTok{"big as the corresponding lower bound."}\NormalTok{)))}
 \NormalTok{  \}}
   \CommentTok{# set seed if none is provided by the user}
-  \ControlFlowTok{if}\NormalTok{ ( }\KeywordTok{is.null}\NormalTok{(seed) ) \{}
-\NormalTok{    seed <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{Sys.time}\NormalTok{())}
+  \ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{is.null}\NormalTok{(seed) ) \{}
+    \KeywordTok{set.seed}\NormalTok{(seed)}
 \NormalTok{  \}}
-  \KeywordTok{set.seed}\NormalTok{(seed)}
 
 \NormalTok{  lst <-}\StringTok{ }\KeywordTok{vector}\NormalTok{(}\DataTypeTok{mode =} \StringTok{"list"}\NormalTok{, }\DataTypeTok{length =} \KeywordTok{length}\NormalTok{(vecs))}
   \ControlFlowTok{for}\NormalTok{ ( i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(vecs) ) \{}
@@ -27476,7 +27941,7 @@ more human-readable or to make it perform the task more quickly.)
 \end{Highlighting}
 \end{Shaded}
 
-  Use \texttt{Map()} to refactor the code for \texttt{randomSims2()} so
+  Use \texttt{map()} to refactor the code for \texttt{randomSims2()} so
   as to avoid using the loop.
 \item
   Supposing that \texttt{y} is a numerical vector, explain in words what
@@ -27484,14 +27949,14 @@ more human-readable or to make it perform the task more quickly.)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{Filter}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) x }\OperatorTok{>=}\StringTok{ }\DecValTok{4}\NormalTok{, y)}
+\NormalTok{y }\OperatorTok{%>%}\StringTok{ }\KeywordTok{keep}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) x }\OperatorTok{>=}\StringTok{ }\DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 \item
-  Write a line of code using the sub-setting operator \texttt{{[}}
+  Write a line of code using the sub-setting operator \texttt{{[}} that
   produces the same result as the code in the previous problem.
 \item
-  Use \texttt{Filter()} to write a function called \texttt{oddMembers()}
+  Use \texttt{keep()} to write a function called \texttt{oddMembers()}
   that, given any numerical vector, returns a vector containing the odd
   numbers of the given vector. Your function should take a single
   argument called \texttt{vec}, the given vector. A typical example of
@@ -27518,8 +27983,47 @@ more human-readable or to make it perform the task more quickly.)
 \end{Highlighting}
 \end{Shaded}
 
-  Use \texttt{Reduce()} and the \texttt{union()} function to obtain a
+  Use \texttt{reduce()} and the \texttt{union()} function to obtain a
   character vector that is the union of all the vectors in \texttt{lst}.
+\item
+  (*) Run the following code to see what it does. Then analyse the code
+  and explain in detail how it works. Along the way you will have to
+  study some unfamiliar R-functions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataDir <-}\StringTok{ "datafiles"}
+\ControlFlowTok{if}\NormalTok{ ( }\OperatorTok{!}\KeywordTok{dir.exists}\NormalTok{(dataDir) ) }\KeywordTok{dir.create}\NormalTok{(dataDir)}
+
+\NormalTok{urls <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+  \StringTok{"https://data.cityofnewyork.us/api/views/25th-nujf/rows.csv"}\NormalTok{,}
+  \StringTok{"https://data.seattle.gov/api/views/cf52-s8er/rows.csv"}\NormalTok{,}
+  \StringTok{"https://data.ct.gov/api/views/kbxi-4ia7/rows.csv"}
+\NormalTok{)}
+
+\NormalTok{fileNameFrags <-}
+\StringTok{  }\NormalTok{urls }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{str_match}\NormalTok{(}\StringTok{"data}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{.(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{."}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{.[, }\DecValTok{2}\NormalTok{]}
+
+\NormalTok{processFiles <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(url, frag) \{}
+\NormalTok{  csvDest <-}\StringTok{ }\KeywordTok{file.path}\NormalTok{(dataDir,}
+                       \KeywordTok{paste0}\NormalTok{(frag, }\StringTok{".csv"}\NormalTok{))}
+  \KeywordTok{download.file}\NormalTok{(url, csvDest)}
+  \KeywordTok{assign}\NormalTok{(frag, }\KeywordTok{read_csv}\NormalTok{(csvDest))}
+  \KeywordTok{do.call}\NormalTok{(}
+\NormalTok{    save,}
+    \DataTypeTok{args =} \KeywordTok{list}\NormalTok{(}
+\NormalTok{      frag,}
+      \DataTypeTok{file =} \KeywordTok{file.path}\NormalTok{(}
+\NormalTok{        dataDir,}
+        \KeywordTok{paste0}\NormalTok{(frag, }\StringTok{".rda"}\NormalTok{))))}
+\NormalTok{\}}
+
+\KeywordTok{list}\NormalTok{(urls, fileNameFrags) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pwalk}\NormalTok{(processFiles)}
+\end{Highlighting}
+\end{Shaded}
 \end{enumerate}
 
 \chapter{Object-Oriented Programming in R}\label{oo}
@@ -27967,7 +28471,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e828928"
+## [1] "0x137c8b818"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -27981,7 +28485,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e828928"
+## [1] "0x137c8b818"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -28020,7 +28524,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e828928"
+## [1] "0x137c8b818"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -28033,7 +28537,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11c2c40b8"
+## [1] "0x13a62c858"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -28051,7 +28555,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11e828928"
+## [1] "0x137c8b818"
 \end{verbatim}
 
 \begin{Shaded}
@@ -28095,7 +28599,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120cb41b8" "0x120cb41b8"
+## [1] "0x11a9bf868" "0x11a9bf868"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -28134,7 +28638,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120cb41b8" "0x120cb41b8"
+## [1] "0x11a9bf868" "0x11a9bf868"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -28176,7 +28680,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x120cb41b8" "0x1475dac38"
+## [1] "0x11a9bf868" "0x119948468"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
@@ -29055,13 +29559,12 @@ graphics system rather than \textbf{ggplot2}.
               \KeywordTok{box}\NormalTok{(}\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
               \KeywordTok{return}\NormalTok{(}\OtherTok{NULL}\NormalTok{)}
 \NormalTok{            \}}
-\NormalTok{            mat <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(whales, }\ControlFlowTok{function}\NormalTok{(x) \{}
-              \KeywordTok{c}\NormalTok{(x}\OperatorTok{$}\NormalTok{position[}\DecValTok{1}\NormalTok{], x}\OperatorTok{$}\NormalTok{position[}\DecValTok{2}\NormalTok{],}
-                \KeywordTok{as.numeric}\NormalTok{(x}\OperatorTok{$}\NormalTok{sex }\OperatorTok{==}\StringTok{ "male"}\NormalTok{), }\KeywordTok{as.numeric}\NormalTok{(x}\OperatorTok{$}\NormalTok{age }\OperatorTok{>=}\StringTok{ }\NormalTok{x}\OperatorTok{$}\NormalTok{maturity))}
-\NormalTok{              \}, }\DataTypeTok{simplify =} \StringTok{"array"}\NormalTok{)}
-\NormalTok{            mat <-}\StringTok{ }\KeywordTok{simplify2array}\NormalTok{(}\KeywordTok{t}\NormalTok{(mat))}
-\NormalTok{            df <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(mat)}
-            \KeywordTok{names}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{, }\StringTok{"sex"}\NormalTok{, }\StringTok{"mature"}\NormalTok{)}
+\NormalTok{            df <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map_dfr}\NormalTok{(whales, }\ControlFlowTok{function}\NormalTok{(x) \{}
+              \KeywordTok{list}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x}\OperatorTok{$}\NormalTok{position[}\DecValTok{1}\NormalTok{],}
+                   \DataTypeTok{y =}\NormalTok{ x}\OperatorTok{$}\NormalTok{position[}\DecValTok{2}\NormalTok{],}
+                   \DataTypeTok{sex =} \KeywordTok{as.numeric}\NormalTok{(x}\OperatorTok{$}\NormalTok{sex }\OperatorTok{==}\StringTok{ "male"}\NormalTok{),}
+                   \DataTypeTok{mature =} \KeywordTok{as.numeric}\NormalTok{(x}\OperatorTok{$}\NormalTok{age }\OperatorTok{>=}\StringTok{ }\NormalTok{x}\OperatorTok{$}\NormalTok{maturity))}
+\NormalTok{              \})}
             \CommentTok{# males will be red, females green:}
 \NormalTok{            df}\OperatorTok{$}\NormalTok{color <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(df}\OperatorTok{$}\NormalTok{sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{)}
             \CommentTok{# mature whales have cex = 3, immature whales cex 0.7}
@@ -29153,8 +29656,8 @@ turn off the step-by-step-animation, thus:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{oceanSim}\NormalTok{(}\DataTypeTok{steps =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{males =} \DecValTok{60}\NormalTok{, }\DataTypeTok{females =} \DecValTok{60}\NormalTok{,}
-         \DataTypeTok{starve =} \FloatTok{2.5}\NormalTok{, }\DataTypeTok{animate =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{oceanSim}\NormalTok{(}\DataTypeTok{steps =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{males =} \DecValTok{75}\NormalTok{, }\DataTypeTok{females =} \DecValTok{75}\NormalTok{,}
+         \DataTypeTok{starve =} \FloatTok{2.5}\NormalTok{, }\DataTypeTok{animate =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -30128,7 +30631,7 @@ or the type of object to which it is applied.
   distance from the origin is \(\sqrt{x^2 + y^2}\).)
 \end{enumerate}
 
-\bibliography{book.bib,packages.bib}
+\bibliography{book.bib,packages.bib,packages2.bib}
 
 \backmatter
 \printindex

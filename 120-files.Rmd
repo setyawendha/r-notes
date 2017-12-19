@@ -411,6 +411,28 @@ knitr::include_graphics("images/thinking.png")
 
 1. (*) Install the **tidytext** and **gutenbergr** packages.  **gutenbergr** simplifies the task of downloading a Project Gutenberg text, stripping off the spurious leading and trailing material.  **tidytext** automates a number fo basic text-analysis tasks.  Read the Vignette in the **gutenberg** packages and learn how to find the words in a text. Find the unique words in *The Wizard of Oz* as determined by **tidytext**, and use the `setdiff()` function to compare the `ozWords` in this Chapter with the word-list according to **tidytext**.  What are the primary differences?
 
+```{r echo=FALSE, eval=FALSE}
+library(gutenbergr)
+library(tidytext)
+gutenberg_works(str_detect(title, "Wizard of Oz"))
+ozBook <- gutenberg_download(55)
+```
+
+```{r echo=FALSE, eval=FALSE}
+ozWordsG <-
+  ozBook %>% 
+  unnest_tokens(word, text) %>%
+  .$word %>% 
+  unique() %>% 
+  sort()
+```
+
+```{r echo=FALSE, eval=FALSE}
+setdiff(ozWordsG, ozWords)
+setdiff(ozWords, ozWordsG)
+```
+
+
 
 
 

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-18">
+<meta name="date" content="2017-12-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -477,14 +477,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="14.2.4" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#procedures-as-higher-order-function-calls"><i class="fa fa-check"></i><b>14.2.4</b> Procedures as Higher-Order Function Calls</a></li>
 <li class="chapter" data-level="14.2.5" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#functional-programming-a-summary"><i class="fa fa-check"></i><b>14.2.5</b> Functional Programming: A Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html"><i class="fa fa-check"></i><b>14.3</b> <code>lapply()</code> and Friends</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#lapply"><i class="fa fa-check"></i><b>14.3.1</b> <code>lapply()</code></a></li>
-<li class="chapter" data-level="14.3.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#sapply"><i class="fa fa-check"></i><b>14.3.2</b> <code>sapply()</code></a></li>
-<li class="chapter" data-level="14.3.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#tapply"><i class="fa fa-check"></i><b>14.3.3</b> <code>tapply()</code></a></li>
-<li class="chapter" data-level="14.3.4" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#map"><i class="fa fa-check"></i><b>14.3.4</b> <code>Map()</code></a></li>
-<li class="chapter" data-level="14.3.5" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#replicate"><i class="fa fa-check"></i><b>14.3.5</b> <code>replicate()</code></a></li>
+<li class="chapter" data-level="14.3" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html"><i class="fa fa-check"></i><b>14.3</b> <strong>purrr</strong> Higher-Order Functions for Iteration</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#map-and-variations"><i class="fa fa-check"></i><b>14.3.1</b> <code>map()</code> and Variations</a></li>
+<li class="chapter" data-level="14.3.2" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#walk-and-variations"><i class="fa fa-check"></i><b>14.3.2</b> <code>walk()</code> and Variations</a></li>
+<li class="chapter" data-level="14.3.3" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#practice-exercises-36"><i class="fa fa-check"></i><b>14.3.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="14.3.4" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#solutions-to-the-practice-exercises-18"><i class="fa fa-check"></i><b>14.3.4</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="filter-and-reduce.html"><a href="filter-and-reduce.html"><i class="fa fa-check"></i><b>14.4</b> <code>Filter()</code> and <code>Reduce()</code></a></li>
+<li class="chapter" data-level="14.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html"><i class="fa fa-check"></i><b>14.4</b> Other <strong>purr</strong> Higher-Order Functions</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#keep-and-discard"><i class="fa fa-check"></i><b>14.4.1</b> <code>keep()</code> and <code>discard()</code></a></li>
+<li class="chapter" data-level="14.4.2" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#reduce"><i class="fa fa-check"></i><b>14.4.2</b> <code>reduce()</code></a></li>
+<li class="chapter" data-level="14.4.3" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#practice-exercises-37"><i class="fa fa-check"></i><b>14.4.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="14.4.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#solutions-to-the-practice-exercises-19"><i class="fa fa-check"></i><b>14.4.4</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="14.5" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>14.5</b> Functionals vs. Loops</a></li>
 <li class="chapter" data-level="14.6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>14.6</b> Conclusion</a></li>
 <li class="chapter" data-level="" data-path="glossary-11.html"><a href="glossary-11.html"><i class="fa fa-check"></i>Glossary</a></li>
@@ -800,13 +804,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
               <span class="kw">box</span>(<span class="dt">lwd =</span> <span class="dv">2</span>)
               <span class="kw">return</span>(<span class="ot">NULL</span>)
             }
-            mat &lt;-<span class="st"> </span><span class="kw">sapply</span>(whales, <span class="cf">function</span>(x) {
-              <span class="kw">c</span>(x<span class="op">$</span>position[<span class="dv">1</span>], x<span class="op">$</span>position[<span class="dv">2</span>],
-                <span class="kw">as.numeric</span>(x<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>), <span class="kw">as.numeric</span>(x<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>x<span class="op">$</span>maturity))
-              }, <span class="dt">simplify =</span> <span class="st">&quot;array&quot;</span>)
-            mat &lt;-<span class="st"> </span><span class="kw">simplify2array</span>(<span class="kw">t</span>(mat))
-            df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(mat)
-            <span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;mature&quot;</span>)
+            df &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_dfr</span>(whales, <span class="cf">function</span>(x) {
+              <span class="kw">list</span>(<span class="dt">x =</span> x<span class="op">$</span>position[<span class="dv">1</span>],
+                   <span class="dt">y =</span> x<span class="op">$</span>position[<span class="dv">2</span>],
+                   <span class="dt">sex =</span> <span class="kw">as.numeric</span>(x<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>),
+                   <span class="dt">mature =</span> <span class="kw">as.numeric</span>(x<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>x<span class="op">$</span>maturity))
+              })
             <span class="co"># males will be red, females green:</span>
             df<span class="op">$</span>color &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>sex <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>)
             <span class="co"># mature whales have cex = 3, immature whales cex 0.7</span>
@@ -854,8 +857,8 @@ Figure 15.1: Simulated whale population. Sadly, they all die after about 130 day
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">200</span>, <span class="dt">males =</span> <span class="dv">15</span>, <span class="dt">females =</span> <span class="dv">15</span>,
          <span class="dt">animate =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>You might also wish to explore varying the <code>starve</code> parameter: recall that the higher it is, the lower the long-term stable whale population will be. In order to better detect long-term stable population sizes, you will want to work with more steps, and you should turn off the step-by-step-animation, thus:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">males =</span> <span class="dv">60</span>, <span class="dt">females =</span> <span class="dv">60</span>,
-         <span class="dt">starve =</span> <span class="fl">2.5</span>, <span class="dt">animate =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">males =</span> <span class="dv">75</span>, <span class="dt">females =</span> <span class="dv">75</span>,
+         <span class="dt">starve =</span> <span class="fl">2.5</span>, <span class="dt">animate =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>The object-oriented approach to simulation is not necessarily the quickest approach: R6 objects do require a bit more time for computation, as compared to a system that stores relevant information about the population in vectors or in a data frame. On the other hand the object-oriented approach makes it easy to encode information about each individual whale as it proceeds through time. In larger applications, an object-oriented approach to programming can result in code that is relatively easy to read and to modify, albeit at some cost in terms of speed.</p>
 </div>
             </section>

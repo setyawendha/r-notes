@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-18">
+<meta name="date" content="2017-12-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -477,14 +477,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="14.2.4" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#procedures-as-higher-order-function-calls"><i class="fa fa-check"></i><b>14.2.4</b> Procedures as Higher-Order Function Calls</a></li>
 <li class="chapter" data-level="14.2.5" data-path="the-functional-programming-paradigm.html"><a href="the-functional-programming-paradigm.html#functional-programming-a-summary"><i class="fa fa-check"></i><b>14.2.5</b> Functional Programming: A Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html"><i class="fa fa-check"></i><b>14.3</b> <code>lapply()</code> and Friends</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#lapply"><i class="fa fa-check"></i><b>14.3.1</b> <code>lapply()</code></a></li>
-<li class="chapter" data-level="14.3.2" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#sapply"><i class="fa fa-check"></i><b>14.3.2</b> <code>sapply()</code></a></li>
-<li class="chapter" data-level="14.3.3" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#tapply"><i class="fa fa-check"></i><b>14.3.3</b> <code>tapply()</code></a></li>
-<li class="chapter" data-level="14.3.4" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#map"><i class="fa fa-check"></i><b>14.3.4</b> <code>Map()</code></a></li>
-<li class="chapter" data-level="14.3.5" data-path="lapply-and-friends.html"><a href="lapply-and-friends.html#replicate"><i class="fa fa-check"></i><b>14.3.5</b> <code>replicate()</code></a></li>
+<li class="chapter" data-level="14.3" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html"><i class="fa fa-check"></i><b>14.3</b> <strong>purrr</strong> Higher-Order Functions for Iteration</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#map-and-variations"><i class="fa fa-check"></i><b>14.3.1</b> <code>map()</code> and Variations</a></li>
+<li class="chapter" data-level="14.3.2" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#walk-and-variations"><i class="fa fa-check"></i><b>14.3.2</b> <code>walk()</code> and Variations</a></li>
+<li class="chapter" data-level="14.3.3" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#practice-exercises-36"><i class="fa fa-check"></i><b>14.3.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="14.3.4" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#solutions-to-the-practice-exercises-18"><i class="fa fa-check"></i><b>14.3.4</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="filter-and-reduce.html"><a href="filter-and-reduce.html"><i class="fa fa-check"></i><b>14.4</b> <code>Filter()</code> and <code>Reduce()</code></a></li>
+<li class="chapter" data-level="14.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html"><i class="fa fa-check"></i><b>14.4</b> Other <strong>purr</strong> Higher-Order Functions</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#keep-and-discard"><i class="fa fa-check"></i><b>14.4.1</b> <code>keep()</code> and <code>discard()</code></a></li>
+<li class="chapter" data-level="14.4.2" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#reduce"><i class="fa fa-check"></i><b>14.4.2</b> <code>reduce()</code></a></li>
+<li class="chapter" data-level="14.4.3" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#practice-exercises-37"><i class="fa fa-check"></i><b>14.4.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="14.4.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#solutions-to-the-practice-exercises-19"><i class="fa fa-check"></i><b>14.4.4</b> Solutions to the Practice Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="14.5" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>14.5</b> Functionals vs. Loops</a></li>
 <li class="chapter" data-level="14.6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>14.6</b> Conclusion</a></li>
 <li class="chapter" data-level="" data-path="glossary-11.html"><a href="glossary-11.html"><i class="fa fa-check"></i>Glossary</a></li>
@@ -711,17 +715,17 @@ message &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class=
 </ul>
 <p>We can view the first few row of the data frame using R’s <code>head()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(Births78, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
-<pre><code>##          date births dayofyear  wday weekend
-## 1  1978-01-01   7701         1   Sun weekend
-## 2  1978-01-02   7527         2   Mon weekday
-## 3  1978-01-03   8825         3  Tues weekday
-## 4  1978-01-04   8859         4   Wed weekday
-## 5  1978-01-05   9043         5 Thurs weekday
-## 6  1978-01-06   9208         6   Fri weekday
-## 7  1978-01-07   8084         7   Sat weekend
-## 8  1978-01-08   7611         8   Sun weekend
-## 9  1978-01-09   9172         9   Mon weekday
-## 10 1978-01-10   9089        10  Tues weekday</code></pre>
+<pre><code>##          date births dayofyear  wday
+## 1  1978-01-01   7701         1   Sun
+## 2  1978-01-02   7527         2   Mon
+## 3  1978-01-03   8825         3  Tues
+## 4  1978-01-04   8859         4   Wed
+## 5  1978-01-05   9043         5 Thurs
+## 6  1978-01-06   9208         6   Fri
+## 7  1978-01-07   8084         7   Sat
+## 8  1978-01-08   7611         8   Sun
+## 9  1978-01-09   9172         9   Mon
+## 10 1978-01-10   9089        10  Tues</code></pre>
 <p>We might wonder whether the number of births varies with the time of year. One way to investigate this question is to make a <em>scatterplot</em>, where the days of the year (numbered 1 through 365) are on the horizontal axis and the number of births for each day are on the vertical axis. Figure <a href="idea-tour.html#fig:birthsplot">1.2</a> shows such a plot.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 <div class="figure" style="text-align: center"><span id="fig:birthsplot"></span>
 <img src="r-notes_files/figure-html/birthsplot-1.png" alt="A simple scatterplot with R's ggplot2 graphics system." width="60%" />
