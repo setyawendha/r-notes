@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-12-19}
+  \date{2017-12-29}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -640,7 +640,7 @@ In the console you should see the following output:
 \end{verbatim}
 
 That's it---you just wrote a \emph{computer program}. A computer program
-is simply a sequence of instructions tha perform a specific task when
+is simply a sequence of instructions that perform a specific task when
 they are \emph{executed} (carried out) by the computer. In the above
 example, there was only one instruction in the sequence: it was the
 command to reproduce the \emph{string} \index{string} ``Hello, World''
@@ -665,7 +665,7 @@ In the console you should see the following output:
 
 We have been using the \texttt{cat()}
 \index{R-functions!cat()@\texttt{cat()}}function so far. Actually you
-can can get output without it. For example, suppose you type:
+can get output without it. For example, suppose you type:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -727,7 +727,7 @@ order of operations.
 
 Here are some examples:
 
-To get \(\frac{27-10}{3}\), use:
+To get \(\frac{27-3}{10}\), use:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6542,21 +6542,22 @@ number of other environments:
 
 \begin{verbatim}
 ##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:tigerData"      "package:stringr"       
-##  [5] "package:bindrcpp"       "package:purrr"         
-##  [7] "package:readr"          "package:tidyr"         
-##  [9] "package:tibble"         "package:tidyverse"     
-## [11] "package:babynames"      "package:tigerstats"    
-## [13] "package:abd"            "package:mosaic"        
-## [15] "package:Matrix"         "package:ggformula"     
-## [17] "package:dplyr"          "package:lattice"       
-## [19] "package:nlme"           "package:TurtleGraphics"
-## [21] "package:grid"           "package:ggplot2"       
-## [23] "package:mosaicData"     "tools:rstudio"         
-## [25] "package:stats"          "package:graphics"      
-## [27] "package:grDevices"      "package:utils"         
-## [29] "package:datasets"       "package:methods"       
-## [31] "Autoloads"              "package:base"
+##  [3] "package:tigerData"      "package:bindrcpp"      
+##  [5] "package:forcats"        "package:stringr"       
+##  [7] "package:purrr"          "package:readr"         
+##  [9] "package:tidyr"          "package:tibble"        
+## [11] "package:tidyverse"      "package:babynames"     
+## [13] "package:tigerstats"     "package:abd"           
+## [15] "package:mosaic"         "package:Matrix"        
+## [17] "package:ggformula"      "package:dplyr"         
+## [19] "package:lattice"        "package:nlme"          
+## [21] "package:TurtleGraphics" "package:grid"          
+## [23] "package:ggplot2"        "package:mosaicData"    
+## [25] "tools:rstudio"          "package:stats"         
+## [27] "package:graphics"       "package:grDevices"     
+## [29] "package:utils"          "package:datasets"      
+## [31] "package:methods"        "Autoloads"             
+## [33] "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -6662,7 +6663,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10c8c20d0>
+## <bytecode: 0x10252a948>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -8781,10 +8782,10 @@ Let's see our function in action:
 
 In the code for \texttt{verboseSearch()} you will notice that there is
 an initial check on the length of the vector. This is actually
-important. If a user were to enter an empty vector, then it length would
-be 0. Then in the loop the sequence would be \texttt{1:0}, which is the
-vector with elements 1 and 0. But look at what happens when you ask for
-any element of a zero-length vector:
+important. If a user were to enter an empty vector, then its length
+would be 0. Then in the loop the sequence would be \texttt{1:0}, which
+is the vector with elements 1 and 0. But look at what happens when you
+ask for any element of a zero-length vector:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10810,9 +10811,8 @@ Then we can call \texttt{sample()} like this:
 ##  [1]  9  1  9 10  9  6  8  9  4  7 10 10  9  2  6  9  5  9 10 10
 \end{verbatim}
 
-Notice that we a majority of 9's and 10's: this was fairly likely to
-occur since each selection had a 60\% chance of turning out to be 9 or
-10.
+Notice the majority of 9's and 10's: this was fairly likely to occur
+since each selection had a 60\% chance of turning out to be 9 or 10.
 
 \subsection{Application: a Bouncing
 Turtle}\label{application-a-bouncing-turtle}
@@ -19381,7 +19381,7 @@ couple of lists:
 \end{Shaded}
 
 Note that the elements of our three lists are not objects of a single
-data type. Note also that \texttt{lst3} actually contains \texttt{lst2}
+data type. Note also that \texttt{lst3} actually contains \texttt{lst1}
 as one of its elements.
 
 When you call \texttt{list()} to create a list, you have the option to
@@ -28471,7 +28471,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137c8b818"
+## [1] "0x11c1afc68"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -28485,7 +28485,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137c8b818"
+## [1] "0x11c1afc68"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -28524,7 +28524,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137c8b818"
+## [1] "0x11c1afc68"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -28537,7 +28537,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x13a62c858"
+## [1] "0x11b2d4458"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -28555,7 +28555,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x137c8b818"
+## [1] "0x11c1afc68"
 \end{verbatim}
 
 \begin{Shaded}
@@ -28599,7 +28599,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11a9bf868" "0x11a9bf868"
+## [1] "0x11eb7dd20" "0x11eb7dd20"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -28638,7 +28638,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11a9bf868" "0x11a9bf868"
+## [1] "0x11eb7dd20" "0x11eb7dd20"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -28680,7 +28680,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11a9bf868" "0x119948468"
+## [1] "0x11eb7dd20" "0x13bde8070"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in
