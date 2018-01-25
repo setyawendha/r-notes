@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-12-29}
+  \date{2018-01-25}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -6541,23 +6541,24 @@ number of other environments:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] ".GlobalEnv"             "package:R6"            
-##  [3] "package:tigerData"      "package:bindrcpp"      
+##  [1] ".GlobalEnv"             "package:tidytext"      
+##  [3] "package:magrittr"       "package:babynames"     
 ##  [5] "package:forcats"        "package:stringr"       
-##  [7] "package:purrr"          "package:readr"         
-##  [9] "package:tidyr"          "package:tibble"        
-## [11] "package:tidyverse"      "package:babynames"     
-## [13] "package:tigerstats"     "package:abd"           
-## [15] "package:mosaic"         "package:Matrix"        
-## [17] "package:ggformula"      "package:dplyr"         
-## [19] "package:lattice"        "package:nlme"          
-## [21] "package:TurtleGraphics" "package:grid"          
-## [23] "package:ggplot2"        "package:mosaicData"    
-## [25] "tools:rstudio"          "package:stats"         
-## [27] "package:graphics"       "package:grDevices"     
-## [29] "package:utils"          "package:datasets"      
-## [31] "package:methods"        "Autoloads"             
-## [33] "package:base"
+##  [7] "package:purrr"          "package:tidyr"         
+##  [9] "package:tibble"         "package:tidyverse"     
+## [11] "package:bindrcpp"       "package:R6"            
+## [13] "package:readr"          "package:tigerData"     
+## [15] "package:tigerstats"     "package:abd"           
+## [17] "package:mosaic"         "package:Matrix"        
+## [19] "package:ggformula"      "package:dplyr"         
+## [21] "package:lattice"        "package:nlme"          
+## [23] "package:TurtleGraphics" "package:grid"          
+## [25] "package:ggplot2"        "package:mosaicData"    
+## [27] "tools:rstudio"          "package:stats"         
+## [29] "package:graphics"       "package:grDevices"     
+## [31] "package:utils"          "package:datasets"      
+## [33] "package:methods"        "Autoloads"             
+## [35] "package:base"
 \end{verbatim}
 
 \texttt{search()} returns a character vector of names of environments.
@@ -6663,7 +6664,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x10252a948>
+## <bytecode: 0x11281e318>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -18295,6 +18296,17 @@ If you want to add another layer of glyphs, simply add on another call
 to a \texttt{geom}-function. In order to produce Figure
 \ref{fig:impviolinfastestseat}, for example, we use the code below:
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(m111survey, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ seat, }\DataTypeTok{y =}\NormalTok{ fastest)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_violin}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"burlywood"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_jitter}\NormalTok{(}\DataTypeTok{width =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Seating preference"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Fastest speed ever driven (mph)"}\NormalTok{,}
+             \DataTypeTok{title =} \StringTok{"There aren't so many back-sitters."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{figure}
 
 {\centering \includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/impviolinfastestseat-1} 
@@ -20635,7 +20647,7 @@ from the \textbf{magrittr} package.\footnote{\textbf{magrittr} is not
   attached in the tidy-verse, but most of the capability of this package
   is imported by \textbf{dplyr}.}
 
-The piper operator connect two function calls by making the the value
+The pipe operator connects two function calls by making the the value
 returned by the first call the first argument of the second call. Here's
 an example:
 
@@ -24277,7 +24289,7 @@ one for each of the three components of the phone number. For this,
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{people }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{extract}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ phone,}
+\StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{extract}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ phone,}
           \DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"area"}\NormalTok{, }\StringTok{"office"}\NormalTok{, }\StringTok{"line"}\NormalTok{),}
           \DataTypeTok{regex =} \StringTok{"(?x)        # for comments}
 \StringTok{                  .*           # in case of opening paren, etc.}
@@ -24581,7 +24593,7 @@ Exercises}\label{solutions-to-the-practice-exercises-16}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{people }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{extract}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ name,}
+\StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{extract}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ name,}
           \DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"last"}\NormalTok{, }\StringTok{"first"}\NormalTok{),}
           \DataTypeTok{regex =} \StringTok{"(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{W+(}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+)"}\NormalTok{)}
 \end{Highlighting}
@@ -28471,7 +28483,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11c1afc68"
+## [1] "0x1162186f8"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -28485,7 +28497,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11c1afc68"
+## [1] "0x1162186f8"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -28524,7 +28536,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11c1afc68"
+## [1] "0x1162186f8"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -28537,7 +28549,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11b2d4458"
+## [1] "0x119602728"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -28555,7 +28567,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11c1afc68"
+## [1] "0x1162186f8"
 \end{verbatim}
 
 \begin{Shaded}
@@ -28599,7 +28611,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11eb7dd20" "0x11eb7dd20"
+## [1] "0x11fad3df0" "0x11fad3df0"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -28638,7 +28650,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11eb7dd20" "0x11eb7dd20"
+## [1] "0x11fad3df0" "0x11fad3df0"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -28680,7 +28692,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11eb7dd20" "0x13bde8070"
+## [1] "0x11fad3df0" "0x118549bf8"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-29">
+<meta name="date" content="2018-01-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -782,7 +782,7 @@ sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
 </ul>
 <p>Suppose we would like to create three new variables in the data table, one for each of the three components of the phone number. For this, <code>tidyr::extract()</code> comes in handy: </p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">people <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">extract</span>(<span class="dt">col =</span> phone,
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(<span class="dt">col =</span> phone,
           <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;office&quot;</span>, <span class="st">&quot;line&quot;</span>),
           <span class="dt">regex =</span> <span class="st">&quot;(?x)        # for comments</span>
 <span class="st">                  .*           # in case of opening paren, etc.</span>
@@ -940,7 +940,7 @@ fruit[vowelCount <span class="op">&gt;</span><span class="st"> </span><span clas
 ## [6] &quot;salal berry&quot;</code></pre></li>
 <li><p>Try this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">people <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">extract</span>(<span class="dt">col =</span> name,
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(<span class="dt">col =</span> name,
           <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;last&quot;</span>, <span class="st">&quot;first&quot;</span>),
           <span class="dt">regex =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">w+)</span><span class="ch">\\</span><span class="st">W+(</span><span class="ch">\\</span><span class="st">w+)&quot;</span>)</code></pre></div>
 <pre><code>##       last    first          phone

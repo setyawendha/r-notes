@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2017-12-29">
+<meta name="date" content="2018-01-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -752,6 +752,12 @@ Figure 8.22: Color scale adjusted manually.
 <div id="layering-adding-another-glyph-type" class="section level3">
 <h3><span class="header-section-number">8.2.5</span> Layering: Adding Another Glyph Type</h3>
 <p>If you want to add another layer of glyphs, simply add on another call to a <code>geom</code>-function. In order to produce Figure <a href="implementation-in-ggplot2.html#fig:impviolinfastestseat">8.23</a>, for example, we use the code below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> seat, <span class="dt">y =</span> fastest)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Seating preference&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;Fastest speed ever driven (mph)&quot;</span>,
+             <span class="dt">title =</span> <span class="st">&quot;There aren&#39;t so many back-sitters.&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:impviolinfastestseat"></span>
 <img src="r-notes_files/figure-html/impviolinfastestseat-1.png" alt="Violin plot of the fastest speed ever driven." width="95%" />
 <p class="caption">

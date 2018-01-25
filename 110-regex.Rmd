@@ -743,7 +743,7 @@ Suppose we would like to create three new variables in the data table, one for e
 
 ```{r}
 people %>% 
-  extract(col = phone,
+  tidyr::extract(col = phone,
           into = c("area", "office", "line"),
           regex = "(?x)        # for comments
                   .*           # in case of opening paren, etc.
@@ -892,7 +892,7 @@ The **stringr** package comes with `fruit`, a character-vector of giving the nam
 
     ```{r}
     people %>% 
-      extract(col = name,
+      tidyr::extract(col = name,
               into = c("last", "first"),
               regex = "(\\w+)\\W+(\\w+)")
     ```
