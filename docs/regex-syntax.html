@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-01-30">
+<meta name="date" content="2018-02-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -585,7 +585,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="the-need-to-escape" class="section level4">
 <h4><span class="header-section-number">12.3.2.2</span> The Need to Escape</h4>
-<p>Perhaps now you can spot the problem with the sequence-specific rule: what happens if one of the characters in the sequence is, say ‘[’ or ’]’? These characters are examples of <em>metacharacters</em>,  which means that in the syntax of regular expressions they don’t mach themselves but instead have a special role. In the case of square-brackets, that role is to delimit character classes.</p>
+<p>Perhaps now you can spot the problem with the sequence-specific rule: what happens if one of the characters in the sequence is, say ‘[’ or ’]’? These characters are examples of <em>metacharacters</em>,  which means that in the syntax of regular expressions they don’t match themselves but instead have a special role. In the case of square-brackets, that role is to delimit character classes.</p>
 <p>If you want your pattern to include a metacharacter you will have to escape it with the backslash. Thus, the correct way to match the string “[aardvark]” would be with the regular expression: <code>\[aardvark]\]</code>:</p>
 <blockquote>
 <p>The <em>[aardvark]</em> appears early in the dictionary.</p>
@@ -596,7 +596,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>[a-c]</code> matches a, b, and c;</li>
 <li><code>[a\-c]</code> matches a, -, and c (but not b);</li>
 <li><code>[a-]</code> matches a and - (the machine can tell that the hyphen was not being used in a range);</li>
-<li><code>[a\-]</code> also matches just a and -, not a,  and -. (Apparently the regex syntax takes into account the fact that some folks will worry that they might have to escape the hyphen).</li>
+<li><code>[a\-]</code> also matches just a and -, not a, \ and -. (Apparently the regex syntax takes into account the fact that some folks will worry that they might have to escape the hyphen).</li>
 </ul>
 <p>Of course since the backslash plays a role in escaping metacharacters, it too acts as a metacharacter at times. Hence if you want to match a backslash you’ll have to escape <em>it</em>! How? By preceding the black-slash with a backslash! Thus:</p>
 <ul>
@@ -711,7 +711,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>You can accomplish this by negating within a character class: the regex to use is <code>t[^exz]t</code>. Here the caret <code>^</code> functions as a metacharacter, indicating that any character except the others in the class are permitted. In order to function as a negation, the <code>^</code> must appear immediately after the opening bracket. If it appears elsewhere in the class, then it’s a literal: it just stands for itself. (Outside of a character class the <code>^</code> functions as an <em>anchor</em>—we’ll get to these soon—and as such has to be escaped if you want to act as a literal.)</p>
 <p>As another example, <code>t[^a-z]t</code> matches t followed by any character expect a lowercase letter, followed by t.</p>
-<p>Negating within a particular class of characters can be tricky. For example, suppose you are looking for 3-character sequences that consists of t, any letter except e or E, and then t. Rather than trying to use a <code>^</code> it’s easiest to work with ranges: <code>t[a-df-zA-DF-Z]t</code>.</p>
+<p>Negating within a particular class of characters can be tricky. For example, suppose you are looking for 3-character sequences that consist of t, any letter except e or E, and then t. Rather than trying to use a <code>^</code> it’s easiest to work with ranges: <code>t[a-df-zA-DF-Z]t</code>.</p>
 </div>
 </div>
 <div id="quantification" class="section level3">
@@ -720,10 +720,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 <p><code>\d\d\d-\d\d\d-\d\d\d\d</code></p>
 </blockquote>
-<p>But that’s a bit difficult to read. And what if you wanted to match sequences like the following (which has 10 digits in succession)?</p>
+<p>But that’s a bit difficult to read. And besides, what if you weren’t working with phone numbers but instead wanted to match sequences like the following (which has 10 digits in succession)?</p>
 <blockquote>
 <p>A2356737821</p>
 </blockquote>
+<p>It would be awful to write <code>A\d\d\d\d\d\d\d\d\d\d</code>.</p>
 <p>This is where <em>quantifiers</em>  come in. In regular expression syntax a token of the form <code>{n}</code> indicates that we are looking for n consecutive copies of whatever token precedes the <code>{n}</code>. Thus we can write the phone-number regex more concisely and more legibly as:</p>
 <blockquote>
 <p><code>\d{3}-\d{3}-\d{4}</code></p>
@@ -731,7 +732,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Note that the curly braces <code>{</code> and <code>}</code> may now function as metacharacters, and as such may have to be escaped if you are looking for them specifically, Thus if you want to search for occurrences of “t{3}b”, you’ll need the regex <code>t\{3\}b</code>. On the other hand if you want to match “t{swim}b” then it’s fine to use the regex <code>t{swim}b</code>: the machine sees here that the braces don’t play a role in quantification.</p>
 <p>Quantifiers are quite flexible. Within a quantifier you can use a comma to indicate a range of permissible number of copies of the preceding expression:</p>
 <ul>
-<li>`t{3,5}1 matches 3, 4 or 5 t’s in succession: ttt, tttt, or ttttt;</li>
+<li><code>t{3,5}</code> matches 3, 4 or 5 t’s in succession: ttt, tttt, or ttttt;</li>
 <li><code>t{3,}</code> matches three or more t’s in succession: ttt, tttt, ttttt, … .</li>
 </ul>
 <p>Because quantification is so often required, regular expression syntax provides shortcuts for special cases:</p>

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-01-30">
+<meta name="date" content="2018-02-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -547,38 +547,38 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">filter</span>((sex <span class="op">==</span><span class="st"> &quot;male&quot;</span> <span class="op">&amp;</span><span class="st"> </span>height <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>) <span class="op">|</span><span class="st"> </span>(sex <span class="op">==</span><span class="st">&quot;female&quot;</span> <span class="op">&amp;</span><span class="st"> </span>height <span class="op">&lt;</span><span class="st"> </span><span class="dv">55</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(sex, height, fastest)</code></pre></div>
 <pre><code>## # A tibble: 22 x 3
-##       sex height fastest
-##    &lt;fctr&gt;  &lt;dbl&gt;   &lt;int&gt;
-##  1   male   76.0     119
-##  2   male   74.0     110
-##  3   male   72.0      95
-##  4   male   70.8     100
-##  5   male   79.0     160
-##  6   male   73.0     110
-##  7   male   73.0     120
+##    sex    height fastest
+##    &lt;fct&gt;   &lt;dbl&gt;   &lt;int&gt;
+##  1 male     76.0     119
+##  2 male     74.0     110
+##  3 male     72.0      95
+##  4 male     70.8     100
+##  5 male     79.0     160
+##  6 male     73.0     110
+##  7 male     73.0     120
 ##  8 female   54.0     130
-##  9   male   74.0     119
-## 10   male   72.0     125
+##  9 male     74.0     119
+## 10 male     72.0     125
 ## # ... with 12 more rows</code></pre>
 <p>Note that <strong>dplyr</strong> data-functions like <code>filter()</code> and <code>select()</code> take a data table as their first argument, and return a data table as well. Hence they may be chained together as we saw in the above example.</p>
 <p>With <code>select()</code> it’s easy to leave out columns, too:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">survey <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ideal_ht, <span class="op">-</span>love_first)</code></pre></div>
 <pre><code>## # A tibble: 71 x 10
-##    height sleep fastest   weight_feel extra_life     seat   GPA
-##     &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt;        &lt;fctr&gt;     &lt;fctr&gt;   &lt;fctr&gt; &lt;dbl&gt;
-##  1   76.0   9.5     119 1_underweight        yes  1_front  3.56
-##  2   74.0   7.0     110 2_about_right        yes 2_middle  2.50
-##  3   64.0   9.0      85 2_about_right         no 2_middle  3.80
-##  4   62.0   7.0     100 1_underweight         no  1_front  3.50
-##  5   72.0   8.0      95 1_underweight        yes   3_back  3.20
-##  6   70.8  10.0     100  3_overweight         no  1_front  3.10
-##  7   70.0   4.0      85 2_about_right        yes  1_front  3.68
-##  8   79.0   6.0     160 2_about_right        yes   3_back  2.70
-##  9   59.0   7.0      90 2_about_right        yes   3_back  2.80
-## 10   67.0   7.0      90  3_overweight         no 2_middle    NA
-## # ... with 61 more rows, and 3 more variables: enough_Sleep &lt;fctr&gt;,
-## #   sex &lt;fctr&gt;, diff.ideal.act. &lt;dbl&gt;</code></pre>
+##    height sleep fastest weight_feel   extra_life seat     GPA enough_Sleep
+##     &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt; &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;       
+##  1   76.0  9.50     119 1_underweight yes        1_fro…  3.56 no          
+##  2   74.0  7.00     110 2_about_right yes        2_mid…  2.50 no          
+##  3   64.0  9.00      85 2_about_right no         2_mid…  3.80 no          
+##  4   62.0  7.00     100 1_underweight no         1_fro…  3.50 no          
+##  5   72.0  8.00      95 1_underweight yes        3_back  3.20 no          
+##  6   70.8 10.0      100 3_overweight  no         1_fro…  3.10 yes         
+##  7   70.0  4.00      85 2_about_right yes        1_fro…  3.68 no          
+##  8   79.0  6.00     160 2_about_right yes        3_back  2.70 yes         
+##  9   59.0  7.00      90 2_about_right yes        3_back  2.80 no          
+## 10   67.0  7.00      90 3_overweight  no         2_mid… NA    yes         
+## # ... with 61 more rows, and 2 more variables: sex &lt;fct&gt;,
+## #   diff.ideal.act. &lt;dbl&gt;</code></pre>
 <div id="practice-exercises-31" class="section level3">
 <h3><span class="header-section-number">10.4.1</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
