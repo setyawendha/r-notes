@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-02-08">
+<meta name="date" content="2018-02-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -633,19 +633,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>No more bottles of beer on the wall.</p>
 </blockquote>
 <p>Make sure to get the lyrics exactly right. For example, it’s “1 bottle”, not “1 bottles”.</p></li>
-<li><p>Recall the function <code>madhavaPI()</code> from Section <a href="more-about-arguments.html#default-arguments">3.4.1</a>. Use this function to write a function called <code>madhavaGraph()</code> that will do the following: given a number <span class="math inline">\(n\)</span>, the function uses <strong>ggplot2</strong> to produce a line graph of the first <span class="math inline">\(n\)</span> approximations to <span class="math inline">\(\pi\)</span> using the initial terms of the Madhava series. The plot should be a line graph similar to the one produced by the <code>collatz()</code> functions from this Chapter. The function should take a single argument <code>n</code>, whose default value is 10. It should validate the input: if the number entered is not at least 1, then the function should explain to the user that the he/she must enter a positive number, and then stop.</p>
+<li><p>Recall the function <code>madhavaPI()</code> from Section <a href="more-about-arguments.html#default-arguments">3.4.1</a>. Use this function to write a function called <code>madhavaGraph()</code> that will do the following: given a number <span class="math inline">\(n\)</span>, the function uses <strong>ggplot2</strong> to produce a vector consisting of the first <span class="math inline">\(n\)</span> approximations to <span class="math inline">\(\pi\)</span>, using the initial terms of the Madhava series. The function should take a single argument <code>n</code>, whose default value is 10. It should validate the input: if the number entered is not at least 1, then the function should explain to the user that the he/she must enter a positive number, and then stop.</p>
 <p>Here is an example of how the function should work:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaGraph</span>(<span class="dt">n =</span> <span class="op">-</span><span class="dv">3</span>)</code></pre></div>
 <pre><code>## You need to enter a positive integer.  Try again!</code></pre>
 <p>Here is another example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaGraph</span>()  <span class="co"># using the default value</span></code></pre></div>
+<pre><code>##  [1] 4.000000 2.666667 3.466667 2.895238 3.339683 2.976046 3.283738
+##  [8] 3.017072 3.252366 3.041840</code></pre>
+<p>And another:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaGraph</span>(<span class="dt">n =</span> <span class="dv">20</span>)</code></pre></div>
-<p>The output should be as in Figure <a href="exercises-2.html#fig:madhavaGraph">4.5</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:madhavaGraph"></span>
-<img src="r-notes_files/figure-html/madhavaGraph-1.png" alt="This is how the output of the     madhavaGraph function should look." width="50%" />
-<p class="caption">
-Figure 4.5: This is how the output of the madhavaGraph function should look.
-</p>
-</div></li>
+<pre><code>##  [1] 4.000000 2.666667 3.466667 2.895238 3.339683 2.976046 3.283738
+##  [8] 3.017072 3.252366 3.041840 3.232316 3.058403 3.218403 3.070255
+## [15] 3.208186 3.079153 3.200366 3.086080 3.194188 3.091624</code></pre></li>
 <li><p>(*) <strong>The Subtraction Game.</strong> In this game there are two players, A and B, and a pile of <span class="math inline">\(n\)</span> pebbles. The players take turns removing pebbles from the pile. On each turn, a player can take either one or two pebbles. The players who takes the last pebble wins the game.</p>
 <p>It turns out that one of the players has a winning strategy. If the initial number of pebbles is a multiple of 3, then player who goes second has a winning strategy, whereas if the initial number of pebbles is not a multiple of 3 then the player who goes second has the winning strategy.</p>
 The idea for the winning strategy comes from the following observations:

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-01-25}
+  \date{2018-02-19}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -6664,7 +6664,7 @@ Let's investigate. First get a print of \texttt{cat()}:
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## <bytecode: 0x11281e318>
+## <bytecode: 0x10b8e4bb8>
 ## <environment: namespace:base>
 \end{verbatim}
 
@@ -7751,7 +7751,7 @@ this for you:
 \end{Highlighting}
 \end{Shaded}
 
-  \textbf{Important}: Run the lines \emph{at at a time}, not all three
+  \textbf{Important}: Run the lines \emph{one at a time}, not all three
   at once. R will stop after the first line, waiting for your answer. If
   you try to run line 2 along with the \texttt{pet} line, then line 2
   will become your attempted input for \texttt{pet}, resulting in an
@@ -10128,14 +10128,13 @@ helpful suggestions---if it is not of the correct form.
   Recall the function \texttt{madhavaPI()} from Section
   \ref{default-arguments}. Use this function to write a function called
   \texttt{madhavaGraph()} that will do the following: given a number
-  \(n\), the function uses \textbf{ggplot2} to produce a line graph of
-  the first \(n\) approximations to \(\pi\) using the initial terms of
-  the Madhava series. The plot should be a line graph similar to the one
-  produced by the \texttt{collatz()} functions from this Chapter. The
-  function should take a single argument \texttt{n}, whose default value
-  is 10. It should validate the input: if the number entered is not at
-  least 1, then the function should explain to the user that the he/she
-  must enter a positive number, and then stop.
+  \(n\), the function uses \textbf{ggplot2} to produce a vector
+  consisting of the first \(n\) approximations to \(\pi\), using the
+  initial terms of the Madhava series. The function should take a single
+  argument \texttt{n}, whose default value is 10. It should validate the
+  input: if the number entered is not at least 1, then the function
+  should explain to the user that the he/she must enter a positive
+  number, and then stop.
 
   Here is an example of how the function should work:
 
@@ -10153,20 +10152,28 @@ helpful suggestions---if it is not of the correct form.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{madhavaGraph}\NormalTok{()  }\CommentTok{# using the default value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 4.000000 2.666667 3.466667 2.895238 3.339683 2.976046 3.283738
+##  [8] 3.017072 3.252366 3.041840
+\end{verbatim}
+
+  And another:
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{madhavaGraph}\NormalTok{(}\DataTypeTok{n =} \DecValTok{20}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-  The output should be as in Figure \ref{fig:madhavaGraph}.
-
-  \begin{figure}
-
-  {\centering \includegraphics[width=0.5\linewidth]{r-notes_files/figure-latex/madhavaGraph-1} 
-
-  }
-
-  \caption{This is how the output of the     madhavaGraph function should look.}\label{fig:madhavaGraph}
-  \end{figure}
+\begin{verbatim}
+##  [1] 4.000000 2.666667 3.466667 2.895238 3.339683 2.976046 3.283738
+##  [8] 3.017072 3.252366 3.041840 3.232316 3.058403 3.218403 3.070255
+## [15] 3.208186 3.079153 3.200366 3.086080 3.194188 3.091624
+\end{verbatim}
 \item
   (*) \textbf{The Subtraction Game.} In this game there are two players,
   A and B, and a pile of \(n\) pebbles. The players take turns removing
@@ -17782,7 +17789,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::SwimRecords}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-724-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-725-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -17800,7 +17807,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::KidsFeet}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-725-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-726-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -17818,7 +17825,7 @@ frame when you discuss aesthetic mappings.)
   The following graph is based on the data frame
   \texttt{mosaicData::Galton}:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-726-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-727-1} \end{center}
 
   \begin{itemize}
   \tightlist
@@ -18576,15 +18583,15 @@ In the exercises of this Chapter we will meet a case in which
 \item
   With \texttt{mosaicData::SwimRecords}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-732-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-733-1} \end{center}
 \item
   With \texttt{mosaicData::KidsFeet}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-733-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-734-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-734-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-735-1} \end{center}
 
   \textbf{Hint:} Make the call \texttt{geom\_point(alpha\ =\ 0.2)}. The
   \texttt{alpha} parameter has a default-value of 1. The lower you set
@@ -18596,11 +18603,11 @@ In the exercises of this Chapter we will meet a case in which
   for the boxes is set to \texttt{"burlywood"}. The x-location is mapped
   to \texttt{factor(smoke)}, rather than to \texttt{smoke}.
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-735-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-736-1} \end{center}
 \item
   With \texttt{mosaicData::Galton}, make the following graph:
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-736-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-737-1} \end{center}
 
   \textbf{Hint}: The fill of the density plot is set to
   \texttt{"burlywood"}. The rug is made of randomly jittered
@@ -19092,20 +19099,20 @@ This works!
   With \texttt{mosaicData::KidsFeet}, make the following graph.
   (\textbf{Hint}: Use \texttt{plyr::mapvalues()}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-761-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-762-1} \end{center}
 \item
   With \texttt{mosaicData::TenMileRace}, make the following graph.
   (\textbf{Hint}: Use \texttt{cut()} to make age groups. The fill for
   the boxes is the ever-popular \texttt{"burlywood"}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-762-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-763-1} \end{center}
 \item
   With \texttt{mosaicData::Gestation}, make the following graph.
   (\textbf{Hint}: Use \texttt{!is.na()} to select the rows of
   \texttt{Gestation} where \texttt{smoke} is not \texttt{NA}. Then use
   \texttt{plyr::mapvalues()} on \texttt{smoke}.)
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-763-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-764-1} \end{center}
 \end{enumerate}
 
 \subsection{Solutions to Practice
@@ -20647,7 +20654,7 @@ from the \textbf{magrittr} package.\footnote{\textbf{magrittr} is not
   attached in the tidy-verse, but most of the capability of this package
   is imported by \textbf{dplyr}.}
 
-The pipe operator connects two function calls by making the the value
+The pipe operator connects two function calls by making the value
 returned by the first call the first argument of the second call. Here's
 an example:
 
@@ -20756,7 +20763,7 @@ together of many manipulations involving data frames.
 \end{Highlighting}
 \end{Shaded}
 
-  Use the pipe operator with \texttt{subset()} to the row of
+  Use the pipe operator with \texttt{subset()} to find the row of
   \texttt{mosaicData::CPS85} containing the worker who made more than 40
   dollars per hour. Display only the sex, age and wage of the worker.
 \end{enumerate}
@@ -20837,20 +20844,20 @@ difference is manifest when you print a tibble to the Console:
 
 \begin{verbatim}
 ## # A tibble: 71 x 12
-##    height ideal_ht sleep fastest   weight_feel love_first extra_life
-##     <dbl>    <dbl> <dbl>   <int>        <fctr>     <fctr>     <fctr>
-##  1   76.0       78   9.5     119 1_underweight         no        yes
-##  2   74.0       76   7.0     110 2_about_right         no        yes
-##  3   64.0       NA   9.0      85 2_about_right         no         no
-##  4   62.0       65   7.0     100 1_underweight         no         no
-##  5   72.0       72   8.0      95 1_underweight         no        yes
-##  6   70.8       NA  10.0     100  3_overweight         no         no
-##  7   70.0       72   4.0      85 2_about_right         no        yes
-##  8   79.0       76   6.0     160 2_about_right         no        yes
-##  9   59.0       61   7.0      90 2_about_right         no        yes
-## 10   67.0       67   7.0      90  3_overweight         no         no
-## # ... with 61 more rows, and 5 more variables: seat <fctr>, GPA <dbl>,
-## #   enough_Sleep <fctr>, sex <fctr>, diff.ideal.act. <dbl>
+##    height ideal_ht sleep fastest weight_feel  love_first extra_life seat  
+##     <dbl>    <dbl> <dbl>   <int> <fct>        <fct>      <fct>      <fct> 
+##  1   76.0     78.0  9.50     119 1_underweig~ no         yes        1_fro~
+##  2   74.0     76.0  7.00     110 2_about_rig~ no         yes        2_mid~
+##  3   64.0     NA    9.00      85 2_about_rig~ no         no         2_mid~
+##  4   62.0     65.0  7.00     100 1_underweig~ no         no         1_fro~
+##  5   72.0     72.0  8.00      95 1_underweig~ no         yes        3_back
+##  6   70.8     NA   10.0      100 3_overweight no         no         1_fro~
+##  7   70.0     72.0  4.00      85 2_about_rig~ no         yes        1_fro~
+##  8   79.0     76.0  6.00     160 2_about_rig~ no         yes        3_back
+##  9   59.0     61.0  7.00      90 2_about_rig~ no         yes        3_back
+## 10   67.0     67.0  7.00      90 3_overweight no         no         2_mid~
+## # ... with 61 more rows, and 4 more variables: GPA <dbl>,
+## #   enough_Sleep <fct>, sex <fct>, diff.ideal.act. <dbl>
 \end{verbatim}
 
 The output is automatically truncated, and the number of columns printed
@@ -20883,18 +20890,18 @@ With the pipe operator, your code can be quite easy to read:
 
 \begin{verbatim}
 ## # A tibble: 22 x 3
-##       sex height fastest
-##    <fctr>  <dbl>   <int>
-##  1   male   76.0     119
-##  2   male   74.0     110
-##  3   male   72.0      95
-##  4   male   70.8     100
-##  5   male   79.0     160
-##  6   male   73.0     110
-##  7   male   73.0     120
+##    sex    height fastest
+##    <fct>   <dbl>   <int>
+##  1 male     76.0     119
+##  2 male     74.0     110
+##  3 male     72.0      95
+##  4 male     70.8     100
+##  5 male     79.0     160
+##  6 male     73.0     110
+##  7 male     73.0     120
 ##  8 female   54.0     130
-##  9   male   74.0     119
-## 10   male   72.0     125
+##  9 male     74.0     119
+## 10 male     72.0     125
 ## # ... with 12 more rows
 \end{verbatim}
 
@@ -20914,20 +20921,20 @@ With \texttt{select()} it's easy to leave out columns, too:
 
 \begin{verbatim}
 ## # A tibble: 71 x 10
-##    height sleep fastest   weight_feel extra_life     seat   GPA
-##     <dbl> <dbl>   <int>        <fctr>     <fctr>   <fctr> <dbl>
-##  1   76.0   9.5     119 1_underweight        yes  1_front  3.56
-##  2   74.0   7.0     110 2_about_right        yes 2_middle  2.50
-##  3   64.0   9.0      85 2_about_right         no 2_middle  3.80
-##  4   62.0   7.0     100 1_underweight         no  1_front  3.50
-##  5   72.0   8.0      95 1_underweight        yes   3_back  3.20
-##  6   70.8  10.0     100  3_overweight         no  1_front  3.10
-##  7   70.0   4.0      85 2_about_right        yes  1_front  3.68
-##  8   79.0   6.0     160 2_about_right        yes   3_back  2.70
-##  9   59.0   7.0      90 2_about_right        yes   3_back  2.80
-## 10   67.0   7.0      90  3_overweight         no 2_middle    NA
-## # ... with 61 more rows, and 3 more variables: enough_Sleep <fctr>,
-## #   sex <fctr>, diff.ideal.act. <dbl>
+##    height sleep fastest weight_feel   extra_life seat     GPA enough_Sleep
+##     <dbl> <dbl>   <int> <fct>         <fct>      <fct>  <dbl> <fct>       
+##  1   76.0  9.50     119 1_underweight yes        1_fro~  3.56 no          
+##  2   74.0  7.00     110 2_about_right yes        2_mid~  2.50 no          
+##  3   64.0  9.00      85 2_about_right no         2_mid~  3.80 no          
+##  4   62.0  7.00     100 1_underweight no         1_fro~  3.50 no          
+##  5   72.0  8.00      95 1_underweight yes        3_back  3.20 no          
+##  6   70.8 10.0      100 3_overweight  no         1_fro~  3.10 yes         
+##  7   70.0  4.00      85 2_about_right yes        1_fro~  3.68 no          
+##  8   79.0  6.00     160 2_about_right yes        3_back  2.70 yes         
+##  9   59.0  7.00      90 2_about_right yes        3_back  2.80 no          
+## 10   67.0  7.00      90 3_overweight  no         2_mid~ NA    yes         
+## # ... with 61 more rows, and 2 more variables: sex <fct>,
+## #   diff.ideal.act. <dbl>
 \end{verbatim}
 
 \subsection{Practice Exercises}\label{practice-exercises-31}
@@ -21015,18 +21022,18 @@ an example:
 
 \begin{verbatim}
 ## # A tibble: 71 x 3
-##       sex fastest dareDevil
-##    <fctr>   <int>     <lgl>
-##  1   male     119     FALSE
-##  2   male     110     FALSE
-##  3 female      85     FALSE
-##  4 female     100     FALSE
-##  5   male      95     FALSE
-##  6   male     100     FALSE
-##  7   male      85     FALSE
-##  8   male     160      TRUE
-##  9 female      90     FALSE
-## 10 female      90     FALSE
+##    sex    fastest dareDevil
+##    <fct>    <int> <lgl>    
+##  1 male       119 F        
+##  2 male       110 F        
+##  3 female      85 F        
+##  4 female     100 F        
+##  5 male        95 F        
+##  6 male       100 F        
+##  7 male        85 F        
+##  8 male       160 T        
+##  9 female      90 F        
+## 10 female      90 F        
 ## # ... with 61 more rows
 \end{verbatim}
 
@@ -21089,18 +21096,18 @@ Exercises}\label{solutions-to-practice-exercises-17}
 
 \begin{verbatim}
 ## # A tibble: 534 x 3
-##       sex   sector dailyWage
-##    <fctr>   <fctr>     <dbl>
-##  1      M    const     72.00
-##  2      M    sales     44.00
-##  3      F    sales     30.40
-##  4      F clerical     84.00
-##  5      M    const    120.00
-##  6      F clerical     72.00
-##  7      F  service     76.56
-##  8      M    sales    120.00
-##  9      M    manuf     88.00
-## 10      F    sales     40.00
+##    sex   sector   dailyWage
+##    <fct> <fct>        <dbl>
+##  1 M     const         72.0
+##  2 M     sales         44.0
+##  3 F     sales         30.4
+##  4 F     clerical      84.0
+##  5 M     const        120  
+##  6 F     clerical      72.0
+##  7 F     service       76.6
+##  8 M     sales        120  
+##  9 M     manuf         88.0
+## 10 F     sales         40.0
 ## # ... with 524 more rows
 \end{verbatim}
 \end{enumerate}
@@ -21130,10 +21137,10 @@ each group. This is accomplished by calling \texttt{group\_by()} and
 
 \begin{verbatim}
 ## # A tibble: 2 x 2
-##      sex meanWage
-##   <fctr>    <dbl>
-## 1      F 7.878857
-## 2      M 9.994913
+##   sex   meanWage
+##   <fct>    <dbl>
+## 1 F         7.88
+## 2 M         9.99
 \end{verbatim}
 
 It's possible to create more than one summary variable in a single call
@@ -21150,10 +21157,10 @@ to \texttt{summarise()}, for example:
 
 \begin{verbatim}
 ## # A tibble: 2 x 3
-##      sex meanWage     n
-##   <fctr>    <dbl> <int>
-## 1      F 7.878857   245
-## 2      M 9.994913   289
+##   sex   meanWage     n
+##   <fct>    <dbl> <int>
+## 1 F         7.88   245
+## 2 M         9.99   289
 \end{verbatim}
 
 In the previous example, \texttt{dplyr::n()}
@@ -21209,10 +21216,10 @@ Let's find the five number summaries for the wages of men and women:
 
 \begin{verbatim}
 ## # A tibble: 2 x 7
-##      sex     n   min    Q1 median    Q3   max
-##   <fctr> <int> <dbl> <dbl>  <dbl> <dbl> <dbl>
-## 1      F   245  1.75  4.75   6.80    10 44.50
-## 2      M   289  1.00  6.00   8.93    13 26.29
+##   sex       n   min    Q1 median    Q3   max
+##   <fct> <int> <dbl> <dbl>  <dbl> <dbl> <dbl>
+## 1 F       245  1.75  4.75   6.80  10.0  44.5
+## 2 M       289  1.00  6.00   8.93  13.0  26.3
 \end{verbatim}
 
 It's also possible to group by more than one variable at a time. For
@@ -21236,23 +21243,23 @@ the various sectors of employment. All we need to do is group by both
 \begin{verbatim}
 ## # A tibble: 15 x 8
 ## # Groups:   sector [?]
-##      sector    sex     n   min    Q1 median     Q3   max
-##      <fctr> <fctr> <int> <dbl> <dbl>  <dbl>  <dbl> <dbl>
-##  1 clerical      F    76  3.00 5.100  7.000  9.550 15.03
-##  2 clerical      M    21  3.35 6.000  7.690  9.000 12.00
-##  3    const      M    20  3.75 7.150  9.750 11.825 15.00
-##  4    manag      F    21  3.64 6.880 10.000 11.250 44.50
-##  5    manag      M    34  1.00 8.800 13.990 18.160 26.29
-##  6    manuf      F    24  3.00 4.360  4.900  6.050 18.50
-##  7    manuf      M    44  3.35 6.585  8.945 11.250 22.20
-##  8    other      F     6  3.75 4.000  5.625  6.880  8.93
-##  9    other      M    62  2.85 5.250  7.500 11.250 26.00
-## 10     prof      F    52  4.35 7.025 10.000 12.275 24.98
-## 11     prof      M    53  5.00 8.000 12.000 16.420 24.98
-## 12    sales      F    17  3.35 3.800  4.550  5.650 14.29
-## 13    sales      M    21  3.50 5.560  9.420 12.500 19.98
-## 14  service      F    49  1.75 3.750  5.000  8.000 13.12
-## 15  service      M    34  2.01 4.150  5.890  8.750 25.00
+##    sector   sex       n   min    Q1 median    Q3   max
+##    <fct>    <fct> <int> <dbl> <dbl>  <dbl> <dbl> <dbl>
+##  1 clerical F        76  3.00  5.10   7.00  9.55 15.0 
+##  2 clerical M        21  3.35  6.00   7.69  9.00 12.0 
+##  3 const    M        20  3.75  7.15   9.75 11.8  15.0 
+##  4 manag    F        21  3.64  6.88  10.0  11.2  44.5 
+##  5 manag    M        34  1.00  8.80  14.0  18.2  26.3 
+##  6 manuf    F        24  3.00  4.36   4.90  6.05 18.5 
+##  7 manuf    M        44  3.35  6.58   8.94 11.2  22.2 
+##  8 other    F         6  3.75  4.00   5.62  6.88  8.93
+##  9 other    M        62  2.85  5.25   7.50 11.2  26.0 
+## 10 prof     F        52  4.35  7.02  10.0  12.3  25.0 
+## 11 prof     M        53  5.00  8.00  12.0  16.4  25.0 
+## 12 sales    F        17  3.35  3.80   4.55  5.65 14.3 
+## 13 sales    M        21  3.50  5.56   9.42 12.5  20.0 
+## 14 service  F        49  1.75  3.75   5.00  8.00 13.1 
+## 15 service  M        34  2.01  4.15   5.89  8.75 25.0
 \end{verbatim}
 
 Note that there were no women in the construction sector, so that group
@@ -21357,10 +21364,10 @@ Exercises}\label{solutions-to-practice-exercises-18}
 \begin{verbatim}
 ## # A tibble: 3 x 3
 ##   origin departures meanDelay
-##    <chr>      <int>     <dbl>
-## 1    EWR     117596  15.10795
-## 2    JFK     109416  12.11216
-## 3    LGA     101509  10.34688
+##   <chr>       <int>     <dbl>
+## 1 EWR        117596      15.1
+## 2 JFK        109416      12.1
+## 3 LGA        101509      10.3
 \end{verbatim}
 \item
   Try this:
@@ -21387,10 +21394,10 @@ Exercises}\label{solutions-to-practice-exercises-18}
 
 \begin{verbatim}
 ## # A tibble: 2 x 3
-##   origin  dest distance
-##    <chr> <chr>    <dbl>
-## 1    JFK   HNL     4983
-## 2    EWR   HNL     4963
+##   origin dest  distance
+##   <chr>  <chr>    <dbl>
+## 1 JFK    HNL       4983
+## 2 EWR    HNL       4963
 \end{verbatim}
 \end{enumerate}
 
@@ -21446,7 +21453,7 @@ Exercises}\label{solutions-to-practice-exercises-18}
   girl-names over the years. Note that popularity is given as number per
   one thousand applicants, i.e., as \texttt{prop\ *\ 1000}.
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-866-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-867-1} \end{center}
 \end{enumerate}
 
 \chapter{Strings}\label{strings}
@@ -22642,8 +22649,8 @@ most of the world's written languages.
 \item
   Write a function called \texttt{subPalindrome()} that, for any given
   string and specified number \(n\), returns a character vector of all
-  the substrings of the strings having at least \(n\) characters that
-  are also palindromes. The function should take two arguments:
+  the substrings of the string having at least \(n\) characters that are
+  also palindromes. The function should take two arguments:
 
   \begin{itemize}
   \tightlist
@@ -23027,7 +23034,7 @@ Perhaps now you can spot the problem with the sequence-specific rule:
 what happens if one of the characters in the sequence is, say `{[}' or
 '{]}'? These characters are examples of \emph{metacharacters},
 \index{metacharacter} which means that in the syntax of regular
-expressions they don't mach themselves but instead have a special role.
+expressions they don't match themselves but instead have a special role.
 In the case of square-brackets, that role is to delimit character
 classes.
 
@@ -23060,8 +23067,9 @@ Thus:
   hyphen was not being used in a range);
 \item
   \texttt{{[}a\textbackslash{}-{]}} also matches just a and -, not a,
-  ~and -. (Apparently the regex syntax takes into account the fact that
-  some folks will worry that they might have to escape the hyphen).
+  \textbackslash{} and -. (Apparently the regex syntax takes into
+  account the fact that some folks will worry that they might have to
+  escape the hyphen).
 \end{itemize}
 
 Of course since the backslash plays a role in escaping metacharacters,
@@ -23216,7 +23224,7 @@ As another example, \texttt{t{[}\^{}a-z{]}t} matches t followed by any
 character expect a lowercase letter, followed by t.
 
 Negating within a particular class of characters can be tricky. For
-example, suppose you are looking for 3-character sequences that consists
+example, suppose you are looking for 3-character sequences that consist
 of t, any letter except e or E, and then t. Rather than trying to use a
 \texttt{\^{}} it's easiest to work with ranges:
 \texttt{t{[}a-df-zA-DF-Z{]}t}.
@@ -23232,12 +23240,16 @@ use the following \texttt{regex}:
 \texttt{\textbackslash{}d\textbackslash{}d\textbackslash{}d-\textbackslash{}d\textbackslash{}d\textbackslash{}d-\textbackslash{}d\textbackslash{}d\textbackslash{}d\textbackslash{}d}
 \end{quote}
 
-But that's a bit difficult to read. And what if you wanted to match
-sequences like the following (which has 10 digits in succession)?
+But that's a bit difficult to read. And besides, what if you weren't
+working with phone numbers but instead wanted to match sequences like
+the following (which has 10 digits in succession)?
 
 \begin{quote}
 A2356737821
 \end{quote}
+
+It would be awful to write
+\texttt{A\textbackslash{}d\textbackslash{}d\textbackslash{}d\textbackslash{}d\textbackslash{}d\textbackslash{}d\textbackslash{}d\textbackslash{}d\textbackslash{}d\textbackslash{}d}.
 
 This is where \emph{quantifiers} \index{quantifier} come in. In regular
 expression syntax a token of the form \texttt{\{n\}} indicates that we
@@ -23265,7 +23277,8 @@ expression:
 \begin{itemize}
 \tightlist
 \item
-  `t\{3,5\}1 matches 3, 4 or 5 t's in succession: ttt, tttt, or ttttt;
+  \texttt{t\{3,5\}} matches 3, 4 or 5 t's in succession: ttt, tttt, or
+  ttttt;
 \item
   \texttt{t\{3,\}} matches three or more t's in succession: ttt, tttt,
   ttttt, \ldots{} .
@@ -24923,7 +24936,7 @@ Exercises}\label{solutions-to-the-practice-exercises-17}
 \end{Highlighting}
 \end{Shaded}
 
-  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-978-1} \end{center}
+  \begin{center}\includegraphics[width=0.95\linewidth]{r-notes_files/figure-latex/unnamed-chunk-979-1} \end{center}
 \end{enumerate}
 
 \newpage
@@ -25397,14 +25410,14 @@ Now take a look at the frame:
 
 \begin{verbatim}
 ## # A tibble: 6 x 3
-##       country liters    gdp
-##         <chr>  <dbl>  <int>
-## 1 Afghanistan    0.0  20842
-## 2     Albania    4.9  13370
-## 3  Azerbaijan    1.3  75198
-## 4  Madagascar    0.8  10593
-## 5      Malawi    1.5   4258
-## 6    Malaysia    0.3 326933
+##   country     liters    gdp
+##   <chr>        <dbl>  <int>
+## 1 Afghanistan  0      20842
+## 2 Albania      4.90   13370
+## 3 Azerbaijan   1.30   75198
+## 4 Madagascar   0.800  10593
+## 5 Malawi       1.50    4258
+## 6 Malaysia     0.300 326933
 \end{verbatim}
 
 \texttt{liters} gives the mean total liters of alcohol consumed per
@@ -28483,7 +28496,7 @@ process, but use \texttt{address()} to see where the values are stored:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1162186f8"
+## [1] "0x107875468"
 \end{verbatim}
 
 The value 10 is stored in the memory address given above. Next, let's
@@ -28497,7 +28510,7 @@ create \texttt{b} by assignment from \texttt{a}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1162186f8"
+## [1] "0x107875468"
 \end{verbatim}
 
 For the moment \texttt{b} points to the same place in memory as
@@ -28536,7 +28549,7 @@ But for now \texttt{b} still points to the same place in memory that
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1162186f8"
+## [1] "0x107875468"
 \end{verbatim}
 
 But now let's assign a new value to \texttt{b}:
@@ -28549,7 +28562,7 @@ But now let's assign a new value to \texttt{b}:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x119602728"
+## [1] "0x11bb45718"
 \end{verbatim}
 
 Aha! \texttt{b} now points to a \textbf{new} location in the computer's
@@ -28567,7 +28580,7 @@ spot in memory and thus remains 10:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x1162186f8"
+## [1] "0x107875468"
 \end{verbatim}
 
 \begin{Shaded}
@@ -28611,7 +28624,7 @@ Let's check the memory locations:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fad3df0" "0x11fad3df0"
+## [1] "0x14c4b2920" "0x14c4b2920"
 \end{verbatim}
 
 As with \texttt{a} and \texttt{b}, the two names initially point to the
@@ -28650,7 +28663,7 @@ to it:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fad3df0" "0x11fad3df0"
+## [1] "0x14c4b2920" "0x14c4b2920"
 \end{verbatim}
 
 \subsection{Cloning an Object}\label{cloning-an-object}
@@ -28692,7 +28705,7 @@ method that was alluded to earlier:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "0x11fad3df0" "0x118549bf8"
+## [1] "0x14c4b2920" "0x11b644ff0"
 \end{verbatim}
 
 Accordingly, changes to \texttt{dorothy2} will no longer result in

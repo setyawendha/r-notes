@@ -59,7 +59,7 @@ cat("The sum is:  ", as.numeric(number) + 10)
     cat(pet, " is a ", type, ".\n", sep = "")
     ```
     
-    **Important**:  Run the lines *at at a time*, not all three at once.  R will stop after the first line, waiting for your answer. If you try to run line 2 along with the `pet` line, then line 2 will become your attempted input for `pet`, resulting in an error.
+    **Important**:  Run the lines *one at a time*, not all three at once.  R will stop after the first line, waiting for your answer. If you try to run line 2 along with the `pet` line, then line 2 will become your attempted input for `pet`, resulting in an error.
     
 ### Solutions to the Practice Exercises
 
@@ -1458,16 +1458,11 @@ madhavaGraph <- function(n = 10) {
   if ( n <= 0 ) {
     return(cat("You need to enter a positive integer.  Try again!"))
   }
-  approx <- numeric(n)
+  approximations <- numeric(n)
   for ( i in 1:n ) {
-    approx[i] <- madhavaPI(i)
+    approximations[i] <- madhavaPI(i)
   }
-  plotTitle <- paste0("The first ", n, " Madhava approximations to pi.")
-  p <- ggplot(mapping = aes(x = 1:n, y = approx)) +
-    geom_point() + geom_line() +
-    labs( x = "m", y = "Sum of first m terms",
-          title = plotTitle)
-  print(p)
+  approximations
 }
 ```
 
@@ -1552,7 +1547,7 @@ madhavaGraph <- function(n = 10) {
     
     Make sure to get the lyrics exactly right.  For example, it's "1 bottle", not "1 bottles".
     
-1.  Recall the function `madhavaPI()` from Section \@ref(default-arguments).  Use this function to write a function called `madhavaGraph()` that will do the following:  given a number $n$, the function uses **ggplot2** to produce a line graph of the first $n$ approximations to $\pi$ using the initial terms of the Madhava series.  The plot should be a line graph similar to the one produced by the `collatz()` functions from this Chapter.  The function should take a single argument `n`, whose default value is 10.  It should validate the input:  if the number entered is not at least 1, then the function should explain to the user that the he/she must enter a positive number, and then stop.
+1.  Recall the function `madhavaPI()` from Section \@ref(default-arguments).  Use this function to write a function called `madhavaGraph()` that will do the following:  given a number $n$, the function uses **ggplot2** to produce a vector consisting of the first $n$ approximations to $\pi$, using the initial terms of the Madhava series.  The function should take a single argument `n`, whose default value is 10.  It should validate the input:  if the number entered is not at least 1, then the function should explain to the user that the he/she must enter a positive number, and then stop.
 
     Here is an example of how the function should work:
    
@@ -1566,15 +1561,15 @@ madhavaGraph <- function(n = 10) {
    
     Here is another example:
 
-    ```{r eval =FALSE}
-    madhavaGraph(n = 20)
+    ```{r}
+    madhavaGraph()  # using the default value
     ```
     
-    The output should be as in Figure \@ref(fig:madhavaGraph).
+    And another:
     
-    ```{r madhavaGraph, out.width = "50%", fig.cap = "This is how the output of the     madhavaGraph function should look.", echo =FALSE, fig.align="center"}
+    ```{r}
     madhavaGraph(n = 20)
-    ```
+    ```  
 
 1.  (\*) **The Subtraction Game.**  In this game there are two players, A and B, and a pile of $n$ pebbles.  The players take turns removing pebbles from the pile.  On each turn, a player can take either one or two pebbles.  The players who takes the last pebble wins the game.
 
