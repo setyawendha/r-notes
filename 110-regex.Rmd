@@ -759,6 +759,27 @@ people %>%
 
 By default `extract()` removes the original column, but you can preserve it with `remove = FALSE`.  (For the format of the regular expression in the above call, see the next sub-section.)
 
+### Counting Matches
+
+The function `str_count()` \index{R-functions!str\_count()@\texttt{str\_count()}}provides a very convenient way to tally up the *number* of matches that a given regex has in a string.  Here we use it to count the number of wrods in a string that begin with a lower or uppercase `p`.
+
+```{r}
+strings <- c("Mary Poppins is practically perfect in every way!",
+             "The best-laid plans of mice and men gang oft astray.",
+             "Peter Piper picked a peck of pickled peppers.")
+strings %>%
+  str_count(pattern = "\\b[Pp]\\w*\\b")
+```
+
+How might we find the words in a string that contain three or more of the same letter?  In this case `str_count()` would not be useful.  However we could try something like this:
+
+```{r}
+"In Patagonia, the peerless Peter Piper picked a peck of pickled peppers." %>% 
+  str_split("\\W+") %>% 
+  unlist() %>% 
+  str_subset(pattern = "([[:alpha:]]).*\\1.*\\1")
+```
+
 
 
 ### Regex Modes
