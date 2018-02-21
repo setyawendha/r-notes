@@ -1288,8 +1288,8 @@ yvals <- c(3, 7, 2, 4, 3)
 
 We set up a plot as follows:
 
-```{r}
-p <- ggplot(mapping = aes(x = xvals, y = yvals))
+```{r eval = FALSE}
+ggplot(mapping = aes(x = xvals, y = yvals))
 ```
 
 The `ggplot()`\index{R-functions!ggplot()@\texttt{ggplot()}} function sets up a basic two-dimensional grid.  The `mapping` parameter explains how data will be "mapped" to particular positions on the plot.  In this case it has been set to:
@@ -1300,23 +1300,26 @@ aes(x = xvals, y = yvals)
 
 `aes` is short for "aesthetics", which has to do with how somethings *looks*.  The expression means that `xvals` will be located on the x-axis and `yvals` will be located on the y-axis of the plot.
 
-Note that the entire plot has been assigned to the variable `p`.  If we want to see the plot we could print p out (see Figure \@ref(fig:blank-ggplot)):
+Now let's see what we get if we actually run the call to the `ggplot()` function (see Figure \@ref(fig:blank-ggplot)):
 
 ```{r blank-ggplot, out.width = "50%", fig.align="center", fig.cap = "A ggplot2 plot without geoms."}
-print(p)
+ggplot(mapping = aes(x = xvals, y = yvals))
 ```
 
 
-The plot is blank!  Why is this?  Well, although `ggplot()` has been told what values are to be represented on the plot and where they might go, it has not yet been told how they should be shaped:  it has not been told their *geometry*, you might say.  We can add a geometry to `p` to get a picture (see Figure \@ref(fig:pointsggplot):
+The plot is blank!  Why is this?  Well, although `ggplot()` has been told what values are to be represented on the plot and where they might go, it has not yet been told how they should be shaped:  it has not been told their *geometry*, you might say.  We can add a geometry to the plot to get a picture (see Figure \@ref(fig:pointsggplot):
 
 ```{r pointsggplot, out.width = "50%", fig.align="center", fig.cap = "A ggplot2 plot with the point geom."}
-print(p + geom_point())
+ggplot(mapping = aes(x = xvals, y = yvals)) +
+  geom_point()
 ```
 
 The geometry determines a lot about the look of the plot.  In order to have the points connected by lines we could add `geom_line()` (see Figure \@ref(fig:pointslinesggplot):
 
 ```{r pointslinesggplot, out.width = "50%", fig.align="center", fig.cap = "A ggplot2 plot with point and line geoms."}
-print(p + geom_point() + geom_line())
+ggplot(mapping = aes(x = xvals, y = yvals)) +
+  geom_point() +
+  geom_line()
 ```
 
 We'll choose a scatterplot with connecting lines for our graph of the sequence.  With a little more work we can get nice labels for the x and y-axes, and a title for the graph.  Our `collatz()` function now looks like:
@@ -1342,12 +1345,10 @@ collatz <- function(n, limit = 10000) {
   # use initial value to make plot title:
   plotTitle <- paste0("Collatz Sequence for n = ", initial)
   # make the plot
-  p <- ggplot(mapping = aes(x = steps, y = numbers[steps])) +
+  ggplot(mapping = aes(x = steps, y = numbers[steps])) +
     geom_point() + geom_line() +
     labs( x = "Step", y = "Collatz Value at Step",
           title = plotTitle)
-  # print it to the Plot Window
-  print(p)
 }
 ```
 

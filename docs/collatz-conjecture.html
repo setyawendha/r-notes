@@ -661,20 +661,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 yvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>)</code></pre></div>
 <p><code>xvals</code> contains the x-coordinates of our points, and <code>yvals</code> contains the corresponding y-coordinates.</p>
 <p>We set up a plot as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals))</code></pre></div>
 <p>The <code>ggplot()</code> function sets up a basic two-dimensional grid. The <code>mapping</code> parameter explains how data will be “mapped” to particular positions on the plot. In this case it has been set to:</p>
 <pre><code>aes(x = xvals, y = yvals)</code></pre>
 <p><code>aes</code> is short for “aesthetics”, which has to do with how somethings <em>looks</em>. The expression means that <code>xvals</code> will be located on the x-axis and <code>yvals</code> will be located on the y-axis of the plot.</p>
-<p>Note that the entire plot has been assigned to the variable <code>p</code>. If we want to see the plot we could print p out (see Figure <a href="collatz-conjecture.html#fig:blank-ggplot">4.2</a>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
+<p>Now let’s see what we get if we actually run the call to the <code>ggplot()</code> function (see Figure <a href="collatz-conjecture.html#fig:blank-ggplot">4.2</a>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:blank-ggplot"></span>
 <img src="r-notes_files/figure-html/blank-ggplot-1.png" alt="A ggplot2 plot without geoms." width="50%" />
 <p class="caption">
 Figure 4.2: A ggplot2 plot without geoms.
 </p>
 </div>
-<p>The plot is blank! Why is this? Well, although <code>ggplot()</code> has been told what values are to be represented on the plot and where they might go, it has not yet been told how they should be shaped: it has not been told their <em>geometry</em>, you might say. We can add a geometry to <code>p</code> to get a picture (see Figure <a href="collatz-conjecture.html#fig:pointsggplot">4.3</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>())</code></pre></div>
+<p>The plot is blank! Why is this? Well, although <code>ggplot()</code> has been told what values are to be represented on the plot and where they might go, it has not yet been told how they should be shaped: it has not been told their <em>geometry</em>, you might say. We can add a geometry to the plot to get a picture (see Figure <a href="collatz-conjecture.html#fig:pointsggplot">4.3</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pointsggplot"></span>
 <img src="r-notes_files/figure-html/pointsggplot-1.png" alt="A ggplot2 plot with the point geom." width="50%" />
 <p class="caption">
@@ -682,7 +683,9 @@ Figure 4.3: A ggplot2 plot with the point geom.
 </p>
 </div>
 <p>The geometry determines a lot about the look of the plot. In order to have the points connected by lines we could add <code>geom_line()</code> (see Figure <a href="collatz-conjecture.html#fig:pointslinesggplot">4.4</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>())</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pointslinesggplot"></span>
 <img src="r-notes_files/figure-html/pointslinesggplot-1.png" alt="A ggplot2 plot with point and line geoms." width="50%" />
 <p class="caption">
@@ -710,12 +713,10 @@ Figure 4.4: A ggplot2 plot with point and line geoms.
   <span class="co"># use initial value to make plot title:</span>
   plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Collatz Sequence for n = &quot;</span>, initial)
   <span class="co"># make the plot</span>
-  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> numbers[steps])) <span class="op">+</span>
+  <span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> numbers[steps])) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Collatz Value at Step&quot;</span>,
           <span class="dt">title =</span> plotTitle)
-  <span class="co"># print it to the Plot Window</span>
-  <span class="kw">print</span>(p)
 }</code></pre></div>
 <p>Try this version a few times, like so:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">257</span>)</code></pre></div>
