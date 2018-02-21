@@ -433,7 +433,7 @@ findKarl <- function(x) {
     But it doesn't work:
     
     ```{r}
-    sizeComment(200)  # this will br OK
+    sizeComment(200)  # this will be OK
     sizeComment(50)   # this won't be OK
     ```
     
@@ -914,6 +914,16 @@ cheerleader <- function(cheer) {
 
 ### Practice Problems
 
+```{r echo = FALSE}
+trianglePattern <- function(char = "*", n) {
+  for (i in n:1) {
+    line <- rep(char, times = i)
+    cat(line, "\n", sep = "")
+  }
+}
+```
+
+
 1. You want to compute the square roots of the whole numbers from 1 to 10.  You could do this quite easily as follows:
 
     ```{r}
@@ -944,9 +954,20 @@ cheerleader <- function(cheer) {
     
     It should take a single parameter `n`, the number of asterisks in the first "line" of the triangle.  Use a `for`-loop in the body of the function.
     
-5. Rewrite `triangleOfStars()` so that it uses a `while`-loop in its body.
+5.  Write a function called `trianglePattern()` that produces patterns like the ones from the previous problem, but using any character that the user specifies.  The function should take two parameters:
+    * `char`, a string giving the character to use.  The default value should be `"*"`.
+    * `n`, the number of asterisks in the first "line" of the output.
+    
+    Typical examples of use should be as follows:
+    
+    ```{r}
+    trianglePattern(char = "x", 5)
+    trianglePattern(n = 6)
+    ```
+    
+6. Rewrite `triangleOfStars()` so that it uses a `while`-loop in its body.
 
-6. Rewrite `triangleOfStars()` so that it still uses a `while`-loop in its body, but produces output like this:
+7. Rewrite `triangleOfStars()` so that it still uses a `while`-loop in its body, but produces output like this:
 
     ```
     *
@@ -956,7 +977,7 @@ cheerleader <- function(cheer) {
     *****
     ```
 
-7. Write a function called `cheerleader()` that badgers you for each of the letters in a word until you give it all of the letters, one by one.  It should work like this:
+8. Write a function called `cheerleader()` that badgers you for each of the letters in a word until you give it all of the letters, one by one.  It should work like this:
 
     ```{r eval = FALSE}
     schoolMascot <- c("T", "I", "G", "E", "R", "S")
@@ -1035,7 +1056,19 @@ cheerleader <- function(cheer) {
     triangleofStars(5)
     ```
     
-5.  Here's the code:
+5. Here's the code:
+
+    ```{r}
+    trianglePattern <- function(char = "*", n) {
+      for (i in n:1) {
+        line <- rep(char, times = i)
+        cat(line, "\n", sep = "")
+      }
+    }
+    ```
+
+
+6.  Here's the code:
 
     ```{r}
     triangleofStars <- function(n) {
@@ -1053,7 +1086,7 @@ cheerleader <- function(cheer) {
     triangleofStars(5)
     ```
 
-6. Here's the code:
+7. Here's the code:
 
     ```{r}
     triangleofStars <- function(n) {
@@ -1072,7 +1105,7 @@ cheerleader <- function(cheer) {
     triangleofStars(5)
     ```
     
-7.  Here is the requested annoying function, using a `repeat`-loop with `break` inside a `for`-loop:
+8.  Here is the requested annoying function, using a `repeat`-loop with `break` inside a `for`-loop:
 
     ```{r eval = FALSE}
     cheerleader <- function(cheer) {

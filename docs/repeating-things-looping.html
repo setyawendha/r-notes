@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-02-20">
+<meta name="date" content="2018-02-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -883,6 +883,25 @@ cheerleader &lt;-<span class="st"> </span><span class="cf">function</span>(cheer
 **
 *</code></pre>
 <p>It should take a single parameter <code>n</code>, the number of asterisks in the first “line” of the triangle. Use a <code>for</code>-loop in the body of the function.</p></li>
+<li>Write a function called <code>trianglePattern()</code> that produces patterns like the ones from the previous problem, but using any character that the user specifies. The function should take two parameters:
+<ul>
+<li><code>char</code>, a string giving the character to use. The default value should be <code>&quot;*&quot;</code>.</li>
+<li><code>n</code>, the number of asterisks in the first “line” of the output.</li>
+</ul>
+<p>Typical examples of use should be as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trianglePattern</span>(<span class="dt">char =</span> <span class="st">&quot;x&quot;</span>, <span class="dv">5</span>)</code></pre></div>
+<pre><code>## xxxxx
+## xxxx
+## xxx
+## xx
+## x</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trianglePattern</span>(<span class="dt">n =</span> <span class="dv">6</span>)</code></pre></div>
+<pre><code>## ******
+## *****
+## ****
+## ***
+## **
+## *</code></pre></li>
 <li><p>Rewrite <code>triangleOfStars()</code> so that it uses a <code>while</code>-loop in its body.</p></li>
 <li><p>Rewrite <code>triangleOfStars()</code> so that it still uses a <code>while</code>-loop in its body, but produces output like this:</p>
 <pre><code>*
@@ -953,6 +972,13 @@ titledDoggies</code></pre></div>
 ## ***
 ## ****
 ## *****</code></pre></li>
+<li><p>Here’s the code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trianglePattern &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">char =</span> <span class="st">&quot;*&quot;</span>, n) {
+  <span class="cf">for</span> (i <span class="cf">in</span> n<span class="op">:</span><span class="dv">1</span>) {
+    line &lt;-<span class="st"> </span><span class="kw">rep</span>(char, <span class="dt">times =</span> i)
+    <span class="kw">cat</span>(line, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  }
+}</code></pre></div></li>
 <li><p>Here’s the code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleofStars &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
   <span class="cf">while</span> ( n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span> ) {
