@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-02-21">
+<meta name="date" content="2018-02-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -907,8 +907,7 @@ cheerleader &lt;-<span class="st"> </span><span class="cf">function</span>(cheer
 <pre><code>*
 **
 ***
-****
-*****</code></pre></li>
+****</code></pre></li>
 <li><p>Write a function called <code>cheerleader()</code> that badgers you for each of the letters in a word until you give it all of the letters, one by one. It should work like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">schoolMascot &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;I&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;E&quot;</span>, <span class="st">&quot;R&quot;</span>, <span class="st">&quot;S&quot;</span>)
 <span class="kw">cheerleader</span>(<span class="dt">cheer =</span> schoolMascot)</code></pre></div>
@@ -959,19 +958,19 @@ titledDoggies &lt;-<span class="st"> </span><span class="kw">character</span>(<s
 titledDoggies</code></pre></div>
 <pre><code>## [1] &quot;Bo the Dog&quot;     &quot;Gracie the Dog&quot; &quot;Rover the Dog&quot;  &quot;Anya the Dog&quot;</code></pre></li>
 <li><p>Here’s the code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleofStars &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n ) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleOfStars &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
+  <span class="cf">for</span> ( i <span class="cf">in</span> n<span class="op">:</span><span class="dv">1</span> ) {
     line &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;*&quot;</span>, <span class="dt">times =</span> i)
     <span class="kw">cat</span>(line, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
 }</code></pre></div>
 <p>Try it out:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">triangleofStars</span>(<span class="dv">5</span>)</code></pre></div>
-<pre><code>## *
-## **
-## ***
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">triangleOfStars</span>(<span class="dv">5</span>)</code></pre></div>
+<pre><code>## *****
 ## ****
-## *****</code></pre></li>
+## ***
+## **
+## *</code></pre></li>
 <li><p>Here’s the code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trianglePattern &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">char =</span> <span class="st">&quot;*&quot;</span>, n) {
   <span class="cf">for</span> (i <span class="cf">in</span> n<span class="op">:</span><span class="dv">1</span>) {
@@ -980,7 +979,7 @@ titledDoggies</code></pre></div>
   }
 }</code></pre></div></li>
 <li><p>Here’s the code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleofStars &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleOfStars &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
   <span class="cf">while</span> ( n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span> ) {
     line &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;*&quot;</span>, <span class="dt">times =</span> n)
     <span class="kw">cat</span>(line, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
@@ -988,14 +987,14 @@ titledDoggies</code></pre></div>
   }
 }</code></pre></div>
 <p>Try it out:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">triangleofStars</span>(<span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">triangleOfStars</span>(<span class="dv">5</span>)</code></pre></div>
 <pre><code>## *****
 ## ****
 ## ***
 ## **
 ## *</code></pre></li>
 <li><p>Here’s the code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleofStars &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">triangleOfStars &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
   m &lt;-<span class="st"> </span><span class="dv">1</span>
   <span class="cf">while</span> ( m <span class="op">&lt;=</span><span class="st"> </span>n ) {
     line &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;*&quot;</span>, <span class="dt">times =</span> m)
@@ -1004,7 +1003,7 @@ titledDoggies</code></pre></div>
   }
 }</code></pre></div>
 <p>Try it out:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">triangleofStars</span>(<span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">triangleOfStars</span>(<span class="dv">5</span>)</code></pre></div>
 <pre><code>## *
 ## **
 ## ***
