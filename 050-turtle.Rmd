@@ -566,7 +566,9 @@ turtle_drunk(100, 5)
 
 It is natural to wonder how likely the turtle is to wander back close to where it started, and to wonder how often that will happen.  We will address questions like these in Chapter \@ref(simulation).
 
-### Practice Exercises
+
+
+### Practice Exercises { #turtle-practice }
 
 These exercises don't deal directly with turtles, but instead drill you on the `sample()` and runif()` functions.
 
@@ -662,6 +664,82 @@ turtle_do({
 })
 ```
 
+## Artistic Turtles
+
+In the Practice Exercises (see Section \@ref(turtle-practice)) you met the `colors()` function.  Let's have the Turtle put it to good use.
+
+First of all, we might ask the Turtle to show us a sample of a given color:
+
+```{r echo = FALSE}
+turtle_show_color <- function(color) {
+  turtle_init()
+  turtle_col(color)
+  turtle_lwd(50)
+  turtle_do({
+    turtle_setpos(x = 30, y = 30)
+    turtle_square(40)
+  })
+}
+```
+
+```{r eval = FALSE}
+turtle_show_color <- function(color) {
+  cat("I'm drawing a ", color, " square!", sep = "")
+  turtle_init()
+  turtle_col(color)
+  turtle_lwd(50)
+  turtle_do({
+    turtle_setpos(x = 30, y = 30)
+    turtle_square(40)
+  })
+}
+```
+
+Note the very thick lines specified above:  `turtle_lwd(50)`.  Our turtle will draw a square with very thick sides that have the desired color.  Let's ask for burlywood.  The resulting color-swatch is shown in Figure \@ref(fig:turtle-burlywood).
+
+```{r turtle-burlywood, cache =TRUE, out.width = "50%", fig.keep='last', fig.cap="I'm drawing a burlywood square!", fig.align="center"}
+turtle_show_color("burlywood")
+```
+
+Feel free to ask for a random color.  The result of the call below is shown in Figure \@ref(fig:turtle-show-random-color).
+
+```{r turtle-show-random-color, echo = 2:2, cache = TRUE, out.width="50%", fig.keep="last", fig.cap="Behold my msterpiece!", fig.align="center"}
+set.seed(4546)
+turtle_show_color(sample(colors(), size = 1))
+```
+
+The function below is the Turtle's attempt to dash off a quick imitation of the work of Jackson Pollack, the great american abstract expressionist:
+
+```{r}
+turtle_quick_pollack <- function(strokes) {
+  turtle_init(mode = "clip")
+  turtle_lwd(50)
+  colorsUsed <- character(strokes)
+  turtle_do({
+    for ( i in 1:strokes ) {
+      randomColor <- sample(colors(), size = 1)
+      turtle_col(randomColor)
+      colorsUsed[i] <- randomColor
+      randomAngle <- runif(1, min = 0, max = 360)
+      turtle_left(randomAngle)
+      turtle_forward(10)
+    }
+  })
+  cat("Behold my masterpiece!  It was painted with: ")
+  print(colorsUsed)
+}
+```
+
+Let's have it make a picture with 50 strokes made by random-colored brushes.  The colors used are output to the console, and the resulting painting appears as Figure \@ref(fig:turtle-quick-pollack)
+
+```{r turtle-quick-pollack, echo = 2:2, cache = TRUE, out.width="50%", fig.keep="last", fig.cap="I'm drawing a palegreen2 square!", fig.align="center"}
+set.seed(3030)
+turtle_quick_pollack(50)
+```
+
+
+
+
 \newpage
 
 ## Glossary {-}
@@ -730,5 +808,5 @@ knitr::include_graphics("images/thinking.png")
     turtle_col(col = randomColor)
     ```
     
-
+1. (\*) Our `turtle_quick_pollack()` function has successive strokes attached to each other.  However, Jackson Pollack famous "drip" style involved placing brush-strokes at seemingly random locations on the canvas---successive strokes weren't placed together.  Modify our Pollack-painter function so that each new stroke appears as a random location *inside* the canvas.  If you really get into it, research <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf" target ="_blank">colors in R</a> and try to come up with your own scheme for randomizing colors.
 
