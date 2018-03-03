@@ -1,0 +1,40 @@
+---
+title: "Untitled"
+author: "Homer White"
+date: "3/3/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(TurtleGraphics)
+```
+
+
+```{r}
+turtle_quick_pollack <- function(strokes) {
+  turtle_init(mode = "clip")
+  turtle_lwd(50)
+  colorsUsed <- character(strokes)
+  turtle_do({
+    for ( i in 1:strokes ) {
+      randomColor <- sample(colors(), size = 1)
+      turtle_col(randomColor)
+      colorsUsed[i] <- randomColor
+      randomAngle <- runif(1, min = 0, max = 360)
+      turtle_left(randomAngle)
+      turtle_forward(10)
+    }
+  })
+  cat("Behold my masterpiece!  It was painted with:")
+  cat("\n\n")
+  print(colorsUsed)
+}
+```
+
+```{r turtle-quick-pollack, echo = 2:2, cache = TRUE, out.width="50%", fig.keep="last", fig.cap="Behold my msterpiece!", fig.align="center"}
+set.seed(3030)
+turtle_quick_pollack(50)
+```
+
+

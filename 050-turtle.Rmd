@@ -708,9 +708,9 @@ set.seed(4546)
 turtle_show_color(sample(colors(), size = 1))
 ```
 
-The function below is the Turtle's attempt to dash off a quick imitation of the work of Jackson Pollack, the great american abstract expressionist:
+The function below is the Turtle's attempt to dash off a quick imitation of the work of Jackson Pollack, the great American abstract expressionist:
 
-```{r}
+```{r eval = FALSE}
 turtle_quick_pollack <- function(strokes) {
   turtle_init(mode = "clip")
   turtle_lwd(50)
@@ -730,7 +730,25 @@ turtle_quick_pollack <- function(strokes) {
 }
 ```
 
-Let's have it make a picture with 50 strokes made by random-colored brushes.  The colors used are output to the console, and the resulting painting appears as Figure \@ref(fig:turtle-quick-pollack)
+```{r echo = FALSE}
+turtle_quick_pollack <- function(strokes) {
+  turtle_init(mode = "clip")
+  turtle_lwd(50)
+  colorsUsed <- character(strokes)
+  turtle_do({
+    for ( i in 1:strokes ) {
+      randomColor <- sample(colors(), size = 1)
+      turtle_col(randomColor)
+      colorsUsed[i] <- randomColor
+      randomAngle <- runif(1, min = 0, max = 360)
+      turtle_left(randomAngle)
+      turtle_forward(10)
+    }
+  })
+}
+```
+
+Note that the colors used are output to the console.  Let's have it make a picture with 50 strokes made by random-colored brushes. The resulting painting appears as Figure \@ref(fig:turtle-quick-pollack)
 
 ```{r turtle-quick-pollack, echo = 2:2, cache = TRUE, out.width="50%", fig.keep="last", fig.cap="Behold my msterpiece!", fig.align="center"}
 set.seed(3030)
