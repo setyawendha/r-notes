@@ -273,7 +273,67 @@ turtle_do({
 })
 ```
 
-The turtle turns one degree every time R goes through the loop, but the amount it travels forward ($i/720$) increases as the index variable `i` increases.^[Another thing to notice is that we set the width and height of the region ourselves, so that the spiral would fit into it.  We also set `mode` to `clip` rather then leaving it at its default value of `error`.  With `mode = "clip"`, R won't throw an error message at you when the turtle moves outside of its region.  Clip-mode is very handy when you are developing a graph and don't know in advance precisely where the turtle will go.]
+The turtle turns one degree every time R goes through the loop, but the amount it travels forward ($i/720$) increases as the index variable `i` increases.
+
+Another thing to notice is that we set the width and height of the region ourselves, so that the spiral would fit into it.  We also set `mode` to `clip` rather then leaving it at its default value of `error`.  With `mode = "clip"`, R won't throw an error message at you when the turtle moves outside of its region.  Clip-mode is very handy when you are developing a graph and don't know in advance precisely where the turtle will go.
+
+### Practice Exercises
+
+1. Write a program to make a four-sided star with rays of length 20 each, like this:
+
+    ```{r cache =TRUE, echo=FALSE, out.width = "50%", fig.keep='last', fig.align="center"}
+    turtle_init(mode = "clip")
+    turtle_do({
+      for ( i in 1:4 ) {
+        turtle_forward(20)
+        turtle_backward(20)
+        turtle_left(90)
+      }
+    })
+    ```
+    
+1. Write a program to make an eight-sided star with rays of length 30 each, like this:
+
+    ```{r cache =TRUE, echo=FALSE, out.width = "50%", fig.keep='last', fig.align="center"}
+    turtle_init(mode = "clip")
+    turtle_do({
+      for ( i in 1:8 ) {
+        turtle_forward(30)
+        turtle_backward(30)
+        turtle_left(45)
+      }
+    })
+    ```
+    
+
+
+### Solutions to the Practice Exercises
+
+1.  In order to make a single ray you walk 20 units forward from a central point, then walk 20 units back to the center.  In order to prepare to make the next ray, you turn after you get back to the center.  Since you plan on four rays, you must turn $360/4 = 90$ degrees each time.  It makes sense to trace each ray once inside a `for`-loop.  Using `turtle_do()` will make the loop run much faster.  Here's the code:
+
+    ```{r eval = FALSE}
+    turtle_init(mode = "clip")
+    turtle_do({
+      for ( i in 1:4 ) {
+        turtle_forward(20)
+        turtle_backward(20)
+        turtle_left(90)
+      }
+    })
+    ```
+    
+1.  This time in order to make a single ray you walk 30 units forward from a central point, then walk 30 units back to the center.  Since you now plan on eight rays, you must turn $360/8 = 45$ degrees each time.  Again it makes sense to trace each ray once inside a `for`-loop.  Here's the code:
+
+    ```{r eval = FALSE}
+    turtle_init(mode = "clip")
+    turtle_do({
+      for ( i in 1:8 ) {
+        turtle_forward(30)
+        turtle_backward(30)
+        turtle_left(45)
+      }
+    })
+    ```
 
 
 ## Writing Turtle Functions
@@ -297,6 +357,92 @@ Note that the user can vary the length of a side.  You would use it like this:
 turtle_init(mode = "clip")
 turtle_square(side = 30)
 ```
+
+### Practice Exercises
+
+```{r echo = FALSE}
+star8 <- function(width) {
+  turtle_init(mode = "clip")
+  turtle_lwd(lwd = width)
+  turtle_do({
+    for ( i in 1:8 ) {
+      turtle_forward(20)
+      turtle_backward(20)
+      turtle_turn(45)
+    }
+  })
+}
+superstar8 <- function(width, color = "burlywood") {
+  turtle_init(mode = "clip")
+  turtle_lwd(lwd = width)
+  turtle_col(col = color)
+  turtle_do({
+    for ( i in 1:8 ) {
+      turtle_forward(20)
+      turtle_backward(20)
+      turtle_turn(45)
+    }
+  })
+}
+```
+
+
+1. Write a function called `star8()` that makes an eight-sided star with rays of length 20 each.  The user should be able to specify the thickness of the rays (think `turtle_lwd()`).  The body of the function should begin with `turtle_init()` so that the star is always drawn inside a new field. The function should take a single parameter called `width`, the desired thickness of the rays. Typical examples of use should be as follows:
+
+    ```{r cache =TRUE, out.width = "50%", fig.keep='last', fig.align="center"}
+    star8(width = 2)
+    ```
+    
+    ```{r cache =TRUE, out.width = "50%", fig.keep='last', fig.align="center"}
+    star8(width = 10)
+    ```
+    
+1. Modify your `star8()` function to make a new function called `superstar8()` that takes an additional parameter called `color` that allows the user to specify the color of the rays.  The default value of `color` should be `"burlywood"`.  Typical examples of use should be as follows:
+
+    ```{r cache =TRUE, out.width = "50%", fig.keep='last', fig.align="center"}
+    superstar8(width = 5)
+    ```
+    
+    ```{r cache =TRUE, out.width = "50%", fig.keep='last', fig.align="center"}
+    superstar8(width = 15, color = "lavenderblush4")
+    ```
+    
+
+
+### Solutions to the Practice Exercises
+
+1.  From the Practice Exercises of the previous section we are already familiar with making 8-ray stars; we just need to encapsulate the process into a function.  Here's the code:
+
+    ```{r eval = FALSE}
+    star8 <- function(width) {
+      turtle_init(mode = "clip")
+      turtle_lwd(lwd = width)
+      turtle_do({
+      for ( i in 1:8 ) {
+        turtle_forward(20)
+        turtle_backward(20)
+        turtle_turn(45)
+      }
+      })
+    }
+    ```
+    
+1.  Try this:
+
+    ```{r eval = FALSE}
+    superstar8 <- function(width, color = "burlywood") {
+      turtle_init(mode = "clip")
+      turtle_lwd(lwd = width)
+      turtle_col(col = color)
+      turtle_do({
+      for ( i in 1:8 ) {
+        turtle_forward(20)
+        turtle_backward(20)
+        turtle_turn(45)
+      }
+      })
+    }
+    ```
 
 
 ## Random Moves
@@ -570,7 +716,28 @@ It is natural to wonder how likely the turtle is to wander back close to where i
 
 ### Practice Exercises { #turtle-practice }
 
-These exercises don't deal directly with turtles, but instead drill you on the `sample()` and runif()` functions.
+```{r echo = FALSE}
+randomColor8 <- function(type = 1) {
+  allowedColors <- c("red", "blue")
+  turtle_init(mode = "clip")
+  turtle_lty(lty = type)
+  turtle_lwd(lwd = 5)
+  turtle_do({
+    for ( i in 1:8 ) {
+      turtle_col(col = sample(allowedColors, 
+                              size = 1, 
+                              prob = c(0.3, 0.7)))
+      rayLength <- runif(1, min = 10, max = 40)
+      turtle_forward(rayLength)
+      turtle_backward(rayLength)
+      turtle_left(45)
+    }
+  })
+}
+```
+
+
+Many of these exercises don't deal directly with turtles, but instead drill you on the `sample()` and runif()` functions.
 
 1. Write a call to the `sample()` function so that it will pick a whole number at random from 1 to 10.  Each number should have the same chance to be selected.
 
@@ -604,6 +771,27 @@ These exercises don't deal directly with turtles, but instead drill you on the `
 
 1. You enter a forest where there are many sticks on the ground.  Each of them is equally likely to be anywhere between 0 and 10 feet long.  You pick up five sticks at random. Write a one-line R-command that produces the length of shortest stick that you pick up.
 
+1. Write a function called `randomColor8()` that produces an 8-ray star.  Here are the specs:
+
+    * The user should be able to determine the type of the line (think `turtle_lty()`).
+    * Each ray should have a 30% chance of being red and a 70% chance of being blue.
+    * In addition, the length of each ray should be a random real number between 10 and 40.
+    * The function should take a single parameter called `type` that the user can set to determine the line-type for the rays; its default-value should be 1.
+    * The width of each ray should be 5.
+    
+    
+    Typical examples of use should be as follows:
+
+    ```{r cache = TRUE, fig.keep = 'last', fig.align = 'center', out.width="50%", echo=2:2}
+    set.seed(3939)
+    randomColor8()
+    ```
+    
+    ```{r cache = TRUE, fig.keep = 'last', fig.align = 'center', out.width="50%", echo=2:2}
+    set.seed(4343)
+    randomColor8(type = 3)
+    ```
+
 
 ### Solutions to the Practice Exercises
 
@@ -626,6 +814,28 @@ These exercises don't deal directly with turtles, but instead drill you on the `
 1. `runif(30, min = 10, max = 15)`
 
 1. `min(runif(5, min = 0, max = 10))`
+
+1. Try this:
+
+    ```{r eval = FALSE}
+    randomColor8 <- function(type = 1) {
+      allowedColors <- c("red", "blue")
+      turtle_init(mode = "clip")
+      turtle_lty(lty = type)
+      turtle_lwd(lwd = 5)
+      turtle_do({
+        for ( i in 1:8 ) {
+          turtle_col(col = sample(allowedColors, 
+                                  size = 1, 
+                                  prob = c(0.3, 0.7)))
+          rayLength <- runif(1, min = 10, max = 40)
+          turtle_forward(rayLength)
+          turtle_backward(rayLength)
+          turtle_left(45)
+        }
+      })
+    }
+    ```
 
 ## More Complex Turtle Graphs
 
@@ -778,19 +988,19 @@ knitr::include_graphics("images/thinking.png")
 
 1. Write a function called `turtle_gon()` that draws a regular polygon.  The user should be able to specify the side-length and the number of sides.  Start with `turtle_init()` and use your function to draw a regular dodecagon (twelve sides) with each side having a side length of 15 units. Your figure should not stray outside of the turtle's field, so you may have to adjust the position of your turtle a bit prior to calling your function.
 
-1. Write a function called `turtle_star()` that can make stars like the ones in Figure \@ref(fig:turtlestarstart).  The user should be able to specify:
-    * the number of rays in a star (default is 6);
-    * the length of the rays (default is 20);
-    * the color of the rays (default is red);
-    * the line-type of the rays (default is 1);
-    * the line-width of the rays (default is 1).
+1. Write a function called `turtle_star()` that can make stars like the ones in Figure \@ref(fig:turtlestarstart).  Here are the required parameters:
+    * `n`:  the number of rays in a star (default should be 6);
+    * `length`:  the length of the rays (default should be 20);
+    * `color`:  the color of the rays (default should be `"red"`);
+    * `type`:  the line-type of the rays (default should be 1);
+    * `width`:  the line-width of the rays (default should be 1).
 
     ```{r turtlestarstart, echo =FALSE, fig.cap="Sample Stars", out.width="60%", fig.align="center"}
     knitr::include_graphics("images/turtle-stars.png")
     ```
     
 
-    Starting with `turtle_init()`, use your function to create a star with 10 rays, each of length 20 units.  The lines should be red and dashed.  I'll leave the thickness   up to you.
+    Starting with `turtle_init()`, use your function to create a star with 10 rays, each of length 20 units.  The lines should be red and dashed.  I'll leave the thickness up to you.
 
 1. Make a new star function `turtle_rstar()` in which the lengths of the rays are not determined by the user but instead vary randomly from 5 to 25 units, as in Figure \@ref(fig:next-turtle-star): 
 
@@ -798,7 +1008,7 @@ knitr::include_graphics("images/thinking.png")
     knitr::include_graphics("images/turtle-stars-2.png")
     ```
 
-    The defaults for the other parameters should be the same as in the previous exercise.  Starting from `turtle_init(50,50)` make a random star with 20 rays and a line-thickness of 3.  Other parameters should be left at their default-values.
+    There is no longer a `legnth` parameter, but the names and default-values for the other parameters should be the same as in the previous exercise.  Starting from `turtle_init(50,50)` make a random star with 20 rays and a line-thickness of 3.  Other parameters should be left at their default-values.
     
     **Hint**:  You'll probably use a loop to draw each ray of the star.  As you go through the loop, get a random ray-length using the `runif()` function:
     
