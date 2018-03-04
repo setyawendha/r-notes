@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-03">
+<meta name="date" content="2018-03-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -583,7 +583,22 @@ Answers to the first question will vary from person to person, depending on circ
 <p>for if not then Anna would arrive and leave before Raj gets there. But if we have <em>both</em> of those conditions:</p>
 <p><span class="math display">\[anna - r \le raj \text{ and } raj \le anna + a\]</span></p>
 <p>then they must connect, since neither person will arrive too much before the other.</p></li>
-<li><p>Refer back to the <code>numberNeededSim()</code> function. Write a program that computes the estimated expected number needed, for the following targets:</p>
+<li><p>A candy-maker makes a particular type of candy that always has 20 candies in each bag. When you buy a bag of this candy, you take a few candies from it every day until they are all gone. The amount you take each day is a random whole number from 1 to 10. A possible scenario is:</p>
+<ul>
+<li>Day 1: take 4 candies. (There are 16 left.)</li>
+<li>Day 2: take 8 candies. (There are 8 left.)</li>
+<li>Day 3: take 3 candies. (There are 5 left.)</li>
+<li>Day 4: take 6 candies. (There were only 5 left, so you take all the remaining candies.)</li>
+</ul>
+<p>In the scenario above, it took you four days to finish the bag.</p>
+<p>Write a function called <code>daysNeededSim()</code> that will estimate the expected number of days required to empty a bag. It should take two parameters:</p>
+<ul>
+<li><code>reps</code>: the number of times to simulate the process of emptying one bag. The default value should be 10,000.</li>
+<li><code>seed</code>: a random seed that the user can set. The default value should be <code>NULL</code>.</li>
+</ul>
+<p>Apply the function with 50,000 repetitions and a seed that you report, in order to estimate the expected number fo days required to empty the bag.</p>
+<p><strong>Hint:</strong> This scenario is quite similar to the <code>numberNeededSim()</code> problem from this Chapter. Begin by reviewing it.</p></li>
+<li><p>(*) Refer back to the <code>numberNeededSim()</code> function. Write a program that computes the estimated expected number needed, for the following targets:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">targets &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="dt">by =</span> <span class="fl">0.05</span>)</code></pre></div>
 <p>Each estimate should be based on ten thousand repetitions. Start with a simple seed that you report. Report the estimated expected values for all of the required targets. Compare these estimates with <code>exp(targets)</code> (the number <span class="math inline">\(e\)</span> raised to the power of each of the targets.) Formulate a conjecture about the value of the expected number of numbers needed, when the target is a real number between 0 and 1.</p>
 <p><strong>Hint</strong>: Recall that <code>numberNeededSim()</code> function returns its estimate of the expected number needed. Hence you could use it inside a <code>for</code>-loop that iterates through the elements of the <code>targets</code> vector above, something like this:</p>
