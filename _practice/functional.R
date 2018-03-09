@@ -143,4 +143,80 @@ Iterate <- function(f, n = 1)
   function(x) Reduce(Funcall, rep.int(list(f), n), x, right = TRUE)
 Iterate(function(x) 1 + 1 / x, 30)(1)
 
+## some recursion
+fibonacci <- function(n) {
+  if ( n %in% c(1,2) ) {
+    return(1);
+  }
+  return(fibonacci(n - 1) + fibonacci(n -2))
+}
 
+system.time(fibonacci(40))
+
+## wow:
+# > system.time(fibonacci(20))
+# user  system elapsed 
+# 0.013   0.000   0.014 
+# > system.time(fibonacci(30))
+# user  system elapsed 
+# 2.069   0.004   2.073 
+# > system.time(fibonacci(40))
+# user  system elapsed 
+# 263.229   0.494 264.065 
+
+## speed up with memoization
+## (Patrick Burns, R Inferno, Chapter 6 Doing Global Assignments,
+## http://www.burns-stat.com/pages/Tutor/R_inferno.pdf)
+
+fibonacci2 <- local({
+  memo <- c(1, 1, rep(NA, 100))
+  f <- function(x) {
+    if (x == 0) return(0)
+    if (x < 0) return(NA)
+    if (x > length(memo))
+      stop("’x’ too big for implementation")
+    if (!is.na(memo[x])) return(memo[x])
+    ans <- f(x-2) + f(x-1)
+    memo[x] <<- ans
+    ans
+  }
+})
+
+## big improvement
+# > system.time(fibonacci2(20))
+# user  system elapsed 
+# 0.000   0.000   0.001 
+# > system.time(fibonacci2(30))
+# user  system elapsed 
+# 0       0       0 
+# > system.time(fibonacci2(40))
+# user  system elapsed 
+# 0       0       0 
+
+## similar idea, via function factory:
+fibber <- function(limit = 100) {
+  memo <- c(1, 1, rep(NA, limit))
+  f <- function(x) {
+    if (x == 0) return(0)
+    if (x < 0) return(NA)
+    if (x > length(memo))
+      stop("’x’ too big for implementation")
+    if (!is.na(memo[x])) return(memo[x])
+    ans <- f(x-2) + f(x-1)
+    memo[x] <<- ans
+    ans
+  }
+}
+
+fibonacci3 <- fibber(limit = 500)
+
+## same improvement
+# > system.time(fibonacci3(20))
+# user  system elapsed 
+# 0       0       0 
+# > system.time(fibonacci3(30))
+# user  system elapsed 
+# 0       0       0 
+# > system.time(fibonacci3(40))
+# user  system elapsed 
+# 0       0       0 

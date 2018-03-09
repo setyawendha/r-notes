@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-04">
+<meta name="date" content="2018-03-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -648,11 +648,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">capVowels</span>(<span class="st">&quot;Far and away the best!&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;FAr And AwAy thE bEst!&quot;</code></pre>
 <p>Here is another function that searches for repeated words and encloses each pair in asterisks:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starRepeats &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
-  <span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">b)&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;*</span><span class="ch">\\</span><span class="st">1*&quot;</span>, <span class="dt">x =</span> str, <span class="dt">perl =</span> <span class="ot">TRUE</span>)
-}
-<span class="kw">starRepeats</span>(<span class="st">&quot;I have a boo boo on my knee knee.&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;I have a *boo boo* on my *knee knee*.&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starRepeats &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
   str <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">b)&quot;</span>,
