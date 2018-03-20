@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-08">
+<meta name="date" content="2018-03-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -723,17 +723,17 @@ message &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class=
 </ul>
 <p>We can view the first few row of the data frame using R’s <code>head()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(Births78, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
-<pre><code>##          date births dayofyear  wday
-## 1  1978-01-01   7701         1   Sun
-## 2  1978-01-02   7527         2   Mon
-## 3  1978-01-03   8825         3  Tues
-## 4  1978-01-04   8859         4   Wed
-## 5  1978-01-05   9043         5 Thurs
-## 6  1978-01-06   9208         6   Fri
-## 7  1978-01-07   8084         7   Sat
-## 8  1978-01-08   7611         8   Sun
-## 9  1978-01-09   9172         9   Mon
-## 10 1978-01-10   9089        10  Tues</code></pre>
+<pre><code>##          date births dayofyear  wday weekend
+## 1  1978-01-01   7701         1   Sun weekend
+## 2  1978-01-02   7527         2   Mon weekday
+## 3  1978-01-03   8825         3  Tues weekday
+## 4  1978-01-04   8859         4   Wed weekday
+## 5  1978-01-05   9043         5 Thurs weekday
+## 6  1978-01-06   9208         6   Fri weekday
+## 7  1978-01-07   8084         7   Sat weekend
+## 8  1978-01-08   7611         8   Sun weekend
+## 9  1978-01-09   9172         9   Mon weekday
+## 10 1978-01-10   9089        10  Tues weekday</code></pre>
 <p>We might wonder whether the number of births varies with the time of year. One way to investigate this question is to make a <em>scatterplot</em>, where the days of the year (numbered 1 through 365) are on the horizontal axis and the number of births for each day are on the vertical axis. Figure <a href="idea-tour.html#fig:birthsplot">1.2</a> shows such a plot.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 <div class="figure" style="text-align: center"><span id="fig:birthsplot"></span>
 <img src="r-notes_files/figure-html/birthsplot-1.png" alt="A simple scatterplot with R's ggplot2 graphics system." width="60%" />
@@ -753,7 +753,7 @@ Figure 1.2: A simple scatterplot with R’s ggplot2 graphics system.
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>The plot is made with the <strong>ggplot2</strong> graphics package <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2017</a>)</span>. Graphing will not be a major focus of the course at first, but we will return from time to time, to the subject of graphing in <strong>ggplot2</strong> as our need for graphs dictates.<a href="idea-tour.html#fnref1">↩</a></p></li>
+<li id="fn1"><p>The plot is made with the <strong>ggplot2</strong> graphics package <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2018</a>)</span>. Graphing will not be a major focus of the course at first, but we will return from time to time, to the subject of graphing in <strong>ggplot2</strong> as our need for graphs dictates.<a href="idea-tour.html#fnref1">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -780,10 +780,11 @@ gitbook.start({
 "facebook": false,
 "twitter": false,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -807,9 +808,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

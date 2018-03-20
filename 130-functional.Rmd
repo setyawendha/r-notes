@@ -272,7 +272,7 @@ for ( i in 1:5 ) {
 str(lst)
 ```
 
-In the first example, the elements in the vector `1:10` didn't matter---we wanted a vector of length ten each time---and in the second case the elements in the `1:10` did matter, in that it determined the length of the new vector produced.  Of course in general we could apply `runif()` to each element of *any* vector at all, like this:
+In the first example, the elements in the vector `1:5` didn't matter---we wanted a vector of length ten each time---and in the second case the elements in the `1:5` *did* matter, in that they determined the lengths of the five vectors produced.  Of course in general we could apply `runif()` to each element of *any* vector at all, like this:
 
 ```{r echo = 2:7}
 set.seed(2020)
@@ -544,9 +544,11 @@ Check the `plots` directory; it should contain these files:
 
 ### Practice Exercises
 
-1. Use `map_dbl()` to produce the squares of the whole numbers form 1 to 10.
+1. Use `map()` to produce a list of the squares of the whole numbers from 1 to 10.
 
-2.  Use `map_chr` to state the type of each element of the following list:
+1. Use `map_dbl()` to produce a numerical vector of the squares of the whole numbers from 1 to 10.
+
+1.  Use `map_chr` to state the type of each element of the following list:
 
     ```{r}
     lst <- list(
@@ -557,7 +559,7 @@ Check the `plots` directory; it should contain these files:
     )
     ```
     
-3. Here are some people:
+1. Here are some people:
 
     ```{r}
     people <- c("Bettina", "Raj", "Isabella", "Khalil")
@@ -588,22 +590,34 @@ Check the `plots` directory; it should contain these files:
 1. Try this:
 
     ```{r}
-    map_dbl(1:10, ~.^2)
+    map(1:10, ~.^2)
     ```
     
     This is more verbose, but works just as well:
     
     ```{r}
+    map(1:10, function(x) x^2)
+    ```
+
+1. Try this:
+
+    ```{r}
+    map_dbl(1:10, ~.^2)
+    ```
+    
+    Again the more verbose approach works just as well:
+    
+    ```{r}
     map_dbl(1:10, function(x) x^2)
     ```    
 
-2. Try this:
+1. Try this:
 
     ```{r}
     map_chr(lst, typeof)
     ```
 
-3. Try this:
+1. Try this:
 
     ```{r eval = FALSE}
     list(people, status) %>% 
@@ -744,7 +758,7 @@ makeTable <- function(n) {
   }
   reduce(.x = 1:n, .f = buildNew, .init = s1)
 }
-makeTable(1)  # all logical vectors of length 3
+makeTable(1)  # all logical vectors of length 1
 ```
 
 Now consider a systematic way to construct the set $S_2$ of all the vectors of length two.  We know that there are four such vectors:
@@ -1156,6 +1170,8 @@ oddMembers <- function(vec) {
     ```
     
     Use `reduce()` and the `union()` function to obtain a character vector that is the union of all the vectors in `lst`.
+    
+1.  Remember the function `subStrings()` from the exercises of the Chapter on Strings?  Refactor it so that it does EXACTLY the same thing but makes no use of loops.
     
 1. (*) Run the following code to see what it does.  Then analyse the code and explain in detail how it works.  Along the way you will have to study some unfamiliar R-functions.
     

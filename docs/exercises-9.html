@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-08">
+<meta name="date" content="2018-03-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -555,7 +555,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>Write a program that uses a regular expression to find all of the words in <code>words</code> that contain a “q” that is not immediately followed by a “u”. The program should <code>cat()</code> the words to the console, one per line.</p></li>
 <li><p>Write a program that uses a regular expression to find all of the words in <code>words</code> that are 4-letter or 5-letter palindromes. The program should <code>cat()</code> the words to the console, one per line. (<strong>Hint:</strong> consult Section <a href="regex-syntax.html#regex-captures">12.3.8</a>.)</p></li>
 <li><p>It can be proven mathematically that there is no regular expression, no matter how complex, that matches all and only the palindromes. We can write regular expressions to match all and only the palindromes that are less than some fixed number of characters, but we can’t match palindromes of arbitrary length. Write a program to find all of the palindromes in <code>words</code>. Obviously this program won’t have to use a regular expression!</p></li>
-<li><p>Gutenburg’s version of Jane Austin’s classic novel <em>Pride and Prejudice</em> may be downloaded from the URL:</p>
+<li><p>(*) Gutenburg’s version of Jane Austin’s classic novel <em>Pride and Prejudice</em> may be downloaded from the URL:</p>
 <blockquote>
 <p><a href="https://www.gutenberg.org/files/1342/1342-0.txt" class="uri">https://www.gutenberg.org/files/1342/1342-0.txt</a></p>
 </blockquote>
@@ -591,10 +591,11 @@ gitbook.start({
 "facebook": false,
 "twitter": false,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -618,9 +619,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

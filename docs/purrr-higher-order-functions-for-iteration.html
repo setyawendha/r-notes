@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-08">
+<meta name="date" content="2018-03-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -578,7 +578,7 @@ lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt
 ##  $ : num [1:9] 0.06738 0.12915 0.39312 0.00258 0.62021 ...
 ##  $ : num [1:16] 0.409 0.54 0.961 0.654 0.547 ...
 ##  $ : num [1:25] 0.96407 0.07147 0.95581 0.94798 0.00119 ...</code></pre>
-<p>In the first example, the elements in the vector <code>1:10</code> didn’t matter—we wanted a vector of length ten each time—and in the second case the elements in the <code>1:10</code> did matter, in that it determined the length of the new vector produced. Of course in general we could apply <code>runif()</code> to each element of <em>any</em> vector at all, like this:</p>
+<p>In the first example, the elements in the vector <code>1:5</code> didn’t matter—we wanted a vector of length ten each time—and in the second case the elements in the <code>1:5</code> <em>did</em> matter, in that they determined the lengths of the five vectors produced. Of course in general we could apply <code>runif()</code> to each element of <em>any</em> vector at all, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">9</span>)
 lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="kw">length</span>(vec))
 <span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(vec) ) {
@@ -865,7 +865,8 @@ numberNA</code></pre></div>
 <div id="practice-exercises-37" class="section level3">
 <h3><span class="header-section-number">14.3.3</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><p>Use <code>map_dbl()</code> to produce the squares of the whole numbers form 1 to 10.</p></li>
+<li><p>Use <code>map()</code> to produce a list of the squares of the whole numbers from 1 to 10.</p></li>
+<li><p>Use <code>map_dbl()</code> to produce a numerical vector of the squares of the whole numbers from 1 to 10.</p></li>
 <li><p>Use <code>map_chr</code> to state the type of each element of the following list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">list</span>(
   letters,
@@ -888,9 +889,71 @@ numberNA</code></pre></div>
 <h3><span class="header-section-number">14.3.4</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Try this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 4
+## 
+## [[3]]
+## [1] 9
+## 
+## [[4]]
+## [1] 16
+## 
+## [[5]]
+## [1] 25
+## 
+## [[6]]
+## [1] 36
+## 
+## [[7]]
+## [1] 49
+## 
+## [[8]]
+## [1] 64
+## 
+## [[9]]
+## [1] 81
+## 
+## [[10]]
+## [1] 100</code></pre>
+<p>This is more verbose, but works just as well:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 4
+## 
+## [[3]]
+## [1] 9
+## 
+## [[4]]
+## [1] 16
+## 
+## [[5]]
+## [1] 25
+## 
+## [[6]]
+## [1] 36
+## 
+## [[7]]
+## [1] 49
+## 
+## [[8]]
+## [1] 64
+## 
+## [[9]]
+## [1] 81
+## 
+## [[10]]
+## [1] 100</code></pre></li>
+<li><p>Try this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
-<p>This is more verbose, but works just as well:</p>
+<p>Again the more verbose approach works just as well:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre></li>
 <li><p>Try this:</p>
@@ -933,10 +996,11 @@ gitbook.start({
 "facebook": false,
 "twitter": false,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -960,9 +1024,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

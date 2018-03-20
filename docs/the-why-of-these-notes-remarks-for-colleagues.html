@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-08">
+<meta name="date" content="2018-03-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -552,7 +552,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>There is a plethora of books on R, covering pretty much every domain of application of the language, from ecology to spatial statistics to machine learning and data science. There are even some books—among the very finest of R-books, in my view—on R as a programming language.</p>
 <p>These Notes are not intended to supersede or to compete with any of the existing literature on R. Instead they are intended to serve the curricular needs of the Computer Science minor at the College where I teach—a minor that emphasizes data analysis primarily, but with a strong focus also on web design and on the increasingly important interfaces between these two areas (e.g., interactive graphics and web apps for working with data and/or reporting the results of data analysis). Students will undertake a serious study of two major scripting languages: R for data analysis and JavaScript for web programming, both from a fairly systematic programming point of view, with due attention to procedural, functional and (to a lesser extent) object-oriented programming paradigms.</p>
 <p>The question is: which language to use in the freshman year? Some institutions are moving toward JavaScript: in fact Stanford University piloted JavaScript in several sections of its introductory CS course in the Fall of 2017. There are certainly considerations in favor of a JavaScript-first approach: it’s a popular language, with Node available as an interactive run-time environment and the browser as a environment in which exciting applications can be built quickly. And whereas R is less widely-used and is still considered a domain-specific language, JavaScript can rightly be said to have made the leap into the ranks of general-purpose programming languages. R also has the reputation of being a prickly language with a somewhat inconsistent syntax and with documentation that is “expert-friendly” at best.</p>
-<p>On the other hand R is designed for one-line interactivity at the console, so it’s possible for a beginner to get simple programs working quickly. The R-ecosystem has also become a lot more user-friendly in recent years. The <a href="https://www.rstudio.com/products/rstudio/">RStudio</a> IDE is comparable to top-flight integrated development environments for many other major languages and yet is still relatively lightweight and accessible to beginners. The Server version of R Studio is especially useful for new programmers, as it saves them from having to deal with installation and other IT issues on their own machines, permitting them to focus on coding. It’s also quite convenient, in a server setting, to make class materials available and to collect and return assignments. R Markdown is fine platform for producing course notes (this book is written in R Markdown with the excellent <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown">2017</a><a href="#ref-R-bookdown">b</a>)</span>) and slides as well. Students, too, can use R Markdown to both write and discuss their programs in a single document. The <strong>blogdown</strong> package <span class="citation">(Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>)</span> permits students to begin writing for the public about technical programming issues—or about anything at all, really, as more than a few of them are taking majors in the Humanities—thus building up a professional resume of online work. When it’s time to learn about databases, students can leverage a body of recent work (see <a href="https://db.rstudio.com/">Databases Using R</a>) that renders the R Studio environment nearly as friendly for interaction with databases as dedicated tools such as MySQL Workbench. Finally, the <strong>shiny</strong> package <span class="citation">(Chang et al. <a href="#ref-R-shiny">2017</a>)</span> permits students to build simple interactive web apps for data analysis that can be used by non-coders. Both <strong>blogdown</strong> and <strong>shiny</strong> prompt students to consider early on—even in the first year, if the pacing is right—concepts of web design, the other focus of the minor.</p>
+<p>On the other hand R is designed for one-line interactivity at the console, so it’s possible for a beginner to get simple programs working quickly. The R-ecosystem has also become a lot more user-friendly in recent years. The <a href="https://www.rstudio.com/products/rstudio/">RStudio</a> IDE is comparable to top-flight integrated development environments for many other major languages and yet is still relatively lightweight and accessible to beginners. The Server version of R Studio is especially useful for new programmers, as it saves them from having to deal with installation and other IT issues on their own machines, permitting them to focus on coding. It’s also quite convenient, in a server setting, to make class materials available and to collect and return assignments. R Markdown is fine platform for producing course notes (this book is written in R Markdown with the excellent <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown">2018</a>)</span>) and slides as well. Students, too, can use R Markdown to both write and discuss their programs in a single document. The <strong>blogdown</strong> package <span class="citation">(Xie <a href="#ref-R-blogdown">2017</a>)</span> permits students to begin writing for the public about technical programming issues—or about anything at all, really, as more than a few of them are taking majors in the Humanities—thus building up a professional resume of online work. When it’s time to learn about databases, students can leverage a body of recent work (see <a href="https://db.rstudio.com/">Databases Using R</a>) that renders the R Studio environment nearly as friendly for interaction with databases as dedicated tools such as MySQL Workbench. Finally, the <strong>shiny</strong> package <span class="citation">(Chang et al. <a href="#ref-R-shiny">2017</a>)</span> permits students to build simple interactive web apps for data analysis that can be used by non-coders. Both <strong>blogdown</strong> and <strong>shiny</strong> prompt students to consider early on—even in the first year, if the pacing is right—concepts of web design, the other focus of the minor.</p>
 <p>Hence the choice was made to teach a first-year computer science course, to beginning programmers, with R. As I pointed out earlier, there do exist some excellent books on R as a programming language that do not presume previous experience with R. One example is Norman Matloff’s <em>The Art of R Programming</em> <span class="citation">(Matloff <a href="#ref-Matloff2011">2011</a>)</span>. Matloff, however, presumes that the reader either has prior programming experience in some other language or else possesses sufficient computational maturity, acquired perhaps through extensive prior training in the mathematical sciences. Another great text is Garrett Grolemund’s <em>Hands-on Programming with R</em> <span class="citation">(Grolemund <a href="#ref-Grolemund2014">2014</a>)</span>. Grolemund’s book is lively and to-the-point, and starts off with excellent motivating examples. Grolemund is also a master explainer, and he has put considerable effort into visual representation of programming concepts such as element-wise operations on vectors and the enclosure-relationships between environments. On the other hand, even though he doesn’t assume that the reader has prior coding experience, Grolemund does assume some prior background in data analysis and a strong motivation, on the reader’s part, to persevere with nontrivial R-programming issues such as lexical scoping in the hopes of eventual payoffs in programming for data science. In short, Grolemund also assumes more computational maturity than will be usually be found among beginning programmers at many small liberal arts colleges.</p>
 <p>Hence the niche for the Notes offered here. I aim to be more copious and slower-paced than Grolemund and less sophisticated than Matloff. These notes will also contain a more extensive set of problems, ranging in difficulty from practice exercises to fairly extended projects that students might write up in R Markdown documents.</p>
 <p>Experienced programmers and R enthusiasts will be struck by the absence of certain topics. Programmers will observe that there is no real attention to algorithms (sorting is just <code>sort()</code> or <code>order()</code>), and although functions receive lots of attention there is no mention of recursion. In future editions I might cover recursion, as I believe that it is wonderful for the development of thinking skills, but it’s not likely that a web developer or data analyst would have the need to write a recursive function. Time spent on recursion and on various efficient algorithms for sorting and searching may be better spent, in my view, on extended programming projects, Shiny apps and blogging, and the introduction of programmer’s trade-tools such as version control and GitHub. I hope by the end of the first year to have made time for all of these out-of-book topics.</p>
@@ -570,10 +570,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-bookdown">
-<p>Xie, Yihui. 2017b. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>.</p>
+<p>Xie, Yihui. 2018. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>.</p>
 </div>
 <div id="ref-R-blogdown">
-<p>Xie, Yihui. 2017a. <em>Blogdown: Create Blogs and Websites with R Markdown</em>. <a href="https://github.com/rstudio/blogdown" class="uri">https://github.com/rstudio/blogdown</a>.</p>
+<p>Xie, Yihui. 2017. <em>Blogdown: Create Blogs and Websites with R Markdown</em>. <a href="https://github.com/rstudio/blogdown" class="uri">https://github.com/rstudio/blogdown</a>.</p>
 </div>
 <div id="ref-R-shiny">
 <p>Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2017. <em>Shiny: Web Application Framework for R</em>. <a href="https://CRAN.R-project.org/package=shiny" class="uri">https://CRAN.R-project.org/package=shiny</a>.</p>
@@ -612,10 +612,11 @@ gitbook.start({
 "facebook": false,
 "twitter": false,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -639,9 +640,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

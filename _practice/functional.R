@@ -220,3 +220,30 @@ fibonacci3 <- fibber(limit = 500)
 # > system.time(fibonacci3(40))
 # user  system elapsed 
 # 0       0       0 
+
+library(stringr)
+library(purrr)
+isPalindrome <- function(str) {
+  str == rev(str_split(str, ""))
+}
+
+subStrings_n <- function(inputString, n) {
+  m <- str_length(inputString)
+  beginning <- 1:(m - n + 1)
+  end <- n:m
+  args <- list(beginning, end)
+  args %>% 
+    pmap_chr(str_sub, string = inputString)
+}
+
+subStrings <- function(inputString, n) {
+  m <- str_length(inputString)
+  n:m %>%
+    map(subStrings_n, inputString = inputString) %>% 
+    unlist()
+}
+
+subStrings("yabbadabbadoo", n = 6)
+
+getPalindromes <- function(inputString, n) {
+}
