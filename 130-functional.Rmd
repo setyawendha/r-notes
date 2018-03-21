@@ -1122,7 +1122,7 @@ oddMembers <- function(vec) {
 1. The following enhanced version of `randomSims()` is even more flexible, as it allows both the upper and lower limits for the randomly-generated numbers to vary with each vector of numbers that is produced.
 
     ```{r}
-    randomSims2 <- function(vecs, lower = 0, upper= 1, seed = NULL) {
+    randomSims2 <- function(vecs, lower, upper, seed = NULL) {
       # validate input
       if (!(length(vecs) == length(upper) && length(upper) == length(lower)) ) {
         return(cat("All vectors entered must have the same length."))
@@ -1144,7 +1144,7 @@ oddMembers <- function(vec) {
     }
     ```
     
-    Use `map()` to refactor the code for `randomSims2()` so as to avoid using the loop.
+    Use `pmap()` to refactor the code for `randomSims2()` so as to avoid using the loop.
 
 1.  Supposing that `y` is a numerical vector, explain in words what the following code produces:
 
@@ -1166,7 +1166,7 @@ oddMembers <- function(vec) {
    lst <- list(c("Akash", "Bipan", "Chandra", "Devadatta", "Raj"),
             c("Raj", "Vikram", "Sita", "Akash", "Chandra"),
             c("Akash", "Raj", "Chandra", "Bipan", "Lila"),
-            c("Akash", "Vikram", "Devadata", "Raj", "Lila"))
+            c("Akash", "Vikram", "Devadatta", "Raj", "Lila"))
     ```
     
     Use `reduce()` and the `union()` function to obtain a character vector that is the union of all the vectors in `lst`.

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-20">
+<meta name="date" content="2018-03-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -586,7 +586,7 @@ newFrame &lt;-<span class="st"> </span>df[, keepVariable]
 }</code></pre></div>
 <p>Refactor the code for <code>randomSims()</code> so that it uses <code>map()</code> instead of a loop.</p></li>
 <li><p>The following enhanced version of <code>randomSims()</code> is even more flexible, as it allows both the upper and lower limits for the randomly-generated numbers to vary with each vector of numbers that is produced.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">randomSims2 &lt;-<span class="st"> </span><span class="cf">function</span>(vecs, <span class="dt">lower =</span> <span class="dv">0</span>, <span class="dt">upper=</span> <span class="dv">1</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">randomSims2 &lt;-<span class="st"> </span><span class="cf">function</span>(vecs, lower, upper, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
   <span class="co"># validate input</span>
   <span class="cf">if</span> (<span class="op">!</span>(<span class="kw">length</span>(vecs) <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(upper) <span class="op">&amp;&amp;</span><span class="st"> </span><span class="kw">length</span>(upper) <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(lower)) ) {
     <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;All vectors entered must have the same length.&quot;</span>))
@@ -606,7 +606,7 @@ newFrame &lt;-<span class="st"> </span>df[, keepVariable]
   }
   lst
 }</code></pre></div>
-<p>Use <code>map()</code> to refactor the code for <code>randomSims2()</code> so as to avoid using the loop.</p></li>
+<p>Use <code>pmap()</code> to refactor the code for <code>randomSims2()</code> so as to avoid using the loop.</p></li>
 <li><p>Supposing that <code>y</code> is a numerical vector, explain in words what the following code produces:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">keep</span>(<span class="cf">function</span>(x) x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4</span>)</code></pre></div></li>
 <li><p>Write a line of code using the sub-setting operator <code>[</code> that produces the same result as the code in the previous problem.</p></li>
@@ -617,7 +617,7 @@ newFrame &lt;-<span class="st"> </span>df[, keepVariable]
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">   lst &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Bipan&quot;</span>, <span class="st">&quot;Chandra&quot;</span>, <span class="st">&quot;Devadatta&quot;</span>, <span class="st">&quot;Raj&quot;</span>),
         <span class="kw">c</span>(<span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Vikram&quot;</span>, <span class="st">&quot;Sita&quot;</span>, <span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Chandra&quot;</span>),
         <span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Chandra&quot;</span>, <span class="st">&quot;Bipan&quot;</span>, <span class="st">&quot;Lila&quot;</span>),
-        <span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Vikram&quot;</span>, <span class="st">&quot;Devadata&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Lila&quot;</span>))</code></pre></div>
+        <span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Vikram&quot;</span>, <span class="st">&quot;Devadatta&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Lila&quot;</span>))</code></pre></div>
 <p>Use <code>reduce()</code> and the <code>union()</code> function to obtain a character vector that is the union of all the vectors in <code>lst</code>.</p></li>
 <li><p>Remember the function <code>subStrings()</code> from the exercises of the Chapter on Strings? Refactor it so that it does EXACTLY the same thing but makes no use of loops.</p></li>
 <li><p>(*) Run the following code to see what it does. Then analyse the code and explain in detail how it works. Along the way you will have to study some unfamiliar R-functions.</p>
