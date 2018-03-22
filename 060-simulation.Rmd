@@ -220,13 +220,14 @@ This is no accident: in fact, it is a consequence of a theorem in the subject of
     ```{r}
     photonTorpedoSim <- function(reps) {
       damage <- numeric(reps)
-      for ( i in 1:reps )
+      for (i in 1:reps) {
         strength <- runif(1, min = 0, max = 12)
-        if ( shot > 5 ) {
+        if (strength > 5) {
           damage[i] <- strength - 5
         } else {
           damage[i] <- 0
         }
+      }
       mean(damage)
     }
     ```    
@@ -1482,7 +1483,7 @@ knitr::include_graphics("images/thinking.png")
     * In Game A you flip a fair coin.  If the coin comes up Heads you get two dollars, whereas if it comes up Tails you get one dollar.
     * In Game B you roll a fair die. If the six-spot comes up, you win twenty-five dollars.  If you get 2, 3, 4, or 5, nothing happens.  If the one-spot comes up, you lose fifteen dollars.
     
-    In this exercise you need to answer two question:
+    In this exercise you need to answer two questions:
     1. If you could choose to play either Game A or Game B *just once*, which game would you prefer to play, and why?
     2. Suppose that you can choose either to play Game A ten thousand times, or Game B ten thousand times.  Which choice would you prefer, and why?
     

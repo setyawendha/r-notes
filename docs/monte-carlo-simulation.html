@@ -678,13 +678,14 @@ winnings</code></pre></div>
 <p>Here’s the code if you used a loop instead:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">photonTorpedoSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps) {
   damage &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps )
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {
     strength &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">12</span>)
-    <span class="cf">if</span> ( shot <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span> ) {
+    <span class="cf">if</span> (strength <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) {
       damage[i] &lt;-<span class="st"> </span>strength <span class="op">-</span><span class="st"> </span><span class="dv">5</span>
     } <span class="cf">else</span> {
       damage[i] &lt;-<span class="st"> </span><span class="dv">0</span>
     }
+  }
   <span class="kw">mean</span>(damage)
 }</code></pre></div></li>
 </ol>
