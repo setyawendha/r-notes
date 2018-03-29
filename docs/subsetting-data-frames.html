@@ -619,6 +619,15 @@ df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span cl
 ## 30 female     69 3_back
 ## 53 female     69 3_back
 ## 70 female     65 3_back</code></pre>
+<p><strong>Note</strong>: <code>subset()</code> takes a third parameter called <code>select</code> that allows you to pick out any desired columns. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(m111survey, seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span> <span class="op">&amp;</span><span class="st"> </span>height <span class="op">&lt;</span><span class="st"> </span><span class="dv">72</span> <span class="op">&amp;</span><span class="st"> </span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span>,
+       <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>, <span class="st">&quot;seat&quot;</span>))</code></pre></div>
+<pre><code>##       sex height   seat
+## 9  female     59 3_back
+## 20 female     65 3_back
+## 30 female     69 3_back
+## 53 female     69 3_back
+## 70 female     65 3_back</code></pre>
 </div>
 <div id="practice-exercises-22" class="section level3">
 <h3><span class="header-section-number">7.6.2</span> Practice Exercises</h3>

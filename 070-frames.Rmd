@@ -881,6 +881,14 @@ df <- subset(m111survey, seat == "3_back" & height < 72 & sex == "female")
 df[, c("sex", "height", "seat")]
 ```
 
+**Note**:  `subset()` takes a third parameter called `select` that allows you to pick out any desired columns.  For example:
+
+```{r}
+subset(m111survey, seat == "3_back" & height < 72 & sex == "female",
+       select = c("sex", "height", "seat"))
+```
+
+
 ### Practice Exercises
 
 We'll use the `CPS85` data frame from the **mosaicData** package.  You should go ahead and load the package and then read about the data frame:
