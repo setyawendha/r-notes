@@ -405,9 +405,6 @@ numbers %>%
   map(~runif(3, min = 0, max = .))
 ```
 
-
-Observe also that each element of the returned list `numberNA` was an integer vector of length 1.  Hence no real purpose was served by the complex list structure:  the information could have just as well been conveyed as a integer vector.
-
 When the result can take on a form more simple than a list, it is possible to use variants of `map()` such as:
 
 * `map_int()`
@@ -457,7 +454,7 @@ pattern <- function(char = "*", n = 5) {
 pattern(char = "a", n = 7)
 ```
 
-The next example illustrates the use of the return-value of `walk()`.  We would like to save plots of all numerical from the data frame `m111survey`, and also print summaries of them to the Console.
+The next example illustrates the use of the return-value of `walk()`.  We would like to save plots of all numerical variables from the data frame `m111survey`, and also print summaries of them to the Console.
 
 First we create a directory to hold the plots:
 
@@ -791,11 +788,11 @@ makeTable(3)
 Observe that the first four of them end begin with `TRUE` and and with the vectors of $S_2$:
 
 ```{r echo = FALSE}
-mat <- makeTable(4)
+mat <- makeTable(3)
 mat[1:4,]
 ```
 
-The last two of them begin with `FALSE` and *also* end with the vectors of $S_2$:
+The last four of them begin with `FALSE` and *also* end with the vectors of $S_2$:
 
 ```{r echo = FALSE}
 mat <- makeTable(3)
@@ -965,7 +962,7 @@ for ( i in 1:10000 ) {
 }
 ```
 
-Or we could use `sapply()`:
+Or we could use `map_dbl()`:
 
 ```{r eval =FALSE}
 means <- map_dbl(lst, mean)

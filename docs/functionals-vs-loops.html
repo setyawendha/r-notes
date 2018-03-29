@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-21">
+<meta name="date" content="2018-03-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -558,7 +558,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span> ) {
   means[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(lst[[i]])
 }</code></pre></div>
-<p>Or we could use <code>sapply()</code>:</p>
+<p>Or we could use <code>map_dbl()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">means &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(lst, mean)</code></pre></div>
 <p>Comparing the two using <code>system.time()</code> , on my machine I got:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(means &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(lst, mean))</code></pre></div>
