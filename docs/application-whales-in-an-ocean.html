@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-29">
+<meta name="date" content="2018-04-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -804,8 +804,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Ocean<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, 
           <span class="st">&quot;plot&quot;</span>,
           <span class="cf">function</span>() {
-            males &lt;-<span class="st"> </span>self<span class="op">$</span>males[<span class="dv">1</span><span class="op">:</span>self<span class="op">$</span>malePop]
-            females &lt;-<span class="st"> </span>self<span class="op">$</span>females[<span class="dv">1</span><span class="op">:</span>self<span class="op">$</span>femalePop]
+            males &lt;-<span class="st"> </span>self<span class="op">$</span>males
+            females &lt;-<span class="st"> </span>self<span class="op">$</span>females
             whales &lt;-<span class="st"> </span><span class="kw">c</span>(males, females)
             <span class="cf">if</span> ( <span class="kw">length</span>(whales) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
               <span class="kw">plot</span>(<span class="dv">0</span>,<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;All Gone!&quot;</span>)
@@ -867,7 +867,14 @@ Figure 15.1: Simulated whale population. Sadly, they all die after about 130 day
 <p>You might also wish to explore varying the <code>starve</code> parameter: recall that the higher it is, the lower the long-term stable whale population will be. In order to better detect long-term stable population sizes, you will want to work with more steps, and you should turn off the step-by-step-animation, thus:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">males =</span> <span class="dv">75</span>, <span class="dt">females =</span> <span class="dv">75</span>,
          <span class="dt">starve =</span> <span class="fl">2.5</span>, <span class="dt">animate =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>The R package <strong>bcscr</strong> (<span class="citation">(White <a href="#ref-R-bcscr">2018</a>)</span>) includes a more flexible version of the <code>Ocean</code> class that allows the users to set custom initial populations, including characteristics that vary from whale to whale.</p>
 <p>The object-oriented approach to simulation is not necessarily the quickest approach: R6 objects do require a bit more time for computation, as compared to a system that stores relevant information about the population in vectors or in a data frame. On the other hand the object-oriented approach makes it easy to encode information about each individual whale as it proceeds through time. In larger applications, an object-oriented approach to programming can result in code that is relatively easy to read and to modify, albeit at some cost in terms of speed.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-bcscr">
+<p>White, Homer. 2018. <em>Bcscr: Beginning Computer Science with R</em>. <a href="https://github.com/homerhanumat/bcscr" class="uri">https://github.com/homerhanumat/bcscr</a>.</p>
+</div>
 </div>
             </section>
 

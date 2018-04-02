@@ -838,8 +838,8 @@ In simulations we might enjoy looking at a picture of the ocean at any given tim
 Ocean$set("public", 
           "plot",
           function() {
-            males <- self$males[1:self$malePop]
-            females <- self$females[1:self$femalePop]
+            males <- self$males
+            females <- self$females
             whales <- c(males, females)
             if ( length(whales) == 0) {
               plot(0,0, type = "n", main = "All Gone!")
@@ -916,6 +916,8 @@ You might also wish to explore varying the `starve` parameter:  recall that the 
 oceanSim(steps = 1000, males = 75, females = 75,
          starve = 2.5, animate = FALSE)
 ```
+
+The R package **bcscr** ([@R-bcscr]) includes a more flexible version of the `Ocean` class that allows the users to set custom initial populations, including characteristics that vary from whale to whale.
 
 The object-oriented approach to simulation is not necessarily the quickest approach:  R6 objects do require a bit more time for computation, as compared to a system that stores relevant information about the population in vectors or in a data frame.  On the other hand the object-oriented approach makes it easy to encode information about each individual whale as it proceeds through time.  In larger applications, an object-oriented approach to programming can result in code that is relatively easy to read and to modify, albeit at some cost in terms of speed.
 
@@ -1426,23 +1428,15 @@ plot.meetupSims <- function(x) {
     * The Wicked Witch of the East.  Her name and desire are up to you, but her slippers should be silver, and of course she should reign over the East.
     * Glinda, the Good Witch of the North.  Her desire and color of shoes are up to you.
     
-1. Revisit the class Ocean, and rewrite its `initialize()` method so that you can set the age, time to maturity, range and stepSize individually for each new whale.  You should be able to use it like this:
+1. Install the package **bcscr**, if you have not done so already:
 
-    ```{r eval =FALSE}
-    maleInfo <- data.frame(age = c(10, 12, 13, 8, 7, 14, 2),
-                                    maturity = rep(10, times = 7),
-                                    range = c(4, 4, 5, 6, 6, 6, 8),
-                                    stepSize = c(3,3,3,4,4,5,6))
-    femaleInfo <- data.frame(age = c(9, 11, 15, 23, 4, 15, 4),
-                                    maturity = rep(8, times = 7),
-                                    range = c(7, 4, 3, 6, 9, 6, 8),
-                                    stepSize = c(3,3,10,2,3,8,5)))
-    ocean <- Ocean$new(dims = c(100, 100), 
-                       males = maleInfo, 
-                       females = femaleInfo)
+    ```{r eval = FALSE}
+    devtools::install.packages("homerhanumat/bcscr")
     ```
+
+    Study the documentation for the classes `Ocean`, `Female` and `Male`, and then write your own ocean simulation in which the initial whales have properties that you select.
     
-    Run a simulation, initializing the ocean with ten whales of each sex.  Their specific characteristics are up to you, as is the value of the starvation parameter.  Write an R Markdown document that incorporates the appropriate code and includes a discussion of your results.
+    Run the simulation, initializing the ocean with ten whales of each sex and report on the results in an R Markdown document.  (**Note**:  Don't run animations in an R Markdown document.)
 
 1. Recall the function `meetupSim()` from Section \@ref(simulation-connect), with which we investigated the probability that Anna and Raj would meet at the Coffee Shop.  Suppose that we are interested not only in the probability that they meet, but also in the distribution of the number of minutes by which the latecomer misses the one who cam early on the occasions when they do not manage to connect.  Revise `meetupSim()` so that it does not print any results to the console, but instead returns a list.  The list should have two elements:
     * a logical vector indicating, for each repetition of the simulation, whether or not Anna and Raj met;

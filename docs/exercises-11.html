@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-03-29">
+<meta name="date" content="2018-04-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -562,19 +562,10 @@ Create two new witches:
 <li>The Wicked Witch of the East. Her name and desire are up to you, but her slippers should be silver, and of course she should reign over the East.</li>
 <li>Glinda, the Good Witch of the North. Her desire and color of shoes are up to you.</li>
 </ul></li>
-<li><p>Revisit the class Ocean, and rewrite its <code>initialize()</code> method so that you can set the age, time to maturity, range and stepSize individually for each new whale. You should be able to use it like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">maleInfo &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">age =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">14</span>, <span class="dv">2</span>),
-                                <span class="dt">maturity =</span> <span class="kw">rep</span>(<span class="dv">10</span>, <span class="dt">times =</span> <span class="dv">7</span>),
-                                <span class="dt">range =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">8</span>),
-                                <span class="dt">stepSize =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>))
-femaleInfo &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">age =</span> <span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">15</span>, <span class="dv">23</span>, <span class="dv">4</span>, <span class="dv">15</span>, <span class="dv">4</span>),
-                                <span class="dt">maturity =</span> <span class="kw">rep</span>(<span class="dv">8</span>, <span class="dt">times =</span> <span class="dv">7</span>),
-                                <span class="dt">range =</span> <span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">8</span>),
-                                <span class="dt">stepSize =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">5</span>))<span class="er">)</span>
-ocean &lt;-<span class="st"> </span>Ocean<span class="op">$</span><span class="kw">new</span>(<span class="dt">dims =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), 
-                   <span class="dt">males =</span> maleInfo, 
-                   <span class="dt">females =</span> femaleInfo)</code></pre></div>
-<p>Run a simulation, initializing the ocean with ten whales of each sex. Their specific characteristics are up to you, as is the value of the starvation parameter. Write an R Markdown document that incorporates the appropriate code and includes a discussion of your results.</p></li>
+<li><p>Install the package <strong>bcscr</strong>, if you have not done so already:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install.packages</span>(<span class="st">&quot;homerhanumat/bcscr&quot;</span>)</code></pre></div>
+<p>Study the documentation for the classes <code>Ocean</code>, <code>Female</code> and <code>Male</code>, and then write your own ocean simulation in which the initial whales have properties that you select.</p>
+<p>Run the simulation, initializing the ocean with ten whales of each sex and report on the results in an R Markdown document. (<strong>Note</strong>: Don’t run animations in an R Markdown document.)</p></li>
 <li>Recall the function <code>meetupSim()</code> from Section <a href="simulation-connect.html#simulation-connect">6.4</a>, with which we investigated the probability that Anna and Raj would meet at the Coffee Shop. Suppose that we are interested not only in the probability that they meet, but also in the distribution of the number of minutes by which the latecomer misses the one who cam early on the occasions when they do not manage to connect. Revise <code>meetupSim()</code> so that it does not print any results to the console, but instead returns a list. The list should have two elements:
 <ul>
 <li>a logical vector indicating, for each repetition of the simulation, whether or not Anna and Raj met;</li>
