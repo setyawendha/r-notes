@@ -64,6 +64,9 @@ as.vector(numbersMat)
 
 ### Practice Exercises
 
+
+
+
 Let's work with the following vector:
 
 ```{r}
@@ -253,6 +256,17 @@ In most applications people want the simpler vector structure, so they usually l
 
 ### Practice Exercises
 
+```{r echo = FALSE}
+myRowSums <- function(mat) {
+  n <- nrow(mat)
+  sums <- numeric(n)
+  for (i in 1:n) {
+    sums[i] <- sum(mat[i, ])
+  }
+  sums
+}
+```
+
 In these exercises we'll work with the following matrix:
 
 ```{r}
@@ -305,6 +319,13 @@ practiceMatrix
     practiceMatrix[ , -c(2, 10)]
     ```
     
+1.  Write a function called `myRowSums()` that will find the sums of the rows of any given matrix.  The function should use a `for`-loop (see the Chapter on Flow Control).  The function should take a single parameter called `mat`, the matrix whose rows the user wishes to sum.  It should work like this:
+
+    ```{r}
+    myMatrix <- matrix(1:24, ncol = 6)
+    myRowSums(mat = myMatrix)
+    ```
+    
 ### Solutions to Practice Exercises
 
 1. Here are two ways:
@@ -348,6 +369,19 @@ practiceMatrix
 
     ```{r eval = FALSE}
     practiceMatrix[ , -c(2, 10)]
+    ```
+    
+1. Here is one way to write the function:
+
+    ```{r eval = FALSE}
+    myRowSums <- function(mat) {
+      n <- nrow(mat)
+      sums <- numeric(n)
+      for (i in 1:n) {
+        sums[i] <- sum[mat[i, ]]
+      }
+      sums
+    }
     ```
 
 ## Operations on Matrices
@@ -1270,9 +1304,8 @@ knitr::include_graphics("images/thinking.png")
 ```
 
 ```{r echo =FALSE}
-dimSum <- function(mat, dim = c("row", "column")) {
-  dim <- match.arg(dim)
-  if (dim == "column") mat <- t(mat)
+dimSum <- function(mat, dim = "rows") {
+  if (dim == "columns") mat <- t(mat)
   sums <- numeric(nrow(mat))
   for ( i in 1:nrow(mat) ) {
     sums[i] <- sum(mat[i, ])
@@ -1320,7 +1353,9 @@ myFrame$sex <- factor(myFrame$sex)
     1. break `mat` down into the vector of its elements, and then
     2. build the new matrix from those elements, with a number of rows equal to the number of columns of `mat`.
     
-    For the first task, `as.vector()` will be useful.  For the second task, recall that the function `nrow()` returns the number of rows of a given matrix.  You will be interested to know that there is also a function `ncol()` that computes the number of columns of a given matrix.
+    For the first task, `as.vector()` will be useful.
+    
+    For the second task, recall (see previous Practice Exercises from this Chapter) that there is a function `nrow()` that returns the number of rows of a given matrix.  It will also be helpful to remember the function `ncol()` that computes the number of columns of a given matrix.
 
 1. R has functions called `rowSums()` and `colSums()` that will respectively sum the rows and the columns of a matrix.  Here is an example:
 
@@ -1331,20 +1366,17 @@ myFrame$sex <- factor(myFrame$sex)
     
     Your task is to write your own function called `dimSum()` that will sum either the rows or the columns of a given matrix.  The function should have two parameters:
     * `mat`:  the matrix to be summed.
-    * `dim`:  the dimension to sum along, either rows or columns.  The default value should be `c("rows", "columns")`, and you should use argument-matching (see Section \@ref(argument-matching)) so that the user doesn't have to spell out all of the possible arguments.
+    * `dim`:  the dimension to sum along, either rows or columns.  The default value should be `"rows"`.  If the user sets `dim` to `"columns"` then the function would compute the column-sums.
     
     **You may NOT use `rowSums()` or `colSums()` in the code for your function.**  A typical example of use should look like this:
     
     ```{r}
     myMatrix <- matrix(1:24, nrow = 6)
-    dimSum(myMatrix, "c")
+    dimSum(myMatrix)
+    dimSum(myMatrix, "columns")
     ```
     
-    **Hint**:  To start, take it easy on yourself.  Instead of writing a function that sums rows or columns as per the user's request, write a function called `myRowSums()` that will just find the row-sums of any given matric.  You could use a loop, here.  Your function can loop along the rows of the matrix, computing the row sums and storing them in a results vector that you set up prior to the loop.
-    
-    Once you have `myRowSums()` working, write a function called `myColSums()` that find the column-sums of any given matrix.
-    
-    Finally, use the two previously-created functions to write the function `dimsum()`.
+    **Hint**:  Recall that in previous Practice Exercises of this Chapter we made a function called `myRowSums()` that sums the rows of any given matrix.  Modify the idea for `myRowSums()` to write a function called `myColSums()` that finds the column-sums of any given matrix.  You may then use the two previously-created functions to write the required function `dimsum()`.
 
 1. Starting with `m111survey` in the **tigerstats** package, write the code necessary to create a new data frame called `smaller` that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall.  The new data frame should contain all of the original variables except for `sex` and `extra_life`.
 

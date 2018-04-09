@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-04-01">
+<meta name="date" content="2018-04-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -573,7 +573,8 @@ myMatrix</code></pre></div>
 <li>break <code>mat</code> down into the vector of its elements, and then</li>
 <li>build the new matrix from those elements, with a number of rows equal to the number of columns of <code>mat</code>.</li>
 </ol>
-<p>For the first task, <code>as.vector()</code> will be useful. For the second task, recall that the function <code>nrow()</code> returns the number of rows of a given matrix. You will be interested to know that there is also a function <code>ncol()</code> that computes the number of columns of a given matrix.</p></li>
+<p>For the first task, <code>as.vector()</code> will be useful.</p>
+<p>For the second task, recall (see previous Practice Exercises from this Chapter) that there is a function <code>nrow()</code> that returns the number of rows of a given matrix. It will also be helpful to remember the function <code>ncol()</code> that computes the number of columns of a given matrix.</p></li>
 <li><p>R has functions called <code>rowSums()</code> and <code>colSums()</code> that will respectively sum the rows and the columns of a matrix. Here is an example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)
 <span class="kw">rowSums</span>(myMatrix)</code></pre></div>
@@ -581,15 +582,15 @@ myMatrix</code></pre></div>
 Your task is to write your own function called <code>dimSum()</code> that will sum either the rows or the columns of a given matrix. The function should have two parameters:
 <ul>
 <li><code>mat</code>: the matrix to be summed.</li>
-<li><code>dim</code>: the dimension to sum along, either rows or columns. The default value should be <code>c(&quot;rows&quot;, &quot;columns&quot;)</code>, and you should use argument-matching (see Section <a href="more-about-arguments.html#argument-matching">3.4.2</a>) so that the user doesn’t have to spell out all of the possible arguments.</li>
+<li><code>dim</code>: the dimension to sum along, either rows or columns. The default value should be <code>&quot;rows&quot;</code>. If the user sets <code>dim</code> to <code>&quot;columns&quot;</code> then the function would compute the column-sums.</li>
 </ul>
 <p><strong>You may NOT use <code>rowSums()</code> or <code>colSums()</code> in the code for your function.</strong> A typical example of use should look like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)
-<span class="kw">dimSum</span>(myMatrix, <span class="st">&quot;c&quot;</span>)</code></pre></div>
+<span class="kw">dimSum</span>(myMatrix)</code></pre></div>
+<pre><code>## [1] 40 44 48 52 56 60</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dimSum</span>(myMatrix, <span class="st">&quot;columns&quot;</span>)</code></pre></div>
 <pre><code>## [1]  21  57  93 129</code></pre>
-<p><strong>Hint</strong>: To start, take it easy on yourself. Instead of writing a function that sums rows or columns as per the user’s request, write a function called <code>myRowSums()</code> that will just find the row-sums of any given matric. You could use a loop, here. Your function can loop along the rows of the matrix, computing the row sums and storing them in a results vector that you set up prior to the loop.</p>
-<p>Once you have <code>myRowSums()</code> working, write a function called <code>myColSums()</code> that find the column-sums of any given matrix.</p>
-<p>Finally, use the two previously-created functions to write the function <code>dimsum()</code>.</p></li>
+<p><strong>Hint</strong>: Recall that in previous Practice Exercises of this Chapter we made a function called <code>myRowSums()</code> that sums the rows of any given matrix. Modify the idea for <code>myRowSums()</code> to write a function called <code>myColSums()</code> that finds the column-sums of any given matrix. You may then use the two previously-created functions to write the required function <code>dimsum()</code>.</p></li>
 <li><p>Starting with <code>m111survey</code> in the <strong>tigerstats</strong> package, write the code necessary to create a new data frame called <code>smaller</code> that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall. The new data frame should contain all of the original variables except for <code>sex</code> and <code>extra_life</code>.</p></li>
 <li>Write a function called <code>dfRandSelect()</code> that randomly selects (without replacement) a specified number of rows from a given data frame. The function should have two parameters:
 <ul>
