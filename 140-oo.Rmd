@@ -548,7 +548,7 @@ Let's now write a more elaborate program in the object-oriented style.  Our prog
 * That child will be either male or female, with equal likelihood for either option.
 * After mating, the female will be infertile for a period of time.
 * Whales have a set maximum lifetime.
-* in any given time period, it is possible for a whale to starve, causing it to die before reaches its lifespan.  The probability of starvation is low when the whale population is small (presumably there is plenty of plankton available then) but the starvation-probability increases in direct proportion to the population.
+* In any given time period, it is possible for a whale to starve, causing it to die before reaches its lifespan.  The probability of starvation is low when the whale population is small (presumably there is plenty of plankton available then) but the starvation-probability increases in direct proportion to the population.
 
 From the above conditions you can see that if the whale population is small then there is low probability of starvation, but on the other hand whales are liable to be spread thinly throughout the ocean.  As a result males and females are relatively unlikely to run across each other, and hence births are less likely to occur.  With a low enough population there is a strong possibility that the whales will die off before they can reproduce.  (This is why biologists worry about some whale populations:  if the whales are hunted to the point where the population is below a certain critical threshold, then they can go extinct on their own, even if hunting ceases.)  On the other hand, if the whale population grows large then males and female meet frequently, and there are plenty of births.  On the other hand there is a general shortage of food, resulting in high starvation rates.  At some point birth and starvation balance each other out, resulting in a long-term equilibrium population-level.
 
@@ -1269,7 +1269,7 @@ If the point is given in polar coordinates, we must convert it to Cartesian coor
 
 $$x = r\cos \theta.$$
 To get $y$, use:
-$$x = r\cos \theta.$$
+$$y = r\sin \theta.$$
 Thus, to find the $x$-coordinate for `point3`, work as follows:
 
 ```{r}
@@ -1455,7 +1455,11 @@ plot.meetupSims <- function(x) {
     results   # has same effect as print(results)
     ```
     
-1. Continuing in the same vein, write a method-function called `plot.meetupSims()` that makes a density plot showing the distribution of the number of minutes by which the latecomer misses the meeting.
+1. Continuing in the same vein, write a method-function called `plot.meetupSims()` that makes a density plot showing the distribution of the number of minutes by which the latecomer misses the meeting.  It should work like this:
+
+    ```{r}
+    plot(results)
+    ```
 
 1.  Write a generic function called `ypos()` that will return the $y$-coordinate of points of class `cartesianPoint` and  `polarPoint`.  Of course you will need to write the corresponding method functions, as well.
 
