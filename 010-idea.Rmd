@@ -56,7 +56,7 @@ There are quote-marks around the text:  that's not so pretty, but we still get t
 Similarly, you can try:
 
 ```{r}
-2+2
+2 + 2
 ```
 
 Notice that when we don't use `cat()` the output begins with a strange `[1]`.  In the next chapter we'll learn why this happens; for now, just ignore it.
@@ -500,6 +500,29 @@ knitr::include_graphics("images/thinking.png")
    intro(name = "Bettina", type = "human", sport = "lacrosse")
     ```
 
+1.  Write a program that modifies the function `intro()` (see Section \@ref(idea-functions)) so that the person who introduces him or herself says what planet he or she is from.  For example, the result of the following function call:
+
+    ```{r eval = FALSE}
+     intro(name = "Zarg", planet = "Jupiter", food = "rubber bands")
+    ```
+
+    should be:
+
+    ```{r echo = FALSE}
+   intro <- function(name, planet, food) {
+     message <- paste(
+                 "Hello, my name is ",
+                 name,
+                 "!\nMy home planet is ",
+                 planet,
+                 ".\nI like to eat ",
+                 food,
+                 ".",
+                 sep = '')
+    cat(message)
+   }
+   intro(name = "Zarg", planet = "Jupiter", food = "rubber bands")
+    ```
 
 1. Write a program to produce the following output to the console:
 
@@ -514,6 +537,19 @@ knitr::include_graphics("images/thinking.png")
     }
     catFun()
     ```
+    
+1. Write a program to produce the following output to the console:
+
+    ```{r echo = FALSE}
+    meowMix <- function() {
+      cat("meow!\n")
+      cat("hiss!  hiss!\n")
+      cat("meow!\n")
+      cat("hiss! hiss! hiss!\n")
+      cat("meow\n")
+    }
+    meowMix()
+    ```
 
 
 
@@ -521,6 +557,14 @@ knitr::include_graphics("images/thinking.png")
 
     ```{r eval = FALSE}
     cat(Hello, World!)
+    ```
+
+    What does R say?  What did we do wrong?
+    
+1.  Suppose we want to `cat` "Hello, World" to the console, and we enter:
+
+    ```{r eval = FALSE}
+    cat["Hello, World!"]
     ```
 
     What does R say?  What did we do wrong?
