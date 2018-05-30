@@ -135,7 +135,7 @@ simba$unlock()
 
 ## play with S3 classes -----
 
-df <- tigerstats::m111survey
+df <- bcscr::m111survey
 class(df) <- c("customDataFrame", "data.frame")
 
 
@@ -160,7 +160,7 @@ f <- function(x) {
 ## simulation method functions -----
 
 library(ggplot2)
-fm <- subset(tigerstats::m111survey, seat != "3_back")
+fm <- subset(bcscr::m111survey, seat != "3_back")
 ggplot(fm, aes(x = seat)) + geom_bar() + scale_x_discrete(drop = F)
 
 numberNeededSim <- function(target = 1, reps = 1000, 

@@ -571,7 +571,7 @@ subPalindrome <- function(str, n) {
 }
 
 m111Report <- function(rows) {
-  df <- tigerstats::m111survey
+  df <- bcscr::m111survey
   df$weight <- plyr::mapvalues(m111survey$weight_feel,
                 from = c("1_underweight", "2_about_right", "3_overweight"),
                 to = c("underweight", "about right", "overweight"))
@@ -625,7 +625,7 @@ m111Report <- function(rows) {
     subPalindrome("yabbadabbadoo!", 0)
     ```
     
-1.  Write a function called `m111Report()` that performs formatted printing from the data frame `m111survey` in the **tigerstats** package.  Given a vector of row numbers, the function will print out the sex, feeling about weight, and GPA of the corresponding individuals.  Thus each row in the printout will correspond to an individual in the study.  Each row will consist of three fields:
+1.  Write a function called `m111Report()` that performs formatted printing from the data frame `m111survey` in the **bcscr** package.  Given a vector of row numbers, the function will print out the sex, feeling about weight, and GPA of the corresponding individuals.  Thus each row in the printout will correspond to an individual in the study.  Each row will consist of three fields:
     * The first field is 10 characters wide, and contains either "male" or "female", followed by the appropriate number of spaces.
     * The first field is 15 characters wide, and contains either "underweight" or "about right" or "overweight", followed by the appropriate number of spaces.
     * The third field is 5 characters wide, and contains an appropriate number of spaces followed by the grade-point average showing only the first two decimal places.  This, if a person's GPA is recorded as 2.714 then the field will be " 2.71".  (Note that, with the space and the decimal point, the total number of characters is 5, as required.)

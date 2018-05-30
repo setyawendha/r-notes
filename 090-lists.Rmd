@@ -11,7 +11,7 @@ In this Chapter we will study *lists*, another important data structure in R.
 ## Introduction to Lists
 
 ```{r include =FALSE}
-library(tigerstats)
+library(bcscr)
 ```
 
 
@@ -62,7 +62,7 @@ This is useful when you want to build up a list gradually, but you do not yet kn
 
     * The sequence of even numbers from 4 to 100.  Its name should be `lion`.
     * The uppercase letters of the alphabet.  Its name should be `scarecrow`.
-    * The data frame `alcohol` from the **tigerstats** package.  Its name should be `wizard`.
+    * The data frame `alcohol` from the **fuel** package.  Its name should be `wizard`.
     
 1. Suppose that `ozStuff` has been created in the previous problem.  Describe in your own words what the following expression does:
 
@@ -77,7 +77,7 @@ This is useful when you want to build up a list gradually, but you do not yet kn
     ```{r eval=FALSE}
     ozStuff <- list(lion = seq(4, 100, by = 2),
                     scarecrow = LETTERS,
-                    wizard = tigerstats::alcohol)
+                    wizard = bcscr::fuel)
     ```
 
 1. One way to describe it is as follows:  the expression creates a new list consisting of all the elements of `ozStuff` together with a new element called `dorothy` (which is the string `"Kansas"`), and then binds the name "`ozStuff`" to that new four-element list.
@@ -147,7 +147,7 @@ These exercises involve the following list:
 ```{r}
 grabBag <- list(letters = letters,
                 as.character(1:10),
-                df = tigerstats::alcohol)
+                df = bcscr::fuel)
 ```
 
 Observe that the second element of this list was NOT given a name.
@@ -162,15 +162,15 @@ Observe that the second element of this list was NOT given a name.
 
 1. Find a way to access the last five elements of the second element of `grabBag`.
 
-1. Find two ways to access the variable `writeups` in the data frame in `grabBag`.
+1. Find two ways to access the variable `speed` in the data frame in `grabBag`.
 
 ### Solutions to the Practice Exercises
 
-1. `grabBag[2:3]` is a list containing two elements: the vector of whole numbers from 1 to 10 turned into strings, and the data frame `alcohol` from the **tigerstats** package.
+1. `grabBag[2:3]` is a list containing two elements: the vector of whole numbers from 1 to 10 turned into strings, and the data frame `fuel` from the **bcscr** package.
 
-1. `grabBag[3]` is a list containing just one element:  the data frame `alcohol` from the **tigerstats** package.
+1. `grabBag[3]` is a list containing just one element:  the data frame `fuel` from the **bcscr** package.
 
-1. `grabBag[[3]]` is the data frame `alcohol` from the **tigerstats** package.
+1. `grabBag[[3]]` is the data frame `fuel` from the **bcscr** package.
 
 1. Here are two ways:
 
@@ -188,8 +188,8 @@ Observe that the second element of this list was NOT given a name.
 1. Here are two ways:
 
     ```{r eval=FALSE}
-    grabBag$df$writeups
-    grabBag[[3]]$writeups
+    grabBag$df$speed
+    grabBag[[3]]$speed
     ```
 
 
@@ -675,7 +675,7 @@ goodStats <- function(x, ...) {
     lst <- list(yabba = letters,
                 dabba = list(x = LETTERS,
                              y = 1:10),
-                do = tigerstats::m111survey)
+                do = bcscr::m111survey)
     ```
     
     One way to access the letter "b" in the first element of `lst` is as follows:

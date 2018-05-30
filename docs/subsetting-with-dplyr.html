@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-01">
+<meta name="date" content="2018-05-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -108,8 +108,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="0.2" data-path="history-of-r.html"><a href="history-of-r.html"><i class="fa fa-check"></i><b>0.2</b> History of R</a></li>
 <li class="chapter" data-level="0.3" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
 <li class="chapter" data-level="0.4" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html"><i class="fa fa-check"></i><b>0.4</b> Miscellaneous Information</a><ul>
-<li class="chapter" data-level="0.4.1" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#typographical-conventions"><i class="fa fa-check"></i><b>0.4.1</b> Typographical Conventions</a></li>
-<li class="chapter" data-level="0.4.2" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#license"><i class="fa fa-check"></i><b>0.4.2</b> License</a></li>
+<li class="chapter" data-level="0.4.1" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#r-packages"><i class="fa fa-check"></i><b>0.4.1</b> R Packages</a></li>
+<li class="chapter" data-level="0.4.2" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#typographical-conventions"><i class="fa fa-check"></i><b>0.4.2</b> Typographical Conventions</a></li>
+<li class="chapter" data-level="0.4.3" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#license"><i class="fa fa-check"></i><b>0.4.3</b> License</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>I CSC 115</b></span></li>
@@ -557,16 +558,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## # A tibble: 22 x 3
 ##    sex    height fastest
 ##    &lt;fct&gt;   &lt;dbl&gt;   &lt;int&gt;
-##  1 male     76.0     119
-##  2 male     74.0     110
-##  3 male     72.0      95
+##  1 male     76       119
+##  2 male     74       110
+##  3 male     72        95
 ##  4 male     70.8     100
-##  5 male     79.0     160
-##  6 male     73.0     110
-##  7 male     73.0     120
-##  8 female   54.0     130
-##  9 male     74.0     119
-## 10 male     72.0     125
+##  5 male     79       160
+##  6 male     73       110
+##  7 male     73       120
+##  8 female   54       130
+##  9 male     74       119
+## 10 male     72       125
 ## # ... with 12 more rows</code></pre>
 <p>Note that <strong>dplyr</strong> data-functions like <code>filter()</code> and <code>select()</code> take a data table as their first argument, and return a data table as well. Hence they may be chained together as we saw in the above example.</p>
 <p>With <code>select()</code> it’s easy to leave out columns, too:</p>
@@ -575,16 +576,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## # A tibble: 71 x 10
 ##    height sleep fastest weight_feel   extra_life seat     GPA enough_Sleep
 ##     &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt; &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;       
-##  1   76.0  9.50     119 1_underweight yes        1_fro…  3.56 no          
-##  2   74.0  7.00     110 2_about_right yes        2_mid…  2.50 no          
-##  3   64.0  9.00      85 2_about_right no         2_mid…  3.80 no          
-##  4   62.0  7.00     100 1_underweight no         1_fro…  3.50 no          
-##  5   72.0  8.00      95 1_underweight yes        3_back  3.20 no          
-##  6   70.8 10.0      100 3_overweight  no         1_fro…  3.10 yes         
-##  7   70.0  4.00      85 2_about_right yes        1_fro…  3.68 no          
-##  8   79.0  6.00     160 2_about_right yes        3_back  2.70 yes         
-##  9   59.0  7.00      90 2_about_right yes        3_back  2.80 no          
-## 10   67.0  7.00      90 3_overweight  no         2_mid… NA    yes         
+##  1   76     9.5     119 1_underweight yes        1_fro…  3.56 no          
+##  2   74     7       110 2_about_right yes        2_mid…  2.5  no          
+##  3   64     9        85 2_about_right no         2_mid…  3.8  no          
+##  4   62     7       100 1_underweight no         1_fro…  3.5  no          
+##  5   72     8        95 1_underweight yes        3_back  3.2  no          
+##  6   70.8  10       100 3_overweight  no         1_fro…  3.1  yes         
+##  7   70     4        85 2_about_right yes        1_fro…  3.68 no          
+##  8   79     6       160 2_about_right yes        3_back  2.7  yes         
+##  9   59     7        90 2_about_right yes        3_back  2.8  no          
+## 10   67     7        90 3_overweight  no         2_mid… NA    yes         
 ## # ... with 61 more rows, and 2 more variables: sex &lt;fct&gt;,
 ## #   diff.ideal.act. &lt;dbl&gt;</code></pre>
 <div id="practice-exercises-32" class="section level3">

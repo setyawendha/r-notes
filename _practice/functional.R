@@ -96,7 +96,7 @@ system.time(
 
 ## lapply to data frame columns ----------
 
-library(tigerstats)
+library(bcscr)
 unlist(lapply(m111survey, class))
 
 ## reduce ----------

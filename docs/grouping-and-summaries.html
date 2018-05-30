@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-01">
+<meta name="date" content="2018-05-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -108,8 +108,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="0.2" data-path="history-of-r.html"><a href="history-of-r.html"><i class="fa fa-check"></i><b>0.2</b> History of R</a></li>
 <li class="chapter" data-level="0.3" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
 <li class="chapter" data-level="0.4" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html"><i class="fa fa-check"></i><b>0.4</b> Miscellaneous Information</a><ul>
-<li class="chapter" data-level="0.4.1" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#typographical-conventions"><i class="fa fa-check"></i><b>0.4.1</b> Typographical Conventions</a></li>
-<li class="chapter" data-level="0.4.2" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#license"><i class="fa fa-check"></i><b>0.4.2</b> License</a></li>
+<li class="chapter" data-level="0.4.1" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#r-packages"><i class="fa fa-check"></i><b>0.4.1</b> R Packages</a></li>
+<li class="chapter" data-level="0.4.2" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#typographical-conventions"><i class="fa fa-check"></i><b>0.4.2</b> Typographical Conventions</a></li>
+<li class="chapter" data-level="0.4.3" data-path="miscellaneous-information.html"><a href="miscellaneous-information.html#license"><i class="fa fa-check"></i><b>0.4.3</b> License</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>I CSC 115</b></span></li>
@@ -596,8 +597,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## # A tibble: 2 x 7
 ##   sex       n   min    Q1 median    Q3   max
 ##   &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 F       245  1.75  4.75   6.80   10.  44.5
-## 2 M       289  1.00  6.00   8.93   13.  26.3</code></pre>
+## 1 F       245  1.75  4.75   6.8     10  44.5
+## 2 M       289  1     6      8.93    13  26.3</code></pre>
 <p>It’s also possible to group by more than one variable at a time. For example, suppose that we wish to compare the wages of men and women in the various sectors of employment. All we need to do is group by both <code>sex</code> and <code>sector</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CPS85 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(sector, sex) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -611,21 +612,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## # Groups:   sector [?]
 ##    sector   sex       n   min    Q1 median    Q3   max
 ##    &lt;fct&gt;    &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 clerical F        76  3.00  5.10   7.00  9.55 15.0 
-##  2 clerical M        21  3.35  6.00   7.69  9.00 12.0 
-##  3 const    M        20  3.75  7.15   9.75 11.8  15.0 
-##  4 manag    F        21  3.64  6.88  10.0  11.2  44.5 
-##  5 manag    M        34  1.00  8.80  14.0  18.2  26.3 
-##  6 manuf    F        24  3.00  4.36   4.90  6.05 18.5 
+##  1 clerical F        76  3     5.1    7     9.55 15.0 
+##  2 clerical M        21  3.35  6      7.69  9    12   
+##  3 const    M        20  3.75  7.15   9.75 11.8  15   
+##  4 manag    F        21  3.64  6.88  10    11.2  44.5 
+##  5 manag    M        34  1     8.8   14.0  18.2  26.3 
+##  6 manuf    F        24  3     4.36   4.9   6.05 18.5 
 ##  7 manuf    M        44  3.35  6.58   8.94 11.2  22.2 
-##  8 other    F         6  3.75  4.00   5.62  6.88  8.93
-##  9 other    M        62  2.85  5.25   7.50 11.2  26.0 
-## 10 prof     F        52  4.35  7.02  10.0  12.3  25.0 
-## 11 prof     M        53  5.00  8.00  12.0  16.4  25.0 
-## 12 sales    F        17  3.35  3.80   4.55  5.65 14.3 
-## 13 sales    M        21  3.50  5.56   9.42 12.5  20.0 
-## 14 service  F        49  1.75  3.75   5.00  8.00 13.1 
-## 15 service  M        34  2.01  4.15   5.89  8.75 25.0</code></pre>
+##  8 other    F         6  3.75  4      5.62  6.88  8.93
+##  9 other    M        62  2.85  5.25   7.5  11.2  26   
+## 10 prof     F        52  4.35  7.02  10    12.3  25.0 
+## 11 prof     M        53  5     8     12    16.4  25.0 
+## 12 sales    F        17  3.35  3.8    4.55  5.65 14.3 
+## 13 sales    M        21  3.5   5.56   9.42 12.5  20.0 
+## 14 service  F        49  1.75  3.75   5     8    13.1 
+## 15 service  M        34  2.01  4.15   5.89  8.75 25</code></pre>
 <p>Note that there were no women in the construction sector, so that group did not appear in the summary.</p>
 <div id="note-on-binding" class="section level3">
 <h3><span class="header-section-number">10.6.1</span> Note on Binding</h3>
@@ -684,8 +685,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## # A tibble: 2 x 3
 ##   origin dest  distance
 ##   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
-## 1 JFK    HNL      4983.
-## 2 EWR    HNL      4963.</code></pre></li>
+## 1 JFK    HNL       4983
+## 2 EWR    HNL       4963</code></pre></li>
 </ol>
 
 </div>

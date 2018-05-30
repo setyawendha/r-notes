@@ -8,7 +8,7 @@ knitr::include_graphics("images/pipe.jpeg")
 ```
 
 ```{r include = FALSE}
-data("m111survey", package = "tigerstats")
+data("m111survey", package = "bcscr")
 data("CPS85", package = "mosaicData")
 data("flights", package = "nycflights13")
 library(babynames)
@@ -73,8 +73,8 @@ rep("hello", times = 4)
 Here's another example:
 
 ```{r}
-# same as nrow(tigerstats::m111survey)
-tigerstats::m111survey %>% nrow()
+# same as nrow(bcscr::m111survey)
+bcscr::m111survey %>% nrow()
 ```
 
 Here's two pipes:
@@ -138,16 +138,16 @@ The pipe operator isn't all that useful when you only use it once or twice in su
 
 The **tibble** package gives us tibbles, which are very nearly the same thing as a data frame.  Indeed, the name "tibble" is supposed to remind us of a data "table."
 
-Consider the class of `tigerstats::m111survey`:
+Consider the class of `bcscr::m111survey`:
 
 ```{r}
-class(tigerstats::m111survey)
+class(bcscr::m111survey)
 ```
 
 Yep, it's a data frame.  But we can convert it to a tibble, as follows:
 
 ```{r}
-survey <- as_tibble(tigerstats::m111survey)
+survey <- as_tibble(bcscr::m111survey)
 class(survey)
 ```
 

@@ -577,14 +577,14 @@ A data frame is like a matrix in that it is two-dimensional---it has rows and co
 
 ### Viewing a Data Frame
 
-Let's take a close look at a data frame:  the frame `m111survey`, which is available from the **tigerstats** package [@R-tigerstats].  First let's attach the package itself:
+Let's take a close look at a data frame:  the frame `m111survey`, which is available from the **bcscr** package [@R-tigerstats].  First let's attach the package itself:
 
 ```{r eval =FALSE}
-library(tigerstats)
+library(bcscr)
 ```
 
 ```{r include =FALSE}
-library(tigerstats)
+library(bcscr)
 ```
 
 In the R Studio IDE, we can get a look at the frame in a tab in the Editor pane if we use the `View()` function:
@@ -1378,7 +1378,7 @@ myFrame$sex <- factor(myFrame$sex)
     
     **Hint**:  Recall that in previous Practice Exercises of this Chapter we made a function called `myRowSums()` that sums the rows of any given matrix.  Modify the idea for `myRowSums()` to write a function called `myColSums()` that finds the column-sums of any given matrix.  You may then use the two previously-created functions to write the required function `dimsum()`.
 
-1. Starting with `m111survey` in the **tigerstats** package, write the code necessary to create a new data frame called `smaller` that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall.  The new data frame should contain all of the original variables except for `sex` and `extra_life`.
+1. Starting with `m111survey` in the **bcscr** package, write the code necessary to create a new data frame called `smaller` that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall.  The new data frame should contain all of the original variables except for `sex` and `extra_life`.
 
 1.  Write a function called `dfRandSelect()` that randomly selects (without replacement) a specified number of rows from a given data frame.  The function should have two parameters:
     * `df`:  the data frame from which to select;
@@ -1388,11 +1388,11 @@ myFrame$sex <- factor(myFrame$sex)
     
     ```{r echo=2:2}
     set.seed(2020)
-    dfRandSelect(tigerstats::fuel, 5)
+    dfRandSelect(bcscr::fuel, 5)
     ```
     
     ```{r eval=FALSE}
-    dfRandSelect(tigerstats::fuel, 200)
+    dfRandSelect(bcscr::fuel, 200)
     ```
     
     ```
@@ -1430,7 +1430,7 @@ myFrame$sex <- factor(myFrame$sex)
     paste0(vec, collapse = "")
     ```
     
-1.  (\*) Study the data frame `fuel` in the **tigerstats** package.  Note that the fuel efficiency is reported as the number of liters of fuel required to travel 100 kilometers.  Look up the conversion between gallons and liters and between kilometers and miles, and use this information to create a new variable called `mpg` that gives the fuel efficiency as miles per gallon.  While you are at it, create a new variable `mph` that gives the speed in miles per hour.  Finally, add these new variables to the `fuel` data frame.  
+1.  (\*) Study the data frame `fuel` in the **bcscr** package.  Note that the fuel efficiency is reported as the number of liters of fuel required to travel 100 kilometers.  Look up the conversion between gallons and liters and between kilometers and miles, and use this information to create a new variable called `mpg` that gives the fuel efficiency as miles per gallon.  While you are at it, create a new variable `mph` that gives the speed in miles per hour.  Finally, add these new variables to the `fuel` data frame.  
 
 1. (\*) Use matrices to generalize the simulation in the Appeals Court Paradox (see Section \@ref(appeals-court-paradox)).  Your goal is to write a simulation function called `appealsSimPlus()` that comes with all the options provided in the text, but with additional parameters so that the user can choose:
     * the number of judges on the court;

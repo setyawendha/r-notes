@@ -1,7 +1,7 @@
 library(htmlwidgets)
 library(threejs)
 library(mosaicData)
-library(tigerstats)
+library(bcscr)
 library(plotly)
 library(slickR)
 library(svglite)

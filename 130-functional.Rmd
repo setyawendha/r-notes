@@ -9,7 +9,7 @@
 
 ```{r include = FALSE}
 library(tidyverse)
-data("m111survey", package = "tigerstats")
+library(bcscr)
 ```
 
 
@@ -30,11 +30,7 @@ One of the older programming paradigms in existence is *procedural programming*.
 Before we define procedural programming, let's illustrate it with an example.  Almost any of the programs we have written so far would do as examples; for specificity, let's consider the following snippet of code that produces from the data frame `m111survey` a new, smaller frame consisting of just the numerical variables:
 
 ```{r eval =FALSE}
-library(tigerstats)
-```
-
-```{r include=FALSE}
-library(tigerstats)
+library(bcscr)
 ```
 
 
@@ -389,7 +385,7 @@ The `~` indicates that the body of the function is about to be begin.  The `.` s
 When we introduced `map()` we said that `.x` was a vector or a list,  In fact `.x` could be an object that can be coerced into a list.  Hence it is quite common to use `map()` with the data frames:  the frame is turned into a list, each element of which is a column of the frame.  Here is an example:
 
 ```{r}
-data("m111survey", package = "tigerstats")
+data("m111survey", package = "bcscr")
 numberNA <-
   m111survey %>% 
   map(~sum(is.na(.)))
@@ -1085,7 +1081,7 @@ oddMembers <- function(vec) {
     Refactor the following code so that it uses `keep()` instead of a loop:
 
     ```{r eval =FALSE}
-    df <- tigerstats::m111survey
+    df <- bcscr::m111survey
     keepVariable <- logical(length(names(df)))
     for ( col in seq_along(keepVariable) ) {
       var <- df[, col]
