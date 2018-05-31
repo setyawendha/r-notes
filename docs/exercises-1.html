@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-30">
+<meta name="date" content="2018-05-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -552,7 +552,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Exercises</h2>
 <p><img src="images/thinking.png" width="50%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
-<li><p>Write a function called <code>pattern()</code> that when given a character will will print out the character in a pattern like this:</p>
+<li><p>Write a function called <code>pattern()</code> that when given a character will print out the character in a pattern like this:</p>
 <pre><code>*
 **
 ***
@@ -572,6 +572,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## xxx
 ## xx
 ## x</code></pre></li>
+<li><p>Write a function called <code>charSquare()</code> that when given two characters will use them to make a square like this:</p>
+<pre><code>****
+a  a
+a  a
+****</code></pre>
+<p>That is: a row of four of one of the characters, then two rows that consist of the other character followed by two spaces followed by that other character, and finally a row of four of the first character.</p>
+<p>The function should take two parameters called <code>ends</code> and <code>middle</code>. The default value of <code>end</code> should should be <code>*</code> and the default value of <code>middle</code> should be <code>x</code>. Typical examples of use should be as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">charSquare</span>()</code></pre></div>
+<pre><code>## ****
+## x  x
+## x  x
+## ****</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pattern</span>(<span class="dt">end =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">middle =</span> <span class="st">&quot;%&quot;</span>)</code></pre></div>
+<pre><code>## zzzz
+## %  %
+## %  %
+## zzzz</code></pre></li>
 <li><p>Write a function called <code>reverse()</code> that, given any vector, returns a vector with the elements in reverse order. It should take one parameter called <code>vec</code>. The default value of <code>vec</code> should be the vector <code>c(&quot;Bob&quot;, &quot;Marley&quot;)</code>. Typical examples of use should be:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverse</span>()</code></pre></div>
 <pre><code>## [1] &quot;Marley&quot; &quot;Bob&quot;</code></pre>
@@ -591,6 +608,8 @@ firstFiveLetters[<span class="dv">5</span><span class="op">:</span><span class="
 <p><strong>Hint:</strong> You already have the function <code>reverse()</code> from the previous Exercise. Use this function, along with the Boolean operator <code>==</code> and the <code>all()</code> function.</p></li>
 <li><p>The eighteenth-century mathematician Leonhard Euler discovered that:</p>
 <p><span class="math display">\[\frac{\pi^2}{6} = \sum_{k=1}^{k=\infty} \frac{1}{k^2}.\]</span> It follows that <span class="math display">\[\pi = \sqrt{\left(\sum_{k=1}^{k=\infty} \frac{6}{k^2}\right)}.\]</span> Use this fact to write a function called <code>eulerPI()</code> that will approximate <span class="math inline">\(\pi\)</span>. The function should take a single parameter <code>n</code>, which is the number of terms in the infinite series that are to be summed to make the approximation. The default value of <code>n</code> should be 10,000.</p></li>
+<li><p>Consider the infinite series:</p>
+<p><span class="math display">\[\sum_{k=1}^{k=\infty} \frac{1}{k(k+1)}.\]</span> Write a function called <code>partialSum()</code> that will compute the sum of the first <span class="math inline">\(n\)</span> terms of this series. The function should take a single parameter <code>n</code>, which is the number of terms in the series that are to be summed to make the approximation. The default value of <code>n</code> should be 10,000. Use the function to compute the sum of the first 10,000 terms and the sum of the first 100,000 terms. What number do you thnk the series converges to?</p></li>
 </ol>
 
 </div>

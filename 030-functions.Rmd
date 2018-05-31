@@ -1220,7 +1220,7 @@ isPalindrome <- function(vec) {
 ```
 
 
-1.  Write a function called `pattern()` that  when given a character will will print out the character in a pattern like this:
+1.  Write a function called `pattern()` that  when given a character will print out the character in a pattern like this:
 
     ```
     *
@@ -1257,6 +1257,42 @@ isPalindrome <- function(vec) {
     ## xx
     ## x
     ```
+    
+1.  Write a function called `charSquare()` that  when given two characters will use them to make a square like this:
+
+    ```
+    ****
+    a  a
+    a  a
+    ****
+    ```
+    
+    That is:  a row of four of one of the characters, then two rows that consist of the other character followed by two spaces followed by that other character, and finally a row of four of the first character.
+    
+    The function should take two parameters called `ends` and `middle`.  The default value of `end` should should be `*` and the default value of `middle` should be `x`.  Typical examples of use should be as follows:
+    
+    ```{r eval =FALSE}
+    charSquare()
+    ```
+    
+    ```
+    ## ****
+    ## x  x
+    ## x  x
+    ## ****
+    ```
+    
+    ```{r eval =FALSE}
+    pattern(end = "z", middle = "%")
+    ```
+    
+    ```
+    ## zzzz
+    ## %  %
+    ## %  %
+    ## zzzz
+    ```
+
 1. Write a function called `reverse()` that, given any vector, returns a vector with the elements in reverse order.  It should take one parameter called `vec`.  The default value of `vec` should be the vector `c("Bob", "Marley")`.  Typical examples of use should be:
 
     ```{r}
@@ -1296,3 +1332,8 @@ isPalindrome <- function(vec) {
     It follows that
     $$\pi = \sqrt{\left(\sum_{k=1}^{k=\infty} \frac{6}{k^2}\right)}.$$
     Use this fact to write a function called `eulerPI()` that will approximate $\pi$.  The function should take a single parameter `n`, which is the number of terms in the infinite series that are to be summed to make the approximation.  The default value of `n` should be 10,000.
+    
+1. Consider the infinite series:
+
+    $$\sum_{k=1}^{k=\infty} \frac{1}{k(k+1)}.$$
+    Write a function called `partialSum()` that will compute the sum of the first $n$ terms of this series.  The function should take a single parameter `n`, which is the number of terms in the series that are to be summed to make the approximation.  The default value of `n` should be 10,000.  Use the function to compute the sum of the first 10,000 terms and the sum of the first 100,000 terms.  What number do you thnk the series converges to?

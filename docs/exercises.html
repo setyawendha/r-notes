@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-30">
+<meta name="date" content="2018-05-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -565,6 +565,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>twelve 2’s, followed by twelve 4’s followed by twelve 6’s, …, followed by twelve 10’s, finishing with twelve 12’s.</li>
 <li>one 1, followed by two 2’s, followed by three 3’s, …, followed by nine 9’s, finishing with ten 10’s.</li>
 </ol></li>
+<li><p>Using a combination of <code>c()</code>, <code>rep()</code> and <code>seq()</code> and other operations, find concise one-line programs to produce each of the following vectors:</p>
+<ol style="list-style-type: decimal">
+<li>the numbers 15, 20, 25, …, 145, 150.</li>
+<li>the numbers 1.1, 1.2, 1.3, …, 9.8, 9.9, 10.0.</li>
+<li>ten A’s followed by ten B’s, …, followed by ten Y’s and finishing with ten Z’s. (<strong>Hint</strong>: the special vector <code>LETTERS</code> will be useful.)</li>
+<li>one a, followed by two b’s, followed by three c’s, …, followed by twenty-five y’s, finishing with twenty-six z’s. (<strong>Hint</strong>: the special vector <code>letters</code> will be useful.)</li>
+</ol></li>
 <li><p>The following three vectors gives the names, heights and ages of five people, and also say whether or not each person likes Toto:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">person &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Bee&quot;</span>, <span class="st">&quot;Celia&quot;</span>, <span class="st">&quot;Devadatta&quot;</span>, <span class="st">&quot;Enid&quot;</span>)
 age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">63</span>)
@@ -577,12 +584,24 @@ likesToto &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="o
 <li>the names of all people who either don’t like Toto or who are over the age of 30;</li>
 <li>the <em>number</em> of people who are over the age of 22.</li>
 </ol></li>
+<li><p>Consider the four vectors defined in the previous problem. Use sub-setting with logical vectors to produce vectors of:</p>
+<ol style="list-style-type: decimal">
+<li>the names of all people who are less than 70 inches tall;</li>
+<li>the names of all people who are between 20 and 30 years of age (not including 20 or 30);</li>
+<li>the names of all people who either like Toto or who are under the age of 50;</li>
+<li>the <em>number</em> of people who are more than 69 inches tall.</li>
+</ol></li>
 <li><p>Logical vectors are not numerical vectors, so it would seem that you should not be able to sum their elements. But:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(likesToto)</code></pre></div>
 <p>results in the number 2! What is happening here is that R coerces the logical vector <code>likesToto</code> into a numerical vector of 1’s and 0’s—1 for <code>TRUE</code>, 0 for <code>FALSE</code>—and then sums the resulting vector. Notice that this gives us the number of people who like Toto. With this idea in mind, use <code>sum()</code> along with logical vectors to find:</p>
 <ol style="list-style-type: decimal">
 <li>the number of people younger than 24 who are also more than 67 inches tall;</li>
 <li>the number of people who either don’t like Toto or who are over the age of 30.</li>
+</ol></li>
+<li><p>Read the previous problem, and then use <code>sum()</code> along with logical vectors to find:</p>
+<ol style="list-style-type: decimal">
+<li>the number of people between 65 and 70 inches tall (including 65 and 70);</li>
+<li>the number of people who either don’t like Toto or who are under the age of 25.</li>
 </ol></li>
 </ol>
 
