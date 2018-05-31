@@ -600,6 +600,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## yyy
 ## yy
 ## y</code></pre></li>
+<li><p>Write a function called <code>checkerBoard()</code> that prints outs out checkerboard patterns like this:</p>
+<pre><code>## -----------
+## |*|*|*|*|*|
+## -----------
+## |*|*|*|*|*|
+## -----------
+## |*|*|*|*|*|
+## -----------
+## |*|*|*|*|*|
+## -----------
+## |*|*|*|*|*|
+## -----------</code></pre>
+<p>The function should take two parameters:</p>
+<ul>
+<li><code>char</code>, the character that fills the “squares” of the board. The default value should be <code>&quot;*&quot;</code>.</li>
+<li><code>side</code>, the number of rows and columns of the board. There should be no default value.</li>
+</ul>
+<p>Note that the horizontal boundaries are formed by the hyphen <code>-</code> and the vetical boundaries are formed by the <em>pipe</em> character <code>|</code> that appears on your keyboard above the backslash <code>\</code> character.</p>
+<p>Typical examples of use should be as follows:</p>
+<pre><code>## -------
+## |x|x|x|
+## -------
+## |x|x|x|
+## -------
+## |x|x|x|
+## -------</code></pre>
+<p><strong>Hint</strong>: Note that the number of hyphens in a boundary is always one more than twice the value of <code>side</code>. for example, suppose that <code>side</code> is 5. Then to get a row of the required hyphens, all you need is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boundary &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;-&quot;</span>, <span class="dt">times =</span> <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>side <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">cat</span>(boundary, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<pre><code>## -----------</code></pre>
+<p>For a single row containing the character itself, you might try:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">between &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;|&quot;</span>, <span class="kw">rep</span>(<span class="kw">c</span>(char, <span class="st">&quot;|&quot;</span>), <span class="dt">times =</span> side), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">cat</span>(between, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<pre><code>## |x|x|x|x|x|</code></pre>
+<p>In the example above, the value of <code>char</code> was <code>&quot;x&quot;</code>.</p></li>
 <li><p>Write a function called <code>beerTune()</code> that prints out the complete lyrics to the song <em>Ninety-Nine Bottles of Beer on the Wall</em>. You’ll recall that the song goes like this:</p>
 <blockquote>
 <p>99 bottles of beer on the wall,</p>
@@ -642,6 +677,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>No more bottles of beer on the wall.</p>
 </blockquote>
 <p>Make sure to get the lyrics exactly right. For example, it’s “1 bottle”, not “1 bottles”.</p></li>
+<li><p>Write a function called <code>farmSong()</code> that allows you to vary the lyrics the song about Old MacDonald’s Farm. The function should take two parameters:</p>
+<ul>
+<li><code>animal</code>: a character vector of names of the animals on the farm;</li>
+<li><code>sound</code>: a character vector, of the same length as the vector <code>animal</code>, giving the sound made by each creature in <code>animal</code>.</li>
+</ul>
+<p>Neither parameter should have a default value. The function should validate its input, stopping with a helpful message if <code>animal</code> and <code>sound</code> don’t have the same length.</p>
+<p>Typical examples of use should be as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">farmSong</span>(<span class="dt">animal =</span> <span class="kw">c</span>(<span class="st">&quot;cow&quot;</span>, <span class="st">&quot;pig&quot;</span>), <span class="dt">sound =</span> <span class="kw">c</span>(<span class="st">&quot;moo&quot;</span>, <span class="st">&quot;oink&quot;</span>))</code></pre></div>
+<pre><code>## Old MacDonald had a farm, ee-i-ee-i-oo!
+## And on this farm he had a cow, ee-iee-i-oo!
+## With a moo-moo here and a moo-moo there
+## Here a moo-moo, there a moo-moo everywhere a moo-moo,
+## Old MacDonald had a farm, ee-i-ee-i-oo!
+## 
+## Old MacDonald had a farm, ee-i-ee-i-oo!
+## And on this farm he had a pig, ee-iee-i-oo!
+## With a oink-oink here and a oink-oink there
+## Here a oink-oink, there a oink-oink everywhere a oink-oink,
+## Old MacDonald had a farm, ee-i-ee-i-oo!</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">farmSong</span>(<span class="dt">animal =</span> <span class="kw">c</span>(<span class="st">&quot;cow&quot;</span>, <span class="st">&quot;pig&quot;</span>, <span class="st">&quot;horse&quot;</span>), <span class="dt">sound =</span> <span class="kw">c</span>(<span class="st">&quot;moo&quot;</span>, <span class="st">&quot;oink&quot;</span>))</code></pre></div>
+<pre><code>## I need the same number of sounds as there are animals!</code></pre>
+<p><strong>Note</strong>: As the above examples show, you don’t have to worry about getting “a” vs. “an” correct.</p></li>
 <li><p>Recall the function <code>madhavaPI()</code> from Section <a href="more-about-arguments.html#default-arguments">3.4.1</a>. Use this function to write a function called <code>madhavaSums()</code> that will do the following: given a number <span class="math inline">\(n\)</span>, the function returns a vector consisting of the first <span class="math inline">\(n\)</span> approximations to <span class="math inline">\(\pi\)</span>, using the initial terms of the Madhava series. The function should take a single argument <code>n</code>, whose default value is 10. It should validate the input: if the number entered is not at least 1, then the function should explain to the user that the he/she must enter a positive number, and then stop.</p>
 <p>Here is an example of how the function should work:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaSums</span>(<span class="dt">n =</span> <span class="op">-</span><span class="dv">3</span>)</code></pre></div>
