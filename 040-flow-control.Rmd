@@ -1496,6 +1496,34 @@ madhavaSums <- function(n = 10) {
   }
   approximations
 }
+checkerBoard <- function(char = "*", side) {
+  boundary <- c(rep("-", times = 2 * side + 1), "\n")
+  between <- c("|", rep(c(char, "|"), times = side), "\n")
+  for (i in 1:side) {
+    cat(boundary, sep = "")
+    cat(between, sep = "")
+  }
+  cat(boundary, sep = "")
+}
+farmSong <- function(animal, sound) {
+  if (length(animal) != length(sound)) {
+    return(cat("I need the same number of sounds as there are animals!"))
+  }
+  macDonald <- "Old MacDonald had a farm, ee-i-ee-i-oo!\n"
+  for (i in 1:length(animal)) {
+    
+    noise <- paste(sound[i], "-", sound[i], sep = "")
+    cat(macDonald)
+    cat("And on this farm he had a ", animal[i], 
+        ", ee-iee-i-oo!\n", sep = "")
+    cat("With a ", noise, " here and a ", noise, 
+        " there\n", sep = "")
+    cat("Here a ", noise, ", there a ", noise, 
+        " everywhere a ", noise, ",\n", sep = "")
+    cat(macDonald)
+    cat("\n")
+  }
+}
 ```
 
 
@@ -1546,6 +1574,43 @@ madhavaSums <- function(n = 10) {
     ```{r}
     pattern(char = "y", n = 5)
     ```
+    
+1. Write a function called `checkerBoard()` that prints outs out checkerboard patterns like this:
+
+    ```{r echo = FALSE}
+    checkerBoard(side = 5)
+    ```
+    
+    The function should take two parameters:
+    
+    * `char`, the character that fills the "squares" of the board.  The default value should be `"*"`.
+    * `side`, the number of rows and columns of the board.  There should be no default value.
+    
+    Note that the horizontal boundaries are formed by the hyphen `-` and the vetical boundaries are formed by the *pipe* character `|` that appears on your keyboard above the backslash `\` character.
+    
+    Typical examples of use should be as follows:
+
+    ```{r echo = FALSE}
+    checkerBoard(char = "x", side = 3)
+    ```
+    
+    **Hint**: Note that the number of hyphens in a boundary is always one more than twice the value of `side`.  for example, suppose that `side` is 5.  Then to get a row of the required hyphens, all you need is:
+    
+    ```{r echo = FALSE}
+    side <- 5
+    ```
+    
+    ```{r}
+    boundary <- c(rep("-", times = 2 * side + 1), "\n")
+    cat(boundary, sep = "")
+    ```
+    
+    For a single row containing the character itself, you might try:
+    
+    ```{r}
+    between <- c("|", rep(c(char, "|"), times = side), "\n")
+    cat(between, sep = "")
+    ```
 
 1.  Write a function called `beerTune()` that prints out the complete lyrics to the song *Ninety-Nine Bottles of Beer on the Wall*.  You'll recall that the song goes like this:
 
@@ -1578,6 +1643,27 @@ madhavaSums <- function(n = 10) {
     >No more bottles of beer on the wall.
     
     Make sure to get the lyrics exactly right.  For example, it's "1 bottle", not "1 bottles".
+    
+1.  Write a function called `farmSong()` that allows you to vary the lyrics the song about Old MacDonald's Farm.  The function should take two parameters:
+
+    * `animal`:  a character vector of names of the animals on the farm;
+    * `sound`:  a character vector, of the same length as the vector `animal`, giving the sound made by each creature in `animal`.
+    
+    Neither parameter should have a default value.  The function should validate its input, stopping with a helpful message if `animal` and `sound` don't have the same length.
+    
+    Typical examples of use should be as follows:
+    
+    ```{r}
+    farmSong(animal = c("cow", "pig"), sound = c("moo", "oink"))
+    ```
+    
+    ```{r}
+    farmSong(animal = c("cow", "pig", "horse"), sound = c("moo", "oink"))
+    ``` 
+    
+    **Note**:  As the above examples show, you don't have to worry about getting "a" vs. "an" correct.
+    
+    
     
 1.  Recall the function `madhavaPI()` from Section \@ref(default-arguments).  Use this function to write a function called `madhavaSums()` that will do the following:  given a number $n$, the function returns a vector consisting of the first $n$ approximations to $\pi$, using the initial terms of the Madhava series.  The function should take a single argument `n`, whose default value is 10.  It should validate the input:  if the number entered is not at least 1, then the function should explain to the user that the he/she must enter a positive number, and then stop.
 
