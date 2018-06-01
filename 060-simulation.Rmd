@@ -463,7 +463,68 @@ estimates
 
 The estimates are indeed getting closer to the theoretical value of $1/4$.^[Statistical theory tells us that when we use Monte Carlo simulation to estimate a probability or an expected value, then the likely size of the error in the approximation is inversely proportional to the square root of the number of repetitions we use.  From this it follows that to cut the likely size of the error in half you should increase the number of repetitions by a factor of 4.  If you want the likely size to be one-third as big, increase repetitions by a factor of 9, and so on.]
 
-### Practice Exercises
+### Practice Exercises {#basic-simulations}
+
+```{r echo = FALSE}
+dual <- function(reps = 10000, seed = NULL) {
+  if (!is.null(seed)) {
+    set.seed(seed)
+  }
+  # set up logical vector to store results of each simulation:
+  abeWins <- logical(reps)
+  for (i in 1:reps) {
+    dualing <- TRUE
+    shotNumber <- 1
+    while (dualing) {
+      # if i is an odd number, then Abe is shooting:
+      abeToShoot <- shotNumber %% 2 == 1
+      # probability of hitting depends on who is shooting:
+      hitProb <- ifelse(abeToShoot, 0.4, 0.6)
+      # shooter takes a shot:
+      resultOfShot <- sample(c("hit", "miss"),
+                             size = 1, 
+                             prob = c(hitProb, 1 - hitProb))
+      if (resultOfShot == "hit") {
+        abeWins[i] <- ifelse(abeToShoot, TRUE, FALSE)
+        dualing <- FALSE
+      }
+      shotNumber <- shotNumber + 1
+    }
+  }
+  # count up how many times abe won, divide by number of plays,
+  # and return:
+  sum(abeWins)/reps
+}
+dual2 <- function(reps = 10000, seed = NULL, a, b) {
+  if (!is.null(seed)) {
+    set.seed(seed)
+  }
+  shots <- numeric(reps)
+  for (i in 1:reps) {
+    dualing <- TRUE
+    shotNumber <- 1
+    while (dualing) {
+      # if i is an odd number, then Abe is shooting:
+      abeToShoot <- shotNumber %% 2 == 1
+      # probability of hitting depends on who is shooting:
+      hitProb <- ifelse(abeToShoot, a, b)
+      # shooter takes a shot:
+      resultOfShot <- sample(c("hit", "miss"),
+                             size = 1, 
+                             prob = c(hitProb, 1 - hitProb))
+      if (resultOfShot == "hit") {
+        shots[i] <- shotNumber
+        dualing <- FALSE
+      }
+      shotNumber <- shotNumber + 1
+    }
+  }
+  # count up how many times abe won, divide by number of plays,
+  # and return:
+  sum(shots)/reps
+}
+```
+
 
 1. Rewrite the `diceGameSim()` function from the previous section so that, just as we did with the `triangleSim()` function in this section:
 
@@ -481,6 +542,11 @@ The estimates are indeed getting closer to the theoretical value of $1/4$.^[Stat
     * `upper`:  the upper bound on the strenght of a torpedo-shot.  (That is, a tropedo shot will be a random real number from 0 to `upper`.)  The default value of `upper` should be 10.
     
     The program should stop with a helpful message if the user sets `upper` or `shield` to a negative number.`
+    
+4. Abe and Bo engage in a duel.  They take turns shooting at each other until one person manages to hit the other, thus winning the dual.  Abe has a 40 percent chance of hitting with each shot he takes, whereas Bo has a 60 percent chance of hitting on each of his shots.  Since Abe is the weaker shooter, Bo generously permits Abe to go first.  We would like to estimate Abe's chance of winning the duel.  Write a function called `dual()` to estimate this probability.  The function should have two parameters:
+
+    * `reps`:  the number of times to simulate a dual.  The default should be 10,000.
+    * `seed`:  a seed that the user can set.  The default value should be `NULL`.
 
 ### Solutions to Practice Exercises
 
@@ -566,6 +632,48 @@ The estimates are indeed getting closer to the theoretical value of $1/4$.^[Stat
     photonTorpedoSim(reps = 100000, seed = 4040,
                      upper = 15, shield = 12)
     ```
+
+4. Here's the function:
+
+    ```{r eval = FALSE}
+    dual <- function(reps = 10000, seed = NULL) {
+      if (!is.null(seed)) {
+        set.seed(seed)
+      }
+      # set up logical vector to store results of each simulation:
+      abeWins <- logical(reps)
+      for (i in 1:reps) {
+        dualing <- TRUE
+        shotNumber <- 1
+        while (dualing) {
+          # if i is an odd number, then Abe is shooting:
+          abeToShoot <- shotNumber %% 2 == 1
+          # probability of hitting depends on who is shooting:
+          hitProb <- ifelse(abeToShoot, 0.4, 0.6)
+          # shooter takes a shot:
+          resultOfShot <- sample(c("hit", "miss"),
+                                 size = 1, 
+                                 prob = c(hitProb, 1 - hitProb))
+          if (resultOfShot == "hit") {
+            abeWins[i] <- ifelse(abeToShoot, TRUE, FALSE)
+            dualing <- FALSE
+          }
+          shotNumber <- shotNumber + 1
+        }
+      }
+      # count up how many times abe won, divide by number of plays,
+      # and return:
+      sum(abeWins)/reps
+    }
+    ```
+    
+    Let's try it out:
+    
+    ```{r cache = TRUE}
+    dual(reps = 100000, seed = 3939)
+    ```
+    
+    Looks like Abe has a slight advantage!
 
 ## Example:  Will They Connect? {#simulation-connect}
 
@@ -898,7 +1006,7 @@ Hey!  That's a *lower* chance of success than before!  The difference is small b
 
 2. Use `rbinom()` to simulate taking twenty free throws, where you have a 70% chance to make each shot, and counting up how many shots you make.  Your simulation should produce a vector of length one that represents the number of shots you made.
 
-3. Every morning  for 100 mornings in a row you take twenty free throws.  You have a 70% chance to make each shot, and you alway count up how many shots you make.  Use `rbinom()` to simulate the counts.  Your simulation should produce a vector of length 100 where the first element represents the number of shots you made on day 1, the second element represents the number of shots you made on day 2, etc.
+3. Every morning  for 100 mornings in a row you take twenty free throws.  You have a 70% chance to make each shot, and you always count up how many shots you make.  Use `rbinom()` to simulate the counts.  Your simulation should produce a vector of length 100 where the first element represents the number of shots you made on day 1, the second element represents the number of shots you made on day 2, etc.
 
 4.  You have a 70% chance to make each free throw shot you take.  Your friend Lester has a 60% chance to make each shot.  Both of you will take 20 shots.  You are interested in knowing the probability that you will make more shots than Lester does.  Write a function called `freeThrowSim()` that will help you estimate this probability.  The function should take two parameters:
 
@@ -1491,7 +1599,7 @@ knitr::include_graphics("images/thinking.png")
     * a `reps` parameter to permit the user to choose the number of repetitions of the game;
     * a `seed` parameter to permit the user to choose a starting seed.
     
-    Use both functions with fifty thousand reps, in order to obtain estimates for the expected amount of winnings in a single play of each game.  Use a simple starting seed for each function.  Report the seeds you used, along with the estimated expected values for each game.  Use your results to decide which game is the better choice to play ten thusand times.
+    Use both functions with fifty thousand reps, in order to obtain estimates for the expected amount of winnings in a single play of each game.  Use a simple starting seed for each function.  Report the seeds you used, along with the estimated expected values for each game.  Use your results to decide which game is the better choice to play ten thousand times.
     
     **Note**:  Please keep in mind that the fifty-thousand figure is just the number of times you repeat your simulations in order to estimate the expected value of a *single play* of one of the games.  It's **not** how many times you actually get to play either game---that's ten thousand.
     
@@ -1518,6 +1626,18 @@ knitr::include_graphics("images/thinking.png")
     $$anna - r \le raj \text{ and } raj \le anna + a$$
     
     then they must connect, since neither person will arrive too much before the other.
+    
+1. Review the function `dual()` in the Practice Exercises of this Chapter (see Section \@ref(basic-simulations)).  Modify the function as follows:
+
+    * Add a parameter `abe` that gives the probability for Abe to hit when he shoots, and a parameter `bo` that gives the chance for Bo to hit when he shoots.  the probabilities should be expressed as numbers between 0 and 1.  (Thus, a 30% chance of hitting is 0.30.)
+    * Make the function estimate the expected value number of shots taken in a dual, rahter than the chance for Abe to win.
+    
+    When you have your function working, use it to estimate the expected number of shots when:
+    
+    * Abe's chance of hitting is 50 percent and Bo's chance if 50%;
+    * Abe's chance of hitting is 20% and Bo's chance of hitting is 25%.
+    
+    In each simulation, use one hundred thousand repetitions and a seed that you choose.
 
 1. A candy-maker makes a particular type of candy that always has 20 candies in each bag.  When you buy a bag of this candy, you take a few candies from it every day until they are all gone.  The amount you take each day is a random whole number from 1 to 10.  A possible scenario is:
 
