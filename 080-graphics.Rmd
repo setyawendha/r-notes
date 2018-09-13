@@ -312,6 +312,11 @@ The term "choropleth" derives from Greek and means "many regions."  A choropleth
 
 In the choropleth map shown in Figure \@ref(fig:ggchoropleth), is based on a data frame in which ease case is a state in the U.S (along with the District of Columbia).  One of the variables is `population`, the population of the state.  The glyphs are the territories of each of the U.S. states.  The frame is determined by mapping x and y-location to latitude and longitude.  The aesthetic property *color* is mapped to the `population`, and a guide is provided to the right of the graph.
 
+```{r include = FALSE}
+library(magrittr)
+```
+
+
 ```{r ggchoropleth, cache=TRUE, echo=FALSE, fig.cap="Choropleth map of state populations in the U.S.", cache = TRUE}
 DataComputing::ZipGeography %>%
   dplyr::select(State, Population) %>%

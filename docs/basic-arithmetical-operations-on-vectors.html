@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -550,7 +578,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="basic-arithmetical-operations-on-vectors" class="section level2">
 <h2><span class="header-section-number">2.7</span> Basic Arithmetical Operations on Vectors</h2>
-<p>R provides a number of arithmetical operations on pairs of numerical vectors. Table <a href="basic-arithmetical-operations-on-vectors.html#tab:arithmetical-operators">2.2</a> shows the basic operators.       </p>
+<p>R provides a number of arithmetical operations on pairs of numerical vectors. Table <a href="basic-arithmetical-operations-on-vectors.html#tab:arithmetical-operators">2.2</a> shows the basic operators.
+
+
+
+
+
+
+</p>
 <table>
 <caption><span id="tab:arithmetical-operators">Table 2.2: </span>Basic arithmetical operations on vectors.</caption>
 <thead>
@@ -591,30 +626,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 <p>The operators are applied element-wise to vectors:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>)
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>)
 y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
-x <span class="op">+</span><span class="st"> </span>y</code></pre></div>
+x <span class="op">+</span><span class="st"> </span>y</code></pre>
 <pre><code>## [1] 13 19 25</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">-</span><span class="st"> </span>y</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x <span class="op">-</span><span class="st"> </span>y</code></pre>
 <pre><code>## [1]  7 11 15</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">*</span><span class="st"> </span>y</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x <span class="op">*</span><span class="st"> </span>y</code></pre>
 <pre><code>## [1]  30  60 100</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">/</span><span class="st"> </span>y</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x <span class="op">/</span><span class="st"> </span>y</code></pre>
 <pre><code>## [1] 3.333333 3.750000 4.000000</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">^</span>y</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x<span class="op">^</span>y</code></pre>
 <pre><code>## [1]    1000   50625 3200000</code></pre>
 <p>As an illustration, the final result is:</p>
-<p><span class="math display">\[10^3, 15^4, 20^5.\]</span> The “mod” operator <code>%%</code> can be quite useful. Here is an example: even numbers have a remainder of 0 after division by 2, whereas odd numbers have a remainder of 1. Hence we may use <code>%%</code> to quickly locate the even numbers in a vector, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">24</span>)
-vec[vec <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>]</code></pre></div>
+<p><span class="math display">\[10^3, 15^4, 20^5.\]</span>
+The “mod” operator <code>%%</code> can be quite useful. Here is an example: even numbers have a remainder of 0 after division by 2, whereas odd numbers have a remainder of 1. Hence we may use <code>%%</code> to quickly locate the even numbers in a vector, as follows:</p>
+<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">24</span>)
+vec[vec <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>]</code></pre>
 <pre><code>## [1]  2 12 24</code></pre>
 <p>Recycling applies in vector arithmetic (as in most of R):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">24</span>)
-<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>vec  <span class="co"># the 2 will be recycled</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">24</span>)
+<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>vec  <span class="co"># the 2 will be recycled</span></code></pre>
 <pre><code>## [1]  4 14 18 24 30 48</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec <span class="op">+</span><span class="st"> </span><span class="dv">100</span> <span class="co"># the 100 will be recycled</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec <span class="op">+</span><span class="st"> </span><span class="dv">100</span> <span class="co"># the 100 will be recycled</span></code></pre>
 <pre><code>## [1] 102 107 109 112 115 124</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec<span class="op">^</span><span class="dv">3</span>  <span class="co"># the 3 will be recycled</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec<span class="op">^</span><span class="dv">3</span>  <span class="co"># the 3 will be recycled</span></code></pre>
 <pre><code>## [1]     8   343   729  1728  3375 13824</code></pre>
 <div id="more-math-functions" class="section level3">
 <h3><span class="header-section-number">2.7.1</span> More Math Functions</h3>
@@ -622,25 +658,25 @@ vec[vec <span class="op">%%</span><span class="st"> </span><span class="dv">2</s
 <div id="rounding" class="section level4">
 <h4><span class="header-section-number">2.7.1.1</span> Rounding</h4>
 <p>You can use the <code>round()</code>  function to round off numbers to any desired number of decimal places.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">roots &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
-roots <span class="co"># Too much information!</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">roots &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
+roots <span class="co"># Too much information!</span></code></pre>
 <pre><code>## [1] 1.000000 1.414214 1.732051 2.000000 2.236068</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(roots, <span class="dt">digits =</span> <span class="dv">3</span>) <span class="co"># nicer</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(roots, <span class="dt">digits =</span> <span class="dv">3</span>) <span class="co"># nicer</span></code></pre>
 <pre><code>## [1] 1.000 1.414 1.732 2.000 2.236</code></pre>
 </div>
 <div id="ceiling-and-floor" class="section level4">
 <h4><span class="header-section-number">2.7.1.2</span> Ceiling and Floor</h4>
 <p>The <code>ceiling()</code>  function returns the least integer that is greater than or equal to the given number:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.9</span>, <span class="op">-</span><span class="fl">1.1</span>, <span class="fl">0.2</span>, <span class="fl">1.35</span>, <span class="dv">3</span>, <span class="fl">4.01</span>)
-<span class="kw">ceiling</span>(vec)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.9</span>, <span class="fl">-1.1</span>, <span class="fl">0.2</span>, <span class="fl">1.35</span>, <span class="dv">3</span>, <span class="fl">4.01</span>)
+<span class="kw">ceiling</span>(vec)</code></pre>
 <pre><code>## [1] -2 -1  1  2  3  5</code></pre>
 <p>The <code>floor()</code>  function returns the greatest integer that is less than or equal to the given number:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">floor</span>(vec)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">floor</span>(vec)</code></pre>
 <pre><code>## [1] -3 -2  0  1  3  4</code></pre>
 </div>
 <div id="vectorization" class="section level4">
 <h4><span class="header-section-number">2.7.1.3</span> Vectorization</h4>
-
+<p></p>
 <p>All of the above operations follow the “vector-in, vector-out” principle—often referred to by R users as <em>vectorization</em>—to which R often adheres. Not only does vectorization permit us to express ideas concisely and in human-readable fashion, but the computations themselves tend to be performed very quickly.</p>
 </div>
 <div id="summing-and-the-mean" class="section level4">
@@ -652,41 +688,42 @@ roots <span class="co"># Too much information!</span></code></pre></div>
 <li><code>all()</code></li>
 </ul>
 <p>Another very important function that returns a vector of length 1 is <code>sum()</code> :</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vecs &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span>
-<span class="kw">sum</span>(vecs)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vecs &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span>
+<span class="kw">sum</span>(vecs)</code></pre>
 <pre><code>## [1] 5050</code></pre>
 <p>In statistics we are often interested in the <em>mean</em> of a list of numbers. The mean is defined as:</p>
-<p><span class="math display">\[\frac{\text{sum of the numbers}}{\text{how many numbers there are}}\]</span> You can find the mean of a numerical vector as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">17</span>, <span class="dv">23</span>, <span class="dv">51</span>)
-meanVec &lt;-<span class="st"> </span><span class="kw">sum</span>(vec)<span class="op">/</span><span class="kw">length</span>(vec)</code></pre></div>
+<p><span class="math display">\[\frac{\text{sum of the numbers}}{\text{how many numbers there are}}\]</span>
+You can find the mean of a numerical vector as follows:</p>
+<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">17</span>, <span class="dv">23</span>, <span class="dv">51</span>)
+meanVec &lt;-<span class="st"> </span><span class="kw">sum</span>(vec)<span class="op">/</span><span class="kw">length</span>(vec)</code></pre>
 <p>The way we compute the mean in R looks a great deal like its mathematical definition.</p>
 <p>You might be interested to know that there is a function in R dedicated to finding the mean. Unsurprisingly, it is called <code>mean()</code> :</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(vec)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(vec)</code></pre>
 <pre><code>## [1] 18.4</code></pre>
 </div>
 <div id="maxmin" class="section level4">
 <h4><span class="header-section-number">2.7.1.5</span> Maximum and Minimum</h4>
 <p>The <code>max()</code>  function delivers the maximum value of the elements of a numerical vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">2</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">2</span>))</code></pre>
 <pre><code>## [1] 7</code></pre>
 <p>The <code>min()</code>  function delivers the minimum value of a numerical vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">2</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">2</span>))</code></pre>
 <pre><code>## [1] 2</code></pre>
 <p>You can enter more than one vector into <code>min()</code> or <code>max()</code>: the function will combine the vectors and then do its job:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>)
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>)
 b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">1</span>)  <span class="co"># the max of both is 15</span>
-<span class="kw">max</span>(a, b)</code></pre></div>
+<span class="kw">max</span>(a, b)</code></pre>
 <pre><code>## [1] 15</code></pre>
 <p>Both functions yield <code>NA</code> when one of the elements is <code>NA</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="op">-</span><span class="dv">2</span>, <span class="ot">NA</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">-2</span>, <span class="ot">NA</span>)</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>Like <code>sum()</code> and <code>mean()</code>, they respond to the <code>na.rm</code> parameter:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="op">-</span><span class="dv">2</span>, <span class="ot">NA</span>, <span class="dt">na.rm =</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">-2</span>, <span class="ot">NA</span>, <span class="dt">na.rm =</span><span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] 7</code></pre>
 <p>The <code>pmax()</code>  function compares corresponding elements of each input-vector and produces a vector of the maximum values:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">10</span>)
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">10</span>)
 b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">12</span>)
-<span class="kw">pmax</span>(a, b)</code></pre></div>
+<span class="kw">pmax</span>(a, b)</code></pre>
 <pre><code>## [1]  5  7 12</code></pre>
 <p>There is a <code>pmin()</code>  function that computes pair-wise minima as well.</p>
 </div>
@@ -694,28 +731,28 @@ b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</sp
 <div id="na-and-nan-considerations" class="section level3">
 <h3><span class="header-section-number">2.7.2</span> NA and NaN Considerations</h3>
 <p>What happens when you are doing mathematics on a vector, one of whose values is <code>NA</code>? A vectorizing function will simply pass it along:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="ot">NA</span>)
-<span class="kw">sqrt</span>(vec)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="ot">NA</span>)
+<span class="kw">sqrt</span>(vec)</code></pre>
 <pre><code>## [1] 1.000000 1.414214 1.732051 2.000000       NA</code></pre>
 <p>On the other hand a function like <code>sum()</code> needs to <em>know</em> all of the values. If one of them is <code>NA</code>, it will report their sum as <code>NA</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(vec)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(vec)</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>The same is true for the mean:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(vec)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(vec)</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>If we want the sum or the mean of the <em>known</em> values, we could first remove the <code>NA</code> values as demonstrated in previous sections. We could also make use of the <code>na.rm</code> parameter that these functions provide:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(vec, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(vec, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(vec , <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(vec , <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] 2.5</code></pre>
 <p>The results of some arithmetical operations sometimes are not defined. (Examples: you can’t divide by 0; you can’t take the square root of a negative number.) R reports the results of such operations as <code>NaN</code>—“not a number.” R also issues a warning:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>))</code></pre>
 <pre><code>## Warning in sqrt(c(-4, 2, 4)): NaNs produced</code></pre>
 <pre><code>## [1]      NaN 1.414214 2.000000</code></pre>
 <p>Keep in mind, though, that the result is a perfectly good vector as far as R is concerned. After the warning R will permit you to use it in further computations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec&lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec&lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>))</code></pre>
 <pre><code>## Warning in sqrt(c(-4, 2, 4)): NaNs produced</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec <span class="op">+</span><span class="st"> </span><span class="dv">3</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec <span class="op">+</span><span class="st"> </span><span class="dv">3</span></code></pre>
 <pre><code>## [1]      NaN 4.414214 5.000000</code></pre>
 </div>
 <div id="practice-exercises-5" class="section level3">
@@ -735,17 +772,17 @@ b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</sp
 <ol style="list-style-type: decimal">
 <li><p><code>(1:10)^2</code></p></li>
 <li><p>Here are a couple of ways:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dt">by =</span> <span class="dv">3</span>))
-<span class="kw">sqrt</span>((<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span> <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>])</code></pre></div></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dt">by =</span> <span class="dv">3</span>))
+<span class="kw">sqrt</span>((<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span> <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>])</code></pre></li>
 <li><p><code>(2:100)^(2:100)</code></p></li>
 <li><p>When given a logical vector, the <code>sum()</code> function converts <code>TRUE</code> to 1 and <code>FALSE</code> to 0, and then adds. Accordingly, you can count how many people have pets like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(hasPets)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(hasPets)</code></pre>
 <pre><code>## [1] 3</code></pre></li>
 <li><p>Do this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="op">!</span>hasPets)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="op">!</span>hasPets)</code></pre>
 <pre><code>## [1] 3</code></pre></li>
 <li><p>Try this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">person[yearsEducation <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(yearsEducation)]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">person[yearsEducation <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(yearsEducation)]</code></pre>
 <pre><code>## [1] &quot;Esmeralda&quot;</code></pre></li>
 </ol>
 </div>
@@ -802,7 +839,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

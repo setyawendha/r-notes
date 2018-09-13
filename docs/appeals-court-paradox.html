@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -562,12 +590,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We are interested in estimating the probability that the majority opinion of the court will be correct.</p>
 <p>Before we write a simulation in full, we should consider how we are going to simulate something that has a specified percentage chance of happening. For example, how would we simulate decisions made by Judge A?</p>
 <p>One approach is to use <code>runif()</code> with a cutoff:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>) <span class="co"># random number between 0 and 1</span>
-number <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.95</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>) <span class="co"># random number between 0 and 1</span>
+number <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.95</span></code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <p>In repeated trials, a random real number between 0 and 1 will turn out to be less than 0.95 about 95% of the time.</p>
 <p>Another—and more convenient—way is to use the function <code>rbinom()</code>.  This function simulates the results of flipping a coin a number of times and counting how many heads one gets. The general form of a call to <code>rbinom()</code>is as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(n, size, prob)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(n, size, prob)</code></pre>
 <p>In this call:</p>
 <ul>
 <li><code>size</code> is how many times you plan to flip the coin;</li>
@@ -575,11 +603,11 @@ number <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.9
 <li><code>n</code> is how many times you plan to repeat the process of flipping the coin <code>size</code> times (counting up the number of heads each time).</li>
 </ul>
 <p>In order to simulate flipping a fair coin 100 times, you could ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre>
 <pre><code>## [1] 52</code></pre>
 <p>It seems that we got 52 heads!</p>
 <p>If you want to go through the above process twenty times instead of just doing it once, you could ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre>
 <pre><code>##  [1] 52 49 45 57 53 60 46 53 50 54 59 47 42 45 41 56 47 57 56 49</code></pre>
 <p>Nothing in <code>rbinom()</code> says that it addresses only coin-flipping. In general it serves as a model for any situation in which:</p>
 <ul>
@@ -589,25 +617,25 @@ number <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.9
 <li>the outcome of any trial is independent of the outcome of all other trials (e.g., making the first free throw does not increase or decrease one’s chances of making the next free throw, etc.)</li>
 <li>you are counting up the number of successes in your trials.</li>
 </ul>
-<p>In such a situation the count of the number of successes is called a <em>binomial</em> random variable.<a href="#fn19" class="footnoteRef" id="fnref19"><sup>19</sup></a> The <code>size</code> parameter in <code>rbinom()</code> gives the fixed number of trials. The <code>prob</code> parameter specifies the chance of success on each trial.</p>
+<p>In such a situation the count of the number of successes is called a <em>binomial</em> random variable.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> The <code>size</code> parameter in <code>rbinom()</code> gives the fixed number of trials. The <code>prob</code> parameter specifies the chance of success on each trial.</p>
 <p>In this example we would like to simulate each judge deciding about each case. Suppose for example, that there are twenty cases. We would like to know, for each judge and each case, whether or not the judge was correct</p>
 <p>Suppose we were to watch Judge A making 20 decisions, recording each time whether she was correct or not. In order to simulate the results with R, we could ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</code></pre>
 <pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1</code></pre>
 <p>In the above results, each 1 stands for a correct decision and the 0 stands for an incorrect decision.</p>
 <p>Note that the following call would be incorrect:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</code></pre>
 <p>This would give us a <em>count</em> of the number of times Judge A was correct, but it would not tell us which of the cases she judged correctly and which she judged incorrectly.</p>
 <p>Assuming that the court hears 20 cases, we would like to simulate the decision of each judge in each case. We could store the results in variables, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)  <span class="co"># Judge A</span>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)  <span class="co"># Judge A</span>
 b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.94</span>)  <span class="co"># Judge B</span>
 c &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.90</span>)  <span class="co"># Judge C</span>
 d &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.90</span>)  <span class="co"># Judge D</span>
-e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.80</span>)  <span class="co"># Judge E</span></code></pre></div>
+e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.80</span>)  <span class="co"># Judge E</span></code></pre>
 <p>Now we come to the key idea in coding our simulation: in order to determine the total number of correct votes in each case, all we need to do is <em>add</em> the five vectors we created above:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d <span class="op">+</span><span class="st"> </span>e</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d <span class="op">+</span><span class="st"> </span>e</code></pre>
 <p>The court will decide correctly when the number of votes for the correct option is at least 3. The following logical vector records this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)</code></pre>
 <p>Table <a href="appeals-court-paradox.html#tab:judge-votes">6.2</a> shows some possible results:</p>
 <table>
 <caption><span id="tab:judge-votes">Table 6.2: </span>Results of 20 simulated appeals court decisions.</caption>
@@ -807,7 +835,7 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 </table>
 <p>Note that all of the court’s decisions were correct, even though in a couple of cases the correct decisions were barely in the majority.</p>
 <p>We now have the basic idea of the simulation. In order to estimate the probability of a correct decision, we simply need to recast our idea in the form of a function that permits us to simulate a very large number of imaginary court cases and that will report the results to us. Here is the code for such a function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">courtSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,
+<pre class="sourceCode r"><code class="sourceCode r">courtSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,
                      <span class="dt">seed =</span> <span class="ot">NULL</span>,
                      <span class="dt">table =</span> <span class="ot">FALSE</span>,
                      <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.94</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)) {
@@ -844,9 +872,9 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
   }
   <span class="kw">cat</span>(<span class="st">&quot;The proportion of times the court was correct was &quot;</span>, 
       <span class="kw">mean</span>(courtCorrect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre></div>
+}</code></pre>
 <p>Let’s now estimate the probability of the court rendering a correct verdict, using one hundred thousand simulated cases:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">courtSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3838</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">courtSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3838</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## Here is a table of the results:
 ## 
 ## courtCorrect
@@ -857,9 +885,9 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 <p>The court seems to be doing quite well! But of course this is not very surprising: after all, most of the judges make the correct decision almost all the time. It is interesting, though, that the chance of the <em>full court</em> rendering a correct verdict is higher than the chance of any individual judge to be correct. There appears to be a benefit to the voting procedure.</p>
 <p>But things get even more interesting if we imagine that the judges recognize, after some time, that Judge E simply isn’t as sharp as Judge A, and that they pressure him into voting whichever way Judge A votes. “Surely”, they reason, “since Judge A is so good this new policy will increase our chance to hand down a correct verdict!”</p>
 <p>We will simulate to see if the judges’ reasoning is correct. All we need to do is to count Judge A’s vote twice in the sum, and not count Judge E’s vote at all:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d</code></pre>
 <p>Here is the new simulation-function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">courtSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,
+<pre class="sourceCode r"><code class="sourceCode r">courtSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,
                      <span class="dt">seed =</span> <span class="ot">NULL</span>,
                      <span class="dt">table =</span> <span class="ot">FALSE</span>,
                      <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.94</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)) {
@@ -895,9 +923,9 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
   }
   <span class="kw">cat</span>(<span class="st">&quot;The proportion of times the court was correct was &quot;</span>, 
       <span class="kw">mean</span>(courtCorrect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre></div>
+}</code></pre>
 <p>Let’s try it out:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">courtSim2</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3838</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">courtSim2</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3838</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## Here is a table of the results:
 ## 
 ## courtCorrect
@@ -924,15 +952,15 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 <h3><span class="header-section-number">6.5.2</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Try this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</code></pre>
 <pre><code>##  [1] 0 0 0 0 1 0 1 0 1 1 1 0 0 1 0 0 1 1 1 1</code></pre></li>
 <li><p>Try this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</code></pre>
 <pre><code>## [1] 14</code></pre></li>
 <li><p>Try this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</code></pre></div></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</code></pre></li>
 <li><p>Here’s the function if you decide to use a loop:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">freeThrowSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, seed) {
+<pre class="sourceCode r"><code class="sourceCode r">freeThrowSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, seed) {
   youWin &lt;-<span class="st"> </span><span class="kw">logical</span>(reps)
   <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {
     youMake &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)
@@ -940,16 +968,16 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
     youWin[i] &lt;-<span class="st"> </span>(youMake <span class="op">&gt;</span><span class="st"> </span>lesterMakes)
   }
   <span class="kw">mean</span>(youWin)
-}</code></pre></div>
+}</code></pre>
 <p>Here’s the function if you vectorize:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">freeThrowSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, seed) {
+<pre class="sourceCode r"><code class="sourceCode r">freeThrowSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, seed) {
   youMake &lt;-<span class="st"> </span><span class="kw">rbinom</span>(reps, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)
   lesterMakes &lt;-<span class="st"> </span><span class="kw">rbinom</span>(reps, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.60</span>)
   youWin&lt;-<span class="st"> </span>(youMake <span class="op">&gt;</span><span class="st"> </span>lesterMakes)
   <span class="kw">mean</span>(youWin)
-}</code></pre></div>
+}</code></pre>
 <p>Let’s try it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">freeThrowSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">freeThrowSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</code></pre>
 <pre><code>## [1] 0.69132</code></pre>
 <p>You have nearly a 70% chance to make more shots than Lester.</p></li>
 </ol>
@@ -964,7 +992,7 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 <div class="footnotes">
 <hr />
 <ol start="19">
-<li id="fn19"><p>“Binomial” is borrowed from a Greek words whose literal meaning is “two names”—corresponding to the two possible outcomes of a trial.<a href="appeals-court-paradox.html#fnref19">↩</a></p></li>
+<li id="fn19"><p>“Binomial” is borrowed from a Greek words whose literal meaning is “two names”—corresponding to the two possible outcomes of a trial.<a href="appeals-court-paradox.html#fnref19" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1019,7 +1047,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -552,8 +580,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">8.4</span> Factor Variables in Plotting</h2>
 <p>It is worthwhile to reconsider factor variables (see <a href="introduction-to-data-frames.html#factor-variables">7.4.3</a>) and to consider their role in the appearance of plots. We’ll do this by way of an example.</p>
 <p>Consider the data frame <code>firesetting</code> in the <strong>tigerData</strong> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;firesetting&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;tigerData&quot;</span>)
-?tigerData<span class="op">::</span>firesetting</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;firesetting&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;tigerData&quot;</span>)
+?tigerData<span class="op">::</span>firesetting</code></pre>
 <p>As we see from the Help file, fire-setting offers information about a large sample of high-school students. Some of them are known to be arsonists, while of course most are not. The purpose for gathering the data was to determine what characteristics of a child might be risk factors in whether he/she would develop into a fire-setter. Among the variables of interest are:</p>
 <ul>
 <li><code>race</code>, the ethnicity of the student, a factor with three levels: “white”, “black”, and “other”;</li>
@@ -561,13 +589,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>fires</code>, a factor variable with levels “0” (does not set fires) and “1” (sets fires).</li>
 </ul>
 <p>We might study the relationship between these variables with some box-plots via the code below. The results appear as Figure <a href="factors-in-plotting.html#fig:firesetting1">8.33</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> race, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> race, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>, 
                <span class="dt">outlier.alpha =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.20</span>, <span class="dt">size =</span> <span class="fl">0.1</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>fires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Ethnicity&quot;</span>,
-       <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre></div>
+       <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:firesetting1"></span>
 <img src="r-notes_files/figure-html/firesetting1-1.png" alt="Boxplots with jittered individual values.  School attitudes are generally worse among fire-setters." width="95%" />
 <p class="caption">
@@ -580,12 +608,12 @@ Figure 8.33: Boxplots with jittered individual values. School attitudes are gene
 <li><code>race</code>: Let’s change the names of the values somewhat, keeping their current order along the x-axis.</li>
 </ul>
 <p>For <code>fires</code>, we simply need to map the current values onto others that we prefer. Currently the levels are:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(firesetting<span class="op">$</span>fires)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(firesetting<span class="op">$</span>fires)</code></pre>
 <pre><code>## [1] &quot;0&quot; &quot;1&quot;</code></pre>
 <p>We can re-map as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">betterFires &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(firesetting<span class="op">$</span>fires, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>),
+<pre class="sourceCode r"><code class="sourceCode r">betterFires &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(firesetting<span class="op">$</span>fires, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>),
                          <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;no fires&quot;</span>, <span class="st">&quot;sets fires&quot;</span>))
-firesetting<span class="op">$</span>betterFires &lt;-<span class="st"> </span>betterFires</code></pre></div>
+firesetting<span class="op">$</span>betterFires &lt;-<span class="st"> </span>betterFires</code></pre>
 <p>For <code>race</code>, we’d like to substitute</p>
 <ul>
 <li>“White” for “white”;</li>
@@ -595,36 +623,36 @@ firesetting<span class="op">$</span>betterFires &lt;-<span class="st"> </span>be
 </ul>
 <p>We’d like the order along the horizontal axis to remain as it is.</p>
 <p>We might begin by replacing the <code>NA</code>-values with “Unknown”, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace &lt;-<span class="st"> </span>firesetting<span class="op">$</span>race
-tempRace[<span class="kw">is.na</span>(tempRace)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">tempRace &lt;-<span class="st"> </span>firesetting<span class="op">$</span>race
+tempRace[<span class="kw">is.na</span>(tempRace)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre>
 <p>We get an error! That’s because <code>race</code> is a factor with only three “possible values”, as given by its levels:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(tempRace)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(tempRace)</code></pre>
 <pre><code>## [1] &quot;white&quot; &quot;black&quot; &quot;other&quot;</code></pre>
 <p>“Unknown” is not considered a “possible value” for <code>tempRace</code>, any attempt to set that value in any elements of <code>tempRace</code> will be resisted.</p>
 <p>We can overcome this resistance by coercing <code>tempRace</code> into a mere character-vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace &lt;-<span class="st"> </span><span class="kw">as.character</span>(tempRace)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">tempRace &lt;-<span class="st"> </span><span class="kw">as.character</span>(tempRace)</code></pre>
 <p>Now <code>tempRace</code> doesn’t come with a limit on its “possible values”. We try again:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace[<span class="kw">is.na</span>(tempRace)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">tempRace[<span class="kw">is.na</span>(tempRace)] &lt;-<span class="st"> &quot;Unknown&quot;</span></code></pre>
 <p>This apparently worked. Let’s check:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(tempRace)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(tempRace)</code></pre>
 <pre><code>## [1] &quot;white&quot;   &quot;other&quot;   &quot;Unknown&quot; &quot;black&quot;</code></pre>
 <p>So far, so good. Now let’s re-map the other three values:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempRace,
+<pre class="sourceCode r"><code class="sourceCode r">tempRace2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempRace,
                         <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;other&quot;</span>),
-                        <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;White&quot;</span>, <span class="st">&quot;AfrAm&quot;</span>, <span class="st">&quot;Other&quot;</span>))</code></pre></div>
+                        <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;White&quot;</span>, <span class="st">&quot;AfrAm&quot;</span>, <span class="st">&quot;Other&quot;</span>))</code></pre>
 <p>Let’s check that it worked:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(tempRace2)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(tempRace2)</code></pre>
 <pre><code>## [1] &quot;White&quot;   &quot;Other&quot;   &quot;Unknown&quot; &quot;AfrAm&quot;</code></pre>
 <p>Great. Now let’s add <code>tempRace2</code> as a new variable into <code>firsetting</code>. In that data frame, it will be called <code>betterRace</code>. Here’s the code to do this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">firesetting<span class="op">$</span>betterRace &lt;-<span class="st"> </span>tempRace2</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">firesetting<span class="op">$</span>betterRace &lt;-<span class="st"> </span>tempRace2</code></pre>
 <p>Let’s try the graph again. We will need to modify the code a bit, so that we’re using the new and improved variable <code>betterRace</code>, as well as the new variable <code>betterFires</code>. Figure <a href="factors-in-plotting.html#fig:firesetting2">8.34</a> is the result.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> betterRace, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> betterRace, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>, 
                <span class="dt">outlier.alpha =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.20</span>, <span class="dt">size =</span> <span class="fl">0.1</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>betterFires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Ethnicity&quot;</span>,
-       <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre></div>
+       <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:firesetting2"></span>
 <img src="r-notes_files/figure-html/firesetting2-1.png" alt="We have re-mapped the fires and race variables." width="95%" />
 <p class="caption">
@@ -633,18 +661,18 @@ Figure 8.34: We have re-mapped the fires and race variables.
 </div>
 <p>This looks better, but now the order along the x-axis isn’t as we desired. Recall that <code>race</code> is now a character vector only. Since it doesn’t have levels that specify a particular order, <strong>ggplot2</strong> uses alphabetical order as the default ordering along the x-axis.</p>
 <p>Accordingly we should convert <code>betterRace</code> to a factor variable, and be careful to set the levels in the order that we want:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tempRace &lt;-<span class="st"> </span>firesetting<span class="op">$</span>betterRace
+<pre class="sourceCode r"><code class="sourceCode r">tempRace &lt;-<span class="st"> </span>firesetting<span class="op">$</span>betterRace
 betterRace2 &lt;-<span class="st"> </span><span class="kw">factor</span>(tempRace,
                <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;White&quot;</span>, <span class="st">&quot;AfrAm&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Unknown&quot;</span>))
-firesetting<span class="op">$</span>evenBetterRace &lt;-<span class="st"> </span>betterRace2</code></pre></div>
+firesetting<span class="op">$</span>evenBetterRace &lt;-<span class="st"> </span>betterRace2</code></pre>
 <p>Now try again. Note that in the code below we switch to <code>evenBetterRace</code>. See Figure <a href="factors-in-plotting.html#fig:firesetting3">8.35</a> for the result.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> evenBetterRace, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(firesetting, <span class="kw">aes</span>(<span class="dt">x =</span> evenBetterRace, <span class="dt">y =</span> school.attitude)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>, 
                <span class="dt">outlier.alpha =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.20</span>, <span class="dt">size =</span> <span class="fl">0.1</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>betterFires, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Ethnicity&quot;</span>,
-       <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre></div>
+       <span class="dt">y =</span> <span class="st">&quot;School-Attitude Score&quot;</span>)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:firesetting3"></span>
 <img src="r-notes_files/figure-html/firesetting3-1.png" alt="Now the order of the race-values is correct!" width="95%" />
 <p class="caption">
@@ -656,18 +684,18 @@ Figure 8.35: Now the order of the race-values is correct!
 <h3><span class="header-section-number">8.4.1</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>With <code>mosaicData::KidsFeet</code>, make the following graph. (<strong>Hint</strong>: Use <code>plyr::mapvalues()</code>.)</p>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-816-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-808-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 <li><p>With <code>mosaicData::TenMileRace</code>, make the following graph. (<strong>Hint</strong>: Use <code>cut()</code> to make age groups. The fill for the boxes is the ever-popular <code>&quot;burlywood&quot;</code>.)</p>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-817-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-809-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 <li><p>With <code>mosaicData::Gestation</code>, make the following graph. (<strong>Hint</strong>: Use <code>!is.na()</code> to select the rows of <code>Gestation</code> where <code>smoke</code> is not <code>NA</code>. Then use <code>plyr::mapvalues()</code> on <code>smoke</code>.)</p>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-818-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-810-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 </ol>
 </div>
 <div id="solutions-to-practice-exercises-14" class="section level3">
 <h3><span class="header-section-number">8.4.2</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s the code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;KidsFeet&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;KidsFeet&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
 tempBiggerfoot &lt;-<span class="st"> </span>KidsFeet<span class="op">$</span>biggerfoot
 biggerfoot2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempBiggerfoot, <span class="kw">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;R&quot;</span>),
                      <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;left foot&quot;</span>, <span class="st">&quot;right foot&quot;</span>))
@@ -681,9 +709,9 @@ KidsFeet<span class="op">$</span>betterDomhand &lt;-<span class="st"> </span>dom
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;the bigger foot&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Foot-size and Handedness for 39 Children&quot;</span>,
        <span class="dt">subtitle =</span> <span class="kw">paste0</span>(<span class="st">&quot;When your right foot is bigger, &quot;</span>,
-                         <span class="st">&quot;are you more likely to be right-handed?&quot;</span>))</code></pre></div></li>
+                         <span class="st">&quot;are you more likely to be right-handed?&quot;</span>))</code></pre></li>
 <li><p>Here’s the code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;TenMileRace&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;TenMileRace&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
 tempSex &lt;-<span class="st"> </span>TenMileRace<span class="op">$</span>sex
 sex2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempSex, <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>),
                        <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))
@@ -697,9 +725,9 @@ TenMileRace<span class="op">$</span>ageGroup &lt;-<span class="st"> </span>ageGr
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(betterSex <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age Group&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;net time to finish (sec)&quot;</span>,
-       <span class="dt">title =</span> <span class="st">&quot;Ten-Mile Race Times&quot;</span>)</code></pre></div></li>
+       <span class="dt">title =</span> <span class="st">&quot;Ten-Mile Race Times&quot;</span>)</code></pre></li>
 <li><p>Here’s the code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;Gestation&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;Gestation&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
 Gestation &lt;-<span class="st"> </span><span class="kw">subset</span>(Gestation, <span class="op">!</span><span class="kw">is.na</span>(smoke))
 tempSmoke &lt;-<span class="st"> </span>Gestation<span class="op">$</span>smoke
 smoke2 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(tempSmoke, <span class="dt">from =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">3</span>,
@@ -712,7 +740,7 @@ Gestation<span class="op">$</span>betterSmoke &lt;-<span class="st"> </span>smok
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;smoking status of mother&quot;</span>,
        <span class="dt">y =</span> <span class="st">&quot;birth weight (ounces)&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Birth Weights&quot;</span>,
-       <span class="dt">subtitle =</span> <span class="st">&quot;Children of smoking mothers have lower birth-weights.&quot;</span>)</code></pre></div></li>
+       <span class="dt">subtitle =</span> <span class="st">&quot;Children of smoking mothers have lower birth-weights.&quot;</span>)</code></pre></li>
 </ol>
 </div>
 </div>
@@ -768,7 +796,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

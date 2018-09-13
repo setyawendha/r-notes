@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -555,7 +583,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">5.4.1</span> Sampling from a Vector</h3>
 <p>You have already met the <code>sample()</code> function (see Section <a href="making-decisions-conditionals.html#if-statements">4.2.1</a>). Let’s take a closer look at it.</p>
 <p><code>sample()</code> makes a random choice from a given vector. From the R-help we read that the general form of a call to sample is as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(x, size, <span class="dt">replace =</span> <span class="ot">FALSE</span>, <span class="dt">prob =</span> <span class="ot">NULL</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(x, size, <span class="dt">replace =</span> <span class="ot">FALSE</span>, <span class="dt">prob =</span> <span class="ot">NULL</span>)</code></pre>
 <p>In the above call:</p>
 <ul>
 <li><code>x</code> is the vector from which we wish to sample (R refers to it as the “population”);</li>
@@ -564,21 +592,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>prob</code> specifies the desired probability for each member of the population to be chosen.</li>
 </ul>
 <p>A few examples will help us understand how the arguments work:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="co"># we&#39;ll sample from this vector</span>
-<span class="kw">sample</span>(vec, <span class="dv">1</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="co"># we&#39;ll sample from this vector</span>
+<span class="kw">sample</span>(vec, <span class="dv">1</span>)</code></pre>
 <pre><code>## [1] 7</code></pre>
 <p>We got only one number because we set <code>size</code> to 1. Every element in <code>vec</code> had an equal chance of being the element selected. This time we got 7, but if you were to run the function again for yourself your results would probably be different.</p>
 <p>Let’s sample 10 numbers from <code>vec</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">10</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">10</span>)</code></pre>
 <pre><code>##  [1]  3  5  2  4  7  6  9  1  8 10</code></pre>
 <p>Because <code>replace</code> was left at its default value of <code>FALSE</code>, R did not replace numbers after pulling them from the <code>vec</code>. After each sample, the remaining numbers all had the same chance to be picked next. Setting <code>size</code> to the length of <code>x</code> and keeping <code>replace = FALSE</code> therefore has the effect of randomly shuffling the elements of <code>x</code>.</p>
 <p>Of course when <code>replace = FALSE</code> any attempt to sample more than the number of elements of <code>vec</code> will result in an error:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">11</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">11</span>)</code></pre>
 <pre><code>Error in sample.int(length(x), size, replace, prob) : 
 cannot take a sample larger than the 
 population when &#39;replace = FALSE&#39;</code></pre>
 <p>When we set <code>replace = TRUE</code> then each selected element is returned to the population. At any stage, the chance for a given member of the population to be the one selected next is the same—no matter how many times that member has already been selected. Thus, when <code>replace = TRUE</code> you are liable to see repeats:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>##  [1]  3  8  8  8  8  9  5  6  7  1  4  8  4  1 10  6  3  3  1  9</code></pre>
 <p>When the <code>prob</code> parameter is left at its <code>NULL</code> value, R gives each member of the population the <em>same</em> chance to be the member that is selected. It is possible to adjust the probabilities of selection by setting <code>prob</code> to a vector of probabilities (one for each corresponding member of <code>x</code>). Thus, suppose we want to select 20 numbers from <code>vec</code>, according to the following the probabilities:</p>
 <ul>
@@ -587,8 +615,8 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <li>30% chance for 10 to be selected.</li>
 </ul>
 <p>Then we can call <code>sample()</code> like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>,
-       <span class="dt">prob  =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">8</span>), <span class="fl">0.30</span>, <span class="fl">0.30</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>,
+       <span class="dt">prob  =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">8</span>), <span class="fl">0.30</span>, <span class="fl">0.30</span>))</code></pre>
 <pre><code>##  [1]  9  1  9 10  9  6  8  9  4  7 10 10  9  2  6  9  5  9 10 10</code></pre>
 <p>Notice the majority of 9’s and 10’s: this was fairly likely to occur since each selection had a 60% chance of turning out to be 9 or 10.</p>
 </div>
@@ -596,7 +624,7 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <h3><span class="header-section-number">5.4.2</span> Application: a Bouncing Turtle</h3>
 <p>Let’s apply <code>sample()</code> to design a scenario in which the turtle moves a fixed amount at each step, but the direction—north, east, south, or west—is completely random. When the turtle reaches the boundary of its domain, however, we would like it to “bounce back”: i.e., take a step in the direction opposite to the step that brought it to the boundary. We will also query the user prior to each step, asking if he/she wants to see another move. This not only allows the user to decide when to end the scenario; it also permits the user to see where the turtle is after each step.</p>
 <p>One possible implementation is as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_bounce &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">side =</span> <span class="dv">60</span>, <span class="dt">step=</span> <span class="dv">10</span>) {
+<pre class="sourceCode r"><code class="sourceCode r">turtle_bounce &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">side =</span> <span class="dv">60</span>, <span class="dt">step=</span> <span class="dv">10</span>) {
   <span class="cf">if</span> ( (side<span class="op">/</span><span class="dv">2</span>) <span class="op">%%</span><span class="st"> </span>step <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> ) {
     <span class="kw">stop</span>(<span class="st">&quot;Side-length divided by two must be a multiple of step.&quot;</span>)
   }
@@ -620,9 +648,9 @@ population when &#39;replace = FALSE&#39;</code></pre>
     <span class="kw">print</span>(cp)
   }
   <span class="kw">cat</span>(<span class="st">&quot;All done!&quot;</span>)
-}</code></pre></div>
+}</code></pre>
 <p>Play the game a few times, to get a feel for how it works:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_bounce</span>(<span class="dv">60</span>, <span class="dv">15</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_bounce</span>(<span class="dv">60</span>, <span class="dv">15</span>)</code></pre>
 <p>Let’s examine the code a bit more closely.</p>
 <p>The definition indicates that there are two parameters: <code>side</code> and <code>step</code>.</p>
 <ul>
@@ -630,36 +658,36 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <li><code>step</code> specifies how many units the turtle will move at each step. In this analysis we will assume that <code>step</code> is set to 15.</li>
 </ul>
 <p>Inside the function, we begin with a bit of input-validation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( (side<span class="op">/</span><span class="dv">2</span>) <span class="op">%%</span><span class="st"> </span>step <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> ) {
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( (side<span class="op">/</span><span class="dv">2</span>) <span class="op">%%</span><span class="st"> </span>step <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> ) {
     <span class="kw">stop</span>(<span class="st">&quot;Side-length divided by two must be a multiple of step.&quot;</span>)
-  }</code></pre></div>
+  }</code></pre>
 <p>Remember that the turtle will start at <span class="math inline">\((\texttt{side}/2, \texttt{side}/2)\)</span> and will move <code>step</code> each time. If <span class="math inline">\(\texttt{side}/2\)</span> is not evenly divisible by <code>step</code> then the turtle would be able to go from inside its field to outside in a single step. We don’t want that to happen so we stop the user if the remainder after dividing <span class="math inline">\(\texttt{side}/2\)</span> by <code>side</code> is anything other than zero.</p>
 <p>If the input is OK, then we set up a vector <code>bounds</code> that records the smallest and largest possible values for the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates of the turtle:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, side)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">bounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, side)</code></pre>
 <p>Next, we initialize the turtle in the middle of the field and record its initial position in the vector <code>cp</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
 origin &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
-cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</code></pre></div>
+cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</code></pre>
 <p>(You can think of <code>cp</code> as short for: “current position”.)</p>
 <p>Next, we enter a <code>repeat</code>-loop. Inside the loop we begin with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)
 <span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span>
 x &lt;-<span class="st"> </span>cp[<span class="st">&quot;x&quot;</span>]
-y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code></pre></div>
+y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code></pre>
 <p>We first asked the user if she wanted to quit. If she enters “q” then we’ll break out of the loop and end the scenario. If she enters anything else (including just pressing Enter) then we record the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates of the turtle’s current position in the vectors <code>x</code> and <code>y</code> respectively.</p>
 <p>Our next task is to determine how the turtle should move:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (x <span class="op">%in%</span><span class="st"> </span>bounds <span class="op">|</span><span class="st"> </span>y <span class="op">%in%</span><span class="st"> </span>bounds) {
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (x <span class="op">%in%</span><span class="st"> </span>bounds <span class="op">|</span><span class="st"> </span>y <span class="op">%in%</span><span class="st"> </span>bounds) {
       angle &lt;-<span class="st"> </span><span class="dv">180</span>
     } <span class="cf">else</span> {
       angle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">90</span>,<span class="dv">180</span>,<span class="dv">270</span>), <span class="dv">1</span>)
-    }</code></pre></div>
+    }</code></pre>
 <p>If the turtle is at a boundary (either <code>x</code> equal to 0 or 60 or <code>y</code> equal to 0 or 60) then we need to “bounce back”. This corresponds to making the turtle turn right by 180 degrees and then step. On the other hand if the turtle is not at a boundary then the direction of the turtle should be random, so we should have it turn right by either 0, 90, 180 or 270 degrees, with each possibility being equally likely. This is accomplished with the above call to the <code>sample()</code> function.</p>
 <p>Having determined the amount by which to turn prior to the next step, we then have the turtle turn that amount and take the step:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_right</span>(angle)
-<span class="kw">turtle_forward</span>(step)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_right</span>(angle)
+<span class="kw">turtle_forward</span>(step)</code></pre>
 <p>Finally, we set <code>cp</code> to the new position of the turtle, and print that position out to the console for the user to see:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cp &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">turtle_getpos</span>(), <span class="dv">0</span>)
-<span class="kw">print</span>(cp)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">cp &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">turtle_getpos</span>(), <span class="dv">0</span>)
+<span class="kw">print</span>(cp)</code></pre>
 <p>Note that we rounded off the position to the nearest while number. This was done because the authors of the <strong>TurtleGraphics</strong> package use floating point arithmetic for their numerical operations, so sometimes the computed positions differ from whole numbers by a very tiny amount.</p>
 <p>We then repeat the loop.</p>
 </div>
@@ -667,20 +695,20 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <h3><span class="header-section-number">5.4.3</span> Uniform Random Numbers</h3>
 <p><code>sample()</code> picks an element from a finite population. Sometimes, though, we want R to give the impression that it has picked a <em>real number</em> at random out of a range of real numbers. This can be accomplished with the <code>runif()</code> function.</p>
 <p>A call to <code>runif()</code> looks like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(n, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(n, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</code></pre>
 <p>The idea is that R will produce <code>n</code> real numbers that have the appearance of having been drawn randomly from the interval of real numbers whose lower and upper bounds are specified respectively by <code>min</code> and <code>max</code>.</p>
 <p>Thus, to get 10 “random” numbers that all lie between 0 and 1, you can leave <code>min</code> and <code>max</code> at their defaults and ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">10</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">10</span>)</code></pre>
 <pre><code>##  [1] 0.646902839 0.394225758 0.618501814 0.476891136 0.136097186
 ##  [6] 0.067384386 0.129152617 0.393117930 0.002582699 0.620205954</code></pre>
 </div>
 <div id="pseudo-randomness-and-setting-a-seed" class="section level3">
 <h3><span class="header-section-number">5.4.4</span> Pseudo-Randomness and Setting a Seed</h3>
-<p>It’s important to point out that R doesn’t generate truly random numbers.<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a> After all, R simply runs a computer which operates according to a set of completely-specified steps. Thus the random data generated by R and by other computer languages is often called <em>pseudorandom</em>. Although the functions for random-number generation have been carefully designed so as to follow many of the statistical laws we associate with randomness in nature, all of the pseudo-random output is determined by an initial value and a deterministic number-generating algorithm.</p>
+<p>It’s important to point out that R doesn’t generate truly random numbers.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> After all, R simply runs a computer which operates according to a set of completely-specified steps. Thus the random data generated by R and by other computer languages is often called <em>pseudorandom</em>. Although the functions for random-number generation have been carefully designed so as to follow many of the statistical laws we associate with randomness in nature, all of the pseudo-random output is determined by an initial value and a deterministic number-generating algorithm.</p>
 <p>We actually have the ability to set the pseudorandom data ourselves. This is called <em>setting the random seed</em>. From any specified seed, the result of calls to R’s random-data functions will be completely determined (although—just as in the case of “real” randomness—the output will still probably “look” random).</p>
 <p>The <code>set.seed()</code> function will fix the random output. Try running the following two lines of code more than once:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2025</span>)
-<span class="kw">runif</span>(<span class="dv">10</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2025</span>)
+<span class="kw">runif</span>(<span class="dv">10</span>)</code></pre>
 <pre><code>##  [1] 0.7326202 0.4757614 0.5142159 0.4984323 0.7802845 0.5042522 0.8984003
 ##  [8] 0.1278527 0.6446721 0.5695311</code></pre>
 <p>You will get the same output every time. If you change the argument of <code>set.seed()</code> to some other integer the output will probably change—but it will stay the same when you run the code <em>again</em> from that that new seed.</p>
@@ -688,7 +716,7 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <div id="drunken-turtle-intro" class="section level3">
 <h3><span class="header-section-number">5.4.5</span> Application: a Drunken Turtle</h3>
 <p>We will now modify the previous scenario so that the turtle’s motion will be almost completely random. Even though it will take the same-size step every time, the angle at which it steps will be completely random: any real number of degrees from 0 to 360. We will also show the user the position of the turtle at each step, and use the “distance formula” from high-school geometry to compute and display the current distance of the turtle from the place where it started.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtle_drunk &lt;-<span class="st"> </span><span class="cf">function</span>(side, step) {
+<pre class="sourceCode r"><code class="sourceCode r">turtle_drunk &lt;-<span class="st"> </span><span class="cf">function</span>(side, step) {
   <span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
   <span class="co"># save (side/2, side/2), the turtle&#39;s initial position:</span>
   initial &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
@@ -710,9 +738,9 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
     <span class="kw">cat</span>(message)
   }
   <span class="kw">cat</span>(<span class="st">&quot;All done!&quot;</span>)
-}</code></pre></div>
+}</code></pre>
 <p>Try the game once or twice:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_drunk</span>(<span class="dv">100</span>, <span class="dv">5</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_drunk</span>(<span class="dv">100</span>, <span class="dv">5</span>)</code></pre>
 <p>It is natural to wonder how likely the turtle is to wander back close to where it started, and to wonder how often that will happen. We will address questions like these in Chapter <a href="simulation.html#simulation">6</a>.</p>
 </div>
 <div id="turtle-practice" class="section level3">
@@ -720,15 +748,15 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <p>Many of these exercises don’t deal directly with turtles, but instead drill you on the <code>sample()</code> and runif()` functions.</p>
 <ol style="list-style-type: decimal">
 <li><p>Write a call to the <code>sample()</code> function so that it will pick a whole number at random from 1 to 10. Each number should have the same chance to be selected.</p></li>
-<li><p>You have a large bag of M&amp;Ms. You reach in an grab a few. You have an equal to chance to grab any number of M&amp;Ms from 1 to 10. (You can’t grab more than 10, and you can’t grab none.) Write a one-line command that expresses how many you grab.</p></li>
+<li><p>You have a large bag of M&amp;Ms. You reach in an grab a few. You have an equal to chance to grab any number of M&amp;Ms from 1 to 10. (You can’t grab more than 10, and you can’t grab none.) Write a one-line command that expresses how many you grab.</p></li>
 <li><p>Write a call to the <code>sample()</code> function that will pick five numbers at random from the whole numbers from 1 to 10. On each pick, each of the ten numbers should have a 1-in-10 chance to be selected.</p></li>
 <li><p>Write a call to the <code>sample()</code> function that will pick five numbers at random from the whole numbers from 1 to 10. It should not be possible to get the same number twice.</p></li>
 <li><p>Write a call to the <code>sample()</code> function that scrambles the whole numbers from 1 to 10 in a random order.</p></li>
 <li><p>Write a call to the <code>sample()</code> functions that randomly re-orders the lowercase letters of the English alphabet.</p></li>
 <li><p>The function <code>color()</code> produces a character vector of the named colors that R is prepared to draw. Run it at the Console:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colors</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colors</span>()</code></pre>
 <p>How many named colors are there? Let’s let R find out for us:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">colors</span>())</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">colors</span>())</code></pre>
 <pre><code>## [1] 657</code></pre>
 <p>Write a call to the <code>sample()</code> function that will pick a single named color at random.</p></li>
 <li><p>Write a call to <code>runif()</code> that will produce a single random real number between 0 and 1.</p></li>
@@ -744,10 +772,10 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <li>The width of each ray should be 5.</li>
 </ul>
 <p>Typical examples of use should be as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">randomColor8</span>()</code></pre></div>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-511-1.png" width="50%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">randomColor8</span>(<span class="dt">type =</span> <span class="dv">3</span>)</code></pre></div>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-512-1.png" width="50%" style="display: block; margin: auto;" /></p></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">randomColor8</span>()</code></pre>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-502-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">randomColor8</span>(<span class="dt">type =</span> <span class="dv">3</span>)</code></pre>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-503-1.png" width="50%" style="display: block; margin: auto;" /></p></li>
 </ol>
 </div>
 <div id="solutions-to-the-practice-exercises-11" class="section level3">
@@ -765,7 +793,7 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <li><p><code>runif(30, min = 10, max = 15)</code></p></li>
 <li><p><code>min(runif(5, min = 0, max = 10))</code></p></li>
 <li><p>Try this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">randomColor8 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">type =</span> <span class="dv">1</span>) {
+<pre class="sourceCode r"><code class="sourceCode r">randomColor8 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">type =</span> <span class="dv">1</span>) {
   allowedColors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)
   <span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
   <span class="kw">turtle_lty</span>(<span class="dt">lty =</span> type)
@@ -781,14 +809,14 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
       <span class="kw">turtle_left</span>(<span class="dv">45</span>)
     }
   })
-}</code></pre></div></li>
+}</code></pre></li>
 </ol>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="15">
-<li id="fn15"><p>Indeed, philosophers of mathematics debate what randomness “really” is.<a href="random-moves.html#fnref15">↩</a></p></li>
+<li id="fn15"><p>Indeed, philosophers of mathematics debate what randomness “really” is.<a href="random-moves.html#fnref15" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -843,7 +871,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -550,27 +578,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="introduction-to-data-frames" class="section level2">
 <h2><span class="header-section-number">7.4</span> Introduction to Data Frames</h2>
-<p>R is known as a <em>domain-specific programming language</em>, meaning that although it can in principle perform any sort of computation that a human can perform (given enough pencil, paper and time), it was originally designed to perform tasks in a particular area of application. R’s area of application is data analysis and statistics, especially when performed <em>interactively</em>—i.e., in a setting where the analyst asks for a relatively small computation, examines the results, modifies his or her requests and asks again, and so on.<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a> Although R can be used effectively for a wide range of programming tasks, data analysis is where it really shines.</p>
+<p>R is known as a <em>domain-specific programming language</em>, meaning that although it can in principle perform any sort of computation that a human can perform (given enough pencil, paper and time), it was originally designed to perform tasks in a particular area of application. R’s area of application is data analysis and statistics, especially when performed <em>interactively</em>—i.e., in a setting where the analyst asks for a relatively small computation, examines the results, modifies his or her requests and asks again, and so on.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> Although R can be used effectively for a wide range of programming tasks, data analysis is where it really shines.</p>
 <p>The data structures of R reflect its orientation to data analysis. We have met a data-oriented structure already—the table, which is one of many convenient ways to display the results of data analysis. For the purpose of organizing data in preparation for analysis, R provides the structure known as the <em>data frame</em>. A data frame facilitates the storage of related data in one location, in a form that makes the most sense to human users.</p>
 <p>A data frame is like a matrix in that it is two-dimensional—it has rows and columns. Unlike a matrix, though, the elements of a data frame do not have to be all of the same data-type. Each column of a data frame is a vector—of the same length as all the others—but these vectors may be of different types: some numerical, some logical, etc.</p>
 <div id="viewing-a-data-frame" class="section level3">
 <h3><span class="header-section-number">7.4.1</span> Viewing a Data Frame</h3>
 <p>Let’s take a close look at a data frame: the frame <code>m111survey</code>, which is available from the <strong>bcscr</strong> package <span class="citation">(White <a href="#ref-R-bcscr">2018</a>)</span>. First let’s attach the package itself:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(bcscr)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(bcscr)</code></pre>
 <p>In the R Studio IDE, we can get a look at the frame in a tab in the Editor pane if we use the <code>View()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(m111survey)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(m111survey)</code></pre>
 <p>As with many objects provided by a package, we can get more information about it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(<span class="st">&quot;m111survey&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(<span class="st">&quot;m111survey&quot;</span>)</code></pre>
 <p>From the Help we see that <code>m111survey</code> records the results of a survey conducted in a number of sections of an elementary statistics course at Georgetown College. From the View we see that the frame is arranged in rows and columns. Each row corresponds to what in data analysis is known as a <em>case</em> or an <em>individual</em>: here, each row goes with a student who participated in the survey. The columns correspond to <em>variables</em>: measurements made on each individual. For a student on a given row, the values in the columns are the values recorded for that student.</p>
 <p>When you are not working in R Studio, there are still a couple of way so view the frame. You could print it all out to the console:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">m111survey</code></pre>
 <p>You could also use the <code>head()</code> function  to view a specified number of initial rows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(m111survey, <span class="dt">n =</span> <span class="dv">6</span>)  <span class="co"># see first six rows</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(m111survey, <span class="dt">n =</span> <span class="dv">6</span>)  <span class="co"># see first six rows</span></code></pre>
 </div>
 <div id="the-stucture-of-a-data-frame" class="section level3">
 <h3><span class="header-section-number">7.4.2</span> The Stucture of a Data Frame</h3>
 <p>Further information about the frame may be obtained with the <code>str()</code> function: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(m111survey)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(m111survey)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    71 obs. of  12 variables:
 ##  $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
 ##  $ ideal_ht       : num  78 76 NA 65 72 NA 72 76 61 67 ...
@@ -584,14 +612,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  $ enough_Sleep   : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 2 1 2 1 2 ...
 ##  $ sex            : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 2 1 1 2 2 2 2 1 1 ...
 ##  $ diff.ideal.act.: num  2 2 NA 3 0 NA 2 -3 2 0 ...</code></pre>
-<p>The concept of <em>structure</em> extends far beyond the domain of computer programming.<a href="#fn24" class="footnoteRef" id="fnref24"><sup>24</sup></a> In general the structure of any object consists of:</p>
+<p>The concept of <em>structure</em> extends far beyond the domain of computer programming.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> In general the structure of any object consists of:</p>
 <ul>
 <li>the kind of thing that the object is;</li>
 <li>the parts of the object is made up of;</li>
 <li>the relationships between these parts—the rules, if you will, for how the parts work together to make the object do what it does.</li>
 </ul>
 <p>In the case of <code>m111survey</code> the kind of thing this is its <em>class</em>: it’s a data frame.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(m111survey)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(m111survey)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <p>Next we see the account of the parts of the object and the way in which the parts relate to one another:</p>
 <pre><code>## 71 obs. of  12 variables</code></pre>
@@ -601,45 +629,45 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We are told the kind of thing that height is: it’s a numerical vector (a vector of type <code>double</code>, in fact). Next we are given the beginning of a statement of its parts: the heights of the individuals. So R is actually giving us the structure of the parts, as well as of the whole <code>m11survey</code>.</p>
 <p>The variable <code>fastest</code> refers to the fastest speed—in miles per hour—that a person has ever driven a car. Note that it is a vector of type <code>integer</code>. Officially this is a numerical variable, too, but R is calling attention to the fact that the fastest-speed data is being stored as integers rather than as floating-point decimals.</p>
 <p>The variables of a data frame are typically associated with the <em>names</em> of the frame:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(m111survey)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(m111survey)</code></pre>
 <pre><code>##  [1] &quot;height&quot;          &quot;ideal_ht&quot;        &quot;sleep&quot;          
 ##  [4] &quot;fastest&quot;         &quot;weight_feel&quot;     &quot;love_first&quot;     
 ##  [7] &quot;extra_life&quot;      &quot;seat&quot;            &quot;GPA&quot;            
 ## [10] &quot;enough_Sleep&quot;    &quot;sex&quot;             &quot;diff.ideal.act.&quot;</code></pre>
 <p>By means of the names we can isolate a vector in any column, identified in our code in the format <code>frame$variable</code>. For example, to see the first ten elements of the <code>fastest</code> variable, we ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>fastest[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>fastest[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</code></pre>
 <pre><code>##  [1] 119 110  85 100  95 100  85 160  90  90</code></pre>
 <p>In order to compute the mean fastest speed our subjects drove their cars, we can ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(m111survey<span class="op">$</span>fastest, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(m111survey<span class="op">$</span>fastest, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] 105.9014</code></pre>
 <p>If you want to see the speeds that are at least 150 miles per hour, you could ask for:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>fastest[m111survey<span class="op">$</span>fastest <span class="op">&gt;=</span><span class="st"> </span><span class="dv">150</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>fastest[m111survey<span class="op">$</span>fastest <span class="op">&gt;=</span><span class="st"> </span><span class="dv">150</span>]</code></pre>
 <pre><code>## [1] 160 190</code></pre>
 <p>If you worry that the form <code>frame$variable</code> will require an annoying amount of typing—as seems to be the case in the the example above—then you can use the <code>with()</code> function: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(m111survey, fastest[fastest <span class="op">&gt;=</span><span class="dv">150</span>])</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(m111survey, fastest[fastest <span class="op">&gt;=</span><span class="dv">150</span>])</code></pre>
 <pre><code>## [1] 160 190</code></pre>
 <p>It’s instructive to consider how <code>with()</code> works. If we were to includes the names of the parameters of <code>with()</code> explicitly, then the call would have looked like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="dt">data =</span> m111survey, <span class="dt">expr =</span> fastest[fastest <span class="op">&gt;=</span><span class="dv">150</span>])</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="dt">data =</span> m111survey, <span class="dt">expr =</span> fastest[fastest <span class="op">&gt;=</span><span class="dv">150</span>])</code></pre>
 <p>For the <code>data</code> parameter we can supply a data frame or any other R-object that can be used to construct an environment . In this case <code>m111survey</code> provides a miniature environment consisting of the names of its variables. For the <code>expr</code> parameter we supply an expression for R to evaluate. As R evaluates the expression, it encounters names (such as <code>fastest</code>). Now ordinarily R would first search whatever counts as the active environment—in this case it’s the Global Environment—for the names in the expression, but <code>with()</code> forces R to look first within the environment created by the <code>data</code> argument. In our example, R finds <code>fastest</code> inside <code>m111survey</code> and evaluates the expression on that basis. If it had not found <code>fastest</code> in <code>m111survey</code>, R would have moved on to the Global Environment and then the rest of the usual search path and (probably) would have found nothing, causing it to throw an “object not found” error message. In R, as in any other programming language, good programming depends very much on paying attention to how the language searches for the objects to which names refer.</p>
 </div>
 <div id="factor-variables" class="section level3">
 <h3><span class="header-section-number">7.4.3</span> Factors</h3>
 <p>Some of the variables in <code>m111survey</code> are called <em>factors</em>; an example is <code>seat</code>, which pertains to where one prefers to sit in a classroom:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(m111survey<span class="op">$</span>seat)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(m111survey<span class="op">$</span>seat)</code></pre>
 <pre><code>##  Factor w/ 3 levels &quot;1_front&quot;,&quot;2_middle&quot;,..: 1 2 2 1 3 1 1 3 3 2 ...</code></pre>
 <p>Seating preference is an example of a <em>categorical</em> variable: one whose values are not meaningfully expressed in terms of numbers. When a categorical variable has a relatively small number of possible values, it can be convenient to store its values in a vector of class <code>factor</code>.</p>
 <p>The <em>levels</em> of factor variable are its possible values. In the case of <code>seat</code>, these are: Front, Middle and Back. As a memory-saving measure, R stores the values in the factor as numbers, where 1 stands for the first level, 2 for the second level, and so on. But please bear in mind that we are dealing with a categorical variable, so the numbers don’t relate to the possible values in any natural way: they are just storage conventions.</p>
 <p>It’s possible to create a factor from any type of vector, but most often this is done with a character vector. Suppose for instance, that eight people are asked for their favorite Wizard of Oz character and they answer:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozFavs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Toto&quot;</span>,
-            <span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Dorothy&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">ozFavs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Toto&quot;</span>,
+            <span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Dorothy&quot;</span>)</code></pre>
 <p>We can create a factor variable as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">factorFavs &lt;-<span class="st"> </span><span class="kw">factor</span>(ozFavs)
-factorFavs</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">factorFavs &lt;-<span class="st"> </span><span class="kw">factor</span>(ozFavs)
+factorFavs</code></pre>
 <pre><code>## [1] Glinda    Toto      Toto      Dorothy   Toto      Glinda    Scarecrow
 ## [8] Dorothy  
 ## Levels: Dorothy Glinda Scarecrow Toto</code></pre>
 <p>Note that the levels are given in alphabetical order: this is the default procedure when R creates a factor. It is possible to ask for a different order, though:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">factor</span>(ozFavs, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;Dorothy&quot;</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">factor</span>(ozFavs, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;Dorothy&quot;</span>))</code></pre>
 <pre><code>## [1] Glinda    Toto      Toto      Dorothy   Toto      Glinda    Scarecrow
 ## [8] Dorothy  
 ## Levels: Toto Scarecrow Glinda Dorothy</code></pre>
@@ -660,18 +688,18 @@ factorFavs</code></pre></div>
 <h3><span class="header-section-number">7.4.5</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>One way is to attach, then then ask for help:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mosaicData)
-<span class="kw">help</span>(RailTrail)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mosaicData)
+<span class="kw">help</span>(RailTrail)</code></pre>
 <p>Another way is to refer to the data frame through the package, with double colons:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mosaicData<span class="op">::</span>RailTrail)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mosaicData<span class="op">::</span>RailTrail)</code></pre>
 <p>That way you don’t have to add all the items in <strong>mosaicData</strong> to your search path.</p></li>
 <li><p>Here’s one way:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mosaicData<span class="op">::</span>RailTrail, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mosaicData<span class="op">::</span>RailTrail, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></li>
 <li><p>It’s <code>names(mosaicData::RailTrail)</code>.</p></li>
 <li><p>Here’s one way:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(mosaicData<span class="op">::</span>RailTrail, hightemp[precip <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>])</code></pre></div></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(mosaicData<span class="op">::</span>RailTrail, hightemp[precip <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>])</code></pre></li>
 <li><p>Try this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(mosaicData<span class="op">::</span>RailTrail<span class="op">$</span>avgtemp, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</code></pre></div></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(mosaicData<span class="op">::</span>RailTrail<span class="op">$</span>avgtemp, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</code></pre></li>
 </ol>
 </div>
 </div>
@@ -684,8 +712,8 @@ factorFavs</code></pre></div>
 <div class="footnotes">
 <hr />
 <ol start="23">
-<li id="fn23"><p>Domain-specific languages (DSLs for short) stand in contrast to general-purpose programming languages that were designed to solve a wide variety of problems. Examples of important general-purpose languages include C and C++, Java, Python and Ruby. Although R is by now the one of the most widely-used DSLs in the world, there a number of other important ones, including Matlab, Octave and Julia for scientific computing, Emacs Lisp for the renowned Emacs editor, and SQL for querying databases. JavaScript is an interesting case: it started out as a DSL for web browsers, but has since expanded to power many web applications and is now being used to develop desktop applications as well.<a href="introduction-to-data-frames.html#fnref23">↩</a></p></li>
-<li id="fn24"><p>As an example outside of programming, consider what happens when you read a piece of literature “for structure.” You begin by asking: “What kind of literature is this? Is it drama, a novel, or something else?” The answer lets you know what to expect as you read: if it’s a novel, you know to suspend disbelief, whereas if it’s a journalistic piece then you know to examine critically whatever it presents as fact. Next, you might outline the piece. When you make an outline, you are breaking the piece up into parts, and indicating how the parts relate to each other to advance the plot and/or message of the piece. Note that in the process of “reading for structure” you are following the pattern of the definition of structure offered above.<a href="introduction-to-data-frames.html#fnref24">↩</a></p></li>
+<li id="fn23"><p>Domain-specific languages (DSLs for short) stand in contrast to general-purpose programming languages that were designed to solve a wide variety of problems. Examples of important general-purpose languages include C and C++, Java, Python and Ruby. Although R is by now the one of the most widely-used DSLs in the world, there a number of other important ones, including Matlab, Octave and Julia for scientific computing, Emacs Lisp for the renowned Emacs editor, and SQL for querying databases. JavaScript is an interesting case: it started out as a DSL for web browsers, but has since expanded to power many web applications and is now being used to develop desktop applications as well.<a href="introduction-to-data-frames.html#fnref23" class="footnote-back">↩</a></p></li>
+<li id="fn24"><p>As an example outside of programming, consider what happens when you read a piece of literature “for structure.” You begin by asking: “What kind of literature is this? Is it drama, a novel, or something else?” The answer lets you know what to expect as you read: if it’s a novel, you know to suspend disbelief, whereas if it’s a journalistic piece then you know to examine critically whatever it presents as fact. Next, you might outline the piece. When you make an outline, you are breaking the piece up into parts, and indicating how the parts relate to each other to advance the plot and/or message of the piece. Note that in the process of “reading for structure” you are following the pattern of the definition of structure offered above.<a href="introduction-to-data-frames.html#fnref24" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -740,7 +768,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

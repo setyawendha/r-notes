@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -555,37 +583,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In R an <em>environment</em> is a particular kind of data structure that helps the computer connect names to a value. An environment can be thought of as a bag of names—names for vectors, functions, and all sorts of objects—along with a way (provided automatically by the computer) of getting from each name to the value that it represents. The process that the computer follows in order to connect a name to a value is called <em>scoping</em>. In R, as in many other computer languages, environments are what makes scoping possible. In other words, environments are how R figures out what the names in any piece of code <em>mean</em>.</p>
 <p>R has a considerable number of environments—and environments can be created and destroyed throughout the course of an R session—but at any moment only one of them is <em>active</em>. The <em>active environment</em> is the first environment that R will examine when it needs to look up a name in an expression.</p>
 <p>The most familiar environment is the <em>Global Environment</em>—the one that is active when you are using R from the console. The names in the Global Environment, along with descriptions of the objects to which they refer, are shown in the <strong>Environment</strong> panel in the R Studio IDE. Alternatively, you see the names in the active environment by using the <code>ls()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
 <p>Even better is <code>ls.str()</code>, which will give the name of each object along with a summary of what sort of object it is.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls.str</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls.str</span>()</code></pre>
 <p>You can remove all of the names from your Global Environment by pressing the Broom icon in the IDE, or by using the <code>rm()</code>function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre>
 <p>As we mentioned previously, the Global Environment is only one of many environments that exist in R. The <code>search()</code> function will show you a number of other environments:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">search</span>()</code></pre></div>
-<pre><code>##  [1] &quot;.GlobalEnv&quot;             &quot;package:bcscr&quot;         
-##  [3] &quot;package:tidytext&quot;       &quot;package:magrittr&quot;      
-##  [5] &quot;package:babynames&quot;      &quot;package:forcats&quot;       
-##  [7] &quot;package:stringr&quot;        &quot;package:purrr&quot;         
-##  [9] &quot;package:tidyr&quot;          &quot;package:tibble&quot;        
-## [11] &quot;package:tidyverse&quot;      &quot;package:bindrcpp&quot;      
-## [13] &quot;package:R6&quot;             &quot;package:readr&quot;         
-## [15] &quot;package:tigerData&quot;      &quot;package:tigerstats&quot;    
-## [17] &quot;package:abd&quot;            &quot;package:mosaic&quot;        
-## [19] &quot;package:Matrix&quot;         &quot;package:ggformula&quot;     
-## [21] &quot;package:dplyr&quot;          &quot;package:lattice&quot;       
-## [23] &quot;package:nlme&quot;           &quot;package:TurtleGraphics&quot;
-## [25] &quot;package:grid&quot;           &quot;package:ggplot2&quot;       
-## [27] &quot;package:mosaicData&quot;     &quot;tools:rstudio&quot;         
-## [29] &quot;package:stats&quot;          &quot;package:graphics&quot;      
-## [31] &quot;package:grDevices&quot;      &quot;package:utils&quot;         
-## [33] &quot;package:datasets&quot;       &quot;package:methods&quot;       
-## [35] &quot;Autoloads&quot;              &quot;package:base&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">search</span>()</code></pre>
+<pre><code>##  [1] &quot;.GlobalEnv&quot;             &quot;package:R6&quot;            
+##  [3] &quot;package:tigerData&quot;      &quot;package:bindrcpp&quot;      
+##  [5] &quot;package:forcats&quot;        &quot;package:stringr&quot;       
+##  [7] &quot;package:dplyr&quot;          &quot;package:purrr&quot;         
+##  [9] &quot;package:readr&quot;          &quot;package:tidyr&quot;         
+## [11] &quot;package:tibble&quot;         &quot;package:tidyverse&quot;     
+## [13] &quot;package:babynames&quot;      &quot;package:magrittr&quot;      
+## [15] &quot;package:bcscr&quot;          &quot;package:TurtleGraphics&quot;
+## [17] &quot;package:grid&quot;           &quot;package:ggplot2&quot;       
+## [19] &quot;package:mosaicData&quot;     &quot;tools:rstudio&quot;         
+## [21] &quot;package:stats&quot;          &quot;package:graphics&quot;      
+## [23] &quot;package:grDevices&quot;      &quot;package:utils&quot;         
+## [25] &quot;package:datasets&quot;       &quot;package:methods&quot;       
+## [27] &quot;Autoloads&quot;              &quot;package:base&quot;</code></pre>
 <p><code>search()</code> returns a character vector of names of environments. The first element is the Global Environment itself. The second element is an environment that is associated with last <em>package</em> that R loaded, the third is an environment associated with the next-to-last package, and so on. Each item on the list is considered to be the <em>parent</em> of the environment that came before it. Thus, the Global Environment has a parent environment, a grandparent environment, and so on. The complete sequence of environments is called the <em>search path</em>. </p>
 <p>Just as the Global Environment has names for objects, so also the packages have names available for use. When you write code that contains a name, R will search for that name: first in your Global Environment, then in its parent environment—the environment of the last package loaded—and so on until it reaches the final package on the list: package <strong>base</strong>. If it can’t find the name anywhere, then it will throw an error, telling you that the object “cannot be found.”</p>
 <p>Let’s try this with a few examples. First, define a (hopefully) new variable:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quadlingColor &lt;-<span class="st"> &quot;red&quot;</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">quadlingColor &lt;-<span class="st"> &quot;red&quot;</span></code></pre>
 <p>Then use it in some code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(quadlingColor, <span class="st">&quot;, white and blue</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span><span class="st">&quot;&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(quadlingColor, <span class="st">&quot;, white and blue</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span><span class="st">&quot;&quot;</span>)</code></pre>
 <pre><code>## red, white and blue</code></pre>
 <p>R was able to complete your request because:</p>
 <ul>
@@ -593,13 +617,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>it found the name <code>cat</code> on its search path (and found that it referred to the <code>cat()</code> function)</li>
 </ul>
 <p>You can tell where R found these things: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;quadlingColor&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;quadlingColor&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;.GlobalEnv&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;cat&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;cat&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;package:base&quot;</code></pre>
 <p>R found <code>quadlingColor</code> in the first place it looked, whereas it had to go all the way up to package <strong>base</strong> to find an object with the name <code>cat</code> that looked like it was the name of a function.</p>
 <p>What happens if the same name gets used in two different environments? Let’s investigate. First get a print of <code>cat()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">cat</code></pre>
 <pre><code>## function (..., file = &quot;&quot;, sep = &quot; &quot;, fill = FALSE, labels = NULL, 
 ##     append = FALSE) 
 ## {
@@ -616,46 +640,46 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## &lt;bytecode: 0x10eddf058&gt;
+## &lt;bytecode: 0x7f8dbbaf2130&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>I got the definition of the <code>cat()</code> function, all the way up in package <strong>base</strong>.</p>
 <p>Now try:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(cat, <span class="dt">times =</span> <span class="dv">3</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(cat, <span class="dt">times =</span> <span class="dv">3</span>)</code></pre>
 <pre><code>## Error in rep(cat, times = 3) : 
 ##   attempt to replicate an object of type &#39;closure&#39;</code></pre>
-<p>I got an error! That’s because the only reference R could find for <code>cat</code> was to the function <code>cat()</code> in package <strong>base</strong>, and since a function isn’t a vector you can’t repeat it.<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a></p>
+<p>I got an error! That’s because the only reference R could find for <code>cat</code> was to the function <code>cat()</code> in package <strong>base</strong>, and since a function isn’t a vector you can’t repeat it.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 <p>Next, define a variable named <code>cat</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat &lt;-<span class="st"> &quot;Pippin&quot;</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">cat &lt;-<span class="st"> &quot;Pippin&quot;</span></code></pre>
 <p>At this point, we the identifier <code>cat</code> appears in at least two environments:</p>
 <ul>
 <li>in the Global Environment, where is refers to the string “Pippin”;</li>
 <li>in the environment associated with package <strong>base</strong>, where is refers to the <code>cat()</code>-function.</li>
 </ul>
 <p>We can verify the above assertions with <code>find()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;cat&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find</span>(<span class="st">&quot;cat&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;.GlobalEnv&quot;   &quot;package:base&quot;</code></pre>
 <p>Now try:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(cat, <span class="dt">times =</span> <span class="dv">3</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(cat, <span class="dt">times =</span> <span class="dv">3</span>)</code></pre>
 <pre><code>## [1] &quot;Pippin&quot; &quot;Pippin&quot; &quot;Pippin&quot;</code></pre>
 <p>This time it worked! The reason is that R found a character-vector named <code>cat</code> in the Global Environment.</p>
 <p>Now try:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(cat, <span class="st">&quot;is a cat</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(cat, <span class="st">&quot;is a cat</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
 <pre><code>## Pippin is a cat</code></pre>
 <p>Wait a minute: why did this work? Doesn’t the Global Environment come before package <strong>base</strong> in the search path? Yes it does, but since the first occurrence of <code>cat</code> was followed by an open parenthesis R know to expect that it referred to a function. Hence it kept looking along the search path for a function with the name <code>cat</code>, eventually finding our familiar <code>cat()</code> function in <strong>base</strong>.</p>
 <p>Well then, consider happens if we do this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cat &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
+<pre class="sourceCode r"><code class="sourceCode r">cat &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
   <span class="st">&quot;Meow!&quot;</span>
-}</code></pre></div>
-<p>We have defined a function <code>cat()</code> that returns “Meow!” no matter what it is given as input.<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a></p>
+}</code></pre>
+<p>We have defined a function <code>cat()</code> that returns “Meow!” no matter what it is given as input.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 <p>Now try again:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(cat, <span class="st">&quot;is a cat</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(cat, <span class="st">&quot;is a cat</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;Meow!&quot;</code></pre>
 <p>Since the <code>cat()</code> we defined is a function in the Global Environment—which comes before <strong>base</strong> in the search path—R uses our <code>cat()</code> instead of the <strong>base</strong>’s <code>cat()</code>. R programmers say that the <strong>base</strong> version of cat has been <em>masked</em>.</p>
 <p>If I want to keep my <code>cat()</code> and still use the <strong>base</strong> version of<code>cat()</code> as well, I can do that. In order to be sure of getting a particular package’s version of a function, put the name of the package and then two semicolons before the function-name, like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base<span class="op">::</span><span class="kw">cat</span>(<span class="st">&quot;This is the good ol&#39; cat() we have been missing!&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">base<span class="op">::</span><span class="kw">cat</span>(<span class="st">&quot;This is the good ol&#39; cat() we have been missing!&quot;</span>)</code></pre>
 <pre><code>## This is the good ol&#39; cat() we have been missing!</code></pre>
 <p>But we don’t like our <code>cat()</code> so very much: let’s remove it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(cat)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(cat)</code></pre>
 <p>The vector <code>cat</code> is removed as well by the previous command.</p>
 </div>
 <div id="a-note-on-parameters-vs.arguments" class="section level3">
@@ -664,19 +688,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>When you are just starting out in R programming, this distinction can be difficult to remember, especially when the parameter and the argument have the <em>same name</em>. Now that we understand environments, though, we can get a grip on this tricky situation.</p>
 <p>Let’s proceed by way of an example.</p>
 <p>First of all, clear out your Global Environment:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre>
 <p>Next make a simple function that adds three to any given number. Our function will take one parameter <code>n</code> (the number to which 3 is to be added), and the default value of <code>n</code> shall be 4.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">addThree &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">4</span>) {
+<pre class="sourceCode r"><code class="sourceCode r">addThree &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">4</span>) {
   n <span class="op">+</span><span class="st"> </span><span class="dv">3</span>
-}</code></pre></div>
+}</code></pre>
 <p>Next, bind the name <code>n</code> to the value 2:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">2</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">2</span></code></pre>
 <p>You should now have two items in your Global Environment. Confirm this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls.str</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls.str</span>()</code></pre>
 <pre><code>## addThree : function (n = 4)  
 ## n :  num 2</code></pre>
 <p>Now call the function as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(<span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(<span class="dt">n =</span> <span class="dv">5</span>)</code></pre>
 <pre><code>## [1] 8</code></pre>
 <p>Let’s recall how this works:</p>
 <ul>
@@ -684,7 +708,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>R executes the code in the body of the function. All is well.</li>
 </ul>
 <p>Now call the function as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>()</code></pre>
 <pre><code>## [1] 7</code></pre>
 <p>Let’s recall how this works:</p>
 <ul>
@@ -693,7 +717,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>R executes the code in the body of the function. All is well.</li>
 </ul>
 <p>Next, call the function as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(<span class="dt">n =</span> n)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(<span class="dt">n =</span> n)</code></pre>
 <pre><code>## [1] 5</code></pre>
 <p>Let’s think about how this works:</p>
 <ul>
@@ -705,7 +729,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>R computes <span class="math inline">\(2+3\)</span> and returns <span class="math inline">\(5\)</span>. All is well.</li>
 </ul>
 <p>Now call the function as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(n)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(n)</code></pre>
 <pre><code>## [1] 5</code></pre>
 <p>Again let’s consider how this works:</p>
 <ul>
@@ -713,9 +737,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Everything now proceeds just as before, with 5 being the number returned.</li>
 </ul>
 <p>Now let’s remove <code>n</code> from the Global Environment:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(n)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(n)</code></pre>
 <p>Now call the function again, in the following way:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(<span class="dt">n =</span> n)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(<span class="dt">n =</span> n)</code></pre>
 <pre><code>Error in addThree(n = n) : object &#39;n&#39; not found</code></pre>
 <p>Can you see why we got an error? This time when R goes looking for <code>n</code>, it can’t find it: <code>n</code> is no longer in the Global Environment, nor is it anywhere else along the search path. Accordingly R throws the error.</p>
 <p>The call <code>addThree(n)</code> will elicit the same error message, for the same reason.</p>
@@ -739,7 +763,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Just as the Global Environment is a child of the last package loaded, so the Global Environment can have children of its own. In fact a child-environment is created whenever we define a function in the Global Environment and then run it.</p>
 <p>Consider the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span>
 b &lt;-<span class="st"> </span><span class="dv">4</span>
 f &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
   a &lt;-<span class="st"> </span><span class="dv">5</span>
@@ -748,31 +772,31 @@ f &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
       <span class="st">&quot;b is &quot;</span>, b, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,
       <span class="st">&quot;x is &quot;</span>, x, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,
       <span class="st">&quot;y is &quot;</span>, y, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre></div>
+}</code></pre>
 <p>Note that <code>a</code> and <code>b</code> are now in the Global Environment, where the value of <code>a</code> is 10 and the value of <code>b</code> is 5.</p>
 <p>We have defined the function <code>f()</code>; pretty soon we will <em>call</em> it. The moment we do so, we will no longer be working directly from the console: instead R will hand control over to the function that it can execute the code in its body. This means that the Global Environment will no longer be the active environment. Instead the active environment will be one that is created at the moment when <code>f</code> is called. Accordingly, it is called the <em>run-time environment</em>  (also known as the <em>evaluation environment</em>) of f.</p>
 <p>Let’s go ahead and call <code>f()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="dv">3</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="dv">3</span>)</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;x&quot; &quot;y&quot;
 ## a is 5
 ## b is 4
 ## x is 2
 ## y is 3</code></pre>
 <p>In the body of the function <code>ls()</code> prints out all of the names in the active environment—which at the moment is the run-time environment of <code>f()</code>. This environment contains <code>a</code> with a value of 5—the <code>a</code> with a value of 10 is masked from it—along with the <code>x</code> and <code>y</code> that were passed into the function as arguments. The <code>a</code> variable having the value 5 that was created within the body of the function is said to be <em>local</em> to the function. Thus we can say that the run-time environment of a function consists of the variables that are local to the function and the arguments that were passed into it.</p>
-<p>Observe that <code>b</code> is <em>not</em> a name in the function’s run-time environment: instead it is in the Global Environment. Nevertheless R can “find” <code>b</code> from within the function because the R considers the Global Environment—the environment in which <code>f()</code> was defined—to be the parent of the run-time environment<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a>, and so the Global Environment is the second place R will look when searching for an object named <code>b</code>. Computer scientists say that <code>b</code> is <em>within the scope</em>  of the function.</p>
+<p>Observe that <code>b</code> is <em>not</em> a name in the function’s run-time environment: instead it is in the Global Environment. Nevertheless R can “find” <code>b</code> from within the function because the R considers the Global Environment—the environment in which <code>f()</code> was defined—to be the parent of the run-time environment<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>, and so the Global Environment is the second place R will look when searching for an object named <code>b</code>. Computer scientists say that <code>b</code> is <em>within the scope</em>  of the function.</p>
 <p>What happens to the run-time environment when <code>f()</code> finishes executing code? R simply destroys it. It’s as if the <code>a</code>, <code>x</code> and <code>y</code> came to life “inside of” <code>f()</code> but died as soon as <code>f()</code> stopped working.</p>
 <p>The next time <code>f()</code> is called, a new run-time environment will be created to enable the code in the body of <code>f()</code> to do its work.</p>
 <p>One consequence of the ephemeral nature of run-time environments is that they are not accessible from parent environments. Thus if the active environment is the Global Environment and you run across a reference to <code>a</code>, you will never “find” the <code>a</code> “inside of” <code>f()</code> or “inside of” any other function, for that matter. R looks only in the active environment and in ancestor-environments, never in child-environments, and besides the run-time environment no longer exists after a function has been called.</p>
 <p>Let’s make sure of this with an example.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span>
 f &lt;-<span class="st"> </span><span class="cf">function</span>() {
   a &lt;-<span class="st"> </span><span class="dv">10</span>
   <span class="kw">print</span>(<span class="kw">ls.str</span>()) <span class="co"># print out the active environment</span>
 }
-<span class="kw">f</span>()</code></pre></div>
+<span class="kw">f</span>()</code></pre>
 <pre><code>## a :  num 10</code></pre>
 <p>Did calling <code>f()</code> change the value of <code>a</code> in the Global Environment? Let’s see:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">a</code></pre>
 <pre><code>## [1] 5</code></pre>
 <p>Nope, <code>a</code> is still 10.</p>
 <p>This is a very good thing. It would be very confusing if assignment to a variable within a function were to “change the values” of variables—happening to have the same name—that were declared outside of the function’s environment.</p>
@@ -781,15 +805,15 @@ f &lt;-<span class="st"> </span><span class="cf">function</span>() {
 <h3><span class="header-section-number">3.5.4</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Starting from a new R session and an empty Global Environment, I run the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="dv">5</span>
+<pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="dv">5</span>
 f &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
   m &lt;-<span class="st"> </span><span class="dv">10</span>
   a &lt;-<span class="st"> </span>m <span class="op">+</span><span class="st"> </span><span class="dv">5</span>
   n<span class="op">^</span><span class="dv">2</span>
-}</code></pre></div>
+}</code></pre>
 <p>What two items are now in my Global Environment?</p></li>
 <li><p>I then run the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">f</span>(<span class="dv">10</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">f</span>(<span class="dv">10</span>)</code></pre>
 <p>What items are now in my Global Environment? What is the value of <code>g</code>? What is the value of <code>m</code>?</p></li>
 <li><p>When <code>f()</code> was called, a runtime environment was created for it. By the time it got down to the line <code>n^2</code>, what items were in that environment, and what were their values?</p></li>
 </ol>
@@ -820,9 +844,9 @@ f &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
 <div class="footnotes">
 <hr />
 <ol start="10">
-<li id="fn10"><p>In R, almost all functions are called “closures.”<a href="environments-and-scope.html#fnref10">↩</a></p></li>
-<li id="fn11"><p>The ellipses, which we will discuss further in Chapter <a href="lists.html#lists">9</a>, allow the function to be passed any arguments at all—or even none.<a href="environments-and-scope.html#fnref11">↩</a></p></li>
-<li id="fn12"><p>For any function that is created in R, the enclosing environment of the function is set to be the environment that was active when the function was defined. This feature is known as <em>lexical scoping</em>. Many other languages use <em>dynamic scoping</em>, meaning that the enclosing environment is the environment that is active when the function is <em>called</em>. At this stage in your work with R, when you almost always create functions while working the Global Environment, it can be a bit difficult to become aware of situations when the distinction between lexical and dynamic scoping makes a practical difference. However, the difference is there and it constantly affects your work with R, especially when you use a function from an R <em>package</em> (see Section <a href="note-on-packages.html#note-on-packages">3.6</a> for more on packages). Since the environment associated with a package is the enclosing environment for any R-function defined in that package, functions from packages behave in a standard, expected way, no matter what environment—Global or otherwise—they are called in. For a practical application of lexical scoping that is not related to packages, consult Chapter 6 of (<span class="citation">Grolemund (<a href="#ref-Grolemund2014">2014</a>)</span>).<a href="environments-and-scope.html#fnref12">↩</a></p></li>
+<li id="fn10"><p>In R, almost all functions are called “closures.”<a href="environments-and-scope.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>The ellipses, which we will discuss further in Chapter <a href="lists.html#lists">9</a>, allow the function to be passed any arguments at all—or even none.<a href="environments-and-scope.html#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p>For any function that is created in R, the enclosing environment of the function is set to be the environment that was active when the function was defined. This feature is known as <em>lexical scoping</em>. Many other languages use <em>dynamic scoping</em>, meaning that the enclosing environment is the environment that is active when the function is <em>called</em>. At this stage in your work with R, when you almost always create functions while working the Global Environment, it can be a bit difficult to become aware of situations when the distinction between lexical and dynamic scoping makes a practical difference. However, the difference is there and it constantly affects your work with R, especially when you use a function from an R <em>package</em> (see Section <a href="note-on-packages.html#note-on-packages">3.6</a> for more on packages). Since the environment associated with a package is the enclosing environment for any R-function defined in that package, functions from packages behave in a standard, expected way, no matter what environment—Global or otherwise—they are called in. For a practical application of lexical scoping that is not related to packages, consult Chapter 6 of (<span class="citation">Grolemund (<a href="#ref-Grolemund2014">2014</a>)</span>).<a href="environments-and-scope.html#fnref12" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -877,7 +901,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -560,13 +588,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 *</code></pre>
 <p>That is: a row of one, then a row of two, then a row of three, then a row of two, and finally a row of one.</p>
 <p>The function should take one parameter called <code>char</code>. The default value of this parameter should be <code>*</code>. Typical examples of use should be as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pattern</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pattern</span>()</code></pre>
 <pre><code>## *
 ## **
 ## ***
 ## **
 ## *</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pattern</span>(<span class="dt">char =</span> <span class="st">&quot;x&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pattern</span>(<span class="dt">char =</span> <span class="st">&quot;x&quot;</span>)</code></pre>
 <pre><code>## x
 ## xx
 ## xxx
@@ -578,38 +606,42 @@ a  a
 a  a
 ****</code></pre>
 <p>That is: a row of four of one of the characters, then two rows that consist of the other character followed by two spaces followed by that other character, and finally a row of four of the first character.</p>
-<p>The function should take two parameters called <code>ends</code> and <code>middle</code>. The default value of <code>end</code> should should be <code>*</code> and the default value of <code>middle</code> should be <code>x</code>. Typical examples of use should be as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">charSquare</span>()</code></pre></div>
+<p>The function should take two parameters called <code>end</code> and <code>middle</code>. The default value of <code>end</code> should should be <code>*</code> and the default value of <code>middle</code> should be <code>x</code>. Typical examples of use should be as follows:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">charSquare</span>()</code></pre>
 <pre><code>## ****
 ## x  x
 ## x  x
 ## ****</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">charSquare</span>(<span class="dt">end =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">middle =</span> <span class="st">&quot;%&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">charSquare</span>(<span class="dt">end =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">middle =</span> <span class="st">&quot;%&quot;</span>)</code></pre>
 <pre><code>## zzzz
 ## %  %
 ## %  %
 ## zzzz</code></pre></li>
 <li><p>Write a function called <code>reverse()</code> that, given any vector, returns a vector with the elements in reverse order. It should take one parameter called <code>vec</code>. The default value of <code>vec</code> should be the vector <code>c(&quot;Bob&quot;, &quot;Marley&quot;)</code>. Typical examples of use should be:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverse</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverse</span>()</code></pre>
 <pre><code>## [1] &quot;Marley&quot; &quot;Bob&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverse</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">6</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverse</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">6</span>))</code></pre>
 <pre><code>## [1] 6 7 2 3</code></pre>
 <p><strong>Hint</strong>: Recall how you can use sub-setting to reverse:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">firstFiveLetters &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>)
-firstFiveLetters[<span class="dv">5</span><span class="op">:</span><span class="dv">1</span>]</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">firstFiveLetters &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>)
+firstFiveLetters[<span class="dv">5</span><span class="op">:</span><span class="dv">1</span>]</code></pre>
 <pre><code>## [1] &quot;e&quot; &quot;d&quot; &quot;c&quot; &quot;b&quot; &quot;a&quot;</code></pre>
 <p>You just need to figure out how to reverse vectors of arbitrary length.</p></li>
 <li><p>A vector is said to be a <em>palindrome</em> if reversing its elements yields the same vector. Thus, <code>c(3,1,3)</code> is a palindrome, but <code>c(3,1,4)</code> is not a palindrome.</p>
 <p>Write a function called <code>isPalindrome()</code> that, when given any vector, will return <code>TRUE</code> if the vector is a palindrome and <code>FALSE</code> if it is not a palindrome. The function should take a single parameter called <code>vec</code>, with no default value. Typical examples of use should be:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isPalindrome</span>(<span class="dt">vec =</span> <span class="kw">c</span>(<span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Marley&quot;</span>, <span class="st">&quot;Bob&quot;</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isPalindrome</span>(<span class="dt">vec =</span> <span class="kw">c</span>(<span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Marley&quot;</span>, <span class="st">&quot;Bob&quot;</span>))</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isPalindrome</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">4</span>,<span class="dv">3</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isPalindrome</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">4</span>,<span class="dv">3</span>))</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <p><strong>Hint:</strong> You already have the function <code>reverse()</code> from the previous Exercise. Use this function, along with the Boolean operator <code>==</code> and the <code>all()</code> function.</p></li>
 <li><p>The eighteenth-century mathematician Leonhard Euler discovered that:</p>
-<p><span class="math display">\[\frac{\pi^2}{6} = \sum_{k=1}^{k=\infty} \frac{1}{k^2}.\]</span> It follows that <span class="math display">\[\pi = \sqrt{\left(\sum_{k=1}^{k=\infty} \frac{6}{k^2}\right)}.\]</span> Use this fact to write a function called <code>eulerPI()</code> that will approximate <span class="math inline">\(\pi\)</span>. The function should take a single parameter <code>n</code>, which is the number of terms in the infinite series that are to be summed to make the approximation. The default value of <code>n</code> should be 10,000.</p></li>
+<p><span class="math display">\[\frac{\pi^2}{6} = \sum_{k=1}^{k=\infty} \frac{1}{k^2}.\]</span>
+It follows that
+<span class="math display">\[\pi = \sqrt{\left(\sum_{k=1}^{k=\infty} \frac{6}{k^2}\right)}.\]</span>
+Use this fact to write a function called <code>eulerPI()</code> that will approximate <span class="math inline">\(\pi\)</span>. The function should take a single parameter <code>n</code>, which is the number of terms in the infinite series that are to be summed to make the approximation. The default value of <code>n</code> should be 10,000.</p></li>
 <li><p>Consider the infinite series:</p>
-<p><span class="math display">\[\sum_{k=1}^{k=\infty} \frac{1}{k(k+1)}.\]</span> Write a function called <code>partialSum()</code> that will compute the sum of the first <span class="math inline">\(n\)</span> terms of this series. The function should take a single parameter <code>n</code>, which is the number of terms in the series that are to be summed to make the approximation. The default value of <code>n</code> should be 10,000. Use the function to compute the sum of the first 10,000 terms and the sum of the first 100,000 terms. What number do you thnk the series converges to?</p></li>
+<p><span class="math display">\[\sum_{k=1}^{k=\infty} \frac{1}{k(k+1)}.\]</span>
+Write a function called <code>partialSum()</code> that will compute the sum of the first <span class="math inline">\(n\)</span> terms of this series. The function should take a single parameter <code>n</code>, which is the number of terms in the series that are to be summed to make the approximation. The default value of <code>n</code> should be 10,000. Use the function to compute the sum of the first 10,000 terms and the sum of the first 100,000 terms. What number do you thnk the series converges to?</p></li>
 </ol>
 
 </div>
@@ -666,7 +698,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

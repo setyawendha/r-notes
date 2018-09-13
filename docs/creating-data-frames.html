@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -554,26 +582,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="creation-from-vectors" class="section level3">
 <h3><span class="header-section-number">7.5.1</span> Creation from Vectors</h3>
 <p>Whenever you have vectors of the same length, you can combine them into a data frame, using the <code>data.frame()</code> function: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>)
 h &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">58</span>, <span class="dv">75</span>, <span class="dv">69</span>)
 a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="fl">0.04</span>, <span class="dv">18</span>)
 ozFolk &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> n, <span class="dt">height =</span> h, <span class="dt">age =</span> a)
-ozFolk</code></pre></div>
+ozFolk</code></pre>
 <pre><code>##        name height   age
 ## 1   Dorothy     58 12.00
 ## 2      Lion     75  0.04
 ## 3 Scarecrow     69 18.00</code></pre>
 <p>Note that at the time of creation you can provide the variables with any names that you like. If later on you change your mind about the names, you can always revise them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ozFolk)  </code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ozFolk)  </code></pre>
 <pre><code>## [1] &quot;name&quot;   &quot;height&quot; &quot;age&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ozFolk)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Height&quot;</span>  <span class="co"># &quot;height&quot; was at index 2&quot;</span>
-ozFolk</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ozFolk)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Height&quot;</span>  <span class="co"># &quot;height&quot; was at index 2&quot;</span>
+ozFolk</code></pre>
 <pre><code>##        name Height   age
 ## 1   Dorothy     58 12.00
 ## 2      Lion     75  0.04
 ## 3 Scarecrow     69 18.00</code></pre>
 <p>Let’s check the structure of the frame we have made:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(ozFolk)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(ozFolk)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
 ##  $ name  : Factor w/ 3 levels &quot;Dorothy&quot;,&quot;Lion&quot;,..: 1 2 3
 ##  $ Height: num  58 75 69
@@ -581,16 +609,16 @@ ozFolk</code></pre></div>
 <p>Maybe we would prefer that the <code>name</code> variable not be a factor. We have a couple of options to accomplish this.</p>
 <ol style="list-style-type: decimal">
 <li><p>We could coerce <code>names</code> to a character variable, and assign it to the data frame:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozFolk<span class="op">$</span>name &lt;-<span class="st"> </span><span class="kw">as.character</span>(ozFolk<span class="op">$</span>name)
-<span class="kw">str</span>(ozFolk)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">ozFolk<span class="op">$</span>name &lt;-<span class="st"> </span><span class="kw">as.character</span>(ozFolk<span class="op">$</span>name)
+<span class="kw">str</span>(ozFolk)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
 ##  $ name  : chr  &quot;Dorothy&quot; &quot;Lion&quot; &quot;Scarecrow&quot;
 ##  $ Height: num  58 75 69
 ##  $ age   : num  12 0.04 18</code></pre></li>
 <li><p>We could prevent <code>names</code> from being made into a factor at the time of creation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozFolk &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> n, <span class="dt">height =</span> h, <span class="dt">age =</span> a,
+<pre class="sourceCode r"><code class="sourceCode r">ozFolk &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> n, <span class="dt">height =</span> h, <span class="dt">age =</span> a,
                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
-<span class="kw">str</span>(ozFolk)</code></pre></div>
+<span class="kw">str</span>(ozFolk)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
 ##  $ name  : chr  &quot;Dorothy&quot; &quot;Lion&quot; &quot;Scarecrow&quot;
 ##  $ height: num  58 75 69
@@ -600,18 +628,18 @@ ozFolk</code></pre></div>
 <div id="creation-from-other-frames" class="section level3">
 <h3><span class="header-section-number">7.5.2</span> Creation From Other Frames</h3>
 <p>If two frames have the same number of rows, you may combine their columns to form a new frame with the <code>cbind()</code> function: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozMore &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>),
+<pre class="sourceCode r"><code class="sourceCode r">ozMore &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>),
                       <span class="dt">desire =</span> <span class="kw">c</span>(<span class="st">&quot;Kansas&quot;</span>, <span class="st">&quot;courage&quot;</span>, <span class="st">&quot;brains&quot;</span>))
-<span class="kw">cbind</span>(ozFolk, ozMore)</code></pre></div>
+<span class="kw">cbind</span>(ozFolk, ozMore)</code></pre>
 <pre><code>##        name height   age  color  desire
 ## 1   Dorothy     58 12.00   blue  Kansas
 ## 2      Lion     75  0.04    red courage
 ## 3 Scarecrow     69 18.00 yellow  brains</code></pre>
 <p>Similarly if two data frames have the same number <em>and type</em> of columns then we can use the <code>rbind()</code> function to combine them: </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ozFolk2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Glinda&quot;</span>),
+<pre class="sourceCode r"><code class="sourceCode r">ozFolk2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Glinda&quot;</span>),
                       <span class="dt">height =</span> <span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">66</span>), <span class="dt">age =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">246</span>),
                       <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
-<span class="kw">rbind</span>(ozFolk, ozFolk2)</code></pre></div>
+<span class="kw">rbind</span>(ozFolk, ozFolk2)</code></pre>
 <pre><code>##        name height    age
 ## 1   Dorothy     58  12.00
 ## 2      Lion     75   0.04
@@ -673,7 +701,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

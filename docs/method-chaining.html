@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -552,15 +580,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">15.5</span> Method Chaining</h2>
 <p>In this Section we will explore a concise and convenient device for calling multiple methods on an object. The device is known as <em>method chaining</em>. </p>
 <p>In order to illustrate method chaining, we’ll extend the class Lion a bit, with some new attributes and new methods. First of all, we’d like to add a data frame consisting of possible animals on which a lion might prey. The data frame will contain the name of each type of animal, and an associated weight.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animal &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;zebra&quot;</span>, <span class="st">&quot;giraffe&quot;</span>, <span class="st">&quot;pig&quot;</span>, 
+<pre class="sourceCode r"><code class="sourceCode r">animal &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;zebra&quot;</span>, <span class="st">&quot;giraffe&quot;</span>, <span class="st">&quot;pig&quot;</span>, 
              <span class="st">&quot;cape buffalo&quot;</span>, <span class="st">&quot;antelope&quot;</span>, <span class="st">&quot;wildebeast&quot;</span>)
 mass &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">25</span>, <span class="dv">60</span>, <span class="dv">45</span>, <span class="dv">55</span>)
-prey &lt;-<span class="st"> </span><span class="kw">data.frame</span>(animal, mass, <span class="dt">stringsAsFactors =</span><span class="ot">FALSE</span>)</code></pre></div>
+prey &lt;-<span class="st"> </span><span class="kw">data.frame</span>(animal, mass, <span class="dt">stringsAsFactors =</span><span class="ot">FALSE</span>)</code></pre>
 <p>Let’s now add <code>prey</code> as a new attribute to class Lion. We will also add an attribute <code>eaten</code>: a character vector—initially empty—that will contain a record of all the animals that the lion has eaten.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;prey&quot;</span>, prey, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
-Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;eaten&quot;</span>, <span class="kw">character</span>(), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;prey&quot;</span>, prey, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
+Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;eaten&quot;</span>, <span class="kw">character</span>(), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre>
 <p>Let us now endow our lions with the capacity to eat a beast of prey, by adding the method <code>eat()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;eat&quot;</span>, <span class="cf">function</span>() {
+<pre class="sourceCode r"><code class="sourceCode r">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;eat&quot;</span>, <span class="cf">function</span>() {
   n &lt;-<span class="st"> </span><span class="kw">nrow</span>(self<span class="op">$</span>prey)
   item &lt;-<span class="st"> </span>self<span class="op">$</span>prey[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> <span class="dv">1</span>), ]
   initLetter &lt;-<span class="st"> </span><span class="kw">substr</span>(item<span class="op">$</span>animal, <span class="dv">1</span>, <span class="dv">1</span>)
@@ -569,11 +597,11 @@ Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;
   self<span class="op">$</span>eaten &lt;-<span class="st"> </span><span class="kw">c</span>(self<span class="op">$</span>eaten, item<span class="op">$</span>animal)
   self<span class="op">$</span>weight &lt;-<span class="st"> </span>self<span class="op">$</span>weight <span class="op">+</span><span class="st"> </span>item<span class="op">$</span>mass
   <span class="kw">return</span>(<span class="kw">invisible</span>(self))
-}, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
+}, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre>
 <p>When it eats an animal—randomly selected from the <code>prey</code> data frame—the lion gains the amount of weight that is associated with its unfortunate victim, and the victim is added to the lion’s <code>eaten</code> attribute.</p>
 <p>Note that the <code>eat()</code> method returns <code>self</code> invisibly. When the method is called on a lion, that very lion itself is returned as a value, but since it is returned invisibly it won’t be printed to the console. The usefulness of returning <code>self</code> will soon become apparent.</p>
 <p>Lions enjoy talking about what they have eaten recently, and for some reason they monitor their weight obsessively. The new method <code>report()</code> accounts for these characteristics of lions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;report&quot;</span>, <span class="cf">function</span>() {
+<pre class="sourceCode r"><code class="sourceCode r">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;report&quot;</span>, <span class="cf">function</span>() {
   n &lt;-<span class="st"> </span><span class="kw">length</span>(self<span class="op">$</span>eaten)
   <span class="cf">if</span> ( n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span> ) {
     <span class="kw">cat</span>(<span class="st">&quot;My name is &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
@@ -581,19 +609,19 @@ Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;
   }
   <span class="kw">cat</span>(<span class="st">&quot;I now weigh &quot;</span>, self<span class="op">$</span>weight, <span class="st">&quot; pounds.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   <span class="kw">return</span>(<span class="kw">invisible</span>(self))
-}, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
+}, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre>
 <p>Note that <code>report()</code> also returns the lion invisibly.</p>
 <p>Let us now instantiate a new lion named Simba:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba &lt;-<span class="st"> </span>Lion<span class="op">$</span><span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Simba&quot;</span>, <span class="dt">age =</span> <span class="dv">10</span>, 
-                  <span class="dt">desire =</span> <span class="st">&quot;Hakuna Matata&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">simba &lt;-<span class="st"> </span>Lion<span class="op">$</span><span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Simba&quot;</span>, <span class="dt">age =</span> <span class="dv">10</span>, 
+                  <span class="dt">desire =</span> <span class="st">&quot;Hakuna Matata&quot;</span>)</code></pre>
 <pre><code>## Grr!  My name is Simba!</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">set_weight</span>(<span class="dv">300</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">set_weight</span>(<span class="dv">300</span>)</code></pre>
 <pre><code>## Simba has weight:  300.</code></pre>
 <p>Having been created after the addition of the <code>prey</code> and <code>eaten</code> attributes and the <code>eat()</code> and <code>report()</code> methods, <code>simba</code> has access to all of them. in particular, he can eat a random beast of prey:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">eat</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">eat</span>()</code></pre>
 <pre><code>## A cape buffalo was eaten just now ...</code></pre>
 <p><code>simba</code> has eaten, and he has presumably gained some weight as a result. Let’s see verify this by asking for his report:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">report</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">report</span>()</code></pre>
 <pre><code>## My name is Simba.
 ## My most recent meal consisted of: cape buffalo.
 ## I now weigh 360 pounds.</code></pre>
@@ -604,7 +632,7 @@ Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;
 <li>and finally call <code>report()</code> on the result of our second call.</li>
 </ul>
 <p>All of this can be accomplished in one line of calls, in which the three method-calls are “chained” together with dollar-signs:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">eat</span>()<span class="op">$</span><span class="kw">eat</span>()<span class="op">$</span><span class="kw">report</span>()</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">simba<span class="op">$</span><span class="kw">eat</span>()<span class="op">$</span><span class="kw">eat</span>()<span class="op">$</span><span class="kw">report</span>()</code></pre>
 <pre><code>## A pig was eaten just now ...
 ## 
 ## A cape buffalo was eaten just now ...
@@ -666,7 +694,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

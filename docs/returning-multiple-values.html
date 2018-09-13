@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-05-31">
+<meta name="date" content="2018-09-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -552,7 +580,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">9.4</span> Returning Multiple Values</h2>
 <p>Lists combine many different sorts of objects into one object. This makes them very useful in the context of certain functions.</p>
 <p>Consider, for example, the drunken-turtle simulation from Section <a href="drunken-turtle-sim.html#drunken-turtle-sim">6.8</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
+<pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
                        <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {
   <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
     <span class="kw">set.seed</span>(seed)
@@ -581,7 +609,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   }
   <span class="kw">cat</span>(<span class="st">&quot;The average number of close returns was:  &quot;</span>, 
       <span class="kw">mean</span>(returns), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre></div>
+}</code></pre>
 <p>Suppose that we would like to store several of the results of the simulation:</p>
 <ul>
 <li>the vector of the number of close returns on each repetition;</li>
@@ -590,7 +618,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Unfortunately a function can only return <em>one</em> object.</p>
 <p>The solution to your problem is to make a list of the three objects we want, and then return the list. We can re-write the function so as to make all output to the console optional. The function will construct the list and return it invisibly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drunkenSimList &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
+<pre class="sourceCode r"><code class="sourceCode r">drunkenSimList &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
                        <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
   <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
     <span class="kw">set.seed</span>(seed)
@@ -630,12 +658,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
                   <span class="dt">returns =</span> returns)
   <span class="co"># return the list</span>
   <span class="kw">invisible</span>(results)
-}</code></pre></div>
+}</code></pre>
 <p>Now we can run the function simply to acquire the simulation results for later use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simResults &lt;-<span class="st"> </span><span class="kw">drunkenSimList</span>(<span class="dt">seed =</span> <span class="dv">3939</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">simResults &lt;-<span class="st"> </span><span class="kw">drunkenSimList</span>(<span class="dt">seed =</span> <span class="dv">3939</span>)</code></pre>
 <p>We can use any of the results at any time and in any way we like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;On the first ten repetitions, the number of close returns were:</span><span class="ch">\n\n\t</span><span class="st">&quot;</span>,
-    simResults<span class="op">$</span>returns[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;On the first ten repetitions, the number of close returns were:</span><span class="ch">\n\n\t</span><span class="st">&quot;</span>,
+    simResults<span class="op">$</span>returns[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre>
 <pre><code>## On the first ten repetitions, the number of close returns were:
 ## 
 ##   0 6 4 4 2 0 2 5 2 4</code></pre>
@@ -692,7 +720,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
