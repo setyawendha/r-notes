@@ -165,6 +165,99 @@ if ( condition1) {
 }
 ```
 
+### Application:  Validating Arguments
+
+Recall the function `manyCat()`:
+
+```{r}
+manyCat <- function(word, n) {
+  wordWithNewline <- paste(word, "\n", sep = "")
+  lines <- rep(wordWithNewline, times = n)
+  cat(lines, sep = "")
+}
+```
+
+What would happen if a user were to call it with an unusable argument for the parameter `n`, a negative number, for instance?
+
+```{r error = TRUE}
+manyCat(word = "Hello", n = -3)
+```
+
+For us, it's clear enough what is wrong.  After all, we wrote the function in the previous chapter, and we know that the `rep()` function in its body requires that the `times` parameter be set to some positive integer.  On the other hand, to someone who is unfamiliar with the body of `manyCat()` and who has no access to help on how `manyCat()` is to be used it may not be so obvious what has gone wrong and why.
+
+In the case of complex functions, we cannot expect ordinary users to search through the function's definition to learn how to fix an error that arises from improper input.  Accordingly, it can be good practice to *validate* \index{validation}user-input.  Conditionals allow us to do this.
+
+Here, a possible approach is to attempt to coerce the user's input for `n` into an integer, using the `as.integer()` function:\index{R-functions!as.integer()@\texttt{as.integer()}}
+
+```{r}
+as.integer(3.6) # will round to nearest integer
+as.integer("4") # will convert string to number 4
+as.integer("4.3") # will convert AND round
+as.integer("two") # cannot convert to integer
+```
+
+In the last example, the result is `NA`, and a cryptic warning was issued.  In order to keep the warning from the user, we should wrap any call to `as.integer()` in the `suppressWarnings()` function.
+
+Let's try out a piece of code that checks for validity:
+
+```{r}
+n <- "two"  # this will not convert to a number at all
+converted <- suppressWarnings(as.integer(n))
+!is.na(converted) && converted >= 1
+```
+
+Think about what happened:
+
+* First we attempted to converted the `"two"` to an integer.
+* Since the result of `as.integer("two")` is `NA`, the expression `is.na(converted)` evaluates to `TRUE`
+* Hence `!is.na(converted)` evaluates to `FALSE`.
+* Hence `!is.na(converted) && converted > 1` evaluates to `FALSE`.
+
+Let's try it on another "wrong" value:
+
+```{r}
+n <- -2  # number, but it's negative
+converted <- suppressWarnings(as.integer(n))
+!is.na(converted) && converted >= 1
+```
+
+This time `converted` gets an assigned value, namely -2, but since it's not at least 1 the expression `!is.na(converted) && converted >= 1` evaluates to `FALSE`.
+
+Now let's try it on a "good" value:
+
+```{r}
+n <- 3
+converted <- suppressWarnings(as.integer(n))
+!is.na(converted) && converted >= 1
+```
+
+Our code appears to be working well.
+
+Now that we've figured out a way to determine whether any given input is a usable number, let's employ a conditional to implement validation in `manyCat()`:
+
+```{r}
+manyCat <- function(word, n) {
+  n <- suppressWarnings(as.integer(n))
+  isValid <- !is.na(n) && n >= 1
+  if (!isValid) {
+    message <- "Sorry, n must be a whole number at least 1.\n"
+    return(cat(message))
+  }
+  wordWithNewline <- paste(word, "\n", sep = "")
+  lines <- rep(wordWithNewline, times = n)
+  cat(lines, sep = "")
+}
+```
+
+The idea is to force an early return---along with a helpful message to the Console---if the user's argument for `n` is no good.
+
+Let's watch it in action:
+
+```{r}
+manyCat(word = "Hello", n = "two")   # problem!
+manyCat(word = "Hello", n = 3)       # OK
+```
+
 
 ### Application:  Invisible Returns  {#invisible-returns}
 
@@ -438,6 +531,8 @@ findKarl <- function(x) {
     ```
     
     Fix the code.
+    
+4.  Add some validation to the `isTriangle()` function so that it stops the user if one or more of the parameters `x`, `y` and `z` cannot be interpreted as a positive real number.
 
 ### Solutions to Practice Exercises
 
@@ -485,6 +580,36 @@ findKarl <- function(x) {
     }
     ```    
     
+4.  Here is one approach:
+
+    ```{r}
+    isTriangle <- function(x, y, z) {
+      x <- suppressWarnings(as.numeric(x))
+      x <- suppressWarnings(as.numeric(x))
+      x <- suppressWarnings(as.numeric(x))
+      xValid <- all(!is.na(x) & x > 0)
+      yValid <- all(!is.na(y) & y > 0)
+      zValid <- all(!is.na(z) & z > 0)
+      if (!(xValid & yValid & zValid)) {
+        return(cat("Sorry, all inputs must be positive real numbers.\n"))
+      }
+      (x + y > z) & (x +z > y) & (y + z > x)
+    }
+    ```
+    
+    Try it out:
+    
+    ```{r}
+    isTriangle(x = c(2,4,7),
+               y = c(3, -4, 5),    # oops, a negative number
+               z = c(6, 8, 10))
+    ```
+    
+    ```{r}
+    isTriangle(x = c(2,4,7),
+               y = c(3, 4, 5),     # fixed it
+               z = c(6, 8, 10))
+    ```
 
 ## Repeating Things:  Looping
 
@@ -709,7 +834,7 @@ if ( NA ) {
 ## Error in if (NA) { : missing value where TRUE/FALSE needed
 ```
 
-Checking that the input vector has positive length is an example of *validating* \index{validation} input.  When you write functions for other people to use you will find that it's important to validate their input instead of allowing R to throw obscure error messages at them.
+Checking that the input vector has positive length is an another example of *validating* input.  Remember:  when you write functions for other people to use it can be helpful to have the function validate its input instead of allowing R to throw obscure error messages at the user.
 
 
 
@@ -900,6 +1025,17 @@ verboseSearch <- function(elem, vec) {
     return(-1)
   }
 }
+```
+
+### Practice Problems
+
+```{r echo = FALSE}
+trianglePattern <- function(char = "*", n) {
+  for (i in n:1) {
+    line <- rep(char, times = i)
+    cat(line, "\n", sep = "")
+  }
+}
 
 cheerleader <- function(cheer) {
   for ( letter in cheer ) {
@@ -910,15 +1046,23 @@ cheerleader <- function(cheer) {
     }
   }
 }
-```
 
-### Practice Problems
-
-```{r echo = FALSE}
-trianglePattern <- function(char = "*", n) {
-  for (i in n:1) {
-    line <- rep(char, times = i)
-    cat(line, "\n", sep = "")
+ageReporter <- function(people, ages) {
+  ## validation:
+  p <- length(people)
+  a <- length(ages)
+  if (p == 0) {
+    return(cat("Provide at least one person!\n"))
+  }
+  if (a == 0) {
+    return(cat("Provide at least one age!\n"))
+  }
+  if (!(p == a & p > 0)) {
+    return(cat("Number of people must equal number of ages!\n"))
+  }
+  ## process:
+  for (i in 1:length(people)) {
+    cat(people[i], " is ", ages[i], " year(s) old.\n", sep = "")
   }
 }
 ```
@@ -997,6 +1141,33 @@ trianglePattern <- function(char = "*", n) {
     Gimme a S!  Stop it, please!
     Gimme a S!  S
     > 
+    ```
+
+9.  Write a function called `ageReporter()` that reports the ages of given individuals.  It should take two parameters:
+
+    * `people`:  a character vector of names of the people of interest.
+    * `ages`:  a vector containing the ages of the people of interest.
+    
+    The function should perform some validation:  it should stop the user with a helpful message if the number of people supplied and the number of ages supplied are not the same, or if one of the supplied vectors has length zero.
+    
+    Typical examples of use would be as follows:
+    
+    ```{r}
+    folks <- c("Gina", "Hector")
+    theirAges <- c(25, 22)
+    ageReporter(folks, theirAges)
+    ```
+    
+    ```{r}
+    folks <- c("Gina", "Hector", "Tom")
+    theirAges <- c(25, 22)
+    ageReporter(folks, theirAges)
+    ```
+    
+    ```{r}
+    folks <- c("Gina", "Hector")
+    theirAges <- numeric(0)
+    ageReporter(folks, theirAges)
     ```
 
 ### Solutions to the Practice Exercises
@@ -1114,6 +1285,29 @@ trianglePattern <- function(char = "*", n) {
           response <- readline(call)
           if ( response == letter ) break
        }
+      }
+    }
+    ```
+
+9.  Here is one possibility:
+
+    ```{r eval = FALSE}
+    ageReporter <- function(people, ages) {
+      ## validation:
+      p <- length(people)
+      a <- length(ages)
+      if (p == 0) {
+        return(cat("Provide at least one person!\n"))
+      }
+      if (a == 0) {
+        return(cat("Provide at least one age!\n"))
+      }
+      if (!(p == a & p > 0)) {
+        return(cat("Number of people must equal number of ages!\n"))
+      }
+      ## process:
+      for (i in 1:length(people)) {
+        cat(people[i], " is ", ages[i], " year(s) old.\n", sep = "")
       }
     }
     ```
@@ -1359,49 +1553,20 @@ collatz(257)
 
 It's quite remarkable how much the sequence can rise and fall before hitting 1.
 
-One final consideration is validation\index{validation} of user-input.  we don't want the user to get strange errors if she fails to enter a number worth looking at---a whole number that is greater than 1.
-
-One possible approach is to attempt to coerce the user's input into an integer, using the `as.integer()` function:\index{R-functions!as.integer()@\texttt{as.integer()}}
-
-```{r}
-as.integer(3.6) # will round to nearest integer
-as.integer("4") # will convert string to number 4
-as.integer("4.3") # will convert AND round
-as.integer("hello") # cannot convert to integer
-```
-In the last example, the result is `NA`, and a cryptic warning was issued.  In order to keep the warning from the user, we should wrap any call to `as.integer()` in the suppressWarnings()` function.
-
-Let's try out a piece of code that implements validation:
-
-```{r eval =FALSE}
-n <- -2
-n <- suppressWarnings(as.integer(n))
-isValid <- !is.na(n) && n > 1
-  if (!isValid ) {
-    stop("Need an integer bigger than 1.  Try again.")
-  }
-```
-
-```
-## Error: Need an integer bigger than 1.  Try again.
-```
-
-The `stop()` \index{R-functions!stop()@\texttt{stop()}}function throws a true error that prevents any further code from being executed, but allows us to write a custom, friendly error-message.  The goal of validation is for the user to receive clear and helpful error messages, rather than obscure, technical messages from the depths of R.
-
-Another issue worth considering is that our collatz() function depends on the previously-defined function `collatzRule()`.  In order for it to work correctly, R would need to be able to find the name `collatzRule` somewhere on the search path.  If the user hasn't already defined the `collatzRule()` function, then a call to `collatz() will fail.
+A further issue worth considering is that our collatz() function depends on the previously-defined function `collatzRule()`.  In order for it to work correctly, R would need to be able to find the name `collatzRule` somewhere on the search path.  If the user hasn't already defined the `collatzRule()` function, then a call to `collatz() will fail.
 
 One solution is simply to remind users of the need to define both `collatzRule()` and `collatz()` prior to running `collatz()`.  Another solution---perhaps the kinder one---is to define the `collatzRule()` function in the body of `collatz()`.  Let's adopt this approach.
 
-The final version of the `collatz()` function appears below.
+The final version of the `collatz()` function (with some validation thrown in for good measure) appears below.
 
 
 ```{r}
 collatz <- function(n, limit = 10000) {
-  # validation:
+  # add some validation:
   n <- suppressWarnings(as.integer(n))
   isValid <- !is.na(n) && n > 1
   if (!isValid ) {
-    stop("Need an integer bigger than 1.  Try again.")
+    return(cat("Need an integer bigger than 1.  Try again."))
   }
   # define collatzRule:
   collatzRule <- function(m) {
@@ -1590,7 +1755,7 @@ farmSong <- function(animal, sound) {
     
     Typical examples of use should be as follows:
 
-    ```{r echo = FALSE}
+    ```{r}
     checkerBoard(char = "x", side = 3)
     ```
     

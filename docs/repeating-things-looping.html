@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-09-19">
+<meta name="date" content="2018-09-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -252,11 +252,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
-<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
-<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
-<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
-<li class="chapter" data-level="4.2.5" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#practice-exercises-12"><i class="fa fa-check"></i><b>4.2.5</b> Practice Exercises</a></li>
-<li class="chapter" data-level="4.2.6" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#solutions-to-practice-exercises-4"><i class="fa fa-check"></i><b>4.2.6</b> Solutions to Practice Exercises</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#application-validating-arguments"><i class="fa fa-check"></i><b>4.2.2</b> Application: Validating Arguments</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.3</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.4</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.5" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.5</b> Switch</a></li>
+<li class="chapter" data-level="4.2.6" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#practice-exercises-12"><i class="fa fa-check"></i><b>4.2.6</b> Practice Exercises</a></li>
+<li class="chapter" data-level="4.2.7" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#solutions-to-practice-exercises-4"><i class="fa fa-check"></i><b>4.2.7</b> Solutions to Practice Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
@@ -744,7 +745,7 @@ emptyVec[<span class="dv">1</span>]  <span class="co"># You get NA</span></code>
   <span class="kw">cat</span>(<span class="st">&quot;We are in the bracket!</span><span class="ch">\n</span><span class="st">&quot;</span>)
 }</code></pre>
 <pre><code>## Error in if (NA) { : missing value where TRUE/FALSE needed</code></pre>
-<p>Checking that the input vector has positive length is an example of <em>validating</em>  input. When you write functions for other people to use you will find that it’s important to validate their input instead of allowing R to throw obscure error messages at them.</p>
+<p>Checking that the input vector has positive length is an another example of <em>validating</em> input. Remember: when you write functions for other people to use it can be helpful to have the function validate its input instead of allowing R to throw obscure error messages at the user.</p>
 </div>
 <div id="solving-the-empty-vector-problem-in-for-loops-with-seq_along" class="section level3">
 <h3><span class="header-section-number">4.3.4</span> Solving the Empty-Vector Problem in <code>for</code>-Loops with <code>seq_along()</code></h3>
@@ -887,16 +888,6 @@ You are correct!  Thanks for playing!</code></pre>
     <span class="kw">cat</span>(elem, <span class="st">&quot; is not in the vector.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
     <span class="kw">return</span>(<span class="op">-</span><span class="dv">1</span>)
   }
-}
-
-cheerleader &lt;-<span class="st"> </span><span class="cf">function</span>(cheer) {
-  <span class="cf">for</span> ( letter <span class="cf">in</span> cheer ) {
-    <span class="cf">repeat</span> {
-      call &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Gimme a &quot;</span>, letter, <span class="st">&quot;!  &quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-      response &lt;-<span class="st"> </span><span class="kw">readline</span>(call)
-      <span class="cf">if</span> ( response <span class="op">==</span><span class="st"> </span>letter ) <span class="cf">break</span>
-    }
-  }
 }</code></pre>
 </div>
 <div id="practice-problems" class="section level3">
@@ -960,6 +951,26 @@ Gimme a R!  R
 Gimme a S!  Stop it, please!
 Gimme a S!  S
 &gt; </code></pre></li>
+<li><p>Write a function called <code>ageReporter()</code> that reports the ages of given individuals. It should take two parameters:</p>
+<ul>
+<li><code>people</code>: a character vector of names of the people of interest.</li>
+<li><code>ages</code>: a vector containing the ages of the people of interest.</li>
+</ul>
+<p>The function should perform some validation: it should stop the user with a helpful message if the number of people supplied and the number of ages supplied are not the same, or if one of the supplied vectors has length zero.</p>
+<p>Typical examples of use would be as follows:</p>
+<pre class="sourceCode r"><code class="sourceCode r">folks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Gina&quot;</span>, <span class="st">&quot;Hector&quot;</span>)
+theirAges &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">22</span>)
+<span class="kw">ageReporter</span>(folks, theirAges)</code></pre>
+<pre><code>## Gina is 25 year(s) old.
+## Hector is 22 year(s) old.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">folks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Gina&quot;</span>, <span class="st">&quot;Hector&quot;</span>, <span class="st">&quot;Tom&quot;</span>)
+theirAges &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">22</span>)
+<span class="kw">ageReporter</span>(folks, theirAges)</code></pre>
+<pre><code>## Number of people must equal number of ages!</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">folks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Gina&quot;</span>, <span class="st">&quot;Hector&quot;</span>)
+theirAges &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">0</span>)
+<span class="kw">ageReporter</span>(folks, theirAges)</code></pre>
+<pre><code>## Provide at least one age!</code></pre></li>
 </ol>
 </div>
 <div id="solutions-to-the-practice-exercises-8" class="section level3">
@@ -1053,6 +1064,25 @@ titledDoggies</code></pre>
       response &lt;-<span class="st"> </span><span class="kw">readline</span>(call)
       <span class="cf">if</span> ( response <span class="op">==</span><span class="st"> </span>letter ) <span class="cf">break</span>
    }
+  }
+}</code></pre></li>
+<li><p>Here is one possibility:</p>
+<pre class="sourceCode r"><code class="sourceCode r">ageReporter &lt;-<span class="st"> </span><span class="cf">function</span>(people, ages) {
+  ## validation:
+  p &lt;-<span class="st"> </span><span class="kw">length</span>(people)
+  a &lt;-<span class="st"> </span><span class="kw">length</span>(ages)
+  <span class="cf">if</span> (p <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
+    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Provide at least one person!</span><span class="ch">\n</span><span class="st">&quot;</span>))
+  }
+  <span class="cf">if</span> (a <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
+    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Provide at least one age!</span><span class="ch">\n</span><span class="st">&quot;</span>))
+  }
+  <span class="cf">if</span> (<span class="op">!</span>(p <span class="op">==</span><span class="st"> </span>a <span class="op">&amp;</span><span class="st"> </span>p <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)) {
+    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Number of people must equal number of ages!</span><span class="ch">\n</span><span class="st">&quot;</span>))
+  }
+  ## process:
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(people)) {
+    <span class="kw">cat</span>(people[i], <span class="st">&quot; is &quot;</span>, ages[i], <span class="st">&quot; year(s) old.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
 }</code></pre></li>
 </ol>

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-09-19">
+<meta name="date" content="2018-09-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -252,11 +252,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
-<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
-<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
-<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
-<li class="chapter" data-level="4.2.5" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#practice-exercises-12"><i class="fa fa-check"></i><b>4.2.5</b> Practice Exercises</a></li>
-<li class="chapter" data-level="4.2.6" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#solutions-to-practice-exercises-4"><i class="fa fa-check"></i><b>4.2.6</b> Solutions to Practice Exercises</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#application-validating-arguments"><i class="fa fa-check"></i><b>4.2.2</b> Application: Validating Arguments</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.3</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.4</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.5" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.5</b> Switch</a></li>
+<li class="chapter" data-level="4.2.6" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#practice-exercises-12"><i class="fa fa-check"></i><b>4.2.6</b> Practice Exercises</a></li>
+<li class="chapter" data-level="4.2.7" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#solutions-to-practice-exercises-4"><i class="fa fa-check"></i><b>4.2.7</b> Solutions to Practice Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
@@ -639,8 +640,77 @@ guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span cla
   <span class="co"># code to run if conditionN evaluates to TRUE</span>
 }</code></pre>
 </div>
+<div id="application-validating-arguments" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Application: Validating Arguments</h3>
+<p>Recall the function <code>manyCat()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, n) {
+  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)
+  <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}</code></pre>
+<p>What would happen if a user were to call it with an unusable argument for the parameter <code>n</code>, a negative number, for instance?</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">-3</span>)</code></pre>
+<pre><code>## Error in rep(wordWithNewline, times = n): invalid &#39;times&#39; argument</code></pre>
+<p>For us, it’s clear enough what is wrong. After all, we wrote the function in the previous chapter, and we know that the <code>rep()</code> function in its body requires that the <code>times</code> parameter be set to some positive integer. On the other hand, to someone who is unfamiliar with the body of <code>manyCat()</code> and who has no access to help on how <code>manyCat()</code> is to be used it may not be so obvious what has gone wrong and why.</p>
+<p>In the case of complex functions, we cannot expect ordinary users to search through the function’s definition to learn how to fix an error that arises from improper input. Accordingly, it can be good practice to <em>validate</em> user-input. Conditionals allow us to do this.</p>
+<p>Here, a possible approach is to attempt to coerce the user’s input for <code>n</code> into an integer, using the <code>as.integer()</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="fl">3.6</span>) <span class="co"># will round to nearest integer</span></code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;4&quot;</span>) <span class="co"># will convert string to number 4</span></code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;4.3&quot;</span>) <span class="co"># will convert AND round</span></code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;two&quot;</span>) <span class="co"># cannot convert to integer</span></code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>In the last example, the result is <code>NA</code>, and a cryptic warning was issued. In order to keep the warning from the user, we should wrap any call to <code>as.integer()</code> in the <code>suppressWarnings()</code> function.</p>
+<p>Let’s try out a piece of code that checks for validity:</p>
+<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> &quot;two&quot;</span>  <span class="co"># this will not convert to a number at all</span>
+converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
+<span class="op">!</span><span class="kw">is.na</span>(converted) <span class="op">&amp;&amp;</span><span class="st"> </span>converted <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Think about what happened:</p>
+<ul>
+<li>First we attempted to converted the <code>&quot;two&quot;</code> to an integer.</li>
+<li>Since the result of <code>as.integer(&quot;two&quot;)</code> is <code>NA</code>, the expression <code>is.na(converted)</code> evaluates to <code>TRUE</code></li>
+<li>Hence <code>!is.na(converted)</code> evaluates to <code>FALSE</code>.</li>
+<li>Hence <code>!is.na(converted) &amp;&amp; converted &gt; 1</code> evaluates to <code>FALSE</code>.</li>
+</ul>
+<p>Let’s try it on another “wrong” value:</p>
+<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">-2</span>  <span class="co"># number, but it&#39;s negative</span>
+converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
+<span class="op">!</span><span class="kw">is.na</span>(converted) <span class="op">&amp;&amp;</span><span class="st"> </span>converted <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>This time <code>converted</code> gets an assigned value, namely -2, but since it’s not at least 1 the expression <code>!is.na(converted) &amp;&amp; converted &gt;= 1</code> evaluates to <code>FALSE</code>.</p>
+<p>Now let’s try it on a “good” value:</p>
+<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">3</span>
+converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
+<span class="op">!</span><span class="kw">is.na</span>(converted) <span class="op">&amp;&amp;</span><span class="st"> </span>converted <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Our code appears to be working well.</p>
+<p>Now that we’ve figured out a way to determine whether any given input is a usable number, let’s employ a conditional to implement validation in <code>manyCat()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, n) {
+  n &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
+  isValid &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(n) <span class="op">&amp;&amp;</span><span class="st"> </span>n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>
+  <span class="cf">if</span> (<span class="op">!</span>isValid) {
+    message &lt;-<span class="st"> &quot;Sorry, n must be a whole number at least 1.</span><span class="ch">\n</span><span class="st">&quot;</span>
+    <span class="kw">return</span>(<span class="kw">cat</span>(message))
+  }
+  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)
+  <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}</code></pre>
+<p>The idea is to force an early return—along with a helpful message to the Console—if the user’s argument for <code>n</code> is no good.</p>
+<p>Let’s watch it in action:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="st">&quot;two&quot;</span>)   <span class="co"># problem!</span></code></pre>
+<pre><code>## Sorry, n must be a whole number at least 1.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">3</span>)       <span class="co"># OK</span></code></pre>
+<pre><code>## Hello
+## Hello
+## Hello</code></pre>
+</div>
 <div id="invisible-returns" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Application: Invisible Returns</h3>
+<h3><span class="header-section-number">4.2.3</span> Application: Invisible Returns</h3>
 <p>Let’s think again about the <span class="math inline">\(\pi\)</span>-computing function from Section <a href="more-about-arguments.html#default-arguments">3.4.1</a>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>) {
   k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n
@@ -685,7 +755,7 @@ guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span cla
 <pre><code>## Pi plus 10 is about 13.14159.</code></pre>
 </div>
 <div id="ifelse" class="section level3">
-<h3><span class="header-section-number">4.2.3</span> Ifelse</h3>
+<h3><span class="header-section-number">4.2.4</span> Ifelse</h3>
 <p>The <code>ifelse()</code> function is a special form of the if-else construct that is used to make assignments, and is especially handy in the context of vectorization.</p>
 <p>Suppose that you have a lot of heights:</p>
 <pre class="sourceCode r"><code class="sourceCode r">height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">69</span>, <span class="dv">67</span>, <span class="dv">70</span>, <span class="dv">72</span>, <span class="dv">65</span>, <span class="dv">63</span>, <span class="dv">75</span>, <span class="dv">70</span>)</code></pre>
@@ -733,7 +803,7 @@ triangle</code></pre>
 <pre><code>## [1] &quot;triangle&quot; &quot;triangle&quot; &quot;not&quot;      &quot;not&quot;      &quot;triangle&quot; &quot;triangle&quot;</code></pre>
 </div>
 <div id="switch" class="section level3">
-<h3><span class="header-section-number">4.2.4</span> Switch</h3>
+<h3><span class="header-section-number">4.2.5</span> Switch</h3>
 <p>If you have to make a decision involving two or more alternatives you can use a chain of <code>if ... else</code> constructions. When the alternatives involve no more than the assignment of a value to a variable, you might also consider using the <code>switch()</code> function.</p>
 <p>For example, suppose that you have days of the week expressed as numbers. Maybe it’s like this:</p>
 <ul>
@@ -786,7 +856,7 @@ triangle</code></pre>
 <pre><code>## [1] &quot;not a weekday!&quot;</code></pre>
 </div>
 <div id="practice-exercises-12" class="section level3">
-<h3><span class="header-section-number">4.2.5</span> Practice Exercises</h3>
+<h3><span class="header-section-number">4.2.6</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Consider the following function:</p>
 <pre class="sourceCode r"><code class="sourceCode r">computeSquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
@@ -821,10 +891,11 @@ mySquare</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sizeComment</span>(<span class="dv">50</span>)   <span class="co"># this won&#39;t be OK</span></code></pre>
 <pre><code>## [1] &quot;big!&quot;</code></pre>
 <p>Fix the code.</p></li>
+<li><p>Add some validation to the <code>isTriangle()</code> function so that it stops the user if one or more of the parameters <code>x</code>, <code>y</code> and <code>z</code> cannot be interpreted as a positive real number.</p></li>
 </ol>
 </div>
 <div id="solutions-to-practice-exercises-4" class="section level3">
-<h3><span class="header-section-number">4.2.6</span> Solutions to Practice Exercises</h3>
+<h3><span class="header-section-number">4.2.7</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s the desired function:</p>
 <pre class="sourceCode r"><code class="sourceCode r">computeSquare2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
@@ -854,6 +925,28 @@ mySquare</code></pre>
     <span class="st">&quot;big!&quot;</span>
   }
 }</code></pre></li>
+<li><p>Here is one approach:</p>
+<pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {
+  x &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))
+  x &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))
+  x &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))
+  xValid &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="op">!</span><span class="kw">is.na</span>(x) <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
+  yValid &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="op">!</span><span class="kw">is.na</span>(y) <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
+  zValid &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="op">!</span><span class="kw">is.na</span>(z) <span class="op">&amp;</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
+  <span class="cf">if</span> (<span class="op">!</span>(xValid <span class="op">&amp;</span><span class="st"> </span>yValid <span class="op">&amp;</span><span class="st"> </span>zValid)) {
+    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Sorry, all inputs must be positive real numbers.</span><span class="ch">\n</span><span class="st">&quot;</span>))
+  }
+  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)
+}</code></pre>
+<p>Try it out:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isTriangle</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">7</span>),
+           <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">-4</span>, <span class="dv">5</span>),    <span class="co"># oops, a negative number</span>
+           <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>))</code></pre>
+<pre><code>## Sorry, all inputs must be positive real numbers.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isTriangle</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">7</span>),
+           <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),     <span class="co"># fixed it</span>
+           <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>))</code></pre>
+<pre><code>## [1] FALSE FALSE  TRUE</code></pre></li>
 </ol>
 </div>
 </div>

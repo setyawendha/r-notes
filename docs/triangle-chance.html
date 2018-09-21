@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-09-19">
+<meta name="date" content="2018-09-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -252,11 +252,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
-<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
-<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
-<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
-<li class="chapter" data-level="4.2.5" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#practice-exercises-12"><i class="fa fa-check"></i><b>4.2.5</b> Practice Exercises</a></li>
-<li class="chapter" data-level="4.2.6" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#solutions-to-practice-exercises-4"><i class="fa fa-check"></i><b>4.2.6</b> Solutions to Practice Exercises</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#application-validating-arguments"><i class="fa fa-check"></i><b>4.2.2</b> Application: Validating Arguments</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.3</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.4</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.5" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.5</b> Switch</a></li>
+<li class="chapter" data-level="4.2.6" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#practice-exercises-12"><i class="fa fa-check"></i><b>4.2.6</b> Practice Exercises</a></li>
+<li class="chapter" data-level="4.2.7" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#solutions-to-practice-exercises-4"><i class="fa fa-check"></i><b>4.2.7</b> Solutions to Practice Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
@@ -579,7 +580,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="triangle-chance" class="section level2">
 <h2><span class="header-section-number">6.3</span> Example: Chance of a Triangle</h2>
 <p>In the examples considered so far, intuition or a simple calculation suggests what the exact value of the probability or expected value should be. The true power of the Monte Carlo simulation method shines forth in situations where it is difficult or impossible to compute a value mathematically.</p>
-<p>Let’s revisit an example from Section <a href="making-decisions-conditionals.html#ifelse">4.2.3</a>, where we considered whether or not three segments could be put together to form a triangle. We developed the following function to determine, from the lengths of each segment, whether or not a triangle is possible:</p>
+<p>Let’s revisit an example from Section <a href="making-decisions-conditionals.html#ifelse">4.2.4</a>, where we considered whether or not three segments could be put together to form a triangle. We developed the following function to determine, from the lengths of each segment, whether or not a triangle is possible:</p>
 <pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {
   (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)
 }</code></pre>
@@ -788,7 +789,7 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-
 <div id="number-of-repetitions" class="section level3">
 <h3><span class="header-section-number">6.3.3</span> Number of Repetitions</h3>
 <p>The Law of Large Numbers says that the more times you repeat the simulation, the better our estimate of the desired probability—or expected value—is liable to be. Let’s use the Stick-Splitting Problem to investigate the effect of the choice of repetitions on the accuracy of our estimate of the probability of getting a triangle.</p>
-<p>We will need to run the <code>triangleSim()</code> function several times, with a different choice for <code>reps</code> each time, keeping track of the estimates we obtain. In the process we won’t need tables or other output to the console. Let’s rewrite <code>triangleSim()</code> for maximum flexibility, making console output optional and using the invisible return discussed in Section <a href="making-decisions-conditionals.html#invisible-returns">4.2.2</a>.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
+<p>We will need to run the <code>triangleSim()</code> function several times, with a different choice for <code>reps</code> each time, keeping track of the estimates we obtain. In the process we won’t need tables or other output to the console. Let’s rewrite <code>triangleSim()</code> for maximum flexibility, making console output optional and using the invisible return discussed in Section <a href="making-decisions-conditionals.html#invisible-returns">4.2.3</a>.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
 <pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>,
                         <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
   <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {

@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-09-19">
+<meta name="date" content="2018-09-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -252,11 +252,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html"><i class="fa fa-check"></i><b>4.2</b> Making Decisions: Conditionals</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#if-statements"><i class="fa fa-check"></i><b>4.2.1</b> If Statements</a></li>
-<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.2</b> Application: Invisible Returns</a></li>
-<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.3</b> Ifelse</a></li>
-<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.4</b> Switch</a></li>
-<li class="chapter" data-level="4.2.5" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#practice-exercises-12"><i class="fa fa-check"></i><b>4.2.5</b> Practice Exercises</a></li>
-<li class="chapter" data-level="4.2.6" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#solutions-to-practice-exercises-4"><i class="fa fa-check"></i><b>4.2.6</b> Solutions to Practice Exercises</a></li>
+<li class="chapter" data-level="4.2.2" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#application-validating-arguments"><i class="fa fa-check"></i><b>4.2.2</b> Application: Validating Arguments</a></li>
+<li class="chapter" data-level="4.2.3" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#invisible-returns"><i class="fa fa-check"></i><b>4.2.3</b> Application: Invisible Returns</a></li>
+<li class="chapter" data-level="4.2.4" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#ifelse"><i class="fa fa-check"></i><b>4.2.4</b> Ifelse</a></li>
+<li class="chapter" data-level="4.2.5" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#switch"><i class="fa fa-check"></i><b>4.2.5</b> Switch</a></li>
+<li class="chapter" data-level="4.2.6" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#practice-exercises-12"><i class="fa fa-check"></i><b>4.2.6</b> Practice Exercises</a></li>
+<li class="chapter" data-level="4.2.7" data-path="making-decisions-conditionals.html"><a href="making-decisions-conditionals.html#solutions-to-practice-exercises-4"><i class="fa fa-check"></i><b>4.2.7</b> Solutions to Practice Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html"><i class="fa fa-check"></i><b>4.3</b> Repeating Things: Looping</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="repeating-things-looping.html"><a href="repeating-things-looping.html#for-loops"><i class="fa fa-check"></i><b>4.3.1</b> For Loops</a></li>
@@ -758,36 +759,15 @@ Figure 4.4: A ggplot2 plot with point and line geoms.
 <p>Try this version a few times, like so:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">257</span>)</code></pre>
 <p>It’s quite remarkable how much the sequence can rise and fall before hitting 1.</p>
-<p>One final consideration is validation of user-input. we don’t want the user to get strange errors if she fails to enter a number worth looking at—a whole number that is greater than 1.</p>
-<p>One possible approach is to attempt to coerce the user’s input into an integer, using the <code>as.integer()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="fl">3.6</span>) <span class="co"># will round to nearest integer</span></code></pre>
-<pre><code>## [1] 3</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;4&quot;</span>) <span class="co"># will convert string to number 4</span></code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;4.3&quot;</span>) <span class="co"># will convert AND round</span></code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;hello&quot;</span>) <span class="co"># cannot convert to integer</span></code></pre>
-<pre><code>## Warning: NAs introduced by coercion</code></pre>
-<pre><code>## [1] NA</code></pre>
-<p>In the last example, the result is <code>NA</code>, and a cryptic warning was issued. In order to keep the warning from the user, we should wrap any call to <code>as.integer()</code> in the suppressWarnings()` function.</p>
-<p>Let’s try out a piece of code that implements validation:</p>
-<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">-2</span>
-n &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
-isValid &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(n) <span class="op">&amp;&amp;</span><span class="st"> </span>n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>
-  <span class="cf">if</span> (<span class="op">!</span>isValid ) {
-    <span class="kw">stop</span>(<span class="st">&quot;Need an integer bigger than 1.  Try again.&quot;</span>)
-  }</code></pre>
-<pre><code>## Error: Need an integer bigger than 1.  Try again.</code></pre>
-<p>The <code>stop()</code> function throws a true error that prevents any further code from being executed, but allows us to write a custom, friendly error-message. The goal of validation is for the user to receive clear and helpful error messages, rather than obscure, technical messages from the depths of R.</p>
-<p>Another issue worth considering is that our collatz() function depends on the previously-defined function <code>collatzRule()</code>. In order for it to work correctly, R would need to be able to find the name <code>collatzRule</code> somewhere on the search path. If the user hasn’t already defined the <code>collatzRule()</code> function, then a call to `collatz() will fail.</p>
+<p>A further issue worth considering is that our collatz() function depends on the previously-defined function <code>collatzRule()</code>. In order for it to work correctly, R would need to be able to find the name <code>collatzRule</code> somewhere on the search path. If the user hasn’t already defined the <code>collatzRule()</code> function, then a call to `collatz() will fail.</p>
 <p>One solution is simply to remind users of the need to define both <code>collatzRule()</code> and <code>collatz()</code> prior to running <code>collatz()</code>. Another solution—perhaps the kinder one—is to define the <code>collatzRule()</code> function in the body of <code>collatz()</code>. Let’s adopt this approach.</p>
-<p>The final version of the <code>collatz()</code> function appears below.</p>
+<p>The final version of the <code>collatz()</code> function (with some validation thrown in for good measure) appears below.</p>
 <pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
-  <span class="co"># validation:</span>
+  <span class="co"># add some validation:</span>
   n &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
   isValid &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(n) <span class="op">&amp;&amp;</span><span class="st"> </span>n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>
   <span class="cf">if</span> (<span class="op">!</span>isValid ) {
-    <span class="kw">stop</span>(<span class="st">&quot;Need an integer bigger than 1.  Try again.&quot;</span>)
+    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Need an integer bigger than 1.  Try again.&quot;</span>))
   }
   <span class="co"># define collatzRule:</span>
   collatzRule &lt;-<span class="st"> </span><span class="cf">function</span>(m) {
