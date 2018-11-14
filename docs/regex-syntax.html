@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-09-21">
+<meta name="date" content="2018-11-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -52,7 +52,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -65,13 +65,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -903,7 +901,7 @@ How would you detect whether a particular instance of a pattern is repeated? For
 <ul>
 <li>The leading <code>\b</code> requires the presence of a word-boundary, which is satisfied by the presence, in the string, of the space between “for” and “bed bed”. The second “bed bed” is also OK at this point, due to the space between “is” and the first “bed”.</li>
 <li><code>\w+</code> matches the first “bed”, and the parentheses make it a group. By default the regex captures the contents of whatever portion of the string matches a group, and remembers those contents for later use.</li>
-<li>The ` ` matches the space between the two “bed” strings.</li>
+<li>The <code></code> matches the space between the two “bed” strings.</li>
 <li>The <code>\1</code> is a <em>back-reference</em>: it represents precisely what was matched in the earlier group. For the regex as a whole to produce a match, <code>\1</code> has to see an exact repetition of whatever string matched the first parenthesis-group in the regex, so it has to see “bed”. At this point both occurrences of “bed bed”&quot; are still in the running to be matches for the entire regex.</li>
 <li>The final <code>\b</code> asserts a word-boundary. This is satisfied by the comma after the first “bed bed”, but not by the “t” after the second “bed bed”. Thus only the first “bed bed” matches the regular expression as a whole.</li>
 </ul>

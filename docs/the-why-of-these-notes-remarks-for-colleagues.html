@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-09-21">
+<meta name="date" content="2018-11-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -52,7 +52,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -65,13 +65,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -589,7 +587,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The Notes give more attention to base R functions than other introductory texts directed to data analysts, but we do introduce elements of the <strong>tidyverse</strong> as appropriate. The pipe operator is introduced in connection with data frames, <strong>ggplot2</strong> and graphing are treated in some detail, string operations and regular expressions are managed primarily with <strong>stringr</strong>, and the approach to higher-order functions is through <strong>purrr</strong>. Full treatment of the data wrangling is deferred, however, to later courses.</p>
 <p>The first-semester course is required for mathematics and physics majors and for students in our pre-engineering program, so a central application of the early material is simulation of random processes. I believe that this makes the Notes relevant for students in other disciplines—e.g., biology and finance—in a way that complements their use of R for data analysis.</p>
 <p>Two of the most fundamental topics in any comprehensive discussion of the R language—lexical scoping and computing on the language—are absent from this book. Lexical scoping and its implications are mentioned only in a brief footnote. Partly this is due the fact that most of the elementary applications of lexical scoping mentioned in the literature are related to scientific computing, which won’t be a concern for most of my students. Certainly lexical scoping is important for understanding how R-packages work, but elementary students don’t author packages. As for computing on the language it is true that users are affected by it all the time (e.g., whenever they use functions with a formula interface), but generally one need not perform any computation on the language until one begins writing formula-interface functions for the benefit of casual R-users.</p>
-<p>On the other hand I have made some effort to explore programming paradigms other than procedural programming, perhaps in a bit more depth than in other elementary texts that teach with a scripting language. There is a chapter on functional programming that, although it admittedly does not get far into the functional paradigm, at least does treat extensively of R’s support for higher-order functions. A chapter on object-oriented programming covers not only the generic-function OO that has been with R from the start but also an implementation of message-passing OO (Winston Chang’s <strong>R6</strong> package <span class="citation">(Chang <a href="#ref-R-R6">2017</a>)</span>). My hope is that these topics will not only sharpen my students’ R-programming skills but also prepare them for encounters with the OO-methods and higher-order functions that are ubiquitous in JavaScript. Finally, there is a pretty serious chapter on regular expressions, because:</p>
+<p>On the other hand I have made some effort to explore programming paradigms other than procedural programming, perhaps in a bit more depth than in other elementary texts that teach with a scripting language. There is a chapter on functional programming that, although it admittedly does not get far into the functional paradigm, at least does treat extensively of R’s support for higher-order functions. A chapter on object-oriented programming covers not only the generic-function OO that has been with R from the start but also an implementation of message-passing OO (Winston Chang’s <strong>R6</strong> package <span class="citation">(Chang <a href="#ref-R-R6">2018</a>)</span>). My hope is that these topics will not only sharpen my students’ R-programming skills but also prepare them for encounters with the OO-methods and higher-order functions that are ubiquitous in JavaScript. Finally, there is a pretty serious chapter on regular expressions, because:</p>
 <ul>
 <li>they are useful in data analysis;</li>
 <li>I have not found a treatment of regular expressions in R that a person without significant prior exposure to them in other languages has a prayer of following;</li>
@@ -600,22 +598,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-bookdown">
-<p>Xie, Yihui. 2018b. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
+<p>Xie, Yihui. 2018b. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</p>
 </div>
 <div id="ref-R-blogdown">
-<p>Xie, Yihui. 2018a. <em>Blogdown: Create Blogs and Websites with R Markdown</em>. <a href="https://CRAN.R-project.org/package=blogdown" class="uri">https://CRAN.R-project.org/package=blogdown</a>.</p>
+<p>Xie, Yihui. 2018a. <em>Blogdown: Create Blogs and Websites with R Markdown</em>. <a href="https://CRAN.R-project.org/package=blogdown">https://CRAN.R-project.org/package=blogdown</a>.</p>
 </div>
 <div id="ref-R-shiny">
-<p>Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2018. <em>Shiny: Web Application Framework for R</em>. <a href="https://CRAN.R-project.org/package=shiny" class="uri">https://CRAN.R-project.org/package=shiny</a>.</p>
+<p>Chang, Winston, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. 2018. <em>Shiny: Web Application Framework for R</em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>.</p>
 </div>
 <div id="ref-Matloff2011">
-<p>Matloff, Norman. 2011. <em>The Art of R Programming</em>. 2nd ed. No Starch Press Press. <a href="https://www.nostarch.com/artofr.htm" class="uri">https://www.nostarch.com/artofr.htm</a>.</p>
+<p>Matloff, Norman. 2011. <em>The Art of R Programming</em>. 2nd ed. No Starch Press Press. <a href="https://www.nostarch.com/artofr.htm">https://www.nostarch.com/artofr.htm</a>.</p>
 </div>
 <div id="ref-Grolemund2014">
-<p>Grolemund, Garrett. 2014. <em>Hands on Programming with R</em>. O’Reilly Media. <a href="http://shop.oreilly.com/product/0636920028574.do" class="uri">http://shop.oreilly.com/product/0636920028574.do</a>.</p>
+<p>Grolemund, Garrett. 2014. <em>Hands on Programming with R</em>. O’Reilly Media. <a href="http://shop.oreilly.com/product/0636920028574.do">http://shop.oreilly.com/product/0636920028574.do</a>.</p>
 </div>
 <div id="ref-R-R6">
-<p>Chang, Winston. 2017. <em>R6: Classes with Reference Semantics</em>. <a href="https://CRAN.R-project.org/package=R6" class="uri">https://CRAN.R-project.org/package=R6</a>.</p>
+<p>Chang, Winston. 2018. <em>R6: Classes with Reference Semantics</em>. <a href="https://CRAN.R-project.org/package=R6">https://CRAN.R-project.org/package=R6</a>.</p>
 </div>
 </div>
             </section>

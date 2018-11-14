@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-09-21">
+<meta name="date" content="2018-11-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -52,7 +52,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -65,13 +65,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -751,7 +749,7 @@ emptyVec[<span class="dv">1</span>]  <span class="co"># You get NA</span></code>
 <h3><span class="header-section-number">4.3.4</span> Solving the Empty-Vector Problem in <code>for</code>-Loops with <code>seq_along()</code></h3>
 <p>In the previous section we considered a possible problem with <code>for</code>-loops of the following form:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec) ) {
-  ## do something ...
+  <span class="co">## do something ...</span>
 }</code></pre>
 <p>In the above loop <code>vec</code> could be thought of as a “loop-defining” vector: its length determines the sequence of values 1, 2, 3 … for the index <code>i</code>. This sequence of values is supposed to end at the length of <code>vec</code>.</p>
 <p>The problem is that if <code>vec</code> happens to be an empty vector then we probably don’t want to enter the loop at all. However, the length of an empty vector is 0, and so the vector <code>1:length(vec)</code> actually works out to be a vector with two elements:</p>
@@ -1068,7 +1066,7 @@ titledDoggies</code></pre>
 }</code></pre></li>
 <li><p>Here is one possibility:</p>
 <pre class="sourceCode r"><code class="sourceCode r">ageReporter &lt;-<span class="st"> </span><span class="cf">function</span>(people, ages) {
-  ## validation:
+  <span class="co">## validation:</span>
   p &lt;-<span class="st"> </span><span class="kw">length</span>(people)
   a &lt;-<span class="st"> </span><span class="kw">length</span>(ages)
   <span class="cf">if</span> (p <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
@@ -1080,7 +1078,7 @@ titledDoggies</code></pre>
   <span class="cf">if</span> (<span class="op">!</span>(p <span class="op">==</span><span class="st"> </span>a <span class="op">&amp;</span><span class="st"> </span>p <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)) {
     <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Number of people must equal number of ages!</span><span class="ch">\n</span><span class="st">&quot;</span>))
   }
-  ## process:
+  <span class="co">## process:</span>
   <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(people)) {
     <span class="kw">cat</span>(people[i], <span class="st">&quot; is &quot;</span>, ages[i], <span class="st">&quot; year(s) old.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
