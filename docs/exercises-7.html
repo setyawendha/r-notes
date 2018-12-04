@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-11-14">
+<meta name="date" content="2018-12-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -585,7 +585,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Typical examples of use should look like this:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">revStr</span>(<span class="dt">str =</span> <span class="st">&quot;goodbye&quot;</span>)</code></pre>
-<pre><code>## [1] &quot;eybdoog&quot;</code></pre></li>
+<pre><code>## [1] &quot;eybdoog&quot;</code></pre>
+<p><strong>Hint</strong>: Let’s think about how to solve the reveral problem for a specific string, e.g.:</p>
+<pre class="sourceCode r"><code class="sourceCode r">str &lt;-<span class="st"> &quot;goodbye&quot;</span></code></pre>
+<p>First, we could turn the string into a list whose only element is the vector of the characters of the string, as follows:</p>
+<pre class="sourceCode r"><code class="sourceCode r">splitString &lt;-<span class="st"> </span><span class="kw">str_split</span>(str, <span class="dt">pattern =</span> <span class="st">&quot;&quot;</span>)
+splitString</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;g&quot; &quot;o&quot; &quot;o&quot; &quot;d&quot; &quot;b&quot; &quot;y&quot; &quot;e&quot;</code></pre>
+<p>This could be turned into just the desired vector with the <code>unlist()</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(splitString)</code></pre>
+<pre><code>## [1] &quot;g&quot; &quot;o&quot; &quot;o&quot; &quot;d&quot; &quot;b&quot; &quot;y&quot; &quot;e&quot;</code></pre>
+<p>Next, recall that R has a function <code>rev()</code> that, when given a vector, returns a vector with the elements in reverse order:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rev</span>(<span class="kw">unlist</span>(splitString))</code></pre>
+<pre><code>## [1] &quot;e&quot; &quot;y&quot; &quot;b&quot; &quot;d&quot; &quot;o&quot; &quot;o&quot; &quot;g&quot;</code></pre>
+<p>Finally, we would need to convert the reversed vector back into a single string. You have learned a <strong>stringr</strong> function that will accomplish this.</p>
+<p>After you have solved the problem for the specific vector <code>str</code>, encapsulate your work into the function <code>revStr()</code>.</p></li>
 <li>A string is said to be a <em>palindrome</em> if it is the same no matter whether it is spelled backwards or forwards. Write a function called <code>palindromeStr()</code> that determines whether or not a given string is a palindrome. The function should take a single parameter:
 <ul>
 <li><code>str</code>: a character-vector of length 1 (a single string).</li>
@@ -594,7 +609,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">palindromeStr</span>(<span class="dt">str =</span> <span class="st">&quot;abba&quot;</span>)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">palindromeStr</span>(<span class="st">&quot;hello&quot;</span>)</code></pre>
-<pre><code>## [1] FALSE</code></pre></li>
+<pre><code>## [1] FALSE</code></pre>
+<p><strong>Hint</strong>; Again, you should begin by solving the problem on a specific vector, and only then encapulate your work into a function. To solve the spcific problem, you might use the function <code>revStr()</code> from the previous problem, along with the function <code>all()</code> from Chapter 2.</p></li>
 <li>Write a function called <code>subStrings()</code> that returns a vector of the substrings of a given string that have at least a given number of characters. The function should take two arguments:
 <ul>
 <li><code>str</code>: a character-vector of length 1 (a single string);</li>
@@ -605,6 +621,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;hello&quot; &quot;hell&quot;  &quot;ello&quot;  &quot;hel&quot;   &quot;ell&quot;   &quot;llo&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subStrings</span>(<span class="st">&quot;hello&quot;</span>, <span class="dv">6</span>)</code></pre>
 <pre><code>## n should be at least 1 and no more than the number
+## of characters in str.</code></pre>
+<p><strong>Hint</strong>: Begin by writing a function, called perhaps <code>subStringFixed()</code>, that when given a string and a specific number <span class="math inline">\(n\)</span>, returns all of the substrongs of length exactly <span class="math inline">\(n\)</span>. It might work like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subStringFixed</span>(<span class="dt">str =</span> <span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dt">n =</span> <span class="dv">6</span>)</code></pre>
+<pre><code>## [1] &quot;yabbad&quot; &quot;abbada&quot; &quot;bbadab&quot; &quot;badabb&quot; &quot;adabba&quot; &quot;dabbad&quot; &quot;abbado&quot; &quot;bbadoo&quot;
+## [9] &quot;badoo!&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subStringFixed</span>(<span class="dt">str =</span> <span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dt">n =</span> <span class="dv">0</span>)</code></pre>
+<pre><code>## n should be at least 1 and no more than the number
 ## of characters in str.</code></pre></li>
 <li>Write a function called <code>subPalindrome()</code> that, for any given string and specified number <span class="math inline">\(n\)</span>, returns a character vector of all the substrings of the string having at least <span class="math inline">\(n\)</span> characters that are also palindromes. The function should take two arguments:
 <ul>
@@ -612,7 +635,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>n</code>: the minimum number of characters a substring should have in order to be included in the vector.</li>
 </ul>
 <p>Validate the input: if the argument for <code>n</code> is less than 1 or greater than the number of characters in <code>str</code>, then the function should advise the user and cease execution. Typical examples of use should look like this (although it is OK if your output-vector contains the palindromes in a different order):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">2</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## Note that palindrome substrings are repeated as many times</span>
+<span class="co">## as they occur in the given string:</span>
+<span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">2</span>)</code></pre>
 <pre><code>##  [1] &quot;abbadabba&quot; &quot;bbadabb&quot;   &quot;dabbad&quot;    &quot;badab&quot;     &quot;abba&quot;     
 ##  [6] &quot;abba&quot;      &quot;ada&quot;       &quot;bb&quot;        &quot;bb&quot;        &quot;oo&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">10</span>)</code></pre>

@@ -570,9 +570,24 @@ subPalindrome <- function(str, n) {
   subs[palindrome]
 }
 
+subStringFixed <- function(str, n) {
+  strlen <- nchar(str)
+  inputOK <- n > 0 && n <= strlen
+  if (!inputOK ) {
+    return(cat("n should be at least 1 and no more than the number\n",
+               "of characters in str.", sep = ""))
+  }
+  subStrings <- character(0)
+  for (i in 1:(strlen - n +1)) {
+    subString <- str_sub(str, start = i, end = i + n - 1)
+    subStrings <- c(subStrings, subString)
+  }
+  subStrings
+}
+
 m111Report <- function(rows) {
   df <- bcscr::m111survey
-  df$weight <- plyr::mapvalues(m111survey$weight_feel,
+  df$weight <- plyr::mapvalues(df$weight_feel,
                 from = c("1_underweight", "2_about_right", "3_overweight"),
                 to = c("underweight", "about right", "overweight"))
   for ( row in rows) {
@@ -592,6 +607,36 @@ m111Report <- function(rows) {
     revStr(str = "goodbye")
     ```
     
+    **Hint**:  Let's think about how to solve the reveral problem for a specific string, e.g.:
+    
+    ```{r}
+    str <- "goodbye"
+    ```
+    
+    First, we could turn the string into a list whose only element is the vector of the characters of the string, as follows:
+    
+    ```{r}
+    splitString <- str_split(str, pattern = "")
+    splitString
+    ```
+    
+    This could be turned into just the desired vector with the `unlist()` function:
+    
+    ```{r}
+    unlist(splitString)
+    ```
+    
+    Next, recall that R has a function `rev()` that, when given a vector, returns a vector with the elements in reverse order:
+    
+    ```{r}
+    rev(unlist(splitString))
+    ```
+    
+    Finally, we would need to convert the reversed vector back into a single string.  You have learned a **stringr** function that will accomplish this.
+    
+    After you have solved the problem for the specific vector `str`, encapsulate your work into the function `revStr()`.
+    
+    
 1. A string is said to be a *palindrome* if it is the same no matter whether it is spelled backwards or forwards.  Write a function called `palindromeStr()` that determines whether or not a given string is a palindrome.  The function should take a single parameter:
     * `str`:  a character-vector of length 1 (a single string).
     
@@ -601,6 +646,8 @@ m111Report <- function(rows) {
     palindromeStr(str = "abba")
     palindromeStr("hello")
     ```
+    
+    **Hint**;  Again, you should begin by solving the problem on a specific vector, and only then encapulate your work into a function.  To solve the spcific problem, you might use the function `revStr()` from the previous problem, along with the function `all()` from Chapter 2.
     
 1. Write a function called `subStrings()` that returns a vector of the substrings of a given string that have at least a given number of characters.  The function should take two arguments:
     * `str`:  a character-vector of length 1 (a single string);
@@ -613,6 +660,13 @@ m111Report <- function(rows) {
     subStrings("hello", 6)
     ```
     
+    **Hint**:  Begin by writing a function, called perhaps `subStringFixed()`, that when given a string and a specific number $n$, returns all of the substrongs of length exactly $n$.  It might work like this:
+    
+    ```{r}
+    subStringFixed(str = "yabbadabbadoo!", n = 6)
+    subStringFixed(str = "yabbadabbadoo!", n = 0)
+    ```
+    
 2.  Write a function called `subPalindrome()` that, for any given string and specified number $n$, returns a character vector of all the substrings of the string having at least $n$ characters that are also palindromes.  The function should take two arguments:
     * `str`:  a character-vector of length 1 (a single string);
     * `n`: the minimum number of characters a substring should have in order to be included in the vector.
@@ -620,10 +674,15 @@ m111Report <- function(rows) {
     Validate the input:  if the argument for `n` is less than 1 or greater than the number of characters in `str`, then the function should advise the user and cease execution.  Typical examples of use should look like this (although it is OK if your output-vector contains the palindromes in a different order):
     
     ```{r}
+    ## Note that palindrome substrings are repeated as many times
+    ## as they occur in the given string:
     subPalindrome("yabbadabbadoo!", 2)
     subPalindrome("yabbadabbadoo!", 10)
     subPalindrome("yabbadabbadoo!", 0)
     ```
+    
+
+    
     
 1.  Write a function called `m111Report()` that performs formatted printing from the data frame `m111survey` in the **bcscr** package.  Given a vector of row numbers, the function will print out the sex, feeling about weight, and GPA of the corresponding individuals.  Thus each row in the printout will correspond to an individual in the study.  Each row will consist of three fields:
     * The first field is 10 characters wide, and contains either "male" or "female", followed by the appropriate number of spaces.
