@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Beginning Computer Science with R</title>
+  <title>12.5 Application: Amazon Book Reviews | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:title" content="12.5 Application: Amazon Book Reviews | Beginning Computer Science with R />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="homerhanumat/r-notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  <meta name="twitter:title" content="12.5 Application: Amazon Book Reviews | Beginning Computer Science with R />
   
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="glossary-9.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -577,7 +578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="application-amazon-book-reviews" class="section level2">
 <h2><span class="header-section-number">12.5</span> Application: Amazon Book Reviews</h2>
-<p>The R-package <strong>tigerData</strong> <span class="citation">(White <a href="#ref-R-tigerData">2017</a>)</span> contains the data set <code>reviews</code>, a collection of user-reviews on <a href="https://www.amazon.com">Amazon</a> for seven bestsellers. Learn more about the data set as follows:</p>
+<p>The R-package <strong>tigerData</strong> <span class="citation">(White <a href="#ref-R-tigerData">2018</a><a href="#ref-R-tigerData">b</a>)</span> contains the data set <code>reviews</code>, a collection of user-reviews on <a href="https://www.amazon.com">Amazon</a> for seven bestsellers. Learn more about the data set as follows:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tigerData)
 <span class="kw">help</span>(reviews)</code></pre>
 <p>Each row of the data frame contains:</p>
@@ -608,7 +609,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We might be curious to know what other books on Amazon our reviewers link to when they are discussing the <em>Hunger Games</em>. Regular expressions can help us to extract the links from the mass of text in <code>hunger$content</code>.</p>
 <p>All of the Amazon links are generated for the user by the computer, so they will all have the same format. Hence we can use a look-behind and a look-ahead to construct a regex that will be matched by any URL-fragment within such an anchor:</p>
 <blockquote>
-<p>(?&lt;=&lt;a class=\“\”a-link-normal\“\” href=\“\”/)(.+?)(?=\“\”&gt;)</p>
+<p><code>(?&lt;=\&lt;a class=\\&quot;\\&quot;a-link-normal\\&quot;\\&quot; href=\\&quot;\\&quot;/)(.+?)(?=\\&quot;\\&quot;\&gt;)</code></p>
 </blockquote>
 <p>Checking carefully, we see that none of the tokens require extra escaping: we can use this text as our pattern in regex function in R:</p>
 <pre class="sourceCode r"><code class="sourceCode r">linkPattern &lt;-<span class="st"> &quot;(?&lt;=&lt;a class=</span><span class="ch">\&quot;\&quot;</span><span class="st">a-link-normal</span><span class="ch">\&quot;\&quot;</span><span class="st"> href=</span><span class="ch">\&quot;\&quot;</span><span class="st">/)(.+?)(?=</span><span class="ch">\&quot;\&quot;</span><span class="st">&gt;)&quot;</span></code></pre>
@@ -755,7 +756,7 @@ fault <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rating =</span> <span class="kw">factor</span>(rating)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rating)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> dislikes), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-1067-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-1046-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 </ol>
 
 </div>
@@ -763,7 +764,7 @@ fault <span class="op">%&gt;%</span><span class="st"> </span>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-tigerData">
-<p>White, Homer. 2017. <em>TigerData: GC Statistics Datasets</em>. <a href="https://github.com/homerhanumat/tigerData">https://github.com/homerhanumat/tigerData</a>.</p>
+<p>White, Homer. 2018b. <em>TigerData: GC Statistics Datasets</em>. <a href="https://github.com/homerhanumat/tigerData">https://github.com/homerhanumat/tigerData</a>.</p>
 </div>
 </div>
             </section>
@@ -792,7 +793,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -802,6 +803,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -819,7 +824,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

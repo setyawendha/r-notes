@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Beginning Computer Science with R</title>
+  <title>14.2 The Functional Programming Paradigm | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:title" content="14.2 The Functional Programming Paradigm | Beginning Computer Science with R />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="homerhanumat/r-notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  <meta name="twitter:title" content="14.2 The Functional Programming Paradigm | Beginning Computer Science with R />
   
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="purrr-higher-order-functions-for-iteration.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -621,7 +622,7 @@ a   <span class="co"># check that a is really 3</span></code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>(x) x<span class="op">+</span><span class="dv">3</span>
 <span class="kw">typeof</span>(f)</code></pre>
 <pre><code>## [1] &quot;closure&quot;</code></pre>
-<p>Functions other than primitive functions are objects of type “closure.”<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a></p>
+<p>Functions other than primitive functions are objects of type “closure.”<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
 <p>If a function can be a certain type of thing, then it must be a “thing”—an object, something you can manipulate. For example, you can put functions in a list:</p>
 <pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">list</span>(is.numeric, f)
 lst</code></pre>
@@ -721,8 +722,8 @@ result</code></pre>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="36">
-<li id="fn36"><p>The term “closure” comes from the fact that every function we define in R consists of three elements: its formal arguments, its body, and a pointer to its enclosing environment. (Recall that in R the enclosing environment is the environment that was active at the time the function was defined, and that it is the second place—after the run-time environment—where R consult when looking up names during the execution of the function.) Due to the importance of its enclosing environment a function gets the name “closure.”<a href="the-functional-programming-paradigm.html#fnref36" class="footnote-back">↩</a></p></li>
+<ol start="35">
+<li id="fn35"><p>The term “closure” comes from the fact that every function we define in R consists of three elements: its formal arguments, its body, and a pointer to its enclosing environment. (Recall that in R the enclosing environment is the environment that was active at the time the function was defined, and that it is the second place—after the run-time environment—where R consult when looking up names during the execution of the function.) Due to the importance of its enclosing environment a function gets the name “closure.”<a href="the-functional-programming-paradigm.html#fnref35" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -751,7 +752,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -761,6 +762,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -778,7 +783,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

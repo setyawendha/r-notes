@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Beginning Computer Science with R</title>
+  <title>11.3 Basic String Operations | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:title" content="11.3 Basic String Operations | Beginning Computer Science with R />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="homerhanumat/r-notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  <meta name="twitter:title" content="11.3 Basic String Operations | Beginning Computer Science with R />
   
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="formatted-printing.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -577,7 +578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="basic-string-operations" class="section level2">
 <h2><span class="header-section-number">11.3</span> Basic String Operations</h2>
-<p>We now introduce a few basic operations for examining, splitting and combining strings. Some of the functions we discuss come from the <strong>stringer</strong> package, which is installed along with the tidyverse but is not automatically attached. Make sure you attach it when you work with strings:</p>
+<p>We now introduce a few basic operations for examining, splitting and combining strings. Some of the functions we discuss come from the <strong>stringr</strong> package, which is installed along with the tidyverse but is not automatically attached. Make sure you attach it when you work with strings:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)</code></pre>
 <div id="is-and-as" class="section level3">
 <h3><span class="header-section-number">11.3.1</span> Is and As</h3>
@@ -607,7 +608,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="sourceCode r"><code class="sourceCode r">poppins &lt;-<span class="st"> &quot;Supercalifragilisticexpialidocious&quot;</span>
 <span class="kw">str_sub</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">end =</span> <span class="dv">20</span>)</code></pre>
 <pre><code>## [1] &quot;fragilistic&quot;</code></pre>
-<p>One can also use <code>substr()</code> to replace part of a string with some other string<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>:</p>
+<p>One can also use <code>substr()</code> to replace part of a string with some other string:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_sub</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">end =</span> <span class="dv">20</span>) &lt;-<span class="st"> &quot;ABCDEFGHIJK&quot;</span>
 poppins</code></pre>
 <pre><code>## [1] &quot;SupercaliABCDEFGHIJKexpialidocious&quot;</code></pre>
@@ -710,7 +711,7 @@ poppins</code></pre>
 <span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</code></pre>
 <pre><code>## [1] &quot;practically perfect in every way&quot;</code></pre>
 <p>We’ll call this process <em>joining</em>. </p>
-<p>In an atomic vector all of the elements have to be of the same data type (all character, all numerical, etc.). What if you want to join objects of different types? If there are only a few, feel free to type them in as separate arguments to <code>paste()</code>:</p>
+<p>In an atomic vector all of the elements have to be of the same data type (all character, all numerical, etc.). What if you want to join objects of different types? If there are only a few, feel free to type them in as separate arguments to <code>str_c()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_c</span>(<span class="st">&quot;March&quot;</span>, <span class="dv">14</span>, <span class="dv">1963</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</code></pre>
 <pre><code>## [1] &quot;March 14 1963&quot;</code></pre>
 <p>If the objects are many, then you could arrange for them appear as the elements of a list:</p>
@@ -739,12 +740,6 @@ poppins</code></pre>
 <p>Now all is well. Soon, though, we’ll learn a superior method for performing substitutions in strings.</p>
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="28">
-<li id="fn28"><p>In some other computer languages, strings are <em>immutable</em>, meaning that once set they cannot be changed. This is not so in R.<a href="basic-string-operations.html#fnref28" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
             </section>
 
           </div>
@@ -771,7 +766,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -781,6 +776,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -798,7 +797,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

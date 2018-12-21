@@ -347,14 +347,14 @@ What does `^Hello$` match?  The rules would say that the string must start with 
 
 But that's not quite right:
 
-* Go your online regex practice site ([Regular Expression 101](https://regex101.com/)).
+* Go your online regex practice site ([Regular Expression 101](https://regexr.com/)).
 * Enter the regex `hello$`.
-* Then at the "Set Regex Options" flag (right after the "/g"), ask to enter multiline mode.
-* You should now see "/gm" at the end.
+* Then in the "Flags" dropdown menu, check "multiline".
+* You should now see "/gm" at the end of the regular expression.  You have entered multiline mode.
 * In the test-text field, enter "I say hello", press Return, and continue on the next line with "Again I say hello".
 * You'll see that both hello's match.
 
-The reason for this is that in multiline mode `$` stands for the end of each line, not just the *absolute end* \index{absolute end} of the string.  From time to time you may deal with strings that run over multiple lines, so remember that if you want your ending anchors to represent end-of-line rather than the absolute end of the string, you'll need to ask R to enter multiline mode.  (Later on in the Chapter we'll discuss some common modes and how to enter them in R.
+The reason for this is that in multiline mode `$` stands for the end of each line, not just the *absolute end* \index{absolute end} of the string.  From time to time you may deal with strings that run over multiple lines, so remember that if you want your ending anchors to represent end-of-line rather than the absolute end of the string, you'll need to ask R to enter multiline mode.  (Later on in the Chapter we'll discuss some common modes and how to enter them in R.)
 
 The word-boundary anchor `\b` is quite useful.  Consider the regex `bed` applied to the string below:
 
@@ -412,7 +412,7 @@ Think about how the above regex works:
 * ... followed by the contents of the second group ...
 * ... at a word-boundary.
 
-If you want to match a palindrome^[Recall that a *palindrome* is a word that is the same when spelled backwards.]consisting of five characters ("abcba", "x444x", etc.) then use:
+If you want to match a palindrome^[Recall that a *palindrome* is a word that is the same when spelled backwards.] consisting of five characters ("abcba", "x444x", etc.) then use:
 
 >`\b(\w)(\w)\w\2\1\b`
 
@@ -533,9 +533,10 @@ dates %>%
 
 Here:
 
-* `pattern` is the regex that for the type of sub-string we want to replace;
-* `replacment` is what we want to replace matches of the pattern with;
-* `x` is the text in which the substitution occurs.
+* `x` (not explicitly seen above, due to the piping) is the text in which the substitution occurs;
+* `pattern` is the regex for the type of sub-string we want to replace;
+* `replacment` is what we want to replace matches of the pattern with.
+
 
 The `all` in the name of the function means that we want to replace *all* occurrences of the pattern with the replacement text.  There is also a `str_replace()` \index{R-functions!str\_replace()@\texttt{str\_replace()}}function that performs replacement only with the *first* match (if any) that it finds:
 
@@ -584,7 +585,7 @@ Here is another function that searches for repeated words and encloses each pair
 ```{r}
 starRepeats <- function(str) {
   str %>% 
-    str_replace_all(pattern = "(\\b(\\w+) \\2\\b)",
+    str_replace_all(pattern = "\\b(\\w+) \\1\\b",
                     replacement = function(x) {
                       str_c("*", x, "*")
                     }
@@ -593,48 +594,10 @@ starRepeats <- function(str) {
 starRepeats("I have a boo boo on my knee knee.")
 ```
 
-The above substitution is tricky, and merits step-by-step analysis:
-
-* In order to get a repeated word, you would start with the regex 
-    
-    >`\b(\w+) \1\b`.
-    
-* In order to enter the regex into R as a string, you would need some escapes:
-    
-    >`\\b(\\w+) \\1\\b`
-    
-* You need to wrap the whole expression in parentheses in order to capture it and refer to it in the replacement expression:
-    
-    >`(\\b(\\w+) \\1\\b)`
-    
-* But now you have a problem:  the back-reference `\1` applies to the *first* captured expression, which is the expression determined by the first opening parenthesis encountered.  Hence it refers to the whole expression, which doesn't make sense.  We want to refer to the first word in the pair (the `(\\w+)`) so we need to back-reference it with `\2`:
-    
-    >`(\\b(\\w+) \\2\\b)`
-    
-* Meanwhile, in the replacement string, we want to refer to the entire repeated-word pair, so we refer to it with `\1`.
-* And of course we have to do the extra backslash escaping, so the replacement string ends up as:
-   
-    >`*\\1*`
-    
-Whew!
-
-A function-replacement version is also possible:
-
-```{r}
-starRepeats <- function(str) {
-  str %>% 
-    str_replace_all(pattern = "(\\b(\\w+) \\2\\b)",
-                    replacement = function(x) {
-                      str_c("*", x, "*")
-                    }
-                    )
-}
-starRepeats("I have a boo boo on my knee knee.")
-```
 
 ### Detecting Matches
 
-If you have many strings---in a character-vector, say---and you want to know which of them contain a match to a particular pattern, then you want to use `str_subset()`. \index{R-functions!str\_subset()@\texttt{str\_subset()}}
+If you have many strings---in a character-vector, say---and you want to select those that contain a match to a particular pattern, then you want to use `str_subset()`. \index{R-functions!str\_subset()@\texttt{str\_subset()}}
 
 Consider, for example, the vector of strings:
 
@@ -755,7 +718,7 @@ By default `extract()` removes the original column, but you can preserve it with
 
 ### Counting Matches
 
-The function `str_count()` \index{R-functions!str\_count()@\texttt{str\_count()}}provides a very convenient way to tally up the *number* of matches that a given regex has in a string.  Here we use it to count the number of wrods in a string that begin with a lower or uppercase `p`.
+The function `str_count()` \index{R-functions!str\_count()@\texttt{str\_count()}}provides a very convenient way to tally up the *number* of matches that a given regex has in a string.  Here we use it to count the number of words in a string that begin with a lower or uppercase `p`.
 
 ```{r}
 strings <- c("Mary Poppins is practically perfect in every way!",
@@ -972,7 +935,7 @@ We might be curious to know what other books on Amazon our reviewers link to whe
 
 All of the Amazon links are generated for the user by the computer, so they will all have the same format.  Hence we can use a look-behind and a look-ahead to construct a regex that will be matched by any URL-fragment within such an anchor:
 
->(?<=\<a class=\\"\\"a-link-normal\\"\\" href=\\"\\"/)(.+?)(?=\\"\\"\>)
+>`(?<=\<a class=\\"\\"a-link-normal\\"\\" href=\\"\\"/)(.+?)(?=\\"\\"\>)`
 
 Checking carefully, we see that none of the tokens require extra escaping:  we can use this text as our pattern in regex function in R:
 

@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Beginning Computer Science with R</title>
+  <title>12.3 Regex Syntax | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:title" content="12.3 Regex Syntax | Beginning Computer Science with R />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="homerhanumat/r-notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  <meta name="twitter:title" content="12.3 Regex Syntax | Beginning Computer Science with R />
   
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="entering-a-regex-in-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -839,7 +840,7 @@ In regex syntax the symbol <code>|</code> (the vertical “pipe”) functions as
 <p><em>Anchors</em> help us accomplish this. The most important anchors to remember are:</p>
 <ul>
 <li><code>^</code>, which indicates (in technical terms, <em>asserts</em>) the beginning of a string;</li>
-<li><code>$</code>, which asserts the end of a string;<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a></li>
+<li><code>$</code>, which asserts the end of a string;<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a></li>
 <li><code>\b</code>, which asserts the presence of any type word-boundary (a space, tab, comma, semicolon, etc.).</li>
 </ul>
 <p>Here are some examples:</p>
@@ -857,14 +858,14 @@ In regex syntax the symbol <code>|</code> (the vertical “pipe”) functions as
 <p>What does <code>^Hello$</code> match? The rules would say that the string must start with H, continue on with e, l, l and then o, and end there, so you might think that the only possible string containing a match of <code>^Hello$</code> is the string “Hello” itself.</p>
 <p>But that’s not quite right:</p>
 <ul>
-<li>Go your online regex practice site (<a href="https://regex101.com/">Regular Expression 101</a>).</li>
+<li>Go your online regex practice site (<a href="https://regexr.com/">Regular Expression 101</a>).</li>
 <li>Enter the regex <code>hello$</code>.</li>
-<li>Then at the “Set Regex Options” flag (right after the “/g”), ask to enter multiline mode.</li>
-<li>You should now see “/gm” at the end.</li>
+<li>Then in the “Flags” dropdown menu, check “multiline”.</li>
+<li>You should now see “/gm” at the end of the regular expression. You have entered multiline mode.</li>
 <li>In the test-text field, enter “I say hello”, press Return, and continue on the next line with “Again I say hello”.</li>
 <li>You’ll see that both hello’s match.</li>
 </ul>
-<p>The reason for this is that in multiline mode <code>$</code> stands for the end of each line, not just the <em>absolute end</em>  of the string. From time to time you may deal with strings that run over multiple lines, so remember that if you want your ending anchors to represent end-of-line rather than the absolute end of the string, you’ll need to ask R to enter multiline mode. (Later on in the Chapter we’ll discuss some common modes and how to enter them in R.</p>
+<p>The reason for this is that in multiline mode <code>$</code> stands for the end of each line, not just the <em>absolute end</em>  of the string. From time to time you may deal with strings that run over multiple lines, so remember that if you want your ending anchors to represent end-of-line rather than the absolute end of the string, you’ll need to ask R to enter multiline mode. (Later on in the Chapter we’ll discuss some common modes and how to enter them in R.)</p>
 <p>The word-boundary anchor <code>\b</code> is quite useful. Consider the regex <code>bed</code> applied to the string below:</p>
 <blockquote>
 <p><em>bed</em> <em>bed</em>time pertur<em>bed</em></p>
@@ -919,7 +920,7 @@ How would you detect whether a particular instance of a pattern is repeated? For
 <li>… followed by the contents of the second group …</li>
 <li>… at a word-boundary.</li>
 </ul>
-<p>If you want to match a palindrome<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>consisting of five characters (“abcba”, “x444x”, etc.) then use:</p>
+<p>If you want to match a palindrome<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a> consisting of five characters (“abcba”, “x444x”, etc.) then use:</p>
 <blockquote>
 <p><code>\b(\w)(\w)\w\2\1\b</code></p>
 </blockquote>
@@ -963,9 +964,9 @@ How would you detect whether a particular instance of a pattern is repeated? For
 </div>
 <div class="footnotes">
 <hr />
-<ol start="31">
-<li id="fn31"><p>Well, actually it asserts the end of the string when we are not in “multiline mode.” In multiline mode it asserts the end of a line within a multiline string. This will be explained shortly.<a href="regex-syntax.html#fnref31" class="footnote-back">↩</a></p></li>
-<li id="fn32"><p>Recall that a <em>palindrome</em> is a word that is the same when spelled backwards.<a href="regex-syntax.html#fnref32" class="footnote-back">↩</a></p></li>
+<ol start="30">
+<li id="fn30"><p>Well, actually it asserts the end of the string when we are not in “multiline mode.” In multiline mode it asserts the end of a line within a multiline string. This will be explained shortly.<a href="regex-syntax.html#fnref30" class="footnote-back">↩</a></p></li>
+<li id="fn31"><p>Recall that a <em>palindrome</em> is a word that is the same when spelled backwards.<a href="regex-syntax.html#fnref31" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -994,7 +995,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -1004,6 +1005,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -1021,7 +1026,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

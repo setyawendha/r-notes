@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Beginning Computer Science with R</title>
+  <title>13.2 Reading Text Files with readLines() | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:title" content="13.2 Reading Text Files with readLines() | Beginning Computer Science with R />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="homerhanumat/r-notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  <meta name="twitter:title" content="13.2 Reading Text Files with readLines() | Beginning Computer Science with R />
   
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="reading-text-files-with-readr.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -579,7 +580,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">13.2</span> Reading Text Files with <code>readLines()</code></h2>
 <p>Let’s transfer the contents of <code>words.txt</code> to a character vector in R. The function for this is <code>readLines()</code>: </p>
 <pre class="sourceCode r"><code class="sourceCode r">words &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">con =</span> <span class="st">&quot;downloads/words.txt&quot;</span>)</code></pre>
-<p><code>readLines()</code> is similar to <code>readline()</code>, which we have used in the past to get a single line of input from the user. <code>readLines()</code> can also read from the console—this is called <em>standard input</em>—but it can also make a <em>connection</em><a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a> with any file. In the code above, we set the connection to be the file <code>words.txt</code>. By default <code>readLines()</code> reads the file—one line at a time as a string. The resulting character vector is named <code>words</code>.<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
+<p><code>readLines()</code> is similar to <code>readline()</code>, which we have used in the past to get a single line of input from the user. <code>readLines()</code> can also read from the console—this is called <em>standard input</em>—but it can also make a <em>connection</em><a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a> with any file. In the code above, we set the connection to be the file <code>words.txt</code>. By default <code>readLines()</code> reads the file—one line at a time as a string. The resulting character vector is named <code>words</code>.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
 <p>Let’s look at words to see if it came out the way we expected. The <code>head()</code> function  works not only on data frames but also on vectors:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(words)</code></pre>
 <pre><code>## [1] &quot;aa&quot;     &quot;aah&quot;    &quot;aahed&quot;  &quot;aahing&quot; &quot;aahs&quot;   &quot;aal&quot;</code></pre>
@@ -589,9 +590,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="34">
-<li id="fn34"><p>A <em>connection</em>, also known to R-programmers as a “generalized file”, is any one of a wide range of interfaces that can be established with the world outside of the R-session for the purpose of sending or receiving data. One can make a connection with files stored locally on one’s computer, with URL addresses on the internet, with databases, and so on.<a href="reading-text-files-with-readlines.html#fnref34" class="footnote-back">↩</a></p></li>
-<li id="fn35"><p>Note that the <strong>stringr</strong> package contains a vector named <code>words</code> that is used for practicing with regular expressions. This vector is now masked by the <code>words</code> vector you have created, but you can still access it as <code>stringr::words</code>.<a href="reading-text-files-with-readlines.html#fnref35" class="footnote-back">↩</a></p></li>
+<ol start="33">
+<li id="fn33"><p>A <em>connection</em>, also known to R-programmers as a “generalized file”, is any one of a wide range of interfaces that can be established with the world outside of the R-session for the purpose of sending or receiving data. One can make a connection with files stored locally on one’s computer, with URL addresses on the internet, with databases, and so on.<a href="reading-text-files-with-readlines.html#fnref33" class="footnote-back">↩</a></p></li>
+<li id="fn34"><p>Note that the <strong>stringr</strong> package contains a vector named <code>words</code> that is used for practicing with regular expressions. This vector is now masked by the <code>words</code> vector you have created, but you can still access it as <code>stringr::words</code>.<a href="reading-text-files-with-readlines.html#fnref34" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -620,7 +621,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -630,6 +631,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -647,7 +652,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

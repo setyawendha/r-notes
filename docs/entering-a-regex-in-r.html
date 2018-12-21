@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Beginning Computer Science with R</title>
+  <title>12.4 Entering a Regex in R | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Beginning Computer Science with R" />
+  <meta property="og:title" content="12.4 Entering a Regex in R | Beginning Computer Science with R />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="homerhanumat/r-notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Beginning Computer Science with R" />
+  <meta name="twitter:title" content="12.4 Entering a Regex in R | Beginning Computer Science with R />
   
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="application-amazon-book-reviews.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -640,9 +641,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;3/14/1963&quot;  &quot;4/13/2005&quot;  &quot;12/1/1997&quot;  &quot;11/11/1918&quot;</code></pre>
 <p>Here:</p>
 <ul>
-<li><code>pattern</code> is the regex that for the type of sub-string we want to replace;</li>
-<li><code>replacment</code> is what we want to replace matches of the pattern with;</li>
-<li><code>x</code> is the text in which the substitution occurs.</li>
+<li><code>x</code> (not explicitly seen above, due to the piping) is the text in which the substitution occurs;</li>
+<li><code>pattern</code> is the regex for the type of sub-string we want to replace;</li>
+<li><code>replacment</code> is what we want to replace matches of the pattern with.</li>
 </ul>
 <p>The <code>all</code> in the name of the function means that we want to replace <em>all</em> occurrences of the pattern with the replacement text. There is also a <code>str_replace()</code> function that performs replacement only with the <em>first</em> match (if any) that it finds:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dates <span class="op">%&gt;%</span><span class="st"> </span>
@@ -678,43 +679,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here is another function that searches for repeated words and encloses each pair in asterisks:</p>
 <pre class="sourceCode r"><code class="sourceCode r">starRepeats &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
   str <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">b)&quot;</span>,
-                    <span class="dt">replacement =</span> <span class="cf">function</span>(x) {
-                      <span class="kw">str_c</span>(<span class="st">&quot;*&quot;</span>, x, <span class="st">&quot;*&quot;</span>)
-                    }
-                    )
-}
-<span class="kw">starRepeats</span>(<span class="st">&quot;I have a boo boo on my knee knee.&quot;</span>)</code></pre>
-<pre><code>## [1] &quot;I have a *boo boo* on my *knee knee*.&quot;</code></pre>
-<p>The above substitution is tricky, and merits step-by-step analysis:</p>
-<ul>
-<li><p>In order to get a repeated word, you would start with the regex</p>
-<blockquote>
-<p><code>\b(\w+) \1\b</code>.</p>
-</blockquote></li>
-<li><p>In order to enter the regex into R as a string, you would need some escapes:</p>
-<blockquote>
-<p><code>\\b(\\w+) \\1\\b</code></p>
-</blockquote></li>
-<li><p>You need to wrap the whole expression in parentheses in order to capture it and refer to it in the replacement expression:</p>
-<blockquote>
-<p><code>(\\b(\\w+) \\1\\b)</code></p>
-</blockquote></li>
-<li><p>But now you have a problem: the back-reference <code>\1</code> applies to the <em>first</em> captured expression, which is the expression determined by the first opening parenthesis encountered. Hence it refers to the whole expression, which doesn’t make sense. We want to refer to the first word in the pair (the <code>(\\w+)</code>) so we need to back-reference it with <code>\2</code>:</p>
-<blockquote>
-<p><code>(\\b(\\w+) \\2\\b)</code></p>
-</blockquote></li>
-<li>Meanwhile, in the replacement string, we want to refer to the entire repeated-word pair, so we refer to it with <code>\1</code>.</li>
-<li><p>And of course we have to do the extra backslash escaping, so the replacement string ends up as:</p>
-<blockquote>
-<p><code>*\\1*</code></p>
-</blockquote></li>
-</ul>
-<p>Whew!</p>
-<p>A function-replacement version is also possible:</p>
-<pre class="sourceCode r"><code class="sourceCode r">starRepeats &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
-  str <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">b)&quot;</span>,
+<span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">b&quot;</span>,
                     <span class="dt">replacement =</span> <span class="cf">function</span>(x) {
                       <span class="kw">str_c</span>(<span class="st">&quot;*&quot;</span>, x, <span class="st">&quot;*&quot;</span>)
                     }
@@ -725,7 +690,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="detecting-matches" class="section level3">
 <h3><span class="header-section-number">12.4.4</span> Detecting Matches</h3>
-<p>If you have many strings—in a character-vector, say—and you want to know which of them contain a match to a particular pattern, then you want to use <code>str_subset()</code>. </p>
+<p>If you have many strings—in a character-vector, say—and you want to select those that contain a match to a particular pattern, then you want to use <code>str_subset()</code>. </p>
 <p>Consider, for example, the vector of strings:</p>
 <pre class="sourceCode r"><code class="sourceCode r">sentences &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;My name is Tom, Sir&quot;</span>,
                <span class="st">&quot;And I&#39;m Tulip!&quot;</span>,
@@ -835,7 +800,7 @@ sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 <div id="counting-matches" class="section level3">
 <h3><span class="header-section-number">12.4.7</span> Counting Matches</h3>
-<p>The function <code>str_count()</code> provides a very convenient way to tally up the <em>number</em> of matches that a given regex has in a string. Here we use it to count the number of wrods in a string that begin with a lower or uppercase <code>p</code>.</p>
+<p>The function <code>str_count()</code> provides a very convenient way to tally up the <em>number</em> of matches that a given regex has in a string. Here we use it to count the number of words in a string that begin with a lower or uppercase <code>p</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mary Poppins is practically perfect in every way!&quot;</span>,
              <span class="st">&quot;The best-laid plans of mice and men gang oft astray.&quot;</span>,
              <span class="st">&quot;Peter Piper picked a peck of pickled peppers.&quot;</span>)
@@ -1028,7 +993,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -1038,6 +1003,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -1055,7 +1024,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
