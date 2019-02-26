@@ -1519,7 +1519,7 @@ We'll choose a scatterplot with connecting lines for our graph of the sequence. 
 
 ```{r}
 collatz <- function(n, limit = 10000) {
-  # record initial numer because will change n
+  # record initial number because we will change n
   initial <- n  
   numbers <- numeric(limit)
   counter <- 0
@@ -1739,6 +1739,24 @@ farmSong <- function(animal, sound) {
     ```{r}
     pattern(char = "y", n = 5)
     ```
+    
+    **Hint:** You already know how to `cat` out a line consisting of any given number of a given character:
+    
+    ```{r}
+    char <- "*"  ## the desried character
+    i <- 4       ## the desired number of times
+    cat(rep(char, times = i), "\n", sep = "")
+    ```
+    
+    You need to make a vector that contains the desired "number of times", for each line.  Consider this method:
+    
+    ```{r}
+    n <- 5    ## say we want 1-2-3-4-5-4-3-2-1
+    lineNumbers <- c(1:(n-1), n, (n-1):1)
+    lineNumbers
+    ```
+    
+    Then you could write a `for`-loop that iterates over `lineNumbers`.
     
 1. Write a function called `checkerBoard()` that prints outs out checkerboard patterns like this:
 

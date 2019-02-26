@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2019-02-05">
+<meta name="date" content="2019-02-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -627,7 +627,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## yyyy
 ## yyy
 ## yy
-## y</code></pre></li>
+## y</code></pre>
+<p><strong>Hint:</strong> You already know how to <code>cat</code> out a line consisting of any given number of a given character:</p>
+<pre class="sourceCode r"><code class="sourceCode r">char &lt;-<span class="st"> &quot;*&quot;</span>  <span class="co">## the desried character</span>
+i &lt;-<span class="st"> </span><span class="dv">4</span>       <span class="co">## the desired number of times</span>
+<span class="kw">cat</span>(<span class="kw">rep</span>(char, <span class="dt">times =</span> i), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<pre><code>## ****</code></pre>
+<p>You need to make a vector that contains the desired “number of times”, for each line. Consider this method:</p>
+<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">5</span>    <span class="co">## say we want 1-2-3-4-5-4-3-2-1</span>
+lineNumbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span>(n<span class="dv">-1</span>), n, (n<span class="dv">-1</span>)<span class="op">:</span><span class="dv">1</span>)
+lineNumbers</code></pre>
+<pre><code>## [1] 1 2 3 4 5 4 3 2 1</code></pre>
+<p>Then you could write a <code>for</code>-loop that iterates over <code>lineNumbers</code>.</p></li>
 <li><p>Write a function called <code>checkerBoard()</code> that prints outs out checkerboard patterns like this:</p>
 <pre><code>## -----------
 ## |*|*|*|*|*|
