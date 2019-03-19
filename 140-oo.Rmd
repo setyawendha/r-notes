@@ -56,7 +56,7 @@ Consider a typical object:  my dog, for example.  He has various attributes:  hi
 
 Some of his attributes and methods Beau has simply in virtue of being the kind of thing that he is.  He is, after all, a dog---a member of the class Dog, let's say---and so like all other dogs he will have four legs and he will be able to bark and to annoy cats. Of course all dogs are animals---members of the more general class Animal, let's say---and all animals eat, so as an animal Beau *inherits* \index{inheritance}the method known as eating.  Of course all animals are material beings---members of the even-more general class Being, let's say---and all beings have a weight, and thus Beau has a weight, but the particular value of that weight---50 pounds---is determined by the way he has lived his life thus far.  Other dogs, animals and material beings have a weight, but they won't necessarily have the same weight as Beau.
 
-What emerges from this discussion is an (admittedly oversimplified) view of the world as a collection of complex objects.  These objects are related to one another in systematic ways--related closely when they are, for instance, both Dogs, and more more distantly, as when one is a Dog and another is a Cat.  And these objects can act on themselves and on each other in various ways, through their methods.
+What emerges from this discussion is an (admittedly oversimplified) view of the world as a collection of complex objects.  These objects are related to one another in systematic ways--related closely when they are, for instance, both Dogs, and more distantly, as when one is a Dog and another is a Cat.  And these objects can act on themselves and on each other in various ways, through their methods.
 
 The idea of Object-Oriented Programming is that since we are so used to viewing the *world* as a collection of objects that are constituted of various attributes and methods and that are related to one another through membership in classes of varying levels of generality, then it might help us to be able to view a *computer program* similarly---as a collection of objects thus constituted and thus related to one another.
 
@@ -121,9 +121,9 @@ Let's analyze the above code.  The function `R6Class()` has a quite a few parame
 * `public`:  a list of members of the class that are "public" in the sense that they can be accessed and used outside of the class.^[`R6Class()` has another parameter called `private`, which takes as value a list of members that can only be accessed within the class by members of the class, not by programmers working outside of the class itself.  In the course of development of very large and complex programs, it can be useful to keep some members private so that programmers don't accidentally change too much about the way objects work.  Since our programs are still on the small side, we won't worry about private members, for now.] Members are of two types:
     * *attributes*:  \index{attribute}the objects `name`, `age` and `desire`.  Currently these have value `NULL`, but they can be given other values later on.  What makes then attributes, though, is that they will not be given a function as a value.
     * *methods*:  \index{method}these are members of the class that are functions.  You can think of a "method" as a particular way of performing a common task that could be performed in many different ways. The four methods you see in `Person` are:
-    * `initialize`:  This is a function that will be run whenever a new object of class Person is created.  As we can see from its arguments, it will be possible to give values to the attributes `name`. `age` and `desire`  when this function is called.
-    * `set_age` and `set_desire` are functions that allow a user to set or to change the value of `age` and `desire` for an object of class Person.
-    * `greet`:  a function that will permit an object of class Person to issue a greeting.
+        * `initialize`:  This is a function that will be run whenever a new object of class Person is created.  As we can see from its arguments, it will be possible to give values to the attributes `name`. `age` and `desire`  when this function is called.
+        * `set_age` and `set_desire` are functions that allow a user to set or to change the value of `age` and `desire` for an object of class Person.
+        * `greet`:  a function that will permit an object of class Person to issue a greeting.
     
 Note the use of the term `self` in the code for the methods of the class.  When a method is called on an object, the term `self` will refer to the object on which the method is being called.  Hence, for example, in the code for `greet` the term `self$name` will evaluate to the name of the person who issues the greeting.
 
@@ -158,7 +158,7 @@ scarecrow <- Person$new(name = "Scarecrow", age = 0.038,
                       desire = "Brains")
 ```
 
-In *The Wizard of Oz*, Scarecrow is only two weeks old when Dorothy meets him, so his age is set at $2/52 = 0.38$ years.
+In *The Wizard of Oz*, Scarecrow is only two weeks old when Dorothy meets him, so his age is set at $2/52 \approx 0.038$ years.
 
 ### Getting and Setting Attributes
 
@@ -208,9 +208,9 @@ In the syntax for calling methods, we see one aspect of "message-passing":  `dor
 \index{reference semantics}
 \index{value semantics}
 
-R6 objects operate by what are known in computer programming as *reference semantics*.  This means that when the assignment operator is used to assign an R6 object to a variable, the new variable holds a *reference* to that object, not a copy of the new object.  This is in contrast *value semantics*, which is the way assignment usually works in R.  In value semantics, R a distinct copy of the value of the assigned object is created, and the new variable refers to that copy.
+R6 objects operate by what are known in computer programming as *reference semantics*.  This means that when the assignment operator is used to assign an R6 object to a variable, the new variable holds a *reference* to that object, not a copy of the new object.
 
-Below is an example of the familiar value semantics in action:
+This is in contrast *value semantics*, which is the way assignment usually works in R. In value semantics, R a distinct copy of the value of the assigned object is created, and the new variable refers to that copy. Below is an example of the familiar value semantics in action:
 
 
 ```{r}
