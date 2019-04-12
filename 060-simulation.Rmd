@@ -613,9 +613,6 @@ dual2 <- function(reps = 10000, seed = NULL, a, b) {
       if ( shield < 0 ) {
         return(cat("Shield strength cannot be set to a negative number!"))
       }
-      if (!is.null(seed) ) {
-        set.seed(seed)
-      }
       strengths <- runif(reps, min = 0, max = upper)
       damage <- pmax(0, strengths - shield)
       if ( verbose ) {
