@@ -9,7 +9,7 @@
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="8.2 Implementation in ggplot2 | Beginning Computer Science with R />
+  <meta property="og:title" content="8.2 Implementation in ggplot2 | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="homerhanumat/r-notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8.2 Implementation in ggplot2 | Beginning Computer Science with R />
+  <meta name="twitter:title" content="8.2 Implementation in ggplot2 | Beginning Computer Science with R" />
   
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2019-04-11">
+<meta name="date" content="2019-07-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -816,7 +816,7 @@ Figure 8.23: Violin plot of the fastest speed ever driven.
 Figure 8.24: Density plot of the fastest speed ever driven. Some rug glyphs overplot each other.
 </p>
 </div>
-<p>It would be nice to solve the problem by jittering the rug-ticks, but unfortunately rug-ticks don’t jitter nicely on their own. One reasonable workaround is to create one’s own randomly-jittered speeds and map the x-location of the rug-ticks to the new variable that holds the jittered values. The code below shows implements this idea, and results in Figure <a href="implementation-in-ggplot2.html#fig:impdensityfastest">8.25</a>.</p>
+<p>It would be nice to solve the problem by jittering the rug-ticks, but unfortunately rug-ticks added to density plots don’t jitter nicely on their own. One reasonable workaround is to create one’s own randomly-jittered speeds and map the x-location of the rug-ticks to the new variable that holds the jittered values. The code below shows implements this idea, and results in Figure <a href="implementation-in-ggplot2.html#fig:impdensityfastest">8.25</a>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(m111survey)
 m111survey<span class="op">$</span>jitteredSpeeds &lt;-<span class="st"> </span>m111survey<span class="op">$</span>fastest <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(n, <span class="dv">-1</span>, <span class="dv">1</span>)
 <span class="kw">ggplot</span>(m111survey, <span class="kw">aes</span>(<span class="dt">x =</span> fastest)) <span class="op">+</span><span class="st"> </span>
@@ -916,16 +916,16 @@ Figure 8.29: Aesthetic mapping is probably superior to facetting in this case.
 <h3><span class="header-section-number">8.2.7</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>With <code>mosaicData::SwimRecords</code>, make the following graph:</p>
-<img src="r-notes_files/figure-html/unnamed-chunk-794-1.png" width="95%" style="display: block; margin: auto;" /></li>
-<li><p>With <code>mosaicData::KidsFeet</code>, make the following graph:</p>
 <img src="r-notes_files/figure-html/unnamed-chunk-795-1.png" width="95%" style="display: block; margin: auto;" /></li>
+<li><p>With <code>mosaicData::KidsFeet</code>, make the following graph:</p>
+<img src="r-notes_files/figure-html/unnamed-chunk-796-1.png" width="95%" style="display: block; margin: auto;" /></li>
 <li><p>With <code>mosaicData::TenMileRace</code>, make the following graph:</p>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-796-1.png" width="95%" style="display: block; margin: auto;" />
+<p><img src="r-notes_files/figure-html/unnamed-chunk-797-1.png" width="95%" style="display: block; margin: auto;" />
 <strong>Hint:</strong> Make the call <code>geom_point(alpha = 0.2)</code>. The <code>alpha</code> parameter has a default-value of 1. The lower you set it, the more “transparent” the points are. Low values for <code>alpha</code> are helpful to deal with the effects of “over-plotting” when many points are crowded together.</p></li>
 <li><p>With <code>mosaicData::Gestation</code> make the following graph. The fill for the boxes is set to <code>&quot;burlywood&quot;</code>. The x-location is mapped to <code>factor(smoke)</code>, rather than to <code>smoke</code>.</p>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-797-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-798-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 <li><p>With <code>mosaicData::Galton</code>, make the following graph:</p>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-798-1.png" width="95%" style="display: block; margin: auto;" />
+<p><img src="r-notes_files/figure-html/unnamed-chunk-799-1.png" width="95%" style="display: block; margin: auto;" />
 <strong>Hint</strong>: The fill of the density plot is set to <code>&quot;burlywood&quot;</code>. The rug is made of randomly jittered father-heights.</p></li>
 </ol>
 </div>

@@ -997,6 +997,12 @@ Each row in the data frame corresponds to an employee in the survey.
     ```{r eval = FALSE}
     CPS85[ , -c(6, 9)]
     ```
+    
+    The `select` parameter of the `subset()` function has a little known feature that allows you to specify columns to omit by name, so the following is another solution:
+    
+    ```{r eval = FALSE}
+    subset(CPS85, select = -c(south, union))
+    ```
 
 ## Ordering Data Frames
 

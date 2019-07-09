@@ -9,7 +9,7 @@
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="7.6 Subsetting Data Frames | Beginning Computer Science with R />
+  <meta property="og:title" content="7.6 Subsetting Data Frames | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="homerhanumat/r-notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.6 Subsetting Data Frames | Beginning Computer Science with R />
+  <meta name="twitter:title" content="7.6 Subsetting Data Frames | Beginning Computer Science with R" />
   
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Homer White">
 
 
-<meta name="date" content="2019-04-11">
+<meta name="date" content="2019-07-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -694,7 +694,9 @@ df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span cl
 <pre class="sourceCode r"><code class="sourceCode r">CPS85[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(CPS85), <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>),
       <span class="kw">c</span>(<span class="st">&quot;wage&quot;</span>, <span class="st">&quot;sex&quot;</span>)]</code></pre></li>
 <li><p>Try this (<code>south</code> and <code>union</code> are columns 6 and 9, respectively):</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85[ , <span class="op">-</span><span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">9</span>)]</code></pre></li>
+<pre class="sourceCode r"><code class="sourceCode r">CPS85[ , <span class="op">-</span><span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">9</span>)]</code></pre>
+<p>The <code>select</code> parameter of the <code>subset()</code> function has a little known feature that allows you to specify columns to omit by name, so the following is another solution:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(CPS85, <span class="dt">select =</span> <span class="op">-</span><span class="kw">c</span>(south, union))</code></pre></li>
 </ol>
 </div>
 </div>
