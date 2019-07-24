@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.3 Operations on Matrices | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.3 Operations on Matrices | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="matrix-indexing.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -582,26 +580,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="arithmetical-operations" class="section level3">
 <h3><span class="header-section-number">7.3.1</span> Arithmetical Operations</h3>
 <p>The usual arithmetic operations apply to matrices, operating element-wise. For example, suppose that we have:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mat1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)
-mat2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb1157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1157-1" data-line-number="1">mat1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1157-2" data-line-number="2">mat2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p>To get the sum of the above two matrices, R adds their corresponding elements and forms a new matrix out of their sums, thus:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mat1 <span class="op">+</span><span class="st"> </span>mat2</code></pre>
+<div class="sourceCode" id="cb1158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1158-1" data-line-number="1">mat1 <span class="op">+</span><span class="st"> </span>mat2</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    3    3
 ## [2,]    3    3</code></pre>
 <p>R applies recycling as needed. For example, suppose we have:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)
-mat</code></pre>
+<div class="sourceCode" id="cb1160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1160-1" data-line-number="1">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1160-2" data-line-number="2">mat</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    3
 ## [2,]    2    4</code></pre>
 <p>In order to multiply each element of <code>mat</code> by 2, we need not create a 2-by-2 matrix of 2’s. We can simply multiply by 2, and R will take care of recycling the 2:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mat</code></pre>
+<div class="sourceCode" id="cb1162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1162-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mat</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    6
 ## [2,]    4    8</code></pre>
 <p>Or we could subtract 3 from each element of <code>mat</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mat <span class="op">-</span><span class="st"> </span><span class="dv">3</span></code></pre>
+<div class="sourceCode" id="cb1164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1164-1" data-line-number="1">mat <span class="op">-</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   -2    0
 ## [2,]   -1    1</code></pre>
@@ -610,25 +608,25 @@ mat</code></pre>
 <h3><span class="header-section-number">7.3.2</span> Matrix Multiplication</h3>
 <p>This section is optional reading, but it may interest you if you know about matrix multiplication in linear algebra.</p>
 <p>In order to accomplish matrix multiplication, we have to keep in mind that the regular multiplication operator <code>*</code> works element-wise on matrices, as we have already seen. For matrix multiplication R provides the special operator <code>%*%</code>. For example, consider the following matrices:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
-a</code></pre>
+<div class="sourceCode" id="cb1166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1166-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb1166-2" data-line-number="2">a</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    3    5
 ## [2,]    2    4    6</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">-1</span>), <span class="dt">nrow =</span> <span class="dv">3</span>)
-b</code></pre>
+<div class="sourceCode" id="cb1168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1168-1" data-line-number="1">b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">-1</span>), <span class="dt">nrow =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb1168-2" data-line-number="2">b</a></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    2
 ## [2,]    1
 ## [3,]   -1</code></pre>
 <p>Observe that the number of columns of <code>a</code> is equal to the number of rows of <code>b</code>. Hence it is possible to form the matrix product <code>a %*% b</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a <span class="op">%*%</span><span class="st"> </span>b</code></pre>
+<div class="sourceCode" id="cb1170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1170-1" data-line-number="1">a <span class="op">%*%</span><span class="st"> </span>b</a></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    0
 ## [2,]    2</code></pre>
 <p>As expected, the result is a matrix having as many rows as the rows of <code>a</code>and as many columns as the columns of <code>b</code>.</p>
 <p>It is also interesting to recall how matrix multiplication works when the second matrix has only one column. The product is obtained by multiplying each column of <code>a</code> by the element on the corresponding row of <code>b</code>, and adding the resulting matrices:</p>
-<pre class="sourceCode r"><code class="sourceCode r">b[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span>a[ ,<span class="dv">1</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>] <span class="op">+</span><span class="st"> </span>b[<span class="dv">2</span>,<span class="dv">1</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]<span class="op">*</span>a[ ,<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>b[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span>a[ ,<span class="dv">3</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre>
+<div class="sourceCode" id="cb1172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1172-1" data-line-number="1">b[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span>a[ ,<span class="dv">1</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>] <span class="op">+</span><span class="st"> </span>b[<span class="dv">2</span>,<span class="dv">1</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]<span class="op">*</span>a[ ,<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>b[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span>a[ ,<span class="dv">3</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    0
 ## [2,]    2</code></pre>
@@ -636,9 +634,9 @@ b</code></pre>
 <div id="logical-operations" class="section level3">
 <h3><span class="header-section-number">7.3.3</span> Logical Operations</h3>
 <p>Boolean operations apply to matrices element-wise, just as they do to ordinary vectors. The result is a matrix of logical values. For examples, consider the original matrix <code>numbersMat</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)</code></pre>
+<div class="sourceCode" id="cb1174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1174-1" data-line-number="1">numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)</a></code></pre></div>
 <p>Suppose we wish to determine which elements of <code>numbersMat</code> are odd. Then we simply ask whether the remainder of an element after division by 2 is equal to 1:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></code></pre>
+<div class="sourceCode" id="cb1175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1175-1" data-line-number="1">numbersMat <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <pre><code>##       [,1]  [,2]  [,3]  [,4]
 ## [1,]  TRUE  TRUE  TRUE  TRUE
 ## [2,] FALSE FALSE FALSE FALSE
@@ -647,25 +645,25 @@ b</code></pre>
 ## [5,]  TRUE  TRUE  TRUE  TRUE
 ## [6,] FALSE FALSE FALSE FALSE</code></pre>
 <p>We can select elements from a matrix using a Boolean operator, too:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[numbersMat <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]</code></pre>
+<div class="sourceCode" id="cb1177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1177-1" data-line-number="1">numbersMat[numbersMat <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]</a></code></pre></div>
 <pre><code>##  [1]  1  3  5  7  9 11 13 15 17 19 21 23</code></pre>
 <p>Note that the result is an ordinary, one-dimensional vector.</p>
 </div>
 <div id="practice-exercises-19" class="section level3">
 <h3><span class="header-section-number">7.3.4</span> Practice Exercises</h3>
 <p>We’ll work with the following three matrices:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">10</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)
-a</code></pre>
+<div class="sourceCode" id="cb1179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1179-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">10</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1179-2" data-line-number="2">a</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    7    9
 ## [2,]    4   10</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)
-b</code></pre>
+<div class="sourceCode" id="cb1181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1181-1" data-line-number="1">b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1181-2" data-line-number="2">b</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    3
 ## [2,]    2    4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">c &lt;-<span class="st"> </span><span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>], <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
-c</code></pre>
+<div class="sourceCode" id="cb1183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1183-1" data-line-number="1">c &lt;-<span class="st"> </span><span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>], <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1183-2" data-line-number="2">c</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,] &quot;a&quot;  &quot;b&quot;  &quot;c&quot;  &quot;d&quot; 
 ## [2,] &quot;e&quot;  &quot;f&quot;  &quot;g&quot;  &quot;h&quot; 
@@ -691,7 +689,7 @@ c</code></pre>
 ## [1,]    6    6
 ## [2,]    2    6</code></pre></li>
 <li><p>Describe in words what the following command does:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></code></pre></li>
+<div class="sourceCode" id="cb1189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1189-1" data-line-number="1">a <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></a></code></pre></div></li>
 <li><p>Write a one-line command using <code>a</code> that tells you which elements of <code>a</code> are one more than a multiple of 3.</p></li>
 <li><p>Using <code>c</code>, write a one-line boolean expression that produces the following:</p>
 <pre><code>##       [,1]  [,2]  [,3]  [,4]
@@ -707,11 +705,11 @@ c</code></pre>
 <h3><span class="header-section-number">7.3.5</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">3</span></code></pre></li>
+<div class="sourceCode" id="cb1191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1191-1" data-line-number="1">a <span class="op">+</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>a</code></pre></li>
+<div class="sourceCode" id="cb1192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1192-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>a</a></code></pre></div></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a<span class="op">^</span><span class="dv">2</span></code></pre></li>
+<div class="sourceCode" id="cb1193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1193-1" data-line-number="1">a<span class="op">^</span><span class="dv">2</span></a></code></pre></div></li>
 <li><p>Here’s one way:</p></li>
 </ol>
 <pre><code>```r
@@ -720,9 +718,9 @@ a - b
 <ol style="list-style-type: decimal">
 <li><p>It produces a logical matrix of the same dimensions as <code>a</code>. The new matrix will have <code>TRUE</code> in a cell when the corresponding cell of <code>a</code> is greater than 5. Otherwise, the cell will have <code>FALSE</code> in it.</p></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></code></pre></li>
+<div class="sourceCode" id="cb1195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1195-1" data-line-number="1">a <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">c <span class="op">&gt;=</span><span class="st"> &quot;h&quot;</span></code></pre></li>
+<div class="sourceCode" id="cb1196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1196-1" data-line-number="1">c <span class="op">&gt;=</span><span class="st"> &quot;h&quot;</span></a></code></pre></div></li>
 </ol>
 </div>
 </div>

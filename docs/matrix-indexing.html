@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.2 Matrix Indexing | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.2 Matrix Indexing | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="introduction-to-matrices.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,29 +578,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.2</span> Matrix Indexing</h2>
 <p>Matrices are incredibly useful in data analysis, but the primary reason we are talking about them now is to get you used to working in two dimensions. Let’s practice sub-setting with matrices.</p>
 <p>We use the sub-setting operator <code>[</code> to pick out parts of a matrix. For example, in order to get the element in the second row and third column of <code>numbersMat</code>, ask for:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">2</span>,<span class="dv">3</span>]</code></pre>
+<div class="sourceCode" id="cb1114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1114-1" data-line-number="1">numbersMat[<span class="dv">2</span>,<span class="dv">3</span>]</a></code></pre></div>
 <pre><code>## [1] 14</code></pre>
 <p>The row and column numbers are called <em>indices</em>.</p>
 <p>If we want the entire second row, then we could ask for:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">2</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</code></pre>
+<div class="sourceCode" id="cb1116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1116-1" data-line-number="1">numbersMat[<span class="dv">2</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a></code></pre></div>
 <pre><code>##  A  B  C  D 
 ##  2  8 14 20</code></pre>
 <p>The result is a one-dimensional vector consisting of the elements in the second row of <code>numbersMat</code>. It inherits as its names the column names of <code>numbersMat</code>.</p>
 <p>Actually, if you want the entire row you don’t have to specify which columns you want. Just leave the spot after the comma empty, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">2</span>, ]</code></pre>
+<div class="sourceCode" id="cb1118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1118-1" data-line-number="1">numbersMat[<span class="dv">2</span>, ]</a></code></pre></div>
 <pre><code>##  A  B  C  D 
 ##  2  8 14 20</code></pre>
 <p>What if you want some items on the second row, but only the items in columns 1, 2 and 4? Then frame your request in terms of a vector of column-indices:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">2</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)]</code></pre>
+<div class="sourceCode" id="cb1120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1120-1" data-line-number="1">numbersMat[<span class="dv">2</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)]</a></code></pre></div>
 <pre><code>##  A  B  D 
 ##  2  8 20</code></pre>
 <p>You can specify a vector of row-indices along with a vector of column-indices, if you like:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre>
+<div class="sourceCode" id="cb1122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1122-1" data-line-number="1">numbersMat[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
 <pre><code>##   A B  C
 ## a 1 7 13
 ## b 2 8 14</code></pre>
 <p>If the vector has row or column names then you may use them in place of indices to make a selection:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[, <span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;D&quot;</span>)]</code></pre>
+<div class="sourceCode" id="cb1124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1124-1" data-line-number="1">numbersMat[, <span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;D&quot;</span>)]</a></code></pre></div>
 <pre><code>##    B  D
 ## a  7 19
 ## b  8 20
@@ -611,8 +609,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## e 11 23
 ## f 12 24</code></pre>
 <p>You can use sub-setting to change the values of the elements of a matrix</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">2</span>,<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
-numbersMat</code></pre>
+<div class="sourceCode" id="cb1126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1126-1" data-line-number="1">numbersMat[<span class="dv">2</span>,<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb1126-2" data-line-number="2">numbersMat</a></code></pre></div>
 <pre><code>##   A  B  C  D
 ## a 1  7 13 19
 ## b 2  8  0 20
@@ -621,8 +619,8 @@ numbersMat</code></pre>
 ## e 5 11 17 23
 ## f 6 12 18 24</code></pre>
 <p>You can assign a value to an entire row:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">2</span>,] &lt;-<span class="st"> </span><span class="dv">0</span>
-numbersMat</code></pre>
+<div class="sourceCode" id="cb1128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1128-1" data-line-number="1">numbersMat[<span class="dv">2</span>,] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb1128-2" data-line-number="2">numbersMat</a></code></pre></div>
 <pre><code>##   A  B  C  D
 ## a 1  7 13 19
 ## b 0  0  0  0
@@ -632,8 +630,8 @@ numbersMat</code></pre>
 ## f 6 12 18 24</code></pre>
 <p>In the code above, the 0 was “recycled”  into each of the four elements of the second row</p>
 <p>You can assign the elements of a vector to corresponding selected elements of a matrix:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">2</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>)
-numbersMat</code></pre>
+<div class="sourceCode" id="cb1130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1130-1" data-line-number="1">numbersMat[<span class="dv">2</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>)</a>
+<a class="sourceLine" id="cb1130-2" data-line-number="2">numbersMat</a></code></pre></div>
 <pre><code>##     A   B   C   D
 ## a   1   7  13  19
 ## b 100 200 300 400
@@ -644,16 +642,16 @@ numbersMat</code></pre>
 <div id="to-drop-or-not" class="section level3">
 <h3><span class="header-section-number">7.2.1</span> To Drop or Not?</h3>
 <p>Note that when we ask for a single row of <code>numbersMat</code> we got a regular one-dimensional vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[<span class="dv">3</span>, ]</code></pre>
+<div class="sourceCode" id="cb1132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1132-1" data-line-number="1">numbersMat[<span class="dv">3</span>, ]</a></code></pre></div>
 <pre><code>##  A  B  C  D 
 ##  3  9 15 21</code></pre>
 <p>The same things happens if we ask for a single column:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[ , <span class="dv">2</span>]</code></pre>
+<div class="sourceCode" id="cb1134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1134-1" data-line-number="1">numbersMat[ , <span class="dv">2</span>]</a></code></pre></div>
 <pre><code>##   a   b   c   d   e   f 
 ##   7 200   9  10  11  12</code></pre>
 <p>We get the second column of <code>numbersMat</code>, but as a regular vector. It’s not a “column” anymore. (Note that it inherits the row names from <code>numbersMat</code>.)</p>
 <p>When a subset of a matrix comes from only one row or column, R takes the opportunity to “drop” the class of the subset from “matrix” to “vector.” If you would like the subset to stay a vector, set the <code>drop</code> parameter, which by default is <code>TRUE</code>, to <code>FALSE</code>. Thus the second column of <code>numbersMat</code>, kept as a matrix with six rows and one column, is found as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat[ , <span class="dv">2</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre>
+<div class="sourceCode" id="cb1136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1136-1" data-line-number="1">numbersMat[ , <span class="dv">2</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a></code></pre></div>
 <pre><code>##     B
 ## a   7
 ## b 200
@@ -666,11 +664,11 @@ numbersMat</code></pre>
 <div id="practice-exercises-18" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> Practice Exercises</h3>
 <p>In these exercises we’ll work with the following matrix:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbers &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">40</span>
-practiceMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">4</span>)
-<span class="kw">rownames</span>(practiceMatrix) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
-<span class="kw">colnames</span>(practiceMatrix) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
-practiceMatrix</code></pre>
+<div class="sourceCode" id="cb1138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1138-1" data-line-number="1">numbers &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">40</span></a>
+<a class="sourceLine" id="cb1138-2" data-line-number="2">practiceMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb1138-3" data-line-number="3"><span class="kw">rownames</span>(practiceMatrix) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb1138-4" data-line-number="4"><span class="kw">colnames</span>(practiceMatrix) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb1138-5" data-line-number="5">practiceMatrix</a></code></pre></div>
 <pre><code>##   A B  C  D  E  F  G  H  I  J
 ## a 1 5  9 13 17 21 25 29 33 37
 ## b 2 6 10 14 18 22 26 30 34 38
@@ -712,8 +710,8 @@ practiceMatrix</code></pre>
 ## c 3 11 15 19 23 27 31 35
 ## d 4 12 16 20 24 28 32 36</code></pre></li>
 <li><p>Write a function called <code>myRowSums()</code> that will find the sums of the rows of any given matrix. The function should use a <code>for</code>-loop (see the Chapter on Flow Control). The function should take a single parameter called <code>mat</code>, the matrix whose rows the user wishes to sum. It should work like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">ncol =</span> <span class="dv">6</span>)
-<span class="kw">myRowSums</span>(<span class="dt">mat =</span> myMatrix)</code></pre>
+<div class="sourceCode" id="cb1147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1147-1" data-line-number="1">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">ncol =</span> <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb1147-2" data-line-number="2"><span class="kw">myRowSums</span>(<span class="dt">mat =</span> myMatrix)</a></code></pre></div>
 <pre><code>## [1] 66 72 78 84</code></pre></li>
 </ol>
 </div>
@@ -721,29 +719,29 @@ practiceMatrix</code></pre>
 <h3><span class="header-section-number">7.2.3</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here are two ways:</p>
-<pre class="sourceCode r"><code class="sourceCode r">practiceMatrix[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>]
-practiceMatrix[<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;c&quot;</span>), <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>]</code></pre></li>
+<div class="sourceCode" id="cb1149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1149-1" data-line-number="1">practiceMatrix[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb1149-2" data-line-number="2">practiceMatrix[<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;c&quot;</span>), <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">practiceMatrix[ , <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dt">by =</span> <span class="dv">2</span>)]</code></pre></li>
+<div class="sourceCode" id="cb1150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1150-1" data-line-number="1">practiceMatrix[ , <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dt">by =</span> <span class="dv">2</span>)]</a></code></pre></div></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">practiceMatrix[ , <span class="dv">1</span>]</code></pre></li>
+<div class="sourceCode" id="cb1151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1151-1" data-line-number="1">practiceMatrix[ , <span class="dv">1</span>]</a></code></pre></div></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">practiceMatrix[<span class="dv">2</span>, ]</code></pre></li>
+<div class="sourceCode" id="cb1152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1152-1" data-line-number="1">practiceMatrix[<span class="dv">2</span>, ]</a></code></pre></div></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">practiceMatrix[ , <span class="dv">1</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></li>
+<div class="sourceCode" id="cb1153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1153-1" data-line-number="1">practiceMatrix[ , <span class="dv">1</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a></code></pre></div></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">practiceMatrix[ , <span class="dv">-10</span>]</code></pre></li>
+<div class="sourceCode" id="cb1154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1154-1" data-line-number="1">practiceMatrix[ , <span class="dv">-10</span>]</a></code></pre></div></li>
 <li><p>Here’s one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">practiceMatrix[ , <span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">10</span>)]</code></pre></li>
+<div class="sourceCode" id="cb1155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1155-1" data-line-number="1">practiceMatrix[ , <span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">10</span>)]</a></code></pre></div></li>
 <li><p>Here is one way to write the function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myRowSums &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {
-  n &lt;-<span class="st"> </span><span class="kw">nrow</span>(mat)
-  sums &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) {
-    sums[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(mat[i, ])
-  }
-  sums
-}</code></pre></li>
+<div class="sourceCode" id="cb1156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1156-1" data-line-number="1">myRowSums &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
+<a class="sourceLine" id="cb1156-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">nrow</span>(mat)</a>
+<a class="sourceLine" id="cb1156-3" data-line-number="3">  sums &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)</a>
+<a class="sourceLine" id="cb1156-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) {</a>
+<a class="sourceLine" id="cb1156-5" data-line-number="5">    sums[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(mat[i, ])</a>
+<a class="sourceLine" id="cb1156-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb1156-7" data-line-number="7">  sums</a>
+<a class="sourceLine" id="cb1156-8" data-line-number="8">}</a></code></pre></div></li>
 </ol>
 </div>
 </div>

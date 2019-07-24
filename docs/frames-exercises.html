@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Exercises | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Exercises | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="glossary-5.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -581,8 +579,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/thinking.png" width="50%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><p>R has a function called <code>t()</code> that computes the <em>transpose</em> of a given matrix. This means that it switches around the rows and columns of the matrix, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)
-myMatrix</code></pre>
+<div class="sourceCode" id="cb1320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1320-1" data-line-number="1">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb1320-2" data-line-number="2">myMatrix</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    7   13   19
 ## [2,]    2    8   14   20
@@ -590,7 +588,7 @@ myMatrix</code></pre>
 ## [4,]    4   10   16   22
 ## [5,]    5   11   17   23
 ## [6,]    6   12   18   24</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(myMatrix)</code></pre>
+<div class="sourceCode" id="cb1322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1322-1" data-line-number="1"><span class="kw">t</span>(myMatrix)</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
 ## [1,]    1    2    3    4    5    6
 ## [2,]    7    8    9   10   11   12
@@ -605,8 +603,8 @@ myMatrix</code></pre>
 <p>For the first task, <code>as.vector()</code> will be useful.</p>
 <p>For the second task, recall (see previous Practice Exercises from this Chapter) that there is a function <code>nrow()</code> that returns the number of rows of a given matrix. It will also be helpful to remember the function <code>ncol()</code> that computes the number of columns of a given matrix.</p></li>
 <li><p>R has functions called <code>rowSums()</code> and <code>colSums()</code> that will respectively sum the rows and the columns of a matrix. Here is an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)
-<span class="kw">rowSums</span>(myMatrix)</code></pre>
+<div class="sourceCode" id="cb1324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1324-1" data-line-number="1">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb1324-2" data-line-number="2"><span class="kw">rowSums</span>(myMatrix)</a></code></pre></div>
 <pre><code>## [1] 40 44 48 52 56 60</code></pre>
 Your task is to write your own function called <code>dimSum()</code> that will sum either the rows or the columns of a given matrix. The function should have two parameters:
 <ul>
@@ -614,10 +612,10 @@ Your task is to write your own function called <code>dimSum()</code> that will s
 <li><code>dim</code>: the dimension to sum along, either rows or columns. The default value should be <code>&quot;rows&quot;</code>. If the user sets <code>dim</code> to <code>&quot;columns&quot;</code> then the function would compute the column-sums.</li>
 </ul>
 <p><strong>You may NOT use <code>rowSums()</code> or <code>colSums()</code> in the code for your function.</strong> A typical example of use should look like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)
-<span class="kw">dimSum</span>(myMatrix)</code></pre>
+<div class="sourceCode" id="cb1326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1326-1" data-line-number="1">myMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb1326-2" data-line-number="2"><span class="kw">dimSum</span>(myMatrix)</a></code></pre></div>
 <pre><code>## [1] 40 44 48 52 56 60</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dimSum</span>(myMatrix, <span class="st">&quot;columns&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1328-1" data-line-number="1"><span class="kw">dimSum</span>(myMatrix, <span class="st">&quot;columns&quot;</span>)</a></code></pre></div>
 <pre><code>## [1]  21  57  93 129</code></pre>
 <p><strong>Hint</strong>: Recall that in previous Practice Exercises of this Chapter we made a function called <code>myRowSums()</code> that sums the rows of any given matrix. Modify the idea for <code>myRowSums()</code> to write a function called <code>myColSums()</code> that finds the column-sums of any given matrix. You may then use the two previously-created functions to write the required function <code>dimsum()</code>.</p></li>
 <li><p>Starting with <code>m111survey</code> in the <strong>bcscr</strong> package, write the code necessary to create a new data frame called <code>smaller</code> that consists precisely of the male students who believe in extraterrestrial life and who are more than 68 inches tall. The new data frame should contain all of the original variables except for <code>sex</code> and <code>extra_life</code>.</p></li>
@@ -627,14 +625,14 @@ Your task is to write your own function called <code>dimSum()</code> that will s
 <li><code>n</code>: the number of rows to select.</li>
 </ul>
 <p>If <code>n</code> is greater than the number of rows in <code>df</code>, the function should return immediately with a message informing the user that the required task is not possible and informing him/her of the number of rows in <code>df</code>. Typical examples of use should be as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dfRandSelect</span>(bcscr<span class="op">::</span>fuel, <span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb1330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1330-1" data-line-number="1"><span class="kw">dfRandSelect</span>(bcscr<span class="op">::</span>fuel, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>##    speed efficiency
-## 10   100       8.27
+## 12   120       9.87
+## 15   150      12.83
+## 7     70       6.30
 ## 6     60       5.90
-## 9     90       7.57
-## 14   140      11.77
-## 2     20      13.00</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dfRandSelect</span>(bcscr<span class="op">::</span>fuel, <span class="dv">200</span>)</code></pre>
+## 8     80       6.95</code></pre>
+<div class="sourceCode" id="cb1332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1332-1" data-line-number="1"><span class="kw">dfRandSelect</span>(bcscr<span class="op">::</span>fuel, <span class="dv">200</span>)</a></code></pre></div>
 <pre><code>## No can do!  The frame has only 15 rows.</code></pre>
 <p><strong>Hint</strong>: Use the function <code>nrow()</code>, which gives the number of rows of a matrix or data frame.</p></li>
 <li>(*) Create your own data frame, named <code>myFrame</code>. The frame should have 100 rows, along with the following variables:
@@ -644,24 +642,24 @@ Your task is to write your own function called <code>dimSum()</code> that will s
 <li><code>sex</code>: a factor whose possible value are “female” and “male”. Again, these values should be chosen randomly.</li>
 </ul>
 <p>A call to <code>str(myFrame)</code> would come out <em>like</em> this (although your results will vary a bit since the vectors are constructed randomly):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(myFrame)</code></pre>
+<div class="sourceCode" id="cb1334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1334-1" data-line-number="1"><span class="kw">str</span>(myFrame)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    100 obs. of  3 variables:
-##  $ lowerLetters: chr  &quot;hst&quot; &quot;stx&quot; &quot;knq&quot; &quot;bit&quot; ...
-##  $ height      : num  68.6 67 63.1 70.7 62 ...
-##  $ sex         : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 2 1 1 1 2 1 1 2 2 ...</code></pre>
+##  $ lowerLetters: chr  &quot;usu&quot; &quot;uhl&quot; &quot;xyj&quot; &quot;uyd&quot; ...
+##  $ height      : num  73.7 72.4 73.8 65.2 61.3 ...
+##  $ sex         : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 1 2 2 2 2 1 2 1 1 1 ...</code></pre>
 <p><code>summary()</code> is useful when working with data frames. Here is how a call to <code>summary(myFrame)</code> might look:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(myFrame)</code></pre>
+<div class="sourceCode" id="cb1336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1336-1" data-line-number="1"><span class="kw">summary</span>(myFrame)</a></code></pre></div>
 <pre><code>##  lowerLetters           height          sex    
-##  Length:100         Min.   :60.63   female:46  
-##  Class :character   1st Qu.:64.14   male  :54  
-##  Mode  :character   Median :68.56              
-##                     Mean   :68.06              
-##                     3rd Qu.:71.91              
-##                     Max.   :74.58</code></pre>
+##  Length:100         Min.   :60.00   female:57  
+##  Class :character   1st Qu.:63.63   male  :43  
+##  Mode  :character   Median :68.28              
+##                     Mean   :67.62              
+##                     3rd Qu.:71.63              
+##                     Max.   :74.57</code></pre>
 <p><strong>Hint</strong>: If you have a vector of three letters, such as</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;g&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;r&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1338-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;g&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;r&quot;</span>)</a></code></pre></div>
 <p>then you can paste them together as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(vec, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1339-1" data-line-number="1"><span class="kw">paste0</span>(vec, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;gar&quot;</code></pre></li>
 <li><p>(*) Study the data frame <code>fuel</code> in the <strong>bcscr</strong> package. Note that the fuel efficiency is reported as the number of liters of fuel required to travel 100 kilometers. Look up the conversion between gallons and liters and between kilometers and miles, and use this information to create a new variable called <code>mpg</code> that gives the fuel efficiency as miles per gallon. While you are at it, create a new variable <code>mph</code> that gives the speed in miles per hour. Finally, add these new variables to the <code>fuel</code> data frame.</p></li>
 <li>(*) Use matrices to generalize the simulation in the Appeals Court Paradox (see Section <a href="appeals-court-paradox.html#appeals-court-paradox">6.5</a>). Your goal is to write a simulation function called <code>appealsSimPlus()</code> that comes with all the options provided in the text, but with additional parameters so that the user can choose:
@@ -671,27 +669,27 @@ Your task is to write your own function called <code>dimSum()</code> that will s
 <li>the voting pattern (how many votes each judge gets).</li>
 </ul>
 <p>A typical call to the functions should look like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">appealsSimPlus</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">5252</span>, 
-               <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>),
-               <span class="dt">votes =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</code></pre>
+<div class="sourceCode" id="cb1341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1341-1" data-line-number="1"><span class="kw">appealsSimPlus</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">5252</span>, </a>
+<a class="sourceLine" id="cb1341-2" data-line-number="2">               <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>),</a>
+<a class="sourceLine" id="cb1341-3" data-line-number="3">               <span class="dt">votes =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</a></code></pre></div>
 <p>In the above call the court consists of five judges. The best one decides cases correctly 95% of the time, three are right 90% of the time and one is right 80%of the time. The voting arrangement is that the best judge gets two votes, the next three get one vote each, and the worst gets no vote. Any voting scheme—even a scheme involving fractional votes—should be allowed so long as the votes add up to the number of judges.</p>
 <p><strong>Here is a hint.</strong> When you write the function it may be helpful to use the fact that <code>rbinom()</code> can take a <code>prob</code> parameter that is a vector of any length. Here’s an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">6</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.10</span>, <span class="fl">0.50</span>, <span class="fl">0.90</span>))
-results</code></pre>
+<div class="sourceCode" id="cb1342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1342-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">6</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.10</span>, <span class="fl">0.50</span>, <span class="fl">0.90</span>))</a>
+<a class="sourceLine" id="cb1342-2" data-line-number="2">results</a></code></pre></div>
 <pre><code>## [1] 20 49 94 15 50 88</code></pre>
 <p>The first and fourth entries simulate a person tossing a fair coin 100 times when she has only a 10% chance of heads. The second and fifth entries simulate the same, when the chance of heads is 50%. The third and sixth simulate coin-tossing when there is a 90% chance of heads.</p>
 <p>If you would like to arrange the results more nicely—say in a matrix where each column gives the results for a different person—you can do so:</p>
-<pre class="sourceCode r"><code class="sourceCode r">resultsMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(results, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
-resultsMat</code></pre>
+<div class="sourceCode" id="cb1344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1344-1" data-line-number="1">resultsMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(results, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1344-2" data-line-number="2">resultsMat</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]   20   49   94
 ## [2,]   15   50   88</code></pre>
 <p>Of course judges don’t flip a coin 100 times, they decide one case at a time. Suppose you have five judges with probabilities as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">probCorrect &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)</code></pre>
+<div class="sourceCode" id="cb1346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1346-1" data-line-number="1">probCorrect &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)</a></code></pre></div>
 <p>If you would like to simulate the judges deciding, say, 6 cases, try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">5</span><span class="op">*</span><span class="dv">6</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob=</span> <span class="kw">rep</span>(probCorrect, <span class="dv">6</span>))
-resultsMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(results, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
-resultsMat</code></pre>
+<div class="sourceCode" id="cb1347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1347-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">5</span><span class="op">*</span><span class="dv">6</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob=</span> <span class="kw">rep</span>(probCorrect, <span class="dv">6</span>))</a>
+<a class="sourceLine" id="cb1347-2" data-line-number="2">resultsMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(results, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1347-3" data-line-number="3">resultsMat</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    1    1    1    0    1
 ## [2,]    0    1    1    1    1
@@ -700,10 +698,10 @@ resultsMat</code></pre>
 ## [5,]    1    1    1    1    1
 ## [6,]    1    1    1    1    0</code></pre>
 <p>When it comes to applying the voting pattern to compute the decision in each case, consider matrix multiplication. For example, suppose that the pattern is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">votes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</code></pre>
+<div class="sourceCode" id="cb1349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1349-1" data-line-number="1">votes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</a></code></pre></div>
 <p>Then make <code>votes</code> a one-column matrix and perform matrix multiplication:</p>
-<pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span>resultsMat <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(votes, <span class="dt">nrow =</span> <span class="dv">5</span>)
-correctVotes</code></pre>
+<div class="sourceCode" id="cb1350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1350-1" data-line-number="1">correctVotes &lt;-<span class="st"> </span>resultsMat <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(votes, <span class="dt">nrow =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1350-2" data-line-number="2">correctVotes</a></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    4
 ## [2,]    3

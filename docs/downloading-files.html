@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13.1 Downloading Files | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13.1 Downloading Files | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="files.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,16 +578,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">13.1</span> Downloading Files</h2>
 <p>First we’ll deal with the situation in which the data we want is in a file somewhere on the Internet. In this case we need only download the file to our computer.</p>
 <p>It’s a good idea to keep one’s work organized. Since we plan to begin downloading data files, we might as well create a directory dedicated to them. It’s easy to use the R Studio IDE to create the directory, but we might as well learn how the same task could be accomplished with an R-command. We will use the function <code>dir.create()</code>. </p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir.create</span>(<span class="st">&quot;downloads&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1823"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1823-1" data-line-number="1"><span class="kw">dir.create</span>(<span class="st">&quot;downloads&quot;</span>)</a></code></pre></div>
 <p>We are ready to begin downloading. Let’s begin with a file<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a> at the URL:</p>
 <blockquote>
 <p><a href="https://homerhanumat.github.io/r-notes/downloads/words.zip" class="uri">https://homerhanumat.github.io/r-notes/downloads/words.zip</a></p>
 </blockquote>
 <p>The relevant function is <code>download.file()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/homerhanumat/r-notes/blob/master/downloads/words.zip?raw=true&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;downloads/words.zip&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1824"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1824-1" data-line-number="1"><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/homerhanumat/r-notes/blob/master/downloads/words.zip?raw=true&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;downloads/words.zip&quot;</span>)</a></code></pre></div>
 <p>The file should now be in the <code>downloads</code> folder of your Home directory.</p>
 <p>We see that it’s a zip-file. R can unzip it for us:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unzip</span>(<span class="dt">zipfile =</span> <span class="st">&quot;downloads/words.zip&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1825"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1825-1" data-line-number="1"><span class="kw">unzip</span>(<span class="dt">zipfile =</span> <span class="st">&quot;downloads/words.zip&quot;</span>)</a></code></pre></div>
 <p>We now have the text-file <code>words.txt</code> in our <code>downloads</code> directory. In R Studio you can examine the contents of the file if you click on the file-name in your <strong>Files</strong> tab. You see something like this:</p>
 <pre><code>aa
 aah

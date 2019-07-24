@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.7 Investigate Your Object: str() and Lists | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.7 Investigate Your Object: str() and Lists | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="a-note-on-ellipses.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,20 +577,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="investigate-your-object-str-and-lists" class="section level2">
 <h2><span class="header-section-number">9.7</span> Investigate Your Object: <code>str()</code> and Lists</h2>
 <p>Let’s reconsider the Meetup Simulation from Section <a href="simulation-connect.html#simulation-connect">6.4</a>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">meetupSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  anna &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)
-  raj &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)
-  connect &lt;-<span class="st"> </span>(<span class="kw">abs</span>(anna <span class="op">-</span><span class="st"> </span>raj) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">table</span>(connect))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of tims they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb1477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1477-1" data-line-number="1">meetupSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1477-2" data-line-number="2">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1477-3" data-line-number="3">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1477-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb1477-5" data-line-number="5">  anna &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb1477-6" data-line-number="6">  raj &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb1477-7" data-line-number="7">  connect &lt;-<span class="st"> </span>(<span class="kw">abs</span>(anna <span class="op">-</span><span class="st"> </span>raj) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1477-8" data-line-number="8">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb1477-9" data-line-number="9">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1477-10" data-line-number="10">    <span class="kw">print</span>(<span class="kw">table</span>(connect))</a>
+<a class="sourceLine" id="cb1477-11" data-line-number="11">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1477-12" data-line-number="12">  }</a>
+<a class="sourceLine" id="cb1477-13" data-line-number="13">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of tims they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1477-14" data-line-number="14">}</a></code></pre></div>
 <p>You will recall that when the user asks for a table of results, the function prints out a table that looks like this:</p>
 <pre><code>## Here is a table of the results:
 
@@ -605,24 +603,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The names for the columns (<code>FALSE</code> and <code>TRUE</code>) again pertain to features internal to the code of the function. The user should see more descriptive names.</li>
 </ul>
 <p>In order to investigate how we might deal with these issues, let’s create a small table here:</p>
-<pre class="sourceCode r"><code class="sourceCode r">logicalVector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="ot">TRUE</span>, <span class="dv">6</span>), <span class="kw">rep</span>(<span class="ot">FALSE</span>, <span class="dv">4</span>))
-tab &lt;-<span class="st"> </span><span class="kw">table</span>(logicalVector)
-tab</code></pre>
+<div class="sourceCode" id="cb1479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1479-1" data-line-number="1">logicalVector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="ot">TRUE</span>, <span class="dv">6</span>), <span class="kw">rep</span>(<span class="ot">FALSE</span>, <span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb1479-2" data-line-number="2">tab &lt;-<span class="st"> </span><span class="kw">table</span>(logicalVector)</a>
+<a class="sourceLine" id="cb1479-3" data-line-number="3">tab</a></code></pre></div>
 <pre><code>## logicalVector
 ## FALSE  TRUE 
 ##     4     6</code></pre>
 <p>One way to deal with the column-name issues might be to isolate each table value and then repackage the values. We can access the individual table-values with sub-setting. For example, the first value is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">tab[<span class="dv">1</span>]</code></pre>
+<div class="sourceCode" id="cb1481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1481-1" data-line-number="1">tab[<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## FALSE 
 ##     4</code></pre>
 <p>Hence we could grab the values, create a vector from them, and then provide names for the vector that we like. Thus:</p>
-<pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw">c</span>(tab[<span class="dv">1</span>], tab[<span class="dv">2</span>])
-<span class="kw">names</span>(results) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;did not meet&quot;</span>, <span class="st">&quot;met&quot;</span>)
-results</code></pre>
+<div class="sourceCode" id="cb1483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1483-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">c</span>(tab[<span class="dv">1</span>], tab[<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb1483-2" data-line-number="2"><span class="kw">names</span>(results) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;did not meet&quot;</span>, <span class="st">&quot;met&quot;</span>)</a>
+<a class="sourceLine" id="cb1483-3" data-line-number="3">results</a></code></pre></div>
 <pre><code>## did not meet          met 
 ##            4            6</code></pre>
 <p>Another approach—and this is the more instructive and generally-useful procedure—is to begin by looking carefully at the structure of the problematic object:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(tab)</code></pre>
+<div class="sourceCode" id="cb1485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1485-1" data-line-number="1"><span class="kw">str</span>(tab)</a></code></pre></div>
 <pre><code>##  &#39;table&#39; int [1:2(1d)] 4 6
 ##  - attr(*, &quot;dimnames&quot;)=List of 1
 ##   ..$ logicalVector: chr [1:2] &quot;FALSE&quot; &quot;TRUE&quot;</code></pre>
@@ -634,34 +632,34 @@ results</code></pre>
 <li>The elements of this vector are the column names for the table.</li>
 </ul>
 <p>If you would like to see the <code>dimnames</code> attribute all by itself, you can access it with the <code>attr()</code> function :</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attr</span>(tab, <span class="dt">which =</span> <span class="st">&quot;dimnames&quot;</span>)  <span class="co"># &quot;which&quot; says which attribute you want!</span></code></pre>
+<div class="sourceCode" id="cb1487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1487-1" data-line-number="1"><span class="kw">attr</span>(tab, <span class="dt">which =</span> <span class="st">&quot;dimnames&quot;</span>)  <span class="co"># &quot;which&quot; says which attribute you want!</span></a></code></pre></div>
 <pre><code>## $logicalVector
 ## [1] &quot;FALSE&quot; &quot;TRUE&quot;</code></pre>
 <p>You can also use <code>attr()</code> to <em>set</em> the values of an attribute. Here, we want <code>dimnames</code> to be a list of length one that does not have a name for its sole element. The following should do the trick:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attr</span>(tab, <span class="dt">which =</span> <span class="st">&quot;dimnames&quot;</span>) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;did not meet&quot;</span>, <span class="st">&quot;met&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb1489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1489-1" data-line-number="1"><span class="kw">attr</span>(tab, <span class="dt">which =</span> <span class="st">&quot;dimnames&quot;</span>) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;did not meet&quot;</span>, <span class="st">&quot;met&quot;</span>))</a></code></pre></div>
 <p>Let’s see if this worked:</p>
-<pre class="sourceCode r"><code class="sourceCode r">tab</code></pre>
+<div class="sourceCode" id="cb1490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1490-1" data-line-number="1">tab</a></code></pre></div>
 <pre><code>## did not meet          met 
 ##            4            6</code></pre>
 <p>It appears to have worked very nicely! Hence we may rewrite <code>meetupSim()</code> as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">meetupSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  anna &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)
-  raj &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)
-  connect &lt;-<span class="st"> </span>(<span class="kw">abs</span>(anna <span class="op">-</span><span class="st"> </span>raj) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    tab &lt;-<span class="st"> </span><span class="kw">table</span>(connect)
-    <span class="kw">attr</span>(tab, <span class="dt">which =</span> <span class="st">&quot;dimnames&quot;</span>) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;did not meet&quot;</span>, <span class="st">&quot;met&quot;</span>))
-    <span class="kw">print</span>(tab)
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of tims they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb1492"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1492-1" data-line-number="1">meetupSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1492-2" data-line-number="2">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1492-3" data-line-number="3">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1492-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb1492-5" data-line-number="5">  anna &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb1492-6" data-line-number="6">  raj &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb1492-7" data-line-number="7">  connect &lt;-<span class="st"> </span>(<span class="kw">abs</span>(anna <span class="op">-</span><span class="st"> </span>raj) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1492-8" data-line-number="8">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb1492-9" data-line-number="9">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1492-10" data-line-number="10">    tab &lt;-<span class="st"> </span><span class="kw">table</span>(connect)</a>
+<a class="sourceLine" id="cb1492-11" data-line-number="11">    <span class="kw">attr</span>(tab, <span class="dt">which =</span> <span class="st">&quot;dimnames&quot;</span>) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;did not meet&quot;</span>, <span class="st">&quot;met&quot;</span>))</a>
+<a class="sourceLine" id="cb1492-12" data-line-number="12">    <span class="kw">print</span>(tab)</a>
+<a class="sourceLine" id="cb1492-13" data-line-number="13">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1492-14" data-line-number="14">  }</a>
+<a class="sourceLine" id="cb1492-15" data-line-number="15">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of tims they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1492-16" data-line-number="16">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="dv">3939</span>)</code></pre>
+<div class="sourceCode" id="cb1493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1493-1" data-line-number="1"><span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="dv">3939</span>)</a></code></pre></div>
 <pre><code>## Here is a table of the results:
 ## 
 ## did not meet          met 
@@ -678,10 +676,10 @@ results</code></pre>
 <h3><span class="header-section-number">9.7.1</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Consider the following matrix:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">4</span>)
-<span class="kw">rownames</span>(myMat) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
-<span class="kw">colnames</span>(myMat) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]
-myMat</code></pre>
+<div class="sourceCode" id="cb1495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1495-1" data-line-number="1">myMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>, <span class="dt">nrow =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb1495-2" data-line-number="2"><span class="kw">rownames</span>(myMat) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb1495-3" data-line-number="3"><span class="kw">colnames</span>(myMat) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]</a>
+<a class="sourceLine" id="cb1495-4" data-line-number="4">myMat</a></code></pre></div>
 <pre><code>##   A B  C  D  E  F
 ## a 1 5  9 13 17 21
 ## b 2 6 10 14 18 22
@@ -694,8 +692,8 @@ myMat</code></pre>
 <h3><span class="header-section-number">9.7.2</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>First, run <code>str(myMat)</code>. You find that it has an attribute called <code>dimnames</code> that is a list of length 2. The first element of this list is the vector of row names. Hence you need to assign new row names to this element. You can do so as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attr</span>(myMat, <span class="dt">which =</span> <span class="st">&quot;dimnames&quot;</span>)[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;w&quot;</span>)
-myMat</code></pre>
+<div class="sourceCode" id="cb1497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1497-1" data-line-number="1"><span class="kw">attr</span>(myMat, <span class="dt">which =</span> <span class="st">&quot;dimnames&quot;</span>)[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;w&quot;</span>)</a>
+<a class="sourceLine" id="cb1497-2" data-line-number="2">myMat</a></code></pre></div>
 <pre><code>##   A B  C  D  E  F
 ## x 1 5  9 13 17 21
 ## y 2 6 10 14 18 22

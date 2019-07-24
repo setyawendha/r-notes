@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13.3 Reading Text Files with readr | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13.3 Reading Text Files with readr | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="reading-text-files-with-readlines.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,7 +578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">13.3</span> Reading Text Files with <strong>readr</strong></h2>
 <p><code>words.txt</code> was unusually simple—just one piece of data per line. It made sense to read it into a vector. Most of the files that we encounter have a more complex structure. In many cases it is best to incorporate them into R as data frames.</p>
 <p>R has several tools for reading data into data frames. One of the most convenient—and most popular—is the set of functions in the <strong>readr</strong> package <span class="citation">(Wickham, Hester, and Francois <a href="#ref-R-readr">2018</a>)</span>. It’s attached automatically when you load the tidy-verse, but you can also attach it separately:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)</code></pre>
+<div class="sourceCode" id="cb1832"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1832-1" data-line-number="1"><span class="kw">library</span>(readr)</a></code></pre></div>
 <p>Let’s practice reading in a file from the Internet. The URL is:</p>
 <blockquote>
 <p><a href="https://query.data.world/s/b6plbxp3ym20s5a5iey36geul" class="uri">https://query.data.world/s/b6plbxp3ym20s5a5iey36geul</a></p>
@@ -598,13 +596,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>You may then press the <strong>Import</strong> button.</li>
 </ul>
 <p>The data is read into <code>alcGDP</code> according to the <code>read_csv()</code> call below:</p>
-<pre class="sourceCode r"><code class="sourceCode r">alcGDP &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://query.data.world/s/b6plbxp3ym20s5a5iey36geul&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1833"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1833-1" data-line-number="1">alcGDP &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://query.data.world/s/b6plbxp3ym20s5a5iey36geul&quot;</span>)</a></code></pre></div>
 <p>If you pressed the <strong>Import</strong> button, then you can see <code>alcGDP</code> in the Editor window. Notice that is has five variables. Two of them have only <code>NA</code> values, and the final two of them have names that are simply too long to be practical. Go ahead and fix this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(alcGDP)[<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;liters&quot;</span>, <span class="st">&quot;gdp&quot;</span>)
-alcGDP<span class="op">$</span>YearDisplay &lt;-<span class="st"> </span><span class="ot">NULL</span>
-alcGDP<span class="op">$</span>SexDisplay &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre>
+<div class="sourceCode" id="cb1834"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1834-1" data-line-number="1"><span class="kw">names</span>(alcGDP)[<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;liters&quot;</span>, <span class="st">&quot;gdp&quot;</span>)</a>
+<a class="sourceLine" id="cb1834-2" data-line-number="2">alcGDP<span class="op">$</span>YearDisplay &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb1834-3" data-line-number="3">alcGDP<span class="op">$</span>SexDisplay &lt;-<span class="st"> </span><span class="ot">NULL</span></a></code></pre></div>
 <p>Now take a look at the frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(alcGDP)</code></pre>
+<div class="sourceCode" id="cb1835"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1835-1" data-line-number="1"><span class="kw">head</span>(alcGDP)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   country     liters    gdp
 ##   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
@@ -618,10 +616,10 @@ alcGDP<span class="op">$</span>SexDisplay &lt;-<span class="st"> </span><span cl
 <p>From the Console output you can tell that <code>alcGDP</code> is a tibble rather than a data frame. (The default behavior for <code>read_csv()</code> is to import data as tibbles.)</p>
 <p>We won’t analyze <code>alcGDP</code> here, but you might want to look at it later. You can save it permanently to your Home directory with the <code>save()</code> function:</p>
 <p></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save</span>(alcGDP, <span class="dt">file =</span> <span class="st">&quot;downloads/alcGDP.rda&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1837"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1837-1" data-line-number="1"><span class="kw">save</span>(alcGDP, <span class="dt">file =</span> <span class="st">&quot;downloads/alcGDP.rda&quot;</span>)</a></code></pre></div>
 <p><code>alcGDP</code> is still in your Global Environment. If you clear the environment later on, you can reload <code>alcGDP</code> as follows:</p>
 <p></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;downloads/alcGDP.rda&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1838"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1838-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;downloads/alcGDP.rda&quot;</span>)</a></code></pre></div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">

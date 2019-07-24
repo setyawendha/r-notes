@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.4 Returning Multiple Values | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.4 Returning Multiple Values | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="lists-splitting.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,36 +578,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.4</span> Returning Multiple Values</h2>
 <p>Lists combine many different sorts of objects into one object. This makes them very useful in the context of certain functions.</p>
 <p>Consider, for example, the drunken-turtle simulation from Section <a href="drunken-turtle-sim.html#drunken-turtle-sim">6.8</a>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
-                       <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  
-  returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
-  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
-  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
-  
-  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
-  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
-  
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)
-  closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)
-  returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)
-  }
-  
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(returns))
-    <span class="kw">print</span>(tab)
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The average number of close returns was:  &quot;</span>, 
-      <span class="kw">mean</span>(returns), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb1451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1451-1" data-line-number="1">drunkenSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, </a>
+<a class="sourceLine" id="cb1451-2" data-line-number="2">                       <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {</a>
+<a class="sourceLine" id="cb1451-3" data-line-number="3">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1451-4" data-line-number="4">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1451-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb1451-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb1451-7" data-line-number="7">  returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)</a>
+<a class="sourceLine" id="cb1451-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb1451-9" data-line-number="9">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {</a>
+<a class="sourceLine" id="cb1451-10" data-line-number="10">  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)</a>
+<a class="sourceLine" id="cb1451-11" data-line-number="11">  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)</a>
+<a class="sourceLine" id="cb1451-12" data-line-number="12">  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</a>
+<a class="sourceLine" id="cb1451-13" data-line-number="13">  </a>
+<a class="sourceLine" id="cb1451-14" data-line-number="14">  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)</a>
+<a class="sourceLine" id="cb1451-15" data-line-number="15">  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)</a>
+<a class="sourceLine" id="cb1451-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb1451-17" data-line-number="17">  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1451-18" data-line-number="18">  closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb1451-19" data-line-number="19">  returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)</a>
+<a class="sourceLine" id="cb1451-20" data-line-number="20">  }</a>
+<a class="sourceLine" id="cb1451-21" data-line-number="21">  </a>
+<a class="sourceLine" id="cb1451-22" data-line-number="22">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb1451-23" data-line-number="23">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1451-24" data-line-number="24">    tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(returns))</a>
+<a class="sourceLine" id="cb1451-25" data-line-number="25">    <span class="kw">print</span>(tab)</a>
+<a class="sourceLine" id="cb1451-26" data-line-number="26">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1451-27" data-line-number="27">  }</a>
+<a class="sourceLine" id="cb1451-28" data-line-number="28">  <span class="kw">cat</span>(<span class="st">&quot;The average number of close returns was:  &quot;</span>, </a>
+<a class="sourceLine" id="cb1451-29" data-line-number="29">      <span class="kw">mean</span>(returns), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1451-30" data-line-number="30">}</a></code></pre></div>
 <p>Suppose that we would like to store several of the results of the simulation:</p>
 <ul>
 <li>the vector of the number of close returns on each repetition;</li>
@@ -618,52 +616,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Unfortunately a function can only return <em>one</em> object.</p>
 <p>The solution to your problem is to make a list of the three objects we want, and then return the list. We can re-write the function so as to make all output to the console optional. The function will construct the list and return it invisibly.</p>
-<pre class="sourceCode r"><code class="sourceCode r">drunkenSimList &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
-                       <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  
-  <span class="co"># get the returns:</span>
-  returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
-  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
-  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
-  
-  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
-  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
-  
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)
-  closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)
-  returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)
-  }
-  <span class="co"># compute the table and the mean:</span>
-  tableReturns &lt;-<span class="st"> </span><span class="kw">table</span>(returns)
-  meanReturns &lt;-<span class="st"> </span><span class="kw">mean</span>(returns)
-  
-  <span class="co"># handle output to console if user wants it</span>
-  <span class="cf">if</span> ( verbose ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">prop.table</span>(tableReturns))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    <span class="kw">cat</span>(<span class="st">&quot;The average number of close returns was:  &quot;</span>, 
-      meanReturns, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }
-  
-  <span class="co"># assemble the desired three items into a list</span>
-  <span class="co"># (for conveneince, name the items)</span>
-  results &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">tableReturns =</span> tableReturns,
-                  <span class="dt">meanReturns =</span> meanReturns,
-                  <span class="dt">returns =</span> returns)
-  <span class="co"># return the list</span>
-  <span class="kw">invisible</span>(results)
-}</code></pre>
+<div class="sourceCode" id="cb1452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1452-1" data-line-number="1">drunkenSimList &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, </a>
+<a class="sourceLine" id="cb1452-2" data-line-number="2">                       <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {</a>
+<a class="sourceLine" id="cb1452-3" data-line-number="3">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1452-4" data-line-number="4">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1452-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb1452-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb1452-7" data-line-number="7">  <span class="co"># get the returns:</span></a>
+<a class="sourceLine" id="cb1452-8" data-line-number="8">  returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)</a>
+<a class="sourceLine" id="cb1452-9" data-line-number="9">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {</a>
+<a class="sourceLine" id="cb1452-10" data-line-number="10">  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)</a>
+<a class="sourceLine" id="cb1452-11" data-line-number="11">  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)</a>
+<a class="sourceLine" id="cb1452-12" data-line-number="12">  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</a>
+<a class="sourceLine" id="cb1452-13" data-line-number="13">  </a>
+<a class="sourceLine" id="cb1452-14" data-line-number="14">  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)</a>
+<a class="sourceLine" id="cb1452-15" data-line-number="15">  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)</a>
+<a class="sourceLine" id="cb1452-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb1452-17" data-line-number="17">  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1452-18" data-line-number="18">  closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb1452-19" data-line-number="19">  returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)</a>
+<a class="sourceLine" id="cb1452-20" data-line-number="20">  }</a>
+<a class="sourceLine" id="cb1452-21" data-line-number="21">  <span class="co"># compute the table and the mean:</span></a>
+<a class="sourceLine" id="cb1452-22" data-line-number="22">  tableReturns &lt;-<span class="st"> </span><span class="kw">table</span>(returns)</a>
+<a class="sourceLine" id="cb1452-23" data-line-number="23">  meanReturns &lt;-<span class="st"> </span><span class="kw">mean</span>(returns)</a>
+<a class="sourceLine" id="cb1452-24" data-line-number="24">  </a>
+<a class="sourceLine" id="cb1452-25" data-line-number="25">  <span class="co"># handle output to console if user wants it</span></a>
+<a class="sourceLine" id="cb1452-26" data-line-number="26">  <span class="cf">if</span> ( verbose ) {</a>
+<a class="sourceLine" id="cb1452-27" data-line-number="27">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1452-28" data-line-number="28">    <span class="kw">print</span>(<span class="kw">prop.table</span>(tableReturns))</a>
+<a class="sourceLine" id="cb1452-29" data-line-number="29">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1452-30" data-line-number="30">    <span class="kw">cat</span>(<span class="st">&quot;The average number of close returns was:  &quot;</span>, </a>
+<a class="sourceLine" id="cb1452-31" data-line-number="31">      meanReturns, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1452-32" data-line-number="32">  }</a>
+<a class="sourceLine" id="cb1452-33" data-line-number="33">  </a>
+<a class="sourceLine" id="cb1452-34" data-line-number="34">  <span class="co"># assemble the desired three items into a list</span></a>
+<a class="sourceLine" id="cb1452-35" data-line-number="35">  <span class="co"># (for conveneince, name the items)</span></a>
+<a class="sourceLine" id="cb1452-36" data-line-number="36">  results &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">tableReturns =</span> tableReturns,</a>
+<a class="sourceLine" id="cb1452-37" data-line-number="37">                  <span class="dt">meanReturns =</span> meanReturns,</a>
+<a class="sourceLine" id="cb1452-38" data-line-number="38">                  <span class="dt">returns =</span> returns)</a>
+<a class="sourceLine" id="cb1452-39" data-line-number="39">  <span class="co"># return the list</span></a>
+<a class="sourceLine" id="cb1452-40" data-line-number="40">  <span class="kw">invisible</span>(results)</a>
+<a class="sourceLine" id="cb1452-41" data-line-number="41">}</a></code></pre></div>
 <p>Now we can run the function simply to acquire the simulation results for later use:</p>
-<pre class="sourceCode r"><code class="sourceCode r">simResults &lt;-<span class="st"> </span><span class="kw">drunkenSimList</span>(<span class="dt">seed =</span> <span class="dv">3939</span>)</code></pre>
+<div class="sourceCode" id="cb1453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1453-1" data-line-number="1">simResults &lt;-<span class="st"> </span><span class="kw">drunkenSimList</span>(<span class="dt">seed =</span> <span class="dv">3939</span>)</a></code></pre></div>
 <p>We can use any of the results at any time and in any way we like:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;On the first ten repetitions, the number of close returns were:</span><span class="ch">\n\n\t</span><span class="st">&quot;</span>,
-    simResults<span class="op">$</span>returns[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre>
+<div class="sourceCode" id="cb1454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1454-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;On the first ten repetitions, the number of close returns were:</span><span class="ch">\n\n\t</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb1454-2" data-line-number="2">    simResults<span class="op">$</span>returns[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a></code></pre></div>
 <pre><code>## On the first ten repetitions, the number of close returns were:
 ## 
 ##   0 6 4 4 2 0 2 5 2 4</code></pre>

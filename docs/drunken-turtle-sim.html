@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.8 Example: The Drunken Turtle | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.8 Example: The Drunken Turtle | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="example-dental-floss.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -587,10 +585,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In particular, we would like to know the distribution of <span class="math inline">\(X\)</span>: what is the chance that the turtle does not make a close return during the first thousand steps? What’s the chance of making only one close return? Two close returns? And so on … . We would also like to estimate the expected value of <span class="math inline">\(X\)</span>: the average number of close returns in the first 1000 steps.</p>
 <p>We will next consider how to code a simulation. Obviously we will need a way to record the turtle’s position at each step. In order to accomplish this we will have to apply the unit-circle trigonometry you learned in high school.</p>
 <p>Instead of measuring angles in degrees, we will work in radians: by default R does trigonometry that way. Recall that 360 degrees is <span class="math inline">\(2 \pi\)</span> radians; hence the way to determine the angle of a turn by the drunken turtle is with the following call to <code>runif()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</code></pre>
+<div class="sourceCode" id="cb1069"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1069-1" data-line-number="1"><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</a></code></pre></div>
 <pre><code>## [1] 4.146176</code></pre>
 <p>If we want a thousand drunken turn-angles, then we can get them all in a vector, as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</code></pre>
+<div class="sourceCode" id="cb1071"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1071-1" data-line-number="1"><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</a></code></pre></div>
 <p>So much for the turning angles. But in order to decide at each step whether the turtle has made a close return, we have to know the coordinates of the turtle after each step. This is where unit-circle trigonometry comes in handy. Recall that if a right triangle has a hypotenuse of length 1 (the length of a turtle step) and if one of the angles of the triangle is <span class="math inline">\(\alpha\)</span>, then the side adjacent to <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(\cos(\alpha)\)</span> and the side opposite is <span class="math inline">\(\sin(\alpha)\)</span>. The situation is illustrated in Figure <a href="drunken-turtle-sim.html#fig:right-triangle">6.4</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:right-triangle"></span>
 <img src="images/righttriangle.png" alt="Sides of a right triangle with hypotenuse 1, in terms of the angle shown." width="75%" />
@@ -615,16 +613,16 @@ Figure 6.5: The first two steps by the Drunken Turtle. Turtle turns by <span cla
 </p>
 </div>
 <p>Let’s put this idea into practice, for just the first ten steps. First, get the turning angles, the sines and the cosines:</p>
-<pre class="sourceCode r"><code class="sourceCode r">angle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
-xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
-ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</code></pre>
+<div class="sourceCode" id="cb1072"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1072-1" data-line-number="1">angle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)</a>
+<a class="sourceLine" id="cb1072-2" data-line-number="2">xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)</a>
+<a class="sourceLine" id="cb1072-3" data-line-number="3">ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</a></code></pre></div>
 <p>Next, we need to add the <code>xSteps</code> together. If we do a sum, we would get the <span class="math inline">\(x\)</span>-coordinate after the tenth step:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(xSteps)</code></pre>
+<div class="sourceCode" id="cb1073"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1073-1" data-line-number="1"><span class="kw">sum</span>(xSteps)</a></code></pre></div>
 <pre><code>## [1] -1.370258</code></pre>
 <p>(Apparently some of the cosines were negative, meaning that some of the turning angles were between 90 and 270 degrees.)</p>
 <p>We need the <span class="math inline">\(x\)</span>-coordinates after all of the previous steps, as well. This can be accomplished by R’s <code>cumsum()</code> function.  You may think of <code>cumsum</code> as short for “cumulative sum”. Given a vector <code>vec</code> of numbers, <code>cumsum(vec)</code> returns a vector of the same length, where for every index <code>i</code>, <code>cumsum(vec)[i]</code> is <code>sum(vec[1:i])</code>. This is made clear in the following example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">-1</span>, <span class="dv">4</span>, <span class="dv">-2</span>)
-<span class="kw">cumsum</span>(vec)</code></pre>
+<div class="sourceCode" id="cb1075"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1075-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">-1</span>, <span class="dv">4</span>, <span class="dv">-2</span>)</a>
+<a class="sourceLine" id="cb1075-2" data-line-number="2"><span class="kw">cumsum</span>(vec)</a></code></pre></div>
 <pre><code>## [1] 3 5 4 8 6</code></pre>
 <p>Look at the table below.</p>
 <table>
@@ -665,16 +663,16 @@ ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</code></
 </table>
 <p>See how it works?</p>
 <p>Returning to <code>xSteps</code>, we see that we can get the <span class="math inline">\(x\)</span>-coordinates of the first ten steps like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
-x</code></pre>
+<div class="sourceCode" id="cb1077"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1077-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)</a>
+<a class="sourceLine" id="cb1077-2" data-line-number="2">x</a></code></pre></div>
 <pre><code>##  [1] -0.6034165 -1.3905805 -2.1259607 -3.1154380 -2.4593130 -1.5476110
 ##  [7] -0.8591924 -1.6420445 -0.6421761 -1.3702583</code></pre>
 <p>Similarly we can get the first ten <span class="math inline">\(y\)</span>-coordinates:</p>
-<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)</code></pre>
+<div class="sourceCode" id="cb1079"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1079-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)</a></code></pre></div>
 <p>Using the distance formula, we can compute the distance of each point from the origin as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb1080"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1080-1" data-line-number="1">dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <p>The following logical vector will then record, at each each step, whether or not the turtle has made a close return:</p>
-<pre class="sourceCode r"><code class="sourceCode r">closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)</code></pre>
+<div class="sourceCode" id="cb1081"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1081-1" data-line-number="1">closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)</a></code></pre></div>
 <p>The results are shown in Table <a href="drunken-turtle-sim.html#tab:tensteptab">6.3</a>.</p>
 <table>
 <caption><span id="tab:tensteptab">Table 6.3: </span>Record of the turtle’s first ten steps. It has not yet made a close return.</caption>
@@ -783,41 +781,41 @@ x</code></pre>
 </tbody>
 </table>
 <p>It remains only to package our code into a simulation function. We will allow the user to specify the fixed initial number of steps (it does not have to be 1000), and also to determine what distance counts as a “close return.”</p>
-<pre class="sourceCode r"><code class="sourceCode r">drunkenSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, 
-                       <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  
-  <span class="co"># set up returns vector to store the number of </span>
-  <span class="co"># close returns in each repetition:</span>
-  returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
-  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
-  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
-  
-  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
-  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
-  
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)
-  closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)
-  returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)
-  }
-  
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(returns))
-    <span class="kw">print</span>(tab)
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The average number of close returns was:  &quot;</span>, 
-      <span class="kw">mean</span>(returns), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb1082"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1082-1" data-line-number="1">drunkenSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">close =</span> <span class="fl">0.5</span>, </a>
+<a class="sourceLine" id="cb1082-2" data-line-number="2">                       <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>) {</a>
+<a class="sourceLine" id="cb1082-3" data-line-number="3">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1082-4" data-line-number="4">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1082-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb1082-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb1082-7" data-line-number="7">  <span class="co"># set up returns vector to store the number of </span></a>
+<a class="sourceLine" id="cb1082-8" data-line-number="8">  <span class="co"># close returns in each repetition:</span></a>
+<a class="sourceLine" id="cb1082-9" data-line-number="9">  returns &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)</a>
+<a class="sourceLine" id="cb1082-10" data-line-number="10">  </a>
+<a class="sourceLine" id="cb1082-11" data-line-number="11">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {</a>
+<a class="sourceLine" id="cb1082-12" data-line-number="12">  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)</a>
+<a class="sourceLine" id="cb1082-13" data-line-number="13">  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)</a>
+<a class="sourceLine" id="cb1082-14" data-line-number="14">  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</a>
+<a class="sourceLine" id="cb1082-15" data-line-number="15">  </a>
+<a class="sourceLine" id="cb1082-16" data-line-number="16">  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)</a>
+<a class="sourceLine" id="cb1082-17" data-line-number="17">  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)</a>
+<a class="sourceLine" id="cb1082-18" data-line-number="18">  </a>
+<a class="sourceLine" id="cb1082-19" data-line-number="19">  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1082-20" data-line-number="20">  closeReturn &lt;-<span class="st"> </span>(dist <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb1082-21" data-line-number="21">  returns[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(closeReturn)</a>
+<a class="sourceLine" id="cb1082-22" data-line-number="22">  }</a>
+<a class="sourceLine" id="cb1082-23" data-line-number="23">  </a>
+<a class="sourceLine" id="cb1082-24" data-line-number="24">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb1082-25" data-line-number="25">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the number of close returns:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1082-26" data-line-number="26">    tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(returns))</a>
+<a class="sourceLine" id="cb1082-27" data-line-number="27">    <span class="kw">print</span>(tab)</a>
+<a class="sourceLine" id="cb1082-28" data-line-number="28">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1082-29" data-line-number="29">  }</a>
+<a class="sourceLine" id="cb1082-30" data-line-number="30">  <span class="kw">cat</span>(<span class="st">&quot;The average number of close returns was:  &quot;</span>, </a>
+<a class="sourceLine" id="cb1082-31" data-line-number="31">      <span class="kw">mean</span>(returns), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1082-32" data-line-number="32">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">drunkenSim</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, 
-           <span class="dt">close =</span> <span class="fl">0.5</span>, <span class="dt">seed =</span> <span class="dv">3535</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb1083"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1083-1" data-line-number="1"><span class="kw">drunkenSim</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, </a>
+<a class="sourceLine" id="cb1083-2" data-line-number="2">           <span class="dt">close =</span> <span class="fl">0.5</span>, <span class="dt">seed =</span> <span class="dv">3535</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Here is a table of the number of close returns:
 ## 
 ## returns
@@ -829,25 +827,25 @@ x</code></pre>
 ## The average number of close returns was:  1.5655.</code></pre>
 <p>Notice that 38.81% of the time the turtle did not make a close return at all during the first thousand steps. On the other hand it is possible, though not at all likely, for the turtle to make quite a few close returns.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
 <p>It is interesting to look specifically at the distances from the origin. The following function draws a graph of the distance from the origin for the specified number of turtle steps:</p>
-<pre class="sourceCode r"><code class="sourceCode r">drunkenSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  
-  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)
-  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)
-  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)
-  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)
-  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)
-  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)
-  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;First &quot;</span>, steps, <span class="st">&quot; Steps of the Drunken Turtle&quot;</span>)
-  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span>steps, <span class="dt">y=</span>dist)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Distance From Origin&quot;</span>,
-         <span class="dt">title =</span> plotTitle)
-  <span class="kw">print</span>(p)
-}</code></pre>
+<div class="sourceCode" id="cb1085"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1085-1" data-line-number="1">drunkenSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1085-2" data-line-number="2">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1085-3" data-line-number="3">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1085-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb1085-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb1085-6" data-line-number="6">  angle &lt;-<span class="st"> </span><span class="kw">runif</span>(steps, <span class="dv">0</span> , <span class="dv">2</span><span class="op">*</span>pi)</a>
+<a class="sourceLine" id="cb1085-7" data-line-number="7">  xSteps &lt;-<span class="st"> </span><span class="kw">cos</span>(angle)</a>
+<a class="sourceLine" id="cb1085-8" data-line-number="8">  ySteps &lt;-<span class="st"> </span><span class="kw">sin</span>(angle)</a>
+<a class="sourceLine" id="cb1085-9" data-line-number="9">  x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)</a>
+<a class="sourceLine" id="cb1085-10" data-line-number="10">  y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)</a>
+<a class="sourceLine" id="cb1085-11" data-line-number="11">  dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1085-12" data-line-number="12">  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;First &quot;</span>, steps, <span class="st">&quot; Steps of the Drunken Turtle&quot;</span>)</a>
+<a class="sourceLine" id="cb1085-13" data-line-number="13">  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span>steps, <span class="dt">y=</span>dist)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1085-14" data-line-number="14"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Distance From Origin&quot;</span>,</a>
+<a class="sourceLine" id="cb1085-15" data-line-number="15">         <span class="dt">title =</span> plotTitle)</a>
+<a class="sourceLine" id="cb1085-16" data-line-number="16">  <span class="kw">print</span>(p)</a>
+<a class="sourceLine" id="cb1085-17" data-line-number="17">}</a></code></pre></div>
 <p>Let’s try it out! The results appear in Figure <a href="drunken-turtle-sim.html#fig:drunken-turtle-steps">6.6</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">drunkenSim2</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="dv">2525</span>)</code></pre>
+<div class="sourceCode" id="cb1086"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1086-1" data-line-number="1"><span class="kw">drunkenSim2</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="dv">2525</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:drunken-turtle-steps"></span>
 <img src="r-notes_files/figure-html/drunken-turtle-steps-1.png" alt="Line plot of the Turtle's distance from the origin, as a function of how many steps the turtle has taken." width="60%" />
 <p class="caption">

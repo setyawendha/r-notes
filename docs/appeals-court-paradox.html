@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.5 Example: the Appeals Court Paradox | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.5 Example: the Appeals Court Paradox | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="simulation-connect.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -590,12 +588,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We are interested in estimating the probability that the majority opinion of the court will be correct.</p>
 <p>Before we write a simulation in full, we should consider how we are going to simulate something that has a specified percentage chance of happening. For example, how would we simulate decisions made by Judge A?</p>
 <p>One approach is to use <code>runif()</code> with a cutoff:</p>
-<pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>) <span class="co"># random number between 0 and 1</span>
-number <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.95</span></code></pre>
+<div class="sourceCode" id="cb1019"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1019-1" data-line-number="1">number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>) <span class="co"># random number between 0 and 1</span></a>
+<a class="sourceLine" id="cb1019-2" data-line-number="2">number <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.95</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>In repeated trials, a random real number between 0 and 1 will turn out to be less than 0.95 about 95% of the time.</p>
 <p>Another—and more convenient—way is to use the function <code>rbinom()</code>.  This function simulates the results of flipping a coin a number of times and counting how many heads one gets. The general form of a call to <code>rbinom()</code>is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(n, size, prob)</code></pre>
+<div class="sourceCode" id="cb1021"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1021-1" data-line-number="1"><span class="kw">rbinom</span>(n, size, prob)</a></code></pre></div>
 <p>In this call:</p>
 <ul>
 <li><code>size</code> is how many times you plan to flip the coin;</li>
@@ -603,11 +601,11 @@ number <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.9
 <li><code>n</code> is how many times you plan to repeat the process of flipping the coin <code>size</code> times (counting up the number of heads each time).</li>
 </ul>
 <p>In order to simulate flipping a fair coin 100 times, you could ask for:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre>
+<div class="sourceCode" id="cb1022"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1022-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>## [1] 52</code></pre>
 <p>It seems that we got 52 heads!</p>
 <p>If you want to go through the above process twenty times instead of just doing it once, you could ask for:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre>
+<div class="sourceCode" id="cb1024"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1024-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>##  [1] 52 49 45 57 53 60 46 53 50 54 59 47 42 45 41 56 47 57 56 49</code></pre>
 <p>Nothing in <code>rbinom()</code> says that it addresses only coin-flipping. In general it serves as a model for any situation in which:</p>
 <ul>
@@ -620,22 +618,22 @@ number <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.9
 <p>In such a situation the count of the number of successes is called a <em>binomial</em> random variable.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> The <code>size</code> parameter in <code>rbinom()</code> gives the fixed number of trials. The <code>prob</code> parameter specifies the chance of success on each trial.</p>
 <p>In this example we would like to simulate each judge deciding about each case. Suppose for example, that there are twenty cases. We would like to know, for each judge and each case, whether or not the judge was correct</p>
 <p>Suppose we were to watch Judge A making 20 decisions, recording each time whether she was correct or not. In order to simulate the results with R, we could ask for:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</code></pre>
+<div class="sourceCode" id="cb1026"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1026-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</a></code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1</code></pre>
 <p>In the above results, each 1 stands for a correct decision and the 0 stands for an incorrect decision.</p>
 <p>Note that the following call would be incorrect:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</code></pre>
+<div class="sourceCode" id="cb1028"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1028-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)</a></code></pre></div>
 <p>This would give us a <em>count</em> of the number of times Judge A was correct, but it would not tell us which of the cases she judged correctly and which she judged incorrectly.</p>
 <p>Assuming that the court hears 20 cases, we would like to simulate the decision of each judge in each case. We could store the results in variables, as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)  <span class="co"># Judge A</span>
-b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.94</span>)  <span class="co"># Judge B</span>
-c &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.90</span>)  <span class="co"># Judge C</span>
-d &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.90</span>)  <span class="co"># Judge D</span>
-e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.80</span>)  <span class="co"># Judge E</span></code></pre>
+<div class="sourceCode" id="cb1029"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1029-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.95</span>)  <span class="co"># Judge A</span></a>
+<a class="sourceLine" id="cb1029-2" data-line-number="2">b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.94</span>)  <span class="co"># Judge B</span></a>
+<a class="sourceLine" id="cb1029-3" data-line-number="3">c &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.90</span>)  <span class="co"># Judge C</span></a>
+<a class="sourceLine" id="cb1029-4" data-line-number="4">d &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.90</span>)  <span class="co"># Judge D</span></a>
+<a class="sourceLine" id="cb1029-5" data-line-number="5">e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.80</span>)  <span class="co"># Judge E</span></a></code></pre></div>
 <p>Now we come to the key idea in coding our simulation: in order to determine the total number of correct votes in each case, all we need to do is <em>add</em> the five vectors we created above:</p>
-<pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d <span class="op">+</span><span class="st"> </span>e</code></pre>
+<div class="sourceCode" id="cb1030"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1030-1" data-line-number="1">correctVotes &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d <span class="op">+</span><span class="st"> </span>e</a></code></pre></div>
 <p>The court will decide correctly when the number of votes for the correct option is at least 3. The following logical vector records this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb1031"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1031-1" data-line-number="1">courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)</a></code></pre></div>
 <p>Table <a href="appeals-court-paradox.html#tab:judge-votes">6.2</a> shows some possible results:</p>
 <table>
 <caption><span id="tab:judge-votes">Table 6.2: </span>Results of 20 simulated appeals court decisions.</caption>
@@ -835,46 +833,46 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 </table>
 <p>Note that all of the court’s decisions were correct, even though in a couple of cases the correct decisions were barely in the majority.</p>
 <p>We now have the basic idea of the simulation. In order to estimate the probability of a correct decision, we simply need to recast our idea in the form of a function that permits us to simulate a very large number of imaginary court cases and that will report the results to us. Here is the code for such a function.</p>
-<pre class="sourceCode r"><code class="sourceCode r">courtSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,
-                     <span class="dt">seed =</span> <span class="ot">NULL</span>,
-                     <span class="dt">table =</span> <span class="ot">FALSE</span>,
-                     <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.94</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)) {
-  
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  
-  <span class="co"># get the probabilities</span>
-  aProb &lt;-<span class="st"> </span>probs[<span class="dv">1</span>]
-  bProb &lt;-<span class="st"> </span>probs[<span class="dv">2</span>]
-  cProb &lt;-<span class="st"> </span>probs[<span class="dv">3</span>]
-  dProb &lt;-<span class="st"> </span>probs[<span class="dv">4</span>]
-  eProb &lt;-<span class="st"> </span>probs[<span class="dv">5</span>]
-  
-  <span class="co"># simulate decisions of each judge:                 </span>
-  a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> aProb)
-  b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> bProb)
-  c &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> cProb)
-  d &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> dProb)
-  e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> eProb)
-  
-  <span class="co"># count the number of correct votes in each case:</span>
-  correctVotes &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d <span class="op">+</span><span class="st"> </span>e
-  
-  <span class="co"># determine whether court decided correctly, in each case:</span>
-  courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)
-  
-  <span class="co"># record results</span>
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">table</span>(courtCorrect))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of times the court was correct was &quot;</span>, 
-      <span class="kw">mean</span>(courtCorrect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb1032"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1032-1" data-line-number="1">courtSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,</a>
+<a class="sourceLine" id="cb1032-2" data-line-number="2">                     <span class="dt">seed =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb1032-3" data-line-number="3">                     <span class="dt">table =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb1032-4" data-line-number="4">                     <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.94</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)) {</a>
+<a class="sourceLine" id="cb1032-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb1032-6" data-line-number="6">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1032-7" data-line-number="7">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1032-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb1032-9" data-line-number="9">  </a>
+<a class="sourceLine" id="cb1032-10" data-line-number="10">  <span class="co"># get the probabilities</span></a>
+<a class="sourceLine" id="cb1032-11" data-line-number="11">  aProb &lt;-<span class="st"> </span>probs[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb1032-12" data-line-number="12">  bProb &lt;-<span class="st"> </span>probs[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb1032-13" data-line-number="13">  cProb &lt;-<span class="st"> </span>probs[<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb1032-14" data-line-number="14">  dProb &lt;-<span class="st"> </span>probs[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb1032-15" data-line-number="15">  eProb &lt;-<span class="st"> </span>probs[<span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb1032-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb1032-17" data-line-number="17">  <span class="co"># simulate decisions of each judge:                 </span></a>
+<a class="sourceLine" id="cb1032-18" data-line-number="18">  a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> aProb)</a>
+<a class="sourceLine" id="cb1032-19" data-line-number="19">  b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> bProb)</a>
+<a class="sourceLine" id="cb1032-20" data-line-number="20">  c &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> cProb)</a>
+<a class="sourceLine" id="cb1032-21" data-line-number="21">  d &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> dProb)</a>
+<a class="sourceLine" id="cb1032-22" data-line-number="22">  e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> eProb)</a>
+<a class="sourceLine" id="cb1032-23" data-line-number="23">  </a>
+<a class="sourceLine" id="cb1032-24" data-line-number="24">  <span class="co"># count the number of correct votes in each case:</span></a>
+<a class="sourceLine" id="cb1032-25" data-line-number="25">  correctVotes &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d <span class="op">+</span><span class="st"> </span>e</a>
+<a class="sourceLine" id="cb1032-26" data-line-number="26">  </a>
+<a class="sourceLine" id="cb1032-27" data-line-number="27">  <span class="co"># determine whether court decided correctly, in each case:</span></a>
+<a class="sourceLine" id="cb1032-28" data-line-number="28">  courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb1032-29" data-line-number="29">  </a>
+<a class="sourceLine" id="cb1032-30" data-line-number="30">  <span class="co"># record results</span></a>
+<a class="sourceLine" id="cb1032-31" data-line-number="31">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb1032-32" data-line-number="32">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1032-33" data-line-number="33">    <span class="kw">print</span>(<span class="kw">table</span>(courtCorrect))</a>
+<a class="sourceLine" id="cb1032-34" data-line-number="34">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1032-35" data-line-number="35">  }</a>
+<a class="sourceLine" id="cb1032-36" data-line-number="36">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of times the court was correct was &quot;</span>, </a>
+<a class="sourceLine" id="cb1032-37" data-line-number="37">      <span class="kw">mean</span>(courtCorrect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1032-38" data-line-number="38">}</a></code></pre></div>
 <p>Let’s now estimate the probability of the court rendering a correct verdict, using one hundred thousand simulated cases:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">courtSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3838</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1033-1" data-line-number="1"><span class="kw">courtSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3838</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Here is a table of the results:
 ## 
 ## courtCorrect
@@ -885,47 +883,47 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 <p>The court seems to be doing quite well! But of course this is not very surprising: after all, most of the judges make the correct decision almost all the time. It is interesting, though, that the chance of the <em>full court</em> rendering a correct verdict is higher than the chance of any individual judge to be correct. There appears to be a benefit to the voting procedure.</p>
 <p>But things get even more interesting if we imagine that the judges recognize, after some time, that Judge E simply isn’t as sharp as Judge A, and that they pressure him into voting whichever way Judge A votes. “Surely”, they reason, “since Judge A is so good this new policy will increase our chance to hand down a correct verdict!”</p>
 <p>We will simulate to see if the judges’ reasoning is correct. All we need to do is to count Judge A’s vote twice in the sum, and not count Judge E’s vote at all:</p>
-<pre class="sourceCode r"><code class="sourceCode r">correctVotes &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d</code></pre>
+<div class="sourceCode" id="cb1035"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1035-1" data-line-number="1">correctVotes &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d</a></code></pre></div>
 <p>Here is the new simulation-function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">courtSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,
-                     <span class="dt">seed =</span> <span class="ot">NULL</span>,
-                     <span class="dt">table =</span> <span class="ot">FALSE</span>,
-                     <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.94</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)) {
-  
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  
-  <span class="co"># get the probabilities</span>
-  aProb &lt;-<span class="st"> </span>probs[<span class="dv">1</span>]
-  bProb &lt;-<span class="st"> </span>probs[<span class="dv">2</span>]
-  cProb &lt;-<span class="st"> </span>probs[<span class="dv">3</span>]
-  dProb &lt;-<span class="st"> </span>probs[<span class="dv">4</span>]
-  eProb &lt;-<span class="st"> </span>probs[<span class="dv">5</span>]
-  
-  <span class="co"># simulate decisions (this time, no need for Judge E) :             </span>
-  a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> aProb)
-  b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> bProb)
-  c &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> cProb)
-  d &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> dProb)
-  
-  <span class="co"># count rhe number of correct votes in each case:</span>
-  correctVotes &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d
-  
-  <span class="co"># determine whether court decided correctly, in each case:</span>
-  courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)
-  
-  <span class="co"># record results</span>
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">table</span>(courtCorrect))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of times the court was correct was &quot;</span>, 
-      <span class="kw">mean</span>(courtCorrect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1036-1" data-line-number="1">courtSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>,</a>
+<a class="sourceLine" id="cb1036-2" data-line-number="2">                     <span class="dt">seed =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb1036-3" data-line-number="3">                     <span class="dt">table =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb1036-4" data-line-number="4">                     <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.95</span>, <span class="fl">0.94</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>, <span class="fl">0.80</span>)) {</a>
+<a class="sourceLine" id="cb1036-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb1036-6" data-line-number="6">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1036-7" data-line-number="7">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1036-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb1036-9" data-line-number="9">  </a>
+<a class="sourceLine" id="cb1036-10" data-line-number="10">  <span class="co"># get the probabilities</span></a>
+<a class="sourceLine" id="cb1036-11" data-line-number="11">  aProb &lt;-<span class="st"> </span>probs[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb1036-12" data-line-number="12">  bProb &lt;-<span class="st"> </span>probs[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb1036-13" data-line-number="13">  cProb &lt;-<span class="st"> </span>probs[<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb1036-14" data-line-number="14">  dProb &lt;-<span class="st"> </span>probs[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb1036-15" data-line-number="15">  eProb &lt;-<span class="st"> </span>probs[<span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb1036-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb1036-17" data-line-number="17">  <span class="co"># simulate decisions (this time, no need for Judge E) :             </span></a>
+<a class="sourceLine" id="cb1036-18" data-line-number="18">  a &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> aProb)</a>
+<a class="sourceLine" id="cb1036-19" data-line-number="19">  b &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> bProb)</a>
+<a class="sourceLine" id="cb1036-20" data-line-number="20">  c &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> cProb)</a>
+<a class="sourceLine" id="cb1036-21" data-line-number="21">  d &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> reps, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> dProb)</a>
+<a class="sourceLine" id="cb1036-22" data-line-number="22">  </a>
+<a class="sourceLine" id="cb1036-23" data-line-number="23">  <span class="co"># count rhe number of correct votes in each case:</span></a>
+<a class="sourceLine" id="cb1036-24" data-line-number="24">  correctVotes &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>a <span class="op">+</span><span class="st"> </span>b <span class="op">+</span><span class="st"> </span>c <span class="op">+</span><span class="st"> </span>d</a>
+<a class="sourceLine" id="cb1036-25" data-line-number="25">  </a>
+<a class="sourceLine" id="cb1036-26" data-line-number="26">  <span class="co"># determine whether court decided correctly, in each case:</span></a>
+<a class="sourceLine" id="cb1036-27" data-line-number="27">  courtCorrect &lt;-<span class="st"> </span>(correctVotes <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb1036-28" data-line-number="28">  </a>
+<a class="sourceLine" id="cb1036-29" data-line-number="29">  <span class="co"># record results</span></a>
+<a class="sourceLine" id="cb1036-30" data-line-number="30">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb1036-31" data-line-number="31">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1036-32" data-line-number="32">    <span class="kw">print</span>(<span class="kw">table</span>(courtCorrect))</a>
+<a class="sourceLine" id="cb1036-33" data-line-number="33">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1036-34" data-line-number="34">  }</a>
+<a class="sourceLine" id="cb1036-35" data-line-number="35">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of times the court was correct was &quot;</span>, </a>
+<a class="sourceLine" id="cb1036-36" data-line-number="36">      <span class="kw">mean</span>(courtCorrect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1036-37" data-line-number="37">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">courtSim2</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3838</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb1037"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1037-1" data-line-number="1"><span class="kw">courtSim2</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3838</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Here is a table of the results:
 ## 
 ## courtCorrect
@@ -952,32 +950,32 @@ e &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">
 <h3><span class="header-section-number">6.5.2</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</code></pre>
+<div class="sourceCode" id="cb1039"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1039-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</a></code></pre></div>
 <pre><code>##  [1] 0 0 0 0 1 0 1 0 1 1 1 0 0 1 0 0 1 1 1 1</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</code></pre>
+<div class="sourceCode" id="cb1041"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1041-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</a></code></pre></div>
 <pre><code>## [1] 14</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</code></pre></li>
+<div class="sourceCode" id="cb1043"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1043-1" data-line-number="1"><span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</a></code></pre></div></li>
 <li><p>Here’s the function if you decide to use a loop:</p>
-<pre class="sourceCode r"><code class="sourceCode r">freeThrowSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, seed) {
-  youWin &lt;-<span class="st"> </span><span class="kw">logical</span>(reps)
-  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {
-    youMake &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)
-    lesterMakes &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.60</span>)
-    youWin[i] &lt;-<span class="st"> </span>(youMake <span class="op">&gt;</span><span class="st"> </span>lesterMakes)
-  }
-  <span class="kw">mean</span>(youWin)
-}</code></pre>
+<div class="sourceCode" id="cb1044"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1044-1" data-line-number="1">freeThrowSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, seed) {</a>
+<a class="sourceLine" id="cb1044-2" data-line-number="2">  youWin &lt;-<span class="st"> </span><span class="kw">logical</span>(reps)</a>
+<a class="sourceLine" id="cb1044-3" data-line-number="3">  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {</a>
+<a class="sourceLine" id="cb1044-4" data-line-number="4">    youMake &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</a>
+<a class="sourceLine" id="cb1044-5" data-line-number="5">    lesterMakes &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.60</span>)</a>
+<a class="sourceLine" id="cb1044-6" data-line-number="6">    youWin[i] &lt;-<span class="st"> </span>(youMake <span class="op">&gt;</span><span class="st"> </span>lesterMakes)</a>
+<a class="sourceLine" id="cb1044-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb1044-8" data-line-number="8">  <span class="kw">mean</span>(youWin)</a>
+<a class="sourceLine" id="cb1044-9" data-line-number="9">}</a></code></pre></div>
 <p>Here’s the function if you vectorize:</p>
-<pre class="sourceCode r"><code class="sourceCode r">freeThrowSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, seed) {
-  youMake &lt;-<span class="st"> </span><span class="kw">rbinom</span>(reps, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)
-  lesterMakes &lt;-<span class="st"> </span><span class="kw">rbinom</span>(reps, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.60</span>)
-  youWin&lt;-<span class="st"> </span>(youMake <span class="op">&gt;</span><span class="st"> </span>lesterMakes)
-  <span class="kw">mean</span>(youWin)
-}</code></pre>
+<div class="sourceCode" id="cb1045"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1045-1" data-line-number="1">freeThrowSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, seed) {</a>
+<a class="sourceLine" id="cb1045-2" data-line-number="2">  youMake &lt;-<span class="st"> </span><span class="kw">rbinom</span>(reps, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.70</span>)</a>
+<a class="sourceLine" id="cb1045-3" data-line-number="3">  lesterMakes &lt;-<span class="st"> </span><span class="kw">rbinom</span>(reps, <span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.60</span>)</a>
+<a class="sourceLine" id="cb1045-4" data-line-number="4">  youWin&lt;-<span class="st"> </span>(youMake <span class="op">&gt;</span><span class="st"> </span>lesterMakes)</a>
+<a class="sourceLine" id="cb1045-5" data-line-number="5">  <span class="kw">mean</span>(youWin)</a>
+<a class="sourceLine" id="cb1045-6" data-line-number="6">}</a></code></pre></div>
 <p>Let’s try it:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">freeThrowSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</code></pre>
+<div class="sourceCode" id="cb1046"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1046-1" data-line-number="1"><span class="kw">freeThrowSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</a></code></pre></div>
 <pre><code>## [1] 0.69132</code></pre>
 <p>You have nearly a 70% chance to make more shots than Lester.</p></li>
 </ol>

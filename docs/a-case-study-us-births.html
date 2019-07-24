@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.3 A Case Study: US Births | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.3 A Case Study: US Births | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="implementation-in-ggplot2.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -586,7 +584,7 @@ Figure 8.30: Some of the days have significantly fewer births. What’s going on
 </p>
 </div>
 <p>To begin with, look at all of the variables available in the data frame <code>Births78</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(Births78)</code></pre>
+<div class="sourceCode" id="cb1384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1384-1" data-line-number="1"><span class="kw">str</span>(Births78)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    365 obs. of  8 variables:
 ##  $ date        : Date, format: &quot;1978-01-01&quot; &quot;1978-01-02&quot; ...
 ##  $ births      : int  7701 7527 8825 8859 9043 9208 8084 7611 9172 9089 ...
@@ -597,8 +595,8 @@ Figure 8.30: Some of the days have significantly fewer births. What’s going on
 ##  $ day_of_month: int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ day_of_week : num  1 2 3 4 5 6 7 1 2 3 ...</code></pre>
 <p>We see that the variable <code>wday</code> gives the name of the day of the week, for each of the days in the year. On a hunch, we make violin plots of the births for each of the days of the week. The code appears below, and the resulting plot is shown in Figure <a href="a-case-study-us-births.html#fig:violinbirthswday">8.31</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> wday, <span class="dt">y =</span> births)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>()</code></pre>
+<div class="sourceCode" id="cb1386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1386-1" data-line-number="1"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> wday, <span class="dt">y =</span> births)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1386-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_jitter</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:violinbirthswday"></span>
 <img src="r-notes_files/figure-html/violinbirthswday-1.png" alt="Violin plot of births, by day of the week." width="95%" />
 <p class="caption">
@@ -606,13 +604,13 @@ Figure 8.31: Violin plot of births, by day of the week.
 </p>
 </div>
 <p>Aha! There are considerably fewer births on the weekend-days—Saturday and Sunday. Perhaps the <em>entire</em> lower cloud of points is composed of weekends. Let’s check this by re-coding the days according to whether or not they are during the week or at the weekend:</p>
-<pre class="sourceCode r"><code class="sourceCode r">weekend &lt;-<span class="st"> </span><span class="kw">with</span>(Births78, <span class="kw">ifelse</span>(wday <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sat&quot;</span>,<span class="st">&quot;Sun&quot;</span>),
-                                 <span class="st">&quot;weekend&quot;</span>, <span class="st">&quot;weekday&quot;</span>))
-Births78<span class="op">$</span>weekend &lt;-<span class="st"> </span>weekend</code></pre>
+<div class="sourceCode" id="cb1387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1387-1" data-line-number="1">weekend &lt;-<span class="st"> </span><span class="kw">with</span>(Births78, <span class="kw">ifelse</span>(wday <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sat&quot;</span>,<span class="st">&quot;Sun&quot;</span>),</a>
+<a class="sourceLine" id="cb1387-2" data-line-number="2">                                 <span class="st">&quot;weekend&quot;</span>, <span class="st">&quot;weekday&quot;</span>))</a>
+<a class="sourceLine" id="cb1387-3" data-line-number="3">Births78<span class="op">$</span>weekend &lt;-<span class="st"> </span>weekend</a></code></pre></div>
 <p>Note that we have added the new variable to the data frame, so that it will be easy in <strong>ggplot2</strong> to use that variable for grouping, as in the code below. The results appear in Figure <a href="a-case-study-us-births.html#fig:birthsplotframesweekend">8.32</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> births)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> weekend)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Day of the Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Number of U.S. Births&quot;</span>,
-       <span class="dt">title =</span> <span class="st">&quot;Daily U.S. Birth-Numbers in 1978&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1388-1" data-line-number="1"><span class="kw">ggplot</span>(Births78, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> births)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> weekend)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1388-2" data-line-number="2"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Day of the Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Number of U.S. Births&quot;</span>,</a>
+<a class="sourceLine" id="cb1388-3" data-line-number="3">       <span class="dt">title =</span> <span class="st">&quot;Daily U.S. Birth-Numbers in 1978&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:birthsplotframesweekend"></span>
 <img src="r-notes_files/figure-html/birthsplotframesweekend-1.png" alt="The days with fewer births are almost always weekend-days." width="95%" />
 <p class="caption">
@@ -620,8 +618,8 @@ Figure 8.32: The days with fewer births are almost always weekend-days.
 </p>
 </div>
 <p>Well, a <em>few</em> of the points in the lower cloud are weekdays. Is there anything special about them? To find out, we subset the data frame to examine only those points:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">subset</span>(Births78, weekend <span class="op">!=</span><span class="st"> &quot;weekend&quot;</span> <span class="op">&amp;</span><span class="st"> </span>births <span class="op">&lt;=</span><span class="st"> </span><span class="dv">8500</span>)
-df</code></pre>
+<div class="sourceCode" id="cb1389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1389-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">subset</span>(Births78, weekend <span class="op">!=</span><span class="st"> &quot;weekend&quot;</span> <span class="op">&amp;</span><span class="st"> </span>births <span class="op">&lt;=</span><span class="st"> </span><span class="dv">8500</span>)</a>
+<a class="sourceLine" id="cb1389-2" data-line-number="2">df</a></code></pre></div>
 <pre><code>##           date births wday year month day_of_year day_of_month day_of_week
 ## 2   1978-01-02   7527  Mon 1978     1           2            2           2
 ## 149 1978-05-29   7780  Mon 1978     5         149           29           2

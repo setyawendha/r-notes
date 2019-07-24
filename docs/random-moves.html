@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.4 Random Moves | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.4 Random Moves | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="writing-turtle-functions.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -583,7 +581,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">5.4.1</span> Sampling from a Vector</h3>
 <p>You have already met the <code>sample()</code> function (see Section <a href="making-decisions-conditionals.html#if-statements">4.2.1</a>). Let’s take a closer look at it.</p>
 <p><code>sample()</code> makes a random choice from a given vector. From the R-help we read that the general form of a call to sample is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(x, size, <span class="dt">replace =</span> <span class="ot">FALSE</span>, <span class="dt">prob =</span> <span class="ot">NULL</span>)</code></pre>
+<div class="sourceCode" id="cb911"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb911-1" data-line-number="1"><span class="kw">sample</span>(x, size, <span class="dt">replace =</span> <span class="ot">FALSE</span>, <span class="dt">prob =</span> <span class="ot">NULL</span>)</a></code></pre></div>
 <p>In the above call:</p>
 <ul>
 <li><code>x</code> is the vector from which we wish to sample (R refers to it as the “population”);</li>
@@ -592,22 +590,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>prob</code> specifies the desired probability for each member of the population to be chosen.</li>
 </ul>
 <p>A few examples will help us understand how the arguments work:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="co"># we&#39;ll sample from this vector</span>
-<span class="kw">sample</span>(vec, <span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb912"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb912-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="co"># we&#39;ll sample from this vector</span></a>
+<a class="sourceLine" id="cb912-2" data-line-number="2"><span class="kw">sample</span>(vec, <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>We got only one number because we set <code>size</code> to 1. Every element in <code>vec</code> had an equal chance of being the element selected. This time we got 7, but if you were to run the function again for yourself your results would probably be different.</p>
 <p>Let’s sample 10 numbers from <code>vec</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">10</span>)</code></pre>
-<pre><code>##  [1]  3  5  2  4  7  6  9  1  8 10</code></pre>
+<div class="sourceCode" id="cb914"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb914-1" data-line-number="1"><span class="kw">sample</span>(vec, <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##  [1]  1  9 10  5  4  3  2  7  8  6</code></pre>
 <p>Because <code>replace</code> was left at its default value of <code>FALSE</code>, R did not replace numbers after pulling them from the <code>vec</code>. After each sample, the remaining numbers all had the same chance to be picked next. Setting <code>size</code> to the length of <code>x</code> and keeping <code>replace = FALSE</code> therefore has the effect of randomly shuffling the elements of <code>x</code>.</p>
 <p>Of course when <code>replace = FALSE</code> any attempt to sample more than the number of elements of <code>vec</code> will result in an error:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">11</span>)</code></pre>
+<div class="sourceCode" id="cb916"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb916-1" data-line-number="1"><span class="kw">sample</span>(vec, <span class="dv">11</span>)</a></code></pre></div>
 <pre><code>Error in sample.int(length(x), size, replace, prob) : 
 cannot take a sample larger than the 
 population when &#39;replace = FALSE&#39;</code></pre>
 <p>When we set <code>replace = TRUE</code> then each selected element is returned to the population. At any stage, the chance for a given member of the population to be the one selected next is the same—no matter how many times that member has already been selected. Thus, when <code>replace = TRUE</code> you are liable to see repeats:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>##  [1]  3  8  8  8  8  9  5  6  7  1  4  8  4  1 10  6  3  3  1  9</code></pre>
+<div class="sourceCode" id="cb918"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb918-1" data-line-number="1"><span class="kw">sample</span>(vec, <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##  [1]  5  3  5  5  8  8  9 10  5  9  4  5  6  4 10  7  1  8  3  5</code></pre>
 <p>When the <code>prob</code> parameter is left at its <code>NULL</code> value, R gives each member of the population the <em>same</em> chance to be the member that is selected. It is possible to adjust the probabilities of selection by setting <code>prob</code> to a vector of probabilities (one for each corresponding member of <code>x</code>). Thus, suppose we want to select 20 numbers from <code>vec</code>, according to the following the probabilities:</p>
 <ul>
 <li>5% chance of selection, for each number from 1 to 8;</li>
@@ -615,8 +613,8 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <li>30% chance for 10 to be selected.</li>
 </ul>
 <p>Then we can call <code>sample()</code> like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(vec, <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>,
-       <span class="dt">prob  =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">8</span>), <span class="fl">0.30</span>, <span class="fl">0.30</span>))</code></pre>
+<div class="sourceCode" id="cb920"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb920-1" data-line-number="1"><span class="kw">sample</span>(vec, <span class="dv">20</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb920-2" data-line-number="2">       <span class="dt">prob  =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">8</span>), <span class="fl">0.30</span>, <span class="fl">0.30</span>))</a></code></pre></div>
 <pre><code>##  [1]  9  1  9 10  9  6  8  9  4  7 10 10  9  2  6  9  5  9 10 10</code></pre>
 <p>Notice the majority of 9’s and 10’s: this was fairly likely to occur since each selection had a 60% chance of turning out to be 9 or 10.</p>
 </div>
@@ -624,33 +622,33 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <h3><span class="header-section-number">5.4.2</span> Application: a Bouncing Turtle</h3>
 <p>Let’s apply <code>sample()</code> to design a scenario in which the turtle moves a fixed amount at each step, but the direction—north, east, south, or west—is completely random. When the turtle reaches the boundary of its domain, however, we would like it to “bounce back”: i.e., take a step in the direction opposite to the step that brought it to the boundary. We will also query the user prior to each step, asking if he/she wants to see another move. This not only allows the user to decide when to end the scenario; it also permits the user to see where the turtle is after each step.</p>
 <p>One possible implementation is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">turtle_bounce &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">side =</span> <span class="dv">60</span>, <span class="dt">step=</span> <span class="dv">10</span>) {
-  <span class="cf">if</span> ( (side<span class="op">/</span><span class="dv">2</span>) <span class="op">%%</span><span class="st"> </span>step <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> ) {
-    <span class="kw">stop</span>(<span class="st">&quot;Side-length divided by two must be a multiple of step.&quot;</span>)
-  }
-  bounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, side)
-  <span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-  origin &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
-  cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
-  <span class="cf">repeat</span> {
-    move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)
-    <span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span>
-    x &lt;-<span class="st"> </span>cp[<span class="st">&quot;x&quot;</span>]
-    y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]
-    <span class="cf">if</span> (x <span class="op">%in%</span><span class="st"> </span>bounds <span class="op">|</span><span class="st"> </span>y <span class="op">%in%</span><span class="st"> </span>bounds) {
-      angle &lt;-<span class="st"> </span><span class="dv">180</span>
-    } <span class="cf">else</span> {
-      angle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">90</span>,<span class="dv">180</span>,<span class="dv">270</span>), <span class="dv">1</span>)
-    }
-    <span class="kw">turtle_right</span>(angle)
-    <span class="kw">turtle_forward</span>(step)
-    cp &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">turtle_getpos</span>(), <span class="dv">0</span>)
-    <span class="kw">print</span>(cp)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;All done!&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb922"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb922-1" data-line-number="1">turtle_bounce &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">side =</span> <span class="dv">60</span>, <span class="dt">step=</span> <span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb922-2" data-line-number="2">  <span class="cf">if</span> ( (side<span class="op">/</span><span class="dv">2</span>) <span class="op">%%</span><span class="st"> </span>step <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb922-3" data-line-number="3">    <span class="kw">stop</span>(<span class="st">&quot;Side-length divided by two must be a multiple of step.&quot;</span>)</a>
+<a class="sourceLine" id="cb922-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb922-5" data-line-number="5">  bounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, side)</a>
+<a class="sourceLine" id="cb922-6" data-line-number="6">  <span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb922-7" data-line-number="7">  origin &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</a>
+<a class="sourceLine" id="cb922-8" data-line-number="8">  cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</a>
+<a class="sourceLine" id="cb922-9" data-line-number="9">  <span class="cf">repeat</span> {</a>
+<a class="sourceLine" id="cb922-10" data-line-number="10">    move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)</a>
+<a class="sourceLine" id="cb922-11" data-line-number="11">    <span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span></a>
+<a class="sourceLine" id="cb922-12" data-line-number="12">    x &lt;-<span class="st"> </span>cp[<span class="st">&quot;x&quot;</span>]</a>
+<a class="sourceLine" id="cb922-13" data-line-number="13">    y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</a>
+<a class="sourceLine" id="cb922-14" data-line-number="14">    <span class="cf">if</span> (x <span class="op">%in%</span><span class="st"> </span>bounds <span class="op">|</span><span class="st"> </span>y <span class="op">%in%</span><span class="st"> </span>bounds) {</a>
+<a class="sourceLine" id="cb922-15" data-line-number="15">      angle &lt;-<span class="st"> </span><span class="dv">180</span></a>
+<a class="sourceLine" id="cb922-16" data-line-number="16">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb922-17" data-line-number="17">      angle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">90</span>,<span class="dv">180</span>,<span class="dv">270</span>), <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb922-18" data-line-number="18">    }</a>
+<a class="sourceLine" id="cb922-19" data-line-number="19">    <span class="kw">turtle_right</span>(angle)</a>
+<a class="sourceLine" id="cb922-20" data-line-number="20">    <span class="kw">turtle_forward</span>(step)</a>
+<a class="sourceLine" id="cb922-21" data-line-number="21">    cp &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">turtle_getpos</span>(), <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb922-22" data-line-number="22">    <span class="kw">print</span>(cp)</a>
+<a class="sourceLine" id="cb922-23" data-line-number="23">  }</a>
+<a class="sourceLine" id="cb922-24" data-line-number="24">  <span class="kw">cat</span>(<span class="st">&quot;All done!&quot;</span>)</a>
+<a class="sourceLine" id="cb922-25" data-line-number="25">}</a></code></pre></div>
 <p>Play the game a few times, to get a feel for how it works:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_bounce</span>(<span class="dv">60</span>, <span class="dv">15</span>)</code></pre>
+<div class="sourceCode" id="cb923"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb923-1" data-line-number="1"><span class="kw">turtle_bounce</span>(<span class="dv">60</span>, <span class="dv">15</span>)</a></code></pre></div>
 <p>Let’s examine the code a bit more closely.</p>
 <p>The definition indicates that there are two parameters: <code>side</code> and <code>step</code>.</p>
 <ul>
@@ -658,36 +656,36 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <li><code>step</code> specifies how many units the turtle will move at each step. In this analysis we will assume that <code>step</code> is set to 15.</li>
 </ul>
 <p>Inside the function, we begin with a bit of input-validation:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( (side<span class="op">/</span><span class="dv">2</span>) <span class="op">%%</span><span class="st"> </span>step <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> ) {
-    <span class="kw">stop</span>(<span class="st">&quot;Side-length divided by two must be a multiple of step.&quot;</span>)
-  }</code></pre>
+<div class="sourceCode" id="cb924"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb924-1" data-line-number="1"><span class="cf">if</span> ( (side<span class="op">/</span><span class="dv">2</span>) <span class="op">%%</span><span class="st"> </span>step <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb924-2" data-line-number="2">    <span class="kw">stop</span>(<span class="st">&quot;Side-length divided by two must be a multiple of step.&quot;</span>)</a>
+<a class="sourceLine" id="cb924-3" data-line-number="3">  }</a></code></pre></div>
 <p>Remember that the turtle will start at <span class="math inline">\((\texttt{side}/2, \texttt{side}/2)\)</span> and will move <code>step</code> each time. If <span class="math inline">\(\texttt{side}/2\)</span> is not evenly divisible by <code>step</code> then the turtle would be able to go from inside its field to outside in a single step. We don’t want that to happen so we stop the user if the remainder after dividing <span class="math inline">\(\texttt{side}/2\)</span> by <code>side</code> is anything other than zero.</p>
 <p>If the input is OK, then we set up a vector <code>bounds</code> that records the smallest and largest possible values for the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates of the turtle:</p>
-<pre class="sourceCode r"><code class="sourceCode r">bounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, side)</code></pre>
+<div class="sourceCode" id="cb925"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb925-1" data-line-number="1">bounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, side)</a></code></pre></div>
 <p>Next, we initialize the turtle in the middle of the field and record its initial position in the vector <code>cp</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-origin &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
-cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</code></pre>
+<div class="sourceCode" id="cb926"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb926-1" data-line-number="1"><span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb926-2" data-line-number="2">origin &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</a>
+<a class="sourceLine" id="cb926-3" data-line-number="3">cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</a></code></pre></div>
 <p>(You can think of <code>cp</code> as short for: “current position”.)</p>
 <p>Next, we enter a <code>repeat</code>-loop. Inside the loop we begin with:</p>
-<pre class="sourceCode r"><code class="sourceCode r">move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)
-<span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span>
-x &lt;-<span class="st"> </span>cp[<span class="st">&quot;x&quot;</span>]
-y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code></pre>
+<div class="sourceCode" id="cb927"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb927-1" data-line-number="1">move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)</a>
+<a class="sourceLine" id="cb927-2" data-line-number="2"><span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span></a>
+<a class="sourceLine" id="cb927-3" data-line-number="3">x &lt;-<span class="st"> </span>cp[<span class="st">&quot;x&quot;</span>]</a>
+<a class="sourceLine" id="cb927-4" data-line-number="4">y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</a></code></pre></div>
 <p>We first asked the user if she wanted to quit. If she enters “q” then we’ll break out of the loop and end the scenario. If she enters anything else (including just pressing Enter) then we record the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates of the turtle’s current position in the vectors <code>x</code> and <code>y</code> respectively.</p>
 <p>Our next task is to determine how the turtle should move:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (x <span class="op">%in%</span><span class="st"> </span>bounds <span class="op">|</span><span class="st"> </span>y <span class="op">%in%</span><span class="st"> </span>bounds) {
-      angle &lt;-<span class="st"> </span><span class="dv">180</span>
-    } <span class="cf">else</span> {
-      angle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">90</span>,<span class="dv">180</span>,<span class="dv">270</span>), <span class="dv">1</span>)
-    }</code></pre>
+<div class="sourceCode" id="cb928"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb928-1" data-line-number="1"><span class="cf">if</span> (x <span class="op">%in%</span><span class="st"> </span>bounds <span class="op">|</span><span class="st"> </span>y <span class="op">%in%</span><span class="st"> </span>bounds) {</a>
+<a class="sourceLine" id="cb928-2" data-line-number="2">      angle &lt;-<span class="st"> </span><span class="dv">180</span></a>
+<a class="sourceLine" id="cb928-3" data-line-number="3">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb928-4" data-line-number="4">      angle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">90</span>,<span class="dv">180</span>,<span class="dv">270</span>), <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb928-5" data-line-number="5">    }</a></code></pre></div>
 <p>If the turtle is at a boundary (either <code>x</code> equal to 0 or 60 or <code>y</code> equal to 0 or 60) then we need to “bounce back”. This corresponds to making the turtle turn right by 180 degrees and then step. On the other hand if the turtle is not at a boundary then the direction of the turtle should be random, so we should have it turn right by either 0, 90, 180 or 270 degrees, with each possibility being equally likely. This is accomplished with the above call to the <code>sample()</code> function.</p>
 <p>Having determined the amount by which to turn prior to the next step, we then have the turtle turn that amount and take the step:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_right</span>(angle)
-<span class="kw">turtle_forward</span>(step)</code></pre>
+<div class="sourceCode" id="cb929"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb929-1" data-line-number="1"><span class="kw">turtle_right</span>(angle)</a>
+<a class="sourceLine" id="cb929-2" data-line-number="2"><span class="kw">turtle_forward</span>(step)</a></code></pre></div>
 <p>Finally, we set <code>cp</code> to the new position of the turtle, and print that position out to the console for the user to see:</p>
-<pre class="sourceCode r"><code class="sourceCode r">cp &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">turtle_getpos</span>(), <span class="dv">0</span>)
-<span class="kw">print</span>(cp)</code></pre>
+<div class="sourceCode" id="cb930"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb930-1" data-line-number="1">cp &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">turtle_getpos</span>(), <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb930-2" data-line-number="2"><span class="kw">print</span>(cp)</a></code></pre></div>
 <p>Note that we rounded off the position to the nearest while number. This was done because the authors of the <strong>TurtleGraphics</strong> package use floating point arithmetic for their numerical operations, so sometimes the computed positions differ from whole numbers by a very tiny amount.</p>
 <p>We then repeat the loop.</p>
 </div>
@@ -695,10 +693,10 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <h3><span class="header-section-number">5.4.3</span> Uniform Random Numbers</h3>
 <p><code>sample()</code> picks an element from a finite population. Sometimes, though, we want R to give the impression that it has picked a <em>real number</em> at random out of a range of real numbers. This can be accomplished with the <code>runif()</code> function.</p>
 <p>A call to <code>runif()</code> looks like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(n, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb931"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb931-1" data-line-number="1"><span class="kw">runif</span>(n, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p>The idea is that R will produce <code>n</code> real numbers that have the appearance of having been drawn randomly from the interval of real numbers whose lower and upper bounds are specified respectively by <code>min</code> and <code>max</code>.</p>
 <p>Thus, to get 10 “random” numbers that all lie between 0 and 1, you can leave <code>min</code> and <code>max</code> at their defaults and ask for:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb932"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb932-1" data-line-number="1"><span class="kw">runif</span>(<span class="dv">10</span>)</a></code></pre></div>
 <pre><code>##  [1] 0.646902839 0.394225758 0.618501814 0.476891136 0.136097186
 ##  [6] 0.067384386 0.129152617 0.393117930 0.002582699 0.620205954</code></pre>
 </div>
@@ -707,8 +705,8 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <p>It’s important to point out that R doesn’t generate truly random numbers.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> After all, R simply runs a computer which operates according to a set of completely-specified steps. Thus the random data generated by R and by other computer languages is often called <em>pseudorandom</em>. Although the functions for random-number generation have been carefully designed so as to follow many of the statistical laws we associate with randomness in nature, all of the pseudo-random output is determined by an initial value and a deterministic number-generating algorithm.</p>
 <p>We actually have the ability to set the pseudorandom data ourselves. This is called <em>setting the random seed</em>. From any specified seed, the result of calls to R’s random-data functions will be completely determined (although—just as in the case of “real” randomness—the output will still probably “look” random).</p>
 <p>The <code>set.seed()</code> function will fix the random output. Try running the following two lines of code more than once:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2025</span>)
-<span class="kw">runif</span>(<span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb934"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb934-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2025</span>)</a>
+<a class="sourceLine" id="cb934-2" data-line-number="2"><span class="kw">runif</span>(<span class="dv">10</span>)</a></code></pre></div>
 <pre><code>##  [1] 0.7326202 0.4757614 0.5142159 0.4984323 0.7802845 0.5042522 0.8984003
 ##  [8] 0.1278527 0.6446721 0.5695311</code></pre>
 <p>You will get the same output every time. If you change the argument of <code>set.seed()</code> to some other integer the output will probably change—but it will stay the same when you run the code <em>again</em> from that that new seed.</p>
@@ -716,31 +714,31 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <div id="drunken-turtle-intro" class="section level3">
 <h3><span class="header-section-number">5.4.5</span> Application: a Drunken Turtle</h3>
 <p>We will now modify the previous scenario so that the turtle’s motion will be almost completely random. Even though it will take the same-size step every time, the angle at which it steps will be completely random: any real number of degrees from 0 to 360. We will also show the user the position of the turtle at each step, and use the “distance formula” from high-school geometry to compute and display the current distance of the turtle from the place where it started.</p>
-<pre class="sourceCode r"><code class="sourceCode r">turtle_drunk &lt;-<span class="st"> </span><span class="cf">function</span>(side, step) {
-  <span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-  <span class="co"># save (side/2, side/2), the turtle&#39;s initial position:</span>
-  initial &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
-  <span class="cf">repeat</span> {
-    move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)
-    <span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span>
-    <span class="co"># pick a random angle to turn by:</span>
-    angle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">360</span>)
-    <span class="kw">turtle_left</span>(angle)
-    <span class="kw">turtle_forward</span>(step)
-    <span class="co"># get new position, make it the current position:</span>
-    cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()
-    <span class="co"># print to console:</span>
-    <span class="kw">print</span>(cp)
-    <span class="co"># determine distnce from initial position (round to 3 decimals):</span>
-    distance &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sqrt</span>((cp[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>initial[<span class="dv">1</span>])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(cp[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>initial[<span class="dv">2</span>])<span class="op">^</span><span class="dv">2</span>),<span class="dv">3</span>)
-    <span class="co"># prepare message to console,and print it:</span>
-    message &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Distance from starting point is: &quot;</span>, distance)
-    <span class="kw">cat</span>(message)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;All done!&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb936"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb936-1" data-line-number="1">turtle_drunk &lt;-<span class="st"> </span><span class="cf">function</span>(side, step) {</a>
+<a class="sourceLine" id="cb936-2" data-line-number="2">  <span class="kw">turtle_init</span>(side, side, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb936-3" data-line-number="3">  <span class="co"># save (side/2, side/2), the turtle&#39;s initial position:</span></a>
+<a class="sourceLine" id="cb936-4" data-line-number="4">  initial &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</a>
+<a class="sourceLine" id="cb936-5" data-line-number="5">  <span class="cf">repeat</span> {</a>
+<a class="sourceLine" id="cb936-6" data-line-number="6">    move &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;Go Again? (enter q to quit):  &quot;</span>)</a>
+<a class="sourceLine" id="cb936-7" data-line-number="7">    <span class="cf">if</span> ( move <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span></a>
+<a class="sourceLine" id="cb936-8" data-line-number="8">    <span class="co"># pick a random angle to turn by:</span></a>
+<a class="sourceLine" id="cb936-9" data-line-number="9">    angle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">360</span>)</a>
+<a class="sourceLine" id="cb936-10" data-line-number="10">    <span class="kw">turtle_left</span>(angle)</a>
+<a class="sourceLine" id="cb936-11" data-line-number="11">    <span class="kw">turtle_forward</span>(step)</a>
+<a class="sourceLine" id="cb936-12" data-line-number="12">    <span class="co"># get new position, make it the current position:</span></a>
+<a class="sourceLine" id="cb936-13" data-line-number="13">    cp &lt;-<span class="st"> </span><span class="kw">turtle_getpos</span>()</a>
+<a class="sourceLine" id="cb936-14" data-line-number="14">    <span class="co"># print to console:</span></a>
+<a class="sourceLine" id="cb936-15" data-line-number="15">    <span class="kw">print</span>(cp)</a>
+<a class="sourceLine" id="cb936-16" data-line-number="16">    <span class="co"># determine distnce from initial position (round to 3 decimals):</span></a>
+<a class="sourceLine" id="cb936-17" data-line-number="17">    distance &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sqrt</span>((cp[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>initial[<span class="dv">1</span>])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(cp[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>initial[<span class="dv">2</span>])<span class="op">^</span><span class="dv">2</span>),<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb936-18" data-line-number="18">    <span class="co"># prepare message to console,and print it:</span></a>
+<a class="sourceLine" id="cb936-19" data-line-number="19">    message &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Distance from starting point is: &quot;</span>, distance)</a>
+<a class="sourceLine" id="cb936-20" data-line-number="20">    <span class="kw">cat</span>(message)</a>
+<a class="sourceLine" id="cb936-21" data-line-number="21">  }</a>
+<a class="sourceLine" id="cb936-22" data-line-number="22">  <span class="kw">cat</span>(<span class="st">&quot;All done!&quot;</span>)</a>
+<a class="sourceLine" id="cb936-23" data-line-number="23">}</a></code></pre></div>
 <p>Try the game once or twice:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_drunk</span>(<span class="dv">100</span>, <span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb937"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb937-1" data-line-number="1"><span class="kw">turtle_drunk</span>(<span class="dv">100</span>, <span class="dv">5</span>)</a></code></pre></div>
 <p>It is natural to wonder how likely the turtle is to wander back close to where it started, and to wonder how often that will happen. We will address questions like these in Chapter <a href="simulation.html#simulation">6</a>.</p>
 </div>
 <div id="turtle-practice" class="section level3">
@@ -754,9 +752,9 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <li><p>Write a call to the <code>sample()</code> function that scrambles the whole numbers from 1 to 10 in a random order.</p></li>
 <li><p>Write a call to the <code>sample()</code> functions that randomly re-orders the lowercase letters of the English alphabet.</p></li>
 <li><p>The function <code>color()</code> produces a character vector of the named colors that R is prepared to draw. Run it at the Console:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colors</span>()</code></pre>
+<div class="sourceCode" id="cb938"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb938-1" data-line-number="1"><span class="kw">colors</span>()</a></code></pre></div>
 <p>How many named colors are there? Let’s let R find out for us:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">colors</span>())</code></pre>
+<div class="sourceCode" id="cb939"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb939-1" data-line-number="1"><span class="kw">length</span>(<span class="kw">colors</span>())</a></code></pre></div>
 <pre><code>## [1] 657</code></pre>
 <p>Write a call to the <code>sample()</code> function that will pick a single named color at random.</p></li>
 <li><p>Write a call to <code>runif()</code> that will produce a single random real number between 0 and 1.</p></li>
@@ -772,9 +770,9 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <li>The width of each ray should be 5.</li>
 </ul>
 <p>Typical examples of use should be as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">randomColor8</span>()</code></pre>
+<div class="sourceCode" id="cb941"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb941-1" data-line-number="1"><span class="kw">randomColor8</span>()</a></code></pre></div>
 <p><img src="r-notes_files/figure-html/unnamed-chunk-517-1.png" width="50%" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">randomColor8</span>(<span class="dt">type =</span> <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb942"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb942-1" data-line-number="1"><span class="kw">randomColor8</span>(<span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
 <p><img src="r-notes_files/figure-html/unnamed-chunk-518-1.png" width="50%" style="display: block; margin: auto;" /></p></li>
 </ol>
 </div>
@@ -793,23 +791,23 @@ y &lt;-<span class="st"> </span>cp[<span class="st">&quot;y&quot;</span>]</code>
 <li><p><code>runif(30, min = 10, max = 15)</code></p></li>
 <li><p><code>min(runif(5, min = 0, max = 10))</code></p></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">randomColor8 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">type =</span> <span class="dv">1</span>) {
-  allowedColors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)
-  <span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-  <span class="kw">turtle_lty</span>(<span class="dt">lty =</span> type)
-  <span class="kw">turtle_lwd</span>(<span class="dt">lwd =</span> <span class="dv">5</span>)
-  <span class="kw">turtle_do</span>({
-    <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span> ) {
-      <span class="kw">turtle_col</span>(<span class="dt">col =</span> <span class="kw">sample</span>(allowedColors, 
-                              <span class="dt">size =</span> <span class="dv">1</span>, 
-                              <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>)))
-      rayLength &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">10</span>, <span class="dt">max =</span> <span class="dv">40</span>)
-      <span class="kw">turtle_forward</span>(rayLength)
-      <span class="kw">turtle_backward</span>(rayLength)
-      <span class="kw">turtle_left</span>(<span class="dv">45</span>)
-    }
-  })
-}</code></pre></li>
+<div class="sourceCode" id="cb943"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb943-1" data-line-number="1">randomColor8 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">type =</span> <span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb943-2" data-line-number="2">  allowedColors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb943-3" data-line-number="3">  <span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb943-4" data-line-number="4">  <span class="kw">turtle_lty</span>(<span class="dt">lty =</span> type)</a>
+<a class="sourceLine" id="cb943-5" data-line-number="5">  <span class="kw">turtle_lwd</span>(<span class="dt">lwd =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb943-6" data-line-number="6">  <span class="kw">turtle_do</span>({</a>
+<a class="sourceLine" id="cb943-7" data-line-number="7">    <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span> ) {</a>
+<a class="sourceLine" id="cb943-8" data-line-number="8">      <span class="kw">turtle_col</span>(<span class="dt">col =</span> <span class="kw">sample</span>(allowedColors, </a>
+<a class="sourceLine" id="cb943-9" data-line-number="9">                              <span class="dt">size =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb943-10" data-line-number="10">                              <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>)))</a>
+<a class="sourceLine" id="cb943-11" data-line-number="11">      rayLength &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">10</span>, <span class="dt">max =</span> <span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb943-12" data-line-number="12">      <span class="kw">turtle_forward</span>(rayLength)</a>
+<a class="sourceLine" id="cb943-13" data-line-number="13">      <span class="kw">turtle_backward</span>(rayLength)</a>
+<a class="sourceLine" id="cb943-14" data-line-number="14">      <span class="kw">turtle_left</span>(<span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb943-15" data-line-number="15">    }</a>
+<a class="sourceLine" id="cb943-16" data-line-number="16">  })</a>
+<a class="sourceLine" id="cb943-17" data-line-number="17">}</a></code></pre></div></li>
 </ol>
 </div>
 </div>

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Exercises | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Exercises | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="glossary-4.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -639,22 +637,22 @@ Answers to the first question will vary from person to person, depending on circ
 <p>Apply the function with 50,000 repetitions and a seed that you report, in order to estimate the expected number of days required to empty the bag.</p>
 <p><strong>Hint:</strong> This scenario is quite similar to the <code>numberNeededSim()</code> problem from this Chapter. Begin by reviewing it.</p></li>
 <li><p>(*) Refer back to the <code>numberNeededSim()</code> function. Write a program that computes the estimated expected number needed, for the following targets:</p>
-<pre class="sourceCode r"><code class="sourceCode r">targets &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="dt">by =</span> <span class="fl">0.05</span>)</code></pre>
+<div class="sourceCode" id="cb1087"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1087-1" data-line-number="1">targets &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="dt">by =</span> <span class="fl">0.05</span>)</a></code></pre></div>
 <p>Each estimate should be based on ten thousand repetitions. Start with a simple seed that you report. Report the estimated expected values for all of the required targets. Compare these estimates with <code>exp(targets)</code> (the number <span class="math inline">\(e\)</span> raised to the power of each of the targets.) Formulate a conjecture about the value of the expected number of numbers needed, when the target is a real number between 0 and 1.</p>
 <p><strong>Hint</strong>: Recall that <code>numberNeededSim()</code> function returns its estimate of the expected number needed. Hence you could use it inside a <code>for</code>-loop that iterates through the elements of the <code>targets</code> vector above, something like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">targets &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="dt">by =</span> <span class="fl">0.05</span>)
-n &lt;-<span class="st"> </span><span class="kw">length</span>(targets)
-results &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)
-<span class="kw">set.seed</span>(<span class="dv">3030</span>) <span class="co"># or some other simple seed that you like</span>
-<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n ) {
-  <span class="co"># use numberNeededSim() with:</span>
-  <span class="co">#    * 10000 reps</span>
-  <span class="co">#    * seed left at the default NULL (you provided one already)</span>
-  <span class="co">#    * target set to targets[i]</span>
-  <span class="co">#    * report left at FALSE (no need to have R talk to you at each step)</span>
-  <span class="co"># make sure to store the estimate in results[i]</span>
-}
-<span class="co"># after the loop, you can compare results with exp(targets)</span></code></pre></li>
+<div class="sourceCode" id="cb1088"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1088-1" data-line-number="1">targets &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="dt">by =</span> <span class="fl">0.05</span>)</a>
+<a class="sourceLine" id="cb1088-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="kw">length</span>(targets)</a>
+<a class="sourceLine" id="cb1088-3" data-line-number="3">results &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)</a>
+<a class="sourceLine" id="cb1088-4" data-line-number="4"><span class="kw">set.seed</span>(<span class="dv">3030</span>) <span class="co"># or some other simple seed that you like</span></a>
+<a class="sourceLine" id="cb1088-5" data-line-number="5"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n ) {</a>
+<a class="sourceLine" id="cb1088-6" data-line-number="6">  <span class="co"># use numberNeededSim() with:</span></a>
+<a class="sourceLine" id="cb1088-7" data-line-number="7">  <span class="co">#    * 10000 reps</span></a>
+<a class="sourceLine" id="cb1088-8" data-line-number="8">  <span class="co">#    * seed left at the default NULL (you provided one already)</span></a>
+<a class="sourceLine" id="cb1088-9" data-line-number="9">  <span class="co">#    * target set to targets[i]</span></a>
+<a class="sourceLine" id="cb1088-10" data-line-number="10">  <span class="co">#    * report left at FALSE (no need to have R talk to you at each step)</span></a>
+<a class="sourceLine" id="cb1088-11" data-line-number="11">  <span class="co"># make sure to store the estimate in results[i]</span></a>
+<a class="sourceLine" id="cb1088-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb1088-13" data-line-number="13"><span class="co"># after the loop, you can compare results with exp(targets)</span></a></code></pre></div></li>
 <li><p>(*) A pipe-smoker has two boxes of matches in his pocket. Both boxes contain 40 matches. Every time he lights his pipe, the smoker reaches into his pocket and randomly picks one of the boxes, pulling a match from the box. Eventually one of the boxes runs out. What is the expected value of the number of matches remaining in the other box at that time? Write a simulation function to estimate the answer. Your function should have at least a <code>reps</code> and a <code>seed</code> parameter. Apply the function with ten thousand repetitions—and with a simple seed that you report—in order to estimate the expected value.</p></li>
 <li>(*) A gambler starts with 10 dollars, and repeatedly plays a game. If she wins the game she gets one dollar and if she loses the game she loses one dollar. Her chance of winning each game is a fixed number that is less than 0.50. Write a function to simulate the gambler repeatedly playing the game until her money runs out. The function should keep track of how much money she has left after each play, so that it can produce a line graph (similar to the one in the section on the Drunken Turtle) of the money left after each play. Write the function so that it has
 <ul>

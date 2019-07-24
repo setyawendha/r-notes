@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.1 What is a Vector? | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.1 What is a Vector? | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="vectors.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -586,9 +584,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>For now we’ll just study atomic vectors. Let’s make a few vectors, as examples.</p>
 <p>We can make a vector of numbers using the <code>c()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">23.2</span>, <span class="dv">45</span>, <span class="dv">631</span>, <span class="dv">-273</span>, <span class="dv">0</span>, <span class="fl">48.371</span>, <span class="dv">100000</span>,
-            <span class="dv">85</span>, <span class="dv">92</span>, <span class="dv">-236</span>, <span class="dv">8546</span>, <span class="dv">98774</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>)
-numVec</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">numVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">23.2</span>, <span class="dv">45</span>, <span class="dv">631</span>, <span class="dv">-273</span>, <span class="dv">0</span>, <span class="fl">48.371</span>, <span class="dv">100000</span>,</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">            <span class="dv">85</span>, <span class="dv">92</span>, <span class="dv">-236</span>, <span class="dv">8546</span>, <span class="dv">98774</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb78-3" data-line-number="3">numVec</a></code></pre></div>
 <pre><code>##  [1]     23.200     45.000    631.000   -273.000      0.000     48.371
 ##  [7] 100000.000     85.000     92.000   -236.000   8546.000  98774.000
 ## [13]      0.000      0.000      1.000      3.000</code></pre>
@@ -597,7 +595,7 @@ numVec</code></pre>
 <div id="types-of-atomic-vectors" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Types of Atomic Vectors</h3>
 <p>The numbers in <code>numVec</code> are what programmers call <em>double-precision</em> numbers. You can verify this for yourself with the <code>typeof()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(numVec)</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="kw">typeof</span>(numVec)</a></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
 <p>The <code>typeof()</code> function returns the type of any object in R. As far as vectors are concerned, there are six possible types, of which we will deal with only four:</p>
 <ul>
@@ -607,29 +605,29 @@ numVec</code></pre>
 <li><code>logical</code></li>
 </ul>
 <p>Let’s look at examples of the other types. Here is a vector of type <code>integer</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">intVec &lt;-<span class="st"> </span><span class="kw">c</span>(3L, 17L, <span class="op">-</span>22L, 45L)
-intVec</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">intVec &lt;-<span class="st"> </span><span class="kw">c</span>(3L, 17L, <span class="op">-</span>22L, 45L)</a>
+<a class="sourceLine" id="cb82-2" data-line-number="2">intVec</a></code></pre></div>
 <pre><code>## [1]   3  17 -22  45</code></pre>
 <p>The <code>L</code> after each number signifies to R that the number should be stored in memory as an integer, rather than in double-precision format. Officially, the type is <code>integer</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(intVec)</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">typeof</span>(intVec)</a></code></pre></div>
 <pre><code>## [1] &quot;integer&quot;</code></pre>
 <p>You should know that if you left off one or more of the <code>L</code>’s, then R would create a vector of type <code>double</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numVec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">17</span>, <span class="dv">-22</span>, <span class="dv">45</span>)
-<span class="kw">typeof</span>(numVec2)</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">numVec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">17</span>, <span class="dv">-22</span>, <span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="kw">typeof</span>(numVec2)</a></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
 <p>We won’t work much with integer-type vectors, but you’ll see them out in the wild.</p>
 <p>We can also make vectors out of pieces of text called <em>strings</em>: these are called <em>character</em> vectors. As noted in the previous chapter, we use quotes to delimit strings:</p>
-<pre class="sourceCode r"><code class="sourceCode r">strVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Brains&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;not&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;best&quot;</span>, 
-            <span class="st">&quot;things&quot;</span>, <span class="st">&quot;in&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;world&quot;</span>, <span class="st">&quot;93.2&quot;</span>)
-strVec</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">strVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Brains&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;not&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;best&quot;</span>, </a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">            <span class="st">&quot;things&quot;</span>, <span class="st">&quot;in&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;world&quot;</span>, <span class="st">&quot;93.2&quot;</span>)</a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">strVec</a></code></pre></div>
 <pre><code>##  [1] &quot;Brains&quot; &quot;are&quot;    &quot;not&quot;    &quot;the&quot;    &quot;best&quot;   &quot;things&quot; &quot;in&quot;    
 ##  [8] &quot;the&quot;    &quot;world&quot;  &quot;93.2&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(strVec)</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">typeof</span>(strVec)</a></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>Notice that <code>&quot;93.2&quot;</code> makes a string, not a number.</p>
 <p>The last type of vectors to consider are the <code>logical</code> vectors. Here is an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">logVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, T, T, F, F, <span class="ot">FALSE</span>)
-logVec</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">logVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, T, T, F, F, <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">logVec</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
 <p>In order to represent a logical value you can use:</p>
 <ul>
@@ -637,18 +635,18 @@ logVec</code></pre>
 <li><code>FALSE</code> or <code>F</code> to represent falsity.</li>
 </ul>
 <p>You can’t represent truth or falsity any other way. If you try anything else—like the following—you get an error:</p>
-<pre class="sourceCode r"><code class="sourceCode r">badVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, false)</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">badVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, false)</a></code></pre></div>
 <pre><code>## Error: object &#39;false&#39; not found</code></pre>
 <p><strong>Note</strong>: Although R allows <code>T</code> to be interpreted as <code>TRUE</code> and <code>F</code> as <code>FALSE</code>, it can be dangerous to use them in some circumstances. Best to get into the habit of always using <code>TRUE</code> and <code>FALSE</code>, rather than the permitted abbreviations.</p>
 </div>
 <div id="coercion" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Coercion</h3>
 <p>What would happen if you tried to represent falsity with the string <code>&quot;false&quot;</code>?</p>
-<pre class="sourceCode r"><code class="sourceCode r">newVector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="st">&quot;false&quot;</span>)
-newVector</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">newVector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="st">&quot;false&quot;</span>)</a>
+<a class="sourceLine" id="cb96-2" data-line-number="2">newVector</a></code></pre></div>
 <pre><code>## [1] &quot;TRUE&quot;  &quot;false&quot;</code></pre>
 <p><code>newVector</code> is not a logical vector. Check it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(newVector)</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">typeof</span>(newVector)</a></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>In order to understand what just happened here, you must recall that all of the elements of an atomic vector have to be of the same type. If the <code>c()</code> function is presented with values of different types, then R follows a set of internal rules to <em>coerce</em> some of the values to a new type in such a way that all resulting values are of the same type. You don’t need to know all of the coercion rules, but it’s worth noting that</p>
 <ul>
@@ -657,11 +655,11 @@ newVector</code></pre>
 <li>which in in turn beats <code>logical</code>.</li>
 </ul>
 <p>The following examples show this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="dv">1</span>, 1L, <span class="ot">TRUE</span>))</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">typeof</span>(<span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="dv">1</span>, 1L, <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="kw">c</span>(<span class="dv">1</span>, 1L, <span class="ot">TRUE</span>))</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">typeof</span>(<span class="kw">c</span>(<span class="dv">1</span>, 1L, <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="kw">c</span>(1L, <span class="ot">TRUE</span>))</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="kw">typeof</span>(<span class="kw">c</span>(1L, <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>## [1] &quot;integer&quot;</code></pre>
 <p>Automatic coercion can be convenient in some circumstances, but in others it can give unexpected results. It’s best to keep track of what types you are dealing with and to exercise caution when combining values to make new vectors.</p>
 <p>You can also coerce vectors “manually” with the functions:</p>
@@ -672,29 +670,29 @@ newVector</code></pre>
 <li><code>as.logical()</code> .</li>
 </ul>
 <p>Here are some examples:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="fl">2.5</span>, <span class="fl">-7.32</span>, <span class="dv">0</span>)
-<span class="kw">as.character</span>(numVec)</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1">numVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="fl">2.5</span>, <span class="fl">-7.32</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="kw">as.character</span>(numVec)</a></code></pre></div>
 <pre><code>## [1] &quot;3&quot;     &quot;2.5&quot;   &quot;-7.32&quot; &quot;0&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(numVec)</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="kw">as.integer</span>(numVec)</a></code></pre></div>
 <pre><code>## [1]  3  2 -7  0</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.logical</span>(numVec)</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="kw">as.logical</span>(numVec)</a></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE  TRUE FALSE</code></pre>
 <p>Note that in coercion from numerical to logical, the number 0 becomes <code>FALSE</code> and all non-zero numbers become <code>TRUE</code>.</p>
 </div>
 <div id="combining-vectors" class="section level3">
 <h3><span class="header-section-number">2.1.3</span> Combining Vectors</h3>
 <p>You can combine vectors you have already created to make new, bigger ones:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numVec1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">10</span>)
-numVec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)
-numCombined &lt;-<span class="st"> </span><span class="kw">c</span>(numVec1, numVec2)
-numCombined</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">numVec1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb112-2" data-line-number="2">numVec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb112-3" data-line-number="3">numCombined &lt;-<span class="st"> </span><span class="kw">c</span>(numVec1, numVec2)</a>
+<a class="sourceLine" id="cb112-4" data-line-number="4">numCombined</a></code></pre></div>
 <pre><code>## [1]  5  3 10  1  2  3  4  5  6</code></pre>
 <p>You can see here that vectors are different from sets: they are allowed to repeat the same value in different indices, as we see in the case of the 3’s above.</p>
 </div>
 <div id="na-values" class="section level3">
 <h3><span class="header-section-number">2.1.4</span> NA Values </h3>
 <p>Consider the following vector, which we may think of as recording the heights of people, in inches:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">72</span>, <span class="dv">70</span>, <span class="dv">69</span>, <span class="dv">58</span>, <span class="ot">NA</span>, <span class="dv">45</span>)</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">72</span>, <span class="dv">70</span>, <span class="dv">69</span>, <span class="dv">58</span>, <span class="ot">NA</span>, <span class="dv">45</span>)</a></code></pre></div>
 <p>The <code>NA</code> in the fifth position of the vector is a special value that may be considered to mean “Not Assigned.” It’s R’s way of letting us indicate that a value was not recorded or has gone missing for some reason.</p>
 </div>
 <div id="everything-in-r-is-a-vector" class="section level3">
@@ -702,40 +700,40 @@ numCombined</code></pre>
 <p>Some folks say that everything in R is a vector. That’s a bit of an exaggeration but it’s remarkably close to the truth.</p>
 <p>And yet it seems implausible. What about the elements of an atomic vector, for instance? A single element doesn’t look at all like a vector: it’s a value, not a <em>sequence</em> of values.</p>
 <p>Or so we might think. But really, in R there are no “single values” that can exist by themselves. Consider, for instance, what we think of as the number 17:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">17</span></code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="dv">17</span></a></code></pre></div>
 <pre><code>## [1] 17</code></pre>
 <p>See the <code>[1]</code> in front, in the output above? It indicates that the line begins with the <em>first element</em> of a vector. So 17 doesn’t exist on its own: it exists a vector of type <code>double</code>—a vector of length 1.</p>
 <p>Even <code>NA</code> is, all along, a vector of length 1</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">NA</span></code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="ot">NA</span></a></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>It is of type <code>logical</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="ot">NA</span>)</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1"><span class="kw">typeof</span>(<span class="ot">NA</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;logical&quot;</code></pre>
 <p>Note that even the type of <code>NA</code> evaluates, in R, to a vector: a character vector of length 1 whose only element is the string “logical”!</p>
 </div>
 <div id="named-vectors" class="section level3">
 <h3><span class="header-section-number">2.1.6</span> Named Vectors</h3>
 <p>The elements of a vector can have names, if we like:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Bettina =</span> <span class="dv">32</span>, <span class="dt">Chris =</span> <span class="dv">64</span>, <span class="dt">Ramesh =</span> <span class="dv">101</span>)
-ages</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1">ages &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Bettina =</span> <span class="dv">32</span>, <span class="dt">Chris =</span> <span class="dv">64</span>, <span class="dt">Ramesh =</span> <span class="dv">101</span>)</a>
+<a class="sourceLine" id="cb121-2" data-line-number="2">ages</a></code></pre></div>
 <pre><code>## Bettina   Chris  Ramesh 
 ##      32      64     101</code></pre>
 <p>Having names doesn’t keep the vector from being a vector of type <code>double</code>: it has to be <code>double</code> because its elements are <code>double</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(ages)</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="kw">typeof</span>(ages)</a></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
 <p>We can names the elements of a vector when we create it with <code>c()</code>, or we can name them later on. One way to do this is with the <code>names()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(heights) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Tinman&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Boq&quot;</span>)
-heights</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">names</span>(heights) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Tinman&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Boq&quot;</span>)</a>
+<a class="sourceLine" id="cb125-2" data-line-number="2">heights</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
 ##        72        70        69        58        NA        45</code></pre>
 </div>
 <div id="special-character-vectors" class="section level3">
 <h3><span class="header-section-number">2.1.7</span> Special Character Vectors</h3>
 <p>R comes with two handy, predefined character vectors:</p>
-<pre class="sourceCode r"><code class="sourceCode r">letters</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">letters</a></code></pre></div>
 <pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
 ## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">LETTERS</a></code></pre></div>
 <pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
 ## [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
 <p>We will make use of them from time to time.</p>
@@ -743,33 +741,33 @@ heights</code></pre>
 <div id="length-of-vectors" class="section level3">
 <h3><span class="header-section-number">2.1.8</span> Length of Vectors</h3>
 <p>The <code>length()</code> function tells us how many elements a vector has:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(heights)</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">length</span>(heights)</a></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 </div>
 <div id="practice-exercises" class="section level3">
 <h3><span class="header-section-number">2.1.9</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Consider the following vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r">upperLower &lt;-<span class="st"> </span><span class="kw">c</span>(LETTERS, letters)</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">upperLower &lt;-<span class="st"> </span><span class="kw">c</span>(LETTERS, letters)</a></code></pre></div>
 <p>What should the length of <code>upperLower</code> be? Check you answer using the <code>length()</code> function.</p></li>
 <li><p>True or False: <code>c(&quot;a&quot;, 2, TRUE)</code> yields a vector of length three consisting of the string <code>&quot;a&quot;</code>, the number 2 and the logical value <code>TRUE</code>.</p></li>
 <li><p>The function <code>as.numeric()</code> tries to coerce its input into numbers. How well can it pick out the “numbers” in strings. Try the following calls. When did <code>as.numeric()</code> find the numbers that was probably intended?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="st">&quot;3.214&quot;</span>)
-<span class="kw">as.numeric</span>(<span class="st">&quot;3L&quot;</span>)
-<span class="kw">as.numeric</span>(<span class="st">&quot;fifty&quot;</span>)
-<span class="kw">as.numeric</span>(<span class="st">&quot;10 + 3&quot;</span>)
-<span class="kw">as.numeric</span>(<span class="st">&quot;3.25e-3&quot;</span>)  <span class="co"># scientific notation:  3.25 times 10^(-2)</span>
-<span class="kw">as.numeric</span>(<span class="st">&quot;31,245&quot;</span>)</code></pre></li>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="kw">as.numeric</span>(<span class="st">&quot;3.214&quot;</span>)</a>
+<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="kw">as.numeric</span>(<span class="st">&quot;3L&quot;</span>)</a>
+<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="kw">as.numeric</span>(<span class="st">&quot;fifty&quot;</span>)</a>
+<a class="sourceLine" id="cb134-4" data-line-number="4"><span class="kw">as.numeric</span>(<span class="st">&quot;10 + 3&quot;</span>)</a>
+<a class="sourceLine" id="cb134-5" data-line-number="5"><span class="kw">as.numeric</span>(<span class="st">&quot;3.25e-3&quot;</span>)  <span class="co"># scientific notation:  3.25 times 10^(-2)</span></a>
+<a class="sourceLine" id="cb134-6" data-line-number="6"><span class="kw">as.numeric</span>(<span class="st">&quot;31,245&quot;</span>)</a></code></pre></div></li>
 </ol>
 </div>
 <div id="solutions-to-practice-exercises" class="section level3">
 <h3><span class="header-section-number">2.1.10</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>There are 26 letters, so the length of <code>upperlower</code> should be <span class="math inline">\(2 \times 26 = 52\)</span>. Let’s check:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(upperLower)</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">length</span>(upperLower)</a></code></pre></div>
 <pre><code>## [1] 52</code></pre></li>
 <li><p><strong>False!</strong> The resulting vector will be atomic—all of its elements will be the same data type. The non-strings will be coerced to strings, yielding:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">2</span>, <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">2</span>, <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;a&quot;    &quot;2&quot;    &quot;TRUE&quot;</code></pre></li>
 <li><p><code>as.numeric()</code> isn’t very smart: it picked out the number in <code>&quot;3.214&quot;</code> and <code>3.25e-3</code>, but in the other cases it returned <code>NA</code>.</p></li>
 </ol>

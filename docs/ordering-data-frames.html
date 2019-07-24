@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.7 Ordering Data Frames | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.7 Ordering Data Frames | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="subsetting-data-frames.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,9 +577,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ordering-data-frames" class="section level2">
 <h2><span class="header-section-number">7.7</span> Ordering Data Frames</h2>
 <p>You can reorder as well as select. For example, the following code selects the first five rows of<code>m111survey</code> and then reverses them:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;ideal_ht&quot;</span>)]
-dfRev &lt;-<span class="st"> </span>df[<span class="dv">5</span><span class="op">:</span><span class="dv">1</span>, ]
-<span class="kw">head</span>(dfRev)</code></pre>
+<div class="sourceCode" id="cb1274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1274-1" data-line-number="1">df &lt;-<span class="st"> </span>m111survey[, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;ideal_ht&quot;</span>)]</a>
+<a class="sourceLine" id="cb1274-2" data-line-number="2">dfRev &lt;-<span class="st"> </span>df[<span class="dv">5</span><span class="op">:</span><span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb1274-3" data-line-number="3"><span class="kw">head</span>(dfRev)</a></code></pre></div>
 <pre><code>##   height ideal_ht
 ## 5     72       72
 ## 4     62       65
@@ -589,22 +587,22 @@ dfRev &lt;-<span class="st"> </span>df[<span class="dv">5</span><span class="op"
 ## 2     74       76
 ## 1     76       78</code></pre>
 <p>If you want, you can even scramble the rows of the data frame in a random order:</p>
-<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(m111survey)
-shuffle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
-df &lt;-<span class="st"> </span>m111survey[shuffle, ]
-<span class="kw">head</span>(df[<span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;seat&quot;</span>)])  <span class="co">#show just two columns</span></code></pre>
+<div class="sourceCode" id="cb1276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1276-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(m111survey)</a>
+<a class="sourceLine" id="cb1276-2" data-line-number="2">shuffle &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1276-3" data-line-number="3">df &lt;-<span class="st"> </span>m111survey[shuffle, ]</a>
+<a class="sourceLine" id="cb1276-4" data-line-number="4"><span class="kw">head</span>(df[<span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;seat&quot;</span>)])  <span class="co">#show just two columns</span></a></code></pre></div>
 <pre><code>##       sex     seat
-## 9  female   3_back
-## 62 female  1_front
-## 49   male 2_middle
-## 27   male  1_front
-## 66   male 2_middle
-## 43 female  1_front</code></pre>
+## 25 female 2_middle
+## 51 female 2_middle
+## 69 female  1_front
+## 52 female 2_middle
+## 64   male   3_back
+## 13 female  1_front</code></pre>
 <p>It is quite common to order the rows of a frame according to the values of a particular variable. For example, you might want to arrange the rows by <code>height</code>, so that the frame begins with the shortest subject and ends with the tallest.</p>
 <p>Accomplishing this task requires a study of R’s <code>order()</code> function. Consider the following vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">23</span>, <span class="dv">7</span>)</code></pre>
+<div class="sourceCode" id="cb1278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1278-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">23</span>, <span class="dv">7</span>)</a></code></pre></div>
 <p>Call <code>order()</code> with this vector as an argument:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">order</span>(vec)</code></pre>
+<div class="sourceCode" id="cb1279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1279-1" data-line-number="1"><span class="kw">order</span>(vec)</a></code></pre></div>
 <pre><code>## [1] 4 2 1 3</code></pre>
 <p><code>order()</code> returns the indices of the elements of <code>vec</code>, in the following order:</p>
 <ul>
@@ -614,15 +612,15 @@ df &lt;-<span class="st"> </span>m111survey[shuffle, ]
 <li>the index of the largest element (23, at index 3 of <code>vec</code>).</li>
 </ul>
 <p>Can you guess the output of the following function-call without looking for the answer underneath?</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec[<span class="kw">order</span>(vec)]</code></pre>
+<div class="sourceCode" id="cb1281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1281-1" data-line-number="1">vec[<span class="kw">order</span>(vec)]</a></code></pre></div>
 <pre><code>## [1]  7 12 15 23</code></pre>
 <p>Sure enough, the result is <code>vec</code> sorted: from smallest to largest element.</p>
 <p>Now the sorting of <code>vec</code> could have been accomplished with R’s <code>sort()</code>function: </p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(vec)</code></pre>
+<div class="sourceCode" id="cb1283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1283-1" data-line-number="1"><span class="kw">sort</span>(vec)</a></code></pre></div>
 <pre><code>## [1]  7 12 15 23</code></pre>
 <p>The power of <code>order()</code> comes with the rearrangement of rows of a data frame. In order to “sort” the frame from shortest to tallest subject, call:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[<span class="kw">order</span>(m111survey<span class="op">$</span>height), ]
-<span class="kw">head</span>(df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>)])  <span class="co"># to show that it worked</span></code></pre>
+<div class="sourceCode" id="cb1285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1285-1" data-line-number="1">df &lt;-<span class="st"> </span>m111survey[<span class="kw">order</span>(m111survey<span class="op">$</span>height), ]</a>
+<a class="sourceLine" id="cb1285-2" data-line-number="2"><span class="kw">head</span>(df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>)])  <span class="co"># to show that it worked</span></a></code></pre></div>
 <pre><code>##       sex height
 ## 45 female     51
 ## 26 female     54
@@ -631,8 +629,8 @@ df &lt;-<span class="st"> </span>m111survey[shuffle, ]
 ## 40 female     60
 ## 69 female     61</code></pre>
 <p>If you want to order the rows from tallest to shortest instead, then use the <code>decreasing</code> parameter, which by default is <code>FALSE</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[<span class="kw">order</span>(m111survey<span class="op">$</span>height, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>), ]
-<span class="kw">head</span>(df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>)])  <span class="co"># to show that it worked</span></code></pre>
+<div class="sourceCode" id="cb1287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1287-1" data-line-number="1">df &lt;-<span class="st"> </span>m111survey[<span class="kw">order</span>(m111survey<span class="op">$</span>height, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>), ]</a>
+<a class="sourceLine" id="cb1287-2" data-line-number="2"><span class="kw">head</span>(df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>)])  <span class="co"># to show that it worked</span></a></code></pre></div>
 <pre><code>##       sex height
 ## 8    male     79
 ## 14 female     78
@@ -641,9 +639,9 @@ df &lt;-<span class="st"> </span>m111survey[shuffle, ]
 ## 34   male     75
 ## 54   male     75</code></pre>
 <p>Sometimes you want to order by two or more variables. For example suppose you want to arrange the frame so that the folks preferring to sit in front come first, followed by the people who prefer the middle and ending with the people who prefer the back. Within these groups you would like people to be arranged from shortest to tallest. Then call:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ordering &lt;-<span class="st"> </span><span class="kw">with</span>(m111survey, <span class="kw">order</span>(seat, height))
-df &lt;-<span class="st"> </span>m111survey[ordering, ]
-<span class="kw">head</span>(df[, <span class="kw">c</span>(<span class="st">&quot;seat&quot;</span>, <span class="st">&quot;height&quot;</span>)], <span class="dt">n =</span> <span class="dv">10</span>)  <span class="co"># see if it worked</span></code></pre>
+<div class="sourceCode" id="cb1289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1289-1" data-line-number="1">ordering &lt;-<span class="st"> </span><span class="kw">with</span>(m111survey, <span class="kw">order</span>(seat, height))</a>
+<a class="sourceLine" id="cb1289-2" data-line-number="2">df &lt;-<span class="st"> </span>m111survey[ordering, ]</a>
+<a class="sourceLine" id="cb1289-3" data-line-number="3"><span class="kw">head</span>(df[, <span class="kw">c</span>(<span class="st">&quot;seat&quot;</span>, <span class="st">&quot;height&quot;</span>)], <span class="dt">n =</span> <span class="dv">10</span>)  <span class="co"># see if it worked</span></a></code></pre></div>
 <pre><code>##       seat height
 ## 45 1_front     51
 ## 26 1_front     54
@@ -659,14 +657,14 @@ df &lt;-<span class="st"> </span>m111survey[ordering, ]
 <h3><span class="header-section-number">7.7.1</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Consider the following vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r">creatures &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mole&quot;</span>, <span class="st">&quot;Frog&quot;</span>, <span class="st">&quot;Rat&quot;</span>, <span class="st">&quot;Badger&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1291-1" data-line-number="1">creatures &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mole&quot;</span>, <span class="st">&quot;Frog&quot;</span>, <span class="st">&quot;Rat&quot;</span>, <span class="st">&quot;Badger&quot;</span>)</a></code></pre></div>
 <p>Write down what you think will be the result of the call:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">order</span>(creatures)</code></pre>
+<div class="sourceCode" id="cb1292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1292-1" data-line-number="1"><span class="kw">order</span>(creatures)</a></code></pre></div>
 <p>Then check your answer by actually running:</p>
-<pre class="sourceCode r"><code class="sourceCode r">creatures &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mole&quot;</span>, <span class="st">&quot;Frog&quot;</span>, <span class="st">&quot;Rat&quot;</span>, <span class="st">&quot;Badger&quot;</span>)
-<span class="kw">order</span>(creatures)</code></pre></li>
+<div class="sourceCode" id="cb1293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1293-1" data-line-number="1">creatures &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mole&quot;</span>, <span class="st">&quot;Frog&quot;</span>, <span class="st">&quot;Rat&quot;</span>, <span class="st">&quot;Badger&quot;</span>)</a>
+<a class="sourceLine" id="cb1293-2" data-line-number="2"><span class="kw">order</span>(creatures)</a></code></pre></div></li>
 <li><p>What will be the result of the following?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">order</span>(creatures, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</code></pre></li>
+<div class="sourceCode" id="cb1294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1294-1" data-line-number="1"><span class="kw">order</span>(creatures, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</a></code></pre></div></li>
 <li><p>Arrange the rows of the data frame <code>mosaicData::CPS85</code> in order, from the lowest to the highest wage. Break ties by experience (less experience coming before more experience).</p></li>
 <li><p>Arrange the rows of the data frame <code>mosaicData::CPS85</code> in order, from the lowest to the highest wage. Break ties by experience (more experience coming before less experience).</p></li>
 </ol>
@@ -675,16 +673,16 @@ df &lt;-<span class="st"> </span>m111survey[ordering, ]
 <h3><span class="header-section-number">7.7.2</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s what you get:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">order</span>(creatures)</code></pre>
+<div class="sourceCode" id="cb1295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1295-1" data-line-number="1"><span class="kw">order</span>(creatures)</a></code></pre></div>
 <pre><code>## [1] 4 2 1 3</code></pre></li>
 <li><p>Here’s what you get:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">order</span>(creatures, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb1297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1297-1" data-line-number="1"><span class="kw">order</span>(creatures, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] 3 1 2 4</code></pre></li>
 <li><p>Here is one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85[<span class="kw">order</span>(CPS85<span class="op">$</span>wage, CPS85<span class="op">$</span>exper), ]</code></pre></li>
+<div class="sourceCode" id="cb1299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1299-1" data-line-number="1">CPS85[<span class="kw">order</span>(CPS85<span class="op">$</span>wage, CPS85<span class="op">$</span>exper), ]</a></code></pre></div></li>
 <li><p>Here is one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85[<span class="kw">order</span>(CPS85<span class="op">$</span>wage, CPS85<span class="op">$</span>exper, 
-            <span class="dt">decreasing =</span> <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)), ]</code></pre></li>
+<div class="sourceCode" id="cb1300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1300-1" data-line-number="1">CPS85[<span class="kw">order</span>(CPS85<span class="op">$</span>wage, CPS85<span class="op">$</span>exper, </a>
+<a class="sourceLine" id="cb1300-2" data-line-number="2">            <span class="dt">decreasing =</span> <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)), ]</a></code></pre></div></li>
 </ol>
 </div>
 </div>

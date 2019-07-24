@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.3 Writing Turtle Functions | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.3 Writing Turtle Functions | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="making-many-movements-an-introduction-to-looping.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,29 +577,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="writing-turtle-functions" class="section level2">
 <h2><span class="header-section-number">5.3</span> Writing Turtle Functions</h2>
 <p>Once you have designed some shapes that you think you might want to draw again, you should write them up as functions. Here for example, is the code for a function that makes squares:</p>
-<pre class="sourceCode r"><code class="sourceCode r">turtle_square &lt;-<span class="st"> </span><span class="cf">function</span>(side) { 
-  <span class="kw">turtle_do</span>({
-    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {
-      <span class="kw">turtle_forward</span>(side)
-      <span class="kw">turtle_right</span>(<span class="dv">90</span>)
-    }
-  })
-}</code></pre>
+<div class="sourceCode" id="cb903"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb903-1" data-line-number="1">turtle_square &lt;-<span class="st"> </span><span class="cf">function</span>(side) { </a>
+<a class="sourceLine" id="cb903-2" data-line-number="2">  <span class="kw">turtle_do</span>({</a>
+<a class="sourceLine" id="cb903-3" data-line-number="3">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) {</a>
+<a class="sourceLine" id="cb903-4" data-line-number="4">      <span class="kw">turtle_forward</span>(side)</a>
+<a class="sourceLine" id="cb903-5" data-line-number="5">      <span class="kw">turtle_right</span>(<span class="dv">90</span>)</a>
+<a class="sourceLine" id="cb903-6" data-line-number="6">    }</a>
+<a class="sourceLine" id="cb903-7" data-line-number="7">  })</a>
+<a class="sourceLine" id="cb903-8" data-line-number="8">}</a></code></pre></div>
 <p>Note that the user can vary the length of a side. You would use it like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-<span class="kw">turtle_square</span>(<span class="dt">side =</span> <span class="dv">30</span>)</code></pre>
+<div class="sourceCode" id="cb904"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb904-1" data-line-number="1"><span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb904-2" data-line-number="2"><span class="kw">turtle_square</span>(<span class="dt">side =</span> <span class="dv">30</span>)</a></code></pre></div>
 <div id="practice-exercises-14" class="section level3">
 <h3><span class="header-section-number">5.3.1</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Write a function called <code>star8()</code> that makes an eight-sided star with rays of length 20 each. The user should be able to specify the thickness of the rays (think <code>turtle_lwd()</code>). The body of the function should begin with <code>turtle_init()</code> so that the star is always drawn inside a new field. The function should take a single parameter called <code>width</code>, the desired thickness of the rays. Typical examples of use should be as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">star8</span>(<span class="dt">width =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb905"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb905-1" data-line-number="1"><span class="kw">star8</span>(<span class="dt">width =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="r-notes_files/figure-html/unnamed-chunk-488-1.png" width="50%" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">star8</span>(<span class="dt">width =</span> <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb906"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb906-1" data-line-number="1"><span class="kw">star8</span>(<span class="dt">width =</span> <span class="dv">10</span>)</a></code></pre></div>
 <p><img src="r-notes_files/figure-html/unnamed-chunk-489-1.png" width="50%" style="display: block; margin: auto;" /></p></li>
 <li><p>Modify your <code>star8()</code> function to make a new function called <code>superstar8()</code> that takes an additional parameter called <code>color</code> that allows the user to specify the color of the rays. The default value of <code>color</code> should be <code>&quot;burlywood&quot;</code>. Typical examples of use should be as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superstar8</span>(<span class="dt">width =</span> <span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb907"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb907-1" data-line-number="1"><span class="kw">superstar8</span>(<span class="dt">width =</span> <span class="dv">5</span>)</a></code></pre></div>
 <p><img src="r-notes_files/figure-html/unnamed-chunk-490-1.png" width="50%" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superstar8</span>(<span class="dt">width =</span> <span class="dv">15</span>, <span class="dt">color =</span> <span class="st">&quot;lavenderblush4&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb908"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb908-1" data-line-number="1"><span class="kw">superstar8</span>(<span class="dt">width =</span> <span class="dv">15</span>, <span class="dt">color =</span> <span class="st">&quot;lavenderblush4&quot;</span>)</a></code></pre></div>
 <p><img src="r-notes_files/figure-html/unnamed-chunk-491-1.png" width="50%" style="display: block; margin: auto;" /></p></li>
 </ol>
 </div>
@@ -609,30 +607,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">5.3.2</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>From the Practice Exercises of the previous section we are already familiar with making 8-ray stars; we just need to encapsulate the process into a function. Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">star8 &lt;-<span class="st"> </span><span class="cf">function</span>(width) {
-  <span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-  <span class="kw">turtle_lwd</span>(<span class="dt">lwd =</span> width)
-  <span class="kw">turtle_do</span>({
-  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span> ) {
-    <span class="kw">turtle_forward</span>(<span class="dv">20</span>)
-    <span class="kw">turtle_backward</span>(<span class="dv">20</span>)
-    <span class="kw">turtle_turn</span>(<span class="dv">45</span>)
-  }
-  })
-}</code></pre></li>
+<div class="sourceCode" id="cb909"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb909-1" data-line-number="1">star8 &lt;-<span class="st"> </span><span class="cf">function</span>(width) {</a>
+<a class="sourceLine" id="cb909-2" data-line-number="2">  <span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb909-3" data-line-number="3">  <span class="kw">turtle_lwd</span>(<span class="dt">lwd =</span> width)</a>
+<a class="sourceLine" id="cb909-4" data-line-number="4">  <span class="kw">turtle_do</span>({</a>
+<a class="sourceLine" id="cb909-5" data-line-number="5">  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span> ) {</a>
+<a class="sourceLine" id="cb909-6" data-line-number="6">    <span class="kw">turtle_forward</span>(<span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb909-7" data-line-number="7">    <span class="kw">turtle_backward</span>(<span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb909-8" data-line-number="8">    <span class="kw">turtle_turn</span>(<span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb909-9" data-line-number="9">  }</a>
+<a class="sourceLine" id="cb909-10" data-line-number="10">  })</a>
+<a class="sourceLine" id="cb909-11" data-line-number="11">}</a></code></pre></div></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">superstar8 &lt;-<span class="st"> </span><span class="cf">function</span>(width, <span class="dt">color =</span> <span class="st">&quot;burlywood&quot;</span>) {
-  <span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-  <span class="kw">turtle_lwd</span>(<span class="dt">lwd =</span> width)
-  <span class="kw">turtle_col</span>(<span class="dt">col =</span> color)
-  <span class="kw">turtle_do</span>({
-  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span> ) {
-    <span class="kw">turtle_forward</span>(<span class="dv">20</span>)
-    <span class="kw">turtle_backward</span>(<span class="dv">20</span>)
-    <span class="kw">turtle_turn</span>(<span class="dv">45</span>)
-  }
-  })
-}</code></pre></li>
+<div class="sourceCode" id="cb910"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb910-1" data-line-number="1">superstar8 &lt;-<span class="st"> </span><span class="cf">function</span>(width, <span class="dt">color =</span> <span class="st">&quot;burlywood&quot;</span>) {</a>
+<a class="sourceLine" id="cb910-2" data-line-number="2">  <span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb910-3" data-line-number="3">  <span class="kw">turtle_lwd</span>(<span class="dt">lwd =</span> width)</a>
+<a class="sourceLine" id="cb910-4" data-line-number="4">  <span class="kw">turtle_col</span>(<span class="dt">col =</span> color)</a>
+<a class="sourceLine" id="cb910-5" data-line-number="5">  <span class="kw">turtle_do</span>({</a>
+<a class="sourceLine" id="cb910-6" data-line-number="6">  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">8</span> ) {</a>
+<a class="sourceLine" id="cb910-7" data-line-number="7">    <span class="kw">turtle_forward</span>(<span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb910-8" data-line-number="8">    <span class="kw">turtle_backward</span>(<span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb910-9" data-line-number="9">    <span class="kw">turtle_turn</span>(<span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb910-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb910-11" data-line-number="11">  })</a>
+<a class="sourceLine" id="cb910-12" data-line-number="12">}</a></code></pre></div></li>
 </ol>
 </div>
 </div>

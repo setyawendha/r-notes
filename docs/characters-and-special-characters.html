@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.2 Characters and Special Characters | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.2 Characters and Special Characters | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="character-vectors-strings.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -593,32 +591,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Since quote-marks are used to <em>delimit</em> strings but can also be part of them, designers of programming languages have to think carefully about how to manage quote-marks. Here’s how it works in R:</p>
 <ul>
 <li><p>If you choose to delimit a string with double-quotes, then you can put single-quotes anywhere you like within the string and they will be treated by the computer as literal single-quotes, not as string-delimiters. Here is an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;&#39;Hello&#39;, she said.&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1583-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;&#39;Hello&#39;, she said.&quot;</span>)</a></code></pre></div>
 <pre><code>## &#39;Hello&#39;, she said.</code></pre></li>
 <li><p>If you delimit with double-quotes and you want to place a double-quote in your string, then you have to <em>escape</em> that double-quote with the backslash character <code>\</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">Hello</span><span class="ch">\&quot;</span><span class="st">, she said.&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1585"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1585-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">Hello</span><span class="ch">\&quot;</span><span class="st">, she said.&quot;</span>)</a></code></pre></div>
 <pre><code>## &quot;Hello&quot;, she said.</code></pre></li>
 <li><p>If you choose to delimit a string with single-quotes, then you can put double-quotes anywhere you like within the string and they will be treated by the computer as literal double-quotes, not as string-delimiters.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&#39;&quot;Hello&quot;, she said.&#39;</span>)</code></pre>
+<div class="sourceCode" id="cb1587"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1587-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&#39;&quot;Hello&quot;, she said.&#39;</span>)</a></code></pre></div>
 <pre><code>## &quot;Hello&quot;, she said.</code></pre></li>
 <li><p>If you delimit with single-quotes and you want to place a single-quote in your string, then you have to escape that single-quote:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&#39;</span><span class="ch">\&#39;</span><span class="st">Hello</span><span class="ch">\&#39;</span><span class="st">, she said.&#39;</span>)</code></pre>
+<div class="sourceCode" id="cb1589"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1589-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&#39;</span><span class="ch">\&#39;</span><span class="st">Hello</span><span class="ch">\&#39;</span><span class="st">, she said.&#39;</span>)</a></code></pre></div>
 <pre><code>## &#39;Hello&#39;, she said.</code></pre></li>
 </ul>
 <p>In R and in many other programming languages the backslash <code>\</code> permits the following character to “escape” any special meaning that is otherwise assigned to it by the language. When we write <code>\&quot;</code> we say that we are “escaping” the double-quote; more precisely, we are escaping the special role of the double-quote as a delimiter for strings.</p>
 <p>Of course the foregoing implies that the backslash character has a special role in the language: as an escaping-device. So what can we do if we want a literal backslash in our string? Well, we simply escape it by preceding it with a backslash:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;up</span><span class="ch">\\</span><span class="st">down&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1591"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1591-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;up</span><span class="ch">\\</span><span class="st">down&quot;</span>)</a></code></pre></div>
 <pre><code>## up\down</code></pre>
 <p>Another example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;C:</span><span class="ch">\\\\</span><span class="st">Inetpub</span><span class="ch">\\\\</span><span class="st">vhosts</span><span class="ch">\\\\</span><span class="st">example.com&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1593"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1593-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;C:</span><span class="ch">\\\\</span><span class="st">Inetpub</span><span class="ch">\\\\</span><span class="st">vhosts</span><span class="ch">\\\\</span><span class="st">example.com&quot;</span>)</a></code></pre></div>
 <pre><code>## C:\\Inetpub\\vhosts\\example.com</code></pre>
 <p>So much for “ordinary” characters. But there are special characters, too, sometimes called <em>control</em> characters, that do not represent written symbols. We have seen a couple of them already; the newline character <code>\n</code> is one:</p>
-<pre class="sourceCode r"><code class="sourceCode r">bye &lt;-<span class="st"> &quot;Farewell!</span><span class="ch">\n\n</span><span class="st">&quot;</span>
-<span class="kw">cat</span>(bye)</code></pre>
+<div class="sourceCode" id="cb1595"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1595-1" data-line-number="1">bye &lt;-<span class="st"> &quot;Farewell!</span><span class="ch">\n\n</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb1595-2" data-line-number="2"><span class="kw">cat</span>(bye)</a></code></pre></div>
 <pre><code>## Farewell!  # first \n moves us to a new line ...
 ##            # .. which is empty due the next \n</code></pre>
 <p>We have also seen the tab-character <code>\t</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;First Name</span><span class="ch">\t</span><span class="st">Last Name&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1597"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1597-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;First Name</span><span class="ch">\t</span><span class="st">Last Name&quot;</span>)</a></code></pre></div>
 <pre><code>## First Name   Last Name</code></pre>
 <p>Notice that the backslash character is used here to allow the <code>n</code> and <code>t</code> to escape their customary roles as the letters “n” and <code>t</code> respectively.</p>
 <p>If you ask R, (try <code>help(Quotes)</code>), you will learn that there are several control characters, including:</p>
@@ -662,16 +660,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>It is worth exploring their effects. Here are a couple of examples<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Hell</span><span class="ch">\t</span><span class="st">o&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1599"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1599-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;Hell</span><span class="ch">\t</span><span class="st">o&quot;</span>)</a></code></pre></div>
 <pre><code>## Hell o</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Hell</span><span class="ch">\r</span><span class="st">o&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1601"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1601-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;Hell</span><span class="ch">\r</span><span class="st">o&quot;</span>)</a></code></pre></div>
 <pre><code>## Hell
 o</code></pre>
 <p>A number of other non-control characters can be generated with the backslash. Unicode characters, for instance, are generated by <code>\u{nnnn}</code>, where the n’s represent hexadecimal digits. Try the following in your console, and see what you get:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;\u{2603}&quot;</span>)  <span class="co"># the Snowman</span></code></pre>
+<div class="sourceCode" id="cb1603"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1603-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;\u{2603}&quot;</span>)  <span class="co"># the Snowman</span></a></code></pre></div>
 <pre><code>## ☃</code></pre>
 <p>Or, for something zanier:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Hello\u{202e}there, Friend!&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1605"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1605-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;Hello\u{202e}there, Friend!&quot;</span>)</a></code></pre></div>
 <pre><code>## Hello‮there, Friend!</code></pre>
 </div>
 <div class="footnotes">

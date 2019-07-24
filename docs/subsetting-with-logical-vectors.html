@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.6 Subsetting with Logical Vectors | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.6 Subsetting with Logical Vectors | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="vector-recycling.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,27 +578,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.6</span> Subsetting with Logical Vectors</h2>
 <p>The subsetting we have seen up to now involves specifying the <em>indices</em> of the elements we would like to select from the original vector. It is also possible to say, for each element, <em>whether or not it is to be included</em> in our selection. This is accomplished by means of logical vectors.</p>
 <p>Recall our <code>heights</code> vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights</code></pre>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1">heights</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
 ##        73        70        69        60        NA        46</code></pre>
 <p>Let’s say that we want the heights of Scarecrow, Tinman and Dorothy. We can use a logical vector to do this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">wanted &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)
-heights[wanted]</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" data-line-number="1">wanted &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb280-2" data-line-number="2">heights[wanted]</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman   Dorothy 
 ##        73        70        60</code></pre>
 <p>The <code>TRUE</code>’s at indices 1, 2, and 4 in <code>wanted</code> inform R that we want the heights vector at indices 1, 2 and 4. The <code>FALSE</code>’s say: “don’t include this element!”</p>
 <p>Subsetting can be used powerfully along with logical vectors and Boolean operators.</p>
 <p>For example, in order to select those persons whose heights exceed a certain amount, we might say something like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#heights of some people:</span>
-people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">55</span>, <span class="dv">64</span>, <span class="dv">67</span>, <span class="dv">70</span>, <span class="dv">63</span>, <span class="dv">72</span>)
-tall &lt;-<span class="st"> </span>(people <span class="op">&gt;=</span><span class="st"> </span><span class="dv">70</span>)
-tall</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" data-line-number="1"><span class="co">#heights of some people:</span></a>
+<a class="sourceLine" id="cb282-2" data-line-number="2">people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">55</span>, <span class="dv">64</span>, <span class="dv">67</span>, <span class="dv">70</span>, <span class="dv">63</span>, <span class="dv">72</span>)</a>
+<a class="sourceLine" id="cb282-3" data-line-number="3">tall &lt;-<span class="st"> </span>(people <span class="op">&gt;=</span><span class="st"> </span><span class="dv">70</span>)</a>
+<a class="sourceLine" id="cb282-4" data-line-number="4">tall</a></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">people[tall]</code></pre>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1">people[tall]</a></code></pre></div>
 <pre><code>## [1] 70 72</code></pre>
 <p>As you can see, the <code>tall</code> vector specifies which elements we would like to select from the <code>people</code> vector.</p>
 <p>We need not define the <code>tall</code> vector along the way. It is quite common to see something like the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r">people[people <span class="op">&gt;=</span><span class="st"> </span><span class="dv">70</span>]</code></pre>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" data-line-number="1">people[people <span class="op">&gt;=</span><span class="st"> </span><span class="dv">70</span>]</a></code></pre></div>
 <pre><code>## [1] 70 72</code></pre>
 <p>I like to pronounce the above as:</p>
 <blockquote>
@@ -608,64 +606,64 @@ tall</code></pre>
 </blockquote>
 <p>The word “where” in the above phrase corresponds to the subsetting operator.</p>
 <p>Your subsetting logical vector need not have been constructed with the original vector in mind. Consider the following example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">63</span>)
-height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">68</span>, <span class="dv">67</span>, <span class="dv">71</span>, <span class="dv">70</span>, <span class="dv">69</span>)
-age[height <span class="op">&lt;</span><span class="st"> </span><span class="dv">70</span>]</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" data-line-number="1">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">63</span>)</a>
+<a class="sourceLine" id="cb288-2" data-line-number="2">height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">68</span>, <span class="dv">67</span>, <span class="dv">71</span>, <span class="dv">70</span>, <span class="dv">69</span>)</a>
+<a class="sourceLine" id="cb288-3" data-line-number="3">age[height <span class="op">&lt;</span><span class="st"> </span><span class="dv">70</span>]</a></code></pre></div>
 <pre><code>## [1] 23 21 63</code></pre>
 <p>Here the selection is done from the <code>age</code> vector, using a logical vector that was constructed from <code>height</code>—another vector altogether. It concisely expresses the idea:</p>
 <blockquote>
 <p><em>the ages of people whose height is less than 70</em></p>
 </blockquote>
 <p>There is no limit to the complexity of selection. Consider the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">63</span>)
-height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">68</span>, <span class="dv">67</span>, <span class="dv">71</span>, <span class="dv">70</span>, <span class="dv">69</span>)
-likesToto &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)
-height[age <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">&amp;</span><span class="st"> </span>likesToto]</code></pre>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">63</span>)</a>
+<a class="sourceLine" id="cb290-2" data-line-number="2">height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">68</span>, <span class="dv">67</span>, <span class="dv">71</span>, <span class="dv">70</span>, <span class="dv">69</span>)</a>
+<a class="sourceLine" id="cb290-3" data-line-number="3">likesToto &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb290-4" data-line-number="4">height[age <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">&amp;</span><span class="st"> </span>likesToto]</a></code></pre></div>
 <pre><code>## [1] 68 67</code></pre>
 <div id="counting" class="section level3">
 <h3><span class="header-section-number">2.6.1</span> Counting</h3>
 <p>Logical subsetting provides a convenient way to <em>count</em> the elements of a vector that possess a given property. For example, to find out how many elements of <code>people</code> are less than 70 we could say:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(people[people <span class="op">&lt;</span><span class="st"> </span><span class="dv">70</span>])</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1"><span class="kw">length</span>(people[people <span class="op">&lt;</span><span class="st"> </span><span class="dv">70</span>])</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 </div>
 <div id="cautions-about-na" class="section level3">
 <h3><span class="header-section-number">2.6.2</span> Cautions about NA</h3>
 <p>You should be aware of the effect of <code>NA</code>-values on subsetting.</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights</code></pre>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" data-line-number="1">heights</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
 ##        73        70        69        60        NA        46</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">tall &lt;-<span class="st"> </span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">65</span>)
-tall</code></pre>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" data-line-number="1">tall &lt;-<span class="st"> </span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">65</span>)</a>
+<a class="sourceLine" id="cb296-2" data-line-number="2">tall</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
 ##      TRUE      TRUE      TRUE     FALSE        NA     FALSE</code></pre>
 <p>Since Toto’s height was missing, R can’t say whether or not he was more than 65 inches tall. Hence it assigns <code>NA</code> to the Toto-element of the <code>tall</code> vector.</p>
 <p>When we subset using this vector we get an odd result:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[tall]</code></pre>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" data-line-number="1">heights[tall]</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion      &lt;NA&gt; 
 ##        73        70        69        NA</code></pre>
 <p>Since R doesn’t know whether or not to select Toto, it records its indecision by including an <code>NA</code> in the result. That <code>NA</code>, however, is not the <code>NA</code> for Toto’s height in the vector <code>heights</code>, so it can’t inherit the “Toto” name. Since it has no name, R presents its name as <code>&lt;NA&gt;</code>.</p>
 <p>If we try to count the number of tall persons, we get a misleading result:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(heights[tall])</code></pre>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" data-line-number="1"><span class="kw">length</span>(heights[tall])</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>We would have preferred something like:</p>
 <blockquote>
 <p>“Three, with another one undecided.”</p>
 </blockquote>
 <p>Counting is one those situations in which we might wish to remove <code>NA</code> values at the start. If the vector is small we could remove them by hand, e.g.:</p>
-<pre class="sourceCode r"><code class="sourceCode r">knownHeights &lt;-<span class="st"> </span>heights[<span class="op">-</span><span class="dv">5</span>]  <span class="co"># remove Toto</span>
-tall &lt;-<span class="st"> </span>(knownHeights <span class="op">&gt;</span><span class="st"> </span><span class="dv">65</span>)
-<span class="kw">length</span>(knownHeights[tall])</code></pre>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" data-line-number="1">knownHeights &lt;-<span class="st"> </span>heights[<span class="op">-</span><span class="dv">5</span>]  <span class="co"># remove Toto</span></a>
+<a class="sourceLine" id="cb302-2" data-line-number="2">tall &lt;-<span class="st"> </span>(knownHeights <span class="op">&gt;</span><span class="st"> </span><span class="dv">65</span>)</a>
+<a class="sourceLine" id="cb302-3" data-line-number="3"><span class="kw">length</span>(knownHeights[tall])</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>For longer vectors the above approach won’t be practical. Instead we may use the <code>is.na()</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(heights)</code></pre>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" data-line-number="1"><span class="kw">is.na</span>(heights)</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
 ##     FALSE     FALSE     FALSE     FALSE      TRUE     FALSE</code></pre>
 <p>Then we may select those elements that are <em>not</em> <code>NA</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">knownHeights &lt;-<span class="st"> </span>heights[<span class="op">!</span><span class="kw">is.na</span>(heights)]
-knownHeights</code></pre>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" data-line-number="1">knownHeights &lt;-<span class="st"> </span>heights[<span class="op">!</span><span class="kw">is.na</span>(heights)]</a>
+<a class="sourceLine" id="cb306-2" data-line-number="2">knownHeights</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy       Boq 
 ##        73        70        69        60        46</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(knownHeights[knownHeights <span class="op">&gt;</span><span class="st"> </span><span class="dv">65</span>])</code></pre>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" data-line-number="1"><span class="kw">length</span>(knownHeights[knownHeights <span class="op">&gt;</span><span class="st"> </span><span class="dv">65</span>])</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
 <div id="which-any-all" class="section level3">
@@ -679,11 +677,11 @@ knownHeights</code></pre>
 <div id="which" class="section level4">
 <h4><span class="header-section-number">2.6.3.1</span> <code>which()</code> </h4>
 <p>Applied to a logical vector, the <code>which()</code> function returns the <em>indices</em> of the vector that have the value <code>TRUE</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">boolVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>,<span class="ot">TRUE</span>,<span class="ot">FALSE</span>,<span class="ot">TRUE</span>)
-<span class="kw">which</span>(boolVec)</code></pre>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" data-line-number="1">boolVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>,<span class="ot">TRUE</span>,<span class="ot">FALSE</span>,<span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb310-2" data-line-number="2"><span class="kw">which</span>(boolVec)</a></code></pre></div>
 <pre><code>## [1] 1 2 4</code></pre>
 <p>Thus if we want to know the indices of <code>heights</code> where the heights are at least 65, then we write:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">65</span>)</code></pre>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" data-line-number="1"><span class="kw">which</span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">65</span>)</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion 
 ##         1         2         3</code></pre>
 <p>(Recall that height was a named vector. The logical vector <code>heights &gt; 65</code> inherited these names and passed them on to the result of <code>whihc()</code>.)</p>
@@ -692,34 +690,34 @@ knownHeights</code></pre>
 <div id="any" class="section level4">
 <h4><span class="header-section-number">2.6.3.2</span> <code>any()</code></h4>
 <p>Is anyone more than 71 inches tall? <code>any()</code> will tell us:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights</code></pre>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" data-line-number="1">heights</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
 ##        73        70        69        60        NA        46</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">any</span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">71</span>)</code></pre>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" data-line-number="1"><span class="kw">any</span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">71</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Yes: the Scarecrow is more than 71 inches tall.</p>
 <p>We can use <code>any()</code> along with the equality Boolean operator <code>==</code> to determine whether or not a given value appears a a given vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Tin Man&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Glinda&quot;</span>)
-<span class="kw">any</span>(vec <span class="op">==</span><span class="st"> &quot;Tin Man&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Tin Man&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Glinda&quot;</span>)</a>
+<a class="sourceLine" id="cb318-2" data-line-number="2"><span class="kw">any</span>(vec <span class="op">==</span><span class="st"> &quot;Tin Man&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">any</span>(vec <span class="op">==</span><span class="st"> &quot;Wizard&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" data-line-number="1"><span class="kw">any</span>(vec <span class="op">==</span><span class="st"> &quot;Wizard&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>The above question occurs so frequently that R provides the <code>%in%</code> operator as a short-cut:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Tin Man&quot;</span> <span class="op">%in%</span><span class="st"> </span>vec</code></pre>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" data-line-number="1"><span class="st">&quot;Tin Man&quot;</span> <span class="op">%in%</span><span class="st"> </span>vec</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Wizard&quot;</span> <span class="op">%in%</span><span class="st"> </span>vec</code></pre>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" data-line-number="1"><span class="st">&quot;Wizard&quot;</span> <span class="op">%in%</span><span class="st"> </span>vec</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </div>
 <div id="all" class="section level4">
 <h4><span class="header-section-number">2.6.3.3</span> <code>all()</code> </h4>
 <p>Is everyone more than 71 inches tall?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all</span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">71</span>)</code></pre>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" data-line-number="1"><span class="kw">all</span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">71</span>)</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </div>
 <div id="na-caution" class="section level4">
 <h4><span class="header-section-number">2.6.3.4</span> NA-Caution</h4>
 <p>Is everyone more than 40 inches tall?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all</span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span>)</code></pre>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" data-line-number="1"><span class="kw">all</span>(heights <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span>)</a></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>Everyone with a known height is taller than 40 inches, but because Toto’s height is <code>NA</code> R can’t say whether <em>all</em> the heights are bigger than 40.</p>
 </div>
@@ -727,10 +725,10 @@ knownHeights</code></pre>
 <div id="practice-exercises-4" class="section level3">
 <h3><span class="header-section-number">2.6.4</span> Practice Exercises</h3>
 <p>Consider the following vectors:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abe&quot;</span>, <span class="st">&quot;Bettina&quot;</span>, <span class="st">&quot;Candace&quot;</span>, <span class="st">&quot;Devadatta&quot;</span>, <span class="st">&quot;Esmeralda&quot;</span>)
-numberKids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>)
-yearsEducation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">16</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">18</span>)
-hasPets &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" data-line-number="1">person &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abe&quot;</span>, <span class="st">&quot;Bettina&quot;</span>, <span class="st">&quot;Candace&quot;</span>, <span class="st">&quot;Devadatta&quot;</span>, <span class="st">&quot;Esmeralda&quot;</span>)</a>
+<a class="sourceLine" id="cb330-2" data-line-number="2">numberKids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb330-3" data-line-number="3">yearsEducation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">16</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb330-4" data-line-number="4">hasPets &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Think of these vectors as providing information about siz people.</p>
 <ol style="list-style-type: decimal">
 <li><p>Write a command that produces the names of people who have more than 1 child.</p></li>
@@ -752,10 +750,10 @@ hasPets &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot"
 <li><p><code>person[numberKids &gt; 1 &amp; yearsEducation &lt; 15]</code></p></li>
 <li><p><code>person[!hasPets]</code></p></li>
 <li><p>Here is one way. We’ll learn an easier way in the next section.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(person[hasPets])</code></pre>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" data-line-number="1"><span class="kw">length</span>(person[hasPets])</a></code></pre></div>
 <pre><code>## [1] 3</code></pre></li>
 <li><p>Here is one way. We’ll learn an easier way in the next section.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(person[<span class="op">!</span>hasPets])</code></pre>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" data-line-number="1"><span class="kw">length</span>(person[<span class="op">!</span>hasPets])</a></code></pre></div>
 <pre><code>## [1] 3</code></pre></li>
 <li><p><code>any(yearsEducation &gt; 15 &amp; numberKids &gt;= 1 &amp; !hasPets)</code></p></li>
 </ol>

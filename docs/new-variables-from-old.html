@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.8 New Variables from Old | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.8 New Variables from Old | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="ordering-data-frames.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,31 +578,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.8</span> New Variables from Old</h2>
 <p>Quite often you will want to <em>transform</em> one or more variables in a data frame. Transforming a variable means changing its values in a systematic way.</p>
 <p>For example, you might want to measure height in feet rather than inches. Then you want the following</p>
-<pre class="sourceCode r"><code class="sourceCode r">heightInFeet &lt;-<span class="st"> </span><span class="kw">with</span>(m111survey, height<span class="op">/</span><span class="dv">12</span>)  <span class="co"># 12 inches in a foot</span></code></pre>
+<div class="sourceCode" id="cb1301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1301-1" data-line-number="1">heightInFeet &lt;-<span class="st"> </span><span class="kw">with</span>(m111survey, height<span class="op">/</span><span class="dv">12</span>)  <span class="co"># 12 inches in a foot</span></a></code></pre></div>
 <p>If you plan to use this new variable in your analysis later on, it might be a good idea to add it to the data frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>height_ft &lt;-<span class="st"> </span>heightInFeet</code></pre>
+<div class="sourceCode" id="cb1302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1302-1" data-line-number="1">m111survey<span class="op">$</span>height_ft &lt;-<span class="st"> </span>heightInFeet</a></code></pre></div>
 <p>Another common need is to <em>recode</em> the values of a categorical variable. For example, you might want to divide people into two groups: those who prefer to sit in the back and those who don’t. This is a good time to use <code>ifelse()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">seat2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(m111survey<span class="op">$</span>seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span>, <span class="st">&quot;Back&quot;</span>, <span class="st">&quot;Other&quot;</span>)
-m111survey<span class="op">$</span>seat2 &lt;-<span class="st"> </span>seat2</code></pre>
+<div class="sourceCode" id="cb1303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1303-1" data-line-number="1">seat2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(m111survey<span class="op">$</span>seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span>, <span class="st">&quot;Back&quot;</span>, <span class="st">&quot;Other&quot;</span>)</a>
+<a class="sourceLine" id="cb1303-2" data-line-number="2">m111survey<span class="op">$</span>seat2 &lt;-<span class="st"> </span>seat2</a></code></pre></div>
 <p>If you plan to re-code into a variable that involves more than two values, then you might want to look into the <code>mapvalues()</code> function from the <strong>plyr</strong> package <span class="citation">(Wickham <a href="#ref-R-plyr">2016</a>)</span>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">seat3 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(m111survey<span class="op">$</span>seat,
-                <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;1_front&quot;</span>, <span class="st">&quot;2_middle&quot;</span>, <span class="st">&quot;3_back&quot;</span>),
-                <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))
-<span class="kw">str</span>(seat3)</code></pre>
+<div class="sourceCode" id="cb1304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1304-1" data-line-number="1">seat3 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(m111survey<span class="op">$</span>seat,</a>
+<a class="sourceLine" id="cb1304-2" data-line-number="2">                <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;1_front&quot;</span>, <span class="st">&quot;2_middle&quot;</span>, <span class="st">&quot;3_back&quot;</span>),</a>
+<a class="sourceLine" id="cb1304-3" data-line-number="3">                <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))</a>
+<a class="sourceLine" id="cb1304-4" data-line-number="4"><span class="kw">str</span>(seat3)</a></code></pre></div>
 <pre><code>##  Factor w/ 3 levels &quot;Front&quot;,&quot;Middle&quot;,..: 1 2 2 1 3 1 1 3 3 2 ...</code></pre>
 <p>The do-it-yourself approach is to write a loop. Remember <code>switch()</code>? </p>
-<pre class="sourceCode r"><code class="sourceCode r">seat &lt;-<span class="st"> </span>m111survey<span class="op">$</span>seat
-seat3 &lt;-<span class="st"> </span><span class="kw">character</span>(<span class="kw">length</span>(seat))  <span class="co"># this will be the recoded variable</span>
-<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(seat) ) {
-  seat3[i] &lt;-<span class="st"> </span><span class="cf">switch</span>(<span class="kw">as.character</span>(seat[i]),
-                     <span class="st">&quot;1_front&quot;</span> =<span class="st"> &quot;Front&quot;</span>,
-                     <span class="st">&quot;2_middle&quot;</span> =<span class="st"> &quot;Middle&quot;</span>,
-                     <span class="st">&quot;3_back&quot;</span> =<span class="st"> &quot;Back&quot;</span>)
-}
-<span class="kw">str</span>(seat3)</code></pre>
+<div class="sourceCode" id="cb1306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1306-1" data-line-number="1">seat &lt;-<span class="st"> </span>m111survey<span class="op">$</span>seat</a>
+<a class="sourceLine" id="cb1306-2" data-line-number="2">seat3 &lt;-<span class="st"> </span><span class="kw">character</span>(<span class="kw">length</span>(seat))  <span class="co"># this will be the recoded variable</span></a>
+<a class="sourceLine" id="cb1306-3" data-line-number="3"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(seat) ) {</a>
+<a class="sourceLine" id="cb1306-4" data-line-number="4">  seat3[i] &lt;-<span class="st"> </span><span class="cf">switch</span>(<span class="kw">as.character</span>(seat[i]),</a>
+<a class="sourceLine" id="cb1306-5" data-line-number="5">                     <span class="st">&quot;1_front&quot;</span> =<span class="st"> &quot;Front&quot;</span>,</a>
+<a class="sourceLine" id="cb1306-6" data-line-number="6">                     <span class="st">&quot;2_middle&quot;</span> =<span class="st"> &quot;Middle&quot;</span>,</a>
+<a class="sourceLine" id="cb1306-7" data-line-number="7">                     <span class="st">&quot;3_back&quot;</span> =<span class="st"> &quot;Back&quot;</span>)</a>
+<a class="sourceLine" id="cb1306-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb1306-9" data-line-number="9"><span class="kw">str</span>(seat3)</a></code></pre></div>
 <pre><code>##  chr [1:71] &quot;Front&quot; &quot;Middle&quot; &quot;Middle&quot; &quot;Front&quot; &quot;Back&quot; &quot;Front&quot; &quot;Front&quot; ...</code></pre>
 <p>The re-coding is done but the result is a character vector and not a factor. We have to make it a factor ourselves:</p>
-<pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>seat3 &lt;-<span class="st"> </span><span class="kw">factor</span>(seat3, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb1308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1308-1" data-line-number="1">m111survey<span class="op">$</span>seat3 &lt;-<span class="st"> </span><span class="kw">factor</span>(seat3, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))</a></code></pre></div>
 <p>This seems like a lot of work!</p>
 <p>Another common transformation involves turning a numerical variable into a factor. For example, we might need to classify people as:</p>
 <ul>
@@ -613,26 +611,26 @@ seat3 &lt;-<span class="st"> </span><span class="kw">character</span>(<span clas
 <li>Short (less than 65 inches)</li>
 </ul>
 <p>The <code>cut()</code> function  will be helpful.</p>
-<pre class="sourceCode r"><code class="sourceCode r">heightClass &lt;-<span class="st"> </span><span class="kw">cut</span>(m111survey<span class="op">$</span>height,
-                   <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">65</span>, <span class="dv">70</span>, <span class="ot">Inf</span>),
-                   <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Short&quot;</span>, <span class="st">&quot;Medium&quot;</span>,<span class="st">&quot;Tall&quot;</span>),
-                   <span class="dt">right =</span> <span class="ot">TRUE</span>)
-<span class="kw">str</span>(heightClass)</code></pre>
+<div class="sourceCode" id="cb1309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1309-1" data-line-number="1">heightClass &lt;-<span class="st"> </span><span class="kw">cut</span>(m111survey<span class="op">$</span>height,</a>
+<a class="sourceLine" id="cb1309-2" data-line-number="2">                   <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">65</span>, <span class="dv">70</span>, <span class="ot">Inf</span>),</a>
+<a class="sourceLine" id="cb1309-3" data-line-number="3">                   <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Short&quot;</span>, <span class="st">&quot;Medium&quot;</span>,<span class="st">&quot;Tall&quot;</span>),</a>
+<a class="sourceLine" id="cb1309-4" data-line-number="4">                   <span class="dt">right =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1309-5" data-line-number="5"><span class="kw">str</span>(heightClass)</a></code></pre></div>
 <pre><code>##  Factor w/ 3 levels &quot;Short&quot;,&quot;Medium&quot;,..: 3 3 1 1 3 3 2 3 1 2 ...</code></pre>
 <p>Setting <code>right = TRUE</code> indicates that the upper bound of each interval is included in the interval. Thus, a person with a height of 70 inches is classed as Medium, not Tall.</p>
 <div id="getting-rid-of-variables" class="section level3">
 <h3><span class="header-section-number">7.8.1</span> Getting Rid of Variables</h3>
 <p>We have added several variables to <code>m111survey</code>. In order to remove them (or any other variables we don’t want) we can assign them the value <code>NULL</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(m111survey)</code></pre>
+<div class="sourceCode" id="cb1311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1311-1" data-line-number="1"><span class="kw">names</span>(m111survey)</a></code></pre></div>
 <pre><code>##  [1] &quot;height&quot;          &quot;ideal_ht&quot;        &quot;sleep&quot;          
 ##  [4] &quot;fastest&quot;         &quot;weight_feel&quot;     &quot;love_first&quot;     
 ##  [7] &quot;extra_life&quot;      &quot;seat&quot;            &quot;GPA&quot;            
 ## [10] &quot;enough_Sleep&quot;    &quot;sex&quot;             &quot;diff.ideal.act.&quot;
 ## [13] &quot;height_ft&quot;       &quot;seat2&quot;           &quot;seat3&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">m111survey<span class="op">$</span>height_ft &lt;-<span class="st"> </span><span class="ot">NULL</span>
-m111survey<span class="op">$</span>seat2 &lt;-<span class="st"> </span><span class="ot">NULL</span>
-m111survey<span class="op">$</span>seat3 &lt;-<span class="st"> </span><span class="ot">NULL</span>
-<span class="kw">names</span>(m111survey)  <span class="co"># the extra variables are gone</span></code></pre>
+<div class="sourceCode" id="cb1313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1313-1" data-line-number="1">m111survey<span class="op">$</span>height_ft &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb1313-2" data-line-number="2">m111survey<span class="op">$</span>seat2 &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb1313-3" data-line-number="3">m111survey<span class="op">$</span>seat3 &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb1313-4" data-line-number="4"><span class="kw">names</span>(m111survey)  <span class="co"># the extra variables are gone</span></a></code></pre></div>
 <pre><code>##  [1] &quot;height&quot;          &quot;ideal_ht&quot;        &quot;sleep&quot;          
 ##  [4] &quot;fastest&quot;         &quot;weight_feel&quot;     &quot;love_first&quot;     
 ##  [7] &quot;extra_life&quot;      &quot;seat&quot;            &quot;GPA&quot;            
@@ -660,17 +658,17 @@ m111survey<span class="op">$</span>seat3 &lt;-<span class="st"> </span><span cla
 <h3><span class="header-section-number">7.8.3</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s one way to do it:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85<span class="op">$</span>hispanic &lt;-<span class="st"> </span><span class="ot">NULL</span>
-CPS85<span class="op">$</span>married &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></li>
+<div class="sourceCode" id="cb1316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1316-1" data-line-number="1">CPS85<span class="op">$</span>hispanic &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb1316-2" data-line-number="2">CPS85<span class="op">$</span>married &lt;-<span class="st"> </span><span class="ot">NULL</span></a></code></pre></div></li>
 <li><p>Here’s one way to do it:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85<span class="op">$</span>wage &lt;-<span class="st"> </span>CPS85<span class="op">$</span>wage <span class="op">*</span><span class="st"> </span><span class="dv">8</span></code></pre></li>
+<div class="sourceCode" id="cb1317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1317-1" data-line-number="1">CPS85<span class="op">$</span>wage &lt;-<span class="st"> </span>CPS85<span class="op">$</span>wage <span class="op">*</span><span class="st"> </span><span class="dv">8</span></a></code></pre></div></li>
 <li><p>Here’s one way to do it:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85<span class="op">$</span>experGrp &lt;-<span class="st"> </span><span class="kw">cut</span>(CPS85<span class="op">$</span>exper,
-                      <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="ot">Inf</span>),
-                      <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))</code></pre></li>
+<div class="sourceCode" id="cb1318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1318-1" data-line-number="1">CPS85<span class="op">$</span>experGrp &lt;-<span class="st"> </span><span class="kw">cut</span>(CPS85<span class="op">$</span>exper,</a>
+<a class="sourceLine" id="cb1318-2" data-line-number="2">                      <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="ot">Inf</span>),</a>
+<a class="sourceLine" id="cb1318-3" data-line-number="3">                      <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>))</a></code></pre></div></li>
 <li><p>Use <code>table(CPS85$experGrp)</code>.</p></li>
 <li><p>Here’s what to do:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(CPS85)</code></pre></li>
+<div class="sourceCode" id="cb1319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1319-1" data-line-number="1"><span class="kw">rm</span>(CPS85)</a></code></pre></div></li>
 </ol>
 
 </div>

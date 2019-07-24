@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.5 Creating Data Frames | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.5 Creating Data Frames | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="introduction-to-data-frames.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -582,26 +580,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creation-from-vectors" class="section level3">
 <h3><span class="header-section-number">7.5.1</span> Creation from Vectors</h3>
 <p>Whenever you have vectors of the same length, you can combine them into a data frame, using the <code>data.frame()</code> function: </p>
-<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>)
-h &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">58</span>, <span class="dv">75</span>, <span class="dv">69</span>)
-a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="fl">0.04</span>, <span class="dv">18</span>)
-ozFolk &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> n, <span class="dt">height =</span> h, <span class="dt">age =</span> a)
-ozFolk</code></pre>
+<div class="sourceCode" id="cb1231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1231-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>)</a>
+<a class="sourceLine" id="cb1231-2" data-line-number="2">h &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">58</span>, <span class="dv">75</span>, <span class="dv">69</span>)</a>
+<a class="sourceLine" id="cb1231-3" data-line-number="3">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="fl">0.04</span>, <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb1231-4" data-line-number="4">ozFolk &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> n, <span class="dt">height =</span> h, <span class="dt">age =</span> a)</a>
+<a class="sourceLine" id="cb1231-5" data-line-number="5">ozFolk</a></code></pre></div>
 <pre><code>##        name height   age
 ## 1   Dorothy     58 12.00
 ## 2      Lion     75  0.04
 ## 3 Scarecrow     69 18.00</code></pre>
 <p>Note that at the time of creation you can provide the variables with any names that you like. If later on you change your mind about the names, you can always revise them:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ozFolk)  </code></pre>
+<div class="sourceCode" id="cb1233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1233-1" data-line-number="1"><span class="kw">names</span>(ozFolk)  </a></code></pre></div>
 <pre><code>## [1] &quot;name&quot;   &quot;height&quot; &quot;age&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ozFolk)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Height&quot;</span>  <span class="co"># &quot;height&quot; was at index 2&quot;</span>
-ozFolk</code></pre>
+<div class="sourceCode" id="cb1235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1235-1" data-line-number="1"><span class="kw">names</span>(ozFolk)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Height&quot;</span>  <span class="co"># &quot;height&quot; was at index 2&quot;</span></a>
+<a class="sourceLine" id="cb1235-2" data-line-number="2">ozFolk</a></code></pre></div>
 <pre><code>##        name Height   age
 ## 1   Dorothy     58 12.00
 ## 2      Lion     75  0.04
 ## 3 Scarecrow     69 18.00</code></pre>
 <p>Let’s check the structure of the frame we have made:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(ozFolk)</code></pre>
+<div class="sourceCode" id="cb1237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1237-1" data-line-number="1"><span class="kw">str</span>(ozFolk)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
 ##  $ name  : Factor w/ 3 levels &quot;Dorothy&quot;,&quot;Lion&quot;,..: 1 2 3
 ##  $ Height: num  58 75 69
@@ -609,16 +607,16 @@ ozFolk</code></pre>
 <p>Maybe we would prefer that the <code>name</code> variable not be a factor. We have a couple of options to accomplish this.</p>
 <ol style="list-style-type: decimal">
 <li><p>We could coerce <code>names</code> to a character variable, and assign it to the data frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ozFolk<span class="op">$</span>name &lt;-<span class="st"> </span><span class="kw">as.character</span>(ozFolk<span class="op">$</span>name)
-<span class="kw">str</span>(ozFolk)</code></pre>
+<div class="sourceCode" id="cb1239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1239-1" data-line-number="1">ozFolk<span class="op">$</span>name &lt;-<span class="st"> </span><span class="kw">as.character</span>(ozFolk<span class="op">$</span>name)</a>
+<a class="sourceLine" id="cb1239-2" data-line-number="2"><span class="kw">str</span>(ozFolk)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
 ##  $ name  : chr  &quot;Dorothy&quot; &quot;Lion&quot; &quot;Scarecrow&quot;
 ##  $ Height: num  58 75 69
 ##  $ age   : num  12 0.04 18</code></pre></li>
 <li><p>We could prevent <code>names</code> from being made into a factor at the time of creation:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ozFolk &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> n, <span class="dt">height =</span> h, <span class="dt">age =</span> a,
-                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
-<span class="kw">str</span>(ozFolk)</code></pre>
+<div class="sourceCode" id="cb1241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1241-1" data-line-number="1">ozFolk &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> n, <span class="dt">height =</span> h, <span class="dt">age =</span> a,</a>
+<a class="sourceLine" id="cb1241-2" data-line-number="2">                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1241-3" data-line-number="3"><span class="kw">str</span>(ozFolk)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
 ##  $ name  : chr  &quot;Dorothy&quot; &quot;Lion&quot; &quot;Scarecrow&quot;
 ##  $ height: num  58 75 69
@@ -628,18 +626,18 @@ ozFolk</code></pre>
 <div id="creation-from-other-frames" class="section level3">
 <h3><span class="header-section-number">7.5.2</span> Creation From Other Frames</h3>
 <p>If two frames have the same number of rows, you may combine their columns to form a new frame with the <code>cbind()</code> function: </p>
-<pre class="sourceCode r"><code class="sourceCode r">ozMore &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>),
-                      <span class="dt">desire =</span> <span class="kw">c</span>(<span class="st">&quot;Kansas&quot;</span>, <span class="st">&quot;courage&quot;</span>, <span class="st">&quot;brains&quot;</span>))
-<span class="kw">cbind</span>(ozFolk, ozMore)</code></pre>
+<div class="sourceCode" id="cb1243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1243-1" data-line-number="1">ozMore &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>),</a>
+<a class="sourceLine" id="cb1243-2" data-line-number="2">                      <span class="dt">desire =</span> <span class="kw">c</span>(<span class="st">&quot;Kansas&quot;</span>, <span class="st">&quot;courage&quot;</span>, <span class="st">&quot;brains&quot;</span>))</a>
+<a class="sourceLine" id="cb1243-3" data-line-number="3"><span class="kw">cbind</span>(ozFolk, ozMore)</a></code></pre></div>
 <pre><code>##        name height   age  color  desire
 ## 1   Dorothy     58 12.00   blue  Kansas
 ## 2      Lion     75  0.04    red courage
 ## 3 Scarecrow     69 18.00 yellow  brains</code></pre>
 <p>Similarly if two data frames have the same number <em>and type</em> of columns then we can use the <code>rbind()</code> function to combine them: </p>
-<pre class="sourceCode r"><code class="sourceCode r">ozFolk2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Glinda&quot;</span>),
-                      <span class="dt">height =</span> <span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">66</span>), <span class="dt">age =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">246</span>),
-                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
-<span class="kw">rbind</span>(ozFolk, ozFolk2)</code></pre>
+<div class="sourceCode" id="cb1245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1245-1" data-line-number="1">ozFolk2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Glinda&quot;</span>),</a>
+<a class="sourceLine" id="cb1245-2" data-line-number="2">                      <span class="dt">height =</span> <span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">66</span>), <span class="dt">age =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">246</span>),</a>
+<a class="sourceLine" id="cb1245-3" data-line-number="3">                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1245-4" data-line-number="4"><span class="kw">rbind</span>(ozFolk, ozFolk2)</a></code></pre></div>
 <pre><code>##        name height    age
 ## 1   Dorothy     58  12.00
 ## 2      Lion     75   0.04

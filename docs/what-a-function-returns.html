@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.3 What a Function Returns | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.3 What a Function Returns | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="function-syntax.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -582,27 +580,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-final-expression-evaluated" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> The Final Expression Evaluated</h3>
 <p>Let’s write a small function to raise a number to a power:<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
-<pre class="sourceCode r"><code class="sourceCode r">pow &lt;-<span class="st"> </span><span class="cf">function</span>(x,y) {
-  x<span class="op">^</span>y
-}</code></pre>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" data-line-number="1">pow &lt;-<span class="st"> </span><span class="cf">function</span>(x,y) {</a>
+<a class="sourceLine" id="cb484-2" data-line-number="2">  x<span class="op">^</span>y</a>
+<a class="sourceLine" id="cb484-3" data-line-number="3">}</a></code></pre></div>
 <p>Check to see that it works:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pow</span>(<span class="dv">2</span>,<span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" data-line-number="1"><span class="kw">pow</span>(<span class="dv">2</span>,<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1] 8</code></pre>
 <p>All seems well.</p>
 <p>If we like we can assign the result of <code>pow()</code> to some variable, for use later on:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">pow</span>(<span class="dv">2</span>,<span class="dv">4</span>)
-<span class="kw">cat</span>(<span class="st">&quot;I have&quot;</span>, a, <span class="st">&quot;cats.&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">pow</span>(<span class="dv">2</span>,<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb487-2" data-line-number="2"><span class="kw">cat</span>(<span class="st">&quot;I have&quot;</span>, a, <span class="st">&quot;cats.&quot;</span>)</a></code></pre></div>
 <pre><code>## I have 16 cats.</code></pre>
 <p>In computer programming parlance, <code>pow(x, y)</code> is said to <em>return</em> the numerical value <code>x^y</code>: <code>pow(2,3)</code> returns 8, <code>pow(2,4)</code> returns 16, and so on.</p>
 <p>In R, what a function returns is: <em>the value of the final expression that it evaluates</em>. You can see this principle at work in the following example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="dv">3</span>
-  <span class="dv">45</span>
-  <span class="st">&quot;hello&quot;</span>
-  x<span class="op">^</span><span class="dv">2</span>
-}
-
-<span class="kw">f</span>(<span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb489-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb489-2" data-line-number="2">  <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb489-3" data-line-number="3">  <span class="dv">45</span></a>
+<a class="sourceLine" id="cb489-4" data-line-number="4">  <span class="st">&quot;hello&quot;</span></a>
+<a class="sourceLine" id="cb489-5" data-line-number="5">  x<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb489-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb489-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb489-8" data-line-number="8"><span class="kw">f</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## [1] 16</code></pre>
 <p>We put in 4 as the argument for the parameter <code>x</code>, but:</p>
 <ul>
@@ -615,70 +613,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-return-function" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> The <code>return()</code> Function</h3>
 <p>R does have a special function to force a function to cease evaluation at a specific point. Its name, unsurprisingly, is <code>return()</code>. Here is an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  val &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">*</span>x <span class="op">+</span><span class="dv">7</span>
-  <span class="kw">return</span>(val)
-  <span class="st">&quot;Hello!&quot;</span>
-}
-
-<span class="kw">g</span>(<span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb491-1" data-line-number="1">g &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb491-2" data-line-number="2">  val &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">*</span>x <span class="op">+</span><span class="dv">7</span></a>
+<a class="sourceLine" id="cb491-3" data-line-number="3">  <span class="kw">return</span>(val)</a>
+<a class="sourceLine" id="cb491-4" data-line-number="4">  <span class="st">&quot;Hello!&quot;</span></a>
+<a class="sourceLine" id="cb491-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb491-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb491-7" data-line-number="7"><span class="kw">g</span>(<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>We get <span class="math inline">\(3*1+7 = 10\)</span>, but we don’t get “Hello!”. After returning the 10, the function stopped evaluating expressions: hence it never even bothered to evaluate “Hello”, much less to display it in the console.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
 <p>It follows that it does not matter whether or not you wrap the final expression of a function in <code>return()</code>. The following two functions do exactly the same thing:</p>
-<pre class="sourceCode r"><code class="sourceCode r">f1 &lt;-<span class="st"> </span><span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>
-f2 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">return</span>(x<span class="op">^</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" data-line-number="1">f1 &lt;-<span class="st"> </span><span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb493-2" data-line-number="2">f2 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">return</span>(x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <p>Some people—especially those who are familiar with other programming languages where return statements are required—like to wrap the final expression in <code>return()</code>, simply as a matter of clarity.</p>
 </div>
 <div id="writing-a-talky-function" class="section level3">
 <h3><span class="header-section-number">3.3.3</span> Writing a “Talky” Function</h3>
 <p>Suppose that you would like your function to raise a number to a power, returning the answer to the user, but you also want it to print out a message to the console. You might try writing your function like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">talkySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  result &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span>
-  result
-  <span class="kw">cat</span>(<span class="st">&quot;The square of &quot;</span>, x, <span class="st">&quot; is:  &quot;</span>, result, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb494-1" data-line-number="1">talkySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb494-2" data-line-number="2">  result &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb494-3" data-line-number="3">  result</a>
+<a class="sourceLine" id="cb494-4" data-line-number="4">  <span class="kw">cat</span>(<span class="st">&quot;The square of &quot;</span>, x, <span class="st">&quot; is:  &quot;</span>, result, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb494-5" data-line-number="5">}</a></code></pre></div>
 <p>We try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">talkySquare</span>(<span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb495-1" data-line-number="1"><span class="kw">talkySquare</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## The square of 4 is:  16.</code></pre>
 <p>All seems well. But what if we want to save the result in a variable, so that we could perhaps add a number to it later? Something like this, perhaps:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">talkySquare</span>(<span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb497-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">talkySquare</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## The square of 4 is:  16.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">4</span></code></pre>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb499-1" data-line-number="1">a <span class="op">+</span><span class="st"> </span><span class="dv">4</span></a></code></pre></div>
 <pre><code>## numeric(0)</code></pre>
 <p>The results don’t really make sense. What happened, of course is that R dutifully returned the value of the final expression in the function’s body—the result of the <code>cat()</code> call, not the value of the variable <code>result</code>. If we want both the print-out <em>and</em> the square to be returned, the we have to write our functions like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">talkySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  result &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span>
-  <span class="kw">cat</span>(<span class="st">&quot;The square of &quot;</span>, x, <span class="st">&quot; is:  &quot;</span>, result, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  result
-}</code></pre>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb501-1" data-line-number="1">talkySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb501-2" data-line-number="2">  result &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb501-3" data-line-number="3">  <span class="kw">cat</span>(<span class="st">&quot;The square of &quot;</span>, x, <span class="st">&quot; is:  &quot;</span>, result, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb501-4" data-line-number="4">  result</a>
+<a class="sourceLine" id="cb501-5" data-line-number="5">}</a></code></pre></div>
 <p>This works out as expected:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">talkySquare</span>(<span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">talkySquare</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## The square of 4 is:  16.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">4</span></code></pre>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb504-1" data-line-number="1">a <span class="op">+</span><span class="st"> </span><span class="dv">4</span></a></code></pre></div>
 <pre><code>## [1] 20</code></pre>
 <p>Well, maybe it doesn’t work <em>exactly</em> as we would like. It would nice if the function would talk to us only when we ask for the results in the console, not when we are simply assigning the results to a variable for later use. In Chapter <a href="flow.html#flow">4</a> we will learn how to make our talky function keep quiet when we prefer silence.</p>
 </div>
 <div id="the-print-function" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> The <code>print()</code> Function</h3>
 <p>Consider the following function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">grumpySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="st">&quot;OK, OK, I&#39;m getting to it ... &quot;</span>
-  x<span class="op">^</span><span class="dv">2</span>
-}</code></pre>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb506-1" data-line-number="1">grumpySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb506-2" data-line-number="2">  <span class="st">&quot;OK, OK, I&#39;m getting to it ... &quot;</span></a>
+<a class="sourceLine" id="cb506-3" data-line-number="3">  x<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb506-4" data-line-number="4">}</a></code></pre></div>
 <p>We know by now not to expect to see the grumpy message:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grumpySquare</span>(<span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" data-line-number="1"><span class="kw">grumpySquare</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## [1] 16</code></pre>
 <p>If we want to see the message, we could wrap it in <code>cat()</code>. Another possibility is to use the <code>print()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">grumpySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="kw">print</span>(<span class="st">&quot;OK, OK, I&#39;m getting to it ... &quot;</span>)
-  x<span class="op">^</span><span class="dv">2</span>
-}
-<span class="kw">grumpySquare</span>(<span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" data-line-number="1">grumpySquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb509-2" data-line-number="2">  <span class="kw">print</span>(<span class="st">&quot;OK, OK, I&#39;m getting to it ... &quot;</span>)</a>
+<a class="sourceLine" id="cb509-3" data-line-number="3">  x<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb509-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb509-5" data-line-number="5"><span class="kw">grumpySquare</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;OK, OK, I&#39;m getting to it ... &quot;</code></pre>
 <pre><code>## [1] 16</code></pre>
 <p>When R executes a call to <code>print()</code> it is forced to print something out to the console, even if it is in the midst of evaluating expressions in a function. The <code>print</code>-statement is not involved in what the function returns—that’s all up to the final expression, the <code>x^2</code>—but it does cause a result <em>outside of the function itself</em>. Any external result produced by a function (other than what the function returns) is called a <em>side-effect</em> of the function. <code>cat()</code> and <code>print()</code> are examples of functions that, when called inside of some other function, produce side-effects.</p>
 <p>You should know that in R you have been calling the <code>print()</code> function quite a bit, without even knowing it. Consider the following line of code:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></code></pre>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" data-line-number="1"><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>R evaluates the expression <code>2+2</code>, arriving at the value 4. But what makes the <code>4</code> appear on our console? Behind the scenes, R actually evaluated the expression</p>
 <blockquote>
@@ -691,42 +689,42 @@ f2 &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class
 <h3><span class="header-section-number">3.3.5</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>What, if anything, does the following function return?</p>
-<pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  <span class="kw">cat</span>(<span class="st">&quot;We have &quot;</span>, n, <span class="st">&quot; dogs.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre></li>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb514-2" data-line-number="2">  <span class="kw">cat</span>(<span class="st">&quot;We have &quot;</span>, n, <span class="st">&quot; dogs.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb514-3" data-line-number="3">}</a></code></pre></div></li>
 <li><p>What, if anything, does the following function return?</p>
-<pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  n <span class="op">+</span><span class="st"> </span><span class="dv">3</span>
-  <span class="st">&quot;Hello&quot;</span>
-}</code></pre></li>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb515-1" data-line-number="1">g &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb515-2" data-line-number="2">  n <span class="op">+</span><span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb515-3" data-line-number="3">  <span class="st">&quot;Hello&quot;</span></a>
+<a class="sourceLine" id="cb515-4" data-line-number="4">}</a></code></pre></div></li>
 <li><p>What, if anything, does the following function return?</p>
-<pre class="sourceCode r"><code class="sourceCode r">h &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  <span class="st">&quot;Hello&quot;</span>
-  n <span class="op">+</span><span class="dv">3</span>
-}</code></pre></li>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb516-1" data-line-number="1">h &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb516-2" data-line-number="2">  <span class="st">&quot;Hello&quot;</span></a>
+<a class="sourceLine" id="cb516-3" data-line-number="3">  n <span class="op">+</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb516-4" data-line-number="4">}</a></code></pre></div></li>
 </ol>
 </div>
 <div id="solutions-to-the-practice-exercises-4" class="section level3">
 <h3><span class="header-section-number">3.3.6</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Like any function, <code>f()</code> returns the value of the last expression that it evaluates. This time the final (and only) expression is the call to <code>cat()</code>. But what does <code>cat()</code> return? It turns out that <code>cat()</code> always returns <code>NULL</code>. You can see this in a couple of ways. One way is to store the result of a call to <code>f()</code> in a variable, and then print the variable:</p>
-<pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">f</span>(<span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb517-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">f</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## We have 4 dogs.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">result</code></pre>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb519-1" data-line-number="1">result</a></code></pre></div>
 <pre><code>## NULL</code></pre>
 <p><code>result</code> got the value returned by the call <code>f(4)</code>. <code>result</code> turned out to be 4. Hence the call <code>f(4)</code> must have returned <code>NULL</code>.</p>
 <p>Another way to see this is to rewrie the function so as to force the final expression to return its result <em>visibly</em> to the console. This is done by placing parentheses arund the expression, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  (<span class="kw">cat</span>(<span class="st">&quot;We have &quot;</span>, n, <span class="st">&quot; dogs.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))
-}</code></pre>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb521-2" data-line-number="2">  (<span class="kw">cat</span>(<span class="st">&quot;We have &quot;</span>, n, <span class="st">&quot; dogs.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb521-3" data-line-number="3">}</a></code></pre></div>
 <p>Now let’s call the functon:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f</span>(<span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb522-1" data-line-number="1"><span class="kw">f</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## We have 4 dogs.</code></pre>
 <pre><code>## NULL</code></pre>
 <p>Yep, there’s <code>NULL</code>, visible in the Console!</p></li>
 <li><p>Well, let’s give it a try an see:</p>
-<pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">g</span>(<span class="dv">4</span>)
-result</code></pre>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb525-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">g</span>(<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb525-2" data-line-number="2">result</a></code></pre></div>
 <pre><code>## [1] &quot;Hello&quot;</code></pre>
 <p>Sure enough, <code>g()</code> returns the value of the last expression that it evaluates. In this case, it’s the expression <code>&quot;Hello&quot;</code>.</p></li>
 <li><p>Like all functions, <code>h()</code> returns the value of the final expression that ti evaluates. Hence it will return three more than the value it was given for <code>n</code>.</p></li>

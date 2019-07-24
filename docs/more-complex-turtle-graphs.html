@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.5 More Complex Turtle Graphs | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.5 More Complex Turtle Graphs | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="random-moves.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,15 +577,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="more-complex-turtle-graphs" class="section level2">
 <h2><span class="header-section-number">5.5</span> More Complex Turtle Graphs</h2>
 <p>Simple instructions, when combined with looping, can produce quite complex patterns. Consider the following process (with results shown in Figure <a href="more-complex-turtle-graphs.html#fig:turtle-zany">5.13</a>):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>(<span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-<span class="kw">turtle_do</span>({
-  <span class="kw">turtle_setpos</span>(<span class="dv">600</span>,<span class="dv">400</span>)
-  <span class="kw">turtle_right</span>(<span class="dv">90</span>)
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2000</span>) {
-    <span class="kw">turtle_right</span>(i)
-    <span class="kw">turtle_forward</span>(<span class="kw">sqrt</span>(i))
-  }
-})</code></pre>
+<div class="sourceCode" id="cb944"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb944-1" data-line-number="1"><span class="kw">turtle_init</span>(<span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb944-2" data-line-number="2"><span class="kw">turtle_do</span>({</a>
+<a class="sourceLine" id="cb944-3" data-line-number="3">  <span class="kw">turtle_setpos</span>(<span class="dv">600</span>,<span class="dv">400</span>)</a>
+<a class="sourceLine" id="cb944-4" data-line-number="4">  <span class="kw">turtle_right</span>(<span class="dv">90</span>)</a>
+<a class="sourceLine" id="cb944-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2000</span>) {</a>
+<a class="sourceLine" id="cb944-6" data-line-number="6">    <span class="kw">turtle_right</span>(i)</a>
+<a class="sourceLine" id="cb944-7" data-line-number="7">    <span class="kw">turtle_forward</span>(<span class="kw">sqrt</span>(i))</a>
+<a class="sourceLine" id="cb944-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb944-9" data-line-number="9">})</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:turtle-zany"></span>
 <img src="r-notes_files/figure-html/turtle-zany-1.png" alt="Galactic Zany!" width="50%" />
 <p class="caption">
@@ -595,22 +593,22 @@ Figure 5.13: Galactic Zany!
 </p>
 </div>
 <p>You might enjoy figuring out why this pattern occurs. As you ponder this, it might help to construct a set of “ragged” spirals with somewhat larger steps, and pause at each step. Code like the following might be useful:<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_init</span>(<span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-<span class="kw">turtle_do</span>({
-  i &lt;-<span class="st"> </span><span class="dv">1</span>
-  <span class="kw">turtle_right</span>(<span class="dv">90</span>)
-  <span class="cf">repeat</span> {
-    bidding &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Proceed? (Enter q to quit) &quot;</span>)
-    <span class="cf">if</span> ( bidding <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span>
-    <span class="kw">turtle_right</span>(i)
-    <span class="kw">turtle_forward</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(i))
-    <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;Turned &quot;</span>, i, <span class="st">&quot; degrees,</span><span class="ch">\n</span><span class="st">&quot;</span>))
-    <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;stepped forward &quot;</span>, <span class="kw">round</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(i), <span class="dv">3</span>), <span class="st">&quot; units.</span><span class="ch">\n</span><span class="st">&quot;</span>))
-    <span class="kw">cat</span>(<span class="st">&quot;Turtle&#39;s current angle is: &quot;</span>, <span class="kw">turtle_getangle</span>(), <span class="st">&quot; degrees.</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">20</span>
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;All done!&quot;</span>)
-})</code></pre>
+<div class="sourceCode" id="cb945"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb945-1" data-line-number="1"><span class="kw">turtle_init</span>(<span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb945-2" data-line-number="2"><span class="kw">turtle_do</span>({</a>
+<a class="sourceLine" id="cb945-3" data-line-number="3">  i &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb945-4" data-line-number="4">  <span class="kw">turtle_right</span>(<span class="dv">90</span>)</a>
+<a class="sourceLine" id="cb945-5" data-line-number="5">  <span class="cf">repeat</span> {</a>
+<a class="sourceLine" id="cb945-6" data-line-number="6">    bidding &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Proceed? (Enter q to quit) &quot;</span>)</a>
+<a class="sourceLine" id="cb945-7" data-line-number="7">    <span class="cf">if</span> ( bidding <span class="op">==</span><span class="st"> &quot;q&quot;</span>) <span class="cf">break</span></a>
+<a class="sourceLine" id="cb945-8" data-line-number="8">    <span class="kw">turtle_right</span>(i)</a>
+<a class="sourceLine" id="cb945-9" data-line-number="9">    <span class="kw">turtle_forward</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(i))</a>
+<a class="sourceLine" id="cb945-10" data-line-number="10">    <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;Turned &quot;</span>, i, <span class="st">&quot; degrees,</span><span class="ch">\n</span><span class="st">&quot;</span>))</a>
+<a class="sourceLine" id="cb945-11" data-line-number="11">    <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;stepped forward &quot;</span>, <span class="kw">round</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(i), <span class="dv">3</span>), <span class="st">&quot; units.</span><span class="ch">\n</span><span class="st">&quot;</span>))</a>
+<a class="sourceLine" id="cb945-12" data-line-number="12">    <span class="kw">cat</span>(<span class="st">&quot;Turtle&#39;s current angle is: &quot;</span>, <span class="kw">turtle_getangle</span>(), <span class="st">&quot; degrees.</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb945-13" data-line-number="13">    i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb945-14" data-line-number="14">  }</a>
+<a class="sourceLine" id="cb945-15" data-line-number="15">  <span class="kw">cat</span>(<span class="st">&quot;All done!&quot;</span>)</a>
+<a class="sourceLine" id="cb945-16" data-line-number="16">})</a></code></pre></div>
 </div>
 <div class="footnotes">
 <hr />

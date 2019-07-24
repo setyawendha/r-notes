@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12.4 Entering a Regex in R | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12.4 Entering a Regex in R | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="regex-syntax.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -582,26 +580,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="string-to-regex" class="section level3">
 <h3><span class="header-section-number">12.4.1</span> String to Regex</h3>
 <p>Regular expressions actually play a role in one of the functions you already know, namely the function <code>strsplit()</code>. Recall that you can use the <code>split</code> parameter to specify the sub-string that separates the strings you want to split up. It works like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;hello there Mary Poppins&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unlist</span>()</code></pre>
+<div class="sourceCode" id="cb1730"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1730-1" data-line-number="1"><span class="st">&quot;hello there Mary Poppins&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1730-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1730-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;hello&quot;   &quot;there&quot;   &quot;Mary&quot;    &quot;Poppins&quot;</code></pre>
 <p>The task of splitting would appear to a quite challenging if the words are separated in more complex ways, with any amount of white-space. Consider, for example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myString &lt;-<span class="st"> &quot;hello</span><span class="ch">\t\t</span><span class="st">there</span><span class="ch">\n\n</span><span class="st">Mary  </span><span class="ch">\t</span><span class="st"> Poppins&quot;</span>
-<span class="kw">cat</span>(myString)</code></pre>
+<div class="sourceCode" id="cb1732"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1732-1" data-line-number="1">myString &lt;-<span class="st"> &quot;hello</span><span class="ch">\t\t</span><span class="st">there</span><span class="ch">\n\n</span><span class="st">Mary  </span><span class="ch">\t</span><span class="st"> Poppins&quot;</span></a>
+<a class="sourceLine" id="cb1732-2" data-line-number="2"><span class="kw">cat</span>(myString)</a></code></pre></div>
 <pre><code>## hello        there
 ## 
 ## Mary      Poppins</code></pre>
 <p>But really it’s not any more difficult, because the <code>split</code> parameter actually takes the string it is given and converts it to a regular expression, splitting on anything that matches. Watch this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myString <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s+&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unlist</span>()</code></pre>
+<div class="sourceCode" id="cb1734"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1734-1" data-line-number="1">myString <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1734-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s+&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1734-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;hello&quot;   &quot;there&quot;   &quot;Mary&quot;    &quot;Poppins&quot;</code></pre>
 <p>We can almost see how this works. Recall from the last section that the regex <code>\s</code> is a character class shortcut for any white-space character, so <code>\s+</code> stands for one or more white-spaces in succession: precisely the mixtures of tab, spaces and newlines that separated the words in our string. <code>str_split()</code> must be splitting on matches to the regex <code>\s+</code>.</p>
 <p>So why did we set <code>pattern = &quot;\\s+&quot;</code>? What’s with the extra backslash?</p>
 <p>The reason is that the argument passed with <code>pattern</code> is a string, not a regular expression object. It starts out life, as if were, as a string, and R converts it to a regular expression, then hands the regex over to its regular expression engine to locate the matches in <code>myString</code> that in turn determine how <code>myString</code> is to be split up. Since in R’s string-world “\s” is not a recognized character in the way that newline (“\n”), tab (“\t”) and other control-characters are, R won’t accept “\s+” as a valid string. Try it for your self:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myString <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;\s+&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1736"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1736-1" data-line-number="1">myString <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1736-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;\s+&quot;</span>)</a></code></pre></div>
 <pre><code>## Error: &#39;\s&#39; is an unrecognized escape in character string starting &quot;&quot;\s&quot;</code></pre>
 <p>It follows that when you enter regular expressions as strings in R, you’ll have to remember to escape the back-slashed tokens that are used in a regular expression. Table <a href="entering-a-regex-in-r.html#tab:regex-string-escape-examples">12.3</a> gives several examples of this.</p>
 <table>
@@ -632,12 +630,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="regex-substitution" class="section level3">
 <h3><span class="header-section-number">12.4.2</span> Substitution</h3>
 <p>One of the most useful applications of regular expressions is in substitution. Suppose that we have a vector of dates:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dates &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;3 - 14 - 1963&quot;</span>, <span class="st">&quot;4/13/ 2005&quot;</span>,
-           <span class="st">&quot;12-1-1997&quot;</span>, <span class="st">&quot;11 / 11 / 1918&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1738"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1738-1" data-line-number="1">dates &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;3 - 14 - 1963&quot;</span>, <span class="st">&quot;4/13/ 2005&quot;</span>,</a>
+<a class="sourceLine" id="cb1738-2" data-line-number="2">           <span class="st">&quot;12-1-1997&quot;</span>, <span class="st">&quot;11 / 11 / 1918&quot;</span>)</a></code></pre></div>
 <p>It seems that the folks who entered the dates were not consistent in how to format them. In order to make analysis easier, it would be better if all the dates had exactly the same format. With the function <code>str_replace_all()</code> and regular expressions, this is not difficult:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dates <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[- /]+&quot;</span>,
-              <span class="dt">replacement =</span> <span class="st">&quot;/&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1739"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1739-1" data-line-number="1">dates <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1739-2" data-line-number="2"><span class="st">  </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[- /]+&quot;</span>,</a>
+<a class="sourceLine" id="cb1739-3" data-line-number="3">              <span class="dt">replacement =</span> <span class="st">&quot;/&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;3/14/1963&quot;  &quot;4/13/2005&quot;  &quot;12/1/1997&quot;  &quot;11/11/1918&quot;</code></pre>
 <p>Here:</p>
 <ul>
@@ -646,9 +644,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>replacment</code> is what we want to replace matches of the pattern with.</li>
 </ul>
 <p>The <code>all</code> in the name of the function means that we want to replace <em>all</em> occurrences of the pattern with the replacement text. There is also a <code>str_replace()</code> function that performs replacement only with the <em>first</em> match (if any) that it finds:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dates <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_replace</span>(<span class="dt">pattern =</span> <span class="st">&quot;[- /]+&quot;</span>,
-              <span class="dt">replacement =</span> <span class="st">&quot;/&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1741"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1741-1" data-line-number="1">dates <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1741-2" data-line-number="2"><span class="st">  </span><span class="kw">str_replace</span>(<span class="dt">pattern =</span> <span class="st">&quot;[- /]+&quot;</span>,</a>
+<a class="sourceLine" id="cb1741-3" data-line-number="3">              <span class="dt">replacement =</span> <span class="st">&quot;/&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;3/14 - 1963&quot;  &quot;4/13/ 2005&quot;   &quot;12/1-1997&quot;    &quot;11/11 / 1918&quot;</code></pre>
 <p>In our application, that’s certainly NOT what we need. However, in cases where you happen to know that there will be at most one match, <code>str_replace()</code> gets the job done faster than <code>str_replace_all()</code>, which is forced to search through the entire string.</p>
 </div>
@@ -660,54 +658,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>It can be a defined function of the match.</li>
 </ul>
 <p>Let’s look at an example. Here is a function that, given a string, will double all of the vowels that it finds:</p>
-<pre class="sourceCode r"><code class="sourceCode r">doubleVowels &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
-  str <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;([aeiou])&quot;</span>, 
-                    <span class="dt">replacement =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">1&quot;</span>)
-}
-<span class="kw">doubleVowels</span>(<span class="st">&quot;Far and away the best!&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1743"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1743-1" data-line-number="1">doubleVowels &lt;-<span class="st"> </span><span class="cf">function</span>(str) {</a>
+<a class="sourceLine" id="cb1743-2" data-line-number="2">  str <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1743-3" data-line-number="3"><span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;([aeiou])&quot;</span>, </a>
+<a class="sourceLine" id="cb1743-4" data-line-number="4">                    <span class="dt">replacement =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">1&quot;</span>)</a>
+<a class="sourceLine" id="cb1743-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb1743-6" data-line-number="6"><span class="kw">doubleVowels</span>(<span class="st">&quot;Far and away the best!&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Faar aand aawaay thee beest!&quot;</code></pre>
 <p>Note that the pattern <code>[aeiou]</code> for vowels had to be enclosed in parentheses so that it could be captured and referred to by the back-reference <code>\1</code>. Also note that, since R converts the replacement string into a pattern, extra backslash escapes are required, just as in regular expressions.</p>
 <p>Here is a function to capitalize every vowel found:</p>
-<pre class="sourceCode r"><code class="sourceCode r">capVowels &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
-  str <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[aeiou]&quot;</span>, 
-                    <span class="dt">replacement =</span> <span class="cf">function</span>(x) <span class="kw">str_to_upper</span>(x))
-}
-<span class="kw">capVowels</span>(<span class="st">&quot;Far and away the best!&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1745"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1745-1" data-line-number="1">capVowels &lt;-<span class="st"> </span><span class="cf">function</span>(str) {</a>
+<a class="sourceLine" id="cb1745-2" data-line-number="2">  str <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1745-3" data-line-number="3"><span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;[aeiou]&quot;</span>, </a>
+<a class="sourceLine" id="cb1745-4" data-line-number="4">                    <span class="dt">replacement =</span> <span class="cf">function</span>(x) <span class="kw">str_to_upper</span>(x))</a>
+<a class="sourceLine" id="cb1745-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb1745-6" data-line-number="6"><span class="kw">capVowels</span>(<span class="st">&quot;Far and away the best!&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;FAr And AwAy thE bEst!&quot;</code></pre>
 <p>Here is another function that searches for repeated words and encloses each pair in asterisks:</p>
-<pre class="sourceCode r"><code class="sourceCode r">starRepeats &lt;-<span class="st"> </span><span class="cf">function</span>(str) {
-  str <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">b&quot;</span>,
-                    <span class="dt">replacement =</span> <span class="cf">function</span>(x) {
-                      <span class="kw">str_c</span>(<span class="st">&quot;*&quot;</span>, x, <span class="st">&quot;*&quot;</span>)
-                    }
-                    )
-}
-<span class="kw">starRepeats</span>(<span class="st">&quot;I have a boo boo on my knee knee.&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1747"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1747-1" data-line-number="1">starRepeats &lt;-<span class="st"> </span><span class="cf">function</span>(str) {</a>
+<a class="sourceLine" id="cb1747-2" data-line-number="2">  str <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1747-3" data-line-number="3"><span class="st">    </span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w+) </span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">b&quot;</span>,</a>
+<a class="sourceLine" id="cb1747-4" data-line-number="4">                    <span class="dt">replacement =</span> <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb1747-5" data-line-number="5">                      <span class="kw">str_c</span>(<span class="st">&quot;*&quot;</span>, x, <span class="st">&quot;*&quot;</span>)</a>
+<a class="sourceLine" id="cb1747-6" data-line-number="6">                    }</a>
+<a class="sourceLine" id="cb1747-7" data-line-number="7">                    )</a>
+<a class="sourceLine" id="cb1747-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb1747-9" data-line-number="9"><span class="kw">starRepeats</span>(<span class="st">&quot;I have a boo boo on my knee knee.&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;I have a *boo boo* on my *knee knee*.&quot;</code></pre>
 </div>
 <div id="detecting-matches" class="section level3">
 <h3><span class="header-section-number">12.4.4</span> Detecting Matches</h3>
 <p>If you have many strings—in a character-vector, say—and you want to select those that contain a match to a particular pattern, then you want to use <code>str_subset()</code>. </p>
 <p>Consider, for example, the vector of strings:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sentences &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;My name is Tom, Sir&quot;</span>,
-               <span class="st">&quot;And I&#39;m Tulip!&quot;</span>,
-               <span class="st">&quot;Whereas my name is Lester.&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1749"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1749-1" data-line-number="1">sentences &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;My name is Tom, Sir&quot;</span>,</a>
+<a class="sourceLine" id="cb1749-2" data-line-number="2">               <span class="st">&quot;And I&#39;m Tulip!&quot;</span>,</a>
+<a class="sourceLine" id="cb1749-3" data-line-number="3">               <span class="st">&quot;Whereas my name is Lester.&quot;</span>)</a></code></pre></div>
 <p>If we would like to find the strings that contain a word beginning with capital T, we could proceed as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sentences <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_subset</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1750"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1750-1" data-line-number="1">sentences <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1750-2" data-line-number="2"><span class="st">  </span><span class="kw">str_subset</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;My name is Tom, Sir&quot; &quot;And I&#39;m Tulip!&quot;</code></pre>
 <p><code>str_subset()</code> returns a vector consisting of the elements of the vector <code>sentences</code> where the string contains at least one word beginning with “T”.</p>
 <p>A related function is <code>str_detect()</code>: </p>
-<pre class="sourceCode r"><code class="sourceCode r">sentences <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_detect</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1752"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1752-1" data-line-number="1">sentences <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1752-2" data-line-number="2"><span class="st">  </span><span class="kw">str_detect</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>)</a></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE</code></pre>
 <p><code>str_detect()</code> returns a logical vector with <code>TRUE</code> where <code>sentences</code> has a capital-T word, <code>FALSE</code> otherwise.</p>
 <p>Finally, <code>str_locate()</code>  gives the <em>positions</em> in each string where a match begins:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sentences <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_locate</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1754"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1754-1" data-line-number="1">sentences <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1754-2" data-line-number="2"><span class="st">  </span><span class="kw">str_locate</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">bT</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>)</a></code></pre></div>
 <pre><code>##      start end
 ## [1,]    12  14
 ## [2,]     9  13
@@ -719,16 +717,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </p>
 <p>As an example, let’s extract pairs of words beginning with the same letter in <code>sentences2</code> defined below:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sentences2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;The big bad wolf is walking warily to the cottage.&quot;</span>,
-                <span class="st">&quot;He huffs and he puffs peevishly.&quot;</span>,
-                <span class="st">&quot;He wears gnarly gargantuan bell bottoms!&quot;</span>)
-sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_extract</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w)</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">W+</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">w*&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1756"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1756-1" data-line-number="1">sentences2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;The big bad wolf is walking warily to the cottage.&quot;</span>,</a>
+<a class="sourceLine" id="cb1756-2" data-line-number="2">                <span class="st">&quot;He huffs and he puffs peevishly.&quot;</span>,</a>
+<a class="sourceLine" id="cb1756-3" data-line-number="3">                <span class="st">&quot;He wears gnarly gargantuan bell bottoms!&quot;</span>)</a>
+<a class="sourceLine" id="cb1756-4" data-line-number="4">sentences2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1756-5" data-line-number="5"><span class="st">  </span><span class="kw">str_extract</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w)</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">W+</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">w*&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;big bad&quot;           &quot;puffs peevishly&quot;   &quot;gnarly gargantuan&quot;</code></pre>
 <p>The results are returned as a character vector, in which each element is the first matching pair in the corresponding sentence.</p>
 <p>If we want all of the matches in each sentence, then we use <code>str_extract_all()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_extract_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w)</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">W+</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">w*&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1758"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1758-1" data-line-number="1">sentences2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1758-2" data-line-number="2"><span class="st">  </span><span class="kw">str_extract_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w)</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">W+</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">w*&quot;</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;big bad&quot;        &quot;walking warily&quot; &quot;to the&quot;        
 ## 
@@ -739,8 +737,8 @@ sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
 ## [1] &quot;gnarly gargantuan&quot; &quot;bell bottoms&quot;</code></pre>
 <p>Sometimes we want even more information. Suppose, for example, that we want not only the first matching word-pair, but also the repeated initial letter that permitted the match in the first place. In that case we need <code>str_match()</code>:
 </p>
-<pre class="sourceCode r"><code class="sourceCode r">sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_match</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w)</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">W+</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">w*&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1760"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1760-1" data-line-number="1">sentences2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1760-2" data-line-number="2"><span class="st">  </span><span class="kw">str_match</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w)</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">W+</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">w*&quot;</span>)</a></code></pre></div>
 <pre><code>##      [,1]                [,2]
 ## [1,] &quot;big bad&quot;           &quot;b&quot; 
 ## [2,] &quot;puffs peevishly&quot;   &quot;p&quot; 
@@ -748,8 +746,8 @@ sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
 <p><code>str_match()</code> returns a matrix, each row of which corresponds to an element of <code>sentences</code>. The first column gives the value of the entire match, and the second column gives value of the capture-group in the regular expression. If the regular expression had used more capture groups, then the matrix would have had additional columns showing the values of the captures, in order.</p>
 <p>If you want an analysis of all the matches in a string, then use <code>str_match_all()</code>:
 </p>
-<pre class="sourceCode r"><code class="sourceCode r">sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_match_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w)</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">W+</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">w*&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1762"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1762-1" data-line-number="1">sentences2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1762-2" data-line-number="2"><span class="st">  </span><span class="kw">str_match_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b(</span><span class="ch">\\</span><span class="st">w)</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">W+</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">w*&quot;</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ##      [,1]             [,2]
 ## [1,] &quot;big bad&quot;        &quot;b&quot; 
@@ -770,10 +768,10 @@ sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
 <h3><span class="header-section-number">12.4.6</span> Extraction in Data Frames</h3>
 <p>Quite often you will want to manipulate strings in the context of working with a data frame. For this regex functions we have examined so far will be quite useful, but you should also know about the <code>extract()</code> function from the <strong>tidyr</strong> package, which is among the packages attached by the tidy-verse.</p>
 <p>Imagine a data table that contains some names and phone numbers:</p>
-<pre class="sourceCode r"><code class="sourceCode r">people &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Lauf, Bettina&quot;</span>, <span class="st">&quot;Bachchan, Abhishek&quot;</span>, <span class="st">&quot;Jones,  Jenna&quot;</span>),
-  <span class="dt">phone =</span> <span class="kw">c</span>(<span class="st">&quot;(202) 415-3785&quot;</span>, <span class="st">&quot;4133372100&quot;</span>, <span class="st">&quot;310-231-4453&quot;</span>)
-)</code></pre>
+<div class="sourceCode" id="cb1764"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1764-1" data-line-number="1">people &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb1764-2" data-line-number="2">  <span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Lauf, Bettina&quot;</span>, <span class="st">&quot;Bachchan, Abhishek&quot;</span>, <span class="st">&quot;Jones,  Jenna&quot;</span>),</a>
+<a class="sourceLine" id="cb1764-3" data-line-number="3">  <span class="dt">phone =</span> <span class="kw">c</span>(<span class="st">&quot;(202) 415-3785&quot;</span>, <span class="st">&quot;4133372100&quot;</span>, <span class="st">&quot;310-231-4453&quot;</span>)</a>
+<a class="sourceLine" id="cb1764-4" data-line-number="4">)</a></code></pre></div>
 <p>Each person has a standard ten-digit phone number, consisting of:</p>
 <ul>
 <li>the three-digit <em>area code</em>;</li>
@@ -781,17 +779,17 @@ sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
 <li>the four-digit <em>line</em> number.</li>
 </ul>
 <p>Suppose we would like to create three new variables in the data table, one for each of the three components of the phone number. For this, <code>tidyr::extract()</code> comes in handy: </p>
-<pre class="sourceCode r"><code class="sourceCode r">people <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(<span class="dt">col =</span> phone,
-          <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;office&quot;</span>, <span class="st">&quot;line&quot;</span>),
-          <span class="dt">regex =</span> <span class="st">&quot;(?x)        # for comments</span>
-<span class="st">                  .*           # in case of opening paren, etc.</span>
-<span class="st">                  (</span><span class="ch">\\</span><span class="st">d{3})     # capture 1:  area code</span>
-<span class="st">                  .*           # possible separators</span>
-<span class="st">                  (</span><span class="ch">\\</span><span class="st">d{3})     # capture 2:  central office</span>
-<span class="st">                  .*           # possible separators</span>
-<span class="st">                  (</span><span class="ch">\\</span><span class="st">d{4})     # capture 3:  line number</span>
-<span class="st">                  &quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1765"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1765-1" data-line-number="1">people <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1765-2" data-line-number="2"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(<span class="dt">col =</span> phone,</a>
+<a class="sourceLine" id="cb1765-3" data-line-number="3">          <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;office&quot;</span>, <span class="st">&quot;line&quot;</span>),</a>
+<a class="sourceLine" id="cb1765-4" data-line-number="4">          <span class="dt">regex =</span> <span class="st">&quot;(?x)        # for comments</span></a>
+<a class="sourceLine" id="cb1765-5" data-line-number="5"><span class="st">                  .*           # in case of opening paren, etc.</span></a>
+<a class="sourceLine" id="cb1765-6" data-line-number="6"><span class="st">                  (</span><span class="ch">\\</span><span class="st">d{3})     # capture 1:  area code</span></a>
+<a class="sourceLine" id="cb1765-7" data-line-number="7"><span class="st">                  .*           # possible separators</span></a>
+<a class="sourceLine" id="cb1765-8" data-line-number="8"><span class="st">                  (</span><span class="ch">\\</span><span class="st">d{3})     # capture 2:  central office</span></a>
+<a class="sourceLine" id="cb1765-9" data-line-number="9"><span class="st">                  .*           # possible separators</span></a>
+<a class="sourceLine" id="cb1765-10" data-line-number="10"><span class="st">                  (</span><span class="ch">\\</span><span class="st">d{4})     # capture 3:  line number</span></a>
+<a class="sourceLine" id="cb1765-11" data-line-number="11"><span class="st">                  &quot;</span>)</a></code></pre></div>
 <pre><code>##                 name area office line
 ## 1      Lauf, Bettina  202    415 3785
 ## 2 Bachchan, Abhishek  413    337 2100
@@ -801,17 +799,17 @@ sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
 <div id="counting-matches" class="section level3">
 <h3><span class="header-section-number">12.4.7</span> Counting Matches</h3>
 <p>The function <code>str_count()</code> provides a very convenient way to tally up the <em>number</em> of matches that a given regex has in a string. Here we use it to count the number of words in a string that begin with a lower or uppercase <code>p</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mary Poppins is practically perfect in every way!&quot;</span>,
-             <span class="st">&quot;The best-laid plans of mice and men gang oft astray.&quot;</span>,
-             <span class="st">&quot;Peter Piper picked a peck of pickled peppers.&quot;</span>)
-strings <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">str_count</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b[Pp]</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1767"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1767-1" data-line-number="1">strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mary Poppins is practically perfect in every way!&quot;</span>,</a>
+<a class="sourceLine" id="cb1767-2" data-line-number="2">             <span class="st">&quot;The best-laid plans of mice and men gang oft astray.&quot;</span>,</a>
+<a class="sourceLine" id="cb1767-3" data-line-number="3">             <span class="st">&quot;Peter Piper picked a peck of pickled peppers.&quot;</span>)</a>
+<a class="sourceLine" id="cb1767-4" data-line-number="4">strings <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1767-5" data-line-number="5"><span class="st">  </span><span class="kw">str_count</span>(<span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b[Pp]</span><span class="ch">\\</span><span class="st">w*</span><span class="ch">\\</span><span class="st">b&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] 3 1 6</code></pre>
 <p>How might we find the words in a string that contain three or more of the same letter? In this case <code>str_count()</code> would not be useful. However we could try something like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;In Patagonia, the peerless Peter Piper picked a peck of pickled peppers.&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">W+&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_subset</span>(<span class="dt">pattern =</span> <span class="st">&quot;([[:alpha:]]).*</span><span class="ch">\\</span><span class="st">1.*</span><span class="ch">\\</span><span class="st">1&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1769"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1769-1" data-line-number="1"><span class="st">&quot;In Patagonia, the peerless Peter Piper picked a peck of pickled peppers.&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1769-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">W+&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1769-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1769-4" data-line-number="4"><span class="st">  </span><span class="kw">str_subset</span>(<span class="dt">pattern =</span> <span class="st">&quot;([[:alpha:]]).*</span><span class="ch">\\</span><span class="st">1.*</span><span class="ch">\\</span><span class="st">1&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Patagonia&quot; &quot;peerless&quot;  &quot;peppers&quot;</code></pre>
 </div>
 <div id="regex-modes" class="section level3">
@@ -835,17 +833,17 @@ If you have been practicing consistently with an online regex site, you will hav
 </blockquote>
 <p>In the example above, we are in both case-insensitive and multiline mode, and we are looking for t or T followed by 1, 2 or 3 vowels (upper or lower) at the end of any line in a (possibly) multiline string.</p>
 <p>Following is an example of the mode to ignore white-space and to ignore case:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myPattern &lt;-
-<span class="st">  &quot;(?xi)       # ignore whitespace (x) and ignore case (i)</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">b          # assert a word-boundary</span>
-<span class="st">  (</span><span class="ch">\\</span><span class="st">w)        # capture the first letter of the first word</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">w*         # rest of the first word</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">W+         # one or more non-word characters</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">1          # repeat the letter captured previously</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">w*         # rest of the second word</span>
-<span class="st">  &quot;</span>
-sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_match_all</span>(<span class="dt">pattern =</span> myPattern)</code></pre>
+<div class="sourceCode" id="cb1771"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1771-1" data-line-number="1">myPattern &lt;-</a>
+<a class="sourceLine" id="cb1771-2" data-line-number="2"><span class="st">  &quot;(?xi)       # ignore whitespace (x) and ignore case (i)</span></a>
+<a class="sourceLine" id="cb1771-3" data-line-number="3"><span class="st">  </span><span class="ch">\\</span><span class="st">b          # assert a word-boundary</span></a>
+<a class="sourceLine" id="cb1771-4" data-line-number="4"><span class="st">  (</span><span class="ch">\\</span><span class="st">w)        # capture the first letter of the first word</span></a>
+<a class="sourceLine" id="cb1771-5" data-line-number="5"><span class="st">  </span><span class="ch">\\</span><span class="st">w*         # rest of the first word</span></a>
+<a class="sourceLine" id="cb1771-6" data-line-number="6"><span class="st">  </span><span class="ch">\\</span><span class="st">W+         # one or more non-word characters</span></a>
+<a class="sourceLine" id="cb1771-7" data-line-number="7"><span class="st">  </span><span class="ch">\\</span><span class="st">1          # repeat the letter captured previously</span></a>
+<a class="sourceLine" id="cb1771-8" data-line-number="8"><span class="st">  </span><span class="ch">\\</span><span class="st">w*         # rest of the second word</span></a>
+<a class="sourceLine" id="cb1771-9" data-line-number="9"><span class="st">  &quot;</span></a>
+<a class="sourceLine" id="cb1771-10" data-line-number="10">sentences2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1771-11" data-line-number="11"><span class="st">  </span><span class="kw">str_match_all</span>(<span class="dt">pattern =</span> myPattern)</a></code></pre></div>
 <pre><code>## [[1]]
 ##      [,1]             [,2]
 ## [1,] &quot;big bad&quot;        &quot;b&quot; 
@@ -863,20 +861,20 @@ sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
 ## [2,] &quot;bell bottoms&quot;      &quot;b&quot;</code></pre>
 <p>Due to the presence of <code>x</code>-flag at the very beginning of the regex, the regex engine knows to ignore white-space throughout, and it will also ignore hash-tags and whatever comes after them on a line. This permits the placement of comments within the regular expression. The <code>i</code>-flag directs the regex engine to ignore case when looking for matches. Accordingly, in the example we pick up the extra match “he huffs”.</p>
 <p>Some people prefer to control regular-expression modes by means of <strong>stringr</strong>’s <code>regex()</code> function: </p>
-<pre class="sourceCode r"><code class="sourceCode r">myPattern &lt;-<span class="st"> </span><span class="kw">regex</span>(
-  <span class="dt">pattern =</span> <span class="st">&quot;</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">b          # assert a word-boundary</span>
-<span class="st">  (</span><span class="ch">\\</span><span class="st">w)        # capture the first letter of the first word</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">w*         # rest of the first word</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">W+         # one or more non-word characters</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">1          # repeat the letter captured previously</span>
-<span class="st">  </span><span class="ch">\\</span><span class="st">w*         # rest of the second word</span>
-<span class="st">  &quot;</span>,
-  <span class="dt">comments =</span> <span class="ot">TRUE</span>,
-  <span class="dt">ignore_case =</span> <span class="ot">TRUE</span>
-)
-sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_match_all</span>(<span class="dt">pattern =</span> myPattern)</code></pre>
+<div class="sourceCode" id="cb1773"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1773-1" data-line-number="1">myPattern &lt;-<span class="st"> </span><span class="kw">regex</span>(</a>
+<a class="sourceLine" id="cb1773-2" data-line-number="2">  <span class="dt">pattern =</span> <span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb1773-3" data-line-number="3"><span class="st">  </span><span class="ch">\\</span><span class="st">b          # assert a word-boundary</span></a>
+<a class="sourceLine" id="cb1773-4" data-line-number="4"><span class="st">  (</span><span class="ch">\\</span><span class="st">w)        # capture the first letter of the first word</span></a>
+<a class="sourceLine" id="cb1773-5" data-line-number="5"><span class="st">  </span><span class="ch">\\</span><span class="st">w*         # rest of the first word</span></a>
+<a class="sourceLine" id="cb1773-6" data-line-number="6"><span class="st">  </span><span class="ch">\\</span><span class="st">W+         # one or more non-word characters</span></a>
+<a class="sourceLine" id="cb1773-7" data-line-number="7"><span class="st">  </span><span class="ch">\\</span><span class="st">1          # repeat the letter captured previously</span></a>
+<a class="sourceLine" id="cb1773-8" data-line-number="8"><span class="st">  </span><span class="ch">\\</span><span class="st">w*         # rest of the second word</span></a>
+<a class="sourceLine" id="cb1773-9" data-line-number="9"><span class="st">  &quot;</span>,</a>
+<a class="sourceLine" id="cb1773-10" data-line-number="10">  <span class="dt">comments =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb1773-11" data-line-number="11">  <span class="dt">ignore_case =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb1773-12" data-line-number="12">)</a>
+<a class="sourceLine" id="cb1773-13" data-line-number="13">sentences2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1773-14" data-line-number="14"><span class="st">  </span><span class="kw">str_match_all</span>(<span class="dt">pattern =</span> myPattern)</a></code></pre></div>
 <pre><code>## [[1]]
 ##      [,1]             [,2]
 ## [1,] &quot;big bad&quot;        &quot;b&quot; 
@@ -910,38 +908,38 @@ sentences2 <span class="op">%&gt;%</span><span class="st"> </span>
 <h3><span class="header-section-number">12.4.10</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">wordCount &lt;-<span class="st"> </span>fruit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_count</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">w+&quot;</span>)
-<span class="kw">sum</span>(wordCount <span class="op">==</span><span class="st"> </span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb1775"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1775-1" data-line-number="1">wordCount &lt;-<span class="st"> </span>fruit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_count</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">w+&quot;</span>)</a>
+<a class="sourceLine" id="cb1775-2" data-line-number="2"><span class="kw">sum</span>(wordCount <span class="op">==</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 11</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fruit <span class="op">%&gt;%</span><span class="st"> </span>.[<span class="kw">str_count</span>(., <span class="st">&quot;</span><span class="ch">\\</span><span class="st">w+&quot;</span>) <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]</code></pre>
+<div class="sourceCode" id="cb1777"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1777-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span>.[<span class="kw">str_count</span>(., <span class="st">&quot;</span><span class="ch">\\</span><span class="st">w+&quot;</span>) <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]</a></code></pre></div>
 <pre><code>##  [1] &quot;bell pepper&quot;       &quot;blood orange&quot;      &quot;canary melon&quot;     
 ##  [4] &quot;chili pepper&quot;      &quot;goji berry&quot;        &quot;kiwi fruit&quot;       
 ##  [7] &quot;purple mangosteen&quot; &quot;rock melon&quot;        &quot;salal berry&quot;      
 ## [10] &quot;star fruit&quot;        &quot;ugli fruit&quot;</code></pre>
 <p>Another way is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fruit <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">w+</span><span class="ch">\\</span><span class="st">s+</span><span class="ch">\\</span><span class="st">w+$&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1779"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1779-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1779-2" data-line-number="2"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">w+</span><span class="ch">\\</span><span class="st">s+</span><span class="ch">\\</span><span class="st">w+$&quot;</span>)</a></code></pre></div>
 <pre><code>##  [1] &quot;bell pepper&quot;       &quot;blood orange&quot;      &quot;canary melon&quot;     
 ##  [4] &quot;chili pepper&quot;      &quot;goji berry&quot;        &quot;kiwi fruit&quot;       
 ##  [7] &quot;purple mangosteen&quot; &quot;rock melon&quot;        &quot;salal berry&quot;      
 ## [10] &quot;star fruit&quot;        &quot;ugli fruit&quot;</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fruit <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_detect</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">w+</span><span class="ch">\\</span><span class="st">s+</span><span class="ch">\\</span><span class="st">w+$&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">which</span>()</code></pre>
+<div class="sourceCode" id="cb1781"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1781-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1781-2" data-line-number="2"><span class="st">  </span><span class="kw">str_detect</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">w+</span><span class="ch">\\</span><span class="st">s+</span><span class="ch">\\</span><span class="st">w+$&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1781-3" data-line-number="3"><span class="st">  </span><span class="kw">which</span>()</a></code></pre></div>
 <pre><code>##  [1]  5  9 13 17 32 42 66 72 73 75 79</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fruit <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">w+berry$&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1783"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1783-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1783-2" data-line-number="2"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">w+berry$&quot;</span>)</a></code></pre></div>
 <pre><code>##  [1] &quot;bilberry&quot;    &quot;blackberry&quot;  &quot;blueberry&quot;   &quot;boysenberry&quot; &quot;cloudberry&quot; 
 ##  [6] &quot;cranberry&quot;   &quot;elderberry&quot;  &quot;gooseberry&quot;  &quot;huckleberry&quot; &quot;mulberry&quot;   
 ## [11] &quot;raspberry&quot;   &quot;strawberry&quot;</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vowelCount &lt;-<span class="st"> </span>
-<span class="st">  </span>fruit <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_count</span>(<span class="st">&quot;[aeiou]&quot;</span>)
-fruit[vowelCount <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>]</code></pre>
+<div class="sourceCode" id="cb1785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1785-1" data-line-number="1">vowelCount &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb1785-2" data-line-number="2"><span class="st">  </span>fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1785-3" data-line-number="3"><span class="st">  </span><span class="kw">str_count</span>(<span class="st">&quot;[aeiou]&quot;</span>)</a>
+<a class="sourceLine" id="cb1785-4" data-line-number="4">fruit[vowelCount <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>]</a></code></pre></div>
 <pre><code>##  [1] &quot;avocado&quot;           &quot;blood orange&quot;      &quot;breadfruit&quot;       
 ##  [4] &quot;canary melon&quot;      &quot;cantaloupe&quot;        &quot;cherimoya&quot;        
 ##  [7] &quot;chili pepper&quot;      &quot;clementine&quot;        &quot;dragonfruit&quot;      
@@ -951,15 +949,15 @@ fruit[vowelCount <span class="op">&gt;</span><span class="st"> </span><span clas
 ## [19] &quot;purple mangosteen&quot; &quot;tamarillo&quot;         &quot;tangerine&quot;        
 ## [22] &quot;ugli fruit&quot;        &quot;watermelon&quot;</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fruit <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;(</span><span class="ch">\\</span><span class="st">w{2,})</span><span class="ch">\\</span><span class="st">1&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1787"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1787-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1787-2" data-line-number="2"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;(</span><span class="ch">\\</span><span class="st">w{2,})</span><span class="ch">\\</span><span class="st">1&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;banana&quot;      &quot;coconut&quot;     &quot;cucumber&quot;    &quot;jujube&quot;      &quot;papaya&quot;     
 ## [6] &quot;salal berry&quot;</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">people <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(<span class="dt">col =</span> name,
-          <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;last&quot;</span>, <span class="st">&quot;first&quot;</span>),
-          <span class="dt">regex =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">w+)</span><span class="ch">\\</span><span class="st">W+(</span><span class="ch">\\</span><span class="st">w+)&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1789"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1789-1" data-line-number="1">people <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1789-2" data-line-number="2"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(<span class="dt">col =</span> name,</a>
+<a class="sourceLine" id="cb1789-3" data-line-number="3">          <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;last&quot;</span>, <span class="st">&quot;first&quot;</span>),</a>
+<a class="sourceLine" id="cb1789-4" data-line-number="4">          <span class="dt">regex =</span> <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">w+)</span><span class="ch">\\</span><span class="st">W+(</span><span class="ch">\\</span><span class="st">w+)&quot;</span>)</a></code></pre></div>
 <pre><code>##       last    first          phone
 ## 1     Lauf  Bettina (202) 415-3785
 ## 2 Bachchan Abhishek     4133372100

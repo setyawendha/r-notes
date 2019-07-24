@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.6 Grouping and Summaries | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.6 Grouping and Summaries | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="transforming-variables-with-dplyr.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -582,19 +580,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 <p>The next two <strong>dplyr</strong> data-functions are useful for generating numerical summaries of data.</p>
 <p>Consider, for example, <code>CPS85</code>. We know from graphical studies that the men in the study are paid more than women, but how might we verify this fact numerically? One approach would be to separate the men and the women into two different groups and compute the mean wage for each group. This is accomplished by calling <code>group_by()</code> and <code>summarise()</code> in succession:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">meanWage =</span> <span class="kw">mean</span>(wage))</code></pre>
+<div class="sourceCode" id="cb1548"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1548-1" data-line-number="1">CPS85 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1548-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1548-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">meanWage =</span> <span class="kw">mean</span>(wage))</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   sex   meanWage
 ##   &lt;fct&gt;    &lt;dbl&gt;
 ## 1 F         7.88
 ## 2 M         9.99</code></pre>
 <p>It’s possible to create more than one summary variable in a single call to <code>summarise()</code>, for example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">meanWage =</span> <span class="kw">mean</span>(wage),
-            <span class="dt">n =</span> <span class="kw">n</span>())</code></pre>
+<div class="sourceCode" id="cb1550"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1550-1" data-line-number="1">CPS85 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1550-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1550-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">meanWage =</span> <span class="kw">mean</span>(wage),</a>
+<a class="sourceLine" id="cb1550-4" data-line-number="4">            <span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   sex   meanWage     n
 ##   &lt;fct&gt;    &lt;dbl&gt; &lt;int&gt;
@@ -610,33 +608,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>the maximum value</li>
 </ul>
 <p>These quantities are conveniently computed by R’s <code>fivenum()</code>  function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>.<span class="op">$</span>wage <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">fivenum</span>()</code></pre>
+<div class="sourceCode" id="cb1552"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1552-1" data-line-number="1">CPS85 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1552-2" data-line-number="2"><span class="st">  </span>.<span class="op">$</span>wage <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1552-3" data-line-number="3"><span class="st">  </span><span class="kw">fivenum</span>()</a></code></pre></div>
 <pre><code>## [1]  1.00  5.25  7.78 11.25 44.50</code></pre>
 <p>Let’s find the five number summaries for the wages of men and women:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(),
-            <span class="dt">min =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">1</span>],
-            <span class="dt">Q1 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">2</span>],
-            <span class="dt">median =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">3</span>],
-            <span class="dt">Q3 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">4</span>],
-            <span class="dt">max =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">5</span>])</code></pre>
+<div class="sourceCode" id="cb1554"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1554-1" data-line-number="1">CPS85 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1554-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1554-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb1554-4" data-line-number="4">            <span class="dt">min =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb1554-5" data-line-number="5">            <span class="dt">Q1 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb1554-6" data-line-number="6">            <span class="dt">median =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">3</span>],</a>
+<a class="sourceLine" id="cb1554-7" data-line-number="7">            <span class="dt">Q3 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">4</span>],</a>
+<a class="sourceLine" id="cb1554-8" data-line-number="8">            <span class="dt">max =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">5</span>])</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 7
 ##   sex       n   min    Q1 median    Q3   max
 ##   &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 F       245  1.75  4.75   6.8     10  44.5
 ## 2 M       289  1     6      8.93    13  26.3</code></pre>
 <p>It’s also possible to group by more than one variable at a time. For example, suppose that we wish to compare the wages of men and women in the various sectors of employment. All we need to do is group by both <code>sex</code> and <code>sector</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(sector, sex) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(),
-            <span class="dt">min =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">1</span>],
-            <span class="dt">Q1 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">2</span>],
-            <span class="dt">median =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">3</span>],
-            <span class="dt">Q3 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">4</span>],
-            <span class="dt">max =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">5</span>])</code></pre>
+<div class="sourceCode" id="cb1556"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1556-1" data-line-number="1">CPS85 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1556-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(sector, sex) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1556-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb1556-4" data-line-number="4">            <span class="dt">min =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb1556-5" data-line-number="5">            <span class="dt">Q1 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb1556-6" data-line-number="6">            <span class="dt">median =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">3</span>],</a>
+<a class="sourceLine" id="cb1556-7" data-line-number="7">            <span class="dt">Q3 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">4</span>],</a>
+<a class="sourceLine" id="cb1556-8" data-line-number="8">            <span class="dt">max =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">5</span>])</a></code></pre></div>
 <pre><code>## # A tibble: 15 x 8
 ## # Groups:   sector [8]
 ##    sector   sex       n   min    Q1 median    Q3   max
@@ -660,26 +658,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="note-on-binding" class="section level3">
 <h3><span class="header-section-number">10.6.1</span> Note on Binding</h3>
 <p>Keep in mind that you can always “save” the results of any computation by binding them to a variable name, thus:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sexSector &lt;-
-<span class="st">  </span>CPS85 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(sector, sex) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(),
-            <span class="dt">min =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">1</span>],
-            <span class="dt">Q1 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">2</span>],
-            <span class="dt">median =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">3</span>],
-            <span class="dt">Q3 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">4</span>],
-            <span class="dt">max =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">5</span>])
-<span class="kw">class</span>(sexSector)</code></pre>
+<div class="sourceCode" id="cb1558"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1558-1" data-line-number="1">sexSector &lt;-</a>
+<a class="sourceLine" id="cb1558-2" data-line-number="2"><span class="st">  </span>CPS85 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1558-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(sector, sex) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1558-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb1558-5" data-line-number="5">            <span class="dt">min =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb1558-6" data-line-number="6">            <span class="dt">Q1 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb1558-7" data-line-number="7">            <span class="dt">median =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">3</span>],</a>
+<a class="sourceLine" id="cb1558-8" data-line-number="8">            <span class="dt">Q3 =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">4</span>],</a>
+<a class="sourceLine" id="cb1558-9" data-line-number="9">            <span class="dt">max =</span> <span class="kw">fivenum</span>(wage)[<span class="dv">5</span>])</a>
+<a class="sourceLine" id="cb1558-10" data-line-number="10"><span class="kw">class</span>(sexSector)</a></code></pre></div>
 <pre><code>## [1] &quot;grouped_df&quot; &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 <p>Note that the result has <code>data.frame</code> as one of its classes, so you may extract components in any of the ways you have learned. The old ways, for instance, are fine:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># minimum wage among male professionals:</span>
-<span class="kw">with</span>(sexSector, min[sex <span class="op">==</span><span class="st"> &quot;M&quot;</span> <span class="op">&amp;</span><span class="st"> </span>sector <span class="op">==</span><span class="st"> &quot;prof&quot;</span>])</code></pre>
+<div class="sourceCode" id="cb1560"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1560-1" data-line-number="1"><span class="co"># minimum wage among male professionals:</span></a>
+<a class="sourceLine" id="cb1560-2" data-line-number="2"><span class="kw">with</span>(sexSector, min[sex <span class="op">==</span><span class="st"> &quot;M&quot;</span> <span class="op">&amp;</span><span class="st"> </span>sector <span class="op">==</span><span class="st"> &quot;prof&quot;</span>])</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 </div>
 <div id="practice-exercises-33" class="section level3">
 <h3><span class="header-section-number">10.6.2</span> Practice Exercises</h3>
 <p>These exercises deal with flight data from the <strong>nycflights13</strong> data frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;flights&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;nycflights13&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1562"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1562-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;flights&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;nycflights13&quot;</span>)</a></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><p>The <code>flights</code> table gives information about each departure in the year 2013 from one of the three major airports near New York City: John F. Kennedy (JFK), LaGuardia (LGA) or Newark (EWR). The airport from which the plane departed is recorded in the variable <code>origin</code>. The variable <code>dep_delay</code> gives the delay in departure, in minutes. (This is a negative number if the plane left early). Find the number of departures and the mean departure delay for each of the three airports. (Note that <code>dep_delay</code> for cancelled flights will be <code>NA</code>.)</p></li>
 <li><p>The variable <code>distance</code> gives the distance, in miles, between an origin and destination airport. For July 26, 2013, make a violin plot of the distances traveled by the departing planes from the each of the three New York airports. Use the pipe and <code>filter()</code> to take <code>flights</code> into the desired plot.</p></li>
@@ -690,11 +688,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">10.6.3</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Flights that were cancelled have <code>NA</code> for their departure delay, so we need to filter out these cases first, in order to correctly count the number of flights that actually left the airport. Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(dep_delay)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(origin) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">departures =</span> <span class="kw">n</span>(),
-            <span class="dt">meanDelay =</span> <span class="kw">mean</span>(dep_delay))</code></pre>
+<div class="sourceCode" id="cb1563"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1563-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1563-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(dep_delay)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1563-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(origin) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1563-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">departures =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb1563-5" data-line-number="5">            <span class="dt">meanDelay =</span> <span class="kw">mean</span>(dep_delay))</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   origin departures meanDelay
 ##   &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt;
@@ -702,15 +700,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 JFK        109416      12.1
 ## 3 LGA        101509      10.3</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(month <span class="op">==</span><span class="st"> </span><span class="dv">6</span> <span class="op">&amp;</span><span class="st"> </span>day <span class="op">==</span><span class="st"> </span><span class="dv">26</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> distance)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.25</span>, <span class="dt">size =</span> <span class="fl">0.1</span>)</code></pre></li>
+<div class="sourceCode" id="cb1565"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1565-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1565-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(month <span class="op">==</span><span class="st"> </span><span class="dv">6</span> <span class="op">&amp;</span><span class="st"> </span>day <span class="op">==</span><span class="st"> </span><span class="dv">26</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1565-3" data-line-number="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> distance)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1565-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1565-5" data-line-number="5"><span class="st">    </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.25</span>, <span class="dt">size =</span> <span class="fl">0.1</span>)</a></code></pre></div></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(month <span class="op">==</span><span class="st"> </span><span class="dv">6</span> <span class="op">&amp;</span><span class="st"> </span>day <span class="op">==</span><span class="st"> </span><span class="dv">26</span> <span class="op">&amp;</span><span class="st"> </span>distance <span class="op">&gt;</span><span class="st"> </span><span class="dv">4000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(origin, dest, distance)</code></pre>
+<div class="sourceCode" id="cb1566"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1566-1" data-line-number="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1566-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(month <span class="op">==</span><span class="st"> </span><span class="dv">6</span> <span class="op">&amp;</span><span class="st"> </span>day <span class="op">==</span><span class="st"> </span><span class="dv">26</span> <span class="op">&amp;</span><span class="st"> </span>distance <span class="op">&gt;</span><span class="st"> </span><span class="dv">4000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1566-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(origin, dest, distance)</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   origin dest  distance
 ##   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;

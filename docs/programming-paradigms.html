@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.1 Programming Paradigms | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.1 Programming Paradigms | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="functional.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -584,21 +582,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">14.1.1</span> Procedural Programming</h3>
 <p>One of the older programming paradigms in existence is <em>procedural programming</em>. It is supported in many popular languages and is often the first paradigm within which beginners learn to program. In fact, if one’s programming does not progress beyond a rudimentary level, one may never become aware that one is working within the procedural paradigm—or any paradigm at all, for that matter.</p>
 <p>Before we define procedural programming, let’s illustrate it with an example. Almost any of the programs we have written so far would do as examples; for specificity, let’s consider the following snippet of code that produces from the data frame <code>m111survey</code> a new, smaller frame consisting of just the numerical variables:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(bcscr)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find the numer of columns in the data frame:</span>
-cols &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">names</span>(m111survey))
-<span class="co">#set up a logical vector of length equal to the number of columns:</span>
-isNumerical &lt;-<span class="st"> </span><span class="kw">logical</span>(cols)
-
-<span class="co"># loop through.  For each variable, say if it is numerical:</span>
-<span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(isNumerical) ) {
-  isNumerical[i] &lt;-<span class="st"> </span><span class="cf">if</span> (<span class="kw">is.numeric</span>(m111survey[, i])) <span class="ot">TRUE</span> <span class="cf">else</span> <span class="ot">FALSE</span>
-}
-
-<span class="co"># pick the numerical variables from the data frame</span>
-numsm111 &lt;-<span class="st"> </span>m111survey[, isNumerical]
-<span class="co"># have a look at the result:</span>
-<span class="kw">str</span>(numsm111)</code></pre>
+<div class="sourceCode" id="cb1855"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1855-1" data-line-number="1"><span class="kw">library</span>(bcscr)</a></code></pre></div>
+<div class="sourceCode" id="cb1856"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1856-1" data-line-number="1"><span class="co"># find the numer of columns in the data frame:</span></a>
+<a class="sourceLine" id="cb1856-2" data-line-number="2">cols &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">names</span>(m111survey))</a>
+<a class="sourceLine" id="cb1856-3" data-line-number="3"><span class="co">#set up a logical vector of length equal to the number of columns:</span></a>
+<a class="sourceLine" id="cb1856-4" data-line-number="4">isNumerical &lt;-<span class="st"> </span><span class="kw">logical</span>(cols)</a>
+<a class="sourceLine" id="cb1856-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1856-6" data-line-number="6"><span class="co"># loop through.  For each variable, say if it is numerical:</span></a>
+<a class="sourceLine" id="cb1856-7" data-line-number="7"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(isNumerical) ) {</a>
+<a class="sourceLine" id="cb1856-8" data-line-number="8">  isNumerical[i] &lt;-<span class="st"> </span><span class="cf">if</span> (<span class="kw">is.numeric</span>(m111survey[, i])) <span class="ot">TRUE</span> <span class="cf">else</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb1856-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb1856-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb1856-11" data-line-number="11"><span class="co"># pick the numerical variables from the data frame</span></a>
+<a class="sourceLine" id="cb1856-12" data-line-number="12">numsm111 &lt;-<span class="st"> </span>m111survey[, isNumerical]</a>
+<a class="sourceLine" id="cb1856-13" data-line-number="13"><span class="co"># have a look at the result:</span></a>
+<a class="sourceLine" id="cb1856-14" data-line-number="14"><span class="kw">str</span>(numsm111)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    71 obs. of  6 variables:
 ##  $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
 ##  $ ideal_ht       : num  78 76 NA 65 72 NA 72 76 61 67 ...

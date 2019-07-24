@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.2 Making Decisions: Conditionals | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.2 Making Decisions: Conditionals | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="prompting-the-user.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -587,86 +585,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The user will then be asked to guess the number.</li>
 <li>If the user is correct, then the computer will congratulate the user.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
-guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">readline</span>(<span class="st">&quot;Guess the number (1-4):  &quot;</span>))
-<span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {
-  <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb661-1" data-line-number="1">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb661-2" data-line-number="2">guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">readline</span>(<span class="st">&quot;Guess the number (1-4):  &quot;</span>))</a>
+<a class="sourceLine" id="cb661-3" data-line-number="3"><span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {</a>
+<a class="sourceLine" id="cb661-4" data-line-number="4">  <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)</a>
+<a class="sourceLine" id="cb661-5" data-line-number="5">}</a></code></pre></div>
 <p>The <code>sample()</code> function randomly picks a value from the vector that is is given. The <code>size</code> parameter specifies how many numbers to pick. (This time we only want one number.)</p>
 <p>Flow control enters the picture with the reserved word <code>if</code>. Immediately after <code>if</code> is a Boolean expression enclosed in parentheses. This expression is often called the <em>condition</em>. If the condition evaluates to <code>TRUE</code>, then the body of the <code>if</code> statement—the code enclosed in the brackets—will be executed. On the other hand if the condition evaluates to <code>FALSE</code>, then R skips past the bracketed code.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
 <p>The general form of an <code>if</code> expression is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( condition ) {
-  <span class="co">## code to run when the condition evaluates to TRUE</span>
-}</code></pre>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb662-1" data-line-number="1"><span class="cf">if</span> ( condition ) {</a>
+<a class="sourceLine" id="cb662-2" data-line-number="2">  <span class="co">## code to run when the condition evaluates to TRUE</span></a>
+<a class="sourceLine" id="cb662-3" data-line-number="3">}</a></code></pre></div>
 <p>The code above congratulates the a lucky guesser, but it has nothing at all to say to someone who did not guess correctly. The way to provide an alternative is through the addition of the <code>else</code> reserved-word:</p>
-<pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
-guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">readline</span>(<span class="st">&quot;Guess the number (1-4):  &quot;</span>))
-<span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {
-  <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)
-} <span class="cf">else</span> {
-  <span class="kw">cat</span>(<span class="st">&quot;Sorry, the correct number was &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  <span class="kw">cat</span>(<span class="st">&quot;Better luck next time!&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb663-1" data-line-number="1">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb663-2" data-line-number="2">guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">readline</span>(<span class="st">&quot;Guess the number (1-4):  &quot;</span>))</a>
+<a class="sourceLine" id="cb663-3" data-line-number="3"><span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {</a>
+<a class="sourceLine" id="cb663-4" data-line-number="4">  <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)</a>
+<a class="sourceLine" id="cb663-5" data-line-number="5">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb663-6" data-line-number="6">  <span class="kw">cat</span>(<span class="st">&quot;Sorry, the correct number was &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb663-7" data-line-number="7">  <span class="kw">cat</span>(<span class="st">&quot;Better luck next time!&quot;</span>)</a>
+<a class="sourceLine" id="cb663-8" data-line-number="8">}</a></code></pre></div>
 <p>The general form of an <code>if-else</code> expression is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( condition ) {
-  <span class="co"># code to run if the condition evaluates to TRUE</span>
-} <span class="cf">else</span> {
-  <span class="co"># code to run if condition evaluates to FALSE</span>
-}</code></pre>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb664-1" data-line-number="1"><span class="cf">if</span> ( condition ) {</a>
+<a class="sourceLine" id="cb664-2" data-line-number="2">  <span class="co"># code to run if the condition evaluates to TRUE</span></a>
+<a class="sourceLine" id="cb664-3" data-line-number="3">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb664-4" data-line-number="4">  <span class="co"># code to run if condition evaluates to FALSE</span></a>
+<a class="sourceLine" id="cb664-5" data-line-number="5">}</a></code></pre></div>
 <p>An <code>if-else</code>can be followed by any number of <code>if-else</code>’s, setting up a chain of alternative responses:</p>
-<pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)
-guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">readline</span>(<span class="st">&quot;Guess the number (1-4):  &quot;</span>))
-<span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {
-  <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)
-} <span class="cf">else</span> <span class="cf">if</span> ( <span class="kw">abs</span>(guess <span class="op">-</span><span class="st"> </span>number) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ){
-  <span class="kw">cat</span>(<span class="st">&quot;You were close!</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  <span class="kw">cat</span>(<span class="st">&quot;The correct number was &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-} <span class="cf">else</span> {
-  <span class="kw">cat</span>(<span class="st">&quot;You were way off.</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  <span class="kw">cat</span>(<span class="st">&quot;The correct number was &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb665-1" data-line-number="1">number &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb665-2" data-line-number="2">guess &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">readline</span>(<span class="st">&quot;Guess the number (1-4):  &quot;</span>))</a>
+<a class="sourceLine" id="cb665-3" data-line-number="3"><span class="cf">if</span> ( guess <span class="op">==</span><span class="st"> </span>number ) {</a>
+<a class="sourceLine" id="cb665-4" data-line-number="4">  <span class="kw">cat</span>(<span class="st">&quot;Congratulations!  You are correct.&quot;</span>)</a>
+<a class="sourceLine" id="cb665-5" data-line-number="5">} <span class="cf">else</span> <span class="cf">if</span> ( <span class="kw">abs</span>(guess <span class="op">-</span><span class="st"> </span>number) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ){</a>
+<a class="sourceLine" id="cb665-6" data-line-number="6">  <span class="kw">cat</span>(<span class="st">&quot;You were close!</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb665-7" data-line-number="7">  <span class="kw">cat</span>(<span class="st">&quot;The correct number was &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb665-8" data-line-number="8">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb665-9" data-line-number="9">  <span class="kw">cat</span>(<span class="st">&quot;You were way off.</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb665-10" data-line-number="10">  <span class="kw">cat</span>(<span class="st">&quot;The correct number was &quot;</span>, number, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb665-11" data-line-number="11">}</a></code></pre></div>
 <p>In general, a chain looks like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( condition1) {
-  <span class="co"># code to run if condition1 evaluates to TRUE</span>
-} <span class="cf">else</span> <span class="cf">if</span> ( condition2 ) {
-  <span class="co"># code to run if condition2 evaluates to TRUE</span>
-} <span class="cf">else</span> <span class="cf">if</span> ( condition3 ) {
-  <span class="co"># code to run if condition2 evaluates to TRUE</span>
-} <span class="cf">else</span> <span class="cf">if</span> ......
-
-  <span class="co"># and so on until</span>
-<span class="er">}</span> <span class="cf">else</span> <span class="cf">if</span> ( conditionN ) {
-  <span class="co"># code to run if conditionN evaluates to TRUE</span>
-}</code></pre>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb666-1" data-line-number="1"><span class="cf">if</span> ( condition1) {</a>
+<a class="sourceLine" id="cb666-2" data-line-number="2">  <span class="co"># code to run if condition1 evaluates to TRUE</span></a>
+<a class="sourceLine" id="cb666-3" data-line-number="3">} <span class="cf">else</span> <span class="cf">if</span> ( condition2 ) {</a>
+<a class="sourceLine" id="cb666-4" data-line-number="4">  <span class="co"># code to run if condition2 evaluates to TRUE</span></a>
+<a class="sourceLine" id="cb666-5" data-line-number="5">} <span class="cf">else</span> <span class="cf">if</span> ( condition3 ) {</a>
+<a class="sourceLine" id="cb666-6" data-line-number="6">  <span class="co"># code to run if condition2 evaluates to TRUE</span></a>
+<a class="sourceLine" id="cb666-7" data-line-number="7">} <span class="cf">else</span> <span class="cf">if</span> ......</a>
+<a class="sourceLine" id="cb666-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb666-9" data-line-number="9">  <span class="co"># and so on until</span></a>
+<a class="sourceLine" id="cb666-10" data-line-number="10"><span class="er">}</span> <span class="cf">else</span> <span class="cf">if</span> ( conditionN ) {</a>
+<a class="sourceLine" id="cb666-11" data-line-number="11">  <span class="co"># code to run if conditionN evaluates to TRUE</span></a>
+<a class="sourceLine" id="cb666-12" data-line-number="12">}</a></code></pre></div>
 </div>
 <div id="application-validating-arguments" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Application: Validating Arguments</h3>
 <p>Recall the function <code>manyCat()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, n) {
-  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)
-  <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb667-1" data-line-number="1">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, n) {</a>
+<a class="sourceLine" id="cb667-2" data-line-number="2">  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb667-3" data-line-number="3">  lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)</a>
+<a class="sourceLine" id="cb667-4" data-line-number="4">  <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb667-5" data-line-number="5">}</a></code></pre></div>
 <p>What would happen if a user were to call it with an unusable argument for the parameter <code>n</code>, a negative number, for instance?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">-3</span>)</code></pre>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb668-1" data-line-number="1"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">-3</span>)</a></code></pre></div>
 <pre><code>## Error in rep(wordWithNewline, times = n): invalid &#39;times&#39; argument</code></pre>
 <p>For us, it’s clear enough what is wrong. After all, we wrote the function in the previous chapter, and we know that the <code>rep()</code> function in its body requires that the <code>times</code> parameter be set to some positive integer. On the other hand, to someone who is unfamiliar with the body of <code>manyCat()</code> and who has no access to help on how <code>manyCat()</code> is to be used it may not be so obvious what has gone wrong and why.</p>
 <p>In the case of complex functions, we cannot expect ordinary users to search through the function’s definition to learn how to fix an error that arises from improper input. Accordingly, it can be good practice to <em>validate</em> user-input. Conditionals allow us to do this.</p>
 <p>Here, a possible approach is to attempt to coerce the user’s input for <code>n</code> into an integer, using the <code>as.integer()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="fl">3.6</span>) <span class="co"># will round to nearest integer</span></code></pre>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb670-1" data-line-number="1"><span class="kw">as.integer</span>(<span class="fl">3.6</span>) <span class="co"># will round to nearest integer</span></a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;4&quot;</span>) <span class="co"># will convert string to number 4</span></code></pre>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb672-1" data-line-number="1"><span class="kw">as.integer</span>(<span class="st">&quot;4&quot;</span>) <span class="co"># will convert string to number 4</span></a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;4.3&quot;</span>) <span class="co"># will convert AND round</span></code></pre>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb674-1" data-line-number="1"><span class="kw">as.integer</span>(<span class="st">&quot;4.3&quot;</span>) <span class="co"># will convert AND round</span></a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.integer</span>(<span class="st">&quot;two&quot;</span>) <span class="co"># cannot convert to integer</span></code></pre>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb676-1" data-line-number="1"><span class="kw">as.integer</span>(<span class="st">&quot;two&quot;</span>) <span class="co"># cannot convert to integer</span></a></code></pre></div>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>In the last example, the result is <code>NA</code>, and a cryptic warning was issued. In order to keep the warning from the user, we should wrap any call to <code>as.integer()</code> in the <code>suppressWarnings()</code> function.</p>
 <p>Let’s try out a piece of code that checks for validity:</p>
-<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> &quot;two&quot;</span>  <span class="co"># this will not convert to a number at all</span>
-converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
-<span class="op">!</span><span class="kw">is.na</span>(converted) <span class="op">&amp;&amp;</span><span class="st"> </span>converted <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></code></pre>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb679-1" data-line-number="1">n &lt;-<span class="st"> &quot;two&quot;</span>  <span class="co"># this will not convert to a number at all</span></a>
+<a class="sourceLine" id="cb679-2" data-line-number="2">converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))</a>
+<a class="sourceLine" id="cb679-3" data-line-number="3"><span class="op">!</span><span class="kw">is.na</span>(converted) <span class="op">&amp;&amp;</span><span class="st"> </span>converted <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>Think about what happened:</p>
 <ul>
@@ -676,34 +674,34 @@ converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>
 <li>Hence <code>!is.na(converted) &amp;&amp; converted &gt; 1</code> evaluates to <code>FALSE</code>.</li>
 </ul>
 <p>Let’s try it on another “wrong” value:</p>
-<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">-2</span>  <span class="co"># number, but it&#39;s negative</span>
-converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
-<span class="op">!</span><span class="kw">is.na</span>(converted) <span class="op">&amp;&amp;</span><span class="st"> </span>converted <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></code></pre>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb681-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">-2</span>  <span class="co"># number, but it&#39;s negative</span></a>
+<a class="sourceLine" id="cb681-2" data-line-number="2">converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))</a>
+<a class="sourceLine" id="cb681-3" data-line-number="3"><span class="op">!</span><span class="kw">is.na</span>(converted) <span class="op">&amp;&amp;</span><span class="st"> </span>converted <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>This time <code>converted</code> gets an assigned value, namely -2, but since it’s not at least 1 the expression <code>!is.na(converted) &amp;&amp; converted &gt;= 1</code> evaluates to <code>FALSE</code>.</p>
 <p>Now let’s try it on a “good” value:</p>
-<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">3</span>
-converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
-<span class="op">!</span><span class="kw">is.na</span>(converted) <span class="op">&amp;&amp;</span><span class="st"> </span>converted <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></code></pre>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb683-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb683-2" data-line-number="2">converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))</a>
+<a class="sourceLine" id="cb683-3" data-line-number="3"><span class="op">!</span><span class="kw">is.na</span>(converted) <span class="op">&amp;&amp;</span><span class="st"> </span>converted <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Our code appears to be working well.</p>
 <p>Now that we’ve figured out a way to determine whether any given input is a usable number, let’s employ a conditional to implement validation in <code>manyCat()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, n) {
-  n &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
-  isValid &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(n) <span class="op">&amp;&amp;</span><span class="st"> </span>n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>
-  <span class="cf">if</span> (<span class="op">!</span>isValid) {
-    message &lt;-<span class="st"> &quot;Sorry, n must be a whole number at least 1.</span><span class="ch">\n</span><span class="st">&quot;</span>
-    <span class="kw">return</span>(<span class="kw">cat</span>(message))
-  }
-  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)
-  <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb685-1" data-line-number="1">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, n) {</a>
+<a class="sourceLine" id="cb685-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))</a>
+<a class="sourceLine" id="cb685-3" data-line-number="3">  isValid &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(n) <span class="op">&amp;&amp;</span><span class="st"> </span>n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb685-4" data-line-number="4">  <span class="cf">if</span> (<span class="op">!</span>isValid) {</a>
+<a class="sourceLine" id="cb685-5" data-line-number="5">    message &lt;-<span class="st"> &quot;Sorry, n must be a whole number at least 1.</span><span class="ch">\n</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb685-6" data-line-number="6">    <span class="kw">return</span>(<span class="kw">cat</span>(message))</a>
+<a class="sourceLine" id="cb685-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb685-8" data-line-number="8">  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb685-9" data-line-number="9">  lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)</a>
+<a class="sourceLine" id="cb685-10" data-line-number="10">  <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb685-11" data-line-number="11">}</a></code></pre></div>
 <p>The idea is to force an early return—along with a helpful message to the Console—if the user’s argument for <code>n</code> is no good.</p>
 <p>Let’s watch it in action:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="st">&quot;two&quot;</span>)   <span class="co"># problem!</span></code></pre>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb686-1" data-line-number="1"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="st">&quot;two&quot;</span>)   <span class="co"># problem!</span></a></code></pre></div>
 <pre><code>## Sorry, n must be a whole number at least 1.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">3</span>)       <span class="co"># OK</span></code></pre>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb688-1" data-line-number="1"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">3</span>)       <span class="co"># OK</span></a></code></pre></div>
 <pre><code>## Hello
 ## Hello
 ## Hello</code></pre>
@@ -711,57 +709,57 @@ converted &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>
 <div id="invisible-returns" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> Application: Invisible Returns</h3>
 <p>Let’s think again about the <span class="math inline">\(\pi\)</span>-computing function from Section <a href="more-about-arguments.html#default-arguments">3.4.1</a>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>) {
-  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n
-  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)
-  <span class="kw">sum</span>(terms)
-}</code></pre>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb690-1" data-line-number="1">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>) {</a>
+<a class="sourceLine" id="cb690-2" data-line-number="2">  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb690-3" data-line-number="3">  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb690-4" data-line-number="4">  <span class="kw">sum</span>(terms)</a>
+<a class="sourceLine" id="cb690-5" data-line-number="5">}</a></code></pre></div>
 <p>We could use <code>if</code> to write in a “talky” option:</p>
-<pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
-  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n
-  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)
-  approx &lt;-<span class="st"> </span><span class="kw">sum</span>(terms)
-  <span class="cf">if</span> ( verbose) {
-    <span class="kw">cat</span>(<span class="st">&quot;Madhava&#39;s approximation is:  &quot;</span>, approx, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-    <span class="kw">cat</span>(<span class="st">&quot;This is based on &quot;</span>, n, <span class="st">&quot; terms.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }
-  approx
-}</code></pre>
+<div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb691-1" data-line-number="1">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {</a>
+<a class="sourceLine" id="cb691-2" data-line-number="2">  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb691-3" data-line-number="3">  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb691-4" data-line-number="4">  approx &lt;-<span class="st"> </span><span class="kw">sum</span>(terms)</a>
+<a class="sourceLine" id="cb691-5" data-line-number="5">  <span class="cf">if</span> ( verbose) {</a>
+<a class="sourceLine" id="cb691-6" data-line-number="6">    <span class="kw">cat</span>(<span class="st">&quot;Madhava&#39;s approximation is:  &quot;</span>, approx, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb691-7" data-line-number="7">    <span class="kw">cat</span>(<span class="st">&quot;This is based on &quot;</span>, n, <span class="st">&quot; terms.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb691-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb691-9" data-line-number="9">  approx</a>
+<a class="sourceLine" id="cb691-10" data-line-number="10">}</a></code></pre></div>
 <p>Try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb692-1" data-line-number="1"><span class="kw">madhavaPI</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Madhava&#39;s approximation is:  3.140593.
 ## This is based on 1000 terms.</code></pre>
 <pre><code>## [1] 3.140593</code></pre>
 <p>It’s a bit awkward that the approximation gets printed out at the end: after the message on the console, the user doesn’t need to see it. But if we were to remove the final <code>approx</code> expression, then the function would not return an approximation that could be used for further computations.</p>
 <p>The solution to this dilemma is R’s <code>invisible()</code> function. </p>
-<pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {
-  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n
-  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)
-  approx &lt;-<span class="st"> </span><span class="kw">sum</span>(terms)
-  <span class="cf">if</span> ( verbose) {
-    <span class="kw">cat</span>(<span class="st">&quot;Madhava&#39;s approximation is:  &quot;</span>, approx, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-    <span class="kw">cat</span>(<span class="st">&quot;This is based on &quot;</span>, n, <span class="st">&quot; terms.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }
-  <span class="kw">invisible</span>(approx)
-}</code></pre>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb695-1" data-line-number="1">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {</a>
+<a class="sourceLine" id="cb695-2" data-line-number="2">  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb695-3" data-line-number="3">  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb695-4" data-line-number="4">  approx &lt;-<span class="st"> </span><span class="kw">sum</span>(terms)</a>
+<a class="sourceLine" id="cb695-5" data-line-number="5">  <span class="cf">if</span> ( verbose) {</a>
+<a class="sourceLine" id="cb695-6" data-line-number="6">    <span class="kw">cat</span>(<span class="st">&quot;Madhava&#39;s approximation is:  &quot;</span>, approx, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb695-7" data-line-number="7">    <span class="kw">cat</span>(<span class="st">&quot;This is based on &quot;</span>, n, <span class="st">&quot; terms.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb695-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb695-9" data-line-number="9">  <span class="kw">invisible</span>(approx)</a>
+<a class="sourceLine" id="cb695-10" data-line-number="10">}</a></code></pre></div>
 <p>If you wrap an expression in <code>invisible()</code>, then it won’t be printed out to the console:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb696-1" data-line-number="1"><span class="kw">madhavaPI</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Madhava&#39;s approximation is:  3.140593.
 ## This is based on 1000 terms.</code></pre>
 <p>Nevertheless it is still returned, as we can see from the following code, in which the approximation is computed without any output to the console and stored in the variable <code>p</code> for use later on in a <code>cat()</code> statement.</p>
-<pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">madhavaPI</span>() <span class="co"># verbose is FALSE by default</span>
-<span class="kw">cat</span>(<span class="st">&quot;Pi plus 10 is about &quot;</span>, p <span class="op">+</span><span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb698-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw">madhavaPI</span>() <span class="co"># verbose is FALSE by default</span></a>
+<a class="sourceLine" id="cb698-2" data-line-number="2"><span class="kw">cat</span>(<span class="st">&quot;Pi plus 10 is about &quot;</span>, p <span class="op">+</span><span class="st"> </span><span class="dv">10</span>, <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## Pi plus 10 is about 13.14159.</code></pre>
 </div>
 <div id="ifelse" class="section level3">
 <h3><span class="header-section-number">4.2.4</span> Ifelse</h3>
 <p>The <code>ifelse()</code> function is a special form of the if-else construct that is used to make assignments, and is especially handy in the context of vectorization.</p>
 <p>Suppose that you have a lot of heights:</p>
-<pre class="sourceCode r"><code class="sourceCode r">height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">69</span>, <span class="dv">67</span>, <span class="dv">70</span>, <span class="dv">72</span>, <span class="dv">65</span>, <span class="dv">63</span>, <span class="dv">75</span>, <span class="dv">70</span>)</code></pre>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb700-1" data-line-number="1">height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">69</span>, <span class="dv">67</span>, <span class="dv">70</span>, <span class="dv">72</span>, <span class="dv">65</span>, <span class="dv">63</span>, <span class="dv">75</span>, <span class="dv">70</span>)</a></code></pre></div>
 <p>You would like to classify each person as either “tall” or “short”, depending on whether they are respectively more or less than 71 inches in height. <code>ifelse()</code> makes quick work of it:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heightClass &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="dt">test =</span> height <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>, 
-                      <span class="dt">yes =</span> <span class="st">&quot;tall&quot;</span>, <span class="dt">no =</span> <span class="st">&quot;short&quot;</span>)
-heightClass</code></pre>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb701-1" data-line-number="1">heightClass &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="dt">test =</span> height <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>, </a>
+<a class="sourceLine" id="cb701-2" data-line-number="2">                      <span class="dt">yes =</span> <span class="st">&quot;tall&quot;</span>, <span class="dt">no =</span> <span class="st">&quot;short&quot;</span>)</a>
+<a class="sourceLine" id="cb701-3" data-line-number="3">heightClass</a></code></pre></div>
 <pre><code>## [1] &quot;short&quot; &quot;short&quot; &quot;short&quot; &quot;tall&quot;  &quot;short&quot; &quot;short&quot; &quot;tall&quot;  &quot;short&quot;</code></pre>
 <p>Note that <code>ifelse()</code> takes three parameters:</p>
 <ul>
@@ -770,7 +768,7 @@ heightClass</code></pre>
 <li><code>no</code>: the value assigned when <code>test</code> is false;</li>
 </ul>
 <p>Most programmers don’t name the parameters. This is fine—just remember to keep the test-yes-no order:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(height <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>, <span class="st">&quot;tall&quot;</span>, <span class="st">&quot;short&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb703-1" data-line-number="1"><span class="kw">ifelse</span>(height <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>, <span class="st">&quot;tall&quot;</span>, <span class="st">&quot;short&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;short&quot; &quot;short&quot; &quot;short&quot; &quot;tall&quot;  &quot;short&quot; &quot;short&quot; &quot;tall&quot;  &quot;short&quot;</code></pre>
 <p>Here’s another example of the power of <code>ifelese()</code>. If a triangle has three sides of length <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span>, then the sum of any two sides must be greater than the remaining side:</p>
 <p><span class="math display">\[\begin{aligned}
@@ -780,25 +778,25 @@ y + z &amp;&gt; x.
 \end{aligned}\]</span>
 This fact is known as the <em>Triangle Inequality</em>. It works the other way around, too: if three positive numbers are such that the sum of any two exceeds the third, then three line segments having those numbers as lengths could be arranged into a triangle.</p>
 <p>We can write a function that, when given three lengths, determines whether or not they can make a triangle:</p>
-<pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {
-  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)
-}</code></pre>
+<div class="sourceCode" id="cb705"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb705-1" data-line-number="1">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {</a>
+<a class="sourceLine" id="cb705-2" data-line-number="2">  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb705-3" data-line-number="3">}</a></code></pre></div>
 <p><code>isTriangle()</code> simply evaluates a Boolean expression involving <code>x</code>, <code>y</code> and <code>z</code>. It will return <code>TRUE</code> when the three quantities satisfy the Triangle Inequality; otherwise, it returns <code>FALSE</code>. Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isTriangle</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">4</span>, <span class="dt">z =</span> <span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb706-1" data-line-number="1"><span class="kw">isTriangle</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">4</span>, <span class="dt">z =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Recall that Boolean expressions can involve vectors of any length. So suppose that we are would like to know which of the following six triples of numbers could be the side-lengths of a triangle:</p>
 <p><span class="math display">\[(2,4,5),(4.7,1,3.8),(5.2,8,12),\\
 (6, 6, 13), (6, 6, 11), (9, 3.5, 6.2)\]</span>
 We could enter the triples one at a time into <code>isTriangle()</code>. On the other hand we could arrange the sides into three vectors of length six each:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="fl">4.7</span>, <span class="fl">5.2</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>)
-b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="fl">2.8</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">3.5</span>)
-c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="fl">3.8</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="fl">6.2</span>)</code></pre>
+<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb708-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="fl">4.7</span>, <span class="fl">5.2</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb708-2" data-line-number="2">b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="fl">2.8</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">3.5</span>)</a>
+<a class="sourceLine" id="cb708-3" data-line-number="3">c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="fl">3.8</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="fl">6.2</span>)</a></code></pre></div>
 <p>Then we can decide about all six triples at once:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isTriangle</span>(<span class="dt">x =</span> a, <span class="dt">y =</span> b, <span class="dt">z =</span> c)</code></pre>
+<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb709-1" data-line-number="1"><span class="kw">isTriangle</span>(<span class="dt">x =</span> a, <span class="dt">y =</span> b, <span class="dt">z =</span> c)</a></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE FALSE  TRUE  TRUE</code></pre>
 <p>We could also use <code>ifelse()</code> to create a new character-vector that expresses our results verbally:</p>
-<pre class="sourceCode r"><code class="sourceCode r">triangle &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">isTriangle</span>(a, b, c), <span class="st">&quot;triangle&quot;</span>, <span class="st">&quot;not&quot;</span>)
-triangle</code></pre>
+<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb711-1" data-line-number="1">triangle &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">isTriangle</span>(a, b, c), <span class="st">&quot;triangle&quot;</span>, <span class="st">&quot;not&quot;</span>)</a>
+<a class="sourceLine" id="cb711-2" data-line-number="2">triangle</a></code></pre></div>
 <pre><code>## [1] &quot;triangle&quot; &quot;triangle&quot; &quot;not&quot;      &quot;not&quot;      &quot;triangle&quot; &quot;triangle&quot;</code></pre>
 </div>
 <div id="switch" class="section level3">
@@ -812,82 +810,82 @@ triangle</code></pre>
 <li>and so on.</li>
 </ul>
 <p>If you would like to convert a day-number to the right day name, then you could write a function like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dayWord &lt;-<span class="st"> </span><span class="cf">function</span>(dayNumber) {
-  <span class="cf">switch</span>(dayNumber,
-         <span class="st">&quot;Sunday&quot;</span>,
-         <span class="st">&quot;Monday&quot;</span>,
-         <span class="st">&quot;Tuesday&quot;</span>,
-         <span class="st">&quot;Wednesday&quot;</span>,
-         <span class="st">&quot;Thursday&quot;</span>,
-         <span class="st">&quot;Friday&quot;</span>,
-         <span class="st">&quot;Saturday&quot;</span>)
-}
-<span class="kw">dayWord</span>(<span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb713-1" data-line-number="1">dayWord &lt;-<span class="st"> </span><span class="cf">function</span>(dayNumber) {</a>
+<a class="sourceLine" id="cb713-2" data-line-number="2">  <span class="cf">switch</span>(dayNumber,</a>
+<a class="sourceLine" id="cb713-3" data-line-number="3">         <span class="st">&quot;Sunday&quot;</span>,</a>
+<a class="sourceLine" id="cb713-4" data-line-number="4">         <span class="st">&quot;Monday&quot;</span>,</a>
+<a class="sourceLine" id="cb713-5" data-line-number="5">         <span class="st">&quot;Tuesday&quot;</span>,</a>
+<a class="sourceLine" id="cb713-6" data-line-number="6">         <span class="st">&quot;Wednesday&quot;</span>,</a>
+<a class="sourceLine" id="cb713-7" data-line-number="7">         <span class="st">&quot;Thursday&quot;</span>,</a>
+<a class="sourceLine" id="cb713-8" data-line-number="8">         <span class="st">&quot;Friday&quot;</span>,</a>
+<a class="sourceLine" id="cb713-9" data-line-number="9">         <span class="st">&quot;Saturday&quot;</span>)</a>
+<a class="sourceLine" id="cb713-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb713-11" data-line-number="11"><span class="kw">dayWord</span>(<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Tuesday&quot;</code></pre>
 <p>In <code>switch()</code> above, the first argument after <code>dayNumber</code> is what goes with 1, the second argument is what goes with 2, and so on.</p>
 <p>When the item you want to convert is a string rather than a number, then the <code>switch()</code> function works a little bit differently. Suppose, for instance, that you want to <em>abbreviate</em> the names of the weekdays. You might write an abbreviation-function as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">abbrDay &lt;-<span class="st"> </span><span class="cf">function</span>(day) {
-  <span class="cf">switch</span>(day,
-         <span class="dt">Monday =</span> <span class="st">&quot;Mon&quot;</span>,
-         <span class="dt">Tuesday =</span> <span class="st">&quot;Tue&quot;</span>,
-         <span class="dt">Wednesday =</span> <span class="st">&quot;Wed&quot;</span>,
-         <span class="dt">Thursday =</span> <span class="st">&quot;Th&quot;</span>,
-         <span class="dt">Friday =</span> <span class="st">&quot;Fri&quot;</span>,
-         <span class="dt">Saturday =</span> <span class="st">&quot;Sat&quot;</span>)
-}
-<span class="kw">abbrDay</span>(<span class="st">&quot;Wednesday&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb715-1" data-line-number="1">abbrDay &lt;-<span class="st"> </span><span class="cf">function</span>(day) {</a>
+<a class="sourceLine" id="cb715-2" data-line-number="2">  <span class="cf">switch</span>(day,</a>
+<a class="sourceLine" id="cb715-3" data-line-number="3">         <span class="dt">Monday =</span> <span class="st">&quot;Mon&quot;</span>,</a>
+<a class="sourceLine" id="cb715-4" data-line-number="4">         <span class="dt">Tuesday =</span> <span class="st">&quot;Tue&quot;</span>,</a>
+<a class="sourceLine" id="cb715-5" data-line-number="5">         <span class="dt">Wednesday =</span> <span class="st">&quot;Wed&quot;</span>,</a>
+<a class="sourceLine" id="cb715-6" data-line-number="6">         <span class="dt">Thursday =</span> <span class="st">&quot;Th&quot;</span>,</a>
+<a class="sourceLine" id="cb715-7" data-line-number="7">         <span class="dt">Friday =</span> <span class="st">&quot;Fri&quot;</span>,</a>
+<a class="sourceLine" id="cb715-8" data-line-number="8">         <span class="dt">Saturday =</span> <span class="st">&quot;Sat&quot;</span>)</a>
+<a class="sourceLine" id="cb715-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb715-10" data-line-number="10"><span class="kw">abbrDay</span>(<span class="st">&quot;Wednesday&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Wed&quot;</code></pre>
 <p>In the above call to <code>switch()</code>, the weekday names you want to abbreviate appear as the names of named character-vectors, each of length one. The value of each vector is what the its name will be converted to.</p>
 <p>When you are converting strings you have the option to provide a default conversion for values that don’t fit into the pattern you have in mind. All you have to do is to provide the default value as an additional argument. (It should NOT have a name.) Thus:</p>
-<pre class="sourceCode r"><code class="sourceCode r">abbrDay &lt;-<span class="st"> </span><span class="cf">function</span>(day) {
-  <span class="cf">switch</span>(day,
-         <span class="dt">Monday =</span> <span class="st">&quot;Mon&quot;</span>,
-         <span class="dt">Tuesday =</span> <span class="st">&quot;Tue&quot;</span>,
-         <span class="dt">Wednesday =</span> <span class="st">&quot;Wed&quot;</span>,
-         <span class="dt">Thursday =</span> <span class="st">&quot;Th&quot;</span>,
-         <span class="dt">Friday =</span> <span class="st">&quot;Fri&quot;</span>,
-         <span class="dt">Saturday =</span> <span class="st">&quot;Sat&quot;</span>,
-         <span class="st">&quot;not a weekday!&quot;</span>)
-}
-<span class="kw">abbrDay</span>(<span class="st">&quot;Wednesday&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb717-1" data-line-number="1">abbrDay &lt;-<span class="st"> </span><span class="cf">function</span>(day) {</a>
+<a class="sourceLine" id="cb717-2" data-line-number="2">  <span class="cf">switch</span>(day,</a>
+<a class="sourceLine" id="cb717-3" data-line-number="3">         <span class="dt">Monday =</span> <span class="st">&quot;Mon&quot;</span>,</a>
+<a class="sourceLine" id="cb717-4" data-line-number="4">         <span class="dt">Tuesday =</span> <span class="st">&quot;Tue&quot;</span>,</a>
+<a class="sourceLine" id="cb717-5" data-line-number="5">         <span class="dt">Wednesday =</span> <span class="st">&quot;Wed&quot;</span>,</a>
+<a class="sourceLine" id="cb717-6" data-line-number="6">         <span class="dt">Thursday =</span> <span class="st">&quot;Th&quot;</span>,</a>
+<a class="sourceLine" id="cb717-7" data-line-number="7">         <span class="dt">Friday =</span> <span class="st">&quot;Fri&quot;</span>,</a>
+<a class="sourceLine" id="cb717-8" data-line-number="8">         <span class="dt">Saturday =</span> <span class="st">&quot;Sat&quot;</span>,</a>
+<a class="sourceLine" id="cb717-9" data-line-number="9">         <span class="st">&quot;not a weekday!&quot;</span>)</a>
+<a class="sourceLine" id="cb717-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb717-11" data-line-number="11"><span class="kw">abbrDay</span>(<span class="st">&quot;Wednesday&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Wed&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">abbrDay</span>(<span class="st">&quot;Neptune&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb719-1" data-line-number="1"><span class="kw">abbrDay</span>(<span class="st">&quot;Neptune&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;not a weekday!&quot;</code></pre>
 </div>
 <div id="practice-exercises-12" class="section level3">
 <h3><span class="header-section-number">4.2.6</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Consider the following function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">computeSquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  x<span class="op">^</span><span class="dv">2</span>
-}</code></pre>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb721-1" data-line-number="1">computeSquare &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb721-2" data-line-number="2">  x<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb721-3" data-line-number="3">}</a></code></pre></div>
 <p>Write a “talky” version of the above function that returns the square invisibly.. It should be called <code>computeSquare2()</code> and should take two parameters:</p>
 <ul>
 <li><code>x</code>: the number to be squared</li>
 <li><code>verbose</code>: whether or not to <code>cat()</code> out a report to the Console.</li>
 </ul>
 <p>Typical examples of use would be:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">computeSquare2</span>(<span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" data-line-number="1"><span class="kw">computeSquare2</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## The square of 4 is 16.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">mySquare &lt;-<span class="st"> </span><span class="kw">computeSquare2</span>(<span class="dv">6</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
-mySquare</code></pre>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb724-1" data-line-number="1">mySquare &lt;-<span class="st"> </span><span class="kw">computeSquare2</span>(<span class="dv">6</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb724-2" data-line-number="2">mySquare</a></code></pre></div>
 <pre><code>## [1] 36</code></pre></li>
 <li><p>Write a function called <code>findKarl()</code> that takes a character vector and returns a character vector that reports whether or not each element of the given vector was equal to the string <code>&quot;Karl&quot;</code>. It should work like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;three&quot;</span>, <span class="st">&quot;blowfish&quot;</span>, <span class="st">&quot;Karl&quot;</span>, <span class="st">&quot;Grindel&quot;</span>)
-<span class="kw">findKarl</span>(vec1)</code></pre>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb726-1" data-line-number="1">vec1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;three&quot;</span>, <span class="st">&quot;blowfish&quot;</span>, <span class="st">&quot;Karl&quot;</span>, <span class="st">&quot;Grindel&quot;</span>)</a>
+<a class="sourceLine" id="cb726-2" data-line-number="2"><span class="kw">findKarl</span>(vec1)</a></code></pre></div>
 <pre><code>## [1] &quot;Sorry, not our guy.&quot; &quot;Sorry, not our guy.&quot; &quot;Yep, that&#39;s Karl!&quot;  
 ## [4] &quot;Sorry, not our guy.&quot;</code></pre></li>
 <li><p>Here’s a function that is supposed to return <code>&quot;small!&quot;</code> when given a number less than 100, and return <code>&quot;big!&quot;</code> when the number if at least 100:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sizeComment &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="cf">if</span> ( x <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> ) {
-    <span class="st">&quot;small!&quot;</span>
-  }
-  <span class="st">&quot;big!&quot;</span>
-}</code></pre>
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb728-1" data-line-number="1">sizeComment &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb728-2" data-line-number="2">  <span class="cf">if</span> ( x <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> ) {</a>
+<a class="sourceLine" id="cb728-3" data-line-number="3">    <span class="st">&quot;small!&quot;</span></a>
+<a class="sourceLine" id="cb728-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb728-5" data-line-number="5">  <span class="st">&quot;big!&quot;</span></a>
+<a class="sourceLine" id="cb728-6" data-line-number="6">}</a></code></pre></div>
 <p>But it doesn’t work:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sizeComment</span>(<span class="dv">200</span>)  <span class="co"># this will be OK</span></code></pre>
+<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb729-1" data-line-number="1"><span class="kw">sizeComment</span>(<span class="dv">200</span>)  <span class="co"># this will be OK</span></a></code></pre></div>
 <pre><code>## [1] &quot;big!&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sizeComment</span>(<span class="dv">50</span>)   <span class="co"># this won&#39;t be OK</span></code></pre>
+<div class="sourceCode" id="cb731"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb731-1" data-line-number="1"><span class="kw">sizeComment</span>(<span class="dv">50</span>)   <span class="co"># this won&#39;t be OK</span></a></code></pre></div>
 <pre><code>## [1] &quot;big!&quot;</code></pre>
 <p>Fix the code.</p></li>
 <li><p>Add some validation to the <code>isTriangle()</code> function so that it stops the user if one or more of the parameters <code>x</code>, <code>y</code> and <code>z</code> cannot be interpreted as a positive real number.</p></li>
@@ -897,54 +895,54 @@ mySquare</code></pre>
 <h3><span class="header-section-number">4.2.7</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s the desired function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">computeSquare2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
-  <span class="cf">if</span> ( verbose ) {
-    <span class="kw">cat</span>(<span class="st">&quot;The square of &quot;</span>, x, <span class="st">&quot; is &quot;</span>, x<span class="op">^</span><span class="dv">2</span>, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }
-  <span class="kw">invisible</span>(x<span class="op">^</span><span class="dv">2</span>)
-}</code></pre></li>
+<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb733-1" data-line-number="1">computeSquare2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {</a>
+<a class="sourceLine" id="cb733-2" data-line-number="2">  <span class="cf">if</span> ( verbose ) {</a>
+<a class="sourceLine" id="cb733-3" data-line-number="3">    <span class="kw">cat</span>(<span class="st">&quot;The square of &quot;</span>, x, <span class="st">&quot; is &quot;</span>, x<span class="op">^</span><span class="dv">2</span>, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb733-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb733-5" data-line-number="5">  <span class="kw">invisible</span>(x<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb733-6" data-line-number="6">}</a></code></pre></div></li>
 <li><p>Here’s one way to write it:</p>
-<pre class="sourceCode r"><code class="sourceCode r">findKarl &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="kw">ifelse</span>(x <span class="op">==</span><span class="st"> &quot;Karl&quot;</span>,
-         <span class="st">&quot;Yep, that&#39;s Karl!&quot;</span>,
-         <span class="st">&quot;Sorry, not our guy.&quot;</span>)
-}</code></pre></li>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb734-1" data-line-number="1">findKarl &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb734-2" data-line-number="2">  <span class="kw">ifelse</span>(x <span class="op">==</span><span class="st"> &quot;Karl&quot;</span>,</a>
+<a class="sourceLine" id="cb734-3" data-line-number="3">         <span class="st">&quot;Yep, that&#39;s Karl!&quot;</span>,</a>
+<a class="sourceLine" id="cb734-4" data-line-number="4">         <span class="st">&quot;Sorry, not our guy.&quot;</span>)</a>
+<a class="sourceLine" id="cb734-5" data-line-number="5">}</a></code></pre></div></li>
 <li><p>A function always returns the value of the last expression that it evaluates. As it stands, the function will always end at the line <code>&quot;big!&quot;</code>, so <code>&quot;big&quot;</code> will always be returned. One way to get the desired behavior is to force the function to stop executing once it prints out <code>&quot;small!&quot;</code>. You can do this with the <code>return()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sizeComment &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="cf">if</span> ( x <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> ) {
-    <span class="kw">return</span>(<span class="st">&quot;small!&quot;</span>)
-  }
-  <span class="st">&quot;big!&quot;</span>
-}</code></pre>
+<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb735-1" data-line-number="1">sizeComment &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb735-2" data-line-number="2">  <span class="cf">if</span> ( x <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> ) {</a>
+<a class="sourceLine" id="cb735-3" data-line-number="3">    <span class="kw">return</span>(<span class="st">&quot;small!&quot;</span>)</a>
+<a class="sourceLine" id="cb735-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb735-5" data-line-number="5">  <span class="st">&quot;big!&quot;</span></a>
+<a class="sourceLine" id="cb735-6" data-line-number="6">}</a></code></pre></div>
 <p>Another way is to use the <code>if ... else</code> construction:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sizeComment &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="cf">if</span> ( x <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> ) {
-    <span class="st">&quot;small!&quot;</span>
-  } <span class="cf">else</span> {
-    <span class="st">&quot;big!&quot;</span>
-  }
-}</code></pre></li>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb736-1" data-line-number="1">sizeComment &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb736-2" data-line-number="2">  <span class="cf">if</span> ( x <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> ) {</a>
+<a class="sourceLine" id="cb736-3" data-line-number="3">    <span class="st">&quot;small!&quot;</span></a>
+<a class="sourceLine" id="cb736-4" data-line-number="4">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb736-5" data-line-number="5">    <span class="st">&quot;big!&quot;</span></a>
+<a class="sourceLine" id="cb736-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb736-7" data-line-number="7">}</a></code></pre></div></li>
 <li><p>Here is one approach:</p>
-<pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {
-  x &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))
-  x &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))
-  x &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))
-  xValid &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="op">!</span><span class="kw">is.na</span>(x) <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
-  yValid &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="op">!</span><span class="kw">is.na</span>(y) <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
-  zValid &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="op">!</span><span class="kw">is.na</span>(z) <span class="op">&amp;</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
-  <span class="cf">if</span> (<span class="op">!</span>(xValid <span class="op">&amp;</span><span class="st"> </span>yValid <span class="op">&amp;</span><span class="st"> </span>zValid)) {
-    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Sorry, all inputs must be positive real numbers.</span><span class="ch">\n</span><span class="st">&quot;</span>))
-  }
-  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)
-}</code></pre>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb737-1" data-line-number="1">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {</a>
+<a class="sourceLine" id="cb737-2" data-line-number="2">  x &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))</a>
+<a class="sourceLine" id="cb737-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))</a>
+<a class="sourceLine" id="cb737-4" data-line-number="4">  x &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))</a>
+<a class="sourceLine" id="cb737-5" data-line-number="5">  xValid &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="op">!</span><span class="kw">is.na</span>(x) <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb737-6" data-line-number="6">  yValid &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="op">!</span><span class="kw">is.na</span>(y) <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb737-7" data-line-number="7">  zValid &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="op">!</span><span class="kw">is.na</span>(z) <span class="op">&amp;</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb737-8" data-line-number="8">  <span class="cf">if</span> (<span class="op">!</span>(xValid <span class="op">&amp;</span><span class="st"> </span>yValid <span class="op">&amp;</span><span class="st"> </span>zValid)) {</a>
+<a class="sourceLine" id="cb737-9" data-line-number="9">    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Sorry, all inputs must be positive real numbers.</span><span class="ch">\n</span><span class="st">&quot;</span>))</a>
+<a class="sourceLine" id="cb737-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb737-11" data-line-number="11">  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb737-12" data-line-number="12">}</a></code></pre></div>
 <p>Try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isTriangle</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">7</span>),
-           <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">-4</span>, <span class="dv">5</span>),    <span class="co"># oops, a negative number</span>
-           <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>))</code></pre>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb738-1" data-line-number="1"><span class="kw">isTriangle</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">7</span>),</a>
+<a class="sourceLine" id="cb738-2" data-line-number="2">           <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">-4</span>, <span class="dv">5</span>),    <span class="co"># oops, a negative number</span></a>
+<a class="sourceLine" id="cb738-3" data-line-number="3">           <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>))</a></code></pre></div>
 <pre><code>## Sorry, all inputs must be positive real numbers.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isTriangle</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">7</span>),
-           <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),     <span class="co"># fixed it</span>
-           <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>))</code></pre>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb740-1" data-line-number="1"><span class="kw">isTriangle</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">7</span>),</a>
+<a class="sourceLine" id="cb740-2" data-line-number="2">           <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),     <span class="co"># fixed it</span></a>
+<a class="sourceLine" id="cb740-3" data-line-number="3">           <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>))</a></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE</code></pre></li>
 </ol>
 </div>

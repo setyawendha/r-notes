@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.3 Splitting | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.3 Splitting | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="subsetting-and-accessing.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,7 +577,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="lists-splitting" class="section level2">
 <h2><span class="header-section-number">9.3</span> Splitting</h2>
 <p>Sometimes it is useful to split a vector or data frame into pieces according to the value of a variable. For example, from <code>m111survey</code> we might like to have separate data frames for each of the three seating preferences. We can accomplish this with the <code>split()</code> function: </p>
-<pre class="sourceCode r"><code class="sourceCode r">bySeat &lt;-<span class="st"> </span><span class="kw">split</span>(m111survey, <span class="dt">f =</span> m111survey<span class="op">$</span>seat)</code></pre>
+<div class="sourceCode" id="cb1446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1446-1" data-line-number="1">bySeat &lt;-<span class="st"> </span><span class="kw">split</span>(m111survey, <span class="dt">f =</span> m111survey<span class="op">$</span>seat)</a></code></pre></div>
 <p>If you run the command <code>str(bySeat)</code>, you find that <code>bySeat</code> is a list consisting of three data frames:</p>
 <ul>
 <li><code>1_front</code>: the frame of all subjects who prefer the Front;</li>
@@ -588,12 +586,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Now you can carry on three separate analyses, working with one frame at a time.</p>
 <p>There is a pitfall which of you should be aware. If you try to access any one of the frames by its name, you will get an error:</p>
-<pre class="sourceCode r"><code class="sourceCode r">bySeat<span class="op">$</span><span class="dv">1</span>_front</code></pre>
+<div class="sourceCode" id="cb1447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1447-1" data-line-number="1">bySeat<span class="op">$</span><span class="dv">1</span>_front</a></code></pre></div>
 <pre><code>## Error: unexpected numeric constant in &quot;bySeat$1&quot;</code></pre>
 <p>The reason is that variable names cannot begin with a number! You have two options, here. You could access a single frame by using the name in quotes:</p>
-<pre class="sourceCode r"><code class="sourceCode r">bySeat[[<span class="st">&quot;1_front&quot;</span>]]</code></pre>
+<div class="sourceCode" id="cb1449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1449-1" data-line-number="1">bySeat[[<span class="st">&quot;1_front&quot;</span>]]</a></code></pre></div>
 <p>Your second option is to use the index of the element you want:</p>
-<pre class="sourceCode r"><code class="sourceCode r">bySeat[[<span class="dv">1</span>]]</code></pre>
+<div class="sourceCode" id="cb1450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1450-1" data-line-number="1">bySeat[[<span class="dv">1</span>]]</a></code></pre></div>
 </div>
             </section>
 

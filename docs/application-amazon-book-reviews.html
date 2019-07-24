@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12.5 Application: Amazon Book Reviews | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12.5 Application: Amazon Book Reviews | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="entering-a-regex-in-r.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -578,9 +576,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="application-amazon-book-reviews" class="section level2">
 <h2><span class="header-section-number">12.5</span> Application: Amazon Book Reviews</h2>
-<p>The R-package <strong>tigerData</strong> <span class="citation">(White <a href="#ref-R-tigerData">2018</a><a href="#ref-R-tigerData">b</a>)</span> contains the data set <code>reviews</code>, a collection of user-reviews on <a href="https://www.amazon.com">Amazon</a> for seven bestsellers. Learn more about the data set as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tigerData)
-<span class="kw">help</span>(reviews)</code></pre>
+<p>The R-package <strong>tigerData</strong> <span class="citation">(White <a href="#ref-R-tigerData">2018</a>)</span> contains the data set <code>reviews</code>, a collection of user-reviews on <a href="https://www.amazon.com">Amazon</a> for seven bestsellers. Learn more about the data set as follows:</p>
+<div class="sourceCode" id="cb1791"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1791-1" data-line-number="1"><span class="kw">library</span>(tigerData)</a>
+<a class="sourceLine" id="cb1791-2" data-line-number="2"><span class="kw">help</span>(reviews)</a></code></pre></div>
 <p>Each row of the data frame contains:</p>
 <ul>
 <li>the 1-5 rating that the reviewer assigned to the book</li>
@@ -589,13 +587,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>the content of the review itself.</li>
 </ul>
 <p>Let’s focus on reviews for <em>Hunger Games</em> series. The following code creates a new data frame that contains only those reviews:</p>
-<pre class="sourceCode r"><code class="sourceCode r">hunger &lt;-<span class="st"> </span><span class="kw">subset</span>(reviews, book <span class="op">==</span><span class="st"> &quot;hunger&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1792"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1792-1" data-line-number="1">hunger &lt;-<span class="st"> </span><span class="kw">subset</span>(reviews, book <span class="op">==</span><span class="st"> &quot;hunger&quot;</span>)</a></code></pre></div>
 <p>That’s still a lot of reviews! We can tell by asking for the number of rows in the <code>hunger</code> data frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(hunger)</code></pre>
+<div class="sourceCode" id="cb1793"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1793-1" data-line-number="1"><span class="kw">nrow</span>(hunger)</a></code></pre></div>
 <pre><code>## [1] 24027</code></pre>
 <p>We are looking at 24,027 reviews—some of which, by the way, are quite long.</p>
 <p>Explore the plain-text of some of the reviews. For example, the text of the second review can be viewed with:</p>
-<pre class="sourceCode r"><code class="sourceCode r">hunger<span class="op">$</span>content[<span class="dv">2</span>]</code></pre>
+<div class="sourceCode" id="cb1795"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1795-1" data-line-number="1">hunger<span class="op">$</span>content[<span class="dv">2</span>]</a></code></pre></div>
 <pre><code>## # A single long string.  We will show just the first few characters:
 ## [1] &quot;\&quot;&lt;span class=\&quot;\&quot;a-size-base review-text\&quot;\&quot;&gt;Clearly ...</code></pre>
 <p>Perusing this review, we come upon the following passage:</p>
@@ -612,13 +610,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>(?&lt;=\&lt;a class=\\&quot;\\&quot;a-link-normal\\&quot;\\&quot; href=\\&quot;\\&quot;/)(.+?)(?=\\&quot;\\&quot;\&gt;)</code></p>
 </blockquote>
 <p>Checking carefully, we see that none of the tokens require extra escaping: we can use this text as our pattern in regex function in R:</p>
-<pre class="sourceCode r"><code class="sourceCode r">linkPattern &lt;-<span class="st"> &quot;(?&lt;=&lt;a class=</span><span class="ch">\&quot;\&quot;</span><span class="st">a-link-normal</span><span class="ch">\&quot;\&quot;</span><span class="st"> href=</span><span class="ch">\&quot;\&quot;</span><span class="st">/)(.+?)(?=</span><span class="ch">\&quot;\&quot;</span><span class="st">&gt;)&quot;</span></code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">hungerLinks &lt;-
-<span class="st">  </span>hunger <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">linkCount =</span> <span class="kw">str_count</span>(content, linkPattern))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</code></pre>
+<div class="sourceCode" id="cb1797"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1797-1" data-line-number="1">linkPattern &lt;-<span class="st"> &quot;(?&lt;=&lt;a class=</span><span class="ch">\&quot;\&quot;</span><span class="st">a-link-normal</span><span class="ch">\&quot;\&quot;</span><span class="st"> href=</span><span class="ch">\&quot;\&quot;</span><span class="st">/)(.+?)(?=</span><span class="ch">\&quot;\&quot;</span><span class="st">&gt;)&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb1798"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1798-1" data-line-number="1">hungerLinks &lt;-</a>
+<a class="sourceLine" id="cb1798-2" data-line-number="2"><span class="st">  </span>hunger <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1798-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">linkCount =</span> <span class="kw">str_count</span>(content, linkPattern))</a></code></pre></div>
+<div class="sourceCode" id="cb1799"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1799-1" data-line-number="1">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1799-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1799-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
 ##    linkCount     n
 ##        &lt;int&gt; &lt;int&gt;
@@ -633,12 +631,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9         8     1
 ## 10         9     1</code></pre>
 <p>If you are generating a report with R Markdown, then a better-looking table (see Table <a href="application-amazon-book-reviews.html#tab:tabulated-link-numbers">12.4</a> can be produced as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">caption=</span><span class="kw">str_c</span>(<span class="st">&quot;Table showing number of links &quot;</span>,
-                             <span class="st">&quot;made by reviewers of the Hunger &quot;</span>,
-                             <span class="st">&quot;Games series.&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb1801"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1801-1" data-line-number="1">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1801-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1801-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1801-4" data-line-number="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">caption=</span><span class="kw">str_c</span>(<span class="st">&quot;Table showing number of links &quot;</span>,</a>
+<a class="sourceLine" id="cb1801-5" data-line-number="5">                             <span class="st">&quot;made by reviewers of the Hunger &quot;</span>,</a>
+<a class="sourceLine" id="cb1801-6" data-line-number="6">                             <span class="st">&quot;Games series.&quot;</span>))</a></code></pre></div>
 <table>
 <caption><span id="tab:tabulated-link-numbers">Table 12.4: </span>Table showing number of links made by reviewers of the Hunger Games series.</caption>
 <thead>
@@ -691,16 +689,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Most of the reviewers didn’t link at all, but 173 of them did provide at least one link. One reviewer linked to nine books! Let’s find them and add the base URL <code>http://www.amazon.com/</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(linkCount <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(linkCount)) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># get the case having most links</span>
-<span class="st">  </span>.<span class="op">$</span>content <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># get just the content of the review,</span>
-<span class="st">                   </span><span class="co"># a character vector (of length 1 since there</span>
-<span class="st">                   </span><span class="co"># is only one review with the max number of lengths)</span>
-<span class="st">  </span><span class="kw">str_extract_all</span>(<span class="dt">pattern =</span> linkPattern) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># get the matches,</span>
-<span class="st">                                             </span><span class="co"># but this is a list of</span>
-<span class="st">                                             </span><span class="co"># length 1 ...</span>
-<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st">     </span><span class="co"># ... so unlist it into a character vector</span>
-<span class="st">  </span><span class="kw">str_c</span>(<span class="st">&quot;http://www.amazon.com/&quot;</span>, .)  <span class="co"># prepend the base URL to each link</span></code></pre>
+<div class="sourceCode" id="cb1802"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1802-1" data-line-number="1">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1802-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(linkCount <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(linkCount)) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># get the case having most links</span></a>
+<a class="sourceLine" id="cb1802-3" data-line-number="3"><span class="st">  </span>.<span class="op">$</span>content <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># get just the content of the review,</span></a>
+<a class="sourceLine" id="cb1802-4" data-line-number="4"><span class="st">                   </span><span class="co"># a character vector (of length 1 since there</span></a>
+<a class="sourceLine" id="cb1802-5" data-line-number="5"><span class="st">                   </span><span class="co"># is only one review with the max number of lengths)</span></a>
+<a class="sourceLine" id="cb1802-6" data-line-number="6"><span class="st">  </span><span class="kw">str_extract_all</span>(<span class="dt">pattern =</span> linkPattern) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># get the matches,</span></a>
+<a class="sourceLine" id="cb1802-7" data-line-number="7"><span class="st">                                             </span><span class="co"># but this is a list of</span></a>
+<a class="sourceLine" id="cb1802-8" data-line-number="8"><span class="st">                                             </span><span class="co"># length 1 ...</span></a>
+<a class="sourceLine" id="cb1802-9" data-line-number="9"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st">     </span><span class="co"># ... so unlist it into a character vector</span></a>
+<a class="sourceLine" id="cb1802-10" data-line-number="10"><span class="st">  </span><span class="kw">str_c</span>(<span class="st">&quot;http://www.amazon.com/&quot;</span>, .)  <span class="co"># prepend the base URL to each link</span></a></code></pre></div>
 <pre><code>## [1] &quot;http://www.amazon.com/Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
 ## [2] &quot;http://www.amazon.com/The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
 ## [3] &quot;http://www.amazon.com/The-Long-Walk/dp/0451196716&quot;                                
@@ -723,14 +721,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">12.5.2</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">linkPattern &lt;-<span class="st"> &quot;(?&lt;=&lt;a class=</span><span class="ch">\&quot;\&quot;</span><span class="st">a-link-normal</span><span class="ch">\&quot;\&quot;</span><span class="st"> href=</span><span class="ch">\&quot;\&quot;</span><span class="st">/)(.+?)(?=</span><span class="ch">\&quot;\&quot;</span><span class="st">&gt;)&quot;</span>
-fault &lt;-
-<span class="st">  </span>reviews <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(book <span class="op">==</span><span class="st"> &quot;fault&quot;</span>)
-fault <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">linkCount =</span> <span class="kw">str_count</span>(content, linkPattern)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</code></pre>
+<div class="sourceCode" id="cb1804"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1804-1" data-line-number="1">linkPattern &lt;-<span class="st"> &quot;(?&lt;=&lt;a class=</span><span class="ch">\&quot;\&quot;</span><span class="st">a-link-normal</span><span class="ch">\&quot;\&quot;</span><span class="st"> href=</span><span class="ch">\&quot;\&quot;</span><span class="st">/)(.+?)(?=</span><span class="ch">\&quot;\&quot;</span><span class="st">&gt;)&quot;</span></a>
+<a class="sourceLine" id="cb1804-2" data-line-number="2">fault &lt;-</a>
+<a class="sourceLine" id="cb1804-3" data-line-number="3"><span class="st">  </span>reviews <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1804-4" data-line-number="4"><span class="st">  </span><span class="kw">filter</span>(book <span class="op">==</span><span class="st"> &quot;fault&quot;</span>)</a>
+<a class="sourceLine" id="cb1804-5" data-line-number="5">fault <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1804-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">linkCount =</span> <span class="kw">str_count</span>(content, linkPattern)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1804-7" data-line-number="7"><span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1804-8" data-line-number="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   linkCount     n
 ##       &lt;int&gt; &lt;int&gt;
@@ -741,21 +739,21 @@ fault <span class="op">%&gt;%</span><span class="st"> </span>
 ## 5         6     1
 ## 6         7     1</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fault <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>.<span class="op">$</span>content <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">str_extract_all</span>(<span class="dt">pattern =</span> linkPattern) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">str_detect</span>(<span class="st">&quot;(?i)Looking-For-Alaska&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">sum</span>()</code></pre>
+<div class="sourceCode" id="cb1806"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1806-1" data-line-number="1">fault <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1806-2" data-line-number="2"><span class="st">  </span>.<span class="op">$</span>content <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1806-3" data-line-number="3"><span class="st">  </span><span class="kw">str_extract_all</span>(<span class="dt">pattern =</span> linkPattern) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1806-4" data-line-number="4"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1806-5" data-line-number="5"><span class="st">  </span><span class="kw">str_detect</span>(<span class="st">&quot;(?i)Looking-For-Alaska&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1806-6" data-line-number="6"><span class="st">  </span><span class="kw">sum</span>()</a></code></pre></div>
 <pre><code>## [1] 5</code></pre></li>
 <li><p>Here is one possibility:</p>
-<pre class="sourceCode r"><code class="sourceCode r">reviews <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(book <span class="op">==</span><span class="st"> &quot;shades&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dislikes =</span> <span class="kw">str_detect</span>(content, 
-                               <span class="st">&quot;bad|awful|terrible|waste&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rating =</span> <span class="kw">factor</span>(rating)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rating)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> dislikes), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1808"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1808-1" data-line-number="1">reviews <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1808-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(book <span class="op">==</span><span class="st"> &quot;shades&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1808-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dislikes =</span> <span class="kw">str_detect</span>(content, </a>
+<a class="sourceLine" id="cb1808-4" data-line-number="4">                               <span class="st">&quot;bad|awful|terrible|waste&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1808-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rating =</span> <span class="kw">factor</span>(rating)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1808-6" data-line-number="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rating)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1808-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> dislikes), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
 <p><img src="r-notes_files/figure-html/unnamed-chunk-1049-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 </ol>
 
@@ -764,7 +762,7 @@ fault <span class="op">%&gt;%</span><span class="st"> </span>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-tigerData">
-<p>White, Homer. 2018b. <em>TigerData: GC Statistics Datasets</em>. <a href="https://github.com/homerhanumat/tigerData">https://github.com/homerhanumat/tigerData</a>.</p>
+<p>White, Homer. 2018. <em>TigerData: GC Statistics Datasets</em>. <a href="https://github.com/homerhanumat/tigerData">https://github.com/homerhanumat/tigerData</a>.</p>
 </div>
 </div>
             </section>

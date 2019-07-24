@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.3 purrr Higher-Order Functions for Iteration | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.3 purrr Higher-Order Functions for Iteration | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="the-functional-programming-paradigm.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -583,24 +581,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="map-and-variations" class="section level3">
 <h3><span class="header-section-number">14.3.1</span> <code>map()</code> and Variations</h3>
 <p>Suppose that we want to generate five vectors, each of which consists of ten numbers randomly chosen between 0 and 1. We accomplish the task with a loop, as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set up a list of length 10:</span>
-lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">5</span>)
-<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span> ) {
-  lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)
-}
-<span class="kw">str</span>(lst)</code></pre>
+<div class="sourceCode" id="cb1880"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1880-1" data-line-number="1"><span class="co"># set up a list of length 10:</span></a>
+<a class="sourceLine" id="cb1880-2" data-line-number="2">lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1880-3" data-line-number="3"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span> ) {</a>
+<a class="sourceLine" id="cb1880-4" data-line-number="4">  lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1880-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb1880-6" data-line-number="6"><span class="kw">str</span>(lst)</a></code></pre></div>
 <pre><code>## List of 5
-##  $ : num [1:10] 0.546 0.271 0.189 0.267 0.956 ...
-##  $ : num [1:10] 0.0384 0.5677 0.9629 0.5131 0.0181 ...
-##  $ : num [1:10] 0.184 0.268 0.477 0.263 0.107 ...
-##  $ : num [1:10] 0.9318 0.2411 0.3267 0.0647 0.1426 ...
-##  $ : num [1:10] 0.573 0.364 0.524 0.604 0.119 ...</code></pre>
+##  $ : num [1:10] 0.271 0.189 0.267 0.956 0.473 ...
+##  $ : num [1:10] 0.5677 0.9629 0.5131 0.0181 0.7333 ...
+##  $ : num [1:10] 0.268 0.477 0.263 0.107 0.608 ...
+##  $ : num [1:10] 0.2411 0.3267 0.0647 0.1426 0.5102 ...
+##  $ : num [1:10] 0.364 0.524 0.604 0.119 0.835 ...</code></pre>
 <p>If we wanted the vectors to have length <span class="math inline">\(1, 4, 9, 16,\)</span> and 25, then we could write:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">5</span>)
-<span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span> ) {
-  lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(i<span class="op">^</span><span class="dv">2</span>)
-}
-<span class="kw">str</span>(lst)</code></pre>
+<div class="sourceCode" id="cb1882"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1882-1" data-line-number="1">lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1882-2" data-line-number="2"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span> ) {</a>
+<a class="sourceLine" id="cb1882-3" data-line-number="3">  lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(i<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1882-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb1882-5" data-line-number="5"><span class="kw">str</span>(lst)</a></code></pre></div>
 <pre><code>## List of 5
 ##  $ : num 0.647
 ##  $ : num [1:4] 0.394 0.619 0.477 0.136
@@ -608,12 +606,12 @@ lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt
 ##  $ : num [1:16] 0.409 0.54 0.961 0.654 0.547 ...
 ##  $ : num [1:25] 0.96407 0.07147 0.95581 0.94798 0.00119 ...</code></pre>
 <p>In the first example, the elements in the vector <code>1:5</code> didn’t matter—we wanted a vector of length ten each time—and in the second case the elements in the <code>1:5</code> <em>did</em> matter, in that they determined the lengths of the five vectors produced. Of course in general we could apply <code>runif()</code> to each element of <em>any</em> vector at all, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">9</span>)
-lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="kw">length</span>(vec))
-<span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(vec) ) {
-  lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(vec[i])
-}
-<span class="kw">str</span>(lst)</code></pre>
+<div class="sourceCode" id="cb1884"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1884-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb1884-2" data-line-number="2">lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="kw">length</span>(vec))</a>
+<a class="sourceLine" id="cb1884-3" data-line-number="3"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(vec) ) {</a>
+<a class="sourceLine" id="cb1884-4" data-line-number="4">  lst[[i]] &lt;-<span class="st"> </span><span class="kw">runif</span>(vec[i])</a>
+<a class="sourceLine" id="cb1884-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb1884-6" data-line-number="6"><span class="kw">str</span>(lst)</a></code></pre></div>
 <pre><code>## List of 5
 ##  $ : num [1:5] 0.647 0.394 0.619 0.477 0.136
 ##  $ : num [1:7] 0.06738 0.12915 0.39312 0.00258 0.62021 ...
@@ -621,7 +619,7 @@ lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt
 ##  $ : num [1:2] 0.1968 0.0779
 ##  $ : num [1:9] 0.818 0.942 0.884 0.166 0.355 ...</code></pre>
 <p>If we can apply <code>runif()</code> to each element of a vector, why not apply <em>an arbitrary function</em> to each element? That’s what the function <code>map()</code>  will do for us. The general form of <code>map()</code> is:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(.x, .f, ...)</code></pre>
+<div class="sourceCode" id="cb1886"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1886-1" data-line-number="1"><span class="kw">map</span>(.x, .f, ...)</a></code></pre></div>
 <p>In the template above:</p>
 <ul>
 <li><code>.x</code> can be a list or any atomic vector;</li>
@@ -630,11 +628,11 @@ lst &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt
 </ul>
 <p>The result is always a list.</p>
 <p>With <code>map()</code> we can get the list in our second example as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">howMany &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">9</span>)
-lst &lt;-<span class="st"> </span>
-<span class="st">  </span>howMany <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">map</span>(runif)
-<span class="kw">str</span>(lst)</code></pre>
+<div class="sourceCode" id="cb1887"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1887-1" data-line-number="1">howMany &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb1887-2" data-line-number="2">lst &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb1887-3" data-line-number="3"><span class="st">  </span>howMany <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1887-4" data-line-number="4"><span class="st">  </span><span class="kw">map</span>(runif)</a>
+<a class="sourceLine" id="cb1887-5" data-line-number="5"><span class="kw">str</span>(lst)</a></code></pre></div>
 <pre><code>## List of 5
 ##  $ : num [1:5] 0.647 0.394 0.619 0.477 0.136
 ##  $ : num [1:7] 0.06738 0.12915 0.39312 0.00258 0.62021 ...
@@ -642,10 +640,10 @@ lst &lt;-<span class="st"> </span>
 ##  $ : num [1:2] 0.1968 0.0779
 ##  $ : num [1:9] 0.818 0.942 0.884 0.166 0.355 ...</code></pre>
 <p>If we had wanted the random numbers to be between—say—4 and 8, then we would supply extra arguments to <code>runif()</code> as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span>
-<span class="st">  </span>howMany <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">map</span>(runif, <span class="dt">min =</span> <span class="dv">4</span>, <span class="dt">max =</span> <span class="dv">8</span>)
-<span class="kw">str</span>(lst)</code></pre>
+<div class="sourceCode" id="cb1889"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1889-1" data-line-number="1">lst &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb1889-2" data-line-number="2"><span class="st">  </span>howMany <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1889-3" data-line-number="3"><span class="st">  </span><span class="kw">map</span>(runif, <span class="dt">min =</span> <span class="dv">4</span>, <span class="dt">max =</span> <span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb1889-4" data-line-number="4"><span class="kw">str</span>(lst)</a></code></pre></div>
 <pre><code>## List of 5
 ##  $ : num [1:5] 6.59 5.58 6.47 5.91 4.54
 ##  $ : num [1:7] 4.27 4.52 5.57 4.01 6.48 ...
@@ -653,9 +651,9 @@ lst &lt;-<span class="st"> </span>
 ##  $ : num [1:2] 4.79 4.31
 ##  $ : num [1:9] 7.27 7.77 7.54 4.66 5.42 ...</code></pre>
 <p>The default behavior of <code>map()</code> is that the <code>.x</code> vector supplies the first argument of <code>.f</code>. However, if some <code>...</code> parameters are supplied then <code>.x</code> substitutes for the first parameter that is not mentioned in <code>...</code>. In the above example, the <code>min</code> and <code>max</code>parameters are the second and third parameters for <code>runif()</code> so <code>.x</code> substitutes for the first parameter—the one that determines how many random numbers will be generated. In the example below, the vector <code>lowerBounds</code> substitutes for <code>min</code>, the second parameter of <code>runif()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lowerBounds &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>
-lowerBounds <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">map</span>(runif, <span class="dt">n =</span> <span class="dv">2</span>, <span class="dt">max =</span> <span class="dv">8</span>)</code></pre>
+<div class="sourceCode" id="cb1891"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1891-1" data-line-number="1">lowerBounds &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb1891-2" data-line-number="2">lowerBounds <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1891-3" data-line-number="3"><span class="st">  </span><span class="kw">map</span>(runif, <span class="dt">n =</span> <span class="dv">2</span>, <span class="dt">max =</span> <span class="dv">8</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 3.008575 5.964877
 ## 
@@ -665,10 +663,10 @@ lowerBounds <span class="op">%&gt;%</span>
 ## [[3]]
 ## [1] 6.688118 7.431739</code></pre>
 <p>Sometimes we wish to vary two or more of the parameters of function. In that case we use <code>pmap()</code>. The first parameter of <code>pmap()</code> is named <code>.l</code> and takes a list of vectors (or lists). For example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">howMany &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>)
-upperBounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)
-<span class="kw">list</span>(howMany, upperBounds) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">pmap</span>(runif, <span class="dt">min =</span> <span class="dv">0</span>)</code></pre>
+<div class="sourceCode" id="cb1893"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1893-1" data-line-number="1">howMany &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb1893-2" data-line-number="2">upperBounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1893-3" data-line-number="3"><span class="kw">list</span>(howMany, upperBounds) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1893-4" data-line-number="4"><span class="st">  </span><span class="kw">pmap</span>(runif, <span class="dt">min =</span> <span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 0.4142409 0.5140328 0.6190231
 ## 
@@ -679,67 +677,67 @@ upperBounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class=
 ## [1] 3.0889976 7.4509632 3.6170952 0.2348365</code></pre>
 <p>Observe that <code>pmap()</code> knows to interpret the first element of the input-list—the vector <code>howmany</code> as giving the values of the first argument of <code>runif()</code>. The second parameter of <code>runif()</code> (<code>min</code>) is set at 0, so <code>pmap()</code> deduces that <code>upperBounds</code>—the second element of the input-list—gives the values for the next next parameter in line, the parameter <code>max</code>.</p>
 <p>One might just as well use <code>pmap()</code> to vary all three parameters:</p>
-<pre class="sourceCode r"><code class="sourceCode r">howMany &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>)
-lowerBounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">5</span>)
-upperBounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">10</span>)
-args &lt;-<span class="st"> </span><span class="kw">list</span>(howMany, lowerBounds, upperBounds)
-args <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">pmap</span>(runif) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str</span>()</code></pre>
+<div class="sourceCode" id="cb1895"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1895-1" data-line-number="1">howMany &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb1895-2" data-line-number="2">lowerBounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1895-3" data-line-number="3">upperBounds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1895-4" data-line-number="4">args &lt;-<span class="st"> </span><span class="kw">list</span>(howMany, lowerBounds, upperBounds)</a>
+<a class="sourceLine" id="cb1895-5" data-line-number="5">args <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1895-6" data-line-number="6"><span class="st">  </span><span class="kw">pmap</span>(runif) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1895-7" data-line-number="7"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
 <pre><code>## List of 3
 ##  $ : num [1:3] -0.00743 -2.35882 -3.90104
 ##  $ : num 1.01
 ##  $ : num [1:4] 5.38 9.16 8.45 9.67</code></pre>
 <p>The <code>.f</code> parameter can be any function, including one that you define yourself. Here’s an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">rLetters &lt;-<span class="st"> </span><span class="cf">function</span>(n, upper) {
-  <span class="cf">if</span> ( upper ) {
-    <span class="kw">sample</span>(LETTERS, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
-  } <span class="cf">else</span> {
-    <span class="kw">sample</span>(letters, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
-  }
-}
-n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>)                <span class="co"># vary number of letters to pick</span>
-upper &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)  <span class="co"># vary the case (upper, lower)</span>
-<span class="kw">list</span>(n, upper) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pmap</span>(rLetters)</code></pre>
+<div class="sourceCode" id="cb1897"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1897-1" data-line-number="1">rLetters &lt;-<span class="st"> </span><span class="cf">function</span>(n, upper) {</a>
+<a class="sourceLine" id="cb1897-2" data-line-number="2">  <span class="cf">if</span> ( upper ) {</a>
+<a class="sourceLine" id="cb1897-3" data-line-number="3">    <span class="kw">sample</span>(LETTERS, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1897-4" data-line-number="4">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb1897-5" data-line-number="5">    <span class="kw">sample</span>(letters, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1897-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb1897-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb1897-8" data-line-number="8">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>)                <span class="co"># vary number of letters to pick</span></a>
+<a class="sourceLine" id="cb1897-9" data-line-number="9">upper &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)  <span class="co"># vary the case (upper, lower)</span></a>
+<a class="sourceLine" id="cb1897-10" data-line-number="10"><span class="kw">list</span>(n, upper) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1897-11" data-line-number="11"><span class="st">  </span><span class="kw">pmap</span>(rLetters)</a></code></pre></div>
 <pre><code>## [[1]]
-## [1] &quot;U&quot; &quot;D&quot; &quot;C&quot;
+## [1] &quot;O&quot; &quot;G&quot; &quot;A&quot;
 ## 
 ## [[2]]
-## [1] &quot;j&quot; &quot;a&quot; &quot;s&quot; &quot;d&quot; &quot;m&quot; &quot;k&quot;
+## [1] &quot;x&quot; &quot;s&quot; &quot;p&quot; &quot;m&quot; &quot;n&quot; &quot;u&quot;
 ## 
 ## [[3]]
-## [1] &quot;S&quot; &quot;S&quot; &quot;R&quot; &quot;A&quot; &quot;V&quot; &quot;P&quot; &quot;A&quot; &quot;N&quot; &quot;B&quot;</code></pre>
+## [1] &quot;R&quot; &quot;I&quot; &quot;Q&quot; &quot;M&quot; &quot;D&quot; &quot;E&quot; &quot;Y&quot; &quot;M&quot; &quot;O&quot;</code></pre>
 <p>You could also set <code>f</code> to be a function that you write on the spot, without even bothering to give it a name:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">map</span>(<span class="cf">function</span>(x) <span class="kw">runif</span>(<span class="dv">3</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> x))</code></pre>
+<div class="sourceCode" id="cb1899"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1899-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1899-2" data-line-number="2"><span class="st">  </span><span class="kw">map</span>(<span class="cf">function</span>(x) <span class="kw">runif</span>(<span class="dv">3</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> x))</a></code></pre></div>
 <pre><code>## [[1]]
-## [1] 0.4170589 0.5614115 0.6146708
+## [1] 0.2002036 0.2269999 0.5505148
 ## 
 ## [[2]]
-## [1] 1.0992127 0.4576997 0.6006109
+## [1] 1.250093 0.430766 2.521417
 ## 
 ## [[3]]
-## [1] 1.134999 2.752574 2.083488</code></pre>
+## [1] 4.861459 2.029991 2.718963</code></pre>
 <p>In computer programming a function is called <em>anonymous</em> when it is not the value bound to some name. .</p>
 <p><code>map()</code> allows a shortcut for defining anonymous functions. The above call could have been written as:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">runif</span>(<span class="dv">3</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> .))</code></pre>
+<div class="sourceCode" id="cb1901"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1901-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1901-2" data-line-number="2"><span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">runif</span>(<span class="dv">3</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> .))</a></code></pre></div>
 <pre><code>## [[1]]
-## [1] 0.1435887 0.8404723 0.9722919
+## [1] 0.4939934 0.8951945 0.7801631
 ## 
 ## [[2]]
-## [1] 1.217995 1.631378 1.481980
+## [1] 2.5637547 0.6993537 2.7956469
 ## 
 ## [[3]]
-## [1] 4.475972 3.900816 4.272925</code></pre>
+## [1] 4.790131 4.959646 2.544537</code></pre>
 <p>The <code>~</code> indicates that the body of the function is about to be begin. The <code>.</code> stands for the parameter of the function.</p>
 <p>When we introduced <code>map()</code> we said that <code>.x</code> was a vector or a list, In fact <code>.x</code> could be an object that can be coerced into a list. Hence it is quite common to use <code>map()</code> with the data frames: the frame is turned into a list, each element of which is a column of the frame. Here is an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;m111survey&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcscr&quot;</span>)
-numberNA &lt;-
-<span class="st">  </span>m111survey <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">sum</span>(<span class="kw">is.na</span>(.)))
-<span class="kw">str</span>(numberNA)</code></pre>
+<div class="sourceCode" id="cb1903"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1903-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;m111survey&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;bcscr&quot;</span>)</a>
+<a class="sourceLine" id="cb1903-2" data-line-number="2">numberNA &lt;-</a>
+<a class="sourceLine" id="cb1903-3" data-line-number="3"><span class="st">  </span>m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1903-4" data-line-number="4"><span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">sum</span>(<span class="kw">is.na</span>(.)))</a>
+<a class="sourceLine" id="cb1903-5" data-line-number="5"><span class="kw">str</span>(numberNA)</a></code></pre></div>
 <pre><code>## List of 12
 ##  $ height         : int 0
 ##  $ ideal_ht       : int 2
@@ -754,18 +752,18 @@ numberNA &lt;-
 ##  $ sex            : int 0
 ##  $ diff.ideal.act.: int 2</code></pre>
 <p>Note that the elements of the returned list inherit the names of the input data frame. This holds for any named input:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)
-<span class="kw">names</span>(numbers) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;five&quot;</span>)
-numbers <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">runif</span>(<span class="dv">3</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> .))</code></pre>
+<div class="sourceCode" id="cb1905"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1905-1" data-line-number="1">numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1905-2" data-line-number="2"><span class="kw">names</span>(numbers) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;five&quot;</span>)</a>
+<a class="sourceLine" id="cb1905-3" data-line-number="3">numbers <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1905-4" data-line-number="4"><span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">runif</span>(<span class="dv">3</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> .))</a></code></pre></div>
 <pre><code>## $one
-## [1] 0.2331179 0.9318823 0.9580263
+## [1] 0.20446027 0.01439487 0.95556547
 ## 
 ## $three
-## [1] 2.9757873 1.5267223 0.6133808
+## [1] 1.918565 1.987142 2.199431
 ## 
 ## $five
-## [1] 0.07197437 4.77782735 3.19760884</code></pre>
+## [1] 4.372549 4.764371 2.637053</code></pre>
 <p>When the result can take on a form more simple than a list, it is possible to use variants of <code>map()</code> such as:</p>
 <ul>
 <li><code>map_int()</code></li>
@@ -774,10 +772,10 @@ numbers <span class="op">%&gt;%</span><span class="st"> </span>
 <li><code>map_chr()</code></li>
 </ul>
 <p>Thus we could obtain a named integer vector of the number of <code>NA</code>-values for each variable in <code>m11survey</code> as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numberNA &lt;-
-<span class="st">  </span>m111survey <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">map_int</span>(<span class="op">~</span><span class="kw">sum</span>(<span class="kw">is.na</span>(.)))
-numberNA</code></pre>
+<div class="sourceCode" id="cb1907"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1907-1" data-line-number="1">numberNA &lt;-</a>
+<a class="sourceLine" id="cb1907-2" data-line-number="2"><span class="st">  </span>m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1907-3" data-line-number="3"><span class="st">  </span><span class="kw">map_int</span>(<span class="op">~</span><span class="kw">sum</span>(<span class="kw">is.na</span>(.)))</a>
+<a class="sourceLine" id="cb1907-4" data-line-number="4">numberNA</a></code></pre></div>
 <pre><code>##          height        ideal_ht           sleep         fastest 
 ##               0               2               0               0 
 ##     weight_feel      love_first      extra_life            seat 
@@ -785,8 +783,8 @@ numberNA</code></pre>
 ##             GPA    enough_Sleep             sex diff.ideal.act. 
 ##               1               0               0               2</code></pre>
 <p>Here are the types of each variable:</p>
-<pre class="sourceCode r"><code class="sourceCode r">m111survey <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">map_chr</span>(typeof)</code></pre>
+<div class="sourceCode" id="cb1909"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1909-1" data-line-number="1">m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1909-2" data-line-number="2"><span class="st">  </span><span class="kw">map_chr</span>(typeof)</a></code></pre></div>
 <pre><code>##          height        ideal_ht           sleep         fastest 
 ##        &quot;double&quot;        &quot;double&quot;        &quot;double&quot;       &quot;integer&quot; 
 ##     weight_feel      love_first      extra_life            seat 
@@ -794,8 +792,8 @@ numberNA</code></pre>
 ##             GPA    enough_Sleep             sex diff.ideal.act. 
 ##        &quot;double&quot;       &quot;integer&quot;       &quot;integer&quot;        &quot;double&quot;</code></pre>
 <p>Here is a statement of whether or not each variable is a factor:</p>
-<pre class="sourceCode r"><code class="sourceCode r">m111survey <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">map_lgl</span>(is.factor)</code></pre>
+<div class="sourceCode" id="cb1911"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1911-1" data-line-number="1">m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1911-2" data-line-number="2"><span class="st">  </span><span class="kw">map_lgl</span>(is.factor)</a></code></pre></div>
 <pre><code>##          height        ideal_ht           sleep         fastest 
 ##           FALSE           FALSE           FALSE           FALSE 
 ##     weight_feel      love_first      extra_life            seat 
@@ -807,15 +805,15 @@ numberNA</code></pre>
 <h3><span class="header-section-number">14.3.2</span> <code>walk()</code> and Variations</h3>
 <p><code>walk()</code> is similar to <code>map()</code>, but is used when we are interested in producing side-effects. It applies its <code>.f</code> argument to each element of <code>.x</code> is was given, but also returns the <code>.x</code> in case we want to pipe it into some other function.</p>
 <p>Here we use <code>walk()</code> only for its side-effect: we re-write a familiar function to print a pattern to the Console without using a loop.</p>
-<pre class="sourceCode r"><code class="sourceCode r">pattern &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">char =</span> <span class="st">&quot;*&quot;</span>, <span class="dt">n =</span> <span class="dv">5</span>) {
-  lineLength &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span>n, (n<span class="dv">-1</span>)<span class="op">:</span><span class="dv">1</span>)
-  theLine &lt;-<span class="st"> </span><span class="cf">function</span>(char, n) {
-    <span class="kw">cat</span>(<span class="kw">rep</span>(char, <span class="dt">times =</span> n), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }
-  lineLength <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">walk</span>(theLine, <span class="dt">char =</span> char)
-}
-
-<span class="kw">pattern</span>(<span class="dt">char =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">n =</span> <span class="dv">7</span>)</code></pre>
+<div class="sourceCode" id="cb1913"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1913-1" data-line-number="1">pattern &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">char =</span> <span class="st">&quot;*&quot;</span>, <span class="dt">n =</span> <span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb1913-2" data-line-number="2">  lineLength &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span>n, (n<span class="dv">-1</span>)<span class="op">:</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1913-3" data-line-number="3">  theLine &lt;-<span class="st"> </span><span class="cf">function</span>(char, n) {</a>
+<a class="sourceLine" id="cb1913-4" data-line-number="4">    <span class="kw">cat</span>(<span class="kw">rep</span>(char, <span class="dt">times =</span> n), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1913-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb1913-6" data-line-number="6">  lineLength <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">walk</span>(theLine, <span class="dt">char =</span> char)</a>
+<a class="sourceLine" id="cb1913-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb1913-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1913-9" data-line-number="9"><span class="kw">pattern</span>(<span class="dt">char =</span> <span class="st">&quot;a&quot;</span>, <span class="dt">n =</span> <span class="dv">7</span>)</a></code></pre></div>
 <pre><code>## a
 ## aa
 ## aaa
@@ -831,33 +829,33 @@ numberNA</code></pre>
 ## a</code></pre>
 <p>The next example illustrates the use of the return-value of <code>walk()</code>. We would like to save plots of all numerical variables from the data frame <code>m111survey</code>, and also print summaries of them to the Console.</p>
 <p>First we create a directory to hold the plots:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> ( <span class="op">!</span><span class="kw">dir.exists</span>(<span class="st">&quot;plots&quot;</span>) ) <span class="kw">dir.create</span>(<span class="st">&quot;plots&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1915"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1915-1" data-line-number="1"><span class="cf">if</span> ( <span class="op">!</span><span class="kw">dir.exists</span>(<span class="st">&quot;plots&quot;</span>) ) <span class="kw">dir.create</span>(<span class="st">&quot;plots&quot;</span>)</a></code></pre></div>
 <p>Next, we get the names of the numerical variables in <code>m111survey</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numNames &lt;-
-<span class="st">  </span>m111survey <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># purrr::keep()</span>
-<span class="st">  </span><span class="kw">names</span>()</code></pre>
+<div class="sourceCode" id="cb1916"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1916-1" data-line-number="1">numNames &lt;-</a>
+<a class="sourceLine" id="cb1916-2" data-line-number="2"><span class="st">  </span>m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1916-3" data-line-number="3"><span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># purrr::keep()</span></a>
+<a class="sourceLine" id="cb1916-4" data-line-number="4"><span class="st">  </span><span class="kw">names</span>()</a></code></pre></div>
 <p>We used <code>purrr::keep()</code>, which retains only the elements of its input <code>.x</code> such that the <code>.f</code> function returns <code>TRUE</code>.</p>
 <p>We need a function to save the density plot of a single numerical variable:</p>
-<pre class="sourceCode r"><code class="sourceCode r">saveGraph &lt;-<span class="st"> </span><span class="cf">function</span>(var, varname) {
-  p &lt;-
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x =</span> var)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_density</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste0</span>(<span class="st">&quot;Density plot for &quot;</span>,
-                        varname, <span class="st">&quot;.&quot;</span>))
-  <span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="kw">paste0</span>(<span class="st">&quot;plots/density_&quot;</span>, varname, <span class="st">&quot;.png&quot;</span>),
-         <span class="dt">plot =</span> p, <span class="dt">device =</span> <span class="st">&quot;png&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb1917"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1917-1" data-line-number="1">saveGraph &lt;-<span class="st"> </span><span class="cf">function</span>(var, varname) {</a>
+<a class="sourceLine" id="cb1917-2" data-line-number="2">  p &lt;-</a>
+<a class="sourceLine" id="cb1917-3" data-line-number="3"><span class="st">    </span><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x =</span> var)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1917-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_density</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1917-5" data-line-number="5"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste0</span>(<span class="st">&quot;Density plot for &quot;</span>,</a>
+<a class="sourceLine" id="cb1917-6" data-line-number="6">                        varname, <span class="st">&quot;.&quot;</span>))</a>
+<a class="sourceLine" id="cb1917-7" data-line-number="7">  <span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="kw">paste0</span>(<span class="st">&quot;plots/density_&quot;</span>, varname, <span class="st">&quot;.png&quot;</span>),</a>
+<a class="sourceLine" id="cb1917-8" data-line-number="8">         <span class="dt">plot =</span> p, <span class="dt">device =</span> <span class="st">&quot;png&quot;</span>)</a>
+<a class="sourceLine" id="cb1917-9" data-line-number="9">}</a></code></pre></div>
 <p>We also need a function to produce a summary of a single numerical variable:</p>
-<pre class="sourceCode r"><code class="sourceCode r">makeSummary &lt;-<span class="st"> </span><span class="cf">function</span>(x, varname) {
-  five &lt;-<span class="st"> </span><span class="kw">fivenum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
-  <span class="kw">list</span>(<span class="dt">variable =</span> varname,
-       <span class="dt">min =</span> five[<span class="dv">1</span>],
-       <span class="dt">Q1 =</span> five[<span class="dv">2</span>],
-       <span class="dt">median =</span> five[<span class="dv">3</span>],
-       <span class="dt">Q3 =</span> five[<span class="dv">4</span>],
-       <span class="dt">max =</span> five[<span class="dv">5</span>])
-}</code></pre>
+<div class="sourceCode" id="cb1918"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1918-1" data-line-number="1">makeSummary &lt;-<span class="st"> </span><span class="cf">function</span>(x, varname) {</a>
+<a class="sourceLine" id="cb1918-2" data-line-number="2">  five &lt;-<span class="st"> </span><span class="kw">fivenum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1918-3" data-line-number="3">  <span class="kw">list</span>(<span class="dt">variable =</span> varname,</a>
+<a class="sourceLine" id="cb1918-4" data-line-number="4">       <span class="dt">min =</span> five[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb1918-5" data-line-number="5">       <span class="dt">Q1 =</span> five[<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb1918-6" data-line-number="6">       <span class="dt">median =</span> five[<span class="dv">3</span>],</a>
+<a class="sourceLine" id="cb1918-7" data-line-number="7">       <span class="dt">Q3 =</span> five[<span class="dv">4</span>],</a>
+<a class="sourceLine" id="cb1918-8" data-line-number="8">       <span class="dt">max =</span> five[<span class="dv">5</span>])</a>
+<a class="sourceLine" id="cb1918-9" data-line-number="9">}</a></code></pre></div>
 <p>Now we walk through the process. We will actually use the function<code>walk2()</code>, which takes the following inputs:</p>
 <ul>
 <li><code>.x</code> (the data frame consisting of the numerical variables) and</li>
@@ -865,12 +863,12 @@ numberNA</code></pre>
 <li><code>.f</code> (the function <code>saveGraph</code>, to make and save a density plot)</li>
 </ul>
 <p>We also use <code>pmap_dfr()</code>, which takes a list consisting of the data frame and variable-names and constructs a data frame row-by-row, with each row summarizing one of the variables.</p>
-<pre class="sourceCode r"><code class="sourceCode r">m111survey <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">walk2</span>(<span class="dt">.y =</span> numNames,
-        <span class="dt">.f =</span> saveGraph) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># returns the df of numerical variables</span>
-<span class="st">  </span><span class="kw">list</span>(., numNames) <span class="op">%&gt;%</span><span class="st">      </span><span class="co"># creating the list (df, numNames)</span>
-<span class="st">  </span><span class="kw">pmap_dfr</span>(makeSummary)</code></pre>
+<div class="sourceCode" id="cb1919"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1919-1" data-line-number="1">m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1919-2" data-line-number="2"><span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1919-3" data-line-number="3"><span class="st">  </span><span class="kw">walk2</span>(<span class="dt">.y =</span> numNames,</a>
+<a class="sourceLine" id="cb1919-4" data-line-number="4">        <span class="dt">.f =</span> saveGraph) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># returns the df of numerical variables</span></a>
+<a class="sourceLine" id="cb1919-5" data-line-number="5"><span class="st">  </span><span class="kw">list</span>(., numNames) <span class="op">%&gt;%</span><span class="st">      </span><span class="co"># creating the list (df, numNames)</span></a>
+<a class="sourceLine" id="cb1919-6" data-line-number="6"><span class="st">  </span><span class="kw">pmap_dfr</span>(makeSummary)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 6
 ##          variable   min    Q1  median     Q3   max
 ##             &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -896,16 +894,16 @@ numberNA</code></pre>
 <li><p>Use <code>map()</code> to produce a list of the squares of the whole numbers from 1 to 10.</p></li>
 <li><p>Use <code>map_dbl()</code> to produce a numerical vector of the squares of the whole numbers from 1 to 10.</p></li>
 <li><p>Use <code>map_chr</code> to state the type of each element of the following list:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">list</span>(
-  letters,
-  <span class="kw">seq</span>(<span class="dv">2</span>, <span class="dv">20</span>, <span class="dt">by =</span> <span class="dv">2</span>),
-  <span class="kw">c</span>(1L, 5L, 7L),
-  <span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="fl">5.5</span>
-)</code></pre></li>
+<div class="sourceCode" id="cb1921"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1921-1" data-line-number="1">lst &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1921-2" data-line-number="2">  letters,</a>
+<a class="sourceLine" id="cb1921-3" data-line-number="3">  <span class="kw">seq</span>(<span class="dv">2</span>, <span class="dv">20</span>, <span class="dt">by =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb1921-4" data-line-number="4">  <span class="kw">c</span>(1L, 5L, 7L),</a>
+<a class="sourceLine" id="cb1921-5" data-line-number="5">  <span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="fl">5.5</span></a>
+<a class="sourceLine" id="cb1921-6" data-line-number="6">)</a></code></pre></div></li>
 <li><p>Here are some people:</p>
-<pre class="sourceCode r"><code class="sourceCode r">people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Bettina&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Isabella&quot;</span>, <span class="st">&quot;Khalil&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1922"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1922-1" data-line-number="1">people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Bettina&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Isabella&quot;</span>, <span class="st">&quot;Khalil&quot;</span>)</a></code></pre></div>
 <p>The following vector tells whether or not each person is a Grand Poo-Bah:</p>
-<pre class="sourceCode r"><code class="sourceCode r">status &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;humble&quot;</span>, <span class="st">&quot;poobah&quot;</span>, <span class="st">&quot;poobah&quot;</span>, <span class="st">&quot;humble&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1923"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1923-1" data-line-number="1">status &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;humble&quot;</span>, <span class="st">&quot;poobah&quot;</span>, <span class="st">&quot;poobah&quot;</span>, <span class="st">&quot;humble&quot;</span>)</a></code></pre></div>
 <p>Use <code>pwalk()</code> to properly greet each person. The result in the console should be as follows:</p>
 <pre><code>## Yo, dawg.
 ## Hail, O Grand Poo-Bah Raj!
@@ -917,7 +915,7 @@ numberNA</code></pre>
 <h3><span class="header-section-number">14.3.4</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb1925"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1925-1" data-line-number="1"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1
 ## 
@@ -948,7 +946,7 @@ numberNA</code></pre>
 ## [[10]]
 ## [1] 100</code></pre>
 <p>This is more verbose, but works just as well:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb1927"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1927-1" data-line-number="1"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1
 ## 
@@ -979,24 +977,24 @@ numberNA</code></pre>
 ## [[10]]
 ## [1] 100</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb1929"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1929-1" data-line-number="1"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
 <p>Again the more verbose approach works just as well:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb1931"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1931-1" data-line-number="1"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_chr</span>(lst, typeof)</code></pre>
+<div class="sourceCode" id="cb1933"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1933-1" data-line-number="1"><span class="kw">map_chr</span>(lst, typeof)</a></code></pre></div>
 <pre><code>## [1] &quot;character&quot; &quot;double&quot;    &quot;integer&quot;   &quot;logical&quot;</code></pre></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(people, status) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pwalk</span>(<span class="cf">function</span>(person, type) {
-    <span class="cf">if</span> ( type <span class="op">==</span><span class="st"> &quot;poobah&quot;</span> ) {
-      <span class="kw">cat</span>(<span class="st">&quot;Hail, O Grand Poo-Bah &quot;</span>,
-          person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-    } <span class="cf">else</span> {
-      <span class="kw">cat</span>(<span class="st">&quot;Yo, dawg.</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    }
-  })</code></pre></li>
+<div class="sourceCode" id="cb1935"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1935-1" data-line-number="1"><span class="kw">list</span>(people, status) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1935-2" data-line-number="2"><span class="st">  </span><span class="kw">pwalk</span>(<span class="cf">function</span>(person, type) {</a>
+<a class="sourceLine" id="cb1935-3" data-line-number="3">    <span class="cf">if</span> ( type <span class="op">==</span><span class="st"> &quot;poobah&quot;</span> ) {</a>
+<a class="sourceLine" id="cb1935-4" data-line-number="4">      <span class="kw">cat</span>(<span class="st">&quot;Hail, O Grand Poo-Bah &quot;</span>,</a>
+<a class="sourceLine" id="cb1935-5" data-line-number="5">          person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1935-6" data-line-number="6">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb1935-7" data-line-number="7">      <span class="kw">cat</span>(<span class="st">&quot;Yo, dawg.</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1935-8" data-line-number="8">    }</a>
+<a class="sourceLine" id="cb1935-9" data-line-number="9">  })</a></code></pre></div></li>
 </ol>
 </div>
 </div>

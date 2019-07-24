@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.5 Vector Recycling  | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.5 Vector Recycling  | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="more-on-logical-vectors.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,32 +577,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="vector-recycling" class="section level2">
 <h2><span class="header-section-number">2.5</span> Vector Recycling </h2>
 <p>Consider the vector</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>)</a></code></pre></div>
 <p>Look at what happens when we evaluate the expression:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span></code></pre>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1">vec <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span></a></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE  TRUE FALSE</code></pre>
 <p>At first blush this doesn’t make any sense: <code>vec</code> has length 5, whereas <code>4</code> is a vector of length 1. How can the two of them be compared?</p>
 <p>They cannot, in fact, be compared. Instead the shorter of the two vectors—the <code>4</code>—is <em>recycled</em> into the <code>c(4,4,4,4,4)</code> a vector of length five, which may then be compared element-wise with <code>vec</code>. Recycling is a great convenience as it allows us to express an idea clearly and concisely.</p>
 <p>Recycling is always performed on the shorter of two vectors. Consider the example below:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>
-vec2 <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1">vec2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb253-2" data-line-number="2">vec2 <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE</code></pre>
 <p>Here, <code>c(3,1)</code> was recycled into <code>c(3,1,3,1,3,1)</code> prior to being compared with <code>vec2</code>.</p>
 <p>What happens if the length of the longer vector is not a multiple of the shorter one? We should look into this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">7</span>
-vec2 <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>)</code></pre>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1">vec2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">7</span></a>
+<a class="sourceLine" id="cb255-2" data-line-number="2">vec2 <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>)</a></code></pre></div>
 <pre><code>## longer object length is not a multiple of shorter object length
 ## [1] FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
 <p>We get a warning, but R tries to do the job for us anyway, recycling the shorter vector to <code>c(3,8,3,8,3,8,3)</code> and then performing the comparison.</p>
 <p>By the way, if you don’t want to see the warning you can put the expression into the <code>suppressWarnings()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressWarnings</span>(vec2 <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>))</code></pre>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="kw">suppressWarnings</span>(vec2 <span class="op">&gt;</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>))</a></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE  TRUE FALSE</code></pre>
 <div id="practice-exercises-3" class="section level3">
 <h3><span class="header-section-number">2.5.1</span> Practice Exercises</h3>
 <p>We’ll work with the following vectors:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Tin Man&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Toto&quot;</span>)
-age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="fl">0.04</span>, <span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">6</span>)
-likesDogs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1">person &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Tin Man&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Toto&quot;</span>)</a>
+<a class="sourceLine" id="cb259-2" data-line-number="2">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="fl">0.04</span>, <span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb259-3" data-line-number="3">likesDogs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Think of the vectors as having corresponding elements. Thus, there is a person named Dorothy who is 12 years old and likes dogs, a person named Tin Man who is 0.04 years old and doesn’t like dogs, etc.</p>
 <ol style="list-style-type: decimal">
 <li><p>Write a Boolean expression that is <code>TRUE</code> when a person is less than 14 years old and <code>FALSE</code> otherwise.</p></li>
@@ -622,31 +620,31 @@ likesDogs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="o
 <h3><span class="header-section-number">2.5.2</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">age <span class="op">&lt;</span><span class="st"> </span><span class="dv">14</span></code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" data-line-number="1">age <span class="op">&lt;</span><span class="st"> </span><span class="dv">14</span></a></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE FALSE  TRUE</code></pre></li>
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span></code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" data-line-number="1">age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span></a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE FALSE FALSE</code></pre></li>
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">age <span class="op">&gt;</span><span class="st"> </span><span class="dv">12</span> <span class="op">&amp;</span><span class="st"> </span>likesDogs</code></pre>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1">age <span class="op">&gt;</span><span class="st"> </span><span class="dv">12</span> <span class="op">&amp;</span><span class="st"> </span>likesDogs</a></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE</code></pre></li>
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">age <span class="op">&gt;</span><span class="st"> </span><span class="dv">12</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>likesDogs</code></pre>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1">age <span class="op">&gt;</span><span class="st"> </span><span class="dv">12</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>likesDogs</a></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE  TRUE FALSE</code></pre></li>
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">age <span class="op">&gt;</span><span class="st"> </span><span class="dv">12</span> <span class="op">|</span><span class="st"> </span>likesDogs</code></pre>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1">age <span class="op">&gt;</span><span class="st"> </span><span class="dv">12</span> <span class="op">|</span><span class="st"> </span>likesDogs</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE  TRUE  TRUE</code></pre></li>
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person <span class="op">==</span><span class="st"> &quot;Dorothy&quot;</span></code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" data-line-number="1">person <span class="op">==</span><span class="st"> &quot;Dorothy&quot;</span></a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE FALSE FALSE</code></pre></li>
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person <span class="op">==</span><span class="st"> &quot;Dorothy&quot;</span> <span class="op">|</span><span class="st"> </span>person <span class="op">==</span><span class="st"> &quot;Tin Man&quot;</span></code></pre>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1">person <span class="op">==</span><span class="st"> &quot;Dorothy&quot;</span> <span class="op">|</span><span class="st"> </span>person <span class="op">==</span><span class="st"> &quot;Tin Man&quot;</span></a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE FALSE</code></pre></li>
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person <span class="op">&gt;</span><span class="st"> &quot;M&quot;</span></code></pre>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" data-line-number="1">person <span class="op">&gt;</span><span class="st"> &quot;M&quot;</span></a></code></pre></div>
 <pre><code>## [1] FALSE  TRUE  TRUE FALSE  TRUE</code></pre></li>
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person <span class="op">!=</span><span class="st"> &quot;Dorothy&quot;</span></code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1">person <span class="op">!=</span><span class="st"> &quot;Dorothy&quot;</span></a></code></pre></div>
 <pre><code>## [1] FALSE  TRUE  TRUE  TRUE  TRUE</code></pre></li>
 </ol>
 </div>

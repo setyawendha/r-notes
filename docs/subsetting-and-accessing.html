@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.2 Subsetting and Accessing | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.2 Subsetting and Accessing | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="introduction-to-lists.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,7 +577,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="subsetting-and-accessing" class="section level2">
 <h2><span class="header-section-number">9.2</span> Subsetting and Accessing</h2>
 <p>You can subset lists in the same way that you subset a vector: simply use the <code>[</code> sub-setting operator. Let’s pick out the first two elements of <code>lst3</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lst3[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre>
+<div class="sourceCode" id="cb1426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1426-1" data-line-number="1">lst3[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a></code></pre></div>
 <pre><code>## $nums
 ##  [1] 10 11 12 13 14 15 16 17 18 19 20
 ## 
@@ -587,40 +585,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1]  TRUE FALSE FALSE</code></pre>
 <p>We get a new list consisting of the desired two elements.</p>
 <p>Suppose we want to access just one element from <code>lst3</code>: the numbers, for instance. We could try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">justNumbers &lt;-<span class="st"> </span>lst3[<span class="dv">1</span>]
-justNumbers</code></pre>
+<div class="sourceCode" id="cb1428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1428-1" data-line-number="1">justNumbers &lt;-<span class="st"> </span>lst3[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb1428-2" data-line-number="2">justNumbers</a></code></pre></div>
 <pre><code>## $nums
 ##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 <p>Now suppose that we want to access the third number in the <code>nums</code> vector. You might think this would work fine:</p>
-<pre class="sourceCode r"><code class="sourceCode r">justNumbers[<span class="dv">3</span>]</code></pre>
+<div class="sourceCode" id="cb1430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1430-1" data-line-number="1">justNumbers[<span class="dv">3</span>]</a></code></pre></div>
 <pre><code>## $&lt;NA&gt;
 ## NULL</code></pre>
 <p>Wait a minute! The third number in <code>nums</code> is 12: so why are we getting <code>NA</code>?</p>
 <p>Look carefully again at the printout for <code>justNumbers</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">justNumbers</code></pre>
+<div class="sourceCode" id="cb1432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1432-1" data-line-number="1">justNumbers</a></code></pre></div>
 <pre><code>## $nums
 ##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 <p>The <code>$nums</code> give us the clue: <code>justNumbers</code> is not just the vector <code>nums</code>—in fact it’s not an atomic vector at all. It is a list whose only element is a vector with the name <code>nums</code>. Another way to see this is to check the length of <code>justNumbers</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(justNumbers)</code></pre>
+<div class="sourceCode" id="cb1434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1434-1" data-line-number="1"><span class="kw">length</span>(justNumbers)</a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The fact is that the sub-setting operator <code>[</code>, applied to lists, always returns a list. If you want access to an individual element of a list, then you need to use the double-bracket <code>[[</code> operator:</p>
-<pre class="sourceCode r"><code class="sourceCode r">reallyJustNumbers &lt;-<span class="st"> </span>lst3[[<span class="dv">1</span>]]
-reallyJustNumbers</code></pre>
+<div class="sourceCode" id="cb1436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1436-1" data-line-number="1">reallyJustNumbers &lt;-<span class="st"> </span>lst3[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb1436-2" data-line-number="2">reallyJustNumbers</a></code></pre></div>
 <pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 <p>Of course if an element of a list is named, then you may also access it with the dollar sign:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lst3<span class="op">$</span>nums</code></pre>
+<div class="sourceCode" id="cb1438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1438-1" data-line-number="1">lst3<span class="op">$</span>nums</a></code></pre></div>
 <pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 <p>From time to time it’s useful to “flatten out” a list into a vector of values of its elements. This is accomplished by the function <code>unlist()</code> :</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(lst1)</code></pre>
+<div class="sourceCode" id="cb1440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1440-1" data-line-number="1"><span class="kw">unlist</span>(lst1)</a></code></pre></div>
 <pre><code>##      name       age 
 ## &quot;Dorothy&quot;      &quot;12&quot;</code></pre>
 <p>As the example above shows, you have to exercise caution with <code>unlist()</code>. Since <code>unlist()</code> returns an atomic vector, when it encounters values of different types then it has to coerce them to be of the same type. In the competition between <code>double</code> and <code>character</code> types, <code>character</code> wins, so you end up with a vector of strings.</p>
 <div id="practice-exercises-28" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Practice Exercises</h3>
 <p>These exercises involve the following list:</p>
-<pre class="sourceCode r"><code class="sourceCode r">grabBag &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">letters =</span> letters,
-                <span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>),
-                <span class="dt">df =</span> bcscr<span class="op">::</span>fuel)</code></pre>
+<div class="sourceCode" id="cb1442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1442-1" data-line-number="1">grabBag &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">letters =</span> letters,</a>
+<a class="sourceLine" id="cb1442-2" data-line-number="2">                <span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb1442-3" data-line-number="3">                <span class="dt">df =</span> bcscr<span class="op">::</span>fuel)</a></code></pre></div>
 <p>Observe that the second element of this list was NOT given a name.</p>
 <ol style="list-style-type: decimal">
 <li><p>Describe in words what <code>grabBag[2:3]</code> is.</p></li>
@@ -638,13 +636,13 @@ reallyJustNumbers</code></pre>
 <li><p><code>grabBag[3]</code> is a list containing just one element: the data frame <code>fuel</code> from the <strong>bcscr</strong> package.</p></li>
 <li><p><code>grabBag[[3]]</code> is the data frame <code>fuel</code> from the <strong>bcscr</strong> package.</p></li>
 <li><p>Here are two ways:</p>
-<pre class="sourceCode r"><code class="sourceCode r">grabBag<span class="op">$</span>letters[<span class="dv">4</span>]
-grabBag[[<span class="dv">1</span>]][<span class="dv">4</span>]</code></pre></li>
+<div class="sourceCode" id="cb1443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1443-1" data-line-number="1">grabBag<span class="op">$</span>letters[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb1443-2" data-line-number="2">grabBag[[<span class="dv">1</span>]][<span class="dv">4</span>]</a></code></pre></div></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">grabBag[[<span class="dv">2</span>]][<span class="dv">6</span><span class="op">:</span><span class="dv">10</span>]</code></pre></li>
+<div class="sourceCode" id="cb1444"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1444-1" data-line-number="1">grabBag[[<span class="dv">2</span>]][<span class="dv">6</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div></li>
 <li><p>Here are two ways:</p>
-<pre class="sourceCode r"><code class="sourceCode r">grabBag<span class="op">$</span>df<span class="op">$</span>speed
-grabBag[[<span class="dv">3</span>]]<span class="op">$</span>speed</code></pre></li>
+<div class="sourceCode" id="cb1445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1445-1" data-line-number="1">grabBag<span class="op">$</span>df<span class="op">$</span>speed</a>
+<a class="sourceLine" id="cb1445-2" data-line-number="2">grabBag[[<span class="dv">3</span>]]<span class="op">$</span>speed</a></code></pre></div></li>
 </ol>
 </div>
 </div>

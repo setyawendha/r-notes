@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.4 Application: The Collatz Conjecture | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.4 Application: The Collatz Conjecture | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="repeating-things-looping.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -604,39 +602,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 In mathematics the <em>Collatz Conjecture</em> is the conjecture that for <em>any</em> initial positive number, every Collatz Sequence (the sequence formed by repeated application of the Collatz Rule) eventually contains a 1, after which it must cycle forever. No matter how large a number we begin with, we have always found that it returns to 1, but mathematicians do not know if this will be so for <em>any</em> initial number.</p>
 <p>A sequence of Collatz numbers can bounce around quite remarkably before descending to 1. Our goal in this section is to write a function called <code>collatz()</code> that will compute the Collatz sequence for any given initial number and draw a graph of the sequence as well.</p>
 <p>First, let’s make a function just for the Collatz Rule itself:</p>
-<pre class="sourceCode r"><code class="sourceCode r">collatzRule &lt;-<span class="st"> </span><span class="cf">function</span>(m) {
-  <span class="cf">if</span> ( m <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
-    <span class="kw">return</span>(m<span class="op">/</span><span class="dv">2</span>)
-  } <span class="cf">else</span> {
-    <span class="kw">return</span>(<span class="dv">3</span><span class="op">*</span>m <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
-  }
-}</code></pre>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb831-1" data-line-number="1">collatzRule &lt;-<span class="st"> </span><span class="cf">function</span>(m) {</a>
+<a class="sourceLine" id="cb831-2" data-line-number="2">  <span class="cf">if</span> ( m <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb831-3" data-line-number="3">    <span class="kw">return</span>(m<span class="op">/</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb831-4" data-line-number="4">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb831-5" data-line-number="5">    <span class="kw">return</span>(<span class="dv">3</span><span class="op">*</span>m <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb831-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb831-7" data-line-number="7">}</a></code></pre></div>
 <p>(Recall that <code>m %% 2</code> is the remainder of <code>m</code> after it is divided by 2. If this is 0, then <code>m</code> is even.)</p>
 <p>Next let’s try to get a function going that will print out Collatz numbers:</p>
-<pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  <span class="co"># n is the initial number</span>
-  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> ) {
-    <span class="kw">cat</span>(n, <span class="st">&quot; &quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-    <span class="co"># get the next number and call it n:</span>
-    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
-  }
-}</code></pre>
+<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb832-1" data-line-number="1">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb832-2" data-line-number="2">  <span class="co"># n is the initial number</span></a>
+<a class="sourceLine" id="cb832-3" data-line-number="3">  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> ) {</a>
+<a class="sourceLine" id="cb832-4" data-line-number="4">    <span class="kw">cat</span>(n, <span class="st">&quot; &quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb832-5" data-line-number="5">    <span class="co"># get the next number and call it n:</span></a>
+<a class="sourceLine" id="cb832-6" data-line-number="6">    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)</a>
+<a class="sourceLine" id="cb832-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb832-8" data-line-number="8">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">13</span>)</code></pre>
+<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb833-1" data-line-number="1"><span class="kw">collatz</span>(<span class="dv">13</span>)</a></code></pre></div>
 <pre><code>## 13 40 20 10 5 16 8 4 2</code></pre>
 <p>So far, so good, but if we are going to graph the numbers, then we should store them in a vector. The problem is that we don’t know how long the vector needs to be.</p>
 <p>One possible solution is to add to the vector as we go, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>()
-  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> ) {
-    <span class="co"># stick n onto the end of numbers:</span>
-    numbers &lt;-<span class="st"> </span><span class="kw">c</span>(numbers, n)
-    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
-  }
-  <span class="kw">print</span>(numbers)
-}</code></pre>
+<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb835-1" data-line-number="1">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb835-2" data-line-number="2">  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>()</a>
+<a class="sourceLine" id="cb835-3" data-line-number="3">  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> ) {</a>
+<a class="sourceLine" id="cb835-4" data-line-number="4">    <span class="co"># stick n onto the end of numbers:</span></a>
+<a class="sourceLine" id="cb835-5" data-line-number="5">    numbers &lt;-<span class="st"> </span><span class="kw">c</span>(numbers, n)</a>
+<a class="sourceLine" id="cb835-6" data-line-number="6">    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)</a>
+<a class="sourceLine" id="cb835-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb835-8" data-line-number="8">  <span class="kw">print</span>(numbers)</a>
+<a class="sourceLine" id="cb835-9" data-line-number="9">}</a></code></pre></div>
 <p>Try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">13</span>)</code></pre>
+<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb836-1" data-line-number="1"><span class="kw">collatz</span>(<span class="dv">13</span>)</a></code></pre></div>
 <pre><code>## [1] 13 40 20 10  5 16  8  4  2</code></pre>
 <p>This looks good. There are two problems, though, if the Collatz sequence happens to go on for a very long time.</p>
 <ul>
@@ -646,26 +644,26 @@ In mathematics the <em>Collatz Conjecture</em> is the conjecture that for <em>an
 <li><p><strong>Memory Problems</strong> Once the <code>numbers</code> vector gets long enough it will use all of the memory in the computer that is available to R. R will crash.</p></li>
 </ul>
 <p>In order to get around this problem, we should impose a limit on the number of Collatz numbers that we will compute. We’ll set the limit at 10,000. The user can change the limit, but should exercise caution in doing so. Also, we’ll initialize our <code>numbers</code> vector to have a length set to this limit. We can then assign values to elements of an <em>already existing</em> vector: this is much faster than copying entire vectors from scratch.</p>
-<pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
-  <span class="co"># collatz numbers will go in this vector</span>
-  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)
-  <span class="co"># keep count of how many numbers we have made:</span>
-  counter &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>counter <span class="op">&lt;</span><span class="st"> </span>limit) {
-    <span class="co"># need to make a new number</span>
-    counter &lt;-<span class="st"> </span>counter <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-    <span class="co"># put the current number into the vector</span>
-    numbers[counter] &lt;-<span class="st"> </span>n
-    <span class="co"># make next Collatz number</span>
-    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
-  }
-  <span class="co"># find how many Collatz numbers we made:</span>
-  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)
-  <span class="co"># print them out:</span>
-  <span class="kw">print</span>(numbers[<span class="dv">1</span><span class="op">:</span>howMany])
-}</code></pre>
+<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb839-1" data-line-number="1">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {</a>
+<a class="sourceLine" id="cb839-2" data-line-number="2">  <span class="co"># collatz numbers will go in this vector</span></a>
+<a class="sourceLine" id="cb839-3" data-line-number="3">  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)</a>
+<a class="sourceLine" id="cb839-4" data-line-number="4">  <span class="co"># keep count of how many numbers we have made:</span></a>
+<a class="sourceLine" id="cb839-5" data-line-number="5">  counter &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb839-6" data-line-number="6">  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>counter <span class="op">&lt;</span><span class="st"> </span>limit) {</a>
+<a class="sourceLine" id="cb839-7" data-line-number="7">    <span class="co"># need to make a new number</span></a>
+<a class="sourceLine" id="cb839-8" data-line-number="8">    counter &lt;-<span class="st"> </span>counter <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb839-9" data-line-number="9">    <span class="co"># put the current number into the vector</span></a>
+<a class="sourceLine" id="cb839-10" data-line-number="10">    numbers[counter] &lt;-<span class="st"> </span>n</a>
+<a class="sourceLine" id="cb839-11" data-line-number="11">    <span class="co"># make next Collatz number</span></a>
+<a class="sourceLine" id="cb839-12" data-line-number="12">    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)</a>
+<a class="sourceLine" id="cb839-13" data-line-number="13">  }</a>
+<a class="sourceLine" id="cb839-14" data-line-number="14">  <span class="co"># find how many Collatz numbers we made:</span></a>
+<a class="sourceLine" id="cb839-15" data-line-number="15">  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)</a>
+<a class="sourceLine" id="cb839-16" data-line-number="16">  <span class="co"># print them out:</span></a>
+<a class="sourceLine" id="cb839-17" data-line-number="17">  <span class="kw">print</span>(numbers[<span class="dv">1</span><span class="op">:</span>howMany])</a>
+<a class="sourceLine" id="cb839-18" data-line-number="18">}</a></code></pre></div>
 <p>Again let’s try it:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">257</span>)</code></pre>
+<div class="sourceCode" id="cb840"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb840-1" data-line-number="1"><span class="kw">collatz</span>(<span class="dv">257</span>)</a></code></pre></div>
 <pre><code>##   [1]  257  772  386  193  580  290  145  436  218  109  328  164   82   41
 ##  [15]  124   62   31   94   47  142   71  214  107  322  161  484  242  121
 ##  [29]  364  182   91  274  137  412  206  103  310  155  466  233  700  350
@@ -676,34 +674,34 @@ In mathematics the <em>Collatz Conjecture</em> is the conjecture that for <em>an
 ##  [99]  325  976  488  244  122   61  184   92   46   23   70   35  106   53
 ## [113]  160   80   40   20   10    5   16    8    4    2</code></pre>
 <p>Things are working pretty well, but since the sequence of numbers might get pretty long, perhaps we should only print out the length of the sequence, and leave it to the reader to say whether the sequence itself should be shown.</p>
-<pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
-  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)
-  counter &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>counter <span class="op">&lt;</span><span class="st"> </span>limit) {
-    counter &lt;-<span class="st"> </span>counter <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-    numbers[counter] &lt;-<span class="st"> </span>n
-    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
-  }
-  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)
-  <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)
-  <span class="cf">if</span> ( show <span class="op">==</span><span class="st"> &quot;y&quot;</span> ) {
-    <span class="kw">print</span>(numbers[<span class="dv">1</span><span class="op">:</span>howMany])
-  }
-}</code></pre>
-<p>Next let’s think about the plot. We’ll use the plotting system in the <strong>ggplot2</strong> package <span class="citation">(Wickham et al. <a href="#ref-R-ggplot2">2018</a>)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre>
+<div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb842-1" data-line-number="1">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {</a>
+<a class="sourceLine" id="cb842-2" data-line-number="2">  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)</a>
+<a class="sourceLine" id="cb842-3" data-line-number="3">  counter &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb842-4" data-line-number="4">  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>counter <span class="op">&lt;</span><span class="st"> </span>limit) {</a>
+<a class="sourceLine" id="cb842-5" data-line-number="5">    counter &lt;-<span class="st"> </span>counter <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb842-6" data-line-number="6">    numbers[counter] &lt;-<span class="st"> </span>n</a>
+<a class="sourceLine" id="cb842-7" data-line-number="7">    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)</a>
+<a class="sourceLine" id="cb842-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb842-9" data-line-number="9">  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)</a>
+<a class="sourceLine" id="cb842-10" data-line-number="10">  <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb842-11" data-line-number="11">  show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)</a>
+<a class="sourceLine" id="cb842-12" data-line-number="12">  <span class="cf">if</span> ( show <span class="op">==</span><span class="st"> &quot;y&quot;</span> ) {</a>
+<a class="sourceLine" id="cb842-13" data-line-number="13">    <span class="kw">print</span>(numbers[<span class="dv">1</span><span class="op">:</span>howMany])</a>
+<a class="sourceLine" id="cb842-14" data-line-number="14">  }</a>
+<a class="sourceLine" id="cb842-15" data-line-number="15">}</a></code></pre></div>
+<p>Next let’s think about the plot. We’ll use the plotting system in the <strong>ggplot2</strong> package <span class="citation">(Wickham et al. <a href="#ref-R-ggplot2">2019</a>)</span>.</p>
+<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb843-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
 <p>Later on we will make a serious study of plotting with <strong>ggplot2</strong>, but for now let’s just get the basic idea of plotting a set of points. First, let’s get a small set of points to plot:</p>
-<pre class="sourceCode r"><code class="sourceCode r">xvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
-yvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb844"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb844-1" data-line-number="1">xvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb844-2" data-line-number="2">yvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>)</a></code></pre></div>
 <p><code>xvals</code> contains the x-coordinates of our points, and <code>yvals</code> contains the corresponding y-coordinates.</p>
 <p>We set up a plot as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals))</code></pre>
+<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb845-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals))</a></code></pre></div>
 <p>The <code>ggplot()</code> function sets up a basic two-dimensional grid. The <code>mapping</code> parameter explains how data will be “mapped” to particular positions on the plot. In this case it has been set to:</p>
 <pre><code>aes(x = xvals, y = yvals)</code></pre>
 <p><code>aes</code> is short for “aesthetics”, which has to do with how somethings <em>looks</em>. The expression means that <code>xvals</code> will be located on the x-axis and <code>yvals</code> will be located on the y-axis of the plot.</p>
 <p>Now let’s see what we get if we actually run the call to the <code>ggplot()</code> function (see Figure <a href="collatz-conjecture.html#fig:blank-ggplot">4.2</a>):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals))</code></pre>
+<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb847-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals))</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:blank-ggplot"></span>
 <img src="r-notes_files/figure-html/blank-ggplot-1.png" alt="A ggplot2 plot without geoms." width="50%" />
 <p class="caption">
@@ -711,8 +709,8 @@ Figure 4.2: A ggplot2 plot without geoms.
 </p>
 </div>
 <p>The plot is blank! Why is this? Well, although <code>ggplot()</code> has been told what values are to be represented on the plot and where they might go, it has not yet been told how they should be shaped: it has not been told their <em>geometry</em>, you might say. We can add a geometry to the plot to get a picture (see Figure <a href="collatz-conjecture.html#fig:pointsggplot">4.3</a>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb848-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb848-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pointsggplot"></span>
 <img src="r-notes_files/figure-html/pointsggplot-1.png" alt="A ggplot2 plot with the point geom." width="50%" />
 <p class="caption">
@@ -720,9 +718,9 @@ Figure 4.3: A ggplot2 plot with the point geom.
 </p>
 </div>
 <p>The geometry determines a lot about the look of the plot. In order to have the points connected by lines we could add <code>geom_line()</code> (see Figure <a href="collatz-conjecture.html#fig:pointslinesggplot">4.4</a>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb849-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> xvals, <span class="dt">y =</span> yvals)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb849-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb849-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pointslinesggplot"></span>
 <img src="r-notes_files/figure-html/pointslinesggplot-1.png" alt="A ggplot2 plot with point and line geoms." width="50%" />
 <p class="caption">
@@ -730,82 +728,82 @@ Figure 4.4: A ggplot2 plot with point and line geoms.
 </p>
 </div>
 <p>We’ll choose a scatterplot with connecting lines for our graph of the sequence. With a little more work we can get nice labels for the x and y-axes, and a title for the graph. Our <code>collatz()</code> function now looks like:</p>
-<pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
-  <span class="co"># record initial number because we will change n</span>
-  initial &lt;-<span class="st"> </span>n  
-  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)
-  counter &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>counter <span class="op">&lt;</span><span class="st"> </span>limit) {
-    counter &lt;-<span class="st"> </span>counter <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-    numbers[counter] &lt;-<span class="st"> </span>n
-    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
-  }
-  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)
-  steps &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>howMany
-  <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)
-  <span class="cf">if</span> ( show <span class="op">==</span><span class="st"> &quot;y&quot;</span> ) {
-    <span class="kw">print</span>(numbers[steps])
-  }
-  <span class="co"># use initial value to make plot title:</span>
-  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Collatz Sequence for n = &quot;</span>, initial)
-  <span class="co"># make the plot</span>
-  <span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> numbers[steps])) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Collatz Value at Step&quot;</span>,
-          <span class="dt">title =</span> plotTitle)
-}</code></pre>
+<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb850-1" data-line-number="1">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {</a>
+<a class="sourceLine" id="cb850-2" data-line-number="2">  <span class="co"># record initial number because we will change n</span></a>
+<a class="sourceLine" id="cb850-3" data-line-number="3">  initial &lt;-<span class="st"> </span>n  </a>
+<a class="sourceLine" id="cb850-4" data-line-number="4">  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)</a>
+<a class="sourceLine" id="cb850-5" data-line-number="5">  counter &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb850-6" data-line-number="6">  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>counter <span class="op">&lt;</span><span class="st"> </span>limit) {</a>
+<a class="sourceLine" id="cb850-7" data-line-number="7">    counter &lt;-<span class="st"> </span>counter <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb850-8" data-line-number="8">    numbers[counter] &lt;-<span class="st"> </span>n</a>
+<a class="sourceLine" id="cb850-9" data-line-number="9">    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)</a>
+<a class="sourceLine" id="cb850-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb850-11" data-line-number="11">  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)</a>
+<a class="sourceLine" id="cb850-12" data-line-number="12">  steps &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>howMany</a>
+<a class="sourceLine" id="cb850-13" data-line-number="13">  <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb850-14" data-line-number="14">  show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)</a>
+<a class="sourceLine" id="cb850-15" data-line-number="15">  <span class="cf">if</span> ( show <span class="op">==</span><span class="st"> &quot;y&quot;</span> ) {</a>
+<a class="sourceLine" id="cb850-16" data-line-number="16">    <span class="kw">print</span>(numbers[steps])</a>
+<a class="sourceLine" id="cb850-17" data-line-number="17">  }</a>
+<a class="sourceLine" id="cb850-18" data-line-number="18">  <span class="co"># use initial value to make plot title:</span></a>
+<a class="sourceLine" id="cb850-19" data-line-number="19">  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Collatz Sequence for n = &quot;</span>, initial)</a>
+<a class="sourceLine" id="cb850-20" data-line-number="20">  <span class="co"># make the plot</span></a>
+<a class="sourceLine" id="cb850-21" data-line-number="21">  <span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> numbers[steps])) <span class="op">+</span></a>
+<a class="sourceLine" id="cb850-22" data-line-number="22"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb850-23" data-line-number="23"><span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Collatz Value at Step&quot;</span>,</a>
+<a class="sourceLine" id="cb850-24" data-line-number="24">          <span class="dt">title =</span> plotTitle)</a>
+<a class="sourceLine" id="cb850-25" data-line-number="25">}</a></code></pre></div>
 <p>Try this version a few times, like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collatz</span>(<span class="dv">257</span>)</code></pre>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb851-1" data-line-number="1"><span class="kw">collatz</span>(<span class="dv">257</span>)</a></code></pre></div>
 <p>It’s quite remarkable how much the sequence can rise and fall before hitting 1.</p>
 <p>A further issue worth considering is that our collatz() function depends on the previously-defined function <code>collatzRule()</code>. In order for it to work correctly, R would need to be able to find the name <code>collatzRule</code> somewhere on the search path. If the user hasn’t already defined the <code>collatzRule()</code> function, then a call to `collatz() will fail.</p>
 <p>One solution is simply to remind users of the need to define both <code>collatzRule()</code> and <code>collatz()</code> prior to running <code>collatz()</code>. Another solution—perhaps the kinder one—is to define the <code>collatzRule()</code> function in the body of <code>collatz()</code>. Let’s adopt this approach.</p>
 <p>The final version of the <code>collatz()</code> function (with some validation thrown in for good measure) appears below.</p>
-<pre class="sourceCode r"><code class="sourceCode r">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {
-  <span class="co"># add some validation:</span>
-  n &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))
-  isValid &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(n) <span class="op">&amp;&amp;</span><span class="st"> </span>n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>
-  <span class="cf">if</span> (<span class="op">!</span>isValid ) {
-    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Need an integer bigger than 1.  Try again.&quot;</span>))
-  }
-  <span class="co"># define collatzRule:</span>
-  collatzRule &lt;-<span class="st"> </span><span class="cf">function</span>(m) {
-    <span class="cf">if</span> ( m <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
-      <span class="kw">return</span>(m<span class="op">/</span><span class="dv">2</span>)
-    } <span class="cf">else</span> {
-      <span class="kw">return</span>(<span class="dv">3</span><span class="op">*</span>m <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
-    }
-  }
-  
-  <span class="co"># On with the show!</span>
-  <span class="co"># Record initial number because we will change it:</span>
-  initial &lt;-<span class="st"> </span>n 
-  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)
-  counter &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>counter <span class="op">&lt;</span><span class="st"> </span>limit) {
-    counter &lt;-<span class="st"> </span>counter <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-    numbers[counter] &lt;-<span class="st"> </span>n
-    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)
-  }
-  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)
-  <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)
-  <span class="cf">if</span> ( show <span class="op">==</span><span class="st"> &quot;y&quot;</span> ) {
-    <span class="kw">print</span>(numbers[<span class="dv">1</span><span class="op">:</span>howMany])
-  }
-  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Collatz Sequence for n = &quot;</span>, initial)
-  steps &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>howMany
-  <span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> numbers[<span class="dv">1</span><span class="op">:</span>howMany])) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Collatz Value at Step&quot;</span>,
-          <span class="dt">title =</span> plotTitle)
-}</code></pre>
+<div class="sourceCode" id="cb852"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb852-1" data-line-number="1">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {</a>
+<a class="sourceLine" id="cb852-2" data-line-number="2">  <span class="co"># add some validation:</span></a>
+<a class="sourceLine" id="cb852-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as.integer</span>(n))</a>
+<a class="sourceLine" id="cb852-4" data-line-number="4">  isValid &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(n) <span class="op">&amp;&amp;</span><span class="st"> </span>n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb852-5" data-line-number="5">  <span class="cf">if</span> (<span class="op">!</span>isValid ) {</a>
+<a class="sourceLine" id="cb852-6" data-line-number="6">    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Need an integer bigger than 1.  Try again.&quot;</span>))</a>
+<a class="sourceLine" id="cb852-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb852-8" data-line-number="8">  <span class="co"># define collatzRule:</span></a>
+<a class="sourceLine" id="cb852-9" data-line-number="9">  collatzRule &lt;-<span class="st"> </span><span class="cf">function</span>(m) {</a>
+<a class="sourceLine" id="cb852-10" data-line-number="10">    <span class="cf">if</span> ( m <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb852-11" data-line-number="11">      <span class="kw">return</span>(m<span class="op">/</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb852-12" data-line-number="12">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb852-13" data-line-number="13">      <span class="kw">return</span>(<span class="dv">3</span><span class="op">*</span>m <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb852-14" data-line-number="14">    }</a>
+<a class="sourceLine" id="cb852-15" data-line-number="15">  }</a>
+<a class="sourceLine" id="cb852-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb852-17" data-line-number="17">  <span class="co"># On with the show!</span></a>
+<a class="sourceLine" id="cb852-18" data-line-number="18">  <span class="co"># Record initial number because we will change it:</span></a>
+<a class="sourceLine" id="cb852-19" data-line-number="19">  initial &lt;-<span class="st"> </span>n </a>
+<a class="sourceLine" id="cb852-20" data-line-number="20">  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)</a>
+<a class="sourceLine" id="cb852-21" data-line-number="21">  counter &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb852-22" data-line-number="22">  <span class="cf">while</span> ( n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>counter <span class="op">&lt;</span><span class="st"> </span>limit) {</a>
+<a class="sourceLine" id="cb852-23" data-line-number="23">    counter &lt;-<span class="st"> </span>counter <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb852-24" data-line-number="24">    numbers[counter] &lt;-<span class="st"> </span>n</a>
+<a class="sourceLine" id="cb852-25" data-line-number="25">    n &lt;-<span class="st"> </span><span class="kw">collatzRule</span>(n)</a>
+<a class="sourceLine" id="cb852-26" data-line-number="26">  }</a>
+<a class="sourceLine" id="cb852-27" data-line-number="27">  howMany &lt;-<span class="st"> </span><span class="kw">min</span>(counter, limit)</a>
+<a class="sourceLine" id="cb852-28" data-line-number="28">  <span class="kw">cat</span>(<span class="st">&quot;The Collatz sequence has &quot;</span>, howMany, <span class="st">&quot; elements.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb852-29" data-line-number="29">  show &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Do you want to see it (y/n)?  &quot;</span>)</a>
+<a class="sourceLine" id="cb852-30" data-line-number="30">  <span class="cf">if</span> ( show <span class="op">==</span><span class="st"> &quot;y&quot;</span> ) {</a>
+<a class="sourceLine" id="cb852-31" data-line-number="31">    <span class="kw">print</span>(numbers[<span class="dv">1</span><span class="op">:</span>howMany])</a>
+<a class="sourceLine" id="cb852-32" data-line-number="32">  }</a>
+<a class="sourceLine" id="cb852-33" data-line-number="33">  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Collatz Sequence for n = &quot;</span>, initial)</a>
+<a class="sourceLine" id="cb852-34" data-line-number="34">  steps &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>howMany</a>
+<a class="sourceLine" id="cb852-35" data-line-number="35">  <span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> steps, <span class="dt">y =</span> numbers[<span class="dv">1</span><span class="op">:</span>howMany])) <span class="op">+</span></a>
+<a class="sourceLine" id="cb852-36" data-line-number="36"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb852-37" data-line-number="37"><span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Collatz Value at Step&quot;</span>,</a>
+<a class="sourceLine" id="cb852-38" data-line-number="38">          <span class="dt">title =</span> plotTitle)</a>
+<a class="sourceLine" id="cb852-39" data-line-number="39">}</a></code></pre></div>
 
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-ggplot2">
-<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, and Kara Woo. 2018. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.</p>
+<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, and Hiroaki Yutani. 2019. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.</p>
 </div>
 </div>
             </section>

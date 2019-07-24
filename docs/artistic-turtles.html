@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.6 Artistic Turtles | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.6 Artistic Turtles | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="more-complex-turtle-graphs.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,18 +578,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.6</span> Artistic Turtles</h2>
 <p>In the Practice Exercises (see Section <a href="random-moves.html#turtle-practice">5.4.6</a>) you met the <code>colors()</code> function. Let’s have the Turtle put it to good use.</p>
 <p>First of all, we might ask the Turtle to show us a sample of a given color:</p>
-<pre class="sourceCode r"><code class="sourceCode r">turtle_show_color &lt;-<span class="st"> </span><span class="cf">function</span>(color) {
-  <span class="kw">cat</span>(<span class="st">&quot;I&#39;m drawing a &quot;</span>, color, <span class="st">&quot; square!&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  <span class="kw">turtle_init</span>()
-  <span class="kw">turtle_col</span>(color)
-  <span class="kw">turtle_lwd</span>(<span class="dv">50</span>)
-  <span class="kw">turtle_do</span>({
-    <span class="kw">turtle_setpos</span>(<span class="dt">x =</span> <span class="dv">30</span>, <span class="dt">y =</span> <span class="dv">30</span>)
-    <span class="kw">turtle_square</span>(<span class="dv">40</span>)
-  })
-}</code></pre>
+<div class="sourceCode" id="cb946"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb946-1" data-line-number="1">turtle_show_color &lt;-<span class="st"> </span><span class="cf">function</span>(color) {</a>
+<a class="sourceLine" id="cb946-2" data-line-number="2">  <span class="kw">cat</span>(<span class="st">&quot;I&#39;m drawing a &quot;</span>, color, <span class="st">&quot; square!&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb946-3" data-line-number="3">  <span class="kw">turtle_init</span>()</a>
+<a class="sourceLine" id="cb946-4" data-line-number="4">  <span class="kw">turtle_col</span>(color)</a>
+<a class="sourceLine" id="cb946-5" data-line-number="5">  <span class="kw">turtle_lwd</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb946-6" data-line-number="6">  <span class="kw">turtle_do</span>({</a>
+<a class="sourceLine" id="cb946-7" data-line-number="7">    <span class="kw">turtle_setpos</span>(<span class="dt">x =</span> <span class="dv">30</span>, <span class="dt">y =</span> <span class="dv">30</span>)</a>
+<a class="sourceLine" id="cb946-8" data-line-number="8">    <span class="kw">turtle_square</span>(<span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb946-9" data-line-number="9">  })</a>
+<a class="sourceLine" id="cb946-10" data-line-number="10">}</a></code></pre></div>
 <p>Note the very thick lines specified above: <code>turtle_lwd(50)</code>. Our turtle will draw a square with very thick sides that have the desired color. Let’s ask for burlywood. The resulting color-swatch is shown in Figure <a href="artistic-turtles.html#fig:turtle-burlywood">5.14</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_show_color</span>(<span class="st">&quot;burlywood&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb947"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb947-1" data-line-number="1"><span class="kw">turtle_show_color</span>(<span class="st">&quot;burlywood&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:turtle-burlywood"></span>
 <img src="r-notes_files/figure-html/turtle-burlywood-1.png" alt="I'm drawing a burlywood square!" width="50%" />
 <p class="caption">
@@ -599,7 +597,7 @@ Figure 5.14: I’m drawing a burlywood square!
 </p>
 </div>
 <p>Feel free to ask for a random color. The result of the call below is shown in Figure <a href="artistic-turtles.html#fig:turtle-show-random-color">5.15</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_show_color</span>(<span class="kw">sample</span>(<span class="kw">colors</span>(), <span class="dt">size =</span> <span class="dv">1</span>))</code></pre>
+<div class="sourceCode" id="cb948"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb948-1" data-line-number="1"><span class="kw">turtle_show_color</span>(<span class="kw">sample</span>(<span class="kw">colors</span>(), <span class="dt">size =</span> <span class="dv">1</span>))</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:turtle-show-random-color"></span>
 <img src="r-notes_files/figure-html/turtle-show-random-color-1.png" alt="I'm drawing a palegreen2 square!" width="50%" />
 <p class="caption">
@@ -607,25 +605,25 @@ Figure 5.15: I’m drawing a palegreen2 square!
 </p>
 </div>
 <p>The function below is the Turtle’s attempt to dash off a quick imitation of the work of Jackson Pollack, the great American abstract expressionist:</p>
-<pre class="sourceCode r"><code class="sourceCode r">turtle_quick_pollack &lt;-<span class="st"> </span><span class="cf">function</span>(strokes) {
-  <span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)
-  <span class="kw">turtle_lwd</span>(<span class="dv">50</span>)
-  colorsUsed &lt;-<span class="st"> </span><span class="kw">character</span>(strokes)
-  <span class="kw">turtle_do</span>({
-    <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>strokes ) {
-      randomColor &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">colors</span>(), <span class="dt">size =</span> <span class="dv">1</span>)
-      <span class="kw">turtle_col</span>(randomColor)
-      colorsUsed[i] &lt;-<span class="st"> </span>randomColor
-      randomAngle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">360</span>)
-      <span class="kw">turtle_left</span>(randomAngle)
-      <span class="kw">turtle_forward</span>(<span class="dv">10</span>)
-    }
-  })
-  <span class="kw">cat</span>(<span class="st">&quot;Behold my masterpiece!  It was painted with:</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  <span class="kw">print</span>(colorsUsed)
-}</code></pre>
+<div class="sourceCode" id="cb949"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb949-1" data-line-number="1">turtle_quick_pollack &lt;-<span class="st"> </span><span class="cf">function</span>(strokes) {</a>
+<a class="sourceLine" id="cb949-2" data-line-number="2">  <span class="kw">turtle_init</span>(<span class="dt">mode =</span> <span class="st">&quot;clip&quot;</span>)</a>
+<a class="sourceLine" id="cb949-3" data-line-number="3">  <span class="kw">turtle_lwd</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb949-4" data-line-number="4">  colorsUsed &lt;-<span class="st"> </span><span class="kw">character</span>(strokes)</a>
+<a class="sourceLine" id="cb949-5" data-line-number="5">  <span class="kw">turtle_do</span>({</a>
+<a class="sourceLine" id="cb949-6" data-line-number="6">    <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>strokes ) {</a>
+<a class="sourceLine" id="cb949-7" data-line-number="7">      randomColor &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">colors</span>(), <span class="dt">size =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb949-8" data-line-number="8">      <span class="kw">turtle_col</span>(randomColor)</a>
+<a class="sourceLine" id="cb949-9" data-line-number="9">      colorsUsed[i] &lt;-<span class="st"> </span>randomColor</a>
+<a class="sourceLine" id="cb949-10" data-line-number="10">      randomAngle &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">360</span>)</a>
+<a class="sourceLine" id="cb949-11" data-line-number="11">      <span class="kw">turtle_left</span>(randomAngle)</a>
+<a class="sourceLine" id="cb949-12" data-line-number="12">      <span class="kw">turtle_forward</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb949-13" data-line-number="13">    }</a>
+<a class="sourceLine" id="cb949-14" data-line-number="14">  })</a>
+<a class="sourceLine" id="cb949-15" data-line-number="15">  <span class="kw">cat</span>(<span class="st">&quot;Behold my masterpiece!  It was painted with:</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb949-16" data-line-number="16">  <span class="kw">print</span>(colorsUsed)</a>
+<a class="sourceLine" id="cb949-17" data-line-number="17">}</a></code></pre></div>
 <p>Note that the colors used are output to the console. Let’s have it make a picture with 50 strokes made by random-colored brushes. The resulting painting appears as Figure <a href="artistic-turtles.html#fig:turtle-quick-pollack">5.16</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_quick_pollack</span>(<span class="dv">50</span>)</code></pre>
+<div class="sourceCode" id="cb950"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb950-1" data-line-number="1"><span class="kw">turtle_quick_pollack</span>(<span class="dv">50</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:turtle-quick-pollack"></span>
 <img src="r-notes_files/figure-html/turtle-quick-pollack-1.png" alt="Behold my masterpiece!" width="50%" />
 <p class="caption">
@@ -633,23 +631,23 @@ Figure 5.16: Behold my masterpiece!
 </p>
 </div>
 <pre><code>## Behold my masterpiece!  It was painted with:
-##  [1] &quot;floralwhite&quot;          &quot;darkolivegreen4&quot;      &quot;lemonchiffon&quot;        
-##  [4] &quot;steelblue4&quot;           &quot;grey80&quot;               &quot;palegreen2&quot;          
-##  [7] &quot;grey98&quot;               &quot;lightpink4&quot;           &quot;olivedrab&quot;           
-## [10] &quot;lightyellow4&quot;         &quot;grey7&quot;                &quot;seashell&quot;            
-## [13] &quot;gold&quot;                 &quot;grey3&quot;                &quot;limegreen&quot;           
-## [16] &quot;darkorchid2&quot;          &quot;magenta1&quot;             &quot;gray72&quot;              
-## [19] &quot;lightsalmon&quot;          &quot;maroon4&quot;              &quot;salmon2&quot;             
-## [22] &quot;grey48&quot;               &quot;maroon3&quot;              &quot;green4&quot;              
-## [25] &quot;coral3&quot;               &quot;lightgoldenrodyellow&quot; &quot;burlywood1&quot;          
-## [28] &quot;gray9&quot;                &quot;lavenderblush4&quot;       &quot;chocolate4&quot;          
-## [31] &quot;darkcyan&quot;             &quot;navajowhite1&quot;         &quot;gray21&quot;              
-## [34] &quot;gray59&quot;               &quot;tomato&quot;               &quot;tan4&quot;                
-## [37] &quot;maroon4&quot;              &quot;lightpink3&quot;           &quot;thistle1&quot;            
-## [40] &quot;dodgerblue1&quot;          &quot;darkslategray1&quot;       &quot;gray87&quot;              
-## [43] &quot;ivory2&quot;               &quot;grey&quot;                 &quot;snow&quot;                
-## [46] &quot;lavenderblush2&quot;       &quot;ivory&quot;                &quot;indianred1&quot;          
-## [49] &quot;lightyellow&quot;          &quot;powderblue&quot;</code></pre>
+##  [1] &quot;lightskyblue3&quot;   &quot;gray12&quot;          &quot;grey62&quot;         
+##  [4] &quot;cyan&quot;            &quot;gray77&quot;          &quot;lightpink3&quot;     
+##  [7] &quot;sandybrown&quot;      &quot;gray57&quot;          &quot;darkolivegreen2&quot;
+## [10] &quot;snow3&quot;           &quot;grey43&quot;          &quot;sandybrown&quot;     
+## [13] &quot;grey79&quot;          &quot;orangered1&quot;      &quot;blanchedalmond&quot; 
+## [16] &quot;gray95&quot;          &quot;mediumpurple2&quot;   &quot;darkgoldenrod4&quot; 
+## [19] &quot;purple&quot;          &quot;dodgerblue2&quot;     &quot;grey93&quot;         
+## [22] &quot;violetred&quot;       &quot;steelblue2&quot;      &quot;grey71&quot;         
+## [25] &quot;gold4&quot;           &quot;grey64&quot;          &quot;goldenrod2&quot;     
+## [28] &quot;brown3&quot;          &quot;orangered2&quot;      &quot;gray&quot;           
+## [31] &quot;gray52&quot;          &quot;darkgoldenrod3&quot;  &quot;grey70&quot;         
+## [34] &quot;lightslategrey&quot;  &quot;aquamarine4&quot;     &quot;grey71&quot;         
+## [37] &quot;grey5&quot;           &quot;darkslategray&quot;   &quot;gray19&quot;         
+## [40] &quot;ivory1&quot;          &quot;deeppink&quot;        &quot;mediumorchid&quot;   
+## [43] &quot;palevioletred1&quot;  &quot;wheat2&quot;          &quot;tan&quot;            
+## [46] &quot;springgreen&quot;     &quot;thistle&quot;         &quot;chartreuse3&quot;    
+## [49] &quot;grey9&quot;           &quot;royalblue4&quot;</code></pre>
 
 </div>
             </section>

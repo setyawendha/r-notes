@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.4 More About Arguments | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.4 More About Arguments | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="what-a-function-returns.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -604,70 +602,70 @@ the third term in the series.</li>
 </ul>
 <p>What Madhava discovered was that if you <em>do</em> stop after some large number of terms, then the sum of the terms you have constructed will be close to <span class="math inline">\(\pi\)</span>. The more terms you add up before stopping, the closer to <span class="math inline">\(\pi\)</span> you will get.</p>
 <p>Let’s write a function to compute the sum of the first <span class="math inline">\(n\)</span> terms of the series, where <span class="math inline">\(n\)</span> can be any value we choose.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># function to approximate pi with Madhava&#39;s series</span>
-<span class="co"># (sum the first n terms of the series)</span>
-madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  <span class="co"># make a vector of all of the k&#39;s we need:</span>
-  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n
-  <span class="co"># make a vector of the first n terms of the sum:</span>
-  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)
-  <span class="co"># return the sum of the terms:</span>
-  <span class="kw">sum</span>(terms)
-}</code></pre>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb527-1" data-line-number="1"><span class="co"># function to approximate pi with Madhava&#39;s series</span></a>
+<a class="sourceLine" id="cb527-2" data-line-number="2"><span class="co"># (sum the first n terms of the series)</span></a>
+<a class="sourceLine" id="cb527-3" data-line-number="3">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb527-4" data-line-number="4">  <span class="co"># make a vector of all of the k&#39;s we need:</span></a>
+<a class="sourceLine" id="cb527-5" data-line-number="5">  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb527-6" data-line-number="6">  <span class="co"># make a vector of the first n terms of the sum:</span></a>
+<a class="sourceLine" id="cb527-7" data-line-number="7">  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb527-8" data-line-number="8">  <span class="co"># return the sum of the terms:</span></a>
+<a class="sourceLine" id="cb527-9" data-line-number="9">  <span class="kw">sum</span>(terms)</a>
+<a class="sourceLine" id="cb527-10" data-line-number="10">}</a></code></pre></div>
 <p>R’s vectorization capabilities make it easy to write the code; in fact, the code is essentially a copy of the sum-formula.</p>
 <p>Note also the presence of <em>comments</em> in the code above. Anything that appears on a line after the pound-sign <code>#</code> will be ignored by R. We therefore use the <code>#</code>-sign to insert ordinary-language comments into our code in order to explain to others (and to ourselves when we look at the code much later) what we are doing and why we are doing it.</p>
 <p>Let’s try it out by adding the first million terms of the series:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>(<span class="dv">1000000</span>)</code></pre>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb528-1" data-line-number="1"><span class="kw">madhavaPI</span>(<span class="dv">1000000</span>)</a></code></pre></div>
 <pre><code>## [1] 3.141592</code></pre>
 <p>How close is this to <span class="math inline">\(\pi\)</span>? R has a built-in constant <code>pi</code> that will tell us:</p>
-<pre class="sourceCode r"><code class="sourceCode r">pi</code></pre>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb530-1" data-line-number="1">pi</a></code></pre></div>
 <pre><code>## [1] 3.141593</code></pre>
 <p>Madhava’s approximation was pretty close, although we did have to add up quite a few terms!</p>
 <p>The <code>madhavaPI()</code> function has a parameter <code>n</code> that stands for the number of terms we want to add up. If we don’t provide a value for <code>n</code>, then there will be an error:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>()</code></pre>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb532-1" data-line-number="1"><span class="kw">madhavaPI</span>()</a></code></pre></div>
 <pre><code>## Error in madhavaPI() : argument &quot;n&quot; is missing, with no default</code></pre>
 <p>There is a way, though, to allow a user to avoid providing a value for <code>n</code>. We simply provide a <em>default value</em> for it, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>) {
-  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n
-  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)
-  <span class="kw">sum</span>(terms)
-}</code></pre>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb534-1" data-line-number="1">madhavaPI &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">1000000</span>) {</a>
+<a class="sourceLine" id="cb534-2" data-line-number="2">  k &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</a>
+<a class="sourceLine" id="cb534-3" data-line-number="3">  terms &lt;-<span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">^</span>(k<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">4</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>k<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb534-4" data-line-number="4">  <span class="kw">sum</span>(terms)</a>
+<a class="sourceLine" id="cb534-5" data-line-number="5">}</a></code></pre></div>
 <p>Now we can call the function without having to specify an argument for the parameter <code>n</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>()</code></pre>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb535-1" data-line-number="1"><span class="kw">madhavaPI</span>()</a></code></pre></div>
 <pre><code>## [1] 3.141592</code></pre>
 <p>The function used the default value of 1000000, so it summed the first million terms.</p>
 <p>On the other hand, if the user provides his or her own value for <code>n</code> then the function will <em>override</em> the default:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaPI</span>(<span class="dv">100</span>)   <span class="co"># only the first hundred terms, please!</span></code></pre>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb537-1" data-line-number="1"><span class="kw">madhavaPI</span>(<span class="dv">100</span>)   <span class="co"># only the first hundred terms, please!</span></a></code></pre></div>
 <pre><code>## [1] 3.131593</code></pre>
 <p>If you are writing a function for which some of the parameters will often be assigned particular values, it would be a kindness to your users to write in these common values as defaults.</p>
 </div>
 <div id="argument-matching" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> Argument-Matching</h3>
 <p>Sometimes you will see functions in R that provide what appears to be a <em>vector</em> of default values. You’ll see this in the following example, which concerns a function that uses a named vector to report the favorite color of each of the major groups of inhabitants of the Land of Oz.</p>
-<pre class="sourceCode r"><code class="sourceCode r">inhabitants &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Munchkin&quot;</span>, <span class="st">&quot;Winkie&quot;</span>, 
-            <span class="st">&quot;Quadling&quot;</span>, <span class="st">&quot;Gillikin&quot;</span>)
-favColor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;purple&quot;</span>)
-<span class="kw">names</span>(favColor) &lt;-<span class="st"> </span>inhabitants
-
-favColorReport &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">inhabitant =</span> inhabitants) {
-  x &lt;-<span class="st"> </span><span class="kw">match.arg</span>(inhabitant)
-  <span class="kw">cat</span>(favColor[x],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb539-1" data-line-number="1">inhabitants &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Munchkin&quot;</span>, <span class="st">&quot;Winkie&quot;</span>, </a>
+<a class="sourceLine" id="cb539-2" data-line-number="2">            <span class="st">&quot;Quadling&quot;</span>, <span class="st">&quot;Gillikin&quot;</span>)</a>
+<a class="sourceLine" id="cb539-3" data-line-number="3">favColor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;purple&quot;</span>)</a>
+<a class="sourceLine" id="cb539-4" data-line-number="4"><span class="kw">names</span>(favColor) &lt;-<span class="st"> </span>inhabitants</a>
+<a class="sourceLine" id="cb539-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb539-6" data-line-number="6">favColorReport &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">inhabitant =</span> inhabitants) {</a>
+<a class="sourceLine" id="cb539-7" data-line-number="7">  x &lt;-<span class="st"> </span><span class="kw">match.arg</span>(inhabitant)</a>
+<a class="sourceLine" id="cb539-8" data-line-number="8">  <span class="kw">cat</span>(favColor[x],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb539-9" data-line-number="9">}</a></code></pre></div>
 <p>Here are a couple of sample calls:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favColorReport</span>(<span class="st">&quot;Winkie&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb540-1" data-line-number="1"><span class="kw">favColorReport</span>(<span class="st">&quot;Winkie&quot;</span>)</a></code></pre></div>
 <pre><code>## yellow</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favColorReport</span>(<span class="st">&quot;Quadling&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb542-1" data-line-number="1"><span class="kw">favColorReport</span>(<span class="st">&quot;Quadling&quot;</span>)</a></code></pre></div>
 <pre><code>## red</code></pre>
 <p>It might get tiresome to type out the full name of each group of inhabitants. What would happen if we got a bit lazy?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favColorReport</span>(<span class="st">&quot;Win&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb544-1" data-line-number="1"><span class="kw">favColorReport</span>(<span class="st">&quot;Win&quot;</span>)</a></code></pre></div>
 <pre><code>## yellow</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favColorReport</span>(<span class="st">&quot;Wi&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb546-1" data-line-number="1"><span class="kw">favColorReport</span>(<span class="st">&quot;Wi&quot;</span>)</a></code></pre></div>
 <pre><code>## yellow</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favColorReport</span>(<span class="st">&quot;W&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb548-1" data-line-number="1"><span class="kw">favColorReport</span>(<span class="st">&quot;W&quot;</span>)</a></code></pre></div>
 <pre><code>## yellow</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favColorReport</span>(<span class="st">&quot;Qua&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb550-1" data-line-number="1"><span class="kw">favColorReport</span>(<span class="st">&quot;Qua&quot;</span>)</a></code></pre></div>
 <pre><code>## red</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favColorReport</span>(<span class="st">&quot;Gil&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb552-1" data-line-number="1"><span class="kw">favColorReport</span>(<span class="st">&quot;Gil&quot;</span>)</a></code></pre></div>
 <pre><code>## purple</code></pre>
 <p>The key to this behavior is two-fold:</p>
 <ul>
@@ -676,11 +674,11 @@ favColorReport &lt;-<span class="st"> </span><span class="cf">function</span>(<s
 </ul>
 <p>Sometimes when you look at R-help you’ll see the default value for a parameter set as a vector—usually a character-vector, as in our example. Most likely what is going on is that somewhere inside the function R will attempt to match the argument you provide with one of the elements of that “default” vector. When a function is written in this way, the possible parameters can have quite long names but the user doesn’t have to type them in all the way, as long as the user types enough characters to pick out uniquely an element of the default vector.</p>
 <p>The matching is done by exact match of initial characters. For example, it won’t do for me to enter:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favColorReport</span>(<span class="st">&quot;w&quot;</span>)  <span class="co"># wants Winkies, but using lower-case w</span></code></pre>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb554-1" data-line-number="1"><span class="kw">favColorReport</span>(<span class="st">&quot;w&quot;</span>)  <span class="co"># wants Winkies, but using lower-case w</span></a></code></pre></div>
 <pre><code>## Error in match.arg(inhabitant) : &#39;arg&#39; should be one of 
 ## “Munchkin”, “Winkie”, “Quadling”, “Gillikin”</code></pre>
 <p>Note that the default vector isn’t really a default <em>value</em> for the parameter. Its first element does, however, serve as the default value:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favColorReport</span>()  <span class="co"># defaults to &quot;Munchkin&quot;</span></code></pre>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb556-1" data-line-number="1"><span class="kw">favColorReport</span>()  <span class="co"># defaults to &quot;Munchkin&quot;</span></a></code></pre></div>
 <pre><code>## blue</code></pre>
 </div>
 <div id="practice-exercises-9" class="section level3">
@@ -688,10 +686,10 @@ favColorReport &lt;-<span class="st"> </span><span class="cf">function</span>(<s
 <ol style="list-style-type: decimal">
 <li><p>Write a function called <code>addSix()</code> that adds six to any number that is is given. The function should have a single parameter named <code>x</code>, and the default value of <code>x</code> should be 5.</p></li>
 <li><p>Tin Man wants to write a function called <code>addTenAndSquare()</code> that takes any given number, adds ten to it and then squares the result. For example, given 5 the function will return <span class="math inline">\((5 + 10)^2 = 225\)</span>. He decides that input value shall be called <code>n</code> and that the default value of <code>n</code> shall be 4. Here is Tin Man’s code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">addTenAndSquare &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  n &lt;-<span class="st"> </span><span class="dv">4</span>
-  (n <span class="op">+</span><span class="st"> </span><span class="dv">10</span>)<span class="op">^</span><span class="dv">2</span>
-}</code></pre>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb558-1" data-line-number="1">addTenAndSquare &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb558-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb558-3" data-line-number="3">  (n <span class="op">+</span><span class="st"> </span><span class="dv">10</span>)<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb558-4" data-line-number="4">}</a></code></pre></div>
 <p>Has Tin Man accomplished what he set out to do? Why or hy not?</p></li>
 </ol>
 </div>
@@ -699,27 +697,27 @@ favColorReport &lt;-<span class="st"> </span><span class="cf">function</span>(<s
 <h3><span class="header-section-number">3.4.4</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s the function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">addSix &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">x =</span> <span class="dv">5</span>) {
-  x <span class="op">+</span><span class="st"> </span><span class="dv">6</span>
-}</code></pre>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb559-1" data-line-number="1">addSix &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">x =</span> <span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb559-2" data-line-number="2">  x <span class="op">+</span><span class="st"> </span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb559-3" data-line-number="3">}</a></code></pre></div>
 <p>Let’s test it:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addSix</span>()</code></pre>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb560-1" data-line-number="1"><span class="kw">addSix</span>()</a></code></pre></div>
 <pre><code>## [1] 11</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addSix</span>(<span class="dt">x =</span> <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb562-1" data-line-number="1"><span class="kw">addSix</span>(<span class="dt">x =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## [1] 16</code></pre></li>
 <li><p>Tin Man’s function does not work correctly. Consider the following calls:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addTenAndSquare</span>(<span class="dv">2</span>)  <span class="co"># should give (2 + 10)^ 2 = 144</span></code></pre>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb564-1" data-line-number="1"><span class="kw">addTenAndSquare</span>(<span class="dv">2</span>)  <span class="co"># should give (2 + 10)^ 2 = 144</span></a></code></pre></div>
 <pre><code>## [1] 196</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addTenAndSquare</span>(<span class="dv">5</span>)  <span class="co"># should give (5 + 10)^ 2 = 225</span></code></pre>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb566-1" data-line-number="1"><span class="kw">addTenAndSquare</span>(<span class="dv">5</span>)  <span class="co"># should give (5 + 10)^ 2 = 225</span></a></code></pre></div>
 <pre><code>## [1] 196</code></pre>
 <p>The function only returns <span class="math inline">\((4 + 10)^2\)</span>,no matter what it is given! The problem is that <code>n</code> is set to 4 within the body of the function. The correct way to define the function would be:</p>
-<pre class="sourceCode r"><code class="sourceCode r">addTenAndSquare &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">4</span>) {
-  (n <span class="op">+</span><span class="st"> </span><span class="dv">10</span>)<span class="op">^</span><span class="dv">2</span>
-}</code></pre>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" data-line-number="1">addTenAndSquare &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">4</span>) {</a>
+<a class="sourceLine" id="cb568-2" data-line-number="2">  (n <span class="op">+</span><span class="st"> </span><span class="dv">10</span>)<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb568-3" data-line-number="3">}</a></code></pre></div>
 <p>This works correctly:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addTenAndSquare</span>()</code></pre>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb569-1" data-line-number="1"><span class="kw">addTenAndSquare</span>()</a></code></pre></div>
 <pre><code>## [1] 196</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addTenAndSquare</span>(<span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb571-1" data-line-number="1"><span class="kw">addTenAndSquare</span>(<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 144</code></pre></li>
 </ol>
 </div>

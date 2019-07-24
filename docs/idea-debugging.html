@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.3 Debugging | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.3 Debugging | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="idea-tour.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,15 +578,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.3</span> Debugging</h2>
 <p>It’s easy to make mistakes when you program—even when you are very experienced! Incorrect computer code is said to have a <em>bug</em>, and the art of finding bugs and correcting them is called <em>debugging</em>. </p>
 <p>Consider the following code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">scarecrowQuote &lt;-<span class="st"> &quot;It is such an uncomfortable feeling to know one is a fool.&quot;</span>
-<span class="kw">paste</span>(<span class="st">&quot;The Scarecrow says: &quot;</span>, scarecrowquote)</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">scarecrowQuote &lt;-<span class="st"> &quot;It is such an uncomfortable feeling to know one is a fool.&quot;</span></a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="kw">paste</span>(<span class="st">&quot;The Scarecrow says: &quot;</span>, scarecrowquote)</a></code></pre></div>
 <p>When we run it we get the following error message in the console:</p>
 <pre><code>## Error in paste(&quot;The Scarecrow says: &quot;, scarecrowquote) : 
 ##  object &#39;scarecrowquote&#39; not found</code></pre>
 <p>R’s error messages are often quite mysterious—they are intended to be maximally useful to experienced R programmers—but it’s always a good idea to read them anyway. In this case the message clearly tells us the problem: R cannot find the object <code>scarecrowquote</code> on its search path. This prompt us to look more closely at the name <code>scarecrow</code>, and sooner or later we will realize that we have a misspelling: the variable that was actually defined was <code>scarecrowQuote</code>, with a capital Q.</p>
 <p>The correct code is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">scarecrowQuote &lt;-<span class="st"> &quot;It is such an uncomfortable feeling to know one is a fool.&quot;</span>
-<span class="kw">paste</span>(<span class="st">&quot;The Scarecrow says: &quot;</span>, scarecrowQuote)</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">scarecrowQuote &lt;-<span class="st"> &quot;It is such an uncomfortable feeling to know one is a fool.&quot;</span></a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">paste</span>(<span class="st">&quot;The Scarecrow says: &quot;</span>, scarecrowQuote)</a></code></pre></div>
 <pre><code>## [1] &quot;The Scarecrow says:  It is such an uncomfortable feeling to know one is a fool.&quot;</code></pre>
 
 <div class="rmdimportant">
@@ -596,10 +594,10 @@ Always bear in mind that R is case-sensitive!
 </div>
 
 <p>Here’s another buggy bit of code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">SermonMountComment &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Oh, it&#39;s &quot;</span>blessed are the meek.<span class="st">&quot;&quot;</span>,
-                     <span class="st">&quot;</span><span class="ch">\n</span><span class="st">I&#39;m glad they are getting something:</span><span class="ch">\n</span><span class="st">&quot;</span>,
-                     <span class="st">&quot;they have a hell of a time.&quot;</span>)
-<span class="kw">cat</span>(SermonMountComment)</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">SermonMountComment &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Oh, it&#39;s &quot;</span>blessed are the meek.<span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">                     <span class="st">&quot;</span><span class="ch">\n</span><span class="st">I&#39;m glad they are getting something:</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">                     <span class="st">&quot;they have a hell of a time.&quot;</span>)</a>
+<a class="sourceLine" id="cb63-4" data-line-number="4"><span class="kw">cat</span>(SermonMountComment)</a></code></pre></div>
 <p>The idea is to produce:</p>
 <pre><code>## Oh, it&#39;s &quot;blessed are the meek.
 ## I&#39;m glad they are getting something:
@@ -621,18 +619,18 @@ Error in cat(SermonMountComment) : object &#39;SermonMountComment&#39; not found
 </blockquote>
 <p>We see that this string has quotes within quotes. Now R uses quotes as <em>delimiters</em>  for strings: that is, quote-marks indicate where a string begins and where it ends. Hence from R’s point of view, the first string consists of just: <code>&quot;Oh, it's &quot;</code>. But then there is no comma to separate this string from the next string argument that the <code>paste()</code> functions expects. Instead R sees the <code>b</code> in <code>blessed</code>; that’s an <em>unexpected symbol</em>. Things go downhill from there.</p>
 <p>There are a couple of ways to correct the problem. One approach is to use single quotes inside any string that is delimited with double quotes, thus:</p>
-<pre class="sourceCode r"><code class="sourceCode r">SermonMountComment &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Oh, it&#39;s &#39;blessed are the meek.&#39;&quot;</span>,
-                     <span class="st">&quot;</span><span class="ch">\n</span><span class="st">I&#39;m glad they are getting something:</span><span class="ch">\n</span><span class="st">&quot;</span>,
-                     <span class="st">&quot;they have a hell of a time.&quot;</span>)
-<span class="kw">cat</span>(SermonMountComment)</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">SermonMountComment &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Oh, it&#39;s &#39;blessed are the meek.&#39;&quot;</span>,</a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">                     <span class="st">&quot;</span><span class="ch">\n</span><span class="st">I&#39;m glad they are getting something:</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb66-3" data-line-number="3">                     <span class="st">&quot;they have a hell of a time.&quot;</span>)</a>
+<a class="sourceLine" id="cb66-4" data-line-number="4"><span class="kw">cat</span>(SermonMountComment)</a></code></pre></div>
 <pre><code>## Oh, it&#39;s &#39;blessed are the meek.&#39; 
 ## I&#39;m glad they are getting something:
 ##  they have a hell of a time.</code></pre>
 <p>On the other hand if you really want those double-quotes inside the string, you can <em>escape</em> their special meaning as string-delimiter by prepending a backslash (<code>\</code>) to them, thus:</p>
-<pre class="sourceCode r"><code class="sourceCode r">SermonMountComment &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Oh, it&#39;s </span><span class="ch">\&quot;</span><span class="st">blessed are the meek.</span><span class="ch">\&quot;</span><span class="st">&quot;</span>,
-                     <span class="st">&quot;</span><span class="ch">\n</span><span class="st">I&#39;m glad they are getting something:</span><span class="ch">\n</span><span class="st">&quot;</span>,
-                     <span class="st">&quot;they have a hell of a time.&quot;</span>)
-<span class="kw">cat</span>(SermonMountComment)</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">SermonMountComment &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Oh, it&#39;s </span><span class="ch">\&quot;</span><span class="st">blessed are the meek.</span><span class="ch">\&quot;</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">                     <span class="st">&quot;</span><span class="ch">\n</span><span class="st">I&#39;m glad they are getting something:</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb68-3" data-line-number="3">                     <span class="st">&quot;they have a hell of a time.&quot;</span>)</a>
+<a class="sourceLine" id="cb68-4" data-line-number="4"><span class="kw">cat</span>(SermonMountComment)</a></code></pre></div>
 <pre><code>## Oh, it&#39;s &quot;blessed are the meek.&quot; 
 ## I&#39;m glad they are getting something:
 ##  they have a hell of a time.</code></pre>

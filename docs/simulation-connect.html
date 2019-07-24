@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.4 Example: Will They Connect? | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.4 Example: Will They Connect? | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="triangle-chance.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,22 +578,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.4</span> Example: Will They Connect?</h2>
 <p>Anna and Raj make a date for coffee tomorrow at the local Coffee Shop. After making the date, both of them forget the exact time they agreed to meet: they can only remember that it was to be sometime between 10 and 11am. Each person, independently of the other, randomly picks a time between 10 and 11 to arrive. If Anna arrives and Raj is not there, she will wait up to ten minutes for him, but will leave if he does not show within that time period. Raj is similarly disposed: he will wait ten minutes—but no more—for Anna. What is the chance that they meet?</p>
 <p>The key to designing a simulation procedure is to realize that Anna and Raj will connect if and only if the difference between their arrival times is less than 10 minutes. It doesn’t matter who arrived first, so long as the <em>difference</em> is less than 10. This means that we want to check on the <em>absolute value</em> of Anna’s arrival time minus Raj’s arrival time. The following code implements this idea:</p>
-<pre class="sourceCode r"><code class="sourceCode r">meetupSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  anna &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)
-  raj &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)
-  connect &lt;-<span class="st"> </span>(<span class="kw">abs</span>(anna <span class="op">-</span><span class="st"> </span>raj) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">table</span>(connect))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of times they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb1011"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1011-1" data-line-number="1">meetupSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1011-2" data-line-number="2">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1011-3" data-line-number="3">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1011-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb1011-5" data-line-number="5">  anna &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb1011-6" data-line-number="6">  raj &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dv">0</span>, <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb1011-7" data-line-number="7">  connect &lt;-<span class="st"> </span>(<span class="kw">abs</span>(anna <span class="op">-</span><span class="st"> </span>raj) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1011-8" data-line-number="8">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb1011-9" data-line-number="9">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1011-10" data-line-number="10">    <span class="kw">print</span>(<span class="kw">table</span>(connect))</a>
+<a class="sourceLine" id="cb1011-11" data-line-number="11">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1011-12" data-line-number="12">  }</a>
+<a class="sourceLine" id="cb1011-13" data-line-number="13">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of times they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1011-14" data-line-number="14">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="dv">3939</span>)</code></pre>
+<div class="sourceCode" id="cb1012"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1012-1" data-line-number="1"><span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">table =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="dv">3939</span>)</a></code></pre></div>
 <pre><code>## Here is a table of the results:
 ## 
 ## connect
@@ -606,38 +604,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="vectorization-vs.looping" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Vectorization vs. Looping</h3>
 <p>Whenever you perform a simulation you have the option to use a <code>for</code>-loop, running through the loop once for each repetition of the random process in question. For example, you could rewrite the meetup-simulation as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">meetupSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  <span class="co">#create an empty vector to hold the results:</span>
-  connect &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  <span class="co"># loop through:</span>
-  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {
-    <span class="co"># get one arrival time for anna:</span>
-    anna &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">60</span>)
-    <span class="co"># and one for raj:</span>
-    raj &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">60</span>)
-    <span class="co">#compute result and record in conncect:</span>
-    connect[i] &lt;-<span class="st"> </span>(<span class="kw">abs</span>(anna <span class="op">-</span><span class="st"> </span>raj) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)
-  }
-  <span class="co">#the rest is the same as in meetupSim:</span>
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">table</span>(connect))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of times they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb1014"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1014-1" data-line-number="1">meetupSim2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1014-2" data-line-number="2">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1014-3" data-line-number="3">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1014-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb1014-5" data-line-number="5">  <span class="co">#create an empty vector to hold the results:</span></a>
+<a class="sourceLine" id="cb1014-6" data-line-number="6">  connect &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)</a>
+<a class="sourceLine" id="cb1014-7" data-line-number="7">  <span class="co"># loop through:</span></a>
+<a class="sourceLine" id="cb1014-8" data-line-number="8">  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {</a>
+<a class="sourceLine" id="cb1014-9" data-line-number="9">    <span class="co"># get one arrival time for anna:</span></a>
+<a class="sourceLine" id="cb1014-10" data-line-number="10">    anna &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb1014-11" data-line-number="11">    <span class="co"># and one for raj:</span></a>
+<a class="sourceLine" id="cb1014-12" data-line-number="12">    raj &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb1014-13" data-line-number="13">    <span class="co">#compute result and record in conncect:</span></a>
+<a class="sourceLine" id="cb1014-14" data-line-number="14">    connect[i] &lt;-<span class="st"> </span>(<span class="kw">abs</span>(anna <span class="op">-</span><span class="st"> </span>raj) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1014-15" data-line-number="15">  }</a>
+<a class="sourceLine" id="cb1014-16" data-line-number="16">  <span class="co">#the rest is the same as in meetupSim:</span></a>
+<a class="sourceLine" id="cb1014-17" data-line-number="17">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb1014-18" data-line-number="18">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1014-19" data-line-number="19">    <span class="kw">print</span>(<span class="kw">table</span>(connect))</a>
+<a class="sourceLine" id="cb1014-20" data-line-number="20">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1014-21" data-line-number="21">  }</a>
+<a class="sourceLine" id="cb1014-22" data-line-number="22">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of times they met was &quot;</span>, <span class="kw">mean</span>(connect), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1014-23" data-line-number="23">}</a></code></pre></div>
 <p>Be aware, though, that when you use a loop in place of vectorization your routine is liable to run more slowly. We can measure the difference with the R-function <code>system.time()</code>. As an illustration, let’s compare the running times for the vectorized and the looping versions of the meetup simulation.</p>
 <p>First we get the time for the thousand repetitions of the meetup, using the original vectorized function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>))</code></pre>
+<div class="sourceCode" id="cb1015"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1015-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>))</a></code></pre></div>
 <pre><code>## The proportion of times they met was 0.3079.
 ##   user  system elapsed 
 ##  0.002   0.001   0.003 </code></pre>
 <p>Our concern is with the total elapsed time: a mere three-thousandths of a second!</p>
 <p>Next we get the time for the same number of repetitions, using the looping implementation:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">meetupSim2</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>))</code></pre>
+<div class="sourceCode" id="cb1017"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1017-1" data-line-number="1"><span class="kw">system.time</span>(<span class="kw">meetupSim2</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>))</a></code></pre></div>
 <pre><code>## The proportion of times they met was 0.2993.
 ##    user  system elapsed 
 ##  0.056   0.007   0.065 </code></pre>

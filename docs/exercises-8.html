@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Exercises | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Exercises | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="glossary-9.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -581,12 +579,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/thinking.png" width="50%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><p>Write a function called <code>findMister()</code> that, when given any string, will return a character vector of the words that immediately follow the string “Mister”, with exactly one space in between. The function should take a single argument called <code>str</code>, the string to search. A typical example of use is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">text &lt;-<span class="st"> &quot;Here are Mister Tom, MisterJerry, Mister Mister, and Mister</span><span class="ch">\t</span><span class="st">Joe.&quot;</span>
-<span class="kw">findMister</span>(text)</code></pre>
+<div class="sourceCode" id="cb1809"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1809-1" data-line-number="1">text &lt;-<span class="st"> &quot;Here are Mister Tom, MisterJerry, Mister Mister, and Mister</span><span class="ch">\t</span><span class="st">Joe.&quot;</span></a>
+<a class="sourceLine" id="cb1809-2" data-line-number="2"><span class="kw">findMister</span>(text)</a></code></pre></div>
 <pre><code>## [1] &quot;Tom&quot;    &quot;Mister&quot;</code></pre></li>
 <li><p>Write a function called <code>findMr()</code> that, when given any string, will return a character vector of all words following the string “Mr.”, with exactly one space in between. The function should take a single argument called <code>str</code>, the string to search. A typical example of use is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">text &lt;-<span class="st"> &quot;Here are Mr. Tom, Mr Jerry, Mr. Mister, and Mr.</span><span class="ch">\t</span><span class="st">Joe.&quot;</span>
-<span class="kw">findMr</span>(text)</code></pre>
+<div class="sourceCode" id="cb1811"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1811-1" data-line-number="1">text &lt;-<span class="st"> &quot;Here are Mr. Tom, Mr Jerry, Mr. Mister, and Mr.</span><span class="ch">\t</span><span class="st">Joe.&quot;</span></a>
+<a class="sourceLine" id="cb1811-2" data-line-number="2"><span class="kw">findMr</span>(text)</a></code></pre></div>
 <pre><code>## [1] &quot;Tom&quot;    &quot;Mister&quot;</code></pre></li>
 <li>For each of the following expressions, write a regular expression to test whether any of the sub-string(s) described occur in a given string. The regular expression should match any of the sub-strings described, and should not match any other sub-string. Try to make the regular expression as short as possible. Write the regular expression as a string that could be used in one of R’s regex functions (i.e. extra backslash escapes as needed). The first item is done for you, as an example.
 <ul>
@@ -608,19 +606,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>“Ms.”</li>
 </ul>
 <p>There should be exactly one space between the title and the following word. The function should take a single argument called <code>str</code>, the string to search. A typical example of use is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">text &lt;-<span class="st"> &quot;Here are Mr. Tom, Ms. Thatcher, Miss Ellen, and Helen.&quot;</span>
-<span class="kw">findTitled</span>(text)</code></pre>
+<div class="sourceCode" id="cb1813"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1813-1" data-line-number="1">text &lt;-<span class="st"> &quot;Here are Mr. Tom, Ms. Thatcher, Miss Ellen, and Helen.&quot;</span></a>
+<a class="sourceLine" id="cb1813-2" data-line-number="2"><span class="kw">findTitled</span>(text)</a></code></pre></div>
 <pre><code>## [1] &quot;Tom&quot;      &quot;Thatcher&quot; &quot;Ellen&quot;</code></pre></li>
 <li><p>Write a function called <code>capRepeats()</code> that, when given a string, searches for all repeated-word pairs (with at least one character of white-space in between) and replaces them with the same pair where all letters are capitalized. The function should take a single argument called <code>str</code>, the string to be searched. A typical example of use would be as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">capRepeats</span>(<span class="st">&quot;I have a boo boo on my knee    </span><span class="ch">\t</span><span class="st">knee!&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1815"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1815-1" data-line-number="1"><span class="kw">capRepeats</span>(<span class="st">&quot;I have a boo boo on my knee    </span><span class="ch">\t</span><span class="st">knee!&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;I have a BOO BOO on my KNEE    \tKNEE!&quot;</code></pre></li>
 <li><p>Use <code>str_subset()</code> to write a function called <code>longWord()</code> that, when given a character vector of strings, returns a vector consisting of the strings that contain a word at least eight characters long. The function should take a single argument called <code>strs</code>. An example of use would be:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myText &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Very short words.&quot;</span>, <span class="st">&quot;Got a gargantuan word.&quot;</span>, <span class="st">&quot;More short words!&quot;</span>)
-<span class="kw">longWord</span>(<span class="dt">strs =</span> myText)</code></pre>
+<div class="sourceCode" id="cb1817"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1817-1" data-line-number="1">myText &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Very short words.&quot;</span>, <span class="st">&quot;Got a gargantuan word.&quot;</span>, <span class="st">&quot;More short words!&quot;</span>)</a>
+<a class="sourceLine" id="cb1817-2" data-line-number="2"><span class="kw">longWord</span>(<span class="dt">strs =</span> myText)</a></code></pre></div>
 <pre><code>## [1] &quot;Got a gargantuan word.&quot;</code></pre></li>
 <li><p>Write a function called <code>longWord2()</code> that, when given a character vector of strings, returns a list of character vectors, where each vector consists of the words in the corresponding string that are at least eight characters long. The function should take a single argument called <code>strs</code>. An example of use would be:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myText &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Very short words.&quot;</span>, <span class="st">&quot;Got a gargantuan word.&quot;</span>, <span class="st">&quot;More short words!&quot;</span>)
-<span class="kw">longWord2</span>(<span class="dt">strs =</span> myText)</code></pre>
+<div class="sourceCode" id="cb1819"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1819-1" data-line-number="1">myText &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Very short words.&quot;</span>, <span class="st">&quot;Got a gargantuan word.&quot;</span>, <span class="st">&quot;More short words!&quot;</span>)</a>
+<a class="sourceLine" id="cb1819-2" data-line-number="2"><span class="kw">longWord2</span>(<span class="dt">strs =</span> myText)</a></code></pre></div>
 <pre><code>## [[1]]
 ## character(0)
 ## 
@@ -640,11 +638,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Thus, 502-863-8111 is valid and so is 502.863.8111, but not 502-863.8111.</p>
 <p>In the code for the function, specify the pattern using <code>(?x)</code> so you can ignore whitespace and leave detailed comments for each portion of the regular expression.</p>
 <p>The function should take a single parameter called <code>strs</code>. A typical example of use would be:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sentences &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ted&#39;s number is 606-255-3143.&quot;</span>,
-               <span class="st">&quot;Rhonda&#39;s number is 403-28-1259.&quot;</span>,
-               <span class="st">&quot;Lydia&#39;s number is 502.255.3921.&quot;</span>,
-               <span class="st">&quot;Raj&#39;s number is 502.367-4432.&quot;</span>)
-<span class="kw">phoneNumber</span>(<span class="dt">strs =</span> sentences)</code></pre>
+<div class="sourceCode" id="cb1821"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1821-1" data-line-number="1">sentences &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ted&#39;s number is 606-255-3143.&quot;</span>,</a>
+<a class="sourceLine" id="cb1821-2" data-line-number="2">               <span class="st">&quot;Rhonda&#39;s number is 403-28-1259.&quot;</span>,</a>
+<a class="sourceLine" id="cb1821-3" data-line-number="3">               <span class="st">&quot;Lydia&#39;s number is 502.255.3921.&quot;</span>,</a>
+<a class="sourceLine" id="cb1821-4" data-line-number="4">               <span class="st">&quot;Raj&#39;s number is 502.367-4432.&quot;</span>)</a>
+<a class="sourceLine" id="cb1821-5" data-line-number="5"><span class="kw">phoneNumber</span>(<span class="dt">strs =</span> sentences)</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre></li>
 </ol>
 

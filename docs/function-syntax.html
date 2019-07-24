@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.2 Function Syntax | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.2 Function Syntax | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="motivation-for-functions.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,37 +577,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="function-syntax" class="section level2">
 <h2><span class="header-section-number">3.2</span> Function Syntax</h2>
 <p><code>function</code> is the reserved word in R that permits us to define functions. The general form of a function definition is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">functionName &lt;-<span class="st"> </span><span class="cf">function</span>(parameter, parameter, ...) {
-  Body of the Function ...
-}</code></pre>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" data-line-number="1">functionName &lt;-<span class="st"> </span><span class="cf">function</span>(parameter, parameter, ...) {</a>
+<a class="sourceLine" id="cb464-2" data-line-number="2">  Body of the Function ...</a>
+<a class="sourceLine" id="cb464-3" data-line-number="3">}</a></code></pre></div>
 <p><code>functionName</code> is the variable that will refer to the function you define. Like any other identifier, it can contain letters, numbers, the dot and the underscore character, but is not permitted to begin with the dot followed by a number.</p>
 <p>After the <code>function</code> reserved word we see a pair of matching parentheses. They contain the <em>parameters</em> of the function, which will be passed into the function as variables referred to by the parameter names.</p>
 <p>The <em>body</em>  of the function consists of one or more expressions that do the work of the function. Note that the body is enclosed with curly braces. This is only necessary, though, if the body consists of more than one expression. If the body had only one expression then that expression could appear without the braces, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">add3 &lt;-<span class="st"> </span><span class="cf">function</span>(x) x<span class="op">+</span><span class="dv">3</span>
-<span class="kw">add3</span>(<span class="dt">x =</span> <span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" data-line-number="1">add3 &lt;-<span class="st"> </span><span class="cf">function</span>(x) x<span class="op">+</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb465-2" data-line-number="2"><span class="kw">add3</span>(<span class="dt">x =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] 8</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">add3</span>(<span class="op">-</span><span class="dv">7</span>)</code></pre>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" data-line-number="1"><span class="kw">add3</span>(<span class="op">-</span><span class="dv">7</span>)</a></code></pre></div>
 <pre><code>## [1] -4</code></pre>
 <p>In the <code>add3()</code> function above, <code>x</code> was a parameter. When the function is called the parameter is assigned a particular value called an <em>argument</em>. We see that <code>add3()</code> was called twice, once with an argument of 3 and again with an argument of -7. If the parameter is explicitly mentioned in the function call, then an equal-sign <code>=</code> separates the parameter and the argument. Note also that the parameter and <code>=</code> may be omitted if it is clear what parameter the argument will be matched to. In the case of <code>add3</code> there is only one parameter <code>x</code>, so R knows that any value provided within the parentheses is to be assigned to <code>x</code>. R also knows to refer to the order of parameters within the function’s definition to determine which arguments go with which parameters. Thus, the following calls do the same thing:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">4</span>)
-<span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dv">4</span>)
-<span class="kw">manyCat</span>(<span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">4</span>)
-<span class="kw">manyCat</span>(<span class="st">&quot;Hello&quot;</span>, <span class="dv">4</span>)
-<span class="kw">manyCat</span>(<span class="dt">n =</span> <span class="dv">4</span>, <span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb469-1" data-line-number="1"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb469-2" data-line-number="2"><span class="kw">manyCat</span>(<span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb469-3" data-line-number="3"><span class="kw">manyCat</span>(<span class="st">&quot;Hello&quot;</span>, <span class="dt">n =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb469-4" data-line-number="4"><span class="kw">manyCat</span>(<span class="st">&quot;Hello&quot;</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb469-5" data-line-number="5"><span class="kw">manyCat</span>(<span class="dt">n =</span> <span class="dv">4</span>, <span class="dt">word =</span> <span class="st">&quot;Hello&quot;</span>)</a></code></pre></div>
 <p>On the other hand, the following would produce an error:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="dv">4</span>, <span class="st">&quot;Hello&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" data-line-number="1"><span class="kw">manyCat</span>(<span class="dv">4</span>, <span class="st">&quot;Hello&quot;</span>)</a></code></pre></div>
 <pre><code>## NAs introduced by coercion
 ## Error in rep(wordWithNewline, times = n) :
 ## invalid &#39;times&#39; argument</code></pre>
 <p>If you don’t label your arguments with the parameters they are to match to, then you must at least write them in the order in which the parameters appear in the definition of the function.</p>
 <p>In the definition of functions and in all calls to functions, commas must separate arguments. Thus the following would produce an error:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="st">&quot;Hello&quot;</span> <span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" data-line-number="1"><span class="kw">manyCat</span>(<span class="st">&quot;Hello&quot;</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## Error: unexpected numeric constant in &quot;manyCat(&quot;Hello&quot; 4&quot;</code></pre>
 <p>If R cannot match all your arguments to a parameter it will throw an error;</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="st">&quot;Hello&quot;</span>, <span class="dv">4</span>, <span class="dv">7</span>)</code></pre>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" data-line-number="1"><span class="kw">manyCat</span>(<span class="st">&quot;Hello&quot;</span>, <span class="dv">4</span>, <span class="dv">7</span>)</a></code></pre></div>
 <pre><code>## Error in manyCat(&quot;Hello&quot;, 4, 7) : unused argument (7)</code></pre>
 <p>You will have noticed by now that parentheses are essential when using a function. What would happen if we typed just the function’s name itself? Give it a try:</p>
-<pre class="sourceCode r"><code class="sourceCode r">manyCat</code></pre>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" data-line-number="1">manyCat</a></code></pre></div>
 <pre><code>## function(word, n) {
 ##   wordWithNewline &lt;- paste(word, &quot;\n&quot;, sep = &quot;&quot;)
 ##   lines &lt;- rep(wordWithNewline, times = n)
@@ -619,19 +617,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="practice-exercises-7" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Practice Exercises</h3>
 <p>Consider the following function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">addThree &lt;-<span class="st"> </span><span class="cf">function</span>(n) {
-  n <span class="op">+</span><span class="dv">3</span>
-}</code></pre>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" data-line-number="1">addThree &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb478-2" data-line-number="2">  n <span class="op">+</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb478-3" data-line-number="3">}</a></code></pre></div>
 <p>It adds three to any number you give it. Try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(<span class="dt">n =</span> <span class="dv">7</span>)</code></pre>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" data-line-number="1"><span class="kw">addThree</span>(<span class="dt">n =</span> <span class="dv">7</span>)</a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <ol style="list-style-type: decimal">
 <li><p>What, if anything, is wrong with the following code?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(<span class="dv">7</span>)</code></pre></li>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" data-line-number="1"><span class="kw">addThree</span>(<span class="dv">7</span>)</a></code></pre></div></li>
 <li><p>What, if anything, is wrong with the following code?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addThree</span>(<span class="dt">n =</span> <span class="dv">7</span>, <span class="dt">x =</span> <span class="dv">5</span>)</code></pre></li>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb482-1" data-line-number="1"><span class="kw">addThree</span>(<span class="dt">n =</span> <span class="dv">7</span>, <span class="dt">x =</span> <span class="dv">5</span>)</a></code></pre></div></li>
 <li><p>I’d like to add 3 to the number 15. What, if anything, is wrong with the following code?</p>
-<pre class="sourceCode r"><code class="sourceCode r">addThree[<span class="dv">15</span>]</code></pre></li>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" data-line-number="1">addThree[<span class="dv">15</span>]</a></code></pre></div></li>
 </ol>
 </div>
 <div id="solutions-to-the-practice-exercises-3" class="section level3">

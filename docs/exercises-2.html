@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Exercises | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Exercises | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="glossary-2.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -588,12 +586,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>the absolute value of 0 is 0.</li>
 </ul>
 <p>The absolute value is important enough that R provides the <code>abs()</code> function to compute it. Thus:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">abs</span>(<span class="op">-</span><span class="fl">3.7</span>)</code></pre>
+<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb853-1" data-line-number="1"><span class="kw">abs</span>(<span class="op">-</span><span class="fl">3.7</span>)</a></code></pre></div>
 <pre><code>## [1] 3.7</code></pre>
 <p>Write a function called <code>absolute()</code> that computes the absolute value of any given number <code>x</code>. Your code should make no reference to R’s <code>abs()</code>.</p>
 <p><strong>Small Bonus</strong>: Write the function so that it follows the vector-in, vector-out principle, that is: when it is given a vector of numbers it returns the vector of their absolute values, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">5</span>, <span class="fl">-2.7</span>)
-<span class="kw">absolute</span>(vec)</code></pre>
+<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb855-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">5</span>, <span class="fl">-2.7</span>)</a>
+<a class="sourceLine" id="cb855-2" data-line-number="2"><span class="kw">absolute</span>(vec)</a></code></pre></div>
 <pre><code>## [1] 3.0 5.0 2.7</code></pre></li>
 <li><p>Write a function called <code>pattern()</code> that, when given any character <span class="math inline">\(x\)</span> and any positive number <span class="math inline">\(n\)</span>, will print the following pattern to the console:</p>
 <ul>
@@ -612,13 +610,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>n</code>: the number of characters in the longest, middle line. The default value should be 3.</li>
 </ul>
 <p>Typical examples of use should be as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pattern</span>()</code></pre>
+<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb857-1" data-line-number="1"><span class="kw">pattern</span>()</a></code></pre></div>
 <pre><code>## *
 ## **
 ## ***
 ## **
 ## *</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pattern</span>(<span class="dt">char =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">n =</span> <span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb859"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb859-1" data-line-number="1"><span class="kw">pattern</span>(<span class="dt">char =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">n =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## y
 ## yy
 ## yyy
@@ -629,14 +627,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## yy
 ## y</code></pre>
 <p><strong>Hint:</strong> You already know how to <code>cat</code> out a line consisting of any given number of a given character:</p>
-<pre class="sourceCode r"><code class="sourceCode r">char &lt;-<span class="st"> &quot;*&quot;</span>  <span class="co">## the desried character</span>
-i &lt;-<span class="st"> </span><span class="dv">4</span>       <span class="co">## the desired number of times</span>
-<span class="kw">cat</span>(<span class="kw">rep</span>(char, <span class="dt">times =</span> i), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb861-1" data-line-number="1">char &lt;-<span class="st"> &quot;*&quot;</span>  <span class="co">## the desried character</span></a>
+<a class="sourceLine" id="cb861-2" data-line-number="2">i &lt;-<span class="st"> </span><span class="dv">4</span>       <span class="co">## the desired number of times</span></a>
+<a class="sourceLine" id="cb861-3" data-line-number="3"><span class="kw">cat</span>(<span class="kw">rep</span>(char, <span class="dt">times =</span> i), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## ****</code></pre>
 <p>You need to make a vector that contains the desired “number of times”, for each line. Consider this method:</p>
-<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">5</span>    <span class="co">## say we want 1-2-3-4-5-4-3-2-1</span>
-lineNumbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span>(n<span class="dv">-1</span>), n, (n<span class="dv">-1</span>)<span class="op">:</span><span class="dv">1</span>)
-lineNumbers</code></pre>
+<div class="sourceCode" id="cb863"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb863-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">5</span>    <span class="co">## say we want 1-2-3-4-5-4-3-2-1</span></a>
+<a class="sourceLine" id="cb863-2" data-line-number="2">lineNumbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span>(n<span class="dv">-1</span>), n, (n<span class="dv">-1</span>)<span class="op">:</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb863-3" data-line-number="3">lineNumbers</a></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5 4 3 2 1</code></pre>
 <p>Then you could write a <code>for</code>-loop that iterates over <code>lineNumbers</code>.</p></li>
 <li><p>Write a function called <code>checkerBoard()</code> that prints outs out checkerboard patterns like this:</p>
@@ -658,7 +656,7 @@ lineNumbers</code></pre>
 </ul>
 <p>Note that the horizontal boundaries are formed by the hyphen <code>-</code> and the vetical boundaries are formed by the <em>pipe</em> character <code>|</code> that appears on your keyboard above the backslash <code>\</code> character.</p>
 <p>Typical examples of use should be as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">checkerBoard</span>(<span class="dt">char =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">side =</span> <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb866"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb866-1" data-line-number="1"><span class="kw">checkerBoard</span>(<span class="dt">char =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">side =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## -------
 ## |x|x|x|
 ## -------
@@ -667,12 +665,12 @@ lineNumbers</code></pre>
 ## |x|x|x|
 ## -------</code></pre>
 <p><strong>Hint</strong>: Note that the number of hyphens in a boundary is always one more than twice the value of <code>side</code>. for example, suppose that <code>side</code> is 5. Then to get a row of the required hyphens, all you need is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">boundary &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;-&quot;</span>, <span class="dt">times =</span> <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>side <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-<span class="kw">cat</span>(boundary, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb868"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb868-1" data-line-number="1">boundary &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;-&quot;</span>, <span class="dt">times =</span> <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>side <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb868-2" data-line-number="2"><span class="kw">cat</span>(boundary, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## -----------</code></pre>
 <p>For a single row containing the character itself, you might try:</p>
-<pre class="sourceCode r"><code class="sourceCode r">between &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;|&quot;</span>, <span class="kw">rep</span>(<span class="kw">c</span>(char, <span class="st">&quot;|&quot;</span>), <span class="dt">times =</span> side), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-<span class="kw">cat</span>(between, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb870"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb870-1" data-line-number="1">between &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;|&quot;</span>, <span class="kw">rep</span>(<span class="kw">c</span>(char, <span class="st">&quot;|&quot;</span>), <span class="dt">times =</span> side), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb870-2" data-line-number="2"><span class="kw">cat</span>(between, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## |x|x|x|x|x|</code></pre>
 <p>In the example above, the value of <code>char</code> was <code>&quot;x&quot;</code>.</p></li>
 <li><p>Write a function called <code>beerTune()</code> that prints out the complete lyrics to the song <em>Ninety-Nine Bottles of Beer on the Wall</em>. You’ll recall that the song goes like this:</p>
@@ -724,7 +722,7 @@ lineNumbers</code></pre>
 </ul>
 <p>Neither parameter should have a default value. The function should validate its input, stopping with a helpful message if <code>animal</code> and <code>sound</code> don’t have the same length.</p>
 <p>Typical examples of use should be as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">farmSong</span>(<span class="dt">animal =</span> <span class="kw">c</span>(<span class="st">&quot;cow&quot;</span>, <span class="st">&quot;pig&quot;</span>), <span class="dt">sound =</span> <span class="kw">c</span>(<span class="st">&quot;moo&quot;</span>, <span class="st">&quot;oink&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb872"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb872-1" data-line-number="1"><span class="kw">farmSong</span>(<span class="dt">animal =</span> <span class="kw">c</span>(<span class="st">&quot;cow&quot;</span>, <span class="st">&quot;pig&quot;</span>), <span class="dt">sound =</span> <span class="kw">c</span>(<span class="st">&quot;moo&quot;</span>, <span class="st">&quot;oink&quot;</span>))</a></code></pre></div>
 <pre><code>## Old MacDonald had a farm, ee-i-ee-i-oo!
 ## And on this farm he had a cow, ee-iee-i-oo!
 ## With a moo-moo here and a moo-moo there
@@ -736,19 +734,19 @@ lineNumbers</code></pre>
 ## With a oink-oink here and a oink-oink there
 ## Here a oink, there a oink everywhere a oink-oink,
 ## Old MacDonald had a farm, ee-i-ee-i-oo!</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">farmSong</span>(<span class="dt">animal =</span> <span class="kw">c</span>(<span class="st">&quot;cow&quot;</span>, <span class="st">&quot;pig&quot;</span>, <span class="st">&quot;horse&quot;</span>), <span class="dt">sound =</span> <span class="kw">c</span>(<span class="st">&quot;moo&quot;</span>, <span class="st">&quot;oink&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb874"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb874-1" data-line-number="1"><span class="kw">farmSong</span>(<span class="dt">animal =</span> <span class="kw">c</span>(<span class="st">&quot;cow&quot;</span>, <span class="st">&quot;pig&quot;</span>, <span class="st">&quot;horse&quot;</span>), <span class="dt">sound =</span> <span class="kw">c</span>(<span class="st">&quot;moo&quot;</span>, <span class="st">&quot;oink&quot;</span>))</a></code></pre></div>
 <pre><code>## I need the same number of sounds as there are animals!</code></pre>
 <p><strong>Note</strong>: As the above examples show, you don’t have to worry about getting “a” vs. “an” correct.</p></li>
 <li><p>Recall the function <code>madhavaPI()</code> from Section <a href="more-about-arguments.html#default-arguments">3.4.1</a>. Use this function to write a function called <code>madhavaSums()</code> that will do the following: given a number <span class="math inline">\(n\)</span>, the function returns a vector consisting of the first <span class="math inline">\(n\)</span> approximations to <span class="math inline">\(\pi\)</span>, using the initial terms of the Madhava series. The function should take a single argument <code>n</code>, whose default value is 10. It should validate the input: if the number entered is not at least 1, then the function should explain to the user that the he/she must enter a positive number, and then stop.</p>
 <p>Here is an example of how the function should work:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaSums</span>(<span class="dt">n =</span> <span class="dv">-3</span>)</code></pre>
+<div class="sourceCode" id="cb876"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb876-1" data-line-number="1"><span class="kw">madhavaSums</span>(<span class="dt">n =</span> <span class="dv">-3</span>)</a></code></pre></div>
 <pre><code>## You need to enter a positive integer.  Try again!</code></pre>
 <p>Here is another example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaSums</span>()  <span class="co"># using the default value</span></code></pre>
+<div class="sourceCode" id="cb878"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb878-1" data-line-number="1"><span class="kw">madhavaSums</span>()  <span class="co"># using the default value</span></a></code></pre></div>
 <pre><code>##  [1] 4.000000 2.666667 3.466667 2.895238 3.339683 2.976046 3.283738
 ##  [8] 3.017072 3.252366 3.041840</code></pre>
 <p>And another:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">madhavaSums</span>(<span class="dt">n =</span> <span class="dv">20</span>)</code></pre>
+<div class="sourceCode" id="cb880"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb880-1" data-line-number="1"><span class="kw">madhavaSums</span>(<span class="dt">n =</span> <span class="dv">20</span>)</a></code></pre></div>
 <pre><code>##  [1] 4.000000 2.666667 3.466667 2.895238 3.339683 2.976046 3.283738
 ##  [8] 3.017072 3.252366 3.041840 3.232316 3.058403 3.218403 3.070255
 ## [15] 3.208186 3.079153 3.200366 3.086080 3.194188 3.091624</code></pre></li>

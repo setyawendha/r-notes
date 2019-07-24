@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.7 Example: Dental Floss | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.7 Example: Dental Floss | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="simulation-number-needed.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -593,18 +591,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are several interesting questions we could ask concerning this situation. In this example, let’s focus on finding the expected value of <span class="math inline">\(X\)</span>, the amount of floss left in the <em>other</em> box when I discover the one of the boxes is exhausted.</p>
 <p>I would also like to get some idea of the distribution of <span class="math inline">\(X\)</span>—the chance for it to assume each of its possible values. Unlike the previous “Number of Numbers” example, however, <span class="math inline">\(X\)</span> is what we call a <em>continuous</em> random variable: it can assume any of the values in a <em>range of real numbers</em>. After all, the amount left in the “other” box could be anything from 0 to 150 feet: it could be 3.5633 feet or 5.21887 feet, or any real number at all, so long as it’s between 0 and 150. Although any real number value—3.5633 feet, for instance—is <em>possible</em>, it seems that the chance of <span class="math inline">\(X\)</span> being <em>exactly</em> 3.5633 is vanishingly small, and the same goes for any of the possible real numbers value for <span class="math inline">\(X\)</span>. Hence it seems that the distribution of <span class="math inline">\(X\)</span> cannot be described well with a table of the values that we actually get in a simulation: indeed, we are highly unlikely to get any value more than once in the course of our simulation.</p>
 <p>One way to visualize the distribution of a continuous random variable is to make a <em>density plot</em> of a large, representative sample of its values. Let’s practice making a density plot for a random variable that R provides for us: a so-called <em>normal</em> random variable. Try this code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">70</span>, <span class="dt">sd =</span> <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb1061"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1061-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">70</span>, <span class="dt">sd =</span> <span class="dv">3</span>)</a></code></pre></div>
 <p>We have just asked R to produce 100 numbers chosen randomly from a <em>normal</em> distribution. The <code>mean</code> parameter sets what the values should be “on average”, and the <code>sd</code> parameter indicates how much they should typically differ from that average value. The bigger the <code>sd</code>, the bigger the difference between the mean and value actually obtained is liable to be.</p>
 <p>Let’s get a look at the first ten values in the vector <code>x</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</code></pre>
+<div class="sourceCode" id="cb1062"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1062-1" data-line-number="1">x[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
 <pre><code>##  [1] 71.13092 70.90465 66.70593 66.60878 61.61040 72.16172 72.81736
 ##  [8] 69.31187 75.27739 70.35210</code></pre>
 <p>Sure enough, the numbers are typically around the mean of 70, give or take 3 units or so.</p>
 <p>We can use the <strong>ggplot2</strong> package to produce a density curve from all 100 values in the vector <code>x</code>. (The resulting plot appears as Figure <a href="example-dental-floss.html#fig:densitynormal">6.2</a>.)</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;x-value&quot;</span>)
-p</code></pre>
+<div class="sourceCode" id="cb1064"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1064-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
+<div class="sourceCode" id="cb1065"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1065-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1065-2" data-line-number="2"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;x-value&quot;</span>)</a>
+<a class="sourceLine" id="cb1065-3" data-line-number="3">p</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:densitynormal"></span>
 <img src="r-notes_files/figure-html/densitynormal-1.png" alt="Density plot of 100 random values from a normal distribution with mean 70 and standard deviation 3." width="60%" />
 <p class="caption">
@@ -613,89 +611,89 @@ Figure 6.2: Density plot of 100 random values from a normal distribution with me
 </div>
 <p>The <code>geom_density()</code> part of the plotting-command produces the curve. The <code>geom_rug()</code> part produces tick-marks along the horizontal axis, each of which is located at a particular value in the vector <code>x</code>. You can see that the curve is higher where values are crowded together, and lower where the values are spread apart. The scale on the y-axis has been chosen carefully so that the area under the density curve between any two numbers <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> on the axis gives an estimate of the chance that the normal random variable would produce a value between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. In this way the density curve gives us a visual sense of the distribution of the random variable: it seems rather likely to be between 67 and 73 (most of the area under the curve occurs there) and rather unlikely to be greater than 76, and so on.</p>
 <p>We are now ready to simulate the dental-floss scenario. Since we have worked through the encapsulation-and-generalization development process a number of times by now, we will simply show a final-form implementation of a simulation function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">flossSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">len =</span> <span class="dv">150</span>, <span class="dt">min =</span> <span class="dv">1</span>, 
-                     <span class="dt">max =</span> <span class="dv">2</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, 
-                     <span class="dt">graph =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  
-  <span class="co"># helper function to pick whihc box gets used:</span>
-  whichOne &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-    <span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span> ) {
-      <span class="kw">return</span>(<span class="st">&quot;a&quot;</span>)
-    } <span class="cf">else</span> <span class="kw">return</span>(<span class="st">&quot;b&quot;</span>)
-  }
-  
-  <span class="co"># vector to contains our results:</span>
-  leftover &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)
-  
-  <span class="co"># now the simulation.  Each time we loop through, we</span>
-  <span class="co"># start with two fresh boxes and use them until one of</span>
-  <span class="co"># them runs out.</span>
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {
-    <span class="co"># set the initial lengh of the two fresh boxes:</span>
-    a &lt;-<span class="st"> </span>b &lt;-<span class="st"> </span>len
-    
-    <span class="co"># at the beignning, both can be used:</span>
-    bothOK &lt;-<span class="st"> </span><span class="ot">TRUE</span>
-    
-    <span class="co"># start flossing</span>
-    <span class="cf">while</span> ( bothOK ) {
-      <span class="co"># determine which box is picked</span>
-      <span class="co"># &lt; 0.5 is a; &gt;= 0.5 is b;</span>
-      boxPicked &lt;-<span class="st"> </span><span class="kw">whichOne</span>(<span class="kw">runif</span>(<span class="dv">1</span>))
-      
-      <span class="co"># if we choose box a, attempt to use floss from it</span>
-      <span class="cf">if</span> ( boxPicked <span class="op">==</span><span class="st"> &quot;a&quot;</span> ) {
-        <span class="cf">if</span> ( a <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span> ) {
-          leftover[i] &lt;-<span class="st"> </span>b
-          bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-        } <span class="cf">else</span> {
-          useAmount &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">runif</span>(<span class="dv">1</span>, min, max), a)
-          a &lt;-<span class="st"> </span>a <span class="op">-</span><span class="st"> </span>useAmount
-          <span class="cf">if</span> (<span class="kw">abs</span>(a) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">4</span>)) {
-            leftover[i] &lt;-<span class="st"> </span>b
-            bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-          }
-        }
-      }
-      
-      <span class="co"># use floss from b (if we choose it) </span>
-      <span class="cf">if</span> ( boxPicked <span class="op">==</span><span class="st"> &quot;b&quot;</span> ) {
-        <span class="cf">if</span> ( b <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span> ) {
-          leftover[i] &lt;-<span class="st"> </span>a
-          bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-        } <span class="cf">else</span> {
-          useAmount &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">runif</span>(<span class="dv">1</span>, min, max), b)
-          b &lt;-<span class="st"> </span>b <span class="op">-</span><span class="st"> </span>useAmount
-          <span class="cf">if</span> (<span class="kw">abs</span>(b) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">4</span>)) {
-            leftover[i] &lt;-<span class="st"> </span>a
-            bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-          }
-        }
-      }
-        
-    }  <span class="co"># end while  loop</span>
-  }    <span class="co"># end for loop</span>
-  
-  <span class="co"># report results:</span>
-  <span class="cf">if</span> ( graph ) {
-    plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Dental-Floss Simulation with &quot;</span>, reps, <span class="st">&quot; Repetitions&quot;</span>)
-    p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(leftover)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Amount left in spare (ft)&quot;</span>,
-          <span class="dt">title =</span> plotTitle)
-    <span class="co"># add a rug of individual points, provided there are not too many:</span>
-    <span class="cf">if</span> ( reps <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span> ) {
-      p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>()
-    }
-  }
-  <span class="kw">print</span>(p)
-  <span class="kw">cat</span>(<span class="st">&quot;The average amount left in the spare is:  &quot;</span>, 
-      <span class="kw">mean</span>(leftover), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}      <span class="co"># end flossSim</span></code></pre>
+<div class="sourceCode" id="cb1066"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1066-1" data-line-number="1">flossSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">len =</span> <span class="dv">150</span>, <span class="dt">min =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb1066-2" data-line-number="2">                     <span class="dt">max =</span> <span class="dv">2</span>, <span class="dt">reps =</span> <span class="dv">10000</span>, </a>
+<a class="sourceLine" id="cb1066-3" data-line-number="3">                     <span class="dt">graph =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1066-4" data-line-number="4">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1066-5" data-line-number="5">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1066-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb1066-7" data-line-number="7">  </a>
+<a class="sourceLine" id="cb1066-8" data-line-number="8">  <span class="co"># helper function to pick whihc box gets used:</span></a>
+<a class="sourceLine" id="cb1066-9" data-line-number="9">  whichOne &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb1066-10" data-line-number="10">    <span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span> ) {</a>
+<a class="sourceLine" id="cb1066-11" data-line-number="11">      <span class="kw">return</span>(<span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb1066-12" data-line-number="12">    } <span class="cf">else</span> <span class="kw">return</span>(<span class="st">&quot;b&quot;</span>)</a>
+<a class="sourceLine" id="cb1066-13" data-line-number="13">  }</a>
+<a class="sourceLine" id="cb1066-14" data-line-number="14">  </a>
+<a class="sourceLine" id="cb1066-15" data-line-number="15">  <span class="co"># vector to contains our results:</span></a>
+<a class="sourceLine" id="cb1066-16" data-line-number="16">  leftover &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)</a>
+<a class="sourceLine" id="cb1066-17" data-line-number="17">  </a>
+<a class="sourceLine" id="cb1066-18" data-line-number="18">  <span class="co"># now the simulation.  Each time we loop through, we</span></a>
+<a class="sourceLine" id="cb1066-19" data-line-number="19">  <span class="co"># start with two fresh boxes and use them until one of</span></a>
+<a class="sourceLine" id="cb1066-20" data-line-number="20">  <span class="co"># them runs out.</span></a>
+<a class="sourceLine" id="cb1066-21" data-line-number="21">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {</a>
+<a class="sourceLine" id="cb1066-22" data-line-number="22">    <span class="co"># set the initial lengh of the two fresh boxes:</span></a>
+<a class="sourceLine" id="cb1066-23" data-line-number="23">    a &lt;-<span class="st"> </span>b &lt;-<span class="st"> </span>len</a>
+<a class="sourceLine" id="cb1066-24" data-line-number="24">    </a>
+<a class="sourceLine" id="cb1066-25" data-line-number="25">    <span class="co"># at the beignning, both can be used:</span></a>
+<a class="sourceLine" id="cb1066-26" data-line-number="26">    bothOK &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb1066-27" data-line-number="27">    </a>
+<a class="sourceLine" id="cb1066-28" data-line-number="28">    <span class="co"># start flossing</span></a>
+<a class="sourceLine" id="cb1066-29" data-line-number="29">    <span class="cf">while</span> ( bothOK ) {</a>
+<a class="sourceLine" id="cb1066-30" data-line-number="30">      <span class="co"># determine which box is picked</span></a>
+<a class="sourceLine" id="cb1066-31" data-line-number="31">      <span class="co"># &lt; 0.5 is a; &gt;= 0.5 is b;</span></a>
+<a class="sourceLine" id="cb1066-32" data-line-number="32">      boxPicked &lt;-<span class="st"> </span><span class="kw">whichOne</span>(<span class="kw">runif</span>(<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb1066-33" data-line-number="33">      </a>
+<a class="sourceLine" id="cb1066-34" data-line-number="34">      <span class="co"># if we choose box a, attempt to use floss from it</span></a>
+<a class="sourceLine" id="cb1066-35" data-line-number="35">      <span class="cf">if</span> ( boxPicked <span class="op">==</span><span class="st"> &quot;a&quot;</span> ) {</a>
+<a class="sourceLine" id="cb1066-36" data-line-number="36">        <span class="cf">if</span> ( a <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span> ) {</a>
+<a class="sourceLine" id="cb1066-37" data-line-number="37">          leftover[i] &lt;-<span class="st"> </span>b</a>
+<a class="sourceLine" id="cb1066-38" data-line-number="38">          bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb1066-39" data-line-number="39">        } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb1066-40" data-line-number="40">          useAmount &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">runif</span>(<span class="dv">1</span>, min, max), a)</a>
+<a class="sourceLine" id="cb1066-41" data-line-number="41">          a &lt;-<span class="st"> </span>a <span class="op">-</span><span class="st"> </span>useAmount</a>
+<a class="sourceLine" id="cb1066-42" data-line-number="42">          <span class="cf">if</span> (<span class="kw">abs</span>(a) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">4</span>)) {</a>
+<a class="sourceLine" id="cb1066-43" data-line-number="43">            leftover[i] &lt;-<span class="st"> </span>b</a>
+<a class="sourceLine" id="cb1066-44" data-line-number="44">            bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb1066-45" data-line-number="45">          }</a>
+<a class="sourceLine" id="cb1066-46" data-line-number="46">        }</a>
+<a class="sourceLine" id="cb1066-47" data-line-number="47">      }</a>
+<a class="sourceLine" id="cb1066-48" data-line-number="48">      </a>
+<a class="sourceLine" id="cb1066-49" data-line-number="49">      <span class="co"># use floss from b (if we choose it) </span></a>
+<a class="sourceLine" id="cb1066-50" data-line-number="50">      <span class="cf">if</span> ( boxPicked <span class="op">==</span><span class="st"> &quot;b&quot;</span> ) {</a>
+<a class="sourceLine" id="cb1066-51" data-line-number="51">        <span class="cf">if</span> ( b <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span> ) {</a>
+<a class="sourceLine" id="cb1066-52" data-line-number="52">          leftover[i] &lt;-<span class="st"> </span>a</a>
+<a class="sourceLine" id="cb1066-53" data-line-number="53">          bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb1066-54" data-line-number="54">        } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb1066-55" data-line-number="55">          useAmount &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">runif</span>(<span class="dv">1</span>, min, max), b)</a>
+<a class="sourceLine" id="cb1066-56" data-line-number="56">          b &lt;-<span class="st"> </span>b <span class="op">-</span><span class="st"> </span>useAmount</a>
+<a class="sourceLine" id="cb1066-57" data-line-number="57">          <span class="cf">if</span> (<span class="kw">abs</span>(b) <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">4</span>)) {</a>
+<a class="sourceLine" id="cb1066-58" data-line-number="58">            leftover[i] &lt;-<span class="st"> </span>a</a>
+<a class="sourceLine" id="cb1066-59" data-line-number="59">            bothOK &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb1066-60" data-line-number="60">          }</a>
+<a class="sourceLine" id="cb1066-61" data-line-number="61">        }</a>
+<a class="sourceLine" id="cb1066-62" data-line-number="62">      }</a>
+<a class="sourceLine" id="cb1066-63" data-line-number="63">        </a>
+<a class="sourceLine" id="cb1066-64" data-line-number="64">    }  <span class="co"># end while  loop</span></a>
+<a class="sourceLine" id="cb1066-65" data-line-number="65">  }    <span class="co"># end for loop</span></a>
+<a class="sourceLine" id="cb1066-66" data-line-number="66">  </a>
+<a class="sourceLine" id="cb1066-67" data-line-number="67">  <span class="co"># report results:</span></a>
+<a class="sourceLine" id="cb1066-68" data-line-number="68">  <span class="cf">if</span> ( graph ) {</a>
+<a class="sourceLine" id="cb1066-69" data-line-number="69">    plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Dental-Floss Simulation with &quot;</span>, reps, <span class="st">&quot; Repetitions&quot;</span>)</a>
+<a class="sourceLine" id="cb1066-70" data-line-number="70">    p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(leftover)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1066-71" data-line-number="71"><span class="st">      </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Amount left in spare (ft)&quot;</span>,</a>
+<a class="sourceLine" id="cb1066-72" data-line-number="72">          <span class="dt">title =</span> plotTitle)</a>
+<a class="sourceLine" id="cb1066-73" data-line-number="73">    <span class="co"># add a rug of individual points, provided there are not too many:</span></a>
+<a class="sourceLine" id="cb1066-74" data-line-number="74">    <span class="cf">if</span> ( reps <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span> ) {</a>
+<a class="sourceLine" id="cb1066-75" data-line-number="75">      p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_rug</span>()</a>
+<a class="sourceLine" id="cb1066-76" data-line-number="76">    }</a>
+<a class="sourceLine" id="cb1066-77" data-line-number="77">  }</a>
+<a class="sourceLine" id="cb1066-78" data-line-number="78">  <span class="kw">print</span>(p)</a>
+<a class="sourceLine" id="cb1066-79" data-line-number="79">  <span class="kw">cat</span>(<span class="st">&quot;The average amount left in the spare is:  &quot;</span>, </a>
+<a class="sourceLine" id="cb1066-80" data-line-number="80">      <span class="kw">mean</span>(leftover), <span class="st">&quot;.&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1066-81" data-line-number="81">}      <span class="co"># end flossSim</span></a></code></pre></div>
 <p>Let’s give it a try with one thousand repetitions.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">flossSim</span>(<span class="dt">reps =</span> <span class="dv">1000</span>, <span class="dt">graph =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</code></pre>
+<div class="sourceCode" id="cb1067"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1067-1" data-line-number="1"><span class="kw">flossSim</span>(<span class="dt">reps =</span> <span class="dv">1000</span>, <span class="dt">graph =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:dentalflosssim"></span>
 <img src="r-notes_files/figure-html/dentalflosssim-1.png" alt="Density plot of the results of a dental-floss simulation." width="60%" />
 <p class="caption">

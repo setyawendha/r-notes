@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.6 Subsetting Data Frames | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.6 Subsetting Data Frames | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="creating-data-frames.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,8 +578,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.6</span> Subsetting Data Frames</h2>
 <p>Our study of sub-setting matrices can be applied to the selection of parts of a data frame. As with a vector, one or both of the dimensions of the frame can come into play.</p>
 <p>We can create a new data frame consisting of any columns we like from the original frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;ideal_ht&quot;</span>)]
-<span class="kw">head</span>(df)</code></pre>
+<div class="sourceCode" id="cb1247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1247-1" data-line-number="1">df &lt;-<span class="st"> </span>m111survey[, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;ideal_ht&quot;</span>)]</a>
+<a class="sourceLine" id="cb1247-2" data-line-number="2"><span class="kw">head</span>(df)</a></code></pre></div>
 <pre><code>##   height ideal_ht
 ## 1   76.0       78
 ## 2   74.0       76
@@ -590,12 +588,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5   72.0       72
 ## 6   70.8       NA</code></pre>
 <p>If we select just one column, then the result is a vector rather than a data frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[, <span class="st">&quot;height&quot;</span>]
-<span class="kw">is.vector</span>(df)</code></pre>
+<div class="sourceCode" id="cb1249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1249-1" data-line-number="1">df &lt;-<span class="st"> </span>m111survey[, <span class="st">&quot;height&quot;</span>]</a>
+<a class="sourceLine" id="cb1249-2" data-line-number="2"><span class="kw">is.vector</span>(df)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>If for some reason you want to prevent this, set <code>drop</code> to <code>FALSE</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[, <span class="st">&quot;height&quot;</span>, drop =<span class="ot">FALSE</span>]
-<span class="kw">head</span>(df)</code></pre>
+<div class="sourceCode" id="cb1251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1251-1" data-line-number="1">df &lt;-<span class="st"> </span>m111survey[, <span class="st">&quot;height&quot;</span>, drop =<span class="ot">FALSE</span>]</a>
+<a class="sourceLine" id="cb1251-2" data-line-number="2"><span class="kw">head</span>(df)</a></code></pre></div>
 <pre><code>##   height
 ## 1   76.0
 ## 2   74.0
@@ -604,7 +602,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5   72.0
 ## 6   70.8</code></pre>
 <p>You may select particular rows, too:</p>
-<pre class="sourceCode r"><code class="sourceCode r">m111survey[<span class="dv">10</span><span class="op">:</span><span class="dv">15</span>, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;ideal_ht&quot;</span>)]</code></pre>
+<div class="sourceCode" id="cb1253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1253-1" data-line-number="1">m111survey[<span class="dv">10</span><span class="op">:</span><span class="dv">15</span>, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;ideal_ht&quot;</span>)]</a></code></pre></div>
 <pre><code>##    height ideal_ht
 ## 10     67       67
 ## 11     65       69
@@ -613,35 +611,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 14     78       75
 ## 15     69       72</code></pre>
 <p>You can even select some of the rows at random. Here is a random sample of size six:</p>
-<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(m111survey)
-df &lt;-<span class="st"> </span>m111survey[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> <span class="dv">6</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>), ]
-df[<span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;seat&quot;</span>)]  <span class="co"># show just two columns</span></code></pre>
+<div class="sourceCode" id="cb1255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1255-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(m111survey)</a>
+<a class="sourceLine" id="cb1255-2" data-line-number="2">df &lt;-<span class="st"> </span>m111survey[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dt">size =</span> <span class="dv">6</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>), ]</a>
+<a class="sourceLine" id="cb1255-3" data-line-number="3">df[<span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;seat&quot;</span>)]  <span class="co"># show just two columns</span></a></code></pre></div>
 <pre><code>##       sex     seat
-## 47 female 2_middle
-## 51 female 2_middle
-## 34   male 2_middle
-## 19 female  1_front
-## 41 female 2_middle
-## 61 female  1_front</code></pre>
+## 13 female  1_front
+## 54   male 2_middle
+## 56   male   3_back
+## 28 female  1_front
+## 53 female   3_back
+## 46 female 2_middle</code></pre>
 <p>Note the function <code>nrow()</code>  that gives the number of rows of the frame. When we sample six items without replacement from the vector <code>1:n</code>, we are picking six numbers at random from the row-numbers of the vector. Specifying these six numbers in the selection operator <code>[</code> yields the desired random sample of rows.</p>
 <div id="boolean-expressions" class="section level3">
 <h3><span class="header-section-number">7.6.1</span> Boolean Expressions</h3>
 <p>It is especially common to select rows by the values of a logical vector. For example, to select the rows where the fast speed ever driven is at least 150 miles per hour, try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>m111survey[m111survey<span class="op">$</span>fastest <span class="op">&gt;=</span><span class="st"> </span><span class="dv">150</span>, ]
-df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;fastest&quot;</span>)]  <span class="co"># show just two of the variables</span></code></pre>
+<div class="sourceCode" id="cb1257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1257-1" data-line-number="1">df &lt;-<span class="st"> </span>m111survey[m111survey<span class="op">$</span>fastest <span class="op">&gt;=</span><span class="st"> </span><span class="dv">150</span>, ]</a>
+<a class="sourceLine" id="cb1257-2" data-line-number="2">df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;fastest&quot;</span>)]  <span class="co"># show just two of the variables</span></a></code></pre></div>
 <pre><code>##     sex fastest
 ## 8  male     160
 ## 32 male     190</code></pre>
 <p>When you are selecting rows it can be convenient to use the <code>subset()</code> function.  The first argument to the function is the frame from which you plan to select, and the second is the Boolean expression by which to select:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">subset</span>(m111survey, fastest <span class="op">&gt;=</span><span class="st"> </span><span class="dv">150</span>)
-df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;fastest&quot;</span>)] </code></pre>
+<div class="sourceCode" id="cb1259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1259-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">subset</span>(m111survey, fastest <span class="op">&gt;=</span><span class="st"> </span><span class="dv">150</span>)</a>
+<a class="sourceLine" id="cb1259-2" data-line-number="2">df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;fastest&quot;</span>)] </a></code></pre></div>
 <pre><code>##     sex fastest
 ## 8  male     160
 ## 32 male     190</code></pre>
 <p>Note that we did not need to type <code>m111survey$fastest</code>: the first argument to <code>subset()</code> provides the environment in which to search for names that appear in the Boolean expression.</p>
 <p>The Boolean sub-setting expressions can be quite complex:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">subset</span>(m111survey, seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span> <span class="op">&amp;</span><span class="st"> </span>height <span class="op">&lt;</span><span class="st"> </span><span class="dv">72</span> <span class="op">&amp;</span><span class="st"> </span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span>)
-df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>, <span class="st">&quot;seat&quot;</span>)]</code></pre>
+<div class="sourceCode" id="cb1261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1261-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">subset</span>(m111survey, seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span> <span class="op">&amp;</span><span class="st"> </span>height <span class="op">&lt;</span><span class="st"> </span><span class="dv">72</span> <span class="op">&amp;</span><span class="st"> </span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span>)</a>
+<a class="sourceLine" id="cb1261-2" data-line-number="2">df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>, <span class="st">&quot;seat&quot;</span>)]</a></code></pre></div>
 <pre><code>##       sex height   seat
 ## 9  female     59 3_back
 ## 20 female     65 3_back
@@ -649,8 +647,8 @@ df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span cl
 ## 53 female     69 3_back
 ## 70 female     65 3_back</code></pre>
 <p><strong>Note</strong>: <code>subset()</code> takes a third parameter called <code>select</code> that allows you to pick out any desired columns. For example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(m111survey, seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span> <span class="op">&amp;</span><span class="st"> </span>height <span class="op">&lt;</span><span class="st"> </span><span class="dv">72</span> <span class="op">&amp;</span><span class="st"> </span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span>,
-       <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>, <span class="st">&quot;seat&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb1263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1263-1" data-line-number="1"><span class="kw">subset</span>(m111survey, seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span> <span class="op">&amp;</span><span class="st"> </span>height <span class="op">&lt;</span><span class="st"> </span><span class="dv">72</span> <span class="op">&amp;</span><span class="st"> </span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span>,</a>
+<a class="sourceLine" id="cb1263-2" data-line-number="2">       <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;height&quot;</span>, <span class="st">&quot;seat&quot;</span>))</a></code></pre></div>
 <pre><code>##       sex height   seat
 ## 9  female     59 3_back
 ## 20 female     65 3_back
@@ -661,8 +659,8 @@ df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span cl
 <div id="practice-exercises-21" class="section level3">
 <h3><span class="header-section-number">7.6.2</span> Practice Exercises</h3>
 <p>We’ll use the <code>CPS85</code> data frame from the <strong>mosaicData</strong> package. You should go ahead and load the package and then read about the data frame:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mosaicData)
-?CPS85</code></pre>
+<div class="sourceCode" id="cb1265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1265-1" data-line-number="1"><span class="kw">library</span>(mosaicData)</a>
+<a class="sourceLine" id="cb1265-2" data-line-number="2">?CPS85</a></code></pre></div>
 <p>Each row in the data frame corresponds to an employee in the survey.</p>
 <ol style="list-style-type: decimal">
 <li><p>Write a command that gives the number of employees in the data frame.</p></li>
@@ -680,23 +678,23 @@ df[, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span cl
 <ol style="list-style-type: decimal">
 <li><p>The command is <code>nrow(CPS85)</code>.</p></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(CPS85, age <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span>)</code></pre></li>
+<div class="sourceCode" id="cb1266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1266-1" data-line-number="1"><span class="kw">subset</span>(CPS85, age <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span>)</a></code></pre></div></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(CPS85, married <span class="op">==</span><span class="st"> &quot;Married&quot;</span> <span class="op">&amp;</span><span class="st"> </span>exper <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>)</code></pre></li>
+<div class="sourceCode" id="cb1267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1267-1" data-line-number="1"><span class="kw">subset</span>(CPS85, married <span class="op">==</span><span class="st"> &quot;Married&quot;</span> <span class="op">&amp;</span><span class="st"> </span>exper <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>)</a></code></pre></div></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(CPS85, union <span class="op">==</span><span class="st"> &quot;Not&quot;</span> <span class="op">&amp;</span><span class="st"> </span>(south <span class="op">==</span><span class="st"> &quot;S&quot;</span> <span class="op">|</span><span class="st"> </span>educ <span class="op">&gt;</span><span class="st"> </span><span class="dv">12</span>))</code></pre></li>
+<div class="sourceCode" id="cb1268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1268-1" data-line-number="1"><span class="kw">subset</span>(CPS85, union <span class="op">==</span><span class="st"> &quot;Not&quot;</span> <span class="op">&amp;</span><span class="st"> </span>(south <span class="op">==</span><span class="st"> &quot;S&quot;</span> <span class="op">|</span><span class="st"> </span>educ <span class="op">&gt;</span><span class="st"> </span><span class="dv">12</span>))</a></code></pre></div></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(CPS85, sector <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;clerical&quot;</span>, <span class="st">&quot;construction&quot;</span>,
-                            <span class="st">&quot;management&quot;</span>, <span class="st">&quot;professional&quot;</span>))</code></pre></li>
+<div class="sourceCode" id="cb1269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1269-1" data-line-number="1"><span class="kw">subset</span>(CPS85, sector <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;clerical&quot;</span>, <span class="st">&quot;construction&quot;</span>,</a>
+<a class="sourceLine" id="cb1269-2" data-line-number="2">                            <span class="st">&quot;management&quot;</span>, <span class="st">&quot;professional&quot;</span>))</a></code></pre></div></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85[CPS85<span class="op">$</span>wage <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>, <span class="kw">c</span>(<span class="st">&quot;wage&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;sector&quot;</span>)]</code></pre></li>
+<div class="sourceCode" id="cb1270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1270-1" data-line-number="1">CPS85[CPS85<span class="op">$</span>wage <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>, <span class="kw">c</span>(<span class="st">&quot;wage&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;sector&quot;</span>)]</a></code></pre></div></li>
 <li><p>Try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(CPS85), <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>),
-      <span class="kw">c</span>(<span class="st">&quot;wage&quot;</span>, <span class="st">&quot;sex&quot;</span>)]</code></pre></li>
+<div class="sourceCode" id="cb1271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1271-1" data-line-number="1">CPS85[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(CPS85), <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb1271-2" data-line-number="2">      <span class="kw">c</span>(<span class="st">&quot;wage&quot;</span>, <span class="st">&quot;sex&quot;</span>)]</a></code></pre></div></li>
 <li><p>Try this (<code>south</code> and <code>union</code> are columns 6 and 9, respectively):</p>
-<pre class="sourceCode r"><code class="sourceCode r">CPS85[ , <span class="op">-</span><span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">9</span>)]</code></pre>
+<div class="sourceCode" id="cb1272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1272-1" data-line-number="1">CPS85[ , <span class="op">-</span><span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">9</span>)]</a></code></pre></div>
 <p>The <code>select</code> parameter of the <code>subset()</code> function has a little known feature that allows you to specify columns to omit by name, so the following is another solution:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(CPS85, <span class="dt">select =</span> <span class="op">-</span><span class="kw">c</span>(south, union))</code></pre></li>
+<div class="sourceCode" id="cb1273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1273-1" data-line-number="1"><span class="kw">subset</span>(CPS85, <span class="dt">select =</span> <span class="op">-</span><span class="kw">c</span>(south, union))</a></code></pre></div></li>
 </ol>
 </div>
 </div>

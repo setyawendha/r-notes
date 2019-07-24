@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.8 Further Notes on Syntax | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.8 Further Notes on Syntax | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="basic-arithmetical-operations-on-vectors.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -582,7 +580,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="syntax-errors-vs.run-time-errors-vs.semantic-errors" class="section level3">
 <h3><span class="header-section-number">2.8.1</span> Syntax Errors vs. Run-time Errors vs. Semantic Errors</h3>
 <p>For the most part you will learn the syntax informally. By now, for example, you have probably realized that when you call a function you have to supply a closing parenthesis to match the open parenthesis. Thus the following is completely fine:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" data-line-number="1"><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] 15</code></pre>
 <p>On the other hand if you were to type <code>sum(1:5</code> alone on a single line in a R script, R Studio’s code-checker would show a red warning-circle at that line. Hovering over the circle you would see the message:</p>
 <blockquote>
@@ -597,11 +595,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>“Mice are.” (Incomplete expression.)</li>
 </ul>
 <p>A <em>run-time error</em>  is an error that occurs when the syntax is correct but R is unable to finish the execution of your code for some other reason. The following code, for example, is perfectly fine from a syntactical point of view:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="st">&quot;hello&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" data-line-number="1"><span class="kw">sum</span>(<span class="st">&quot;hello&quot;</span>)</a></code></pre></div>
 <p>When run, however, it produces an error:</p>
 <pre><code>## Error in sum(&quot;hello&quot;) : invalid &#39;type&#39; (character) of argument</code></pre>
 <p>Here is another example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(emeraldCity)</code></pre>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb407-1" data-line-number="1"><span class="kw">sum</span>(emeraldCity)</a></code></pre></div>
 <p>Unless for some reason you have defined the variable <code>emeraldCity</code>, an attempt to run the above command will produce the following run-time error:</p>
 <pre><code>## Error: object &#39;emeraldCity&#39; not found</code></pre>
 <p>Many run-time errors in computer programming resemble errors in ordinary language where the sentence is grammatically correct by does not <em>mean</em> anything, as in:</p>
@@ -610,10 +608,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>There is a third type of error, known in the world of programming as a <em>semantic error</em>.  The term “semantics” refers to the meaning of things. Computer code is said to contain a semantic error when it is syntactically correct and can be executed, but does not deliver the results one knows to expect.</p>
 <p>As an example, suppose you have defined, at some point, two variables:</p>
-<pre class="sourceCode r"><code class="sourceCode r">emeraldCity &lt;-<span class="st"> </span><span class="dv">15</span>
-emeraldcity &lt;-<span class="st"> </span><span class="dv">4</span></code></pre>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb409-1" data-line-number="1">emeraldCity &lt;-<span class="st"> </span><span class="dv">15</span></a>
+<a class="sourceLine" id="cb409-2" data-line-number="2">emeraldcity &lt;-<span class="st"> </span><span class="dv">4</span></a></code></pre></div>
 <p>Suppose now that—wanting R to compute <span class="math inline">\(15^2\)</span>—you run the following code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">emeraldcity<span class="op">^</span><span class="dv">2</span></code></pre>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb410-1" data-line-number="1">emeraldcity<span class="op">^</span><span class="dv">2</span></a></code></pre></div>
 <pre><code>## [1] 16</code></pre>
 <p>You don’t get the results you wanted, because you accidentally asked for the square of the wrong number.</p>
 <p>Semantic errors are usually the most difficult errors for programmers to detect and repair.</p>
@@ -621,29 +619,29 @@ emeraldcity &lt;-<span class="st"> </span><span class="dv">4</span></code></pre>
 <div id="the-assignment-operator" class="section level3">
 <h3><span class="header-section-number">2.8.2</span> The Assignment Operator</h3>
 <p>We have been using the assignment operator <code>&lt;-</code> to assign values to variables. You should be aware that there is another assignment operator that works the other way around:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span> -&gt;<span class="st"> </span>emeraldCity
-emeraldCity</code></pre>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb412-1" data-line-number="1"><span class="dv">4</span> -&gt;<span class="st"> </span>emeraldCity</a>
+<a class="sourceLine" id="cb412-2" data-line-number="2">emeraldCity</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>Most people don’t use it.</p>
 <p>A popular alternative to <code>&lt;-</code> as an assignment operator is the equals sign <code>=</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">emeraldCity =<span class="st"> </span><span class="dv">5</span>
-emeraldCity</code></pre>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb414-1" data-line-number="1">emeraldCity =<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb414-2" data-line-number="2">emeraldCity</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>I myself prefer to stay away from it, as it can be confused with other uses of <code>=</code>, such as the setting of values to parameters in functions:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="dt">times =</span> <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb416-1" data-line-number="1"><span class="kw">rep</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="dt">times =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Dorothy&quot; &quot;Dorothy&quot; &quot;Dorothy&quot;</code></pre>
 <p>When you have to assign the same value to several values, R allows you to abbreviate a bit. Consider the following code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span>b &lt;-<span class="st"> </span>c &lt;-<span class="st"> </span><span class="dv">5</span></code></pre>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb418-1" data-line-number="1">a &lt;-<span class="st"> </span>b &lt;-<span class="st"> </span>c &lt;-<span class="st"> </span><span class="dv">5</span></a></code></pre></div>
 <p>The above code has the same effect as:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span>
-b &lt;-<span class="st"> </span><span class="dv">5</span>
-c &lt;-<span class="st"> </span><span class="dv">5</span></code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb419-2" data-line-number="2">b &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb419-3" data-line-number="3">c &lt;-<span class="st"> </span><span class="dv">5</span></a></code></pre></div>
 </div>
 <div id="multiple-expressions" class="section level3">
 <h3><span class="header-section-number">2.8.3</span> Multiple Expressions</h3>
 <p>R allows you to write more than one expression on a single line, as long as you separate the expressions with semicolons:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span>b &lt;-<span class="st"> </span>c &lt;-<span class="st"> </span><span class="dv">5</span>
-a; b; c; <span class="dv">2</span><span class="op">+</span><span class="dv">2</span>; <span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" data-line-number="1">a &lt;-<span class="st"> </span>b &lt;-<span class="st"> </span>c &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb420-2" data-line-number="2">a; b; c; <span class="dv">2</span><span class="op">+</span><span class="dv">2</span>; <span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <pre><code>## [1] 5</code></pre>
 <pre><code>## [1] 5</code></pre>
@@ -693,19 +691,19 @@ a; b; c; <span class="dv">2</span><span class="op">+</span><span class="dv">2</s
 <p><code>if</code>, <code>else</code>, <code>while</code>, <code>repeat</code>, <code>function</code>, <code>for</code>, <code>in</code>, <code>next</code>, <code>break</code>,<code>TRUE</code>, <code>FALSE</code>, <code>NULL</code>, <code>inf</code>, <code>NaN</code>, <code>NA</code>, <code>NA_integer</code>, <code>NA_real</code>, <code>NA_complex</code>, <code>NA_character</code></p>
 </blockquote>
 <p>You need not memorize the above list: You’ll gradually learn most of it, and words you don’t learn are words that you are unlikely to ever choose as a variable-name on your own. Besides, reserved words show in in blue in the R Studio editor, and if you manage to use one anyway then R will stop you outright with a clear error message:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">break</span> &lt;-<span class="st"> </span><span class="dv">5</span></code></pre>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" data-line-number="1"><span class="cf">break</span> &lt;-<span class="st"> </span><span class="dv">5</span></a></code></pre></div>
 <pre><code>## Error in break &lt;- 5 : invalid (NULL) left side of assignment</code></pre>
 <p>Notice also that although <code>TRUE</code> and <code>FALSE</code> are reserved words, their accepted abbreviations <code>T</code> and <code>F</code> are not. This can lead to problems in code, if someone chooses to bind <code>T</code> or <code>F</code> to some value.</p>
 <p>For example, suppose that have two lines of code like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">T &lt;-<span class="st"> </span><span class="dv">0</span>
-F &lt;-<span class="st"> </span><span class="dv">1</span></code></pre>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" data-line-number="1">T &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb428-2" data-line-number="2">F &lt;-<span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <p>Later on, suppose you create what you think is a logical vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myVector &lt;-<span class="st"> </span><span class="kw">c</span>(T, F, F, T)</code></pre>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" data-line-number="1">myVector &lt;-<span class="st"> </span><span class="kw">c</span>(T, F, F, T)</a></code></pre></div>
 <p>But it’s <em>not</em> logical:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(myVector)</code></pre>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" data-line-number="1"><span class="kw">typeof</span>(myVector)</a></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
 <p>That’s because <code>T</code> ad <code>F</code> have been bound to numerical values. If you coerce <code>myLogical</code> to a logical vector, you get the exact opposite of what you would have expected:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.logical</span>(myVector)</code></pre>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" data-line-number="1"><span class="kw">as.logical</span>(myVector)</a></code></pre></div>
 <pre><code>## [1] FALSE  TRUE  TRUE FALSE</code></pre>
 <p>The moral of the story is:</p>
 
@@ -718,17 +716,17 @@ To be safe, never use <code>T</code> for <code>TRUE</code> or <code>F</code> for
 <div id="practice-exercises-6" class="section level3">
 <h3><span class="header-section-number">2.8.5</span> Practice Exercises</h3>
 <p>Suppose that you begin a new R session and that you run to following code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abe&quot;</span>, <span class="st">&quot;Bettina&quot;</span>, <span class="st">&quot;Candace&quot;</span>, <span class="st">&quot;Devadatta&quot;</span>, <span class="st">&quot;Esmeralda&quot;</span>)
-numberKids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>)
-yearsEducation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">16</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">18</span>)
-hasPets &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" data-line-number="1">person &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Abe&quot;</span>, <span class="st">&quot;Bettina&quot;</span>, <span class="st">&quot;Candace&quot;</span>, <span class="st">&quot;Devadatta&quot;</span>, <span class="st">&quot;Esmeralda&quot;</span>)</a>
+<a class="sourceLine" id="cb434-2" data-line-number="2">numberKids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb434-3" data-line-number="3">yearsEducation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">16</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb434-4" data-line-number="4">hasPets &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</a></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><p>What sort of error (syntax, runtime or semantic) is produced by the this next piece of code, which is intended to produce the names of the people with more than 15 years of education? Why?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">person</span>(yearsEducation <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span>]</code></pre></li>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" data-line-number="1"><span class="kw">person</span>(yearsEducation <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span>]</a></code></pre></div></li>
 <li><p>What sort of error (syntax, runtime or semantic) is produced by the this next piece of code, which is intended to produce the names of the people who don’t have pets? Why?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">person</span>(<span class="op">!</span>haspets]</code></pre></li>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" data-line-number="1"><span class="kw">person</span>(<span class="op">!</span>haspets]</a></code></pre></div></li>
 <li><p>What sort of error (syntax, runtime or semantic) is produced by the this next piece of code, which is intended to find out how many people have pets? Why?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(hasPets)</code></pre></li>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" data-line-number="1"><span class="kw">length</span>(hasPets)</a></code></pre></div></li>
 <li><p>Is <code>ThreeLittlePigs</code> a valid name for a variable? If not, why not?</p></li>
 <li><p>Is <code>3LittlePigs</code> a valid name for a variable? If not, why not?</p></li>
 <li><p>Is <code>LittlePigs3</code> a valid name for a variable? If not, why not?</p></li>
@@ -741,12 +739,12 @@ hasPets &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot"
 <h3><span class="header-section-number">2.8.6</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>This will result in a syntax error. You need brackets to select and you’ve got a parenthesis n the left. The correct syntax would be:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person[yearsEducation <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span>]</code></pre></li>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" data-line-number="1">person[yearsEducation <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span>]</a></code></pre></div></li>
 <li><p>This will result in a runtime error. The variable <code>haspets</code> is not defined, so R will issue a “can’t find” erro when the code is executed. Probably you meant:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person[<span class="op">!</span>hasPets]</code></pre></li>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" data-line-number="1">person[<span class="op">!</span>hasPets]</a></code></pre></div></li>
 <li><p>This will result in a semantic error. You’ll get 5 (the number of elements in the vector <code>hasPets</code>) What you wnat can be accomplished by either one of the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="op">!</span>hasPets)              <span class="co"># nice and snappy!</span>
-<span class="kw">length</span>(hasPets[<span class="op">!</span>hasPets])  <span class="co"># kinda awkward</span></code></pre></li>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" data-line-number="1"><span class="kw">sum</span>(<span class="op">!</span>hasPets)              <span class="co"># nice and snappy!</span></a>
+<a class="sourceLine" id="cb440-2" data-line-number="2"><span class="kw">length</span>(hasPets[<span class="op">!</span>hasPets])  <span class="co"># kinda awkward</span></a></code></pre></div></li>
 <li><p>Yes.</p></li>
 <li><p>No! Variables can’t start with a number.</p></li>
 <li><p>Yes.</p></li>

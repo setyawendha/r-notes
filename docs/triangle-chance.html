@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.3 Example: Chance of a Triangle | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.3 Example: Chance of a Triangle | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="monte-carlo-simulation.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,16 +578,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.3</span> Example: Chance of a Triangle</h2>
 <p>In the examples considered so far, intuition or a simple calculation suggests what the exact value of the probability or expected value should be. The true power of the Monte Carlo simulation method shines forth in situations where it is difficult or impossible to compute a value mathematically.</p>
 <p>Let’s revisit an example from Section <a href="making-decisions-conditionals.html#ifelse">4.2.4</a>, where we considered whether or not three segments could be put together to form a triangle. We developed the following function to determine, from the lengths of each segment, whether or not a triangle is possible:</p>
-<pre class="sourceCode r"><code class="sourceCode r">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {
-  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)
-}</code></pre>
+<div class="sourceCode" id="cb980"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb980-1" data-line-number="1">isTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z) {</a>
+<a class="sourceLine" id="cb980-2" data-line-number="2">  (x <span class="op">+</span><span class="st"> </span>y <span class="op">&gt;</span><span class="st"> </span>z) <span class="op">&amp;</span><span class="st"> </span>(x <span class="op">+</span>z <span class="op">&gt;</span><span class="st"> </span>y) <span class="op">&amp;</span><span class="st"> </span>(y <span class="op">+</span><span class="st"> </span>z <span class="op">&gt;</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb980-3" data-line-number="3">}</a></code></pre></div>
 <p>Recall also that this function applied to vectors of any length, so we can use it to decide about many triples of segments at once.</p>
 <p>Let’s now inject some chance variation into the situation. Suppose that you have a stick that is one unit in length: one foot, one meter, one yard—whatever. You plan to break the stick at two randomly selected points. Breaking the stick will yield three pieces. You wonder: what is the chance that these three pieces can form a triangle?</p>
 <p>In an advanced probability course you can show that the probability of a triangle is exactly <span class="math inline">\(1/4\)</span>. Here we would like to estimate the probability with Monte Carlo simulation.</p>
 <p>In order to carry out the simulation, we will need to develop code that produces a pair of break-points, any number of times that we like—let’s think about ten times, to start.</p>
 <p>This is not so difficult if we use the <code>runif()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)  <span class="co"># the first breaks</span>
-y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)  <span class="co"># the second breaks</span></code></pre>
+<div class="sourceCode" id="cb981"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb981-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)  <span class="co"># the first breaks</span></a>
+<a class="sourceLine" id="cb981-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)  <span class="co"># the second breaks</span></a></code></pre></div>
 <p>Next we must compute—for each pair of breaks—the lengths of the three segments that are produced. If we knew that the <code>x</code> break was always less than the <code>y</code> break, this would be easy:</p>
 <ul>
 <li>the leftmost piece would be <code>x</code> units long;</li>
@@ -598,20 +596,20 @@ y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1
 </ul>
 <p>The problem is that a given element of the vector <code>y</code> can easily be less than than corresponding element of the vector <code>x</code>. When that happens, the pieces won’t be as described in the bullet-ed items above.</p>
 <p>We can solve this problem with the <code>pmin()</code> and <code>pmax()</code> functions  that were introduced in Section <a href="basic-arithmetical-operations-on-vectors.html#maxmin">2.7.1.5</a>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)
-b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)
-side1 &lt;-<span class="st"> </span>a     <span class="co"># leftmost</span>
-side2 &lt;-<span class="st"> </span>b <span class="op">-</span><span class="st"> </span>a  <span class="co"># middle</span>
-side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b <span class="co"># rigttmost</span></code></pre>
+<div class="sourceCode" id="cb982"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb982-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)</a>
+<a class="sourceLine" id="cb982-2" data-line-number="2">b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)</a>
+<a class="sourceLine" id="cb982-3" data-line-number="3">side1 &lt;-<span class="st"> </span>a     <span class="co"># leftmost</span></a>
+<a class="sourceLine" id="cb982-4" data-line-number="4">side2 &lt;-<span class="st"> </span>b <span class="op">-</span><span class="st"> </span>a  <span class="co"># middle</span></a>
+<a class="sourceLine" id="cb982-5" data-line-number="5">side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b <span class="co"># rigttmost</span></a></code></pre></div>
 <p>It is useful to write a helper-function that starts from the breaks, computes the sides, and then decides whether they form a triangle:</p>
-<pre class="sourceCode r"><code class="sourceCode r">makesTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
-  a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)
-  b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)
-  side1 &lt;-<span class="st"> </span>a
-  side2 &lt;-<span class="st"> </span>b <span class="op">-</span><span class="st"> </span>a
-  side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b
-  <span class="kw">isTriangle</span>(<span class="dt">x =</span> side1, <span class="dt">y =</span> side2, <span class="dt">z =</span> side3)
-}</code></pre>
+<div class="sourceCode" id="cb983"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb983-1" data-line-number="1">makesTriangle &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb983-2" data-line-number="2">  a &lt;-<span class="st"> </span><span class="kw">pmin</span>(x, y)</a>
+<a class="sourceLine" id="cb983-3" data-line-number="3">  b &lt;-<span class="st"> </span><span class="kw">pmax</span>(x, y)</a>
+<a class="sourceLine" id="cb983-4" data-line-number="4">  side1 &lt;-<span class="st"> </span>a</a>
+<a class="sourceLine" id="cb983-5" data-line-number="5">  side2 &lt;-<span class="st"> </span>b <span class="op">-</span><span class="st"> </span>a</a>
+<a class="sourceLine" id="cb983-6" data-line-number="6">  side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b</a>
+<a class="sourceLine" id="cb983-7" data-line-number="7">  <span class="kw">isTriangle</span>(<span class="dt">x =</span> side1, <span class="dt">y =</span> side2, <span class="dt">z =</span> side3)</a>
+<a class="sourceLine" id="cb983-8" data-line-number="8">}</a></code></pre></div>
 <p>Let’s try it our for our repetitions</p>
 <p>Table <a href="triangle-chance.html#tab:trianglesimstab">6.1</a> shows the results. Based on our ten repetitions, we would estimate the probability of a triangle as <span class="math inline">\(4/10\)</span>.</p>
 <table>
@@ -710,32 +708,32 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-
 </tbody>
 </table>
 <p>Interestingly, R can compute the proportion of times that a triangle was formed, directly from the logical vector <code>triangle</code>. Look at the following code:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(triangle)</code></pre>
+<div class="sourceCode" id="cb984"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb984-1" data-line-number="1"><span class="kw">sum</span>(triangle)</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(triangle)</code></pre>
+<div class="sourceCode" id="cb986"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb986-1" data-line-number="1"><span class="kw">mean</span>(triangle)</a></code></pre></div>
 <pre><code>## [1] 0.4</code></pre>
 <p>When we ask R to add the elements of a logical vector, it coerces the Boolean values to numbers: <code>TRUE</code> becomes 1 and <code>FALSE</code> becomes 0. Summing the numbers is then equivalent to counting how many times <code>TRUE</code> appeared in <code>triangle</code>. Taking the mean is equivalent to computing the proportion of <code>TRUE</code>s in <code>triangle</code>.</p>
 <p>We would like, of course, to simulate breaking the unit length many times, and we would like to be able to choose easily—without a lot of fuss in coding—the number of repetitions. It makes sense, therefore, to write a simulation function that will do our work for us:</p>
-<pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span> ) {
-  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb988"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb988-1" data-line-number="1">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span> ) {</a>
+<a class="sourceLine" id="cb988-2" data-line-number="2">  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb988-3" data-line-number="3">  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb988-4" data-line-number="4">  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)</a>
+<a class="sourceLine" id="cb988-5" data-line-number="5">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb988-6" data-line-number="6">}</a></code></pre></div>
 <p>Now that we think about it, it might also be nice to have the option to view a table of the results, along with the estimate of the probability:</p>
-<pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span> ) {
-  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">table</span>(triangle))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb989"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb989-1" data-line-number="1">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span> ) {</a>
+<a class="sourceLine" id="cb989-2" data-line-number="2">  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb989-3" data-line-number="3">  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb989-4" data-line-number="4">  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)</a>
+<a class="sourceLine" id="cb989-5" data-line-number="5">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb989-6" data-line-number="6">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb989-7" data-line-number="7">    <span class="kw">print</span>(<span class="kw">table</span>(triangle))</a>
+<a class="sourceLine" id="cb989-8" data-line-number="8">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb989-9" data-line-number="9">  }</a>
+<a class="sourceLine" id="cb989-10" data-line-number="10">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb989-11" data-line-number="11">}</a></code></pre></div>
 <p>Let’s give our function a try, using the default of ten thousand repetitions and asking for a table of results:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">triangleSim</span>(<span class="dt">table =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb990"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb990-1" data-line-number="1"><span class="kw">triangleSim</span>(<span class="dt">table =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Here is a table of the results:
 ## triangle
 ## FALSE  TRUE 
@@ -746,34 +744,34 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-
 <div id="setting-a-seed" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Setting a Seed</h3>
 <p>There are further possibilities for refining the simulation function. We know that it can be a good idea to set a seed for R’s random-number generator. When you do this you still get random-looking results, but they will be the same results no matter how often you call the simulation function. In that way others who have access to your function can “reproduce” the results you got, thus assuring themselves that you weren’t making anything up. Let’s add a <code>seed</code> parameter to our simulation function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, seed ) {
-  <span class="kw">set.seed</span>(seed)
-  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">table</span>(triangle))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb992"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb992-1" data-line-number="1">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, seed ) {</a>
+<a class="sourceLine" id="cb992-2" data-line-number="2">  <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb992-3" data-line-number="3">  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb992-4" data-line-number="4">  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb992-5" data-line-number="5">  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)</a>
+<a class="sourceLine" id="cb992-6" data-line-number="6">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb992-7" data-line-number="7">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb992-8" data-line-number="8">    <span class="kw">print</span>(<span class="kw">table</span>(triangle))</a>
+<a class="sourceLine" id="cb992-9" data-line-number="9">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb992-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb992-11" data-line-number="11">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb992-12" data-line-number="12">}</a></code></pre></div>
 <p>This is all very well, but if for some reason you <em>desire</em> to have the function produce different results with every call, you have to come up with the seed yourself. It would be nice to have the option to call your function without having to provide a seed.</p>
 <p>This is not difficult to accomplish. We’ll set the default value for <code>seed</code> to be <code>NULL</code>. Then when the function begins we’ll check the value of <code>seed</code>. If it is not <code>NULL</code>, then the user has provided a seed, and we’ll use that. Otherwise, we’ll let R grab pseudo-random numbers however it likes.</p>
-<pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">table</span>(triangle))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb993"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb993-1" data-line-number="1">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb993-2" data-line-number="2">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb993-3" data-line-number="3">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb993-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb993-5" data-line-number="5">  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb993-6" data-line-number="6">  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb993-7" data-line-number="7">  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)</a>
+<a class="sourceLine" id="cb993-8" data-line-number="8">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb993-9" data-line-number="9">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb993-10" data-line-number="10">    <span class="kw">print</span>(<span class="kw">table</span>(triangle))</a>
+<a class="sourceLine" id="cb993-11" data-line-number="11">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb993-12" data-line-number="12">  }</a>
+<a class="sourceLine" id="cb993-13" data-line-number="13">  <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb993-14" data-line-number="14">}</a></code></pre></div>
 </div>
 <div id="program-development" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> Program Development</h3>
@@ -789,35 +787,35 @@ side3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-
 <h3><span class="header-section-number">6.3.3</span> Number of Repetitions</h3>
 <p>The Law of Large Numbers says that the more times you repeat the simulation, the better our estimate of the desired probability—or expected value—is liable to be. Let’s use the Stick-Splitting Problem to investigate the effect of the choice of repetitions on the accuracy of our estimate of the probability of getting a triangle.</p>
 <p>We will need to run the <code>triangleSim()</code> function several times, with a different choice for <code>reps</code> each time, keeping track of the estimates we obtain. In the process we won’t need tables or other output to the console. Let’s rewrite <code>triangleSim()</code> for maximum flexibility, making console output optional and using the invisible return discussed in Section <a href="making-decisions-conditionals.html#invisible-returns">4.2.3</a>.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
-<pre class="sourceCode r"><code class="sourceCode r">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>,
-                        <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
-  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)
-  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)
-  <span class="cf">if</span> ( table ) {
-    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-    <span class="kw">print</span>(<span class="kw">table</span>(triangle))
-    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-  <span class="cf">if</span> ( verbose ) {
-    <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }
-  <span class="kw">invisible</span>(<span class="kw">mean</span>(triangle))
-}</code></pre>
+<div class="sourceCode" id="cb994"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb994-1" data-line-number="1">triangleSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">table =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb994-2" data-line-number="2">                        <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {</a>
+<a class="sourceLine" id="cb994-3" data-line-number="3">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb994-4" data-line-number="4">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb994-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb994-6" data-line-number="6">  cut1 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb994-7" data-line-number="7">  cut2 &lt;-<span class="st"> </span><span class="kw">runif</span>(reps)</a>
+<a class="sourceLine" id="cb994-8" data-line-number="8">  triangle &lt;-<span class="st"> </span><span class="kw">makesTriangle</span>(cut1, cut2)</a>
+<a class="sourceLine" id="cb994-9" data-line-number="9">  <span class="cf">if</span> ( table ) {</a>
+<a class="sourceLine" id="cb994-10" data-line-number="10">    <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results:</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb994-11" data-line-number="11">    <span class="kw">print</span>(<span class="kw">table</span>(triangle))</a>
+<a class="sourceLine" id="cb994-12" data-line-number="12">    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb994-13" data-line-number="13">  }</a>
+<a class="sourceLine" id="cb994-14" data-line-number="14">  <span class="cf">if</span> ( verbose ) {</a>
+<a class="sourceLine" id="cb994-15" data-line-number="15">    <span class="kw">cat</span>(<span class="st">&quot;The proportion of triangles was &quot;</span>, <span class="kw">mean</span>(triangle), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb994-16" data-line-number="16">  }</a>
+<a class="sourceLine" id="cb994-17" data-line-number="17">  <span class="kw">invisible</span>(<span class="kw">mean</span>(triangle))</a>
+<a class="sourceLine" id="cb994-18" data-line-number="18">}</a></code></pre></div>
 <p>Next, we make a vector of repetitions, and a vector to hold our estimates:</p>
-<pre class="sourceCode r"><code class="sourceCode r">reps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>)
-estimates &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">length</span>(reps))</code></pre>
+<div class="sourceCode" id="cb995"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb995-1" data-line-number="1">reps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>)</a>
+<a class="sourceLine" id="cb995-2" data-line-number="2">estimates &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">length</span>(reps))</a></code></pre></div>
 <p>Next we loop through <code>reps</code>, performing a complete simulation for each repetition-number and storing our results:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(reps)) {
-  estimates[i] &lt;-<span class="st"> </span><span class="kw">triangleSim</span>(<span class="dt">reps =</span> reps[i], <span class="dt">seed =</span> <span class="dv">3030</span>,
-                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
-}</code></pre>
+<div class="sourceCode" id="cb996"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb996-1" data-line-number="1"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(reps)) {</a>
+<a class="sourceLine" id="cb996-2" data-line-number="2">  estimates[i] &lt;-<span class="st"> </span><span class="kw">triangleSim</span>(<span class="dt">reps =</span> reps[i], <span class="dt">seed =</span> <span class="dv">3030</span>,</a>
+<a class="sourceLine" id="cb996-3" data-line-number="3">                             <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb996-4" data-line-number="4">}</a></code></pre></div>
 <p>Let’s have a look at our estimates:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(estimates) &lt;-<span class="st"> </span>reps
-estimates</code></pre>
+<div class="sourceCode" id="cb997"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb997-1" data-line-number="1"><span class="kw">names</span>(estimates) &lt;-<span class="st"> </span>reps</a>
+<a class="sourceLine" id="cb997-2" data-line-number="2">estimates</a></code></pre></div>
 <pre><code>##      100     1000    10000    1e+05    1e+06 
 ## 0.200000 0.245000 0.254700 0.251570 0.249779</code></pre>
 <p>The estimates are indeed getting closer to the theoretical value of <span class="math inline">\(1/4\)</span>.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
@@ -852,96 +850,96 @@ estimates</code></pre>
 <h3><span class="header-section-number">6.3.5</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">diceGameSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  w &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>)
-  pw &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">3</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)
-  winnings &lt;-<span class="st"> </span><span class="kw">sample</span>(w, <span class="dt">size =</span> reps, 
-                     <span class="dt">replace =</span> <span class="ot">TRUE</span>,
-                     <span class="dt">prob =</span> pw)
-  <span class="cf">if</span> ( verbose ) {
-    <span class="kw">cat</span>(<span class="st">&quot;The expected amount to win is about &quot;</span>,
-        <span class="kw">mean</span>(winnings), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }
-  <span class="kw">invisible</span>(<span class="kw">mean</span>(winnings))
-}</code></pre>
+<div class="sourceCode" id="cb999"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb999-1" data-line-number="1">diceGameSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {</a>
+<a class="sourceLine" id="cb999-2" data-line-number="2">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb999-3" data-line-number="3">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb999-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb999-5" data-line-number="5">  w &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb999-6" data-line-number="6">  pw &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">3</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb999-7" data-line-number="7">  winnings &lt;-<span class="st"> </span><span class="kw">sample</span>(w, <span class="dt">size =</span> reps, </a>
+<a class="sourceLine" id="cb999-8" data-line-number="8">                     <span class="dt">replace =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb999-9" data-line-number="9">                     <span class="dt">prob =</span> pw)</a>
+<a class="sourceLine" id="cb999-10" data-line-number="10">  <span class="cf">if</span> ( verbose ) {</a>
+<a class="sourceLine" id="cb999-11" data-line-number="11">    <span class="kw">cat</span>(<span class="st">&quot;The expected amount to win is about &quot;</span>,</a>
+<a class="sourceLine" id="cb999-12" data-line-number="12">        <span class="kw">mean</span>(winnings), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb999-13" data-line-number="13">  }</a>
+<a class="sourceLine" id="cb999-14" data-line-number="14">  <span class="kw">invisible</span>(<span class="kw">mean</span>(winnings))</a>
+<a class="sourceLine" id="cb999-15" data-line-number="15">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diceGameSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">5252</span>)</code></pre>
+<div class="sourceCode" id="cb1000"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1000-1" data-line-number="1"><span class="kw">diceGameSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">5252</span>)</a></code></pre></div>
 <pre><code>## The expected amount to win is about 0.17503.</code></pre></li>
 <li><p>Here’s the code, if you use the <code>pmax()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">photonTorpedoSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  strengths &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">12</span>)
-  damage &lt;-<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, strengths <span class="op">-</span><span class="st"> </span><span class="dv">5</span>)
-  <span class="cf">if</span> ( verbose ) {
-    <span class="kw">cat</span>(<span class="st">&quot;The expected damage is about &quot;</span>,
-        <span class="kw">mean</span>(damage), <span class="st">&quot; units.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }
-  <span class="kw">invisible</span>(<span class="kw">mean</span>(damage))
-}</code></pre>
+<div class="sourceCode" id="cb1002"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1002-1" data-line-number="1">photonTorpedoSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>) {</a>
+<a class="sourceLine" id="cb1002-2" data-line-number="2">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1002-3" data-line-number="3">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1002-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb1002-5" data-line-number="5">  strengths &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb1002-6" data-line-number="6">  damage &lt;-<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, strengths <span class="op">-</span><span class="st"> </span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1002-7" data-line-number="7">  <span class="cf">if</span> ( verbose ) {</a>
+<a class="sourceLine" id="cb1002-8" data-line-number="8">    <span class="kw">cat</span>(<span class="st">&quot;The expected damage is about &quot;</span>,</a>
+<a class="sourceLine" id="cb1002-9" data-line-number="9">        <span class="kw">mean</span>(damage), <span class="st">&quot; units.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1002-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb1002-11" data-line-number="11">  <span class="kw">invisible</span>(<span class="kw">mean</span>(damage))</a>
+<a class="sourceLine" id="cb1002-12" data-line-number="12">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">photonTorpedoSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>)</code></pre>
+<div class="sourceCode" id="cb1003"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1003-1" data-line-number="1"><span class="kw">photonTorpedoSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>)</a></code></pre></div>
 <pre><code>## The expected damage is about 2.034732 units.</code></pre></li>
 <li><p>Here’s the code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">photonTorpedoSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>,
-                             <span class="dt">shield =</span> <span class="dv">5</span>, <span class="dt">upper =</span> <span class="dv">10</span>) {
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(seed) ) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  <span class="cf">if</span> ( upper <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> ) {
-    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Upper bound on torpedo strength cannot be a negative number!&quot;</span>))
-  }
-  <span class="cf">if</span> ( shield <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> ) {
-    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Shield strength cannot be set to a negative number!&quot;</span>))
-  }
-  strengths &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> upper)
-  damage &lt;-<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, strengths <span class="op">-</span><span class="st"> </span>shield)
-  <span class="cf">if</span> ( verbose ) {
-    <span class="kw">cat</span>(<span class="st">&quot;The expected damage is about &quot;</span>,
-        <span class="kw">mean</span>(damage), <span class="st">&quot; units.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  }
-  <span class="kw">invisible</span>(<span class="kw">mean</span>(damage))
-}</code></pre>
+<div class="sourceCode" id="cb1005"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1005-1" data-line-number="1">photonTorpedoSim &lt;-<span class="st"> </span><span class="cf">function</span>(reps, <span class="dt">seed =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb1005-2" data-line-number="2">                             <span class="dt">shield =</span> <span class="dv">5</span>, <span class="dt">upper =</span> <span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb1005-3" data-line-number="3">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb1005-4" data-line-number="4">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1005-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb1005-6" data-line-number="6">  <span class="cf">if</span> ( upper <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb1005-7" data-line-number="7">    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Upper bound on torpedo strength cannot be a negative number!&quot;</span>))</a>
+<a class="sourceLine" id="cb1005-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb1005-9" data-line-number="9">  <span class="cf">if</span> ( shield <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb1005-10" data-line-number="10">    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Shield strength cannot be set to a negative number!&quot;</span>))</a>
+<a class="sourceLine" id="cb1005-11" data-line-number="11">  }</a>
+<a class="sourceLine" id="cb1005-12" data-line-number="12">  strengths &lt;-<span class="st"> </span><span class="kw">runif</span>(reps, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> upper)</a>
+<a class="sourceLine" id="cb1005-13" data-line-number="13">  damage &lt;-<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, strengths <span class="op">-</span><span class="st"> </span>shield)</a>
+<a class="sourceLine" id="cb1005-14" data-line-number="14">  <span class="cf">if</span> ( verbose ) {</a>
+<a class="sourceLine" id="cb1005-15" data-line-number="15">    <span class="kw">cat</span>(<span class="st">&quot;The expected damage is about &quot;</span>,</a>
+<a class="sourceLine" id="cb1005-16" data-line-number="16">        <span class="kw">mean</span>(damage), <span class="st">&quot; units.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1005-17" data-line-number="17">  }</a>
+<a class="sourceLine" id="cb1005-18" data-line-number="18">  <span class="kw">invisible</span>(<span class="kw">mean</span>(damage))</a>
+<a class="sourceLine" id="cb1005-19" data-line-number="19">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">photonTorpedoSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>,
-                 <span class="dt">upper =</span> <span class="dv">15</span>, <span class="dt">shield =</span> <span class="dv">12</span>)</code></pre>
+<div class="sourceCode" id="cb1006"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1006-1" data-line-number="1"><span class="kw">photonTorpedoSim</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">4040</span>,</a>
+<a class="sourceLine" id="cb1006-2" data-line-number="2">                 <span class="dt">upper =</span> <span class="dv">15</span>, <span class="dt">shield =</span> <span class="dv">12</span>)</a></code></pre></div>
 <pre><code>## The expected damage is about 0.2991273 units.</code></pre></li>
 <li><p>Here’s the function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dual &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(seed)) {
-    <span class="kw">set.seed</span>(seed)
-  }
-  <span class="co"># set up logical vector to store results of each simulation:</span>
-  abeWins &lt;-<span class="st"> </span><span class="kw">logical</span>(reps)
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {
-    dualing &lt;-<span class="st"> </span><span class="ot">TRUE</span>
-    shotNumber &lt;-<span class="st"> </span><span class="dv">1</span>
-    <span class="cf">while</span> (dualing) {
-      <span class="co"># if i is an odd number, then Abe is shooting:</span>
-      abeToShoot &lt;-<span class="st"> </span>shotNumber <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>
-      <span class="co"># probability of hitting depends on who is shooting:</span>
-      hitProb &lt;-<span class="st"> </span><span class="kw">ifelse</span>(abeToShoot, <span class="fl">0.4</span>, <span class="fl">0.6</span>)
-      <span class="co"># shooter takes a shot:</span>
-      resultOfShot &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;hit&quot;</span>, <span class="st">&quot;miss&quot;</span>),
-                             <span class="dt">size =</span> <span class="dv">1</span>, 
-                             <span class="dt">prob =</span> <span class="kw">c</span>(hitProb, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>hitProb))
-      <span class="cf">if</span> (resultOfShot <span class="op">==</span><span class="st"> &quot;hit&quot;</span>) {
-        abeWins[i] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(abeToShoot, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
-        dualing &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-      }
-      shotNumber &lt;-<span class="st"> </span>shotNumber <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-    }
-  }
-  <span class="co"># count up how many times abe won, divide by number of plays,</span>
-  <span class="co"># and return:</span>
-  <span class="kw">sum</span>(abeWins)<span class="op">/</span>reps
-}</code></pre>
+<div class="sourceCode" id="cb1008"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1008-1" data-line-number="1">dual &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1008-2" data-line-number="2">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(seed)) {</a>
+<a class="sourceLine" id="cb1008-3" data-line-number="3">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb1008-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb1008-5" data-line-number="5">  <span class="co"># set up logical vector to store results of each simulation:</span></a>
+<a class="sourceLine" id="cb1008-6" data-line-number="6">  abeWins &lt;-<span class="st"> </span><span class="kw">logical</span>(reps)</a>
+<a class="sourceLine" id="cb1008-7" data-line-number="7">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {</a>
+<a class="sourceLine" id="cb1008-8" data-line-number="8">    dualing &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb1008-9" data-line-number="9">    shotNumber &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1008-10" data-line-number="10">    <span class="cf">while</span> (dualing) {</a>
+<a class="sourceLine" id="cb1008-11" data-line-number="11">      <span class="co"># if i is an odd number, then Abe is shooting:</span></a>
+<a class="sourceLine" id="cb1008-12" data-line-number="12">      abeToShoot &lt;-<span class="st"> </span>shotNumber <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1008-13" data-line-number="13">      <span class="co"># probability of hitting depends on who is shooting:</span></a>
+<a class="sourceLine" id="cb1008-14" data-line-number="14">      hitProb &lt;-<span class="st"> </span><span class="kw">ifelse</span>(abeToShoot, <span class="fl">0.4</span>, <span class="fl">0.6</span>)</a>
+<a class="sourceLine" id="cb1008-15" data-line-number="15">      <span class="co"># shooter takes a shot:</span></a>
+<a class="sourceLine" id="cb1008-16" data-line-number="16">      resultOfShot &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;hit&quot;</span>, <span class="st">&quot;miss&quot;</span>),</a>
+<a class="sourceLine" id="cb1008-17" data-line-number="17">                             <span class="dt">size =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb1008-18" data-line-number="18">                             <span class="dt">prob =</span> <span class="kw">c</span>(hitProb, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>hitProb))</a>
+<a class="sourceLine" id="cb1008-19" data-line-number="19">      <span class="cf">if</span> (resultOfShot <span class="op">==</span><span class="st"> &quot;hit&quot;</span>) {</a>
+<a class="sourceLine" id="cb1008-20" data-line-number="20">        abeWins[i] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(abeToShoot, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1008-21" data-line-number="21">        dualing &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb1008-22" data-line-number="22">      }</a>
+<a class="sourceLine" id="cb1008-23" data-line-number="23">      shotNumber &lt;-<span class="st"> </span>shotNumber <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1008-24" data-line-number="24">    }</a>
+<a class="sourceLine" id="cb1008-25" data-line-number="25">  }</a>
+<a class="sourceLine" id="cb1008-26" data-line-number="26">  <span class="co"># count up how many times abe won, divide by number of plays,</span></a>
+<a class="sourceLine" id="cb1008-27" data-line-number="27">  <span class="co"># and return:</span></a>
+<a class="sourceLine" id="cb1008-28" data-line-number="28">  <span class="kw">sum</span>(abeWins)<span class="op">/</span>reps</a>
+<a class="sourceLine" id="cb1008-29" data-line-number="29">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dual</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3939</span>)</code></pre>
+<div class="sourceCode" id="cb1009"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1009-1" data-line-number="1"><span class="kw">dual</span>(<span class="dt">reps =</span> <span class="dv">100000</span>, <span class="dt">seed =</span> <span class="dv">3939</span>)</a></code></pre></div>
 <pre><code>## [1] 0.52441</code></pre>
 <p>Looks like Abe has a slight advantage!</p></li>
 </ol>

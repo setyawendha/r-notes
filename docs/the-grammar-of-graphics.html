@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.1 The Grammar of Graphics | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.1 The Grammar of Graphics | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="graphics.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -587,8 +585,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>Guides</em>: visual aids that help the human viewer to infer data values for cases from the aesthetic properties of the glyphs that represent them.</li>
 </ul>
 <p>We will clarify these abstract ideas with a series of examples. Many of our examples will be drawn from the <code>m111survey</code> data frame in the <strong>tigerstats</strong> package.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(bcscr)
-<span class="kw">help</span>(m111survey)</code></pre>
+<div class="sourceCode" id="cb1352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1352-1" data-line-number="1"><span class="kw">library</span>(bcscr)</a>
+<a class="sourceLine" id="cb1352-2" data-line-number="2"><span class="kw">help</span>(m111survey)</a></code></pre></div>
 <p>You will recall that the data frame records the results of a survey of 71 students at Georgetown College in Kentucky. Each case (row in the frame) corresponds to an individual student. See Table <a href="the-grammar-of-graphics.html#tab:m111surveyhead">8.1</a>.</p>
 <table>
 <caption><span id="tab:m111surveyhead">Table 8.1: </span>The first few rows of the m111survey data frame. Five variables are shown.</caption>
@@ -841,9 +839,9 @@ Figure 8.9: Violin plots of the fastest speed ever driven, by sex and seating pr
 <p><span class="math display">\[IQR = Q3 - Q1.\]</span></p>
 <p>The interquartile range covers measures the spread in the middle 50% of the values.</p>
 <p>In R the five number summary can be got quickly with the <code>fivenum()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fnFastest &lt;-<span class="st"> </span><span class="kw">fivenum</span>(m111survey<span class="op">$</span>fastest)
-<span class="kw">names</span>(fnFastest) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;min&quot;</span>, <span class="st">&quot;Q1&quot;</span>, <span class="st">&quot;median&quot;</span>, <span class="st">&quot;Q3&quot;</span>, <span class="st">&quot;max&quot;</span>)
-fnFastest</code></pre>
+<div class="sourceCode" id="cb1353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1353-1" data-line-number="1">fnFastest &lt;-<span class="st"> </span><span class="kw">fivenum</span>(m111survey<span class="op">$</span>fastest)</a>
+<a class="sourceLine" id="cb1353-2" data-line-number="2"><span class="kw">names</span>(fnFastest) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;min&quot;</span>, <span class="st">&quot;Q1&quot;</span>, <span class="st">&quot;median&quot;</span>, <span class="st">&quot;Q3&quot;</span>, <span class="st">&quot;max&quot;</span>)</a>
+<a class="sourceLine" id="cb1353-3" data-line-number="3">fnFastest</a></code></pre></div>
 <pre><code>##    min     Q1 median     Q3    max 
 ##   60.0   90.5  102.0  119.5  190.0</code></pre>
 <p>A box-plot glyph is the graphical counterpart of the five number summary. Figure <a href="the-grammar-of-graphics.html#fig:ggboxplotsample">8.10</a> shows how it works for the variable <code>fastest</code> in the <code>m111survey</code> data frame. The box ranges from <span class="math inline">\(Q1\)</span> to <span class="math inline">\(Q3\)</span>, covering the middle half of the speeds. The lower hinge extends from <span class="math inline">\(Q1\)</span> down to the minimum speed. The upper hinge would have extended from <span class="math inline">\(Q3\)</span> to the maximum value, but the maximum value was flagged as an outlier. When <strong>ggplot2</strong> makes a box-plot, any point that is</p>

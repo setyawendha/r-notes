@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.1 Motivation for Functions | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.1 Motivation for Functions | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="functions.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,40 +578,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> Motivation for Functions</h2>
 <p></p>
 <p>Suppose you have the job of printing out the word “Kansas” to the console four times, each time on a new line. The code for this is easy enough:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
 <pre><code>## Kansas</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
 <pre><code>## Kansas</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
 <pre><code>## Kansas</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" data-line-number="1"><span class="kw">cat</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
 <pre><code>## Kansas</code></pre>
 <p>Now suppose that you have the job of printing out <em>any given</em> word to the console four times. You could of course, simply copy and paste the above code to a new place in your R script and then change “Kansas” to whatever the desired word is. But that’s an awful lot of work.</p>
 <p>You could cut down on the work a bit if you use a variable:</p>
-<pre class="sourceCode r"><code class="sourceCode r">word &lt;-<span class="st"> &quot;Kansas&quot;</span>
-<span class="kw">cat</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-<span class="kw">cat</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-<span class="kw">cat</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-<span class="kw">cat</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" data-line-number="1">word &lt;-<span class="st"> &quot;Kansas&quot;</span></a>
+<a class="sourceLine" id="cb451-2" data-line-number="2"><span class="kw">cat</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb451-3" data-line-number="3"><span class="kw">cat</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb451-4" data-line-number="4"><span class="kw">cat</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb451-5" data-line-number="5"><span class="kw">cat</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <p>The advantage of this approach is that, after you copy and paste you only have to make one change, i.e.: substitute the desired word in place of “Kansas” in the assignment to the variable <code>word</code>.</p>
 <p>If you were writing a program that involved many four-line print-outs of various words, then you could carry on this way quite a while, producing many similar five-line snippets of printing-code throughout your program.</p>
 <p>But suppose that it occurs to you one day: maybe you don’t really need five lines of code. What if <code>cat()</code> supports “vector in, vector out”? If so then we could take advantage of vectorization to obviate the need to repeated calls to `cat().</p>
 <p>We could try:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fourWords &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;Kansas&quot;</span>, <span class="dv">4</span>)
-<span class="kw">cat</span>(fourWords, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb452-1" data-line-number="1">fourWords &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;Kansas&quot;</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb452-2" data-line-number="2"><span class="kw">cat</span>(fourWords, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a></code></pre></div>
 <pre><code>## Kansas Kansas Kansas Kansas</code></pre>
 <p>That just repeats “Kansas” four times, with the default space between in each one—then newline is appended. So we need a newline along with each instance of Kansas.</p>
 <p>So instead we try:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fourWords &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dv">4</span>)
-<span class="kw">cat</span>(fourWords)</code></pre>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" data-line-number="1">fourWords &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb454-2" data-line-number="2"><span class="kw">cat</span>(fourWords)</a></code></pre></div>
 <pre><code>## Kansas
 ##  Kansas
 ##  Kansas
 ##  Kansas</code></pre>
 <p>Not quite what we wanted: <code>cat()</code> inserts the default space at the end of each instance of <code>Kansas\n</code>, resulting in the indentation of lines, 2, 3 and 4.</p>
 <p>No problem—let’s just set the separation to the empty string &quot;&quot;:</p>
-<pre class="sourceCode r"><code class="sourceCode r">fourWords &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dv">4</span>)
-<span class="kw">cat</span>(fourWords, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" data-line-number="1">fourWords &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;Kansas</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb456-2" data-line-number="2"><span class="kw">cat</span>(fourWords, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## Kansas
 ## Kansas
 ## Kansas
@@ -622,24 +620,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If you wanted to implement this new idea throughout your program, you would have to search through the program for the many five-line snippets you created previously, replacing each one of them with the appropriate version of your clever one-liner. Not only is this a lot of work, it’s also quite error-prone: you could miss or more of the snippets along the way, or on some occasion fail to modify the word within the one-liner to have the value you need at that point.</p>
 <p>Accordingly programmers try, as much as possible, to solve problems in a <em>general</em> way and to implement that general solution in <em>one place</em> in their program. Then they call upon that solution in the many different locations where the solution might be required.</p>
 <p>Functions are one way in which programmers accomplish this. The following is a function that will print any given word four times, once on each line:</p>
-<pre class="sourceCode r"><code class="sourceCode r">catFourTimes &lt;-<span class="st"> </span><span class="cf">function</span>(word) {
-  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  <span class="kw">cat</span>(<span class="kw">rep</span>(wordWithNewline, <span class="dv">4</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" data-line-number="1">catFourTimes &lt;-<span class="st"> </span><span class="cf">function</span>(word) {</a>
+<a class="sourceLine" id="cb458-2" data-line-number="2">  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb458-3" data-line-number="3">  <span class="kw">cat</span>(<span class="kw">rep</span>(wordWithNewline, <span class="dv">4</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb458-4" data-line-number="4">}</a></code></pre></div>
 <p>Let’s see the function in use:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">catFourTimes</span>(<span class="st">&quot;Kansas&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" data-line-number="1"><span class="kw">catFourTimes</span>(<span class="st">&quot;Kansas&quot;</span>)</a></code></pre></div>
 <pre><code>## Kansas
 ## Kansas
 ## Kansas
 ## Kansas</code></pre>
 <p>It works like a charm! What’s more, once we get to thinking in terms of general solutions, we realize that we might just as well have our function print not only any given word, but print it any given number of times. So instead of <code>catFourTimes()</code> we might actually use the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, n) {
-  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)
-  <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-}</code></pre>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" data-line-number="1">manyCat &lt;-<span class="st"> </span><span class="cf">function</span>(word, n) {</a>
+<a class="sourceLine" id="cb461-2" data-line-number="2">  wordWithNewline &lt;-<span class="st"> </span><span class="kw">paste</span>(word, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb461-3" data-line-number="3">  lines &lt;-<span class="st"> </span><span class="kw">rep</span>(wordWithNewline, <span class="dt">times =</span> n)</a>
+<a class="sourceLine" id="cb461-4" data-line-number="4">  <span class="kw">cat</span>(lines, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb461-5" data-line-number="5">}</a></code></pre></div>
 <p>Does it work? Let’s see:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manyCat</span>(<span class="st">&quot;Kansas&quot;</span>, <span class="dv">5</span>)</code></pre>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1"><span class="kw">manyCat</span>(<span class="st">&quot;Kansas&quot;</span>, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## Kansas
 ## Kansas
 ## Kansas

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Exercises | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Exercises | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="glossary-8.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -585,20 +583,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>str</code>: a character-vector of length 1 (a single string).</li>
 </ul>
 <p>Typical examples of use should look like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">revStr</span>(<span class="dt">str =</span> <span class="st">&quot;goodbye&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1693"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1693-1" data-line-number="1"><span class="kw">revStr</span>(<span class="dt">str =</span> <span class="st">&quot;goodbye&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;eybdoog&quot;</code></pre>
 <p><strong>Hint</strong>: Let’s think about how to solve the reversal problem for a specific string, e.g.:</p>
-<pre class="sourceCode r"><code class="sourceCode r">str &lt;-<span class="st"> &quot;goodbye&quot;</span></code></pre>
+<div class="sourceCode" id="cb1695"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1695-1" data-line-number="1">str &lt;-<span class="st"> &quot;goodbye&quot;</span></a></code></pre></div>
 <p>First, we could turn the string into a list whose only element is the vector of the characters of the string, as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">splitString &lt;-<span class="st"> </span><span class="kw">str_split</span>(str, <span class="dt">pattern =</span> <span class="st">&quot;&quot;</span>)
-splitString</code></pre>
+<div class="sourceCode" id="cb1696"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1696-1" data-line-number="1">splitString &lt;-<span class="st"> </span><span class="kw">str_split</span>(str, <span class="dt">pattern =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1696-2" data-line-number="2">splitString</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;g&quot; &quot;o&quot; &quot;o&quot; &quot;d&quot; &quot;b&quot; &quot;y&quot; &quot;e&quot;</code></pre>
 <p>This could be turned into just the desired vector with the <code>unlist()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(splitString)</code></pre>
+<div class="sourceCode" id="cb1698"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1698-1" data-line-number="1"><span class="kw">unlist</span>(splitString)</a></code></pre></div>
 <pre><code>## [1] &quot;g&quot; &quot;o&quot; &quot;o&quot; &quot;d&quot; &quot;b&quot; &quot;y&quot; &quot;e&quot;</code></pre>
 <p>Next, recall that R has a function <code>rev()</code> that, when given a vector, returns a vector with the elements in reverse order:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rev</span>(<span class="kw">unlist</span>(splitString))</code></pre>
+<div class="sourceCode" id="cb1700"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1700-1" data-line-number="1"><span class="kw">rev</span>(<span class="kw">unlist</span>(splitString))</a></code></pre></div>
 <pre><code>## [1] &quot;e&quot; &quot;y&quot; &quot;b&quot; &quot;d&quot; &quot;o&quot; &quot;o&quot; &quot;g&quot;</code></pre>
 <p>Finally, we would need to convert the reversed vector back into a single string. You have learned a <strong>stringr</strong> function that will accomplish this.</p>
 <p>After you have solved the problem for the specific vector <code>str</code>, encapsulate your work into the function <code>revStr()</code>.</p></li>
@@ -607,9 +605,9 @@ splitString</code></pre>
 <li><code>str</code>: a character-vector of length 1 (a single string).</li>
 </ul>
 <p>It should return <code>TRUE</code> if <code>str</code> is a palindrome, and return <code>FALSE</code> otherwise. Typical example of use should look like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">palindromeStr</span>(<span class="dt">str =</span> <span class="st">&quot;abba&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1702"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1702-1" data-line-number="1"><span class="kw">palindromeStr</span>(<span class="dt">str =</span> <span class="st">&quot;abba&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">palindromeStr</span>(<span class="st">&quot;hello&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1704"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1704-1" data-line-number="1"><span class="kw">palindromeStr</span>(<span class="st">&quot;hello&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p><strong>Hint</strong>; Again, you should begin by solving the problem on a specific vector, and only then encapulate your work into a function. To solve the specific problem, you might use the function <code>revStr()</code> from the previous problem. Another possibility is to use <code>rev()</code> along with the function <code>all()</code> that you met in Chapter 2.</p></li>
 <li>Write a function called <code>subStrings()</code> that returns a vector of the substrings of a given string that have at least a given number of characters. The function should take two arguments:
@@ -618,16 +616,16 @@ splitString</code></pre>
 <li><code>n</code>: the minimum number of characters a substring should have in order to be included in the vector.</li>
 </ul>
 <p>Validate the input: if the argument for <code>n</code> is less than 1 or greater than the number of characters in <code>str</code>, then the function should advise the user and cease execution. Typical examples of use should look like this (although it is OK if your output-vector contains the sub-strings in a different order):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subStrings</span>(<span class="st">&quot;hello&quot;</span>, <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb1706"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1706-1" data-line-number="1"><span class="kw">subStrings</span>(<span class="st">&quot;hello&quot;</span>, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;hello&quot; &quot;hell&quot;  &quot;ello&quot;  &quot;hel&quot;   &quot;ell&quot;   &quot;llo&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subStrings</span>(<span class="st">&quot;hello&quot;</span>, <span class="dv">6</span>)</code></pre>
+<div class="sourceCode" id="cb1708"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1708-1" data-line-number="1"><span class="kw">subStrings</span>(<span class="st">&quot;hello&quot;</span>, <span class="dv">6</span>)</a></code></pre></div>
 <pre><code>## n should be at least 1 and no more than the number
 ## of characters in str.</code></pre>
 <p><strong>Hint</strong>: Begin by writing a function, called perhaps <code>subStringFixed()</code>, that when given a string and a specific number <span class="math inline">\(n\)</span>, returns all of the substrongs of length exactly <span class="math inline">\(n\)</span>. It might work like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subStringFixed</span>(<span class="dt">str =</span> <span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dt">n =</span> <span class="dv">6</span>)</code></pre>
+<div class="sourceCode" id="cb1710"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1710-1" data-line-number="1"><span class="kw">subStringFixed</span>(<span class="dt">str =</span> <span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dt">n =</span> <span class="dv">6</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;yabbad&quot; &quot;abbada&quot; &quot;bbadab&quot; &quot;badabb&quot; &quot;adabba&quot; &quot;dabbad&quot; &quot;abbado&quot; &quot;bbadoo&quot;
 ## [9] &quot;badoo!&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subStringFixed</span>(<span class="dt">str =</span> <span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dt">n =</span> <span class="dv">0</span>)</code></pre>
+<div class="sourceCode" id="cb1712"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1712-1" data-line-number="1"><span class="kw">subStringFixed</span>(<span class="dt">str =</span> <span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dt">n =</span> <span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## n should be at least 1 and no more than the number
 ## of characters in str.</code></pre></li>
 <li>Write a function called <code>subPalindrome()</code> that, for any given string and specified number <span class="math inline">\(n\)</span>, returns a character vector of all the substrings of the string having at least <span class="math inline">\(n\)</span> characters that are also palindromes. The function should take two arguments:
@@ -636,14 +634,14 @@ splitString</code></pre>
 <li><code>n</code>: the minimum number of characters a substring should have in order to be included in the vector.</li>
 </ul>
 <p>Validate the input: if the argument for <code>n</code> is less than 1 or greater than the number of characters in <code>str</code>, then the function should advise the user and cease execution. Typical examples of use should look like this (although it is OK if your output-vector contains the palindromes in a different order):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## Note that palindrome substrings are repeated as many times</span>
-<span class="co">## as they occur in the given string:</span>
-<span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb1714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1714-1" data-line-number="1"><span class="co">## Note that palindrome substrings are repeated as many times</span></a>
+<a class="sourceLine" id="cb1714-2" data-line-number="2"><span class="co">## as they occur in the given string:</span></a>
+<a class="sourceLine" id="cb1714-3" data-line-number="3"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##  [1] &quot;abbadabba&quot; &quot;bbadabb&quot;   &quot;dabbad&quot;    &quot;badab&quot;     &quot;abba&quot;     
 ##  [6] &quot;abba&quot;      &quot;ada&quot;       &quot;bb&quot;        &quot;bb&quot;        &quot;oo&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb1716"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1716-1" data-line-number="1"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## character(0)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">0</span>)</code></pre>
+<div class="sourceCode" id="cb1718"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1718-1" data-line-number="1"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## n should be at least 1 and no more than the number
 ## of characters in str.</code></pre></li>
 <li>Write a function called <code>m111Report()</code> that performs formatted printing from the data frame <code>m111survey</code> in the <strong>bcscr</strong> package. Given a vector of row numbers, the function will print out the sex, feeling about weight, and GPA of the corresponding individuals. Thus each row in the printout will correspond to an individual in the study. Each row will consist of three fields:
@@ -653,7 +651,7 @@ splitString</code></pre>
 <li>The third field is 5 characters wide, and contains an appropriate number of spaces followed by the grade-point average showing only the first two decimal places. This, if a person’s GPA is recorded as 2.714 then the field will be &quot; 2.71&quot;. (Note that, with the space and the decimal point, the total number of characters is 5, as required.)</li>
 </ul>
 <p>A typical example of use is as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">m111Report</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">15</span>))</code></pre>
+<div class="sourceCode" id="cb1720"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1720-1" data-line-number="1"><span class="kw">m111Report</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">15</span>))</a></code></pre></div>
 <pre><code>## male      about right     2.50
 ## female    overweight        NA
 ## male      underweight     3.20</code></pre>

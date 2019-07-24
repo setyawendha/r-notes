@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.3 Subsetting Vectors | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.3 Subsetting Vectors | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="constructing-patterned-vectors.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,77 +578,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.3</span> Subsetting Vectors</h2>
 <p>Quite often we need to select one or more elements from a vector. The <em>subsetting operator</em> <code>[</code>  allows us to do this.</p>
 <p>Recall the vector <code>heights</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">heights</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
 ##        72        70        69        58        NA        45</code></pre>
 <p>If we want the fourth element, we ask for it with the subsetting operator like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">4</span>]</code></pre>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1">heights[<span class="dv">4</span>]</a></code></pre></div>
 <pre><code>## Dorothy 
 ##      58</code></pre>
 <p>If we want two or more elements, then we specify their indices in a vector. Thus, to get the first and fifth elements, we might do this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">desired &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>)
-heights[desired]</code></pre>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1">desired &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb190-2" data-line-number="2">heights[desired]</a></code></pre></div>
 <pre><code>## Scarecrow      Toto 
 ##        72        NA</code></pre>
 <p>We could also ask for them directly:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>)]</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1">heights[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>)]</a></code></pre></div>
 <pre><code>## Scarecrow      Toto 
 ##        72        NA</code></pre>
 <p>Negative numbers are significant in subsetting:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="op">-</span><span class="dv">2</span>] <span class="co">#select all but second element</span></code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">heights[<span class="op">-</span><span class="dv">2</span>] <span class="co">#select all but second element</span></a></code></pre></div>
 <pre><code>## Scarecrow      Lion   Dorothy      Toto       Boq 
 ##        72        69        58        NA        45</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]  <span class="co"># all but first and third</span></code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1">heights[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]  <span class="co"># all but first and third</span></a></code></pre></div>
 <pre><code>##  Tinman Dorothy    Toto     Boq 
 ##      70      58      NA      45</code></pre>
 <p>If you specify a nonexistent index, you get <code>NA</code>, the reasonable result:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">7</span>]</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">heights[<span class="dv">7</span>]</a></code></pre></div>
 <pre><code>## &lt;NA&gt; 
 ##   NA</code></pre>
 <p>Patterned vectors are quite useful for subsetting. If you want the first three elements of <code>heights</code>, you don’t have to type <code>heights[c(1,2,3)]</code>. Instead you can just say:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1">heights[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion 
 ##        72        70        69</code></pre>
 <p>The following gives the same as <code>heights</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(heights)]</code></pre>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1">heights[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(heights)]</a></code></pre></div>
 <pre><code>## Scarecrow    Tinman      Lion   Dorothy      Toto       Boq 
 ##        72        70        69        58        NA        45</code></pre>
 <p>If you desire to quickly provide names for a vector, subsetting can help:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">14</span>, <span class="dv">82</span>, <span class="dv">33</span>, <span class="dv">33</span>, <span class="dv">45</span>)
-<span class="kw">names</span>(vec) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec)]
-vec</code></pre>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">14</span>, <span class="dv">82</span>, <span class="dv">33</span>, <span class="dv">33</span>, <span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb204-2" data-line-number="2"><span class="kw">names</span>(vec) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec)]</a>
+<a class="sourceLine" id="cb204-3" data-line-number="3">vec</a></code></pre></div>
 <pre><code>##  A  B  C  D  E  F 
 ## 23 14 82 33 33 45</code></pre>
 <p>If a vector has names we can refer to its elements using the subsetting operator and those names:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="st">&quot;Tinman&quot;</span>]</code></pre>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1">heights[<span class="st">&quot;Tinman&quot;</span>]</a></code></pre></div>
 <pre><code>## Tinman 
 ##     70</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="kw">c</span>(<span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Boq&quot;</span>)]</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1">heights[<span class="kw">c</span>(<span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Boq&quot;</span>)]</a></code></pre></div>
 <pre><code>## Scarecrow       Boq 
 ##        72        45</code></pre>
 <p>Finally, we can use subsetting to modify parts of a vector. For example, Dorothy’s height is reported as:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="st">&quot;Dorothy&quot;</span>]</code></pre>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1">heights[<span class="st">&quot;Dorothy&quot;</span>]</a></code></pre></div>
 <pre><code>## Dorothy 
 ##      58</code></pre>
 <p>If Dorothy grows two inches, then we can modify her height as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="st">&quot;Dorothy&quot;</span>] &lt;-<span class="st"> </span><span class="dv">60</span></code></pre>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1">heights[<span class="st">&quot;Dorothy&quot;</span>] &lt;-<span class="st"> </span><span class="dv">60</span></a></code></pre></div>
 <p>We can replace more than one element, of course. Thus:</p>
-<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="kw">c</span>(<span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Boq&quot;</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">73</span>, <span class="dv">46</span>)</code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1">heights[<span class="kw">c</span>(<span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Boq&quot;</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">73</span>, <span class="dv">46</span>)</a></code></pre></div>
 <p>The subset of indices may be as complex as you like:</p>
-<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>)
-vec[<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">2</span>, <span class="dt">to =</span> <span class="dv">6</span>, <span class="dt">by =</span> <span class="dv">2</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>)
-vec</code></pre>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb214-2" data-line-number="2">vec[<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">2</span>, <span class="dt">to =</span> <span class="dv">6</span>, <span class="dt">by =</span> <span class="dv">2</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>)</a>
+<a class="sourceLine" id="cb214-3" data-line-number="3">vec</a></code></pre></div>
 <pre><code>## [1]   3 100   5 200   7 300</code></pre>
 <p>In the above example, <code>seq(2,6,2)</code> identified 2, 4 and 6 as the indices of elements of <code>vec</code> that were to be replaced by the corresponding elements of <code>c(100, 200, 300)</code>.</p>
 <p>We can even use subsetting to rearrange the elements of a vector. Consider the example below:</p>
-<pre class="sourceCode r"><code class="sourceCode r">inhabitants &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Oz&quot;</span>, <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Boq&quot;</span>, <span class="st">&quot;Glinda&quot;</span>)
-permuted &lt;-<span class="st"> </span>inhabitants[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>)]
-permuted</code></pre>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1">inhabitants &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Oz&quot;</span>, <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Boq&quot;</span>, <span class="st">&quot;Glinda&quot;</span>)</a>
+<a class="sourceLine" id="cb216-2" data-line-number="2">permuted &lt;-<span class="st"> </span>inhabitants[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb216-3" data-line-number="3">permuted</a></code></pre></div>
 <pre><code>## [1] &quot;Boq&quot;    &quot;Glinda&quot; &quot;Oz&quot;     &quot;Toto&quot;</code></pre>
 <div id="practice-exercises-2" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Practice Exercises</h3>
 <p>We’ll work with the following vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r">practiceVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>)</code></pre>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1">practiceVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>)</a></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><p>Select the fifth element of <code>practiceVec</code>.</p></li>
 <li><p>Select the third and sixth elements of <code>practiceVec</code>.</p></li>
@@ -677,10 +675,10 @@ permuted</code></pre>
 <li><p><code>practiceVec[seq(2, length(practiceVec), by = 2)]</code></p></li>
 <li><p><code>practiceVec[3] &lt;- 5</code></p></li>
 <li><p>Here is one way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">zeroes &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> <span class="kw">length</span>(<span class="kw">seq</span>(<span class="dv">2</span> <span class="kw">length</span>(practiceVec))))
-practiceVec[<span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">length</span>(practiceVec), <span class="dt">by =</span> <span class="dv">2</span>)] &lt;-<span class="st"> </span>zeroes</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1">zeroes &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dt">times =</span> <span class="kw">length</span>(<span class="kw">seq</span>(<span class="dv">2</span> <span class="kw">length</span>(practiceVec))))</a>
+<a class="sourceLine" id="cb219-2" data-line-number="2">practiceVec[<span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">length</span>(practiceVec), <span class="dt">by =</span> <span class="dv">2</span>)] &lt;-<span class="st"> </span>zeroes</a></code></pre></div>
 <p>Here’s a quicker way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">practiceVec[<span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">length</span>(practiceVec), <span class="dt">by =</span> <span class="dv">2</span>)] &lt;-<span class="st"> </span><span class="dv">0</span></code></pre>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1">practiceVec[<span class="kw">seq</span>(<span class="dv">2</span>, <span class="kw">length</span>(practiceVec), <span class="dt">by =</span> <span class="dv">2</span>)] &lt;-<span class="st"> </span><span class="dv">0</span></a></code></pre></div>
 <p>The latter approach involves “recycling” the zero. We’ll discuss recycling soon.</p></li>
 <li><p><code>practiceVec[c(2, 3, 5)] &lt;- c(3, 10, 20)</code></p></li>
 <li><p><code>practiceVec[length(practiceVec):1]</code></p></li>

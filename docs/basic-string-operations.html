@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.3 Basic String Operations | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.3 Basic String Operations | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="characters-and-special-characters.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,72 +577,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="basic-string-operations" class="section level2">
 <h2><span class="header-section-number">11.3</span> Basic String Operations</h2>
 <p>We now introduce a few basic operations for examining, splitting and combining strings. Some of the functions we discuss come from the <strong>stringr</strong> package, which is installed along with the tidyverse but is not automatically attached. Make sure you attach it when you work with strings:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)</code></pre>
+<div class="sourceCode" id="cb1607"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1607-1" data-line-number="1"><span class="kw">library</span>(stringr)</a></code></pre></div>
 <div id="is-and-as" class="section level3">
 <h3><span class="header-section-number">11.3.1</span> Is and As</h3>
 <p>Recall from Chapter <a href="vectors.html#vectors">2</a> that <code>as.character()</code> coerces other data types into strings:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.character</span>(<span class="fl">3.14</span>)</code></pre>
+<div class="sourceCode" id="cb1608"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1608-1" data-line-number="1"><span class="kw">as.character</span>(<span class="fl">3.14</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;3.14&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.character</span>(<span class="ot">FALSE</span>)</code></pre>
+<div class="sourceCode" id="cb1610"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1610-1" data-line-number="1"><span class="kw">as.character</span>(<span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;FALSE&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.character</span>(<span class="ot">NULL</span>)</code></pre>
+<div class="sourceCode" id="cb1612"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1612-1" data-line-number="1"><span class="kw">as.character</span>(<span class="ot">NULL</span>)</a></code></pre></div>
 <pre><code>## character(0)</code></pre>
 <p>Also, <code>is.character()</code> tests whether an object is character-vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.character</span>(<span class="fl">3.14</span>)</code></pre>
+<div class="sourceCode" id="cb1614"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1614-1" data-line-number="1"><span class="kw">is.character</span>(<span class="fl">3.14</span>)</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </div>
 <div id="number-of-characters" class="section level3">
 <h3><span class="header-section-number">11.3.2</span> Number of Characters</h3>
 <p>How many characters are in the word “hello”? Let’s try:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="st">&quot;hello&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1616"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1616-1" data-line-number="1"><span class="kw">length</span>(<span class="st">&quot;hello&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>Oh, right, strings don’t exist alone: <code>&quot;hello&quot;</code> is actually a character-vector of length 1. Instead we should use the <code>str_sub()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_length</span>(<span class="st">&quot;hello&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1618"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1618-1" data-line-number="1"><span class="kw">str_length</span>(<span class="st">&quot;hello&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 </div>
 <div id="substrings-and-trimming" class="section level3">
 <h3><span class="header-section-number">11.3.3</span> Substrings and Trimming</h3>
 <p>We can pull out pieces of a string with the <code>str_sub()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">poppins &lt;-<span class="st"> &quot;Supercalifragilisticexpialidocious&quot;</span>
-<span class="kw">str_sub</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">end =</span> <span class="dv">20</span>)</code></pre>
+<div class="sourceCode" id="cb1620"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1620-1" data-line-number="1">poppins &lt;-<span class="st"> &quot;Supercalifragilisticexpialidocious&quot;</span></a>
+<a class="sourceLine" id="cb1620-2" data-line-number="2"><span class="kw">str_sub</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">end =</span> <span class="dv">20</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;fragilistic&quot;</code></pre>
 <p>One can also use <code>substr()</code> to replace part of a string with some other string:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_sub</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">end =</span> <span class="dv">20</span>) &lt;-<span class="st"> &quot;ABCDEFGHIJK&quot;</span>
-poppins</code></pre>
+<div class="sourceCode" id="cb1622"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1622-1" data-line-number="1"><span class="kw">str_sub</span>(poppins, <span class="dt">start =</span> <span class="dv">10</span>, <span class="dt">end =</span> <span class="dv">20</span>) &lt;-<span class="st"> &quot;ABCDEFGHIJK&quot;</span></a>
+<a class="sourceLine" id="cb1622-2" data-line-number="2">poppins</a></code></pre></div>
 <pre><code>## [1] &quot;SupercaliABCDEFGHIJKexpialidocious&quot;</code></pre>
 <p>Don’t forget: “vector-in, vector-out” usually applies:</p>
-<pre class="sourceCode r"><code class="sourceCode r">words &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Poppins&quot;</span>, <span class="st">&quot;practically&quot;</span>, <span class="st">&quot;perfect&quot;</span>)
-<span class="kw">str_length</span>(words)</code></pre>
+<div class="sourceCode" id="cb1624"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1624-1" data-line-number="1">words &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Poppins&quot;</span>, <span class="st">&quot;practically&quot;</span>, <span class="st">&quot;perfect&quot;</span>)</a>
+<a class="sourceLine" id="cb1624-2" data-line-number="2"><span class="kw">str_length</span>(words)</a></code></pre></div>
 <pre><code>## [1]  4  7 11  7</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_sub</span>(words, <span class="dv">1</span>, <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb1626"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1626-1" data-line-number="1"><span class="kw">str_sub</span>(words, <span class="dv">1</span>, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Mar&quot; &quot;Pop&quot; &quot;pra&quot; &quot;per&quot;</code></pre>
 <p>In practical data-analysis situations you’ll often have to work with strings that include unexpected non-printed characters at the beginning or the end, especially if the string once occurred at the end of a line in a text file. For example, consider:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lastWord &lt;-<span class="st"> &quot;farewell</span><span class="ch">\r\n</span><span class="st">&quot;</span>
-<span class="kw">str_length</span>(lastWord)</code></pre>
+<div class="sourceCode" id="cb1628"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1628-1" data-line-number="1">lastWord &lt;-<span class="st"> &quot;farewell</span><span class="ch">\r\n</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb1628-2" data-line-number="2"><span class="kw">str_length</span>(lastWord)</a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(lastWord)</code></pre>
+<div class="sourceCode" id="cb1630"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1630-1" data-line-number="1"><span class="kw">cat</span>(lastWord)</a></code></pre></div>
 <pre><code>## farewell</code></pre>
 <p>From its display on the console, you might infer that <code>lastWord</code> consists of only the eight characters: f, a, r, e, w, e, l, and l. (You can’t see the carriage return followed by the newline.) But <code>str_length()</code> clearly shows that it’s got two characters after the final “l”, even if you can’t see them.</p>
 <p>If you think your strings might contain unnecessary leading or trailing white-space, you can remove it with <code>str_trim()</code>: </p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_trim</span>(lastWord)</code></pre>
+<div class="sourceCode" id="cb1632"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1632-1" data-line-number="1"><span class="kw">str_trim</span>(lastWord)</a></code></pre></div>
 <pre><code>## [1] &quot;farewell&quot;</code></pre>
 </div>
 <div id="changing-cases" class="section level3">
 <h3><span class="header-section-number">11.3.4</span> Changing Cases</h3>
 <p>You can make all of the letters in a string lowercase: </p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_to_lower</span>(<span class="st">&quot;My name is Rhonda.&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1634"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1634-1" data-line-number="1"><span class="kw">str_to_lower</span>(<span class="st">&quot;My name is Rhonda.&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;my name is rhonda.&quot;</code></pre>
 <p>You can make them all uppercase: </p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_to_upper</span>(<span class="st">&quot;It makes me wanna holler!&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1636"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1636-1" data-line-number="1"><span class="kw">str_to_upper</span>(<span class="st">&quot;It makes me wanna holler!&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;IT MAKES ME WANNA HOLLER!&quot;</code></pre>
 </div>
 <div id="splitting-strings" class="section level3">
 <h3><span class="header-section-number">11.3.5</span> Splitting Strings</h3>
 <p>Consider the following character vector that records several dates:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dates &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;3-14-1963&quot;</span>, <span class="st">&quot;04-01-1965&quot;</span>, <span class="st">&quot;12-2-1983&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1638"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1638-1" data-line-number="1">dates &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;3-14-1963&quot;</span>, <span class="st">&quot;04-01-1965&quot;</span>, <span class="st">&quot;12-2-1983&quot;</span>)</a></code></pre></div>
 <p>You might want to print them out in some uniform way, using the full name of the month, perhaps. Then you would need to gain access to the elements of each date separately, so that you could transform month-numbers to month-names.</p>
 <p><code>str_split()</code> will do the job for you: </p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_split</span>(dates, <span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1639"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1639-1" data-line-number="1"><span class="kw">str_split</span>(dates, <span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;3&quot;    &quot;14&quot;   &quot;1963&quot;
 ## 
@@ -655,87 +653,87 @@ poppins</code></pre>
 ## [1] &quot;12&quot;   &quot;2&quot;    &quot;1983&quot;</code></pre>
 <p>The result is a list with one element for each date in <code>dates</code>. Each element of the list is a character vector containing the elements—month-number, day-number and year—that were demarcated in the original strings by the hyphen <code>-</code>, the value given to the <code>pattern</code> parameter.</p>
 <p>If we wish, we may now access the elements of the list and process them in any way we like. We might report the months, for example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dates <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>.[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">7</span>)] <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">as.numeric</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>month.name[.]</code></pre>
+<div class="sourceCode" id="cb1641"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1641-1" data-line-number="1">dates <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1641-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1641-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1641-4" data-line-number="4"><span class="st">  </span>.[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">7</span>)] <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1641-5" data-line-number="5"><span class="st">  </span><span class="kw">as.numeric</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1641-6" data-line-number="6"><span class="st">  </span>month.name[.]</a></code></pre></div>
 <pre><code>## [1] &quot;March&quot;    &quot;April&quot;    &quot;December&quot;</code></pre>
 <p>(Note the use in the code above of the <code>months.name</code>  constant provided by R.)</p>
 <p>Sometimes it’s handy to split a string word-by-word:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;you have won the lottery&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unlist</span>()</code></pre>
+<div class="sourceCode" id="cb1643"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1643-1" data-line-number="1"><span class="st">&quot;you have won the lottery&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1643-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1643-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;you&quot;     &quot;have&quot;    &quot;won&quot;     &quot;the&quot;     &quot;lottery&quot;</code></pre>
 <p>Of course splitting on the space would not have worked if some of the words had been separated by more than one space:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;you have won the  lottery&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># two spaces betwen &#39;the&#39; and &#39;lottery&#39;</span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unlist</span>()</code></pre>
+<div class="sourceCode" id="cb1645"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1645-1" data-line-number="1"><span class="st">&quot;you have won the  lottery&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># two spaces betwen &#39;the&#39; and &#39;lottery&#39;</span></a>
+<a class="sourceLine" id="cb1645-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1645-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;you&quot;     &quot;have&quot;    &quot;won&quot;     &quot;the&quot;     &quot;&quot;        &quot;lottery&quot;</code></pre>
 <p>We’ll address this problem soon.</p>
 <p>In order to split a string into its constituent characters, split on the string with no characters:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;aardvark&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unlist</span>()</code></pre>
+<div class="sourceCode" id="cb1647"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1647-1" data-line-number="1"><span class="st">&quot;aardvark&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1647-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1647-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;a&quot; &quot;r&quot; &quot;d&quot; &quot;v&quot; &quot;a&quot; &quot;r&quot; &quot;k&quot;</code></pre>
 <p>This would be useful if you wanted to, say, count the number of occurrences of “a” in a word:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;aardvark&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>.[. <span class="op">==</span><span class="st"> &quot;a&quot;</span>] <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">length</span>()</code></pre>
+<div class="sourceCode" id="cb1649"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1649-1" data-line-number="1"><span class="st">&quot;aardvark&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1649-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1649-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1649-4" data-line-number="4"><span class="st">  </span>.[. <span class="op">==</span><span class="st"> &quot;a&quot;</span>] <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1649-5" data-line-number="5"><span class="st">  </span><span class="kw">length</span>()</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
 <div id="pasting-and-joining-strings" class="section level3">
 <h3><span class="header-section-number">11.3.6</span> Pasting and Joining Strings</h3>
 <p>We are already familiar with <code>paste()</code>, which allows us to paste together the arguments that are passed to it:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Poppins&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1651"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1651-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Poppins&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Mary Poppins&quot;</code></pre>
 <p>By default <code>paste()</code> separates the input strings with a space, but you can control this with the <code>sep</code> parameter:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Poppins&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;:&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1653"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1653-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Poppins&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;:&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Mary:Poppins&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Yabba&quot;</span>,<span class="st">&quot;dabba&quot;</span>,<span class="st">&quot;doo!&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1655"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1655-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;Yabba&quot;</span>,<span class="st">&quot;dabba&quot;</span>,<span class="st">&quot;doo!&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Yabbadabbadoo!&quot;</code></pre>
 <p>If you want the separator to be the empty string by default, then you could use <code>paste0()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;Yabba&quot;</span>,<span class="st">&quot;dabba&quot;</span>,<span class="st">&quot;doo!&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1657"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1657-1" data-line-number="1"><span class="kw">paste0</span>(<span class="st">&quot;Yabba&quot;</span>,<span class="st">&quot;dabba&quot;</span>,<span class="st">&quot;doo!&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Yabbadabbadoo!&quot;</code></pre>
 <p>The <strong>stringr</strong> version of <code>paste0()</code> is <code>str_c()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_c</span>(<span class="st">&quot;Yabba&quot;</span>,<span class="st">&quot;dabba&quot;</span>,<span class="st">&quot;doo!&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1659"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1659-1" data-line-number="1"><span class="kw">str_c</span>(<span class="st">&quot;Yabba&quot;</span>,<span class="st">&quot;dabba&quot;</span>,<span class="st">&quot;doo!&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Yabbadabbadoo!&quot;</code></pre>
 <p>What if you had a character-vector whose elements you wanted to paste together? For example, consider:</p>
-<pre class="sourceCode r"><code class="sourceCode r">poppins &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;practically&quot;</span>, <span class="st">&quot;perfect&quot;</span>, <span class="st">&quot;in&quot;</span>,
-             <span class="st">&quot;every&quot;</span>, <span class="st">&quot;way&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1661"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1661-1" data-line-number="1">poppins &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;practically&quot;</span>, <span class="st">&quot;perfect&quot;</span>, <span class="st">&quot;in&quot;</span>,</a>
+<a class="sourceLine" id="cb1661-2" data-line-number="2">             <span class="st">&quot;every&quot;</span>, <span class="st">&quot;way&quot;</span>)</a></code></pre></div>
 <p>Now suppose you want to paste the elements of <code>poppins</code> together into one string where the words are separated by spaces. <code>str_c()</code> will do the job for you, if you use its <code>collapse</code> parameter:</p>
-<pre class="sourceCode r"><code class="sourceCode r">poppins <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1662"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1662-1" data-line-number="1">poppins <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1662-2" data-line-number="2"><span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;practically perfect in every way&quot;</code></pre>
 <p>We’ll call this process <em>joining</em>. </p>
 <p>In an atomic vector all of the elements have to be of the same data type (all character, all numerical, etc.). What if you want to join objects of different types? If there are only a few, feel free to type them in as separate arguments to <code>str_c()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_c</span>(<span class="st">&quot;March&quot;</span>, <span class="dv">14</span>, <span class="dv">1963</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1664"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1664-1" data-line-number="1"><span class="kw">str_c</span>(<span class="st">&quot;March&quot;</span>, <span class="dv">14</span>, <span class="dv">1963</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;March 14 1963&quot;</code></pre>
 <p>If the objects are many, then you could arrange for them appear as the elements of a list:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="st">&quot;Mary&quot;</span>, <span class="dv">343</span>, <span class="st">&quot;Poppins&quot;</span>, <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1666"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1666-1" data-line-number="1"><span class="kw">list</span>(<span class="st">&quot;Mary&quot;</span>, <span class="dv">343</span>, <span class="st">&quot;Poppins&quot;</span>, <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1666-2" data-line-number="2"><span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Mary 343 Poppins FALSE&quot;</code></pre>
 <p>Joining appears to be the opposite of splitting, but in R that’s not quite so. Suppose, for instance, that you have dates where the month, day and year are separated by hyphens and you want to replace the hyphens with forward slashes:</p>
 <pre><code>3-14-1963  # you have this
 3/14/1963  # you want this</code></pre>
 <p>You could try this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;3-14-1963&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;/&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1669"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1669-1" data-line-number="1"><span class="st">&quot;3-14-1963&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1669-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1669-3" data-line-number="3"><span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;/&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;c(\&quot;3\&quot;, \&quot;14\&quot;, \&quot;1963\&quot;)&quot;</code></pre>
 <p>That’s not what we want. We have to remember than the result of applying <code>str_split()</code> is a list:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;3-14-1963&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1671"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1671-1" data-line-number="1"><span class="st">&quot;3-14-1963&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1671-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;3&quot;    &quot;14&quot;   &quot;1963&quot;</code></pre>
 <p>We need to unlist prior to the join. The correct procedure is:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;3-14-1963&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;/&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1673"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1673-1" data-line-number="1"><span class="st">&quot;3-14-1963&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1673-2" data-line-number="2"><span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1673-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1673-4" data-line-number="4"><span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;/&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;3/14/1963&quot;</code></pre>
 <p>Now all is well. Soon, though, we’ll learn a superior method for performing substitutions in strings.</p>
 </div>

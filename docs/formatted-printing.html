@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.4 Formatted Printing | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.4 Formatted Printing | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="basic-string-operations.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,9 +577,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="formatted-printing" class="section level2">
 <h2><span class="header-section-number">11.4</span> Formatted Printing</h2>
 <p>Quite often when we are printing out to the console we want each line to follow some uniform format. This can be accomplished with the <code>sprintf()</code> function.<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a> Lets begin with an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">first &lt;-<span class="st"> &quot;Mary&quot;</span>
-last &lt;-<span class="st"> &quot;Poppins&quot;</span>
-<span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%10s%20s&quot;</span>, first, last)</code></pre>
+<div class="sourceCode" id="cb1675"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1675-1" data-line-number="1">first &lt;-<span class="st"> &quot;Mary&quot;</span></a>
+<a class="sourceLine" id="cb1675-2" data-line-number="2">last &lt;-<span class="st"> &quot;Poppins&quot;</span></a>
+<a class="sourceLine" id="cb1675-3" data-line-number="3"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%10s%20s&quot;</span>, first, last)</a></code></pre></div>
 <pre><code>## [1] &quot;      Mary             Poppins&quot;</code></pre>
 <p><code>sprintf()</code> builds a string from the strings <code>first</code> and <code>last</code> that were passed to it. The <code>fmt</code> parameter is a string that encodes the <em>format</em> of the result. In this example, the command comes down to:</p>
 <ul>
@@ -590,13 +588,13 @@ last &lt;-<span class="st"> &quot;Poppins&quot;</span>
 <li>The preceding two strings are called <em>fields</em>. We then join the above the fields, with nothing between them.</li>
 </ul>
 <p>Here is the result, <code>cat</code>ed out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%10s%20s&quot;</span>, first, last) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">cat</span>()</code></pre>
+<div class="sourceCode" id="cb1677"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1677-1" data-line-number="1"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%10s%20s&quot;</span>, first, last) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1677-2" data-line-number="2"><span class="st">  </span><span class="kw">cat</span>()</a></code></pre></div>
 <pre><code>##       Mary             Poppins</code></pre>
 <p>The “s” in the the <code>fmt</code> argument is called a <em>conversion character</em>. It tells <code>sprintf()</code> to expect a string. Each percent sign indicates the beginning of a new field. For each field, the desired field-width should appear between the percent-sign and the conversion character for the field.</p>
 <p>In the text above, the names are <em>right-justified</em>, meaning that they appear at the end of their respective fields. If you want a field to be left-justified, insert a hyphen anywhere between the percent sign and the conversion character, like so:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># left-justify both fields:</span>
-<span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%-10s%-20s&quot;</span>, first, last) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</code></pre>
+<div class="sourceCode" id="cb1679"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1679-1" data-line-number="1"><span class="co"># left-justify both fields:</span></a>
+<a class="sourceLine" id="cb1679-2" data-line-number="2"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%-10s%-20s&quot;</span>, first, last) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</a></code></pre></div>
 <pre><code>## Mary      Poppins</code></pre>
 <p>Other common conversion characters are:</p>
 <ul>
@@ -605,41 +603,41 @@ last &lt;-<span class="st"> &quot;Poppins&quot;</span>
 <li><code>g</code>: a decimal number where the default precision is determined by the number of significant figures in the given number</li>
 </ul>
 <p>Here is another example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%-10s%-10d%-10f&quot;</span>, <span class="st">&quot;Mary&quot;</span>, <span class="dv">1955</span>, <span class="fl">3.2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</code></pre>
+<div class="sourceCode" id="cb1681"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1681-1" data-line-number="1"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%-10s%-10d%-10f&quot;</span>, <span class="st">&quot;Mary&quot;</span>, <span class="dv">1955</span>, <span class="fl">3.2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</a></code></pre></div>
 <pre><code>## Mary      1955      3.200000</code></pre>
 <p>The following example is the same as above, except that we retain only the significant figures in the 3.2:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%-10s%-10d%-10g&quot;</span>, <span class="st">&quot;Mary&quot;</span>, <span class="dv">1955</span>, <span class="fl">3.2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</code></pre>
+<div class="sourceCode" id="cb1683"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1683-1" data-line-number="1"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%-10s%-10d%-10g&quot;</span>, <span class="st">&quot;Mary&quot;</span>, <span class="dv">1955</span>, <span class="fl">3.2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</a></code></pre></div>
 <pre><code>## Mary      1955      3.2</code></pre>
 <p>When you are creating a field for a decimal number, you can specify both the total field-width and the precision together if you separate them with a <code>.</code>. Thus, if you want the number 234.5647 to appear right-justified in a field of width 10, showing only the first three decimal places, then try:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%-10s%-10d%-10.3f&quot;</span>, <span class="st">&quot;Mary&quot;</span>, <span class="dv">1955</span>, <span class="fl">234.5647</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">cat</span>()</code></pre>
+<div class="sourceCode" id="cb1685"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1685-1" data-line-number="1"><span class="kw">sprintf</span>(<span class="dt">fmt =</span> <span class="st">&quot;%-10s%-10d%-10.3f&quot;</span>, <span class="st">&quot;Mary&quot;</span>, <span class="dv">1955</span>, <span class="fl">234.5647</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1685-2" data-line-number="2"><span class="st">  </span><span class="kw">cat</span>()</a></code></pre></div>
 <pre><code>## Mary      1955      234.565</code></pre>
 <p><code>sprintf()</code> comes in handy when you want your output to appear in nicely-aligned, tabular fashion. Consider this example:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># information for three people:</span>
-firstName &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Donald&quot;</span>, <span class="st">&quot;Gina&quot;</span>, <span class="st">&quot;Rohini&quot;</span>)
-lastName &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Duck&quot;</span>, <span class="st">&quot;Gentorious&quot;</span>, <span class="st">&quot;Lancaster&quot;</span>)
-age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">20</span>)
-gpa &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">3.7</span>, <span class="fl">3.9</span>, <span class="fl">3.823</span>)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {
-  <span class="kw">sprintf</span>(<span class="st">&quot;%-15s%-20s%-5d%-5.2f</span><span class="ch">\n</span><span class="st">&quot;</span>, 
-          firstName[i], lastName[i], age[i], gpa[i]) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">cat</span>()
-}</code></pre>
+<div class="sourceCode" id="cb1687"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1687-1" data-line-number="1"><span class="co"># information for three people:</span></a>
+<a class="sourceLine" id="cb1687-2" data-line-number="2">firstName &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Donald&quot;</span>, <span class="st">&quot;Gina&quot;</span>, <span class="st">&quot;Rohini&quot;</span>)</a>
+<a class="sourceLine" id="cb1687-3" data-line-number="3">lastName &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Duck&quot;</span>, <span class="st">&quot;Gentorious&quot;</span>, <span class="st">&quot;Lancaster&quot;</span>)</a>
+<a class="sourceLine" id="cb1687-4" data-line-number="4">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb1687-5" data-line-number="5">gpa &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">3.7</span>, <span class="fl">3.9</span>, <span class="fl">3.823</span>)</a>
+<a class="sourceLine" id="cb1687-6" data-line-number="6"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {</a>
+<a class="sourceLine" id="cb1687-7" data-line-number="7">  <span class="kw">sprintf</span>(<span class="st">&quot;%-15s%-20s%-5d%-5.2f</span><span class="ch">\n</span><span class="st">&quot;</span>, </a>
+<a class="sourceLine" id="cb1687-8" data-line-number="8">          firstName[i], lastName[i], age[i], gpa[i]) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1687-9" data-line-number="9"><span class="st">    </span><span class="kw">cat</span>()</a>
+<a class="sourceLine" id="cb1687-10" data-line-number="10">}</a></code></pre></div>
 <pre><code>## Donald         Duck                17   3.70 
 ## Gina           Gentorious          19   3.90 
 ## Rohini         Lancaster           20   3.82</code></pre>
 <p>Note the use of “\n” in the <code>fmt</code> argument to ensure that the output appears on separate lines.</p>
 <p>You could take advantage of vectorization to avoid the loop:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(<span class="st">&quot;%-15s%-20s%5-d%-5.2f</span><span class="ch">\n</span><span class="st">&quot;</span>, 
-        firstName, lastName, age, gpa) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">cat</span>()</code></pre>
+<div class="sourceCode" id="cb1689"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1689-1" data-line-number="1"><span class="kw">sprintf</span>(<span class="st">&quot;%-15s%-20s%5-d%-5.2f</span><span class="ch">\n</span><span class="st">&quot;</span>, </a>
+<a class="sourceLine" id="cb1689-2" data-line-number="2">        firstName, lastName, age, gpa) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1689-3" data-line-number="3"><span class="st">  </span><span class="kw">cat</span>()</a></code></pre></div>
 <pre><code>## Donald         Duck                17   3.70 
 ##  Gina           Gentorious          19   3.90 
 ##  Rohini         Lancaster           20   3.82</code></pre>
 <p>Well, that’s not quite right: the second and third lines begin with a space. This happens because <code>cat()</code> separates its input with a space by default. You can prevent this, however, with the <code>sep</code> parameter of <code>cat()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(<span class="st">&quot;%-15s%-20s%-5d%-5.2f</span><span class="ch">\n</span><span class="st">&quot;</span>, 
-        firstName, lastName, age, gpa) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">cat</span>(<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1691"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1691-1" data-line-number="1"><span class="kw">sprintf</span>(<span class="st">&quot;%-15s%-20s%-5d%-5.2f</span><span class="ch">\n</span><span class="st">&quot;</span>, </a>
+<a class="sourceLine" id="cb1691-2" data-line-number="2">        firstName, lastName, age, gpa) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1691-3" data-line-number="3"><span class="st">  </span><span class="kw">cat</span>(<span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## Donald         Duck                17   3.70 
 ## Gina           Gentorious          19   3.90 
 ## Rohini         Lancaster           20   3.82</code></pre>

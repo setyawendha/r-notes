@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.1 Introduction to Matrices | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.1 Introduction to Matrices | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="frames.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -584,9 +582,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>a certain number of columns.</li>
 </ul>
 <p>One way to create is matrix is to take a vector and <em>give</em> it those two extra attributes, via the <code>matrix()</code> function.  Here is an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbers &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">24</span>  <span class="co"># this is an ordinary atomic vector</span>
-numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)  <span class="co"># make a matrix</span>
-numbersMat</code></pre>
+<div class="sourceCode" id="cb1089"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1089-1" data-line-number="1">numbers &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">24</span>  <span class="co"># this is an ordinary atomic vector</span></a>
+<a class="sourceLine" id="cb1089-2" data-line-number="2">numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)  <span class="co"># make a matrix</span></a>
+<a class="sourceLine" id="cb1089-3" data-line-number="3">numbersMat</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    7   13   19
 ## [2,]    2    8   14   20
@@ -595,9 +593,9 @@ numbersMat</code></pre>
 ## [5,]    5   11   17   23
 ## [6,]    6   12   18   24</code></pre>
 <p>Of course if you are making a matrix out of 24 numbers and you know that it’s going to have 6 rows, then you know it must have 4 columns. Similarly, if you know the number of columns then the number of rows is determined. Hence you could have constructed the matrix with just one of the row or column arguments, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">6</span>)</code></pre>
+<div class="sourceCode" id="cb1091"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1091-1" data-line-number="1">numbersMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">6</span>)</a></code></pre></div>
 <p>Notice that the numbers went down the first column, then down the second, and so on. If you would rather fill up the matrix row-by-row, then set the <code>byrow</code> parameter, which is <code>FALSE</code> by default, to <code>TRUE</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb1092"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1092-1" data-line-number="1"><span class="kw">matrix</span>(numbers, <span class="dt">nrow =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    2    3    4
 ## [2,]    5    6    7    8
@@ -606,9 +604,9 @@ numbersMat</code></pre>
 ## [5,]   17   18   19   20
 ## [6,]   21   22   23   24</code></pre>
 <p>Sometimes we like to give names to our rows, or to our columns, or even to both:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(numbersMat) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]
-<span class="kw">colnames</span>(numbersMat) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
-numbersMat</code></pre>
+<div class="sourceCode" id="cb1094"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1094-1" data-line-number="1"><span class="kw">rownames</span>(numbersMat) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]</a>
+<a class="sourceLine" id="cb1094-2" data-line-number="2"><span class="kw">colnames</span>(numbersMat) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb1094-3" data-line-number="3">numbersMat</a></code></pre></div>
 <pre><code>##   A  B  C  D
 ## a 1  7 13 19
 ## b 2  8 14 20
@@ -617,21 +615,21 @@ numbersMat</code></pre>
 ## e 5 11 17 23
 ## f 6 12 18 24</code></pre>
 <p>Matrices don’t have to be numerical. They can be character or logical matrices as well:</p>
-<pre class="sourceCode r"><code class="sourceCode r">creatures &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Oz&quot;</span>,
-               <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Boq&quot;</span>)
-<span class="kw">matrix</span>(creatures, <span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb1096"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1096-1" data-line-number="1">creatures &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Lion&quot;</span>, <span class="st">&quot;Scarecrow&quot;</span>, <span class="st">&quot;Oz&quot;</span>,</a>
+<a class="sourceLine" id="cb1096-2" data-line-number="2">               <span class="st">&quot;Toto&quot;</span>, <span class="st">&quot;Boq&quot;</span>)</a>
+<a class="sourceLine" id="cb1096-3" data-line-number="3"><span class="kw">matrix</span>(creatures, <span class="dt">ncol =</span> <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##      [,1]        [,2]  
 ## [1,] &quot;Dorothy&quot;   &quot;Oz&quot;  
 ## [2,] &quot;Lion&quot;      &quot;Toto&quot;
 ## [3,] &quot;Scarecrow&quot; &quot;Boq&quot;</code></pre>
 <p>If you have to spread out the elements of a matrix into a one-dimensional vector, you can do so:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.vector</span>(numbersMat)</code></pre>
+<div class="sourceCode" id="cb1098"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1098-1" data-line-number="1"><span class="kw">as.vector</span>(numbersMat)</a></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
 ## [24] 24</code></pre>
 <div id="practice-exercises-17" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> Practice Exercises</h3>
 <p>Let’s work with the following vector:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dozen &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>]</code></pre>
+<div class="sourceCode" id="cb1100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1100-1" data-line-number="1">dozen &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>]</a></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><p>Starting with <code>dozen</code> write a command that produces the following matrix:</p>
 <pre><code>##      [,1] [,2] [,3] [,4]
@@ -657,8 +655,8 @@ numbersMat</code></pre>
 ## r3 &quot;g&quot; &quot;h&quot; &quot;i&quot;
 ## r4 &quot;j&quot; &quot;k&quot; &quot;l&quot;</code></pre></li>
 <li><p>Suppose you make the following matrix:</p>
-<pre class="sourceCode r"><code class="sourceCode r">smallMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="dt">nrow =</span><span class="dv">2</span>)
-smallMat</code></pre>
+<div class="sourceCode" id="cb1105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1105-1" data-line-number="1">smallMat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="dt">nrow =</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1105-2" data-line-number="2">smallMat</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    8    3
 ## [2,]    5    4</code></pre>
@@ -672,20 +670,20 @@ smallMat</code></pre>
 <h3><span class="header-section-number">7.1.2</span> Solutions to Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s one way to do it:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(dozen, <span class="dt">nrow =</span> <span class="dv">3</span>)</code></pre>
+<div class="sourceCode" id="cb1108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1108-1" data-line-number="1"><span class="kw">matrix</span>(dozen, <span class="dt">nrow =</span> <span class="dv">3</span>)</a></code></pre></div>
 <p>Here’s another way:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(dozen, <span class="dt">ncol =</span> <span class="dv">4</span>)</code></pre></li>
+<div class="sourceCode" id="cb1109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1109-1" data-line-number="1"><span class="kw">matrix</span>(dozen, <span class="dt">ncol =</span> <span class="dv">4</span>)</a></code></pre></div></li>
 <li><p>Here’s one way to do it:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(dozen, <span class="dt">nrow =</span> <span class="dv">4</span>)</code></pre></li>
+<div class="sourceCode" id="cb1110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1110-1" data-line-number="1"><span class="kw">matrix</span>(dozen, <span class="dt">nrow =</span> <span class="dv">4</span>)</a></code></pre></div></li>
 <li><p>Here’s one way to do it:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(dozen, <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</code></pre></li>
+<div class="sourceCode" id="cb1111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1111-1" data-line-number="1"><span class="kw">matrix</span>(dozen, <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a></code></pre></div></li>
 <li><p>Here’s one way to do it:</p>
-<pre class="sourceCode r"><code class="sourceCode r">answerMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(dozen, <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
-<span class="kw">rownames</span>(answerMatrix) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;r1&quot;</span>, <span class="st">&quot;r2&quot;</span>, <span class="st">&quot;r3&quot;</span>, <span class="st">&quot;r4&quot;</span>)
-<span class="kw">colnames</span>(answerMatrix) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;c1&quot;</span>, <span class="st">&quot;c2&quot;</span>, <span class="st">&quot;c3&quot;</span>)
-answerMatrix</code></pre></li>
+<div class="sourceCode" id="cb1112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1112-1" data-line-number="1">answerMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(dozen, <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1112-2" data-line-number="2"><span class="kw">rownames</span>(answerMatrix) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;r1&quot;</span>, <span class="st">&quot;r2&quot;</span>, <span class="st">&quot;r3&quot;</span>, <span class="st">&quot;r4&quot;</span>)</a>
+<a class="sourceLine" id="cb1112-3" data-line-number="3"><span class="kw">colnames</span>(answerMatrix) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;c1&quot;</span>, <span class="st">&quot;c2&quot;</span>, <span class="st">&quot;c3&quot;</span>)</a>
+<a class="sourceLine" id="cb1112-4" data-line-number="4">answerMatrix</a></code></pre></div></li>
 <li><p>Here’s how:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.vector</span>(smallMat)</code></pre></li>
+<div class="sourceCode" id="cb1113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1113-1" data-line-number="1"><span class="kw">as.vector</span>(smallMat)</a></code></pre></div></li>
 <li><p>The command <code>nrow(mysteryMat)</code> will work.</p></li>
 <li><p>The command <code>ncol(mysteryMat)</code> will work.</p></li>
 </ol>

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12.1 Motivation | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12.1 Motivation | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="regex.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,18 +577,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="motivation" class="section level2">
 <h2><span class="header-section-number">12.1</span> Motivation</h2>
 <p>Suppose you wish to determine how many times the string “ab” appears within some given string. You could write a function to perform this task.</p>
-<pre class="sourceCode r"><code class="sourceCode r">occurrences &lt;-<span class="st"> </span><span class="cf">function</span>(string) {
-  count &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">str_length</span>(string)) {
-    stringPart &lt;-<span class="st"> </span><span class="kw">str_sub</span>(string, i, i<span class="op">+</span><span class="dv">1</span>)
-    <span class="cf">if</span> ( stringPart <span class="op">==</span><span class="st"> &quot;ab&quot;</span> ) {
-      count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="dv">1</span>
-    }
-  }
-  count
-}</code></pre>
+<div class="sourceCode" id="cb1722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1722-1" data-line-number="1">occurrences &lt;-<span class="st"> </span><span class="cf">function</span>(string) {</a>
+<a class="sourceLine" id="cb1722-2" data-line-number="2">  count &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb1722-3" data-line-number="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">str_length</span>(string)) {</a>
+<a class="sourceLine" id="cb1722-4" data-line-number="4">    stringPart &lt;-<span class="st"> </span><span class="kw">str_sub</span>(string, i, i<span class="op">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1722-5" data-line-number="5">    <span class="cf">if</span> ( stringPart <span class="op">==</span><span class="st"> &quot;ab&quot;</span> ) {</a>
+<a class="sourceLine" id="cb1722-6" data-line-number="6">      count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1722-7" data-line-number="7">    }</a>
+<a class="sourceLine" id="cb1722-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb1722-9" data-line-number="9">  count</a>
+<a class="sourceLine" id="cb1722-10" data-line-number="10">}</a></code></pre></div>
 <p>Let’s try it out:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">occurrences</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1723"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1723-1" data-line-number="1"><span class="kw">occurrences</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>This looks right, as there are indeed exactly two occurrences of “ab”: one at beginning at the second character and another beginning at the seventh character.</p>
 <p>Suppose instead that we are interested in counting occurrences, in some arbitrary given string, of any of the following three strings:</p>
@@ -600,25 +598,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>“foo”</li>
 </ul>
 <p>How might we handle this task? Again we could write a function. This time we will generalize it a bit, allowing the user to input, along with the string to be searched, a vector of the sub-strings of interest.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># function to count occurrences of substrings in string.</span>
-<span class="co"># substrings are given as patterns</span>
-occurrences2 &lt;-<span class="st"> </span><span class="cf">function</span>(string, patterns) {
-  count &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">str_length</span>(string)) {
-    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(patterns)) {
-      pattern &lt;-<span class="st"> </span>patterns[j]
-      len &lt;-<span class="st"> </span><span class="kw">str_length</span>(pattern)
-      stringPart &lt;-<span class="st"> </span><span class="kw">str_sub</span>(string, i, i <span class="op">+</span><span class="st"> </span>len <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
-      <span class="cf">if</span> ( stringPart <span class="op">==</span><span class="st"> </span>pattern ) {
-        count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="dv">1</span>
-      }
-    }
-  }
-  count
-}</code></pre>
+<div class="sourceCode" id="cb1725"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1725-1" data-line-number="1"><span class="co"># function to count occurrences of substrings in string.</span></a>
+<a class="sourceLine" id="cb1725-2" data-line-number="2"><span class="co"># substrings are given as patterns</span></a>
+<a class="sourceLine" id="cb1725-3" data-line-number="3">occurrences2 &lt;-<span class="st"> </span><span class="cf">function</span>(string, patterns) {</a>
+<a class="sourceLine" id="cb1725-4" data-line-number="4">  count &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb1725-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">str_length</span>(string)) {</a>
+<a class="sourceLine" id="cb1725-6" data-line-number="6">    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(patterns)) {</a>
+<a class="sourceLine" id="cb1725-7" data-line-number="7">      pattern &lt;-<span class="st"> </span>patterns[j]</a>
+<a class="sourceLine" id="cb1725-8" data-line-number="8">      len &lt;-<span class="st"> </span><span class="kw">str_length</span>(pattern)</a>
+<a class="sourceLine" id="cb1725-9" data-line-number="9">      stringPart &lt;-<span class="st"> </span><span class="kw">str_sub</span>(string, i, i <span class="op">+</span><span class="st"> </span>len <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1725-10" data-line-number="10">      <span class="cf">if</span> ( stringPart <span class="op">==</span><span class="st"> </span>pattern ) {</a>
+<a class="sourceLine" id="cb1725-11" data-line-number="11">        count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1725-12" data-line-number="12">      }</a>
+<a class="sourceLine" id="cb1725-13" data-line-number="13">    }</a>
+<a class="sourceLine" id="cb1725-14" data-line-number="14">  }</a>
+<a class="sourceLine" id="cb1725-15" data-line-number="15">  count</a>
+<a class="sourceLine" id="cb1725-16" data-line-number="16">}</a></code></pre></div>
 <p>We try out our function on the string “This Labrador is a fool, Abba.”, which matches each of our patterns exactly once, for a total of three matches,</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">occurrences2</span>(<span class="st">&quot;This Labrador is a fool, Abba.&quot;</span>,
-           <span class="dt">patterns =</span> <span class="kw">c</span>(<span class="st">&quot;ab&quot;</span>, <span class="st">&quot;Ab&quot;</span>, <span class="st">&quot;foo&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb1726"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1726-1" data-line-number="1"><span class="kw">occurrences2</span>(<span class="st">&quot;This Labrador is a fool, Abba.&quot;</span>,</a>
+<a class="sourceLine" id="cb1726-2" data-line-number="2">           <span class="dt">patterns =</span> <span class="kw">c</span>(<span class="st">&quot;ab&quot;</span>, <span class="st">&quot;Ab&quot;</span>, <span class="st">&quot;foo&quot;</span>))</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>Well, and good, but … the coding is beginning to get a bit complex. What if we were searching instead for, say, sub-strings that resemble a phone number with an area code, i.e., strings of the form:</p>
 <blockquote>
@@ -630,8 +628,8 @@ occurrences2 &lt;-<span class="st"> </span><span class="cf">function</span>(stri
 <p>In practice, regular expressions are like a miniature programming language within a programming language. They are a feature of most major programming languages, including R. With regular expressions we can describe complex string-patterns concisely, and can perform rapid searches for these patterns in a given body of text.</p>
 <p>The rules for regular expressions vary a bit from one language to another, but the general idea is essentially the same for all of them. In the remainder of this Chapter we’ll learn enough of the principles of regular expressions to describe basic, useful patterns, and we’ll also study R-functions that make use of them.</p>
 <p>First of all, here’s a quick example to show the power of regular expressions. The work done by <code>occurences2()</code> may also be done in one line with the <code>str_count()</code>  function, as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_count</span>(<span class="dt">string =</span> <span class="st">&quot;This Labrador is a fool, Abba.&quot;</span>,
-         <span class="dt">pattern =</span> <span class="st">&quot;[Aa]b|foo&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1728"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1728-1" data-line-number="1"><span class="kw">str_count</span>(<span class="dt">string =</span> <span class="st">&quot;This Labrador is a fool, Abba.&quot;</span>,</a>
+<a class="sourceLine" id="cb1728-2" data-line-number="2">         <span class="dt">pattern =</span> <span class="st">&quot;[Aa]b|foo&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>Wow, that was quick. But what in the world is that <code>&quot;[Aa]b|foo&quot;</code> argument to the <code>pattern</code> parameter?</p>
 <p>It’s a regular expression! It tells R to look for sub-strings that EITHER:</p>

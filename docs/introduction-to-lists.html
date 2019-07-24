@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.1 Introduction to Lists | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.1 Introduction to Lists | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="lists.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -581,27 +579,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>So far the vectors that we have met have all been <em>atomic</em>, meaning that they can hold only one type of value. Hence we deal with vectors of type <code>integer</code>, or of type <code>double</code>, or of type <code>character</code>, and so on.</p>
 <p>A <em>list</em>  is a special kind of vector. Like any other vector it is one-dimensional, but unlike an atomic vector it can contain objects of <em>any</em> sort: atomic vectors, functions—even other lists! We say, therefore, that lists are <em>heterogeneous</em> vectors.</p>
 <p>The most direct way to create a list is with the function <code>list()</code> . Let’s make a couple of lists:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lst1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="dv">12</span>)
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])
-lst2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">vowels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;o&quot;</span>, <span class="st">&quot;u&quot;</span>),
-             <span class="dt">myFrame =</span> df)
-lst3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">nums =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">20</span>,
-             <span class="dt">bools =</span> <span class="kw">c</span>(T, F, F),
-             <span class="dt">george =</span> lst1)</code></pre>
+<div class="sourceCode" id="cb1418"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1418-1" data-line-number="1">lst1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb1418-2" data-line-number="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb1418-3" data-line-number="3">lst2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">vowels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;o&quot;</span>, <span class="st">&quot;u&quot;</span>),</a>
+<a class="sourceLine" id="cb1418-4" data-line-number="4">             <span class="dt">myFrame =</span> df)</a>
+<a class="sourceLine" id="cb1418-5" data-line-number="5">lst3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">nums =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb1418-6" data-line-number="6">             <span class="dt">bools =</span> <span class="kw">c</span>(T, F, F),</a>
+<a class="sourceLine" id="cb1418-7" data-line-number="7">             <span class="dt">george =</span> lst1)</a></code></pre></div>
 <p>Note that the elements of our three lists are not objects of a single data type. Note also that <code>lst3</code> actually contains <code>lst1</code> as one of its elements.</p>
 <p>When you call <code>list()</code> to create a list, you have the option to assign a name to one or more of the elements. In the code above we chose, for both of our lists, to assign a name to each element.</p>
 <p>Let’s print out a list to the console. We’ll choose <code>lst1</code>, since it’s rather small:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lst1</code></pre>
+<div class="sourceCode" id="cb1419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1419-1" data-line-number="1">lst1</a></code></pre></div>
 <pre><code>## $name
 ## [1] &quot;Dorothy&quot;
 ## 
 ## $age
 ## [1] 12</code></pre>
 <p>Note that the name of each elements appears before the element itself is printed out, and that the names are preceded by dollar signs. This is a hint that you can access a single member of the list in a way similar to the <code>frame$variable</code> format for data frames:</p>
-<pre class="sourceCode r"><code class="sourceCode r">lst1<span class="op">$</span>age</code></pre>
+<div class="sourceCode" id="cb1421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1421-1" data-line-number="1">lst1<span class="op">$</span>age</a></code></pre></div>
 <pre><code>## [1] 12</code></pre>
 <p>You can make an empty list, too:</p>
-<pre class="sourceCode r"><code class="sourceCode r">emptyList &lt;-<span class="st"> </span><span class="kw">list</span>()</code></pre>
+<div class="sourceCode" id="cb1423"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1423-1" data-line-number="1">emptyList &lt;-<span class="st"> </span><span class="kw">list</span>()</a></code></pre></div>
 <p>This is useful when you want to build up a list gradually, but you do not yet know what will go into it.</p>
 <div id="practice-exercises-27" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> Practice Exercises</h3>
@@ -613,16 +611,16 @@ lst3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt"
 <li>The data frame <code>alcohol</code> from the <strong>fuel</strong> package. Its name should be <code>wizard</code>.</li>
 </ul></li>
 <li><p>Suppose that <code>ozStuff</code> has been created in the previous problem. Describe in your own words what the following expression does:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ozStuff &lt;-<span class="st"> </span><span class="kw">c</span>(ozStuff, <span class="kw">list</span>(<span class="dt">dorothy =</span> <span class="st">&quot;Kansas&quot;</span>))</code></pre></li>
+<div class="sourceCode" id="cb1424"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1424-1" data-line-number="1">ozStuff &lt;-<span class="st"> </span><span class="kw">c</span>(ozStuff, <span class="kw">list</span>(<span class="dt">dorothy =</span> <span class="st">&quot;Kansas&quot;</span>))</a></code></pre></div></li>
 </ol>
 </div>
 <div id="solutions-to-the-practice-exercises-15" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Here’s one way to do it:</p>
-<pre class="sourceCode r"><code class="sourceCode r">ozStuff &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">lion =</span> <span class="kw">seq</span>(<span class="dv">4</span>, <span class="dv">100</span>, <span class="dt">by =</span> <span class="dv">2</span>),
-                <span class="dt">scarecrow =</span> LETTERS,
-                <span class="dt">wizard =</span> bcscr<span class="op">::</span>fuel)</code></pre></li>
+<div class="sourceCode" id="cb1425"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1425-1" data-line-number="1">ozStuff &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">lion =</span> <span class="kw">seq</span>(<span class="dv">4</span>, <span class="dv">100</span>, <span class="dt">by =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb1425-2" data-line-number="2">                <span class="dt">scarecrow =</span> LETTERS,</a>
+<a class="sourceLine" id="cb1425-3" data-line-number="3">                <span class="dt">wizard =</span> bcscr<span class="op">::</span>fuel)</a></code></pre></div></li>
 <li><p>One way to describe it is as follows: the expression creates a new list consisting of all the elements of <code>ozStuff</code> together with a new element called <code>dorothy</code> (which is the string <code>&quot;Kansas&quot;</code>), and then binds the name “<code>ozStuff</code>” to that new four-element list.</p></li>
 </ol>
 </div>

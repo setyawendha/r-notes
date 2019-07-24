@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.1 Prompting the User | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.1 Prompting the User | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="flow.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -580,29 +578,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> Prompting the User</h2>
 <p>One way to control the flow of a program is to arrange for it to pause and await information from the user who runs it.</p>
 <p>Up to this point any information that we have wanted to process has had to be entered into the code itself. For example, if we want to print out a name to the console, we have to provide that name in the code, like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">person &lt;-<span class="st"> &quot;Dorothy&quot;</span>
-<span class="kw">cat</span>(<span class="st">&quot;Hello, &quot;</span>, person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb653-1" data-line-number="1">person &lt;-<span class="st"> &quot;Dorothy&quot;</span></a>
+<a class="sourceLine" id="cb653-2" data-line-number="2"><span class="kw">cat</span>(<span class="st">&quot;Hello, &quot;</span>, person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## Hello, Dorothy!</code></pre>
 <p>We can get any printout we like as long as we assign the desired string to <code>person</code>—but we have to do that <em>in the code itself</em>. But what if we don’t know the name of the person whom we want to greet? How can we be assured of printing out the correct name?</p>
 <p>The <code>readline()</code> function will be helpful, here. It reads input directly from the console and produces a character vector (of length one) that we may use as we like. Thus</p>
-<pre class="sourceCode r"><code class="sourceCode r">person &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;What is your name?  &quot;</span>)
-<span class="co"># Type your name before running the next line!</span>
-<span class="kw">cat</span>(<span class="st">&quot;Hello, &quot;</span>, person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb655-1" data-line-number="1">person &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="dt">prompt =</span> <span class="st">&quot;What is your name?  &quot;</span>)</a>
+<a class="sourceLine" id="cb655-2" data-line-number="2"><span class="co"># Type your name before running the next line!</span></a>
+<a class="sourceLine" id="cb655-3" data-line-number="3"><span class="kw">cat</span>(<span class="st">&quot;Hello, &quot;</span>, person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## What is your name?  Cowardly Lion
 ## Hello, Cowardly Lion!</code></pre>
 <p>Note that the input obtained from <code>readline()</code> is always a character vector of length one—a single string—so if you plan to use it as a number then you need to convert it to a number. The <code>as.numeric()</code> function will do this for you:</p>
-<pre class="sourceCode r"><code class="sourceCode r">number &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Give me a number, and I&#39;ll add 10 to it:  &quot;</span>)
-<span class="co"># Give R your number before you run the next line!</span>
-<span class="kw">cat</span>(<span class="st">&quot;The sum is:  &quot;</span>, <span class="kw">as.numeric</span>(number) <span class="op">+</span><span class="st"> </span><span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb657-1" data-line-number="1">number &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Give me a number, and I&#39;ll add 10 to it:  &quot;</span>)</a>
+<a class="sourceLine" id="cb657-2" data-line-number="2"><span class="co"># Give R your number before you run the next line!</span></a>
+<a class="sourceLine" id="cb657-3" data-line-number="3"><span class="kw">cat</span>(<span class="st">&quot;The sum is:  &quot;</span>, <span class="kw">as.numeric</span>(number) <span class="op">+</span><span class="st"> </span><span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## Give me a number, and I&#39;ll add 10 to it:  15
 ## The sum is:  25</code></pre>
 <div id="practice-exercises-11" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Try out the following code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">pet &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Enter the name of your pet: &quot;</span>)
-type &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;What kind of animal is it? (Dog, cat, etc.): &quot;</span>)
-<span class="kw">cat</span>(pet, <span class="st">&quot; is a &quot;</span>, type, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb659-1" data-line-number="1">pet &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;Enter the name of your pet: &quot;</span>)</a>
+<a class="sourceLine" id="cb659-2" data-line-number="2">type &lt;-<span class="st"> </span><span class="kw">readline</span>(<span class="st">&quot;What kind of animal is it? (Dog, cat, etc.): &quot;</span>)</a>
+<a class="sourceLine" id="cb659-3" data-line-number="3"><span class="kw">cat</span>(pet, <span class="st">&quot; is a &quot;</span>, type, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <p><strong>Important</strong>: Run the lines <em>one at a time</em>, not all three at once. R will stop after the first line, waiting for your answer. If you try to run line 2 along with the <code>pet</code> line, then line 2 will become your attempted input for <code>pet</code>, resulting in an error.</p></li>
 </ol>
 </div>

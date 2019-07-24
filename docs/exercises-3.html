@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Exercises | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Exercises | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="glossary-3.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -605,7 +603,7 @@ Figure 5.18: A star with rays of random lengths.
 </div>
 <p>There is no longer a <code>legnth</code> parameter, but the names and default-values for the other parameters should be the same as in the previous exercise. Starting from <code>turtle_init(50,50)</code> make a random star with 20 rays and a line-thickness of 3. Other parameters should be left at their default-values.</p>
 <p><strong>Hint</strong>: You’ll probably use a loop to draw each ray of the star. As you go through the loop, get a random ray-length using the <code>runif()</code> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r">randomLength &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">5</span>, <span class="dt">max =</span> <span class="dv">25</span>)</code></pre>
+<div class="sourceCode" id="cb952"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb952-1" data-line-number="1">randomLength &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">5</span>, <span class="dt">max =</span> <span class="dv">25</span>)</a></code></pre></div>
 <p>Then have the turtle make the ray by moving forward and backward by that amount.</p></li>
 <li><p>Make a new star function <code>turtle_rstarColors()</code> that behaves like <code>turtle_rstar()</code> except that instead of being determined by the user the ray-color varies randomly from one ray to another, as in Figure <a href="exercises-3.html#fig:turtle-star-3">5.19</a>:</p>
 <div class="figure" style="text-align: center"><span id="fig:turtle-star-3"></span>
@@ -616,9 +614,9 @@ Figure 5.19: A star with rays of random lengths and random colors.
 </div>
 <p>Each ray should have a color drawn randomly from the vector of all colors given by <code>colors()</code>. Starting from <code>turtle_init(50,50)</code> make a random star with 20 rays and a line-thickness of 6. Other parameters should be left at their default-values.</p>
 <p><strong>Hint</strong>: You’ll probably use a loop to draw each ray of the star. As you go through the loop, get a new random color like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r">randomColor &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">colors</span>(), <span class="dt">size =</span> <span class="dv">1</span>)</code></pre>
+<div class="sourceCode" id="cb953"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb953-1" data-line-number="1">randomColor &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">colors</span>(), <span class="dt">size =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p>Then set the turtle’s color accordingly:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">turtle_col</span>(<span class="dt">col =</span> randomColor)</code></pre></li>
+<div class="sourceCode" id="cb954"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb954-1" data-line-number="1"><span class="kw">turtle_col</span>(<span class="dt">col =</span> randomColor)</a></code></pre></div></li>
 <li><p>(*) Our <code>turtle_quick_pollack()</code> function has successive strokes attached to each other. However, Jackson Pollack famous “drip” style involved placing brush-strokes at seemingly random locations on the canvas—successive strokes weren’t placed together. Modify our Pollack-painter function so that each new stroke appears as a random location <em>inside</em> the canvas. If you really get into it, research <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf" target ="_blank">colors in R</a> and try to come up with your own scheme for randomizing colors.</p></li>
 </ol>
 

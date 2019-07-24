@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13.2 Reading Text Files with readLines() | Beginning Computer Science with R</title>
-  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13.2 Reading Text Files with readLines() | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
 
-<meta name="author" content="Homer White">
+<meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-09">
+<meta name="date" content="2019-07-23" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="downloading-files.html">
@@ -56,7 +55,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -579,13 +577,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="reading-text-files-with-readlines" class="section level2">
 <h2><span class="header-section-number">13.2</span> Reading Text Files with <code>readLines()</code></h2>
 <p>Let’s transfer the contents of <code>words.txt</code> to a character vector in R. The function for this is <code>readLines()</code>: </p>
-<pre class="sourceCode r"><code class="sourceCode r">words &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">con =</span> <span class="st">&quot;downloads/words.txt&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb1827"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1827-1" data-line-number="1">words &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="dt">con =</span> <span class="st">&quot;downloads/words.txt&quot;</span>)</a></code></pre></div>
 <p><code>readLines()</code> is similar to <code>readline()</code>, which we have used in the past to get a single line of input from the user. <code>readLines()</code> can also read from the console—this is called <em>standard input</em>—but it can also make a <em>connection</em><a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a> with any file. In the code above, we set the connection to be the file <code>words.txt</code>. By default <code>readLines()</code> reads the file—one line at a time as a string. The resulting character vector is named <code>words</code>.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
 <p>Let’s look at words to see if it came out the way we expected. The <code>head()</code> function  works not only on data frames but also on vectors:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(words)</code></pre>
+<div class="sourceCode" id="cb1828"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1828-1" data-line-number="1"><span class="kw">head</span>(words)</a></code></pre></div>
 <pre><code>## [1] &quot;aa&quot;     &quot;aah&quot;    &quot;aahed&quot;  &quot;aahing&quot; &quot;aahs&quot;   &quot;aal&quot;</code></pre>
 <p>Yes, it looks like we got one word into each element of the vector. The total number of words is:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(words)</code></pre>
+<div class="sourceCode" id="cb1830"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1830-1" data-line-number="1"><span class="kw">length</span>(words)</a></code></pre></div>
 <pre><code>## [1] 113809</code></pre>
 </div>
 <div class="footnotes">
