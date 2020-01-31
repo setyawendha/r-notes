@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.4 Random Moves | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.4 Random Moves | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="writing-turtle-functions.html">
-<link rel="next" href="more-complex-turtle-graphs.html">
+<link rel="prev" href="writing-turtle-functions.html"/>
+<link rel="next" href="more-complex-turtle-graphs.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -697,8 +700,8 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <p>The idea is that R will produce <code>n</code> real numbers that have the appearance of having been drawn randomly from the interval of real numbers whose lower and upper bounds are specified respectively by <code>min</code> and <code>max</code>.</p>
 <p>Thus, to get 10 “random” numbers that all lie between 0 and 1, you can leave <code>min</code> and <code>max</code> at their defaults and ask for:</p>
 <div class="sourceCode" id="cb932"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb932-1" data-line-number="1"><span class="kw">runif</span>(<span class="dv">10</span>)</a></code></pre></div>
-<pre><code>##  [1] 0.646902839 0.394225758 0.618501814 0.476891136 0.136097186
-##  [6] 0.067384386 0.129152617 0.393117930 0.002582699 0.620205954</code></pre>
+<pre><code>##  [1] 0.646902839 0.394225758 0.618501814 0.476891136 0.136097186 0.067384386 0.129152617
+##  [8] 0.393117930 0.002582699 0.620205954</code></pre>
 </div>
 <div id="pseudo-randomness-and-setting-a-seed" class="section level3">
 <h3><span class="header-section-number">5.4.4</span> Pseudo-Randomness and Setting a Seed</h3>
@@ -707,8 +710,8 @@ population when &#39;replace = FALSE&#39;</code></pre>
 <p>The <code>set.seed()</code> function will fix the random output. Try running the following two lines of code more than once:</p>
 <div class="sourceCode" id="cb934"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb934-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2025</span>)</a>
 <a class="sourceLine" id="cb934-2" data-line-number="2"><span class="kw">runif</span>(<span class="dv">10</span>)</a></code></pre></div>
-<pre><code>##  [1] 0.7326202 0.4757614 0.5142159 0.4984323 0.7802845 0.5042522 0.8984003
-##  [8] 0.1278527 0.6446721 0.5695311</code></pre>
+<pre><code>##  [1] 0.7326202 0.4757614 0.5142159 0.4984323 0.7802845 0.5042522 0.8984003 0.1278527 0.6446721
+## [10] 0.5695311</code></pre>
 <p>You will get the same output every time. If you change the argument of <code>set.seed()</code> to some other integer the output will probably change—but it will stay the same when you run the code <em>again</em> from that that new seed.</p>
 </div>
 <div id="drunken-turtle-intro" class="section level3">
@@ -828,11 +831,13 @@ population when &#39;replace = FALSE&#39;</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -840,12 +845,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -857,6 +861,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -875,8 +883,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

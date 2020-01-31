@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>References | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="References | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,14 +24,14 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="exercises-11.html">
+<link rel="prev" href="exercises-11.html"/>
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -618,16 +621,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>White, Homer. 2018. <em>TigerData: GC Statistics Datasets</em>. <a href="https://github.com/homerhanumat/tigerData">https://github.com/homerhanumat/tigerData</a>.</p>
 </div>
 <div>
-<p>———. 2019. <em>Bcscr: Beginning Computer Science with R</em>. <a href="https://github.com/homerhanumat/bcscr">https://github.com/homerhanumat/bcscr</a>.</p>
+<p>———. 2020. <em>Bcscr: Beginning Computer Science with R</em>. <a href="https://github.com/homerhanumat/bcscr">https://github.com/homerhanumat/bcscr</a>.</p>
 </div>
 <div>
 <p>Wickham, Hadley. 2014. <em>Advanced R</em>. Chapman; Hall. <a href="http://adv-r.had.co.nz">http://adv-r.had.co.nz</a>.</p>
 </div>
 <div>
-<p>———. 2016. <em>Plyr: Tools for Splitting, Applying and Combining Data</em>. <a href="https://CRAN.R-project.org/package=plyr">https://CRAN.R-project.org/package=plyr</a>.</p>
+<p>———. 2018. <em>Pryr: Tools for Computing on the Language</em>. <a href="https://CRAN.R-project.org/package=pryr">https://CRAN.R-project.org/package=pryr</a>.</p>
 </div>
 <div>
-<p>———. 2018. <em>Pryr: Tools for Computing on the Language</em>. <a href="https://CRAN.R-project.org/package=pryr">https://CRAN.R-project.org/package=pryr</a>.</p>
+<p>———. 2019. <em>Plyr: Tools for Splitting, Applying and Combining Data</em>. <a href="https://CRAN.R-project.org/package=plyr">https://CRAN.R-project.org/package=plyr</a>.</p>
 </div>
 <div>
 <p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, and Hiroaki Yutani. 2019. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.</p>
@@ -700,11 +703,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -712,12 +717,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -729,6 +733,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -747,8 +755,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

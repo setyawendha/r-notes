@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.1 What is a Vector? | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.1 What is a Vector? | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="vectors.html">
-<link rel="next" href="constructing-patterned-vectors.html">
+<link rel="prev" href="vectors.html"/>
+<link rel="next" href="constructing-patterned-vectors.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -587,9 +590,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">numVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">23.2</span>, <span class="dv">45</span>, <span class="dv">631</span>, <span class="dv">-273</span>, <span class="dv">0</span>, <span class="fl">48.371</span>, <span class="dv">100000</span>,</a>
 <a class="sourceLine" id="cb78-2" data-line-number="2">            <span class="dv">85</span>, <span class="dv">92</span>, <span class="dv">-236</span>, <span class="dv">8546</span>, <span class="dv">98774</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb78-3" data-line-number="3">numVec</a></code></pre></div>
-<pre><code>##  [1]     23.200     45.000    631.000   -273.000      0.000     48.371
-##  [7] 100000.000     85.000     92.000   -236.000   8546.000  98774.000
-## [13]      0.000      0.000      1.000      3.000</code></pre>
+<pre><code>##  [1]     23.200     45.000    631.000   -273.000      0.000     48.371 100000.000     85.000
+##  [9]     92.000   -236.000   8546.000  98774.000      0.000      0.000      1.000      3.000</code></pre>
 <p>You can think of <code>c</code> as standing for “combine.” <code>c()</code> takes its arguments, all of which are separated by commas, and combines them to make a vector.</p>
 <p>If you closely examine the above output, you’ll notice that R printed out all of the numerical values in the vector to three decimal places, which happened to be the largest number of decimal places we assigned to any of the numbers that made up <code>numVec</code>. You’ll also notice the numbers in brackets at the beginning of the lines. Each number represents the position within the vector occupied by the first element of the vector that is printed on the line. The position of an element in a vector is called its <em>index</em>. Reporting the indices of leading elements helps you locate particular elements in the output.</p>
 <div id="types-of-atomic-vectors" class="section level3">
@@ -620,8 +622,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">strVec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Brains&quot;</span>, <span class="st">&quot;are&quot;</span>, <span class="st">&quot;not&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;best&quot;</span>, </a>
 <a class="sourceLine" id="cb88-2" data-line-number="2">            <span class="st">&quot;things&quot;</span>, <span class="st">&quot;in&quot;</span>, <span class="st">&quot;the&quot;</span>, <span class="st">&quot;world&quot;</span>, <span class="st">&quot;93.2&quot;</span>)</a>
 <a class="sourceLine" id="cb88-3" data-line-number="3">strVec</a></code></pre></div>
-<pre><code>##  [1] &quot;Brains&quot; &quot;are&quot;    &quot;not&quot;    &quot;the&quot;    &quot;best&quot;   &quot;things&quot; &quot;in&quot;    
-##  [8] &quot;the&quot;    &quot;world&quot;  &quot;93.2&quot;</code></pre>
+<pre><code>##  [1] &quot;Brains&quot; &quot;are&quot;    &quot;not&quot;    &quot;the&quot;    &quot;best&quot;   &quot;things&quot; &quot;in&quot;     &quot;the&quot;    &quot;world&quot;  &quot;93.2&quot;</code></pre>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="kw">typeof</span>(strVec)</a></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>Notice that <code>&quot;93.2&quot;</code> makes a string, not a number.</p>
@@ -731,11 +732,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.1.7</span> Special Character Vectors</h3>
 <p>R comes with two handy, predefined character vectors:</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">letters</a></code></pre></div>
-<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
-## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot;
+## [24] &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">LETTERS</a></code></pre></div>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
-## [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot;
+## [24] &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
 <p>We will make use of them from time to time.</p>
 </div>
 <div id="length-of-vectors" class="section level3">
@@ -784,11 +785,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -796,12 +799,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -813,6 +815,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -831,8 +837,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

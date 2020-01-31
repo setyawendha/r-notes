@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.4 Subsetting with dplyr | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.4 Subsetting with dplyr | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tibbles.html">
-<link rel="next" href="transforming-variables-with-dplyr.html">
+<link rel="prev" href="tibbles.html"/>
+<link rel="next" href="transforming-variables-with-dplyr.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -600,20 +603,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1536"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1536-1" data-line-number="1">survey <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1536-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ideal_ht, <span class="op">-</span>love_first)</a></code></pre></div>
 <pre><code>## # A tibble: 71 x 10
-##    height sleep fastest weight_feel extra_life seat    GPA enough_Sleep
-##     &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt; &lt;fct&gt;       &lt;fct&gt;      &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt;       
-##  1   76     9.5     119 1_underwei… yes        1_fr…  3.56 no          
-##  2   74     7       110 2_about_ri… yes        2_mi…  2.5  no          
-##  3   64     9        85 2_about_ri… no         2_mi…  3.8  no          
-##  4   62     7       100 1_underwei… no         1_fr…  3.5  no          
-##  5   72     8        95 1_underwei… yes        3_ba…  3.2  no          
-##  6   70.8  10       100 3_overweig… no         1_fr…  3.1  yes         
-##  7   70     4        85 2_about_ri… yes        1_fr…  3.68 no          
-##  8   79     6       160 2_about_ri… yes        3_ba…  2.7  yes         
-##  9   59     7        90 2_about_ri… yes        3_ba…  2.8  no          
-## 10   67     7        90 3_overweig… no         2_mi… NA    yes         
-## # … with 61 more rows, and 2 more variables: sex &lt;fct&gt;,
-## #   diff.ideal.act. &lt;dbl&gt;</code></pre>
+##    height sleep fastest weight_feel   extra_life seat       GPA enough_Sleep sex    diff.ideal.act.
+##     &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt; &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;    &lt;dbl&gt; &lt;fct&gt;        &lt;fct&gt;            &lt;dbl&gt;
+##  1   76     9.5     119 1_underweight yes        1_front   3.56 no           male                 2
+##  2   74     7       110 2_about_right yes        2_middle  2.5  no           male                 2
+##  3   64     9        85 2_about_right no         2_middle  3.8  no           female              NA
+##  4   62     7       100 1_underweight no         1_front   3.5  no           female               3
+##  5   72     8        95 1_underweight yes        3_back    3.2  no           male                 0
+##  6   70.8  10       100 3_overweight  no         1_front   3.1  yes          male                NA
+##  7   70     4        85 2_about_right yes        1_front   3.68 no           male                 2
+##  8   79     6       160 2_about_right yes        3_back    2.7  yes          male                -3
+##  9   59     7        90 2_about_right yes        3_back    2.8  no           female               2
+## 10   67     7        90 3_overweight  no         2_middle NA    yes          female               0
+## # … with 61 more rows</code></pre>
 <div id="practice-exercises-31" class="section level3">
 <h3><span class="header-section-number">10.4.1</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
@@ -643,7 +645,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1542-3" data-line-number="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> wage)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb1542-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>)</a></code></pre></div></li>
 </ol>
-
+<div style="page-break-after: always;"></div>
 </div>
 </div>
             </section>
@@ -657,11 +659,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -669,12 +673,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -686,6 +689,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -704,8 +711,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

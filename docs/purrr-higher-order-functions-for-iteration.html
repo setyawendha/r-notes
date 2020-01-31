@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.3 purrr Higher-Order Functions for Iteration | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.3 purrr Higher-Order Functions for Iteration | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="the-functional-programming-paradigm.html">
-<link rel="next" href="other-purr-higher-order-functions.html">
+<link rel="prev" href="the-functional-programming-paradigm.html"/>
+<link rel="next" href="other-purr-higher-order-functions.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -776,30 +779,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1907-2" data-line-number="2"><span class="st">  </span>m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1907-3" data-line-number="3"><span class="st">  </span><span class="kw">map_int</span>(<span class="op">~</span><span class="kw">sum</span>(<span class="kw">is.na</span>(.)))</a>
 <a class="sourceLine" id="cb1907-4" data-line-number="4">numberNA</a></code></pre></div>
-<pre><code>##          height        ideal_ht           sleep         fastest 
-##               0               2               0               0 
-##     weight_feel      love_first      extra_life            seat 
-##               0               0               0               0 
-##             GPA    enough_Sleep             sex diff.ideal.act. 
-##               1               0               0               2</code></pre>
+<pre><code>##          height        ideal_ht           sleep         fastest     weight_feel      love_first 
+##               0               2               0               0               0               0 
+##      extra_life            seat             GPA    enough_Sleep             sex diff.ideal.act. 
+##               0               0               1               0               0               2</code></pre>
 <p>Here are the types of each variable:</p>
 <div class="sourceCode" id="cb1909"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1909-1" data-line-number="1">m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1909-2" data-line-number="2"><span class="st">  </span><span class="kw">map_chr</span>(typeof)</a></code></pre></div>
-<pre><code>##          height        ideal_ht           sleep         fastest 
-##        &quot;double&quot;        &quot;double&quot;        &quot;double&quot;       &quot;integer&quot; 
-##     weight_feel      love_first      extra_life            seat 
-##       &quot;integer&quot;       &quot;integer&quot;       &quot;integer&quot;       &quot;integer&quot; 
-##             GPA    enough_Sleep             sex diff.ideal.act. 
-##        &quot;double&quot;       &quot;integer&quot;       &quot;integer&quot;        &quot;double&quot;</code></pre>
+<pre><code>##          height        ideal_ht           sleep         fastest     weight_feel      love_first 
+##        &quot;double&quot;        &quot;double&quot;        &quot;double&quot;       &quot;integer&quot;       &quot;integer&quot;       &quot;integer&quot; 
+##      extra_life            seat             GPA    enough_Sleep             sex diff.ideal.act. 
+##       &quot;integer&quot;       &quot;integer&quot;        &quot;double&quot;       &quot;integer&quot;       &quot;integer&quot;        &quot;double&quot;</code></pre>
 <p>Here is a statement of whether or not each variable is a factor:</p>
 <div class="sourceCode" id="cb1911"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1911-1" data-line-number="1">m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1911-2" data-line-number="2"><span class="st">  </span><span class="kw">map_lgl</span>(is.factor)</a></code></pre></div>
-<pre><code>##          height        ideal_ht           sleep         fastest 
-##           FALSE           FALSE           FALSE           FALSE 
-##     weight_feel      love_first      extra_life            seat 
-##            TRUE            TRUE            TRUE            TRUE 
-##             GPA    enough_Sleep             sex diff.ideal.act. 
-##           FALSE            TRUE            TRUE           FALSE</code></pre>
+<pre><code>##          height        ideal_ht           sleep         fastest     weight_feel      love_first 
+##           FALSE           FALSE           FALSE           FALSE            TRUE            TRUE 
+##      extra_life            seat             GPA    enough_Sleep             sex diff.ideal.act. 
+##            TRUE            TRUE           FALSE            TRUE            TRUE           FALSE</code></pre>
 </div>
 <div id="walk-and-variations" class="section level3">
 <h3><span class="header-section-number">14.3.2</span> <code>walk()</code> and Variations</h3>
@@ -1009,11 +1006,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -1021,12 +1020,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1038,6 +1036,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -1056,8 +1058,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.4 Application: The Collatz Conjecture | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.4 Application: The Collatz Conjecture | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="repeating-things-looping.html">
-<link rel="next" href="glossary-2.html">
+<link rel="prev" href="repeating-things-looping.html"/>
+<link rel="next" href="glossary-2.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -664,15 +667,13 @@ In mathematics the <em>Collatz Conjecture</em> is the conjecture that for <em>an
 <a class="sourceLine" id="cb839-18" data-line-number="18">}</a></code></pre></div>
 <p>Again let’s try it:</p>
 <div class="sourceCode" id="cb840"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb840-1" data-line-number="1"><span class="kw">collatz</span>(<span class="dv">257</span>)</a></code></pre></div>
-<pre><code>##   [1]  257  772  386  193  580  290  145  436  218  109  328  164   82   41
-##  [15]  124   62   31   94   47  142   71  214  107  322  161  484  242  121
-##  [29]  364  182   91  274  137  412  206  103  310  155  466  233  700  350
-##  [43]  175  526  263  790  395 1186  593 1780  890  445 1336  668  334  167
-##  [57]  502  251  754  377 1132  566  283  850  425 1276  638  319  958  479
-##  [71] 1438  719 2158 1079 3238 1619 4858 2429 7288 3644 1822  911 2734 1367
-##  [85] 4102 2051 6154 3077 9232 4616 2308 1154  577 1732  866  433 1300  650
-##  [99]  325  976  488  244  122   61  184   92   46   23   70   35  106   53
-## [113]  160   80   40   20   10    5   16    8    4    2</code></pre>
+<pre><code>##   [1]  257  772  386  193  580  290  145  436  218  109  328  164   82   41  124   62   31   94
+##  [19]   47  142   71  214  107  322  161  484  242  121  364  182   91  274  137  412  206  103
+##  [37]  310  155  466  233  700  350  175  526  263  790  395 1186  593 1780  890  445 1336  668
+##  [55]  334  167  502  251  754  377 1132  566  283  850  425 1276  638  319  958  479 1438  719
+##  [73] 2158 1079 3238 1619 4858 2429 7288 3644 1822  911 2734 1367 4102 2051 6154 3077 9232 4616
+##  [91] 2308 1154  577 1732  866  433 1300  650  325  976  488  244  122   61  184   92   46   23
+## [109]   70   35  106   53  160   80   40   20   10    5   16    8    4    2</code></pre>
 <p>Things are working pretty well, but since the sequence of numbers might get pretty long, perhaps we should only print out the length of the sequence, and leave it to the reader to say whether the sequence itself should be shown.</p>
 <div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb842-1" data-line-number="1">collatz &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">limit =</span> <span class="dv">10000</span>) {</a>
 <a class="sourceLine" id="cb842-2" data-line-number="2">  numbers &lt;-<span class="st"> </span><span class="kw">numeric</span>(limit)</a>
@@ -798,7 +799,7 @@ Figure 4.4: A ggplot2 plot with point and line geoms.
 <a class="sourceLine" id="cb852-37" data-line-number="37"><span class="st">    </span><span class="kw">labs</span>( <span class="dt">x =</span> <span class="st">&quot;Step&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Collatz Value at Step&quot;</span>,</a>
 <a class="sourceLine" id="cb852-38" data-line-number="38">          <span class="dt">title =</span> plotTitle)</a>
 <a class="sourceLine" id="cb852-39" data-line-number="39">}</a></code></pre></div>
-
+<div style="page-break-after: always;"></div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
@@ -817,11 +818,13 @@ Figure 4.4: A ggplot2 plot with point and line geoms.
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -829,12 +832,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -846,6 +848,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -864,8 +870,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

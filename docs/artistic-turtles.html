@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.6 Artistic Turtles | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.6 Artistic Turtles | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="more-complex-turtle-graphs.html">
-<link rel="next" href="glossary-3.html">
+<link rel="prev" href="more-complex-turtle-graphs.html"/>
+<link rel="next" href="glossary-3.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -631,24 +634,17 @@ Figure 5.16: Behold my masterpiece!
 </p>
 </div>
 <pre><code>## Behold my masterpiece!  It was painted with:
-##  [1] &quot;lightskyblue3&quot;   &quot;gray12&quot;          &quot;grey62&quot;         
-##  [4] &quot;cyan&quot;            &quot;gray77&quot;          &quot;lightpink3&quot;     
-##  [7] &quot;sandybrown&quot;      &quot;gray57&quot;          &quot;darkolivegreen2&quot;
-## [10] &quot;snow3&quot;           &quot;grey43&quot;          &quot;sandybrown&quot;     
-## [13] &quot;grey79&quot;          &quot;orangered1&quot;      &quot;blanchedalmond&quot; 
-## [16] &quot;gray95&quot;          &quot;mediumpurple2&quot;   &quot;darkgoldenrod4&quot; 
-## [19] &quot;purple&quot;          &quot;dodgerblue2&quot;     &quot;grey93&quot;         
-## [22] &quot;violetred&quot;       &quot;steelblue2&quot;      &quot;grey71&quot;         
-## [25] &quot;gold4&quot;           &quot;grey64&quot;          &quot;goldenrod2&quot;     
-## [28] &quot;brown3&quot;          &quot;orangered2&quot;      &quot;gray&quot;           
-## [31] &quot;gray52&quot;          &quot;darkgoldenrod3&quot;  &quot;grey70&quot;         
-## [34] &quot;lightslategrey&quot;  &quot;aquamarine4&quot;     &quot;grey71&quot;         
-## [37] &quot;grey5&quot;           &quot;darkslategray&quot;   &quot;gray19&quot;         
-## [40] &quot;ivory1&quot;          &quot;deeppink&quot;        &quot;mediumorchid&quot;   
-## [43] &quot;palevioletred1&quot;  &quot;wheat2&quot;          &quot;tan&quot;            
-## [46] &quot;springgreen&quot;     &quot;thistle&quot;         &quot;chartreuse3&quot;    
-## [49] &quot;grey9&quot;           &quot;royalblue4&quot;</code></pre>
-
+##  [1] &quot;lightskyblue3&quot;   &quot;gray12&quot;          &quot;grey62&quot;          &quot;cyan&quot;            &quot;gray77&quot;         
+##  [6] &quot;lightpink3&quot;      &quot;sandybrown&quot;      &quot;gray57&quot;          &quot;darkolivegreen2&quot; &quot;snow3&quot;          
+## [11] &quot;grey43&quot;          &quot;sandybrown&quot;      &quot;grey79&quot;          &quot;orangered1&quot;      &quot;blanchedalmond&quot; 
+## [16] &quot;gray95&quot;          &quot;mediumpurple2&quot;   &quot;darkgoldenrod4&quot;  &quot;purple&quot;          &quot;dodgerblue2&quot;    
+## [21] &quot;grey93&quot;          &quot;violetred&quot;       &quot;steelblue2&quot;      &quot;grey71&quot;          &quot;gold4&quot;          
+## [26] &quot;grey64&quot;          &quot;goldenrod2&quot;      &quot;brown3&quot;          &quot;orangered2&quot;      &quot;gray&quot;           
+## [31] &quot;gray52&quot;          &quot;darkgoldenrod3&quot;  &quot;grey70&quot;          &quot;lightslategrey&quot;  &quot;aquamarine4&quot;    
+## [36] &quot;grey71&quot;          &quot;grey5&quot;           &quot;darkslategray&quot;   &quot;gray19&quot;          &quot;ivory1&quot;         
+## [41] &quot;deeppink&quot;        &quot;mediumorchid&quot;    &quot;palevioletred1&quot;  &quot;wheat2&quot;          &quot;tan&quot;            
+## [46] &quot;springgreen&quot;     &quot;thistle&quot;         &quot;chartreuse3&quot;     &quot;grey9&quot;           &quot;royalblue4&quot;</code></pre>
+<div style="page-break-after: always;"></div>
 </div>
             </section>
 
@@ -661,11 +657,13 @@ Figure 5.16: Behold my masterpiece!
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -673,12 +671,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -690,6 +687,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -708,8 +709,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

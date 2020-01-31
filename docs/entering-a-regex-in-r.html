@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12.4 Entering a Regex in R | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12.4 Entering a Regex in R | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="regex-syntax.html">
-<link rel="next" href="application-amazon-book-reviews.html">
+<link rel="prev" href="regex-syntax.html"/>
+<link rel="next" href="application-amazon-book-reviews.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -913,17 +916,15 @@ If you have been practicing consistently with an online regex site, you will hav
 <pre><code>## [1] 11</code></pre></li>
 <li><p>Try this:</p>
 <div class="sourceCode" id="cb1777"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1777-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span>.[<span class="kw">str_count</span>(., <span class="st">&quot;</span><span class="ch">\\</span><span class="st">w+&quot;</span>) <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]</a></code></pre></div>
-<pre><code>##  [1] &quot;bell pepper&quot;       &quot;blood orange&quot;      &quot;canary melon&quot;     
-##  [4] &quot;chili pepper&quot;      &quot;goji berry&quot;        &quot;kiwi fruit&quot;       
-##  [7] &quot;purple mangosteen&quot; &quot;rock melon&quot;        &quot;salal berry&quot;      
-## [10] &quot;star fruit&quot;        &quot;ugli fruit&quot;</code></pre>
+<pre><code>##  [1] &quot;bell pepper&quot;       &quot;blood orange&quot;      &quot;canary melon&quot;      &quot;chili pepper&quot;     
+##  [5] &quot;goji berry&quot;        &quot;kiwi fruit&quot;        &quot;purple mangosteen&quot; &quot;rock melon&quot;       
+##  [9] &quot;salal berry&quot;       &quot;star fruit&quot;        &quot;ugli fruit&quot;</code></pre>
 <p>Another way is as follows:</p>
 <div class="sourceCode" id="cb1779"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1779-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1779-2" data-line-number="2"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">w+</span><span class="ch">\\</span><span class="st">s+</span><span class="ch">\\</span><span class="st">w+$&quot;</span>)</a></code></pre></div>
-<pre><code>##  [1] &quot;bell pepper&quot;       &quot;blood orange&quot;      &quot;canary melon&quot;     
-##  [4] &quot;chili pepper&quot;      &quot;goji berry&quot;        &quot;kiwi fruit&quot;       
-##  [7] &quot;purple mangosteen&quot; &quot;rock melon&quot;        &quot;salal berry&quot;      
-## [10] &quot;star fruit&quot;        &quot;ugli fruit&quot;</code></pre></li>
+<pre><code>##  [1] &quot;bell pepper&quot;       &quot;blood orange&quot;      &quot;canary melon&quot;      &quot;chili pepper&quot;     
+##  [5] &quot;goji berry&quot;        &quot;kiwi fruit&quot;        &quot;purple mangosteen&quot; &quot;rock melon&quot;       
+##  [9] &quot;salal berry&quot;       &quot;star fruit&quot;        &quot;ugli fruit&quot;</code></pre></li>
 <li><p>Try this:</p>
 <div class="sourceCode" id="cb1781"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1781-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1781-2" data-line-number="2"><span class="st">  </span><span class="kw">str_detect</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">w+</span><span class="ch">\\</span><span class="st">s+</span><span class="ch">\\</span><span class="st">w+$&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -932,27 +933,23 @@ If you have been practicing consistently with an online regex site, you will hav
 <li><p>Try this:</p>
 <div class="sourceCode" id="cb1783"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1783-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1783-2" data-line-number="2"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">w+berry$&quot;</span>)</a></code></pre></div>
-<pre><code>##  [1] &quot;bilberry&quot;    &quot;blackberry&quot;  &quot;blueberry&quot;   &quot;boysenberry&quot; &quot;cloudberry&quot; 
-##  [6] &quot;cranberry&quot;   &quot;elderberry&quot;  &quot;gooseberry&quot;  &quot;huckleberry&quot; &quot;mulberry&quot;   
-## [11] &quot;raspberry&quot;   &quot;strawberry&quot;</code></pre></li>
+<pre><code>##  [1] &quot;bilberry&quot;    &quot;blackberry&quot;  &quot;blueberry&quot;   &quot;boysenberry&quot; &quot;cloudberry&quot;  &quot;cranberry&quot;  
+##  [7] &quot;elderberry&quot;  &quot;gooseberry&quot;  &quot;huckleberry&quot; &quot;mulberry&quot;    &quot;raspberry&quot;   &quot;strawberry&quot;</code></pre></li>
 <li><p>Try this:</p>
 <div class="sourceCode" id="cb1785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1785-1" data-line-number="1">vowelCount &lt;-<span class="st"> </span></a>
 <a class="sourceLine" id="cb1785-2" data-line-number="2"><span class="st">  </span>fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1785-3" data-line-number="3"><span class="st">  </span><span class="kw">str_count</span>(<span class="st">&quot;[aeiou]&quot;</span>)</a>
 <a class="sourceLine" id="cb1785-4" data-line-number="4">fruit[vowelCount <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>]</a></code></pre></div>
-<pre><code>##  [1] &quot;avocado&quot;           &quot;blood orange&quot;      &quot;breadfruit&quot;       
-##  [4] &quot;canary melon&quot;      &quot;cantaloupe&quot;        &quot;cherimoya&quot;        
-##  [7] &quot;chili pepper&quot;      &quot;clementine&quot;        &quot;dragonfruit&quot;      
-## [10] &quot;feijoa&quot;            &quot;gooseberry&quot;        &quot;grapefruit&quot;       
-## [13] &quot;kiwi fruit&quot;        &quot;mandarine&quot;         &quot;nectarine&quot;        
-## [16] &quot;passionfruit&quot;      &quot;pineapple&quot;         &quot;pomegranate&quot;      
-## [19] &quot;purple mangosteen&quot; &quot;tamarillo&quot;         &quot;tangerine&quot;        
-## [22] &quot;ugli fruit&quot;        &quot;watermelon&quot;</code></pre></li>
+<pre><code>##  [1] &quot;avocado&quot;           &quot;blood orange&quot;      &quot;breadfruit&quot;        &quot;canary melon&quot;     
+##  [5] &quot;cantaloupe&quot;        &quot;cherimoya&quot;         &quot;chili pepper&quot;      &quot;clementine&quot;       
+##  [9] &quot;dragonfruit&quot;       &quot;feijoa&quot;            &quot;gooseberry&quot;        &quot;grapefruit&quot;       
+## [13] &quot;kiwi fruit&quot;        &quot;mandarine&quot;         &quot;nectarine&quot;         &quot;passionfruit&quot;     
+## [17] &quot;pineapple&quot;         &quot;pomegranate&quot;       &quot;purple mangosteen&quot; &quot;tamarillo&quot;        
+## [21] &quot;tangerine&quot;         &quot;ugli fruit&quot;        &quot;watermelon&quot;</code></pre></li>
 <li><p>Try this:</p>
 <div class="sourceCode" id="cb1787"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1787-1" data-line-number="1">fruit <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1787-2" data-line-number="2"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;(</span><span class="ch">\\</span><span class="st">w{2,})</span><span class="ch">\\</span><span class="st">1&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] &quot;banana&quot;      &quot;coconut&quot;     &quot;cucumber&quot;    &quot;jujube&quot;      &quot;papaya&quot;     
-## [6] &quot;salal berry&quot;</code></pre></li>
+<pre><code>## [1] &quot;banana&quot;      &quot;coconut&quot;     &quot;cucumber&quot;    &quot;jujube&quot;      &quot;papaya&quot;      &quot;salal berry&quot;</code></pre></li>
 <li><p>Try this:</p>
 <div class="sourceCode" id="cb1789"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1789-1" data-line-number="1">people <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1789-2" data-line-number="2"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(<span class="dt">col =</span> name,</a>
@@ -976,11 +973,13 @@ If you have been practicing consistently with an online regex site, you will hav
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -988,12 +987,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1005,6 +1003,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -1023,8 +1025,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

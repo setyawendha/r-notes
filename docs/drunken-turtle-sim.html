@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.8 Example: The Drunken Turtle | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.8 Example: The Drunken Turtle | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="example-dental-floss.html">
-<link rel="next" href="glossary-4.html">
+<link rel="prev" href="example-dental-floss.html"/>
+<link rel="next" href="glossary-4.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -665,8 +668,8 @@ Figure 6.5: The first two steps by the Drunken Turtle. Turtle turns by <span cla
 <p>Returning to <code>xSteps</code>, we see that we can get the <span class="math inline">\(x\)</span>-coordinates of the first ten steps like this:</p>
 <div class="sourceCode" id="cb1077"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1077-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">cumsum</span>(xSteps)</a>
 <a class="sourceLine" id="cb1077-2" data-line-number="2">x</a></code></pre></div>
-<pre><code>##  [1] -0.6034165 -1.3905805 -2.1259607 -3.1154380 -2.4593130 -1.5476110
-##  [7] -0.8591924 -1.6420445 -0.6421761 -1.3702583</code></pre>
+<pre><code>##  [1] -0.6034165 -1.3905805 -2.1259607 -3.1154380 -2.4593130 -1.5476110 -0.8591924 -1.6420445
+##  [9] -0.6421761 -1.3702583</code></pre>
 <p>Similarly we can get the first ten <span class="math inline">\(y\)</span>-coordinates:</p>
 <div class="sourceCode" id="cb1079"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1079-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">cumsum</span>(ySteps)</a></code></pre></div>
 <p>Using the distance formula, we can compute the distance of each point from the origin as follows:</p>
@@ -819,10 +822,10 @@ Figure 6.5: The first two steps by the Drunken Turtle. Turtle turns by <span cla
 <pre><code>## Here is a table of the number of close returns:
 ## 
 ## returns
-##      0      1      2      3      4      5      6      7      8      9 
-## 0.3881 0.2290 0.1517 0.0908 0.0572 0.0335 0.0227 0.0107 0.0064 0.0048 
-##     10     11     12     13     14     15     16     17 
-## 0.0018 0.0012 0.0008 0.0007 0.0003 0.0001 0.0001 0.0001 
+##      0      1      2      3      4      5      6      7      8      9     10     11     12     13 
+## 0.3881 0.2290 0.1517 0.0908 0.0572 0.0335 0.0227 0.0107 0.0064 0.0048 0.0018 0.0012 0.0008 0.0007 
+##     14     15     16     17 
+## 0.0003 0.0001 0.0001 0.0001 
 ## 
 ## The average number of close returns was:  1.5655.</code></pre>
 <p>Notice that 38.81% of the time the turtle did not make a close return at all during the first thousand steps. On the other hand it is possible, though not at all likely, for the turtle to make quite a few close returns.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
@@ -853,7 +856,7 @@ Figure 6.6: Line plot of the Turtle’s distance from the origin, as a function 
 </p>
 </div>
 <p>It appears that although the turtle might have returned close to the origin a couple of times, for the most part it seems to be wandering further and further away. In the mathematical field known as <em>stochastic processes</em>, it has been shown that if the turtle is allowed to go on forever then it will certainly make a close return <em>infinitely many times</em>. These returns, though, will tend to be spaced further and further apart as time goes on, and our graph suggests that this is so.</p>
-
+<div style="page-break-after: always;"></div>
 </div>
 <div class="footnotes">
 <hr />
@@ -872,11 +875,13 @@ Figure 6.6: Line plot of the Turtle’s distance from the origin, as a function 
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -884,12 +889,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -901,6 +905,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -919,8 +927,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

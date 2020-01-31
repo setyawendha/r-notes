@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.8 New Variables from Old | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.8 New Variables from Old | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ordering-data-frames.html">
-<link rel="next" href="glossary-5.html">
+<link rel="prev" href="ordering-data-frames.html"/>
+<link rel="next" href="glossary-5.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -584,7 +587,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Another common need is to <em>recode</em> the values of a categorical variable. For example, you might want to divide people into two groups: those who prefer to sit in the back and those who don’t. This is a good time to use <code>ifelse()</code>:</p>
 <div class="sourceCode" id="cb1303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1303-1" data-line-number="1">seat2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(m111survey<span class="op">$</span>seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span>, <span class="st">&quot;Back&quot;</span>, <span class="st">&quot;Other&quot;</span>)</a>
 <a class="sourceLine" id="cb1303-2" data-line-number="2">m111survey<span class="op">$</span>seat2 &lt;-<span class="st"> </span>seat2</a></code></pre></div>
-<p>If you plan to re-code into a variable that involves more than two values, then you might want to look into the <code>mapvalues()</code> function from the <strong>plyr</strong> package <span class="citation">(Wickham <a href="#ref-R-plyr">2016</a>)</span>:</p>
+<p>If you plan to re-code into a variable that involves more than two values, then you might want to look into the <code>mapvalues()</code> function from the <strong>plyr</strong> package <span class="citation">(Wickham <a href="#ref-R-plyr">2019</a>)</span>:</p>
 <div class="sourceCode" id="cb1304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1304-1" data-line-number="1">seat3 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(m111survey<span class="op">$</span>seat,</a>
 <a class="sourceLine" id="cb1304-2" data-line-number="2">                <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;1_front&quot;</span>, <span class="st">&quot;2_middle&quot;</span>, <span class="st">&quot;3_back&quot;</span>),</a>
 <a class="sourceLine" id="cb1304-3" data-line-number="3">                <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))</a>
@@ -600,7 +603,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1306-7" data-line-number="7">                     <span class="st">&quot;3_back&quot;</span> =<span class="st"> &quot;Back&quot;</span>)</a>
 <a class="sourceLine" id="cb1306-8" data-line-number="8">}</a>
 <a class="sourceLine" id="cb1306-9" data-line-number="9"><span class="kw">str</span>(seat3)</a></code></pre></div>
-<pre><code>##  chr [1:71] &quot;Front&quot; &quot;Middle&quot; &quot;Middle&quot; &quot;Front&quot; &quot;Back&quot; &quot;Front&quot; &quot;Front&quot; ...</code></pre>
+<pre><code>##  chr [1:71] &quot;Front&quot; &quot;Middle&quot; &quot;Middle&quot; &quot;Front&quot; &quot;Back&quot; &quot;Front&quot; &quot;Front&quot; &quot;Back&quot; &quot;Back&quot; &quot;Middle&quot; ...</code></pre>
 <p>The re-coding is done but the result is a character vector and not a factor. We have to make it a factor ourselves:</p>
 <div class="sourceCode" id="cb1308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1308-1" data-line-number="1">m111survey<span class="op">$</span>seat3 &lt;-<span class="st"> </span><span class="kw">factor</span>(seat3, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))</a></code></pre></div>
 <p>This seems like a lot of work!</p>
@@ -622,19 +625,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">7.8.1</span> Getting Rid of Variables</h3>
 <p>We have added several variables to <code>m111survey</code>. In order to remove them (or any other variables we don’t want) we can assign them the value <code>NULL</code>.</p>
 <div class="sourceCode" id="cb1311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1311-1" data-line-number="1"><span class="kw">names</span>(m111survey)</a></code></pre></div>
-<pre><code>##  [1] &quot;height&quot;          &quot;ideal_ht&quot;        &quot;sleep&quot;          
-##  [4] &quot;fastest&quot;         &quot;weight_feel&quot;     &quot;love_first&quot;     
-##  [7] &quot;extra_life&quot;      &quot;seat&quot;            &quot;GPA&quot;            
-## [10] &quot;enough_Sleep&quot;    &quot;sex&quot;             &quot;diff.ideal.act.&quot;
-## [13] &quot;height_ft&quot;       &quot;seat2&quot;           &quot;seat3&quot;</code></pre>
+<pre><code>##  [1] &quot;height&quot;          &quot;ideal_ht&quot;        &quot;sleep&quot;           &quot;fastest&quot;         &quot;weight_feel&quot;    
+##  [6] &quot;love_first&quot;      &quot;extra_life&quot;      &quot;seat&quot;            &quot;GPA&quot;             &quot;enough_Sleep&quot;   
+## [11] &quot;sex&quot;             &quot;diff.ideal.act.&quot; &quot;height_ft&quot;       &quot;seat2&quot;           &quot;seat3&quot;</code></pre>
 <div class="sourceCode" id="cb1313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1313-1" data-line-number="1">m111survey<span class="op">$</span>height_ft &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
 <a class="sourceLine" id="cb1313-2" data-line-number="2">m111survey<span class="op">$</span>seat2 &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
 <a class="sourceLine" id="cb1313-3" data-line-number="3">m111survey<span class="op">$</span>seat3 &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
 <a class="sourceLine" id="cb1313-4" data-line-number="4"><span class="kw">names</span>(m111survey)  <span class="co"># the extra variables are gone</span></a></code></pre></div>
-<pre><code>##  [1] &quot;height&quot;          &quot;ideal_ht&quot;        &quot;sleep&quot;          
-##  [4] &quot;fastest&quot;         &quot;weight_feel&quot;     &quot;love_first&quot;     
-##  [7] &quot;extra_life&quot;      &quot;seat&quot;            &quot;GPA&quot;            
-## [10] &quot;enough_Sleep&quot;    &quot;sex&quot;             &quot;diff.ideal.act.&quot;</code></pre>
+<pre><code>##  [1] &quot;height&quot;          &quot;ideal_ht&quot;        &quot;sleep&quot;           &quot;fastest&quot;         &quot;weight_feel&quot;    
+##  [6] &quot;love_first&quot;      &quot;extra_life&quot;      &quot;seat&quot;            &quot;GPA&quot;             &quot;enough_Sleep&quot;   
+## [11] &quot;sex&quot;             &quot;diff.ideal.act.&quot;</code></pre>
 </div>
 <div id="practice-exercises-23" class="section level3">
 <h3><span class="header-section-number">7.8.2</span> Practice Exercises</h3>
@@ -670,13 +670,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Here’s what to do:</p>
 <div class="sourceCode" id="cb1319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1319-1" data-line-number="1"><span class="kw">rm</span>(CPS85)</a></code></pre></div></li>
 </ol>
-
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-plyr">
-<p>Wickham, Hadley. 2016. <em>Plyr: Tools for Splitting, Applying and Combining Data</em>. <a href="https://CRAN.R-project.org/package=plyr">https://CRAN.R-project.org/package=plyr</a>.</p>
+<p>Wickham, Hadley. 2019. <em>Plyr: Tools for Splitting, Applying and Combining Data</em>. <a href="https://CRAN.R-project.org/package=plyr">https://CRAN.R-project.org/package=plyr</a>.</p>
 </div>
 </div>
             </section>
@@ -690,11 +690,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -702,12 +704,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -719,6 +720,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -737,8 +742,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

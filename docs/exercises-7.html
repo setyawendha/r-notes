@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Exercises | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Exercises | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2020-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="glossary-8.html">
-<link rel="next" href="regex.html">
+<link rel="prev" href="glossary-8.html"/>
+<link rel="next" href="regex.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -623,8 +626,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## of characters in str.</code></pre>
 <p><strong>Hint</strong>: Begin by writing a function, called perhaps <code>subStringFixed()</code>, that when given a string and a specific number <span class="math inline">\(n\)</span>, returns all of the substrongs of length exactly <span class="math inline">\(n\)</span>. It might work like this:</p>
 <div class="sourceCode" id="cb1710"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1710-1" data-line-number="1"><span class="kw">subStringFixed</span>(<span class="dt">str =</span> <span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dt">n =</span> <span class="dv">6</span>)</a></code></pre></div>
-<pre><code>## [1] &quot;yabbad&quot; &quot;abbada&quot; &quot;bbadab&quot; &quot;badabb&quot; &quot;adabba&quot; &quot;dabbad&quot; &quot;abbado&quot; &quot;bbadoo&quot;
-## [9] &quot;badoo!&quot;</code></pre>
+<pre><code>## [1] &quot;yabbad&quot; &quot;abbada&quot; &quot;bbadab&quot; &quot;badabb&quot; &quot;adabba&quot; &quot;dabbad&quot; &quot;abbado&quot; &quot;bbadoo&quot; &quot;badoo!&quot;</code></pre>
 <div class="sourceCode" id="cb1712"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1712-1" data-line-number="1"><span class="kw">subStringFixed</span>(<span class="dt">str =</span> <span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dt">n =</span> <span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## n should be at least 1 and no more than the number
 ## of characters in str.</code></pre></li>
@@ -637,8 +639,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1714-1" data-line-number="1"><span class="co">## Note that palindrome substrings are repeated as many times</span></a>
 <a class="sourceLine" id="cb1714-2" data-line-number="2"><span class="co">## as they occur in the given string:</span></a>
 <a class="sourceLine" id="cb1714-3" data-line-number="3"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">2</span>)</a></code></pre></div>
-<pre><code>##  [1] &quot;abbadabba&quot; &quot;bbadabb&quot;   &quot;dabbad&quot;    &quot;badab&quot;     &quot;abba&quot;     
-##  [6] &quot;abba&quot;      &quot;ada&quot;       &quot;bb&quot;        &quot;bb&quot;        &quot;oo&quot;</code></pre>
+<pre><code>##  [1] &quot;abbadabba&quot; &quot;bbadabb&quot;   &quot;dabbad&quot;    &quot;badab&quot;     &quot;abba&quot;      &quot;abba&quot;      &quot;ada&quot;      
+##  [8] &quot;bb&quot;        &quot;bb&quot;        &quot;oo&quot;</code></pre>
 <div class="sourceCode" id="cb1716"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1716-1" data-line-number="1"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## character(0)</code></pre>
 <div class="sourceCode" id="cb1718"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1718-1" data-line-number="1"><span class="kw">subPalindrome</span>(<span class="st">&quot;yabbadabbadoo!&quot;</span>, <span class="dv">0</span>)</a></code></pre></div>
@@ -671,11 +673,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -683,12 +687,11 @@ gitbook.start({
 "github": true,
 "facebook": false,
 "twitter": false,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -700,6 +703,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -718,8 +725,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
