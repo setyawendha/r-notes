@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-01-30" />
+<meta name="date" content="2020-02-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -613,7 +613,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Other ranges are possible, e.g.:
 <ul>
 <li><code>c-f</code> denotes the lowercase letters from c to f;</li>
-<li><code>0-3</code> denotes 9, 1, 2 and 3.</li>
+<li><code>0-3</code> denotes 0, 1, 2 and 3.</li>
 </ul></li>
 </ul>
 <p>Thus, in order to match any letter followed by two digits, you could use <code>[a-zA-Z][0-9][0-9]</code>:</p>
@@ -624,7 +624,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-need-to-escape" class="section level4">
 <h4><span class="header-section-number">12.3.2.2</span> The Need to Escape</h4>
 <p>Perhaps now you can spot the problem with the sequence-specific rule: what happens if one of the characters in the sequence is, say ‘[’ or ’]’? These characters are examples of <em>metacharacters</em>,  which means that in the syntax of regular expressions they don’t match themselves but instead have a special role. In the case of square-brackets, that role is to delimit character classes.</p>
-<p>If you want your pattern to include a metacharacter you will have to escape it with the backslash. Thus, the correct way to match the string “[aardvark]” would be with the regular expression: <code>\[aardvark]\]</code>:</p>
+<p>If you want your pattern to include a metacharacter you will have to escape it with the backslash. Thus, the correct way to match the string “[aardvark]” would be with the regular expression: <code>\[aardvark\]</code>:</p>
 <blockquote>
 <p>The <em>[aardvark]</em> appears early in the dictionary.</p>
 </blockquote>
@@ -649,7 +649,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>But keep the following in mind:</p>
 <ul>
 <li><code>a\eb</code> is incorrect regex syntax: <code>\e</code> is not recognized as one of the control characters.</li>
-<li>And yet <code>a\wb</code> is <em>correct</em> regex syntax! (It turns out that the token <code>\w</code> is a recognized character class <em>shortcut</em> that means the same as <code>[a-zA-Z0-9]</code>. We’ll get to the shortcuts soon.)</li>
+<li>And yet <code>a\wb</code> is <em>correct</em> regex syntax! (It turns out that the token <code>\w</code> is a recognized character class <em>shortcut</em> that means the same as <code>[a-zA-Z0-9_]</code> (all of the lowercase and uppercase letters, the digits, and the underscore character). We’ll get to the shortcuts soon.</li>
 </ul>
 </div>
 <div id="named-character-classes" class="section level4">

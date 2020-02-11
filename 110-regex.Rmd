@@ -149,7 +149,7 @@ You can match a *range* \index{character range} of characters.  Inside a charact
 * `0-9` represents all of the decimal digits:  0, 1, 2, ..., 9.
 * Other ranges are possible, e.g.:
     * `c-f` denotes the lowercase letters from c to f;
-    * `0-3` denotes 9, 1, 2 and 3.
+    * `0-3` denotes 0, 1, 2 and 3.
     
 Thus, in order to match any letter followed by two digits, you could use `[a-zA-Z][0-9][0-9]`:
 
@@ -159,7 +159,7 @@ Thus, in order to match any letter followed by two digits, you could use `[a-zA-
 
 Perhaps now you can spot the problem with the sequence-specific rule: what happens if one of the characters in the sequence is, say '[' or ']'? These characters are examples of *metacharacters*, \index{metacharacter} which means that in the syntax of regular expressions they don't match themselves but instead have a special role.  In the case of square-brackets, that role is to delimit character classes.
 
-If you want your pattern to include a metacharacter you will have to escape it with the backslash.  Thus, the correct way to match the string "[aardvark]" would be with the regular expression:  `\[aardvark]\]`:
+If you want your pattern to include a metacharacter you will have to escape it with the backslash.  Thus, the correct way to match the string "[aardvark]" would be with the regular expression:  `\[aardvark\]`:
 
 >The *[aardvark]* appears early in the dictionary.
 
@@ -185,7 +185,7 @@ On the other hand:
 But keep the following in mind:
 
 * `a\eb` is incorrect regex syntax:  `\e` is not recognized as one of the control characters.
-* And yet `a\wb` is *correct* regex syntax!  (It turns out that the token `\w` is a recognized character class *shortcut* that means the same as `[a-zA-Z0-9]`.  We'll get to the shortcuts soon.)
+* And yet `a\wb` is *correct* regex syntax!  (It turns out that the token `\w` is a recognized character class *shortcut* that means the same as `[a-zA-Z0-9_]` (all of the lowercase and uppercase letters, the digits, and the underscore character).  We'll get to the shortcuts soon.
 
 #### Named Character Classes
 
