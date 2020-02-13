@@ -935,19 +935,25 @@ We might be curious to know what other books on Amazon our reviewers link to whe
 
 All of the Amazon links are generated for the user by the computer, so they will all have the same format.  Hence we can use a look-behind and a look-ahead to construct a regex that will be matched by any URL-fragment within such an anchor:
 
->`(?<=\<a class=\\"\\"a-link-normal\\"\\" href=\\"\\"/)(.+?)(?=\\"\\"\>)`
+>`(?<=<a class=\\"\\"a-link-normal\\"\\" href=\\"\\")(.+?)(?=\\"\\">)`
 
 Checking carefully, we see that none of the tokens require extra escaping:  we can use this text as our pattern in regex function in R:
 
+
+
 ```{r}
-linkPattern <- "(?<=<a class=\"\"a-link-normal\"\" href=\"\"/)(.+?)(?=\"\">)"
+linkPattern <- '(?<=<a class=\\"\\"a-link-normal\\"\\" href=\\"\\")(.+?)(?=\\"\\">)'
 ```
+
+First we create a new variable in `hunger` that counts the number of links in a review:
 
 ```{r cache=TRUE}
 hungerLinks <-
   hunger %>% 
   mutate(linkCount = str_count(content, linkPattern))
 ```
+
+Now we can tally the number of links:
 
 ```{r}
 hungerLinks %>% 

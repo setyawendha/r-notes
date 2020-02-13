@@ -610,13 +610,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We might be curious to know what other books on Amazon our reviewers link to when they are discussing the <em>Hunger Games</em>. Regular expressions can help us to extract the links from the mass of text in <code>hunger$content</code>.</p>
 <p>All of the Amazon links are generated for the user by the computer, so they will all have the same format. Hence we can use a look-behind and a look-ahead to construct a regex that will be matched by any URL-fragment within such an anchor:</p>
 <blockquote>
-<p><code>(?&lt;=\&lt;a class=\\&quot;\\&quot;a-link-normal\\&quot;\\&quot; href=\\&quot;\\&quot;/)(.+?)(?=\\&quot;\\&quot;\&gt;)</code></p>
+<p><code>(?&lt;=&lt;a class=\\&quot;\\&quot;a-link-normal\\&quot;\\&quot; href=\\&quot;\\&quot;)(.+?)(?=\\&quot;\\&quot;&gt;)</code></p>
 </blockquote>
 <p>Checking carefully, we see that none of the tokens require extra escaping: we can use this text as our pattern in regex function in R:</p>
-<div class="sourceCode" id="cb1797"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1797-1" data-line-number="1">linkPattern &lt;-<span class="st"> &quot;(?&lt;=&lt;a class=</span><span class="ch">\&quot;\&quot;</span><span class="st">a-link-normal</span><span class="ch">\&quot;\&quot;</span><span class="st"> href=</span><span class="ch">\&quot;\&quot;</span><span class="st">/)(.+?)(?=</span><span class="ch">\&quot;\&quot;</span><span class="st">&gt;)&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb1797"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1797-1" data-line-number="1">linkPattern &lt;-<span class="st"> &#39;(?&lt;=&lt;a class=</span><span class="ch">\\</span><span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;a-link-normal</span><span class="ch">\\</span><span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot; href=</span><span class="ch">\\</span><span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;)(.+?)(?=</span><span class="ch">\\</span><span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;&gt;)&#39;</span></a></code></pre></div>
+<p>First we create a new variable in <code>hunger</code> that counts the number of links in a review:</p>
 <div class="sourceCode" id="cb1798"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1798-1" data-line-number="1">hungerLinks &lt;-</a>
 <a class="sourceLine" id="cb1798-2" data-line-number="2"><span class="st">  </span>hunger <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1798-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">linkCount =</span> <span class="kw">str_count</span>(content, linkPattern))</a></code></pre></div>
+<p>Now we can tally the number of links:</p>
 <div class="sourceCode" id="cb1799"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1799-1" data-line-number="1">hungerLinks <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1799-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(linkCount) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1799-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
@@ -702,15 +704,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1802-8" data-line-number="8"><span class="st">                                             </span><span class="co"># length 1 ...</span></a>
 <a class="sourceLine" id="cb1802-9" data-line-number="9"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st">     </span><span class="co"># ... so unlist it into a character vector</span></a>
 <a class="sourceLine" id="cb1802-10" data-line-number="10"><span class="st">  </span><span class="kw">str_c</span>(<span class="st">&quot;http://www.amazon.com/&quot;</span>, .)  <span class="co"># prepend the base URL to each link</span></a></code></pre></div>
-<pre><code>## [1] &quot;http://www.amazon.com/Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
-## [2] &quot;http://www.amazon.com/The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
-## [3] &quot;http://www.amazon.com/The-Long-Walk/dp/0451196716&quot;                                
-## [4] &quot;http://www.amazon.com/Battle-Royale-The-Novel/dp/1421527723&quot;                      
-## [5] &quot;http://www.amazon.com/Battle-Royale-The-Complete-Collection-Blu-ray/dp/B006L4MX4A&quot;
-## [6] &quot;http://www.amazon.com/The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
-## [7] &quot;http://www.amazon.com/Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
-## [8] &quot;http://www.amazon.com/Abarat/dp/0062094106&quot;                                       
-## [9] &quot;http://www.amazon.com/lord-of-the-flies/dp/B0073SQWWC&quot;</code></pre>
+<pre><code>## [1] &quot;http://www.amazon.com//Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
+## [2] &quot;http://www.amazon.com//The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
+## [3] &quot;http://www.amazon.com//The-Long-Walk/dp/0451196716&quot;                                
+## [4] &quot;http://www.amazon.com//Battle-Royale-The-Novel/dp/1421527723&quot;                      
+## [5] &quot;http://www.amazon.com//Battle-Royale-The-Complete-Collection-Blu-ray/dp/B006L4MX4A&quot;
+## [6] &quot;http://www.amazon.com//The-Dark-Tower-Boxed-Set-Books-1-4/dp/0451211243&quot;           
+## [7] &quot;http://www.amazon.com//Harry-Potter-Paperback-Box-Set-Books-1-7/dp/0545162076&quot;     
+## [8] &quot;http://www.amazon.com//Abarat/dp/0062094106&quot;                                       
+## [9] &quot;http://www.amazon.com//lord-of-the-flies/dp/B0073SQWWC&quot;</code></pre>
 <p>As we learn more about R’s data-analysis functions we’ll be able to explore a wide variety of interesting questions about the attitudes and practices of Amazon reviewers. This will involve plowing through a lot more text, but now that we know regular expressions we are sure to “save the day”!</p>
 <div id="practice-exercises-35" class="section level3">
 <h3><span class="header-section-number">12.5.1</span> Practice Exercises</h3>
@@ -757,7 +759,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1808-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rating =</span> <span class="kw">factor</span>(rating)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1808-6" data-line-number="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rating)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb1808-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> dislikes), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-1056-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-1049-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 </ol>
 <div style="page-break-after: always;"></div>
 </div>

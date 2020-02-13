@@ -591,12 +591,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb575-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
 <p>As we mentioned previously, the Global Environment is only one of many environments that exist in R. The <code>search()</code> function will show you a number of other environments:</p>
 <div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb576-1" data-line-number="1"><span class="kw">search</span>()</a></code></pre></div>
-<pre><code>##  [1] &quot;.GlobalEnv&quot;         &quot;package:mosaicData&quot; &quot;package:forcats&quot;    &quot;package:stringr&quot;   
-##  [5] &quot;package:dplyr&quot;      &quot;package:purrr&quot;      &quot;package:readr&quot;      &quot;package:tidyr&quot;     
-##  [9] &quot;package:tibble&quot;     &quot;package:ggplot2&quot;    &quot;package:tidyverse&quot;  &quot;package:tigerData&quot; 
-## [13] &quot;tools:rstudio&quot;      &quot;package:stats&quot;      &quot;package:graphics&quot;   &quot;package:grDevices&quot; 
-## [17] &quot;package:utils&quot;      &quot;package:datasets&quot;   &quot;package:methods&quot;    &quot;Autoloads&quot;         
-## [21] &quot;package:base&quot;</code></pre>
+<pre><code>##  [1] &quot;.GlobalEnv&quot;             &quot;package:R6&quot;             &quot;package:babynames&quot;     
+##  [4] &quot;package:bindrcpp&quot;       &quot;package:magrittr&quot;       &quot;package:bcscr&quot;         
+##  [7] &quot;package:TurtleGraphics&quot; &quot;package:grid&quot;           &quot;package:mosaicData&quot;    
+## [10] &quot;package:forcats&quot;        &quot;package:stringr&quot;        &quot;package:dplyr&quot;         
+## [13] &quot;package:purrr&quot;          &quot;package:readr&quot;          &quot;package:tidyr&quot;         
+## [16] &quot;package:tibble&quot;         &quot;package:ggplot2&quot;        &quot;package:tidyverse&quot;     
+## [19] &quot;package:tigerData&quot;      &quot;tools:rstudio&quot;          &quot;package:stats&quot;         
+## [22] &quot;package:graphics&quot;       &quot;package:grDevices&quot;      &quot;package:utils&quot;         
+## [25] &quot;package:datasets&quot;       &quot;package:methods&quot;        &quot;Autoloads&quot;             
+## [28] &quot;package:base&quot;</code></pre>
 <p><code>search()</code> returns a character vector of names of environments. The first element is the Global Environment itself. The second element is an environment that is associated with last <em>package</em> that R loaded, the third is an environment associated with the next-to-last package, and so on. Each item on the list is considered to be the <em>parent</em> of the environment that came before it. Thus, the Global Environment has a parent environment, a grandparent environment, and so on. The complete sequence of environments is called the <em>search path</em>. </p>
 <p>Just as the Global Environment has names for objects, so also the packages have names available for use. When you write code that contains a name, R will search for that name: first in your Global Environment, then in its parent environment—the environment of the last package loaded—and so on until it reaches the final package on the list: package <strong>base</strong>. If it can’t find the name anywhere, then it will throw an error, telling you that the object “cannot be found.”</p>
 <p>Let’s try this with a few examples. First, define a (hopefully) new variable:</p>
