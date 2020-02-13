@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-02-11" />
+<meta name="date" content="2020-02-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -690,11 +690,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can use the function <code>address()</code>  from the package <strong>pryr</strong> <span class="citation">(Wickham <a href="#ref-R-pryr">2018</a>)</span> to track what is happening behind the scenes. <code>address()</code> will tell us the current location in memory of the value corresponding to a name. Let’s repeat the above process, but use <code>address()</code> to see where the values are stored:</p>
 <div class="sourceCode" id="cb2017"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2017-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="dv">10</span></a>
 <a class="sourceLine" id="cb2017-2" data-line-number="2">pryr<span class="op">::</span><span class="kw">address</span>(a)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fb08d151888&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fe627483880&quot;</code></pre>
 <p>The value 10 is stored in the memory address given above. Next, let’s create <code>b</code> by assignment from <code>a</code>:</p>
 <div class="sourceCode" id="cb2019"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2019-1" data-line-number="1">b &lt;-<span class="st"> </span>a</a>
 <a class="sourceLine" id="cb2019-2" data-line-number="2">pryr<span class="op">::</span><span class="kw">address</span>(b)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fb08d151888&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fe627483880&quot;</code></pre>
 <p>For the moment <code>b</code> points to the same place in memory as <code>a</code> does, so it will yield 10:</p>
 <div class="sourceCode" id="cb2021"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2021-1" data-line-number="1">b</a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
@@ -703,14 +703,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 40</code></pre>
 <p>But for now <code>b</code> still points to the same place in memory that <code>a</code> does:</p>
 <div class="sourceCode" id="cb2025"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2025-1" data-line-number="1">pryr<span class="op">::</span><span class="kw">address</span>(b)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fb08d151888&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fe627483880&quot;</code></pre>
 <p>But now let’s assign a new value to <code>b</code>:</p>
 <div class="sourceCode" id="cb2027"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2027-1" data-line-number="1">b &lt;-<span class="st"> </span><span class="dv">20</span></a>
 <a class="sourceLine" id="cb2027-2" data-line-number="2">pryr<span class="op">::</span><span class="kw">address</span>(b)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fb0867ba098&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fe629e9beb0&quot;</code></pre>
 <p>Aha! <code>b</code> now points to a <strong>new</strong> location in the computer’s memory! That’s because R saw that the assignment operator was going to change the value of <code>b</code>. Since <code>b</code> has value semantics, R knows to set aside a new spot in memory to contain the value 20, and to associate the name <code>b</code> with that spot. That way, the new <code>b</code> won’t interfere with <code>a</code>, which points to the same old spot in memory and thus remains 10:</p>
 <div class="sourceCode" id="cb2029"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2029-1" data-line-number="1">pryr<span class="op">::</span><span class="kw">address</span>(a)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fb08d151888&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fe627483880&quot;</code></pre>
 <div class="sourceCode" id="cb2031"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2031-1" data-line-number="1">a</a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>On the other hand, R6 objects have <em>reference semantics</em>. We can see this in action with the following example. First, let’s check on <code>dorothy</code>’s age:</p>
@@ -720,7 +720,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2035"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2035-1" data-line-number="1">dorothy2 &lt;-<span class="st"> </span>dorothy</a></code></pre></div>
 <p>Let’s check the memory locations:</p>
 <div class="sourceCode" id="cb2036"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2036-1" data-line-number="1"><span class="kw">c</span>(pryr<span class="op">::</span><span class="kw">address</span>(dorothy), pryr<span class="op">::</span><span class="kw">address</span>(dorothy2))</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fb07eb04190&quot; &quot;0x7fb07eb04190&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fe62a19a910&quot; &quot;0x7fe62a19a910&quot;</code></pre>
 <p>As with <code>a</code> and <code>b</code>, the two names initially point to the same place in memory.</p>
 <p>Now let’s change the age of <code>dorothy2</code> to 30:</p>
 <div class="sourceCode" id="cb2038"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2038-1" data-line-number="1">dorothy2<span class="op">$</span>age &lt;-<span class="st"> </span><span class="dv">30</span></a></code></pre></div>
@@ -729,7 +729,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 30</code></pre>
 <p>Whoa! Changing the age of <code>dorothy2</code> changed the age of <code>dorothy</code>! That’s because of the reference semantics: <code>dorothy2</code> continues to be associated with the same spot in memory as <code>dorothy</code>, <em>even after</em> we begin to make changes to it:</p>
 <div class="sourceCode" id="cb2041"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2041-1" data-line-number="1"><span class="kw">c</span>(pryr<span class="op">::</span><span class="kw">address</span>(dorothy), pryr<span class="op">::</span><span class="kw">address</span>(dorothy2))</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fb07eb04190&quot; &quot;0x7fb07eb04190&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fe62a19a910&quot; &quot;0x7fe62a19a910&quot;</code></pre>
 </div>
 <div id="cloning-an-object" class="section level3">
 <h3><span class="header-section-number">15.2.6</span> Cloning an Object</h3>
@@ -749,7 +749,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     set_desire: function (val)</code></pre>
 <p><code>dorothy2</code> looks just like <code>dorothy</code>. However, the name <code>dorothy2</code> does not point to the same place in memory:</p>
 <div class="sourceCode" id="cb2045"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2045-1" data-line-number="1"><span class="kw">c</span>(pryr<span class="op">::</span><span class="kw">address</span>(dorothy), pryr<span class="op">::</span><span class="kw">address</span>(dorothy2))</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fb07eb04190&quot; &quot;0x7fb063ac3e00&quot;</code></pre>
+<pre><code>## [1] &quot;0x7fe62a19a910&quot; &quot;0x7fe62993c548&quot;</code></pre>
 <p>Accordingly, changes to <code>dorothy2</code> will no longer result in changes to <code>dorothy</code>:</p>
 <div class="sourceCode" id="cb2047"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2047-1" data-line-number="1">dorothy2<span class="op">$</span>age &lt;-<span class="st"> </span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb2047-2" data-line-number="2">dorothy<span class="op">$</span>age</a></code></pre></div>
