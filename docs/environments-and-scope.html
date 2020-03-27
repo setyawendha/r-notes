@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-03-26" />
+<meta name="date" content="2020-03-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -521,11 +521,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.3.3" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#practice-exercises-36"><i class="fa fa-check"></i><b>14.3.3</b> Practice Exercises</a></li>
 <li class="chapter" data-level="14.3.4" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#solutions-to-the-practice-exercises-20"><i class="fa fa-check"></i><b>14.3.4</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html"><i class="fa fa-check"></i><b>14.4</b> Other <strong>purr</strong> Higher-Order Functions</a><ul>
-<li class="chapter" data-level="14.4.1" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#keep-and-discard"><i class="fa fa-check"></i><b>14.4.1</b> <code>keep()</code> and <code>discard()</code></a></li>
-<li class="chapter" data-level="14.4.2" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#reduce"><i class="fa fa-check"></i><b>14.4.2</b> <code>reduce()</code></a></li>
-<li class="chapter" data-level="14.4.3" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#practice-exercises-37"><i class="fa fa-check"></i><b>14.4.3</b> Practice Exercises</a></li>
-<li class="chapter" data-level="14.4.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#solutions-to-the-practice-exercises-21"><i class="fa fa-check"></i><b>14.4.4</b> Solutions to the Practice Exercises</a></li>
+<li class="chapter" data-level="14.4" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html"><i class="fa fa-check"></i><b>14.4</b> Other <strong>purrr</strong> Higher-Order Functions</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#keep-and-discard"><i class="fa fa-check"></i><b>14.4.1</b> <code>keep()</code> and <code>discard()</code></a></li>
+<li class="chapter" data-level="14.4.2" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#reduce"><i class="fa fa-check"></i><b>14.4.2</b> <code>reduce()</code></a></li>
+<li class="chapter" data-level="14.4.3" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#practice-exercises-37"><i class="fa fa-check"></i><b>14.4.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="14.4.4" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#solutions-to-the-practice-exercises-21"><i class="fa fa-check"></i><b>14.4.4</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14.5" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>14.5</b> Functionals vs. Loops</a></li>
 <li class="chapter" data-level="14.6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>14.6</b> Conclusion</a></li>
@@ -591,16 +591,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb575-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
 <p>As we mentioned previously, the Global Environment is only one of many environments that exist in R. The <code>search()</code> function will show you a number of other environments:</p>
 <div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb576-1" data-line-number="1"><span class="kw">search</span>()</a></code></pre></div>
-<pre><code>##  [1] &quot;.GlobalEnv&quot;             &quot;package:R6&quot;             &quot;package:tigerData&quot;     
-##  [4] &quot;package:forcats&quot;        &quot;package:stringr&quot;        &quot;package:dplyr&quot;         
-##  [7] &quot;package:purrr&quot;          &quot;package:readr&quot;          &quot;package:tidyr&quot;         
-## [10] &quot;package:tibble&quot;         &quot;package:tidyverse&quot;      &quot;package:babynames&quot;     
-## [13] &quot;package:bindrcpp&quot;       &quot;package:magrittr&quot;       &quot;package:bcscr&quot;         
-## [16] &quot;package:TurtleGraphics&quot; &quot;package:grid&quot;           &quot;package:ggplot2&quot;       
-## [19] &quot;package:mosaicData&quot;     &quot;tools:rstudio&quot;          &quot;package:stats&quot;         
-## [22] &quot;package:graphics&quot;       &quot;package:grDevices&quot;      &quot;package:utils&quot;         
-## [25] &quot;package:datasets&quot;       &quot;package:methods&quot;        &quot;Autoloads&quot;             
-## [28] &quot;package:base&quot;</code></pre>
+<pre><code>##  [1] &quot;.GlobalEnv&quot;         &quot;package:ggplot2&quot;    &quot;package:mosaicData&quot; &quot;tools:rstudio&quot;     
+##  [5] &quot;package:stats&quot;      &quot;package:graphics&quot;   &quot;package:grDevices&quot;  &quot;package:utils&quot;     
+##  [9] &quot;package:datasets&quot;   &quot;package:methods&quot;    &quot;Autoloads&quot;          &quot;package:base&quot;</code></pre>
 <p><code>search()</code> returns a character vector of names of environments. The first element is the Global Environment itself. The second element is an environment that is associated with last <em>package</em> that R loaded, the third is an environment associated with the next-to-last package, and so on. Each item on the list is considered to be the <em>parent</em> of the environment that came before it. Thus, the Global Environment has a parent environment, a grandparent environment, and so on. The complete sequence of environments is called the <em>search path</em>. </p>
 <p>Just as the Global Environment has names for objects, so also the packages have names available for use. When you write code that contains a name, R will search for that name: first in your Global Environment, then in its parent environment—the environment of the last package loaded—and so on until it reaches the final package on the list: package <strong>base</strong>. If it can’t find the name anywhere, then it will throw an error, telling you that the object “cannot be found.”</p>
 <p>Let’s try this with a few examples. First, define a (hopefully) new variable:</p>
@@ -637,7 +630,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##         }
 ##     .Internal(cat(list(...), file, sep, fill, labels, append))
 ## }
-## &lt;bytecode: 0x7ffcb33a0678&gt;
+## &lt;bytecode: 0x7fb3e8323b00&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>I got the definition of the <code>cat()</code> function, all the way up in package <strong>base</strong>.</p>
 <p>Now try:</p>

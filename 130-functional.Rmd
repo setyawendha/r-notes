@@ -628,11 +628,11 @@ Check the `plots` directory; it should contain these files:
       })
     ```
 
-## Other **purr** Higher-Order Functions
+## Other **purrr** Higher-Order Functions
 
 ### `keep()` and `discard()`
 
-`keep()` is similar to **dplyr**'s `filter()`, but whereas `filter()` chooses rows of a data frame based on a given conditions, `keep()` chooses the elements of the input list or vector `.x` based on a condition named `.p`.
+`keep()` is similar to **dplyr**'s `filter()`, but whereas `filter()` chooses rows of a data frame based on a given condition, `keep()` chooses the elements of the input list or vector `.x` based on a condition named `.p`.
 
 Examples:
 
@@ -701,7 +701,9 @@ vec %>%
   reduce(.f = sum)
 ```
 
-Hence a common application of `reduce` is to take an operation that is defined on only two items and extend it to operate on any number of items.  Consider, for example, the function `intersect()`, \index{R-functions!intersect()()@\texttt{intersect()}}, which will find the intersection of any two vectors of the same type:
+Can you see how `reduce()` gets its name?  Step by step, it "reduces" its `.x` argument, which may consist of many elements, to a single value.
+
+A common application of `reduce()` is to take an operation that is defined on only two items and extend it to operate on any number of items.  Consider, for example, the function `intersect()`, \index{R-functions!intersect()()@\texttt{intersect()}}, which will find the intersection of any two vectors of the same type:
 
 ```{r}
 vec1 <- c(3, 4, 5, 6)
@@ -730,7 +732,35 @@ lst %>%
   reduce(intersect)
 ```
 
-`reduce()` can take an argument called `.init`.  When this argument is given a value, operation begins by applying to `.f` to `.init` and the first element of `.x`.
+You can write your own function to supply as the argument for `.f`, but it has to be able to operate on two arguments.  `reduce()` will take the first argument of the `.f` function to be what has been "accumulated" so far, and the second argument of the `.f` function---the value to be combined with what has been accumulated---will be provided by the current element of `.x`.
+
+As a simple example, let's write our own reduce-summer in a way that shows the user the reduction process at work:
+
+```{r}
+## the .f function:
+mySummer <- function(acc, curr) {
+  cat("So far I have ", acc, ",\n")
+  cat("But just now I was given " , curr, " to add in.\n\n", sep = "")
+  sum(acc, curr)
+}
+
+## .x will be the whole numbers from 1 to 4:
+1:4 %>% 
+  reduce(.f = mySummer)
+```
+
+When you write your own `.f` function, it's a good idea to use names for the parameters that remind you of their role in the reduction process.  `acc` (for "accumulated") and `curr` (for "current") are used above.
+
+
+`reduce()` can take an argument called `.init`.  When this argument is given a value, operation begins by applying to `.f` to `.init` and the first element of `.x`.  For example:
+
+```{r}
+1:4 %>% 
+  reduce(.f = mySummer, .init = 100)
+```
+
+
+#### An Extended Example of Reduction
 
 Let's apply `reduce()` with `.init` to the task of making a *truth table*:  the set of all $2^n$ logical vectors of a given length $n$.
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-03-26" />
+<meta name="date" content="2020-03-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -521,11 +521,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.3.3" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#practice-exercises-36"><i class="fa fa-check"></i><b>14.3.3</b> Practice Exercises</a></li>
 <li class="chapter" data-level="14.3.4" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#solutions-to-the-practice-exercises-20"><i class="fa fa-check"></i><b>14.3.4</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html"><i class="fa fa-check"></i><b>14.4</b> Other <strong>purr</strong> Higher-Order Functions</a><ul>
-<li class="chapter" data-level="14.4.1" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#keep-and-discard"><i class="fa fa-check"></i><b>14.4.1</b> <code>keep()</code> and <code>discard()</code></a></li>
-<li class="chapter" data-level="14.4.2" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#reduce"><i class="fa fa-check"></i><b>14.4.2</b> <code>reduce()</code></a></li>
-<li class="chapter" data-level="14.4.3" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#practice-exercises-37"><i class="fa fa-check"></i><b>14.4.3</b> Practice Exercises</a></li>
-<li class="chapter" data-level="14.4.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#solutions-to-the-practice-exercises-21"><i class="fa fa-check"></i><b>14.4.4</b> Solutions to the Practice Exercises</a></li>
+<li class="chapter" data-level="14.4" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html"><i class="fa fa-check"></i><b>14.4</b> Other <strong>purrr</strong> Higher-Order Functions</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#keep-and-discard"><i class="fa fa-check"></i><b>14.4.1</b> <code>keep()</code> and <code>discard()</code></a></li>
+<li class="chapter" data-level="14.4.2" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#reduce"><i class="fa fa-check"></i><b>14.4.2</b> <code>reduce()</code></a></li>
+<li class="chapter" data-level="14.4.3" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#practice-exercises-37"><i class="fa fa-check"></i><b>14.4.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="14.4.4" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#solutions-to-the-practice-exercises-21"><i class="fa fa-check"></i><b>14.4.4</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14.5" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>14.5</b> Functionals vs. Loops</a></li>
 <li class="chapter" data-level="14.6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>14.6</b> Conclusion</a></li>
@@ -603,18 +603,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1536"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1536-1" data-line-number="1">survey <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1536-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ideal_ht, <span class="op">-</span>love_first)</a></code></pre></div>
 <pre><code>## # A tibble: 71 x 10
-##    height sleep fastest weight_feel   extra_life seat      GPA enough_Sleep sex   diff.ideal.act.
-##     &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt; &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;   &lt;dbl&gt; &lt;fct&gt;        &lt;fct&gt;           &lt;dbl&gt;
-##  1   76     9.5     119 1_underweight yes        1_front  3.56 no           male                2
-##  2   74     7       110 2_about_right yes        2_midd…  2.5  no           male                2
-##  3   64     9        85 2_about_right no         2_midd…  3.8  no           fema…              NA
-##  4   62     7       100 1_underweight no         1_front  3.5  no           fema…               3
-##  5   72     8        95 1_underweight yes        3_back   3.2  no           male                0
-##  6   70.8  10       100 3_overweight  no         1_front  3.1  yes          male               NA
-##  7   70     4        85 2_about_right yes        1_front  3.68 no           male                2
-##  8   79     6       160 2_about_right yes        3_back   2.7  yes          male               -3
-##  9   59     7        90 2_about_right yes        3_back   2.8  no           fema…               2
-## 10   67     7        90 3_overweight  no         2_midd… NA    yes          fema…               0
+##    height sleep fastest weight_feel   extra_life seat       GPA enough_Sleep sex   diff.ideal.act.
+##     &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt; &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;    &lt;dbl&gt; &lt;fct&gt;        &lt;fct&gt;           &lt;dbl&gt;
+##  1   76     9.5     119 1_underweight yes        1_front   3.56 no           male                2
+##  2   74     7       110 2_about_right yes        2_middle  2.5  no           male                2
+##  3   64     9        85 2_about_right no         2_middle  3.8  no           fema…              NA
+##  4   62     7       100 1_underweight no         1_front   3.5  no           fema…               3
+##  5   72     8        95 1_underweight yes        3_back    3.2  no           male                0
+##  6   70.8  10       100 3_overweight  no         1_front   3.1  yes          male               NA
+##  7   70     4        85 2_about_right yes        1_front   3.68 no           male                2
+##  8   79     6       160 2_about_right yes        3_back    2.7  yes          male               -3
+##  9   59     7        90 2_about_right yes        3_back    2.8  no           fema…               2
+## 10   67     7        90 3_overweight  no         2_middle NA    yes          fema…               0
 ## # … with 61 more rows</code></pre>
 <div id="practice-exercises-31" class="section level3">
 <h3><span class="header-section-number">10.4.1</span> Practice Exercises</h3>

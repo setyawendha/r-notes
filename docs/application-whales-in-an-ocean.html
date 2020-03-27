@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-03-26" />
+<meta name="date" content="2020-03-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -521,11 +521,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.3.3" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#practice-exercises-36"><i class="fa fa-check"></i><b>14.3.3</b> Practice Exercises</a></li>
 <li class="chapter" data-level="14.3.4" data-path="purrr-higher-order-functions-for-iteration.html"><a href="purrr-higher-order-functions-for-iteration.html#solutions-to-the-practice-exercises-20"><i class="fa fa-check"></i><b>14.3.4</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html"><i class="fa fa-check"></i><b>14.4</b> Other <strong>purr</strong> Higher-Order Functions</a><ul>
-<li class="chapter" data-level="14.4.1" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#keep-and-discard"><i class="fa fa-check"></i><b>14.4.1</b> <code>keep()</code> and <code>discard()</code></a></li>
-<li class="chapter" data-level="14.4.2" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#reduce"><i class="fa fa-check"></i><b>14.4.2</b> <code>reduce()</code></a></li>
-<li class="chapter" data-level="14.4.3" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#practice-exercises-37"><i class="fa fa-check"></i><b>14.4.3</b> Practice Exercises</a></li>
-<li class="chapter" data-level="14.4.4" data-path="other-purr-higher-order-functions.html"><a href="other-purr-higher-order-functions.html#solutions-to-the-practice-exercises-21"><i class="fa fa-check"></i><b>14.4.4</b> Solutions to the Practice Exercises</a></li>
+<li class="chapter" data-level="14.4" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html"><i class="fa fa-check"></i><b>14.4</b> Other <strong>purrr</strong> Higher-Order Functions</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#keep-and-discard"><i class="fa fa-check"></i><b>14.4.1</b> <code>keep()</code> and <code>discard()</code></a></li>
+<li class="chapter" data-level="14.4.2" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#reduce"><i class="fa fa-check"></i><b>14.4.2</b> <code>reduce()</code></a></li>
+<li class="chapter" data-level="14.4.3" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#practice-exercises-37"><i class="fa fa-check"></i><b>14.4.3</b> Practice Exercises</a></li>
+<li class="chapter" data-level="14.4.4" data-path="other-purrr-higher-order-functions.html"><a href="other-purrr-higher-order-functions.html#solutions-to-the-practice-exercises-21"><i class="fa fa-check"></i><b>14.4.4</b> Solutions to the Practice Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="14.5" data-path="functionals-vs-loops.html"><a href="functionals-vs-loops.html"><i class="fa fa-check"></i><b>14.5</b> Functionals vs. Loops</a></li>
 <li class="chapter" data-level="14.6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>14.6</b> Conclusion</a></li>
@@ -599,25 +599,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p>We will begin by defining the class Whale:</p>
-<div class="sourceCode" id="cb2081"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2081-1" data-line-number="1">Whale &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Whale&quot;</span>,</a>
-<a class="sourceLine" id="cb2081-2" data-line-number="2">                 <span class="dt">public =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb2081-3" data-line-number="3">                   <span class="dt">position =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2081-4" data-line-number="4">                   <span class="dt">age =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2081-5" data-line-number="5">                   <span class="dt">lifespan =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2081-6" data-line-number="6">                   <span class="dt">range =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2081-7" data-line-number="7">                   <span class="dt">maturity =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2081-8" data-line-number="8">                   <span class="dt">stepSize =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2081-9" data-line-number="9">                   <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">position =</span> <span class="ot">NA</span>, <span class="dt">age =</span> <span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb2081-10" data-line-number="10">                                         <span class="dt">lifespan =</span> <span class="dv">40</span>, <span class="dt">range =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb2081-11" data-line-number="11">                                         <span class="dt">maturity =</span> <span class="dv">10</span>, <span class="dt">stepSize =</span> <span class="dv">5</span>) {</a>
-<a class="sourceLine" id="cb2081-12" data-line-number="12">                     self<span class="op">$</span>position &lt;-<span class="st"> </span>position</a>
-<a class="sourceLine" id="cb2081-13" data-line-number="13">                     self<span class="op">$</span>age &lt;-<span class="st"> </span>age</a>
-<a class="sourceLine" id="cb2081-14" data-line-number="14">                     self<span class="op">$</span>lifespan &lt;-<span class="st"> </span>lifespan</a>
-<a class="sourceLine" id="cb2081-15" data-line-number="15">                     self<span class="op">$</span>range &lt;-<span class="st"> </span>range</a>
-<a class="sourceLine" id="cb2081-16" data-line-number="16">                     self<span class="op">$</span>maturity &lt;-<span class="st"> </span>maturity</a>
-<a class="sourceLine" id="cb2081-17" data-line-number="17">                     self<span class="op">$</span>stepSize &lt;-<span class="st"> </span>stepSize</a>
-<a class="sourceLine" id="cb2081-18" data-line-number="18">                   }</a>
-<a class="sourceLine" id="cb2081-19" data-line-number="19">                 ))</a></code></pre></div>
+<div class="sourceCode" id="cb2087"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2087-1" data-line-number="1">Whale &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Whale&quot;</span>,</a>
+<a class="sourceLine" id="cb2087-2" data-line-number="2">                 <span class="dt">public =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb2087-3" data-line-number="3">                   <span class="dt">position =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2087-4" data-line-number="4">                   <span class="dt">age =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2087-5" data-line-number="5">                   <span class="dt">lifespan =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2087-6" data-line-number="6">                   <span class="dt">range =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2087-7" data-line-number="7">                   <span class="dt">maturity =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2087-8" data-line-number="8">                   <span class="dt">stepSize =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2087-9" data-line-number="9">                   <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">position =</span> <span class="ot">NA</span>, <span class="dt">age =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb2087-10" data-line-number="10">                                         <span class="dt">lifespan =</span> <span class="dv">40</span>, <span class="dt">range =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb2087-11" data-line-number="11">                                         <span class="dt">maturity =</span> <span class="dv">10</span>, <span class="dt">stepSize =</span> <span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb2087-12" data-line-number="12">                     self<span class="op">$</span>position &lt;-<span class="st"> </span>position</a>
+<a class="sourceLine" id="cb2087-13" data-line-number="13">                     self<span class="op">$</span>age &lt;-<span class="st"> </span>age</a>
+<a class="sourceLine" id="cb2087-14" data-line-number="14">                     self<span class="op">$</span>lifespan &lt;-<span class="st"> </span>lifespan</a>
+<a class="sourceLine" id="cb2087-15" data-line-number="15">                     self<span class="op">$</span>range &lt;-<span class="st"> </span>range</a>
+<a class="sourceLine" id="cb2087-16" data-line-number="16">                     self<span class="op">$</span>maturity &lt;-<span class="st"> </span>maturity</a>
+<a class="sourceLine" id="cb2087-17" data-line-number="17">                     self<span class="op">$</span>stepSize &lt;-<span class="st"> </span>stepSize</a>
+<a class="sourceLine" id="cb2087-18" data-line-number="18">                   }</a>
+<a class="sourceLine" id="cb2087-19" data-line-number="19">                 ))</a></code></pre></div>
 <p>For whales that are instances of the Whale class:</p>
 <ul>
 <li><code>position</code> will contain the current x and y-coordinate of the whale in a two-dimensional ocean;</li>
@@ -629,99 +629,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Whales need to be able to move about in the sea. A whale moves by picking a random direction—any angle between 0 and <span class="math inline">\(2\pi\)</span> radians—and then moving <code>stepSize</code> units in that direction. If the selected motion would take the whale outside the boundaries of the ocean, then R will repeat the motion until the whale lands properly within the boundaries.</p>
 <p>The motion of a whale is implemented in the code below for a <code>move()</code> method that is added to class Whale:</p>
-<div class="sourceCode" id="cb2082"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2082-1" data-line-number="1">Whale<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>,</a>
-<a class="sourceLine" id="cb2082-2" data-line-number="2">          <span class="st">&quot;move&quot;</span>,</a>
-<a class="sourceLine" id="cb2082-3" data-line-number="3">          <span class="cf">function</span>(dims, <span class="dt">r =</span> self<span class="op">$</span>stepSize) {</a>
-<a class="sourceLine" id="cb2082-4" data-line-number="4">            xMax &lt;-<span class="st"> </span>dims[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb2082-5" data-line-number="5">            yMax &lt;-<span class="st"> </span>dims[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb2082-6" data-line-number="6">            <span class="cf">repeat</span> {</a>
-<a class="sourceLine" id="cb2082-7" data-line-number="7">              theta &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</a>
-<a class="sourceLine" id="cb2082-8" data-line-number="8">              p &lt;-<span class="st"> </span>self<span class="op">$</span>position <span class="op">+</span><span class="st"> </span>r <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="kw">cos</span>(theta), <span class="kw">sin</span>(theta))</a>
-<a class="sourceLine" id="cb2082-9" data-line-number="9">              within &lt;-<span class="st"> </span>(p[<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span>p[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>xMax) <span class="op">&amp;&amp;</span><span class="st"> </span>(p[<span class="dv">2</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span>p[<span class="dv">2</span>] <span class="op">&lt;</span><span class="st"> </span>yMax)</a>
-<a class="sourceLine" id="cb2082-10" data-line-number="10">              <span class="cf">if</span> ( within ) {</a>
-<a class="sourceLine" id="cb2082-11" data-line-number="11">                self<span class="op">$</span>position &lt;-<span class="st"> </span>p</a>
-<a class="sourceLine" id="cb2082-12" data-line-number="12">                <span class="cf">break</span></a>
-<a class="sourceLine" id="cb2082-13" data-line-number="13">              }</a>
-<a class="sourceLine" id="cb2082-14" data-line-number="14">            }</a>
-<a class="sourceLine" id="cb2082-15" data-line-number="15">          }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2088"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2088-1" data-line-number="1">Whale<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>,</a>
+<a class="sourceLine" id="cb2088-2" data-line-number="2">          <span class="st">&quot;move&quot;</span>,</a>
+<a class="sourceLine" id="cb2088-3" data-line-number="3">          <span class="cf">function</span>(dims, <span class="dt">r =</span> self<span class="op">$</span>stepSize) {</a>
+<a class="sourceLine" id="cb2088-4" data-line-number="4">            xMax &lt;-<span class="st"> </span>dims[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb2088-5" data-line-number="5">            yMax &lt;-<span class="st"> </span>dims[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb2088-6" data-line-number="6">            <span class="cf">repeat</span> {</a>
+<a class="sourceLine" id="cb2088-7" data-line-number="7">              theta &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">2</span><span class="op">*</span>pi)</a>
+<a class="sourceLine" id="cb2088-8" data-line-number="8">              p &lt;-<span class="st"> </span>self<span class="op">$</span>position <span class="op">+</span><span class="st"> </span>r <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="kw">cos</span>(theta), <span class="kw">sin</span>(theta))</a>
+<a class="sourceLine" id="cb2088-9" data-line-number="9">              within &lt;-<span class="st"> </span>(p[<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span>p[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>xMax) <span class="op">&amp;&amp;</span><span class="st"> </span>(p[<span class="dv">2</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span>p[<span class="dv">2</span>] <span class="op">&lt;</span><span class="st"> </span>yMax)</a>
+<a class="sourceLine" id="cb2088-10" data-line-number="10">              <span class="cf">if</span> ( within ) {</a>
+<a class="sourceLine" id="cb2088-11" data-line-number="11">                self<span class="op">$</span>position &lt;-<span class="st"> </span>p</a>
+<a class="sourceLine" id="cb2088-12" data-line-number="12">                <span class="cf">break</span></a>
+<a class="sourceLine" id="cb2088-13" data-line-number="13">              }</a>
+<a class="sourceLine" id="cb2088-14" data-line-number="14">            }</a>
+<a class="sourceLine" id="cb2088-15" data-line-number="15">          }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Note the parameter <code>dims</code> for the move function. From the code we can tell that it’s a vector of length 2. In fact the parameter will contain the x and and y-dimensions (the width and breadth) of our ocean. It’s something that will have to be determined by the ocean itself. We haven’t written the class Ocean yet, so this part of the code will have to remain a bit mysterious, for now.</p>
 <p>We need male and female whales, so we create a class for each sex. Both classes inherit from Whale. The class Male adds only a <code>sex</code> attribute:</p>
-<div class="sourceCode" id="cb2083"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2083-1" data-line-number="1">Male &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Male&quot;</span>,</a>
-<a class="sourceLine" id="cb2083-2" data-line-number="2">                <span class="dt">inherit =</span> Whale,</a>
-<a class="sourceLine" id="cb2083-3" data-line-number="3">                <span class="dt">public =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb2083-4" data-line-number="4">                  <span class="dt">sex =</span> <span class="st">&quot;male&quot;</span></a>
-<a class="sourceLine" id="cb2083-5" data-line-number="5">                ))</a></code></pre></div>
+<div class="sourceCode" id="cb2089"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2089-1" data-line-number="1">Male &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Male&quot;</span>,</a>
+<a class="sourceLine" id="cb2089-2" data-line-number="2">                <span class="dt">inherit =</span> Whale,</a>
+<a class="sourceLine" id="cb2089-3" data-line-number="3">                <span class="dt">public =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb2089-4" data-line-number="4">                  <span class="dt">sex =</span> <span class="st">&quot;male&quot;</span></a>
+<a class="sourceLine" id="cb2089-5" data-line-number="5">                ))</a></code></pre></div>
 <p>A female whale is a bit more complex: in addition to a sex attribute, she needs an attribute that specifies how long she will be infertile after giving birth, and another attribute that enables the program to keep track of the number of time-periods she must wait until she is fertile again:</p>
-<div class="sourceCode" id="cb2084"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2084-1" data-line-number="1">Female &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Female&quot;</span>,</a>
-<a class="sourceLine" id="cb2084-2" data-line-number="2">                <span class="dt">inherit =</span> Whale,</a>
-<a class="sourceLine" id="cb2084-3" data-line-number="3">                <span class="dt">public =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb2084-4" data-line-number="4">                  <span class="dt">sex =</span> <span class="st">&quot;female&quot;</span>,</a>
-<a class="sourceLine" id="cb2084-5" data-line-number="5">                  <span class="dt">timeToFertility =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb2084-6" data-line-number="6">                  <span class="dt">infertilityPeriod =</span> <span class="dv">5</span></a>
-<a class="sourceLine" id="cb2084-7" data-line-number="7">                ))</a></code></pre></div>
+<div class="sourceCode" id="cb2090"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2090-1" data-line-number="1">Female &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Female&quot;</span>,</a>
+<a class="sourceLine" id="cb2090-2" data-line-number="2">                <span class="dt">inherit =</span> Whale,</a>
+<a class="sourceLine" id="cb2090-3" data-line-number="3">                <span class="dt">public =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb2090-4" data-line-number="4">                  <span class="dt">sex =</span> <span class="st">&quot;female&quot;</span>,</a>
+<a class="sourceLine" id="cb2090-5" data-line-number="5">                  <span class="dt">timeToFertility =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb2090-6" data-line-number="6">                  <span class="dt">infertilityPeriod =</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb2090-7" data-line-number="7">                ))</a></code></pre></div>
 <p>A female whale also needs a method to determine whether a mature whale is in the vicinity:</p>
-<div class="sourceCode" id="cb2085"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2085-1" data-line-number="1">Female<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>,</a>
-<a class="sourceLine" id="cb2085-2" data-line-number="2">           <span class="st">&quot;maleNear&quot;</span>,</a>
-<a class="sourceLine" id="cb2085-3" data-line-number="3">           <span class="cf">function</span>(males, dist) {</a>
-<a class="sourceLine" id="cb2085-4" data-line-number="4">             foundOne &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb2085-5" data-line-number="5">             <span class="cf">for</span> ( male <span class="cf">in</span> males ) {</a>
-<a class="sourceLine" id="cb2085-6" data-line-number="6">               near &lt;-<span class="st"> </span><span class="kw">dist</span>(male<span class="op">$</span>position, self<span class="op">$</span>position) <span class="op">&lt;</span><span class="st"> </span>self<span class="op">$</span>range</a>
-<a class="sourceLine" id="cb2085-7" data-line-number="7">               mature &lt;-<span class="st"> </span>(male<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>male<span class="op">$</span>maturity)</a>
-<a class="sourceLine" id="cb2085-8" data-line-number="8">               <span class="cf">if</span> ( near <span class="op">&amp;&amp;</span><span class="st"> </span>mature ) {</a>
-<a class="sourceLine" id="cb2085-9" data-line-number="9">                 foundOne &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb2085-10" data-line-number="10">                 <span class="cf">break</span></a>
-<a class="sourceLine" id="cb2085-11" data-line-number="11">               }</a>
-<a class="sourceLine" id="cb2085-12" data-line-number="12">             }</a>
-<a class="sourceLine" id="cb2085-13" data-line-number="13">             foundOne</a>
-<a class="sourceLine" id="cb2085-14" data-line-number="14">           }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2091"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2091-1" data-line-number="1">Female<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>,</a>
+<a class="sourceLine" id="cb2091-2" data-line-number="2">           <span class="st">&quot;maleNear&quot;</span>,</a>
+<a class="sourceLine" id="cb2091-3" data-line-number="3">           <span class="cf">function</span>(males, dist) {</a>
+<a class="sourceLine" id="cb2091-4" data-line-number="4">             foundOne &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb2091-5" data-line-number="5">             <span class="cf">for</span> ( male <span class="cf">in</span> males ) {</a>
+<a class="sourceLine" id="cb2091-6" data-line-number="6">               near &lt;-<span class="st"> </span><span class="kw">dist</span>(male<span class="op">$</span>position, self<span class="op">$</span>position) <span class="op">&lt;</span><span class="st"> </span>self<span class="op">$</span>range</a>
+<a class="sourceLine" id="cb2091-7" data-line-number="7">               mature &lt;-<span class="st"> </span>(male<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>male<span class="op">$</span>maturity)</a>
+<a class="sourceLine" id="cb2091-8" data-line-number="8">               <span class="cf">if</span> ( near <span class="op">&amp;&amp;</span><span class="st"> </span>mature ) {</a>
+<a class="sourceLine" id="cb2091-9" data-line-number="9">                 foundOne &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb2091-10" data-line-number="10">                 <span class="cf">break</span></a>
+<a class="sourceLine" id="cb2091-11" data-line-number="11">               }</a>
+<a class="sourceLine" id="cb2091-12" data-line-number="12">             }</a>
+<a class="sourceLine" id="cb2091-13" data-line-number="13">             foundOne</a>
+<a class="sourceLine" id="cb2091-14" data-line-number="14">           }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Again, note the parameters <code>males</code> and <code>dist</code>. Values for these parameters will be provided by the ocean object. <code>males</code> will be a list of the male whales in the population at the current time, and <code>dist</code> will be a function for computing the distance between any two points in the ocean.</p>
 <p>A female whale also needs to be able to mate:</p>
-<div class="sourceCode" id="cb2086"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2086-1" data-line-number="1">Female<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>,</a>
-<a class="sourceLine" id="cb2086-2" data-line-number="2">           <span class="st">&quot;mate&quot;</span>,</a>
-<a class="sourceLine" id="cb2086-3" data-line-number="3">           <span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb2086-4" data-line-number="4">             babySex &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>), <span class="dt">size =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb2086-5" data-line-number="5">             self<span class="op">$</span>timeToFertility &lt;-<span class="st"> </span>self<span class="op">$</span>infertilityPeriod</a>
-<a class="sourceLine" id="cb2086-6" data-line-number="6">             <span class="kw">return</span>(babySex)</a>
-<a class="sourceLine" id="cb2086-7" data-line-number="7">           }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2092"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2092-1" data-line-number="1">Female<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>,</a>
+<a class="sourceLine" id="cb2092-2" data-line-number="2">           <span class="st">&quot;mate&quot;</span>,</a>
+<a class="sourceLine" id="cb2092-3" data-line-number="3">           <span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb2092-4" data-line-number="4">             babySex &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>), <span class="dt">size =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2092-5" data-line-number="5">             self<span class="op">$</span>timeToFertility &lt;-<span class="st"> </span>self<span class="op">$</span>infertilityPeriod</a>
+<a class="sourceLine" id="cb2092-6" data-line-number="6">             <span class="kw">return</span>(babySex)</a>
+<a class="sourceLine" id="cb2092-7" data-line-number="7">           }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Now it is time to define the Ocean class. It’s a bit of a mouthful:</p>
-<div class="sourceCode" id="cb2087"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2087-1" data-line-number="1">Ocean &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Ocean&quot;</span>,</a>
-<a class="sourceLine" id="cb2087-2" data-line-number="2">                 <span class="dt">public =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb2087-3" data-line-number="3">                   <span class="dt">dimensions =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2087-4" data-line-number="4">                   <span class="dt">males =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2087-5" data-line-number="5">                   <span class="dt">females =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2087-6" data-line-number="6">                   <span class="dt">malePop =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2087-7" data-line-number="7">                   <span class="dt">femalePop =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2087-8" data-line-number="8">                   <span class="dt">starveParameter =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2087-9" data-line-number="9">                   <span class="dt">distance =</span> <span class="cf">function</span>(a, b) {</a>
-<a class="sourceLine" id="cb2087-10" data-line-number="10">                     <span class="kw">sqrt</span>((a[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>b[<span class="dv">1</span>])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(a[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>b[<span class="dv">2</span>])<span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb2087-11" data-line-number="11">                   },</a>
-<a class="sourceLine" id="cb2087-12" data-line-number="12">                   <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">dims =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>),</a>
-<a class="sourceLine" id="cb2087-13" data-line-number="13">                                         <span class="dt">males =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb2087-14" data-line-number="14">                                         <span class="dt">females =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb2087-15" data-line-number="15">                                         <span class="dt">starve =</span> <span class="dv">5</span>) {</a>
-<a class="sourceLine" id="cb2087-16" data-line-number="16">                     self<span class="op">$</span>dimensions &lt;-<span class="st"> </span>dims</a>
-<a class="sourceLine" id="cb2087-17" data-line-number="17">                     xMax &lt;-<span class="st"> </span>dims[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb2087-18" data-line-number="18">                     yMax &lt;-<span class="st"> </span>dims[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb2087-19" data-line-number="19">                     maleWhales &lt;-<span class="st"> </span><span class="kw">replicate</span>(</a>
-<a class="sourceLine" id="cb2087-20" data-line-number="20">                       males, </a>
-<a class="sourceLine" id="cb2087-21" data-line-number="21">                       Male<span class="op">$</span><span class="kw">new</span>(<span class="dt">age =</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb2087-22" data-line-number="22">                                <span class="dt">position =</span> <span class="kw">c</span>(<span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, xMax),</a>
-<a class="sourceLine" id="cb2087-23" data-line-number="23">                                            <span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, yMax))))</a>
-<a class="sourceLine" id="cb2087-24" data-line-number="24">                     femaleWhales &lt;-<span class="st"> </span><span class="kw">replicate</span>(</a>
-<a class="sourceLine" id="cb2087-25" data-line-number="25">                       females, </a>
-<a class="sourceLine" id="cb2087-26" data-line-number="26">                       Female<span class="op">$</span><span class="kw">new</span>(<span class="dt">age =</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb2087-27" data-line-number="27">                                  <span class="dt">position =</span> <span class="kw">c</span>(<span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, xMax), </a>
-<a class="sourceLine" id="cb2087-28" data-line-number="28">                                               <span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, yMax))))</a>
-<a class="sourceLine" id="cb2087-29" data-line-number="29">                     self<span class="op">$</span>males &lt;-<span class="st"> </span>maleWhales</a>
-<a class="sourceLine" id="cb2087-30" data-line-number="30">                     self<span class="op">$</span>females &lt;-<span class="st"> </span>femaleWhales</a>
-<a class="sourceLine" id="cb2087-31" data-line-number="31">                     self<span class="op">$</span>malePop &lt;-<span class="st"> </span>males</a>
-<a class="sourceLine" id="cb2087-32" data-line-number="32">                     self<span class="op">$</span>femalePop &lt;-<span class="st"> </span>females</a>
-<a class="sourceLine" id="cb2087-33" data-line-number="33">                     self<span class="op">$</span>starveParameter &lt;-<span class="st"> </span>starve</a>
-<a class="sourceLine" id="cb2087-34" data-line-number="34">                   },</a>
-<a class="sourceLine" id="cb2087-35" data-line-number="35">                   <span class="dt">starvationProbability =</span> <span class="cf">function</span>(popDensity) {</a>
-<a class="sourceLine" id="cb2087-36" data-line-number="36">                     self<span class="op">$</span>starveParameter <span class="op">*</span><span class="st"> </span>popDensity</a>
-<a class="sourceLine" id="cb2087-37" data-line-number="37">                   }</a>
-<a class="sourceLine" id="cb2087-38" data-line-number="38">                 ))</a></code></pre></div>
+<div class="sourceCode" id="cb2093"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2093-1" data-line-number="1">Ocean &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Ocean&quot;</span>,</a>
+<a class="sourceLine" id="cb2093-2" data-line-number="2">                 <span class="dt">public =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb2093-3" data-line-number="3">                   <span class="dt">dimensions =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2093-4" data-line-number="4">                   <span class="dt">males =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2093-5" data-line-number="5">                   <span class="dt">females =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2093-6" data-line-number="6">                   <span class="dt">malePop =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2093-7" data-line-number="7">                   <span class="dt">femalePop =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2093-8" data-line-number="8">                   <span class="dt">starveParameter =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2093-9" data-line-number="9">                   <span class="dt">distance =</span> <span class="cf">function</span>(a, b) {</a>
+<a class="sourceLine" id="cb2093-10" data-line-number="10">                     <span class="kw">sqrt</span>((a[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>b[<span class="dv">1</span>])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(a[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>b[<span class="dv">2</span>])<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2093-11" data-line-number="11">                   },</a>
+<a class="sourceLine" id="cb2093-12" data-line-number="12">                   <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">dims =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb2093-13" data-line-number="13">                                         <span class="dt">males =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb2093-14" data-line-number="14">                                         <span class="dt">females =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb2093-15" data-line-number="15">                                         <span class="dt">starve =</span> <span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb2093-16" data-line-number="16">                     self<span class="op">$</span>dimensions &lt;-<span class="st"> </span>dims</a>
+<a class="sourceLine" id="cb2093-17" data-line-number="17">                     xMax &lt;-<span class="st"> </span>dims[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb2093-18" data-line-number="18">                     yMax &lt;-<span class="st"> </span>dims[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb2093-19" data-line-number="19">                     maleWhales &lt;-<span class="st"> </span><span class="kw">replicate</span>(</a>
+<a class="sourceLine" id="cb2093-20" data-line-number="20">                       males, </a>
+<a class="sourceLine" id="cb2093-21" data-line-number="21">                       Male<span class="op">$</span><span class="kw">new</span>(<span class="dt">age =</span> <span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb2093-22" data-line-number="22">                                <span class="dt">position =</span> <span class="kw">c</span>(<span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, xMax),</a>
+<a class="sourceLine" id="cb2093-23" data-line-number="23">                                            <span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, yMax))))</a>
+<a class="sourceLine" id="cb2093-24" data-line-number="24">                     femaleWhales &lt;-<span class="st"> </span><span class="kw">replicate</span>(</a>
+<a class="sourceLine" id="cb2093-25" data-line-number="25">                       females, </a>
+<a class="sourceLine" id="cb2093-26" data-line-number="26">                       Female<span class="op">$</span><span class="kw">new</span>(<span class="dt">age =</span> <span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb2093-27" data-line-number="27">                                  <span class="dt">position =</span> <span class="kw">c</span>(<span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, xMax), </a>
+<a class="sourceLine" id="cb2093-28" data-line-number="28">                                               <span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, yMax))))</a>
+<a class="sourceLine" id="cb2093-29" data-line-number="29">                     self<span class="op">$</span>males &lt;-<span class="st"> </span>maleWhales</a>
+<a class="sourceLine" id="cb2093-30" data-line-number="30">                     self<span class="op">$</span>females &lt;-<span class="st"> </span>femaleWhales</a>
+<a class="sourceLine" id="cb2093-31" data-line-number="31">                     self<span class="op">$</span>malePop &lt;-<span class="st"> </span>males</a>
+<a class="sourceLine" id="cb2093-32" data-line-number="32">                     self<span class="op">$</span>femalePop &lt;-<span class="st"> </span>females</a>
+<a class="sourceLine" id="cb2093-33" data-line-number="33">                     self<span class="op">$</span>starveParameter &lt;-<span class="st"> </span>starve</a>
+<a class="sourceLine" id="cb2093-34" data-line-number="34">                   },</a>
+<a class="sourceLine" id="cb2093-35" data-line-number="35">                   <span class="dt">starvationProbability =</span> <span class="cf">function</span>(popDensity) {</a>
+<a class="sourceLine" id="cb2093-36" data-line-number="36">                     self<span class="op">$</span>starveParameter <span class="op">*</span><span class="st"> </span>popDensity</a>
+<a class="sourceLine" id="cb2093-37" data-line-number="37">                   }</a>
+<a class="sourceLine" id="cb2093-38" data-line-number="38">                 ))</a></code></pre></div>
 <p>In an instantiation of the class Ocean:</p>
 <ul>
 <li><code>dimensions</code> will be numerical vector of length 2 that specifies the width and breadth of the ocean.</li>
@@ -740,151 +740,151 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The age of each whale must be increased by one time-unit. For females, the time remaining until fertility must also be decreased by a unit.</li>
 </ul>
 <p>The <code>advance()</code> method is implemented and added to Ocean with the code below:</p>
-<div class="sourceCode" id="cb2088"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2088-1" data-line-number="1">Ocean<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>,</a>
-<a class="sourceLine" id="cb2088-2" data-line-number="2">          <span class="st">&quot;advance&quot;</span>,</a>
-<a class="sourceLine" id="cb2088-3" data-line-number="3">          <span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb2088-4" data-line-number="4">            malePop &lt;-<span class="st"> </span>self<span class="op">$</span>malePop</a>
-<a class="sourceLine" id="cb2088-5" data-line-number="5">            femalePop &lt;-<span class="st"> </span>self<span class="op">$</span>femalePop</a>
-<a class="sourceLine" id="cb2088-6" data-line-number="6">            population &lt;-<span class="st"> </span>malePop <span class="op">+</span><span class="st"> </span>femalePop</a>
-<a class="sourceLine" id="cb2088-7" data-line-number="7">            <span class="cf">if</span> ( population <span class="op">==</span><span class="st"> </span><span class="dv">0</span> ) {</a>
-<a class="sourceLine" id="cb2088-8" data-line-number="8">              <span class="kw">return</span>(<span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb2088-9" data-line-number="9">            }</a>
-<a class="sourceLine" id="cb2088-10" data-line-number="10">            males &lt;-<span class="st"> </span>self<span class="op">$</span>males</a>
-<a class="sourceLine" id="cb2088-11" data-line-number="11">            females &lt;-<span class="st"> </span>self<span class="op">$</span>females</a>
-<a class="sourceLine" id="cb2088-12" data-line-number="12">            babyMales &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb2088-13" data-line-number="13">            babyFemales &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb2088-14" data-line-number="14">            <span class="cf">if</span> ( malePop <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span>femalePop <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
-<a class="sourceLine" id="cb2088-15" data-line-number="15">              <span class="cf">for</span> ( female <span class="cf">in</span> females ) {</a>
-<a class="sourceLine" id="cb2088-16" data-line-number="16">                <span class="cf">if</span> ( female<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>female<span class="op">$</span>maturity <span class="op">&amp;&amp;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2088-17" data-line-number="17"><span class="st">                     </span>female<span class="op">$</span>timeToFertility <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2088-18" data-line-number="18"><span class="st">                     </span>female<span class="op">$</span><span class="kw">maleNear</span>(<span class="dt">males =</span> males,</a>
-<a class="sourceLine" id="cb2088-19" data-line-number="19">                                     <span class="dt">dist =</span> self<span class="op">$</span>distance)) {</a>
-<a class="sourceLine" id="cb2088-20" data-line-number="20">                  outcome &lt;-<span class="st"> </span>female<span class="op">$</span><span class="kw">mate</span>()</a>
-<a class="sourceLine" id="cb2088-21" data-line-number="21">                  <span class="cf">if</span> ( outcome <span class="op">==</span><span class="st"> &quot;male&quot;</span> ) {</a>
-<a class="sourceLine" id="cb2088-22" data-line-number="22">                    baby &lt;-<span class="st"> </span>Male<span class="op">$</span><span class="kw">new</span>(<span class="dt">age =</span> <span class="dv">0</span>, <span class="dt">position =</span> female<span class="op">$</span>position)</a>
-<a class="sourceLine" id="cb2088-23" data-line-number="23">                    babyMales &lt;-<span class="st"> </span><span class="kw">c</span>(babyMales, baby)</a>
-<a class="sourceLine" id="cb2088-24" data-line-number="24">                  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb2088-25" data-line-number="25">                    baby &lt;-<span class="st"> </span>Female<span class="op">$</span><span class="kw">new</span>(<span class="dt">age =</span> <span class="dv">0</span>, <span class="dt">position =</span> female<span class="op">$</span>position)</a>
-<a class="sourceLine" id="cb2088-26" data-line-number="26">                    babyFemales &lt;-<span class="st"> </span><span class="kw">c</span>(babyFemales, baby)</a>
-<a class="sourceLine" id="cb2088-27" data-line-number="27">                  }</a>
-<a class="sourceLine" id="cb2088-28" data-line-number="28">                }</a>
-<a class="sourceLine" id="cb2088-29" data-line-number="29">              }</a>
-<a class="sourceLine" id="cb2088-30" data-line-number="30">            }</a>
-<a class="sourceLine" id="cb2088-31" data-line-number="31">            </a>
-<a class="sourceLine" id="cb2088-32" data-line-number="32">            <span class="co"># augment the male and female lists if needed:</span></a>
-<a class="sourceLine" id="cb2088-33" data-line-number="33">            lmb &lt;-<span class="st"> </span><span class="kw">length</span>(babyMales); lfb &lt;-<span class="st"> </span><span class="kw">length</span>(babyFemales);</a>
-<a class="sourceLine" id="cb2088-34" data-line-number="34">            </a>
-<a class="sourceLine" id="cb2088-35" data-line-number="35">            <span class="co"># throw in the babies:</span></a>
-<a class="sourceLine" id="cb2088-36" data-line-number="36">            <span class="cf">if</span> ( lmb <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
-<a class="sourceLine" id="cb2088-37" data-line-number="37">              males &lt;-<span class="st"> </span><span class="kw">c</span>(males, babyMales)</a>
-<a class="sourceLine" id="cb2088-38" data-line-number="38">            }</a>
-<a class="sourceLine" id="cb2088-39" data-line-number="39">            <span class="cf">if</span> ( lfb <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
-<a class="sourceLine" id="cb2088-40" data-line-number="40">              females &lt;-<span class="st"> </span><span class="kw">c</span>(females, babyFemales)</a>
-<a class="sourceLine" id="cb2088-41" data-line-number="41">            }</a>
-<a class="sourceLine" id="cb2088-42" data-line-number="42">            </a>
-<a class="sourceLine" id="cb2088-43" data-line-number="43">            <span class="co"># revise population for new births:</span></a>
-<a class="sourceLine" id="cb2088-44" data-line-number="44">            population &lt;-<span class="st"> </span><span class="kw">length</span>(males) <span class="op">+</span><span class="st"> </span><span class="kw">length</span>(females)</a>
-<a class="sourceLine" id="cb2088-45" data-line-number="45">            </a>
-<a class="sourceLine" id="cb2088-46" data-line-number="46">            <span class="co"># starve some of them, maybe:</span></a>
-<a class="sourceLine" id="cb2088-47" data-line-number="47">            popDen &lt;-<span class="st"> </span>population<span class="op">/</span><span class="kw">prod</span>(self<span class="op">$</span>dimensions)</a>
-<a class="sourceLine" id="cb2088-48" data-line-number="48">            starveProb &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">starvationProbability</span>(<span class="dt">popDensity =</span> popDen)</a>
-<a class="sourceLine" id="cb2088-49" data-line-number="49">            maleDead &lt;-<span class="st"> </span><span class="kw">logical</span>(<span class="kw">length</span>(males))</a>
-<a class="sourceLine" id="cb2088-50" data-line-number="50">            femaleDead &lt;-<span class="st"> </span><span class="kw">logical</span>(<span class="kw">length</span>(females))</a>
-<a class="sourceLine" id="cb2088-51" data-line-number="51">            <span class="co"># starve some males</span></a>
-<a class="sourceLine" id="cb2088-52" data-line-number="52">            <span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(maleDead) ) {</a>
-<a class="sourceLine" id="cb2088-53" data-line-number="53">              male &lt;-<span class="st"> </span>males[[i]]</a>
-<a class="sourceLine" id="cb2088-54" data-line-number="54">              maleDead[i] &lt;-<span class="st"> </span>(<span class="kw">runif</span>(<span class="dv">1</span>) <span class="op">&lt;=</span><span class="st"> </span>starveProb)</a>
-<a class="sourceLine" id="cb2088-55" data-line-number="55">              male<span class="op">$</span>age &lt;-<span class="st"> </span>male<span class="op">$</span>age <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb2088-56" data-line-number="56">              <span class="cf">if</span> ( male<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>male<span class="op">$</span>lifespan ) maleDead[i] &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb2088-57" data-line-number="57">              <span class="cf">if</span> ( maleDead[i] ) <span class="cf">next</span></a>
-<a class="sourceLine" id="cb2088-58" data-line-number="58">              <span class="co"># if whale is not dead, he should move:</span></a>
-<a class="sourceLine" id="cb2088-59" data-line-number="59">              male<span class="op">$</span><span class="kw">move</span>(<span class="dt">dims =</span> self<span class="op">$</span>dimensions)</a>
-<a class="sourceLine" id="cb2088-60" data-line-number="60">            }</a>
-<a class="sourceLine" id="cb2088-61" data-line-number="61">            <span class="co"># starve some females</span></a>
-<a class="sourceLine" id="cb2088-62" data-line-number="62">            <span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(femaleDead) ) {</a>
-<a class="sourceLine" id="cb2088-63" data-line-number="63">              female &lt;-<span class="st"> </span>females[[i]]</a>
-<a class="sourceLine" id="cb2088-64" data-line-number="64">              femaleDead[i] &lt;-<span class="st"> </span>(<span class="kw">runif</span>(<span class="dv">1</span>) <span class="op">&lt;=</span><span class="st"> </span>starveProb)</a>
-<a class="sourceLine" id="cb2088-65" data-line-number="65">              female<span class="op">$</span>age &lt;-<span class="st"> </span>female<span class="op">$</span>age <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb2088-66" data-line-number="66">              <span class="cf">if</span> ( female<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>female<span class="op">$</span>lifespan ) femaleDead[i] &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb2088-67" data-line-number="67">              <span class="cf">if</span> ( femaleDead[i] ) <span class="cf">next</span></a>
-<a class="sourceLine" id="cb2088-68" data-line-number="68">              <span class="cf">if</span> ( female<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span> ) {</a>
-<a class="sourceLine" id="cb2088-69" data-line-number="69">                female<span class="op">$</span>timeToFertility &lt;-<span class="st"> </span>female<span class="op">$</span>timeToFertility <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb2088-70" data-line-number="70">              }</a>
-<a class="sourceLine" id="cb2088-71" data-line-number="71">              <span class="co"># if female is not dead, she should move:</span></a>
-<a class="sourceLine" id="cb2088-72" data-line-number="72">              female<span class="op">$</span><span class="kw">move</span>(<span class="dt">dims =</span> self<span class="op">$</span>dimensions)</a>
-<a class="sourceLine" id="cb2088-73" data-line-number="73">            }</a>
-<a class="sourceLine" id="cb2088-74" data-line-number="74">            </a>
-<a class="sourceLine" id="cb2088-75" data-line-number="75">            <span class="co"># revise male and female whale lists:</span></a>
-<a class="sourceLine" id="cb2088-76" data-line-number="76">            malePop &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span>maleDead)</a>
-<a class="sourceLine" id="cb2088-77" data-line-number="77">            self<span class="op">$</span>malePop &lt;-<span class="st"> </span>malePop</a>
-<a class="sourceLine" id="cb2088-78" data-line-number="78">            femalePop &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span>femaleDead)</a>
-<a class="sourceLine" id="cb2088-79" data-line-number="79">            self<span class="op">$</span>femalePop &lt;-<span class="st"> </span>femalePop</a>
-<a class="sourceLine" id="cb2088-80" data-line-number="80">            <span class="cf">if</span> ( malePop <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
-<a class="sourceLine" id="cb2088-81" data-line-number="81">              self<span class="op">$</span>males &lt;-<span class="st"> </span>males[<span class="op">!</span>maleDead]</a>
-<a class="sourceLine" id="cb2088-82" data-line-number="82">            } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb2088-83" data-line-number="83">              self<span class="op">$</span>males &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb2088-84" data-line-number="84">            }</a>
-<a class="sourceLine" id="cb2088-85" data-line-number="85">            <span class="cf">if</span> ( femalePop <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
-<a class="sourceLine" id="cb2088-86" data-line-number="86">              self<span class="op">$</span>females &lt;-<span class="st"> </span>females[<span class="op">!</span>femaleDead]</a>
-<a class="sourceLine" id="cb2088-87" data-line-number="87">            } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb2088-88" data-line-number="88">              self<span class="op">$</span>females &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb2088-89" data-line-number="89">            }</a>
-<a class="sourceLine" id="cb2088-90" data-line-number="90">          }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2094"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2094-1" data-line-number="1">Ocean<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>,</a>
+<a class="sourceLine" id="cb2094-2" data-line-number="2">          <span class="st">&quot;advance&quot;</span>,</a>
+<a class="sourceLine" id="cb2094-3" data-line-number="3">          <span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb2094-4" data-line-number="4">            malePop &lt;-<span class="st"> </span>self<span class="op">$</span>malePop</a>
+<a class="sourceLine" id="cb2094-5" data-line-number="5">            femalePop &lt;-<span class="st"> </span>self<span class="op">$</span>femalePop</a>
+<a class="sourceLine" id="cb2094-6" data-line-number="6">            population &lt;-<span class="st"> </span>malePop <span class="op">+</span><span class="st"> </span>femalePop</a>
+<a class="sourceLine" id="cb2094-7" data-line-number="7">            <span class="cf">if</span> ( population <span class="op">==</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb2094-8" data-line-number="8">              <span class="kw">return</span>(<span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb2094-9" data-line-number="9">            }</a>
+<a class="sourceLine" id="cb2094-10" data-line-number="10">            males &lt;-<span class="st"> </span>self<span class="op">$</span>males</a>
+<a class="sourceLine" id="cb2094-11" data-line-number="11">            females &lt;-<span class="st"> </span>self<span class="op">$</span>females</a>
+<a class="sourceLine" id="cb2094-12" data-line-number="12">            babyMales &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb2094-13" data-line-number="13">            babyFemales &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb2094-14" data-line-number="14">            <span class="cf">if</span> ( malePop <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span>femalePop <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb2094-15" data-line-number="15">              <span class="cf">for</span> ( female <span class="cf">in</span> females ) {</a>
+<a class="sourceLine" id="cb2094-16" data-line-number="16">                <span class="cf">if</span> ( female<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>female<span class="op">$</span>maturity <span class="op">&amp;&amp;</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2094-17" data-line-number="17"><span class="st">                     </span>female<span class="op">$</span>timeToFertility <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2094-18" data-line-number="18"><span class="st">                     </span>female<span class="op">$</span><span class="kw">maleNear</span>(<span class="dt">males =</span> males,</a>
+<a class="sourceLine" id="cb2094-19" data-line-number="19">                                     <span class="dt">dist =</span> self<span class="op">$</span>distance)) {</a>
+<a class="sourceLine" id="cb2094-20" data-line-number="20">                  outcome &lt;-<span class="st"> </span>female<span class="op">$</span><span class="kw">mate</span>()</a>
+<a class="sourceLine" id="cb2094-21" data-line-number="21">                  <span class="cf">if</span> ( outcome <span class="op">==</span><span class="st"> &quot;male&quot;</span> ) {</a>
+<a class="sourceLine" id="cb2094-22" data-line-number="22">                    baby &lt;-<span class="st"> </span>Male<span class="op">$</span><span class="kw">new</span>(<span class="dt">age =</span> <span class="dv">0</span>, <span class="dt">position =</span> female<span class="op">$</span>position)</a>
+<a class="sourceLine" id="cb2094-23" data-line-number="23">                    babyMales &lt;-<span class="st"> </span><span class="kw">c</span>(babyMales, baby)</a>
+<a class="sourceLine" id="cb2094-24" data-line-number="24">                  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2094-25" data-line-number="25">                    baby &lt;-<span class="st"> </span>Female<span class="op">$</span><span class="kw">new</span>(<span class="dt">age =</span> <span class="dv">0</span>, <span class="dt">position =</span> female<span class="op">$</span>position)</a>
+<a class="sourceLine" id="cb2094-26" data-line-number="26">                    babyFemales &lt;-<span class="st"> </span><span class="kw">c</span>(babyFemales, baby)</a>
+<a class="sourceLine" id="cb2094-27" data-line-number="27">                  }</a>
+<a class="sourceLine" id="cb2094-28" data-line-number="28">                }</a>
+<a class="sourceLine" id="cb2094-29" data-line-number="29">              }</a>
+<a class="sourceLine" id="cb2094-30" data-line-number="30">            }</a>
+<a class="sourceLine" id="cb2094-31" data-line-number="31">            </a>
+<a class="sourceLine" id="cb2094-32" data-line-number="32">            <span class="co"># augment the male and female lists if needed:</span></a>
+<a class="sourceLine" id="cb2094-33" data-line-number="33">            lmb &lt;-<span class="st"> </span><span class="kw">length</span>(babyMales); lfb &lt;-<span class="st"> </span><span class="kw">length</span>(babyFemales);</a>
+<a class="sourceLine" id="cb2094-34" data-line-number="34">            </a>
+<a class="sourceLine" id="cb2094-35" data-line-number="35">            <span class="co"># throw in the babies:</span></a>
+<a class="sourceLine" id="cb2094-36" data-line-number="36">            <span class="cf">if</span> ( lmb <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb2094-37" data-line-number="37">              males &lt;-<span class="st"> </span><span class="kw">c</span>(males, babyMales)</a>
+<a class="sourceLine" id="cb2094-38" data-line-number="38">            }</a>
+<a class="sourceLine" id="cb2094-39" data-line-number="39">            <span class="cf">if</span> ( lfb <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb2094-40" data-line-number="40">              females &lt;-<span class="st"> </span><span class="kw">c</span>(females, babyFemales)</a>
+<a class="sourceLine" id="cb2094-41" data-line-number="41">            }</a>
+<a class="sourceLine" id="cb2094-42" data-line-number="42">            </a>
+<a class="sourceLine" id="cb2094-43" data-line-number="43">            <span class="co"># revise population for new births:</span></a>
+<a class="sourceLine" id="cb2094-44" data-line-number="44">            population &lt;-<span class="st"> </span><span class="kw">length</span>(males) <span class="op">+</span><span class="st"> </span><span class="kw">length</span>(females)</a>
+<a class="sourceLine" id="cb2094-45" data-line-number="45">            </a>
+<a class="sourceLine" id="cb2094-46" data-line-number="46">            <span class="co"># starve some of them, maybe:</span></a>
+<a class="sourceLine" id="cb2094-47" data-line-number="47">            popDen &lt;-<span class="st"> </span>population<span class="op">/</span><span class="kw">prod</span>(self<span class="op">$</span>dimensions)</a>
+<a class="sourceLine" id="cb2094-48" data-line-number="48">            starveProb &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">starvationProbability</span>(<span class="dt">popDensity =</span> popDen)</a>
+<a class="sourceLine" id="cb2094-49" data-line-number="49">            maleDead &lt;-<span class="st"> </span><span class="kw">logical</span>(<span class="kw">length</span>(males))</a>
+<a class="sourceLine" id="cb2094-50" data-line-number="50">            femaleDead &lt;-<span class="st"> </span><span class="kw">logical</span>(<span class="kw">length</span>(females))</a>
+<a class="sourceLine" id="cb2094-51" data-line-number="51">            <span class="co"># starve some males</span></a>
+<a class="sourceLine" id="cb2094-52" data-line-number="52">            <span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(maleDead) ) {</a>
+<a class="sourceLine" id="cb2094-53" data-line-number="53">              male &lt;-<span class="st"> </span>males[[i]]</a>
+<a class="sourceLine" id="cb2094-54" data-line-number="54">              maleDead[i] &lt;-<span class="st"> </span>(<span class="kw">runif</span>(<span class="dv">1</span>) <span class="op">&lt;=</span><span class="st"> </span>starveProb)</a>
+<a class="sourceLine" id="cb2094-55" data-line-number="55">              male<span class="op">$</span>age &lt;-<span class="st"> </span>male<span class="op">$</span>age <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb2094-56" data-line-number="56">              <span class="cf">if</span> ( male<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>male<span class="op">$</span>lifespan ) maleDead[i] &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb2094-57" data-line-number="57">              <span class="cf">if</span> ( maleDead[i] ) <span class="cf">next</span></a>
+<a class="sourceLine" id="cb2094-58" data-line-number="58">              <span class="co"># if whale is not dead, he should move:</span></a>
+<a class="sourceLine" id="cb2094-59" data-line-number="59">              male<span class="op">$</span><span class="kw">move</span>(<span class="dt">dims =</span> self<span class="op">$</span>dimensions)</a>
+<a class="sourceLine" id="cb2094-60" data-line-number="60">            }</a>
+<a class="sourceLine" id="cb2094-61" data-line-number="61">            <span class="co"># starve some females</span></a>
+<a class="sourceLine" id="cb2094-62" data-line-number="62">            <span class="cf">for</span> ( i <span class="cf">in</span> <span class="kw">seq_along</span>(femaleDead) ) {</a>
+<a class="sourceLine" id="cb2094-63" data-line-number="63">              female &lt;-<span class="st"> </span>females[[i]]</a>
+<a class="sourceLine" id="cb2094-64" data-line-number="64">              femaleDead[i] &lt;-<span class="st"> </span>(<span class="kw">runif</span>(<span class="dv">1</span>) <span class="op">&lt;=</span><span class="st"> </span>starveProb)</a>
+<a class="sourceLine" id="cb2094-65" data-line-number="65">              female<span class="op">$</span>age &lt;-<span class="st"> </span>female<span class="op">$</span>age <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb2094-66" data-line-number="66">              <span class="cf">if</span> ( female<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>female<span class="op">$</span>lifespan ) femaleDead[i] &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb2094-67" data-line-number="67">              <span class="cf">if</span> ( femaleDead[i] ) <span class="cf">next</span></a>
+<a class="sourceLine" id="cb2094-68" data-line-number="68">              <span class="cf">if</span> ( female<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span> ) {</a>
+<a class="sourceLine" id="cb2094-69" data-line-number="69">                female<span class="op">$</span>timeToFertility &lt;-<span class="st"> </span>female<span class="op">$</span>timeToFertility <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb2094-70" data-line-number="70">              }</a>
+<a class="sourceLine" id="cb2094-71" data-line-number="71">              <span class="co"># if female is not dead, she should move:</span></a>
+<a class="sourceLine" id="cb2094-72" data-line-number="72">              female<span class="op">$</span><span class="kw">move</span>(<span class="dt">dims =</span> self<span class="op">$</span>dimensions)</a>
+<a class="sourceLine" id="cb2094-73" data-line-number="73">            }</a>
+<a class="sourceLine" id="cb2094-74" data-line-number="74">            </a>
+<a class="sourceLine" id="cb2094-75" data-line-number="75">            <span class="co"># revise male and female whale lists:</span></a>
+<a class="sourceLine" id="cb2094-76" data-line-number="76">            malePop &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span>maleDead)</a>
+<a class="sourceLine" id="cb2094-77" data-line-number="77">            self<span class="op">$</span>malePop &lt;-<span class="st"> </span>malePop</a>
+<a class="sourceLine" id="cb2094-78" data-line-number="78">            femalePop &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span>femaleDead)</a>
+<a class="sourceLine" id="cb2094-79" data-line-number="79">            self<span class="op">$</span>femalePop &lt;-<span class="st"> </span>femalePop</a>
+<a class="sourceLine" id="cb2094-80" data-line-number="80">            <span class="cf">if</span> ( malePop <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb2094-81" data-line-number="81">              self<span class="op">$</span>males &lt;-<span class="st"> </span>males[<span class="op">!</span>maleDead]</a>
+<a class="sourceLine" id="cb2094-82" data-line-number="82">            } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2094-83" data-line-number="83">              self<span class="op">$</span>males &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb2094-84" data-line-number="84">            }</a>
+<a class="sourceLine" id="cb2094-85" data-line-number="85">            <span class="cf">if</span> ( femalePop <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> ) {</a>
+<a class="sourceLine" id="cb2094-86" data-line-number="86">              self<span class="op">$</span>females &lt;-<span class="st"> </span>females[<span class="op">!</span>femaleDead]</a>
+<a class="sourceLine" id="cb2094-87" data-line-number="87">            } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2094-88" data-line-number="88">              self<span class="op">$</span>females &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb2094-89" data-line-number="89">            }</a>
+<a class="sourceLine" id="cb2094-90" data-line-number="90">          }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>In simulations we might enjoy looking at a picture of the ocean at any given time moment. Hence we add a <code>plot()</code> method that enables an ocean to produce a graph of the whales within it. In this graph males will be colored red and females green. Mature whales will appear as larger than immature whales. For purposes of speed we use R’s base graphics system rather than <strong>ggplot2</strong>.</p>
-<div class="sourceCode" id="cb2089"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2089-1" data-line-number="1">Ocean<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, </a>
-<a class="sourceLine" id="cb2089-2" data-line-number="2">          <span class="st">&quot;plot&quot;</span>,</a>
-<a class="sourceLine" id="cb2089-3" data-line-number="3">          <span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb2089-4" data-line-number="4">            males &lt;-<span class="st"> </span>self<span class="op">$</span>males</a>
-<a class="sourceLine" id="cb2089-5" data-line-number="5">            females &lt;-<span class="st"> </span>self<span class="op">$</span>females</a>
-<a class="sourceLine" id="cb2089-6" data-line-number="6">            whales &lt;-<span class="st"> </span><span class="kw">c</span>(males, females)</a>
-<a class="sourceLine" id="cb2089-7" data-line-number="7">            <span class="cf">if</span> ( <span class="kw">length</span>(whales) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb2089-8" data-line-number="8">              <span class="kw">plot</span>(<span class="dv">0</span>,<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;All Gone!&quot;</span>)</a>
-<a class="sourceLine" id="cb2089-9" data-line-number="9">              <span class="kw">box</span>(<span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb2089-10" data-line-number="10">              <span class="kw">return</span>(<span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb2089-11" data-line-number="11">            }</a>
-<a class="sourceLine" id="cb2089-12" data-line-number="12">            df &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_dfr</span>(whales, <span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb2089-13" data-line-number="13">              <span class="kw">list</span>(<span class="dt">x =</span> x<span class="op">$</span>position[<span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb2089-14" data-line-number="14">                   <span class="dt">y =</span> x<span class="op">$</span>position[<span class="dv">2</span>],</a>
-<a class="sourceLine" id="cb2089-15" data-line-number="15">                   <span class="dt">sex =</span> <span class="kw">as.numeric</span>(x<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>),</a>
-<a class="sourceLine" id="cb2089-16" data-line-number="16">                   <span class="dt">mature =</span> <span class="kw">as.numeric</span>(x<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>x<span class="op">$</span>maturity))</a>
-<a class="sourceLine" id="cb2089-17" data-line-number="17">              })</a>
-<a class="sourceLine" id="cb2089-18" data-line-number="18">            <span class="co"># males will be red, females green:</span></a>
-<a class="sourceLine" id="cb2089-19" data-line-number="19">            df<span class="op">$</span>color &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>sex <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>)</a>
-<a class="sourceLine" id="cb2089-20" data-line-number="20">            <span class="co"># mature whales have cex = 3, immature whales cex 0.7</span></a>
-<a class="sourceLine" id="cb2089-21" data-line-number="21">            df<span class="op">$</span>size &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>mature <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">1.3</span>, <span class="fl">0.7</span>)</a>
-<a class="sourceLine" id="cb2089-22" data-line-number="22">            <span class="kw">with</span>(df, </a>
-<a class="sourceLine" id="cb2089-23" data-line-number="23">                 <span class="kw">plot</span>(x, y, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, self<span class="op">$</span>dimensions[<span class="dv">1</span>]),</a>
-<a class="sourceLine" id="cb2089-24" data-line-number="24">                 <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, self<span class="op">$</span>dimensions[<span class="dv">1</span>]), <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb2089-25" data-line-number="25">                 <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> color, <span class="dt">cex =</span> size,</a>
-<a class="sourceLine" id="cb2089-26" data-line-number="26">                 <span class="dt">main =</span> <span class="kw">paste0</span>(<span class="st">&quot;Population = &quot;</span>, <span class="kw">nrow</span>(df))))</a>
-<a class="sourceLine" id="cb2089-27" data-line-number="27">            <span class="kw">box</span>(<span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb2089-28" data-line-number="28">          }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2095"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2095-1" data-line-number="1">Ocean<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, </a>
+<a class="sourceLine" id="cb2095-2" data-line-number="2">          <span class="st">&quot;plot&quot;</span>,</a>
+<a class="sourceLine" id="cb2095-3" data-line-number="3">          <span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb2095-4" data-line-number="4">            males &lt;-<span class="st"> </span>self<span class="op">$</span>males</a>
+<a class="sourceLine" id="cb2095-5" data-line-number="5">            females &lt;-<span class="st"> </span>self<span class="op">$</span>females</a>
+<a class="sourceLine" id="cb2095-6" data-line-number="6">            whales &lt;-<span class="st"> </span><span class="kw">c</span>(males, females)</a>
+<a class="sourceLine" id="cb2095-7" data-line-number="7">            <span class="cf">if</span> ( <span class="kw">length</span>(whales) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb2095-8" data-line-number="8">              <span class="kw">plot</span>(<span class="dv">0</span>,<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;All Gone!&quot;</span>)</a>
+<a class="sourceLine" id="cb2095-9" data-line-number="9">              <span class="kw">box</span>(<span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2095-10" data-line-number="10">              <span class="kw">return</span>(<span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb2095-11" data-line-number="11">            }</a>
+<a class="sourceLine" id="cb2095-12" data-line-number="12">            df &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_dfr</span>(whales, <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb2095-13" data-line-number="13">              <span class="kw">list</span>(<span class="dt">x =</span> x<span class="op">$</span>position[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb2095-14" data-line-number="14">                   <span class="dt">y =</span> x<span class="op">$</span>position[<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb2095-15" data-line-number="15">                   <span class="dt">sex =</span> <span class="kw">as.numeric</span>(x<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>),</a>
+<a class="sourceLine" id="cb2095-16" data-line-number="16">                   <span class="dt">mature =</span> <span class="kw">as.numeric</span>(x<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span>x<span class="op">$</span>maturity))</a>
+<a class="sourceLine" id="cb2095-17" data-line-number="17">              })</a>
+<a class="sourceLine" id="cb2095-18" data-line-number="18">            <span class="co"># males will be red, females green:</span></a>
+<a class="sourceLine" id="cb2095-19" data-line-number="19">            df<span class="op">$</span>color &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>sex <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>)</a>
+<a class="sourceLine" id="cb2095-20" data-line-number="20">            <span class="co"># mature whales have cex = 3, immature whales cex 0.7</span></a>
+<a class="sourceLine" id="cb2095-21" data-line-number="21">            df<span class="op">$</span>size &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>mature <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="fl">1.3</span>, <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb2095-22" data-line-number="22">            <span class="kw">with</span>(df, </a>
+<a class="sourceLine" id="cb2095-23" data-line-number="23">                 <span class="kw">plot</span>(x, y, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, self<span class="op">$</span>dimensions[<span class="dv">1</span>]),</a>
+<a class="sourceLine" id="cb2095-24" data-line-number="24">                 <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, self<span class="op">$</span>dimensions[<span class="dv">1</span>]), <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb2095-25" data-line-number="25">                 <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> color, <span class="dt">cex =</span> size,</a>
+<a class="sourceLine" id="cb2095-26" data-line-number="26">                 <span class="dt">main =</span> <span class="kw">paste0</span>(<span class="st">&quot;Population = &quot;</span>, <span class="kw">nrow</span>(df))))</a>
+<a class="sourceLine" id="cb2095-27" data-line-number="27">            <span class="kw">box</span>(<span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2095-28" data-line-number="28">          }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Finally, we write a simulation function. The function allows the user to specify the number of time-units that the simulation will cover, along with initial numbers of male and female whales. The user will have an option to “animate” the simulation showing a plot of the ocean after each time-unit. If the animation option is chosen, then R will use the <code>Sys.sleep()</code> function  to make the computer suspend computations for half a second so that the user can view the plot. The simulation will cease if all of the whales die prior to end of the allotted time. Finally, the function uses <strong>ggplot2</strong> to produce a graph of the whale population as a function of time.</p>
-<div class="sourceCode" id="cb2090"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2090-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb2090-2" data-line-number="2">oceanSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">100</span>, <span class="dt">males =</span> <span class="dv">10</span>, <span class="dt">females =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb2090-3" data-line-number="3">                     <span class="dt">starve =</span> <span class="dv">5</span>, <span class="dt">animate =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
-<a class="sourceLine" id="cb2090-4" data-line-number="4">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
-<a class="sourceLine" id="cb2090-5" data-line-number="5">    <span class="kw">set.seed</span>(seed)</a>
-<a class="sourceLine" id="cb2090-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb2090-7" data-line-number="7">  ocean &lt;-<span class="st"> </span>Ocean<span class="op">$</span><span class="kw">new</span>(<span class="dt">dims =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="dt">males =</span> males, </a>
-<a class="sourceLine" id="cb2090-8" data-line-number="8">                     <span class="dt">females =</span> females, <span class="dt">starve =</span> starve)</a>
-<a class="sourceLine" id="cb2090-9" data-line-number="9">  population &lt;-<span class="kw">numeric</span>(steps)</a>
-<a class="sourceLine" id="cb2090-10" data-line-number="10">  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>steps ) {</a>
-<a class="sourceLine" id="cb2090-11" data-line-number="11">    population[i] &lt;-<span class="st"> </span>ocean<span class="op">$</span>malePop <span class="op">+</span><span class="st"> </span>ocean<span class="op">$</span>femalePop</a>
-<a class="sourceLine" id="cb2090-12" data-line-number="12">    <span class="cf">if</span> ( animate ) ocean<span class="op">$</span><span class="kw">plot</span>()</a>
-<a class="sourceLine" id="cb2090-13" data-line-number="13">    <span class="cf">if</span> ( population[i] <span class="op">==</span><span class="st"> </span><span class="dv">0</span> ) <span class="cf">break</span></a>
-<a class="sourceLine" id="cb2090-14" data-line-number="14">    ocean<span class="op">$</span><span class="kw">advance</span>()</a>
-<a class="sourceLine" id="cb2090-15" data-line-number="15">    <span class="cf">if</span> ( animate ) <span class="kw">Sys.sleep</span>(<span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb2090-16" data-line-number="16">  }</a>
-<a class="sourceLine" id="cb2090-17" data-line-number="17">  pop &lt;-<span class="st"> </span>population[<span class="dv">1</span><span class="op">:</span>i]</a>
-<a class="sourceLine" id="cb2090-18" data-line-number="18">  df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">time =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(pop),</a>
-<a class="sourceLine" id="cb2090-19" data-line-number="19">                   pop)</a>
-<a class="sourceLine" id="cb2090-20" data-line-number="20">  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> pop)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb2090-21" data-line-number="21"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Whale Population&quot;</span>)</a>
-<a class="sourceLine" id="cb2090-22" data-line-number="22">}</a></code></pre></div>
+<div class="sourceCode" id="cb2096"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2096-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb2096-2" data-line-number="2">oceanSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">steps =</span> <span class="dv">100</span>, <span class="dt">males =</span> <span class="dv">10</span>, <span class="dt">females =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb2096-3" data-line-number="3">                     <span class="dt">starve =</span> <span class="dv">5</span>, <span class="dt">animate =</span> <span class="ot">TRUE</span>, <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb2096-4" data-line-number="4">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb2096-5" data-line-number="5">    <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb2096-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb2096-7" data-line-number="7">  ocean &lt;-<span class="st"> </span>Ocean<span class="op">$</span><span class="kw">new</span>(<span class="dt">dims =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="dt">males =</span> males, </a>
+<a class="sourceLine" id="cb2096-8" data-line-number="8">                     <span class="dt">females =</span> females, <span class="dt">starve =</span> starve)</a>
+<a class="sourceLine" id="cb2096-9" data-line-number="9">  population &lt;-<span class="kw">numeric</span>(steps)</a>
+<a class="sourceLine" id="cb2096-10" data-line-number="10">  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>steps ) {</a>
+<a class="sourceLine" id="cb2096-11" data-line-number="11">    population[i] &lt;-<span class="st"> </span>ocean<span class="op">$</span>malePop <span class="op">+</span><span class="st"> </span>ocean<span class="op">$</span>femalePop</a>
+<a class="sourceLine" id="cb2096-12" data-line-number="12">    <span class="cf">if</span> ( animate ) ocean<span class="op">$</span><span class="kw">plot</span>()</a>
+<a class="sourceLine" id="cb2096-13" data-line-number="13">    <span class="cf">if</span> ( population[i] <span class="op">==</span><span class="st"> </span><span class="dv">0</span> ) <span class="cf">break</span></a>
+<a class="sourceLine" id="cb2096-14" data-line-number="14">    ocean<span class="op">$</span><span class="kw">advance</span>()</a>
+<a class="sourceLine" id="cb2096-15" data-line-number="15">    <span class="cf">if</span> ( animate ) <span class="kw">Sys.sleep</span>(<span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb2096-16" data-line-number="16">  }</a>
+<a class="sourceLine" id="cb2096-17" data-line-number="17">  pop &lt;-<span class="st"> </span>population[<span class="dv">1</span><span class="op">:</span>i]</a>
+<a class="sourceLine" id="cb2096-18" data-line-number="18">  df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">time =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(pop),</a>
+<a class="sourceLine" id="cb2096-19" data-line-number="19">                   pop)</a>
+<a class="sourceLine" id="cb2096-20" data-line-number="20">  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> pop)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2096-21" data-line-number="21"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Whale Population&quot;</span>)</a>
+<a class="sourceLine" id="cb2096-22" data-line-number="22">}</a></code></pre></div>
 <p>We are now ready for a simulation. The results are graphed in Figure <a href="application-whales-in-an-ocean.html#fig:whalesimgraph">15.1</a>.</p>
-<div class="sourceCode" id="cb2091"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2091-1" data-line-number="1"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">200</span>, <span class="dt">males =</span> <span class="dv">15</span>, <span class="dt">females =</span> <span class="dv">15</span>,</a>
-<a class="sourceLine" id="cb2091-2" data-line-number="2">         <span class="dt">animate =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="dv">3030</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2097"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2097-1" data-line-number="1"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">200</span>, <span class="dt">males =</span> <span class="dv">15</span>, <span class="dt">females =</span> <span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb2097-2" data-line-number="2">         <span class="dt">animate =</span> <span class="ot">FALSE</span>, <span class="dt">seed =</span> <span class="dv">3030</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:whalesimgraph"></span>
 <img src="r-notes_files/figure-html/whalesimgraph-1.png" alt="Simulated whale population.  Sadly, they all die after about 130 days." width="95%" />
 <p class="caption">
@@ -892,11 +892,11 @@ Figure 15.1: Simulated whale population. Sadly, they all die after about 130 day
 </p>
 </div>
 <p>You should try running the simulation yourself a few times, for differing initial numbers of whales. If you like you can watch the whales move about by setting <code>animate</code> to <code>TRUE</code>:</p>
-<div class="sourceCode" id="cb2092"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2092-1" data-line-number="1"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">200</span>, <span class="dt">males =</span> <span class="dv">15</span>, <span class="dt">females =</span> <span class="dv">15</span>,</a>
-<a class="sourceLine" id="cb2092-2" data-line-number="2">         <span class="dt">animate =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2098"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2098-1" data-line-number="1"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">200</span>, <span class="dt">males =</span> <span class="dv">15</span>, <span class="dt">females =</span> <span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb2098-2" data-line-number="2">         <span class="dt">animate =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>You might also wish to explore varying the <code>starve</code> parameter: recall that the higher it is, the lower the long-term stable whale population will be. In order to better detect long-term stable population sizes, you will want to work with more steps, and you should turn off the step-by-step-animation, thus:</p>
-<div class="sourceCode" id="cb2093"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2093-1" data-line-number="1"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">males =</span> <span class="dv">75</span>, <span class="dt">females =</span> <span class="dv">75</span>,</a>
-<a class="sourceLine" id="cb2093-2" data-line-number="2">         <span class="dt">starve =</span> <span class="fl">2.5</span>, <span class="dt">animate =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2099"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2099-1" data-line-number="1"><span class="kw">oceanSim</span>(<span class="dt">steps =</span> <span class="dv">1000</span>, <span class="dt">males =</span> <span class="dv">75</span>, <span class="dt">females =</span> <span class="dv">75</span>,</a>
+<a class="sourceLine" id="cb2099-2" data-line-number="2">         <span class="dt">starve =</span> <span class="fl">2.5</span>, <span class="dt">animate =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>The R package <strong>bcscr</strong> (<span class="citation">(White <a href="#ref-R-bcscr">2020</a>)</span>) includes a more flexible version of the <code>Ocean</code> class that allows the users to set custom initial populations, including characteristics that vary from whale to whale.</p>
 <p>The object-oriented approach to simulation is not necessarily the quickest approach: R6 objects do require a bit more time for computation, as compared to a system that stores relevant information about the population in vectors or in a data frame. On the other hand the object-oriented approach makes it easy to encode information about each individual whale as it proceeds through time. In larger applications, an object-oriented approach to programming can result in code that is relatively easy to read and to modify, albeit at some cost in terms of speed.</p>
 </div>

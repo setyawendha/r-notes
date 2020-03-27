@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9.2 Subsetting and Accessing | Beginning Computer Science with R</title>
+  <title>14.4 Other purrr Higher-Order Functions | Beginning Computer Science with R</title>
   <meta name="description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9.2 Subsetting and Accessing | Beginning Computer Science with R" />
+  <meta property="og:title" content="14.4 Other purrr Higher-Order Functions | Beginning Computer Science with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="homerhanumat/r-notes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9.2 Subsetting and Accessing | Beginning Computer Science with R" />
+  <meta name="twitter:title" content="14.4 Other purrr Higher-Order Functions | Beginning Computer Science with R" />
   
   <meta name="twitter:description" content="Notes for Computer Science 115 and 215 at Georgetown College, Kentucky. The language of instruction is R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction-to-lists.html"/>
-<link rel="next" href="lists-splitting.html"/>
+<link rel="prev" href="purrr-higher-order-functions-for-iteration.html"/>
+<link rel="next" href="functionals-vs-loops.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -577,75 +577,319 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="subsetting-and-accessing" class="section level2">
-<h2><span class="header-section-number">9.2</span> Subsetting and Accessing</h2>
-<p>You can subset lists in the same way that you subset a vector: simply use the <code>[</code> sub-setting operator. Let’s pick out the first two elements of <code>lst3</code>:</p>
-<div class="sourceCode" id="cb1426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1426-1" data-line-number="1">lst3[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a></code></pre></div>
-<pre><code>## $nums
-##  [1] 10 11 12 13 14 15 16 17 18 19 20
+<div id="other-purrr-higher-order-functions" class="section level2">
+<h2><span class="header-section-number">14.4</span> Other <strong>purrr</strong> Higher-Order Functions</h2>
+<div id="keep-and-discard" class="section level3">
+<h3><span class="header-section-number">14.4.1</span> <code>keep()</code> and <code>discard()</code></h3>
+<p><code>keep()</code> is similar to <strong>dplyr</strong>’s <code>filter()</code>, but whereas <code>filter()</code> chooses rows of a data frame based on a given condition, <code>keep()</code> chooses the elements of the input list or vector <code>.x</code> based on a condition named <code>.p</code>.</p>
+<p>Examples:</p>
+<div class="sourceCode" id="cb1937"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1937-1" data-line-number="1"><span class="co"># keep the numbers that are 1 more than a multiple of 3</span></a>
+<a class="sourceLine" id="cb1937-2" data-line-number="2"><span class="dv">1</span><span class="op">:</span><span class="dv">20</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1937-3" data-line-number="3"><span class="st">  </span><span class="kw">keep</span>(<span class="dt">.p =</span> <span class="op">~</span><span class="st"> </span>. <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## [1]  1  4  7 10 13 16 19</code></pre>
+<div class="sourceCode" id="cb1939"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1939-1" data-line-number="1"><span class="co"># keep the factors in m111survey</span></a>
+<a class="sourceLine" id="cb1939-2" data-line-number="2">m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1939-3" data-line-number="3"><span class="st">  </span><span class="kw">keep</span>(is.factor) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1939-4" data-line-number="4"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    71 obs. of  6 variables:
+##  $ weight_feel : Factor w/ 3 levels &quot;1_underweight&quot;,..: 1 2 2 1 1 3 2 2 2 3 ...
+##  $ love_first  : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ extra_life  : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 1 1 2 1 2 2 2 1 ...
+##  $ seat        : Factor w/ 3 levels &quot;1_front&quot;,&quot;2_middle&quot;,..: 1 2 2 1 3 1 1 3 3 2 ...
+##  $ enough_Sleep: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 1 1 1 1 2 1 2 1 2 ...
+##  $ sex         : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 2 1 1 2 2 2 2 1 1 ...</code></pre>
+<p><code>discard(.x,, . p = condition)</code> is equivalent to <code>keep(.x, .p = !condition)</code>. Thus:</p>
+<div class="sourceCode" id="cb1941"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1941-1" data-line-number="1"><span class="co"># discard numbers that are 1 more than a multiple of 3</span></a>
+<a class="sourceLine" id="cb1941-2" data-line-number="2"><span class="dv">1</span><span class="op">:</span><span class="dv">20</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1941-3" data-line-number="3"><span class="st">  </span><span class="kw">discard</span>(<span class="dt">.p =</span> <span class="op">~</span><span class="st"> </span>. <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>##  [1]  2  3  5  6  8  9 11 12 14 15 17 18 20</code></pre>
+<div class="sourceCode" id="cb1943"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1943-1" data-line-number="1"><span class="co"># discard the factors in m111survey</span></a>
+<a class="sourceLine" id="cb1943-2" data-line-number="2">m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1943-3" data-line-number="3"><span class="st">  </span><span class="kw">discard</span>(is.factor) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1943-4" data-line-number="4"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    71 obs. of  6 variables:
+##  $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
+##  $ ideal_ht       : num  78 76 NA 65 72 NA 72 76 61 67 ...
+##  $ sleep          : num  9.5 7 9 7 8 10 4 6 7 7 ...
+##  $ fastest        : int  119 110 85 100 95 100 85 160 90 90 ...
+##  $ GPA            : num  3.56 2.5 3.8 3.5 3.2 3.1 3.68 2.7 2.8 NA ...
+##  $ diff.ideal.act.: num  2 2 NA 3 0 NA 2 -3 2 0 ...</code></pre>
+</div>
+<div id="reduce" class="section level3">
+<h3><span class="header-section-number">14.4.2</span> <code>reduce()</code></h3>
+<p>Another important member of the <strong>purrr</strong> family is <code>reduce()</code> . Given a vector <code>.x</code> and a function <code>.f</code> that takes two inputs, <code>reduce()</code> does the following:</p>
+<ul>
+<li>applies <code>f</code> to elements 1 and 2 of <code>.x</code>, getting a result;</li>
+<li>applies <code>f</code> to the result and to element 3 of <code>.x</code>, getting another result;</li>
+<li>applies <code>f</code> to this new result and to element 4 of <code>.x</code>, getting yet another result …</li>
+<li>… and so on until all of the elements of <code>.x</code> have been exhausted.</li>
+<li>then <code>reduce()</code> returns the final result in the above series of operations.</li>
+</ul>
+<p>For example, suppose that you want to add up the elements of the vector:</p>
+<div class="sourceCode" id="cb1945"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1945-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">6</span>)</a></code></pre></div>
+<p>Of course you could just use:</p>
+<div class="sourceCode" id="cb1946"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1946-1" data-line-number="1"><span class="kw">sum</span>(vec)</a></code></pre></div>
+<pre><code>## [1] 14</code></pre>
+<p>After all, <code>sum()</code> has been written to apply to many elements at once. But what if addition could only be done two numbers at a time? How might you proceed? You could:</p>
+<ul>
+<li>add the 3 and 1 of (the first two elements of <code>vec</code>), getting 4;</li>
+<li>then add 4 to 4, the third element of <code>vec</code>, getting 8;</li>
+<li>then add 8 to 6, the final element of <code>vec</code>, getting 14;</li>
+<li>then return 14.</li>
+</ul>
+<p><code>reduce()</code> operates in this way.</p>
+<div class="sourceCode" id="cb1948"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1948-1" data-line-number="1">vec <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1948-2" data-line-number="2"><span class="st">  </span><span class="kw">reduce</span>(<span class="dt">.f =</span> sum)</a></code></pre></div>
+<pre><code>## [1] 14</code></pre>
+<p>Can you see how <code>reduce()</code> gets its name? Step by step, it “reduces” its <code>.x</code> argument, which may consist of many elements, to a single value.</p>
+<p>A common application of <code>reduce()</code> is to take an operation that is defined on only two items and extend it to operate on any number of items. Consider, for example, the function <code>intersect()</code>, , which will find the intersection of any two vectors of the same type:</p>
+<div class="sourceCode" id="cb1950"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1950-1" data-line-number="1">vec1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb1950-2" data-line-number="2">vec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">-4</span>)</a>
+<a class="sourceLine" id="cb1950-3" data-line-number="3"><span class="kw">intersect</span>(vec1, vec2)</a></code></pre></div>
+<pre><code>## [1] 4 6</code></pre>
+<p>You cannot intersect three or more vectors at once:</p>
+<div class="sourceCode" id="cb1952"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1952-1" data-line-number="1"><span class="kw">intersect</span>(vec1, vec2, <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">9</span>))</a></code></pre></div>
+<pre><code>## Error in base::intersect(x, y, ...) : unused argument (c(4, 7, 9))</code></pre>
+<p>With <code>reduce()</code> you can intersect as many vectors as you like, provided that they are first stored in a list.</p>
+<div class="sourceCode" id="cb1954"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1954-1" data-line-number="1">lst &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Bipan&quot;</span>, <span class="st">&quot;Chandra&quot;</span>, <span class="st">&quot;Devadatta&quot;</span>, <span class="st">&quot;Raj&quot;</span>),</a>
+<a class="sourceLine" id="cb1954-2" data-line-number="2">            <span class="kw">c</span>(<span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Vikram&quot;</span>, <span class="st">&quot;Sita&quot;</span>, <span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Chandra&quot;</span>),</a>
+<a class="sourceLine" id="cb1954-3" data-line-number="3">            <span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Chandra&quot;</span>, <span class="st">&quot;Bipan&quot;</span>, <span class="st">&quot;Lila&quot;</span>),</a>
+<a class="sourceLine" id="cb1954-4" data-line-number="4">            <span class="kw">c</span>(<span class="st">&quot;Akash&quot;</span>, <span class="st">&quot;Vikram&quot;</span>, <span class="st">&quot;Devadatta&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Lila&quot;</span>))</a>
+<a class="sourceLine" id="cb1954-5" data-line-number="5">lst <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1954-6" data-line-number="6"><span class="st">  </span><span class="kw">reduce</span>(intersect)</a></code></pre></div>
+<pre><code>## [1] &quot;Akash&quot; &quot;Raj&quot;</code></pre>
+<p>You can write your own function to supply as the argument for <code>.f</code>, but it has to be able to operate on two arguments. <code>reduce()</code> will take the first argument of the <code>.f</code> function to be what has been “accumulated” so far, and the second argument of the <code>.f</code> function—the value to be combined with what has been accumulated—will be provided by the current element of <code>.x</code>.</p>
+<p>As a simple example, let’s write our own reduce-summer in a way that shows the user the reduction process at work:</p>
+<div class="sourceCode" id="cb1956"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1956-1" data-line-number="1"><span class="co">## the .f function:</span></a>
+<a class="sourceLine" id="cb1956-2" data-line-number="2">mySummer &lt;-<span class="st"> </span><span class="cf">function</span>(acc, curr) {</a>
+<a class="sourceLine" id="cb1956-3" data-line-number="3">  <span class="kw">cat</span>(<span class="st">&quot;So far I have &quot;</span>, acc, <span class="st">&quot;,</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1956-4" data-line-number="4">  <span class="kw">cat</span>(<span class="st">&quot;But just now I was given &quot;</span> , curr, <span class="st">&quot; to add in.</span><span class="ch">\n\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1956-5" data-line-number="5">  <span class="kw">sum</span>(acc, curr)</a>
+<a class="sourceLine" id="cb1956-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb1956-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1956-8" data-line-number="8"><span class="co">## .x will be the whole numbers from 1 to 4:</span></a>
+<a class="sourceLine" id="cb1956-9" data-line-number="9"><span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1956-10" data-line-number="10"><span class="st">  </span><span class="kw">reduce</span>(<span class="dt">.f =</span> mySummer)</a></code></pre></div>
+<pre><code>## So far I have  1 ,
+## But just now I was given 2 to add in.
 ## 
-## $bools
-## [1]  TRUE FALSE FALSE</code></pre>
-<p>We get a new list consisting of the desired two elements.</p>
-<p>Suppose we want to access just one element from <code>lst3</code>: the numbers, for instance. We could try this:</p>
-<div class="sourceCode" id="cb1428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1428-1" data-line-number="1">justNumbers &lt;-<span class="st"> </span>lst3[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb1428-2" data-line-number="2">justNumbers</a></code></pre></div>
-<pre><code>## $nums
-##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
-<p>Now suppose that we want to access the third number in the <code>nums</code> vector. You might think this would work fine:</p>
-<div class="sourceCode" id="cb1430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1430-1" data-line-number="1">justNumbers[<span class="dv">3</span>]</a></code></pre></div>
-<pre><code>## $&lt;NA&gt;
-## NULL</code></pre>
-<p>Wait a minute! The third number in <code>nums</code> is 12: so why are we getting <code>NA</code>?</p>
-<p>Look carefully again at the printout for <code>justNumbers</code>:</p>
-<div class="sourceCode" id="cb1432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1432-1" data-line-number="1">justNumbers</a></code></pre></div>
-<pre><code>## $nums
-##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
-<p>The <code>$nums</code> give us the clue: <code>justNumbers</code> is not just the vector <code>nums</code>—in fact it’s not an atomic vector at all. It is a list whose only element is a vector with the name <code>nums</code>. Another way to see this is to check the length of <code>justNumbers</code>:</p>
-<div class="sourceCode" id="cb1434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1434-1" data-line-number="1"><span class="kw">length</span>(justNumbers)</a></code></pre></div>
-<pre><code>## [1] 1</code></pre>
-<p>The fact is that the sub-setting operator <code>[</code>, applied to lists, always returns a list. If you want access to an individual element of a list, then you need to use the double-bracket <code>[[</code> operator:</p>
-<div class="sourceCode" id="cb1436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1436-1" data-line-number="1">reallyJustNumbers &lt;-<span class="st"> </span>lst3[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb1436-2" data-line-number="2">reallyJustNumbers</a></code></pre></div>
-<pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
-<p>Of course if an element of a list is named, then you may also access it with the dollar sign:</p>
-<div class="sourceCode" id="cb1438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1438-1" data-line-number="1">lst3<span class="op">$</span>nums</a></code></pre></div>
-<pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
-<p>From time to time it’s useful to “flatten out” a list into a vector of values of its elements. This is accomplished by the function <code>unlist()</code> :</p>
-<div class="sourceCode" id="cb1440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1440-1" data-line-number="1"><span class="kw">unlist</span>(lst1)</a></code></pre></div>
-<pre><code>##      name       age 
-## &quot;Dorothy&quot;      &quot;12&quot;</code></pre>
-<p>As the example above shows, you have to exercise caution with <code>unlist()</code>. Since <code>unlist()</code> returns an atomic vector, when it encounters values of different types then it has to coerce them to be of the same type. In the competition between <code>double</code> and <code>character</code> types, <code>character</code> wins, so you end up with a vector of strings.</p>
-<div id="practice-exercises-28" class="section level3">
-<h3><span class="header-section-number">9.2.1</span> Practice Exercises</h3>
-<p>These exercises involve the following list:</p>
-<div class="sourceCode" id="cb1442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1442-1" data-line-number="1">grabBag &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">letters =</span> letters,</a>
-<a class="sourceLine" id="cb1442-2" data-line-number="2">                <span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb1442-3" data-line-number="3">                <span class="dt">df =</span> bcscr<span class="op">::</span>fuel)</a></code></pre></div>
-<p>Observe that the second element of this list was NOT given a name.</p>
+## So far I have  3 ,
+## But just now I was given 3 to add in.
+## 
+## So far I have  6 ,
+## But just now I was given 4 to add in.</code></pre>
+<pre><code>## [1] 10</code></pre>
+<p>When you write your own <code>.f</code> function, it’s a good idea to use names for the parameters that remind you of their role in the reduction process. <code>acc</code> (for “accumulated”) and <code>curr</code> (for “current”) are used above.</p>
+<p><code>reduce()</code> can take an argument called <code>.init</code>. When this argument is given a value, operation begins by applying to <code>.f</code> to <code>.init</code> and the first element of <code>.x</code>. For example:</p>
+<div class="sourceCode" id="cb1959"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1959-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1959-2" data-line-number="2"><span class="st">  </span><span class="kw">reduce</span>(<span class="dt">.f =</span> mySummer, <span class="dt">.init =</span> <span class="dv">100</span>)</a></code></pre></div>
+<pre><code>## So far I have  100 ,
+## But just now I was given 1 to add in.
+## 
+## So far I have  101 ,
+## But just now I was given 2 to add in.
+## 
+## So far I have  103 ,
+## But just now I was given 3 to add in.
+## 
+## So far I have  106 ,
+## But just now I was given 4 to add in.</code></pre>
+<pre><code>## [1] 110</code></pre>
+<div id="an-extended-example-of-reduction" class="section level4">
+<h4><span class="header-section-number">14.4.2.1</span> An Extended Example of Reduction</h4>
+<p>Let’s apply <code>reduce()</code> with <code>.init</code> to the task of making a <em>truth table</em>: the set of all <span class="math inline">\(2^n\)</span> logical vectors of a given length <span class="math inline">\(n\)</span>.</p>
+<p>The set <span class="math inline">\(S_1\)</span> of vectors of length <span class="math inline">\(n = 1\)</span> consists of only two vectors:</p>
+<pre><code>##           
+## vec1  TRUE
+## vec2 FALSE</code></pre>
+<p>Now consider a systematic way to construct the set <span class="math inline">\(S_2\)</span> of all the vectors of length two. We know that there are four such vectors:</p>
+<pre><code>##                 
+## vec1  TRUE  TRUE
+## vec2  TRUE FALSE
+## vec3 FALSE  TRUE
+## vec4 FALSE FALSE</code></pre>
+<p>Observe that the first two of them begin with <code>TRUE</code> and end with the set <span class="math inline">\(S_1\)</span> of vectors of length one:</p>
+<pre><code>##                
+## vec1 TRUE  TRUE
+## vec2 TRUE FALSE</code></pre>
+<p>The last two of them begin with <code>FALSE</code> and <em>also</em> end with <span class="math inline">\(S_1\)</span>:</p>
+<pre><code>##                 
+## vec3 FALSE  TRUE
+## vec4 FALSE FALSE</code></pre>
+<p>Now consider <span class="math inline">\(S_3\)</span>, the set of all eight vectors of length three:</p>
+<pre><code>##                       
+## vec1  TRUE  TRUE  TRUE
+## vec2  TRUE  TRUE FALSE
+## vec3  TRUE FALSE  TRUE
+## vec4  TRUE FALSE FALSE
+## vec5 FALSE  TRUE  TRUE
+## vec6 FALSE  TRUE FALSE
+## vec7 FALSE FALSE  TRUE
+## vec8 FALSE FALSE FALSE</code></pre>
+<p>Observe that the first four of them end begin with <code>TRUE</code> and and with the vectors of <span class="math inline">\(S_2\)</span>:</p>
+<pre><code>##                      
+## vec1 TRUE  TRUE  TRUE
+## vec2 TRUE  TRUE FALSE
+## vec3 TRUE FALSE  TRUE
+## vec4 TRUE FALSE FALSE</code></pre>
+<p>The last four of them begin with <code>FALSE</code> and <em>also</em> end with the vectors of <span class="math inline">\(S_2\)</span>:</p>
+<pre><code>##                       
+## vec5 FALSE  TRUE  TRUE
+## vec6 FALSE  TRUE FALSE
+## vec7 FALSE FALSE  TRUE
+## vec8 FALSE FALSE FALSE</code></pre>
+<p>The pattern is now clear. If for any <span class="math inline">\(m \ge 1\)</span> you are in possession of the <span class="math inline">\(2^m \times m\)</span> matrix <span class="math inline">\(S_m\)</span> of all possible vectors of length <span class="math inline">\(m\)</span>, then to obtain the <span class="math inline">\(2^{m+1} \times (m+1)\)</span> matrix <span class="math inline">\(S_{m+1}\)</span> of all possible vectors of length <span class="math inline">\(m+1\)</span> you should:</p>
+<ul>
+<li>stack <span class="math inline">\(2^m\)</span> <code>TRUE</code>s on top of <span class="math inline">\(2^m\)</span> <code>FALSE</code>s, creating a <span class="math inline">\(2^{m+1} \times 1\)</span> matrix <span class="math inline">\(U\)</span>;</li>
+<li>stack the <span class="math inline">\(S_m\)</span> underneath itself, creating a <span class="math inline">\(2^{m+1} \times m\)</span> matrix <span class="math inline">\(V\)</span>;</li>
+<li>place <span class="math inline">\(U\)</span> next to <span class="math inline">\(V\)</span>.</li>
+</ul>
+<p><code>reduce()</code> with <code>.init</code> set to <span class="math inline">\(S_1\)</span> is appropriate for this iterative building process. Here is an implementation:</p>
+<div class="sourceCode" id="cb1969"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1969-1" data-line-number="1">makeTable &lt;-<span class="st"> </span><span class="cf">function</span>(n, <span class="dt">verbose =</span> <span class="ot">FALSE</span>) {</a>
+<a class="sourceLine" id="cb1969-2" data-line-number="2">  <span class="co"># make .init (S_1)</span></a>
+<a class="sourceLine" id="cb1969-3" data-line-number="3">  s1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1969-4" data-line-number="4">  <span class="kw">rownames</span>(s1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;vec1&quot;</span>, <span class="st">&quot;vec2&quot;</span>)</a>
+<a class="sourceLine" id="cb1969-5" data-line-number="5">  <span class="kw">colnames</span>(s1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1969-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb1969-7" data-line-number="7">  <span class="co"># make .f</span></a>
+<a class="sourceLine" id="cb1969-8" data-line-number="8">  buildNext &lt;-<span class="st"> </span><span class="cf">function</span>(accum, value) {</a>
+<a class="sourceLine" id="cb1969-9" data-line-number="9">    <span class="cf">if</span> ( verbose ) {</a>
+<a class="sourceLine" id="cb1969-10" data-line-number="10">      <span class="kw">cat</span>(<span class="st">&quot;On value &quot;</span>, value, </a>
+<a class="sourceLine" id="cb1969-11" data-line-number="11">          <span class="st">&quot; with accumalated material:&quot;</span>,</a>
+<a class="sourceLine" id="cb1969-12" data-line-number="12">          <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1969-13" data-line-number="13">      <span class="kw">print</span>(accum)</a>
+<a class="sourceLine" id="cb1969-14" data-line-number="14">    }</a>
+<a class="sourceLine" id="cb1969-15" data-line-number="15">    <span class="cf">if</span> ( value <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ) <span class="kw">return</span>(accum)</a>
+<a class="sourceLine" id="cb1969-16" data-line-number="16">    r &lt;-<span class="st"> </span><span class="kw">nrow</span>(accum)</a>
+<a class="sourceLine" id="cb1969-17" data-line-number="17">    u &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="ot">TRUE</span>, <span class="dt">times =</span> r),</a>
+<a class="sourceLine" id="cb1969-18" data-line-number="18">           <span class="kw">rep</span>(<span class="ot">FALSE</span>, <span class="dt">times =</span> r))</a>
+<a class="sourceLine" id="cb1969-19" data-line-number="19">    v &lt;-<span class="st"> </span><span class="kw">rbind</span>(accum, accum)</a>
+<a class="sourceLine" id="cb1969-20" data-line-number="20">    nextMatrix &lt;-<span class="st"> </span><span class="kw">cbind</span>(u, v)</a>
+<a class="sourceLine" id="cb1969-21" data-line-number="21">    <span class="kw">colnames</span>(nextMatrix) &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;&quot;</span>, <span class="dt">times =</span> value)</a>
+<a class="sourceLine" id="cb1969-22" data-line-number="22">    <span class="kw">rownames</span>(nextMatrix) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;vec&quot;</span>, <span class="dv">1</span><span class="op">:</span>(<span class="dv">2</span><span class="op">^</span>value), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1969-23" data-line-number="23">    <span class="cf">if</span> ( verbose ) {</a>
+<a class="sourceLine" id="cb1969-24" data-line-number="24">      <span class="kw">cat</span>(<span class="st">&quot;Finishing value&quot;</span>, value, </a>
+<a class="sourceLine" id="cb1969-25" data-line-number="25">          <span class="st">&quot;, and I&#39;ve built:&quot;</span>,</a>
+<a class="sourceLine" id="cb1969-26" data-line-number="26">          <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1969-27" data-line-number="27">      <span class="kw">print</span>(nextMatrix)</a>
+<a class="sourceLine" id="cb1969-28" data-line-number="28">      <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1969-29" data-line-number="29">    }</a>
+<a class="sourceLine" id="cb1969-30" data-line-number="30">    nextMatrix</a>
+<a class="sourceLine" id="cb1969-31" data-line-number="31">  }</a>
+<a class="sourceLine" id="cb1969-32" data-line-number="32">  </a>
+<a class="sourceLine" id="cb1969-33" data-line-number="33">  <span class="co"># build from .init to the final product S_n</span></a>
+<a class="sourceLine" id="cb1969-34" data-line-number="34">  <span class="kw">reduce</span>(<span class="dt">.x =</span> <span class="dv">1</span><span class="op">:</span>n, <span class="dt">.f =</span> buildNext, <span class="dt">.init =</span> s1)</a>
+<a class="sourceLine" id="cb1969-35" data-line-number="35">}</a></code></pre></div>
+<p>We have included a <code>verbose</code> option so we can watch the process as it unfolds.</p>
+<p>Note also that the parameters for the <code>.f</code> function are named:</p>
+<ul>
+<li><code>acc</code> (what has been “accumulated” up to the current step), and</li>
+<li><code>value</code> (the value of <code>.x</code> at the current step).</li>
+</ul>
+<p>It’s conventional to give these or similar names to the parameters of the building-function.</p>
+<p>Let’s try it out:</p>
+<div class="sourceCode" id="cb1970"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1970-1" data-line-number="1"><span class="kw">makeTable</span>(<span class="dv">3</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## On value 1 with accumalated material:          
+## vec1  TRUE
+## vec2 FALSE
+## On value 2 with accumalated material:          
+## vec1  TRUE
+## vec2 FALSE
+## Finishing value2, and I&#39;ve built:                
+## vec1  TRUE  TRUE
+## vec2  TRUE FALSE
+## vec3 FALSE  TRUE
+## vec4 FALSE FALSE
+## 
+## 
+## On value 3 with accumalated material:                
+## vec1  TRUE  TRUE
+## vec2  TRUE FALSE
+## vec3 FALSE  TRUE
+## vec4 FALSE FALSE
+## Finishing value3, and I&#39;ve built:                      
+## vec1  TRUE  TRUE  TRUE
+## vec2  TRUE  TRUE FALSE
+## vec3  TRUE FALSE  TRUE
+## vec4  TRUE FALSE FALSE
+## vec5 FALSE  TRUE  TRUE
+## vec6 FALSE  TRUE FALSE
+## vec7 FALSE FALSE  TRUE
+## vec8 FALSE FALSE FALSE</code></pre>
+<pre><code>##                       
+## vec1  TRUE  TRUE  TRUE
+## vec2  TRUE  TRUE FALSE
+## vec3  TRUE FALSE  TRUE
+## vec4  TRUE FALSE FALSE
+## vec5 FALSE  TRUE  TRUE
+## vec6 FALSE  TRUE FALSE
+## vec7 FALSE FALSE  TRUE
+## vec8 FALSE FALSE FALSE</code></pre>
+<p>Of course in practice we would not turn on the <code>verbose</code> option:</p>
+<div class="sourceCode" id="cb1973"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1973-1" data-line-number="1"><span class="kw">makeTable</span>(<span class="dv">4</span>)</a></code></pre></div>
+<pre><code>##                              
+## vec1   TRUE  TRUE  TRUE  TRUE
+## vec2   TRUE  TRUE  TRUE FALSE
+## vec3   TRUE  TRUE FALSE  TRUE
+## vec4   TRUE  TRUE FALSE FALSE
+## vec5   TRUE FALSE  TRUE  TRUE
+## vec6   TRUE FALSE  TRUE FALSE
+## vec7   TRUE FALSE FALSE  TRUE
+## vec8   TRUE FALSE FALSE FALSE
+## vec9  FALSE  TRUE  TRUE  TRUE
+## vec10 FALSE  TRUE  TRUE FALSE
+## vec11 FALSE  TRUE FALSE  TRUE
+## vec12 FALSE  TRUE FALSE FALSE
+## vec13 FALSE FALSE  TRUE  TRUE
+## vec14 FALSE FALSE  TRUE FALSE
+## vec15 FALSE FALSE FALSE  TRUE
+## vec16 FALSE FALSE FALSE FALSE</code></pre>
+</div>
+</div>
+<div id="practice-exercises-37" class="section level3">
+<h3><span class="header-section-number">14.4.3</span> Practice Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><p>Describe in words what <code>grabBag[2:3]</code> is.</p></li>
-<li><p>Describe in words what <code>grabBag[3]</code> is.</p></li>
-<li><p>Describe in words what `grabBag[[3]] is.</p></li>
-<li><p>Find two ways to access the letter <code>&quot;d&quot;</code> in the first element of <code>grabBag</code>.</p></li>
-<li><p>Find a way to access the last five elements of the second element of <code>grabBag</code>.</p></li>
-<li><p>Find two ways to access the variable <code>speed</code> in the data frame in <code>grabBag</code>.</p></li>
+<li><p>The operator <code>*</code> (multiplication) is really a function:</p>
+<div class="sourceCode" id="cb1975"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1975-1" data-line-number="1"><span class="st">`</span><span class="dt">*</span><span class="st">`</span>(<span class="dv">3</span>,<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] 15</code></pre>
+<p>But it can only multiply two numbers at once. The R-function <code>prod()</code> cna handle as many numbers as you like:</p>
+<div class="sourceCode" id="cb1977"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1977-1" data-line-number="1"><span class="kw">prod</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">7</span>)</a></code></pre></div>
+<pre><code>## [1] 210</code></pre>
+<p>Use <code>reduce()</code> and <code>*</code> to write your own function <code>product()</code> that takes a numerical vector <code>vec</code> and returns the product of the elements of the vector. It should work liek this:</p>
+<div class="sourceCode" id="cb1979"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1979-1" data-line-number="1"><span class="kw">product</span>(<span class="dt">vec =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>))</a></code></pre></div>
+<pre><code>## [1] 60</code></pre>
+<p>(<strong>Hint</strong>: in the call to <code>reduce()</code> you will have to the refer to the <code>*</code>-function as <code>`*`</code>.)</p></li>
+<li><p>Modify the function <code>product()</code> so that it in a single call to <code>reduce()</code> it multiplies the number 2 by the product of the elements of <code>vec</code>. (<strong>Hint</strong>: set <code>.init</code> to an appropriate value.)</p></li>
+<li><p>The data frame <strong>iris</strong> gives information on 150 irises. Use <code>keep()</code> to create a new data frame that includes only the numerical variables having a mean greater than 3.5.</p></li>
 </ol>
 </div>
-<div id="solutions-to-the-practice-exercises-16" class="section level3">
-<h3><span class="header-section-number">9.2.2</span> Solutions to the Practice Exercises</h3>
+<div id="solutions-to-the-practice-exercises-21" class="section level3">
+<h3><span class="header-section-number">14.4.4</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
-<li><p><code>grabBag[2:3]</code> is a list containing two elements: the vector of whole numbers from 1 to 10 turned into strings, and the data frame <code>fuel</code> from the <strong>bcscr</strong> package.</p></li>
-<li><p><code>grabBag[3]</code> is a list containing just one element: the data frame <code>fuel</code> from the <strong>bcscr</strong> package.</p></li>
-<li><p><code>grabBag[[3]]</code> is the data frame <code>fuel</code> from the <strong>bcscr</strong> package.</p></li>
-<li><p>Here are two ways:</p>
-<div class="sourceCode" id="cb1443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1443-1" data-line-number="1">grabBag<span class="op">$</span>letters[<span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb1443-2" data-line-number="2">grabBag[[<span class="dv">1</span>]][<span class="dv">4</span>]</a></code></pre></div></li>
 <li><p>Try this:</p>
-<div class="sourceCode" id="cb1444"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1444-1" data-line-number="1">grabBag[[<span class="dv">2</span>]][<span class="dv">6</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div></li>
-<li><p>Here are two ways:</p>
-<div class="sourceCode" id="cb1445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1445-1" data-line-number="1">grabBag<span class="op">$</span>df<span class="op">$</span>speed</a>
-<a class="sourceLine" id="cb1445-2" data-line-number="2">grabBag[[<span class="dv">3</span>]]<span class="op">$</span>speed</a></code></pre></div></li>
+<div class="sourceCode" id="cb1981"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1981-1" data-line-number="1">product &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {</a>
+<a class="sourceLine" id="cb1981-2" data-line-number="2">  <span class="kw">reduce</span>(vec, <span class="dt">.f =</span> <span class="st">`</span><span class="dt">*</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb1981-3" data-line-number="3">}</a></code></pre></div></li>
+<li><p>Try this:</p>
+<div class="sourceCode" id="cb1982"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1982-1" data-line-number="1">product &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {</a>
+<a class="sourceLine" id="cb1982-2" data-line-number="2">  <span class="kw">reduce</span>(vec, <span class="dt">.f =</span> <span class="st">`</span><span class="dt">*</span><span class="st">`</span>, <span class="dt">.init =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1982-3" data-line-number="3">}</a></code></pre></div></li>
+<li><p>Try this:</p>
+<div class="sourceCode" id="cb1983"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1983-1" data-line-number="1">bigIris &lt;-</a>
+<a class="sourceLine" id="cb1983-2" data-line-number="2"><span class="st">  </span>iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1983-3" data-line-number="3"><span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1983-4" data-line-number="4"><span class="st">  </span><span class="kw">keep</span>(<span class="op">~</span><span class="kw">mean</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="fl">3.5</span>)</a>
+<a class="sourceLine" id="cb1983-5" data-line-number="5"><span class="kw">str</span>(bigIris)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  2 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...</code></pre>
+<p>The following does not work. Why?</p>
+<div class="sourceCode" id="cb1985"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1985-1" data-line-number="1">bigIris &lt;-</a>
+<a class="sourceLine" id="cb1985-2" data-line-number="2"><span class="st">  </span>iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1985-3" data-line-number="3"><span class="st">  </span><span class="kw">keep</span>(<span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb1985-4" data-line-number="4">    <span class="kw">is.numeric</span>(x) <span class="op">&amp;</span><span class="st"> </span><span class="kw">mean</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="fl">3.5</span></a>
+<a class="sourceLine" id="cb1985-5" data-line-number="5">  })</a>
+<a class="sourceLine" id="cb1985-6" data-line-number="6"><span class="er">}</span></a></code></pre></div></li>
 </ol>
 </div>
 </div>
@@ -654,8 +898,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="introduction-to-lists.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lists-splitting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="purrr-higher-order-functions-for-iteration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functionals-vs-loops.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
