@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-02-13" />
+<meta name="date" content="2020-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -593,7 +593,7 @@ Create two new witches:
 <li>Glinda, the Good Witch of the North. Her desire and color of slippers are up to you.</li>
 </ul></li>
 <li><p>Install the package <strong>bcscr</strong>, if you have not done so already:</p>
-<div class="sourceCode" id="cb2143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2143-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install.packages</span>(<span class="st">&quot;homerhanumat/bcscr&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2144-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install.packages</span>(<span class="st">&quot;homerhanumat/bcscr&quot;</span>)</a></code></pre></div>
 <p>Study the documentation for the classes <code>Ocean</code>, <code>Female</code> and <code>Male</code>, and then write your own ocean simulation in which the initial whales have properties that you select.</p>
 <p>Run the simulation, initializing the ocean with ten whales of each sex and report on the results in an R Markdown document. (<strong>Note</strong>: Don’t run animations in an R Markdown document.)</p></li>
 <li>Recall the function <code>meetupSim()</code> from Section <a href="simulation-connect.html#simulation-connect">6.4</a>, with which we investigated the probability that Anna and Raj would meet at the Coffee Shop. Suppose that we are interested not only in the probability that they meet, but also in the distribution of the number of minutes by which the latecomer misses the one who came early on the occasions when they do not manage to connect. Revise <code>meetupSim()</code> so that it does not print any results to the console, but instead returns a list. The list should have two elements:
@@ -602,14 +602,14 @@ Create two new witches:
 <li>a numerical vector indicating, for each repetition in which they did not meet, the number of minutes by which the latecomer missed meeting the person who arrived earlier.</li>
 </ul>
 <p>Make the list have class “meetupSims”. A typical example of use should look like this:</p>
-<div class="sourceCode" id="cb2144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2144-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</a>
-<a class="sourceLine" id="cb2144-2" data-line-number="2"><span class="kw">str</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb2145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2145-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">meetupSim</span>(<span class="dt">reps =</span> <span class="dv">10000</span>, <span class="dt">seed =</span> <span class="dv">3535</span>)</a>
+<a class="sourceLine" id="cb2145-2" data-line-number="2"><span class="kw">str</span>(results)</a></code></pre></div>
 <pre><code>## List of 2
 ##  $ connect: logi [1:10000] FALSE FALSE TRUE FALSE TRUE FALSE ...
 ##  $ noMeet : num [1:6934] 30.275 29.959 22.394 0.491 4.898 ...
 ##  - attr(*, &quot;class&quot;)= chr &quot;meetupSims&quot;</code></pre></li>
 <li><p>Building on the previous exercise, write a method-function called <code>print.meetupSims()</code> that prints the results of a meet-up simulation to the console. The function should provide a table that gives the proportion of times that Anna and Raj met, and a numerical summary of the simulation results when they did not meet. (You could use the <code>summary()</code> function for this.) A typical example of use would look like this:</p>
-<div class="sourceCode" id="cb2146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2146-1" data-line-number="1">results   <span class="co"># has same effect as print(results)</span></a></code></pre></div>
+<div class="sourceCode" id="cb2147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2147-1" data-line-number="1">results   <span class="co"># has same effect as print(results)</span></a></code></pre></div>
 <pre><code>## Here is a table of the results, based on 10000 simulations.
 ## 
 ## Did not connect       Connected 
@@ -620,8 +620,8 @@ Create two new witches:
 ##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ##  0.00131  6.60680 14.55711 16.55834 24.87720 49.30534</code></pre></li>
 <li><p>Continuing in the same vein, write a method-function called <code>plot.meetupSims()</code> that makes a density plot showing the distribution of the number of minutes by which the latecomer misses the meeting. It should work like this:</p>
-<div class="sourceCode" id="cb2148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2148-1" data-line-number="1"><span class="kw">plot</span>(results)</a></code></pre></div>
-<p><img src="r-notes_files/figure-html/unnamed-chunk-1270-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
+<div class="sourceCode" id="cb2149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2149-1" data-line-number="1"><span class="kw">plot</span>(results)</a></code></pre></div>
+<p><img src="r-notes_files/figure-html/unnamed-chunk-1271-1.png" width="95%" style="display: block; margin: auto;" /></p></li>
 <li><p>Write a generic function called <code>ypos()</code> that will return the <span class="math inline">\(y\)</span>-coordinate of points of class <code>cartesianPoint</code> and <code>polarPoint</code>. Of course you will need to write the corresponding method functions, as well.</p></li>
 <li><p>Write a generic function called <code>norm()</code> that will return the distance of a point from the origin. The point could be of class <code>cartesianPoint</code> or <code>polarPoint</code>, so you will need to write the corresponding method functions, as well. (It will be helpful to recall that for a point with Cartesian coordinates <span class="math inline">\((x,y)\)</span> the distance from the origin is <span class="math inline">\(\sqrt{x^2 + y^2}\)</span>.)</p></li>
 </ol>

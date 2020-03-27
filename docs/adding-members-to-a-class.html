@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-02-13" />
+<meta name="date" content="2020-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -580,9 +580,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="adding-members-to-a-class" class="section level2">
 <h2><span class="header-section-number">15.4</span> Adding Members to a Class</h2>
 <p>Sometimes we need to add or to modify a member of a class, after we have defined that class. Every class comes with a <code>set()</code> method that allows us to do this. For example, suppose that we would like our people to have a favorite color:</p>
-<div class="sourceCode" id="cb2056"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2056-1" data-line-number="1">Person<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="ot">NA</span>, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2057"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2057-1" data-line-number="1">Person<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="ot">NA</span>, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>We now see that <code>color</code> is now one of the public members of class Person:</p>
-<div class="sourceCode" id="cb2057"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2057-1" data-line-number="1">Person</a></code></pre></div>
+<div class="sourceCode" id="cb2058"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2058-1" data-line-number="1">Person</a></code></pre></div>
 <pre><code>## &lt;Person&gt; object generator
 ##   Public:
 ##     name: NULL
@@ -600,17 +600,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   Portable: TRUE</code></pre>
 <p>In the above call to set, the argument <code>overwrite = TRUE</code> was not strictly necessary, since <code>color</code> did not previously exist as a member of Person. If you are developing a program, though, and you find yourself repeatedly running a piece of code that sets a new member for a class, it’s useful to have overwriting turned on.</p>
 <p>While we are at it. let’s write a special <code>set_color()</code> method:</p>
-<div class="sourceCode" id="cb2059"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2059-1" data-line-number="1">Person<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;set_color&quot;</span>, <span class="cf">function</span>(val) {</a>
-<a class="sourceLine" id="cb2059-2" data-line-number="2">  self<span class="op">$</span>color &lt;-<span class="st"> </span>val</a>
-<a class="sourceLine" id="cb2059-3" data-line-number="3">  <span class="kw">cat</span>(self<span class="op">$</span>name, <span class="st">&quot; has favorite color: &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb2059-4" data-line-number="4">  }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2060"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2060-1" data-line-number="1">Person<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;set_color&quot;</span>, <span class="cf">function</span>(val) {</a>
+<a class="sourceLine" id="cb2060-2" data-line-number="2">  self<span class="op">$</span>color &lt;-<span class="st"> </span>val</a>
+<a class="sourceLine" id="cb2060-3" data-line-number="3">  <span class="kw">cat</span>(self<span class="op">$</span>name, <span class="st">&quot; has favorite color: &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb2060-4" data-line-number="4">  }, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>You might think that we can now set a favorite color for <code>dorothy</code>:</p>
-<div class="sourceCode" id="cb2060"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2060-1" data-line-number="1">dorothy<span class="op">$</span><span class="kw">set_color</span>(<span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2061"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2061-1" data-line-number="1">dorothy<span class="op">$</span><span class="kw">set_color</span>(<span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
 <pre><code>Error: attempt to apply non-function</code></pre>
 <p>Why did this not work? It turns out that when you add a new member to a class it is only available to instances of the class that are created <strong>after</strong> the new member is added to that class. If we create a new instance of Person, the Good Witch Glinda, let’s say, then we should be able to give her a favorite color:</p>
-<div class="sourceCode" id="cb2062"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2062-1" data-line-number="1">glinda &lt;-<span class="st"> </span>Person<span class="op">$</span><span class="kw">new</span>(<span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;500&quot;</span>, <span class="st">&quot;the good of all&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2063"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2063-1" data-line-number="1">glinda &lt;-<span class="st"> </span>Person<span class="op">$</span><span class="kw">new</span>(<span class="st">&quot;Glinda&quot;</span>, <span class="st">&quot;500&quot;</span>, <span class="st">&quot;the good of all&quot;</span>)</a></code></pre></div>
 <pre><code>## Hello, my name is Glinda.</code></pre>
-<div class="sourceCode" id="cb2064"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2064-1" data-line-number="1">glinda<span class="op">$</span><span class="kw">set_color</span>(<span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2065"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2065-1" data-line-number="1">glinda<span class="op">$</span><span class="kw">set_color</span>(<span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
 <pre><code>## Glinda has favorite color: blue.</code></pre>
 </div>
             </section>

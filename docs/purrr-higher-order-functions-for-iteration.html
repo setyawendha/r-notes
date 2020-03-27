@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-02-13" />
+<meta name="date" content="2020-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -699,9 +699,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1897-5" data-line-number="5">    <span class="kw">sample</span>(letters, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb1897-6" data-line-number="6">  }</a>
 <a class="sourceLine" id="cb1897-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb1897-8" data-line-number="8">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>)                <span class="co"># vary number of letters to pick</span></a>
-<a class="sourceLine" id="cb1897-9" data-line-number="9">upper &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)  <span class="co"># vary the case (upper, lower)</span></a>
-<a class="sourceLine" id="cb1897-10" data-line-number="10"><span class="kw">list</span>(n, upper) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1897-8" data-line-number="8">george &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>)                <span class="co"># vary number of letters to pick</span></a>
+<a class="sourceLine" id="cb1897-9" data-line-number="9">bettina &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)  <span class="co"># vary the case (upper, lower)</span></a>
+<a class="sourceLine" id="cb1897-10" data-line-number="10"><span class="kw">list</span>(george, bettina) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1897-11" data-line-number="11"><span class="st">  </span><span class="kw">pmap</span>(rLetters)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;O&quot; &quot;G&quot; &quot;A&quot;
@@ -827,45 +827,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The next example illustrates the use of the return-value of <code>walk()</code>. We would like to save plots of all numerical variables from the data frame <code>m111survey</code>, and also print summaries of them to the Console.</p>
 <p>First we create a directory to hold the plots:</p>
 <div class="sourceCode" id="cb1915"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1915-1" data-line-number="1"><span class="cf">if</span> ( <span class="op">!</span><span class="kw">dir.exists</span>(<span class="st">&quot;plots&quot;</span>) ) <span class="kw">dir.create</span>(<span class="st">&quot;plots&quot;</span>)</a></code></pre></div>
-<p>Next, we get the names of the numerical variables in <code>m111survey</code>:</p>
-<div class="sourceCode" id="cb1916"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1916-1" data-line-number="1">numNames &lt;-</a>
+<p>Next, we get the numerical variables in <code>m111survey</code>:</p>
+<div class="sourceCode" id="cb1916"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1916-1" data-line-number="1">numericals &lt;-</a>
 <a class="sourceLine" id="cb1916-2" data-line-number="2"><span class="st">  </span>m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1916-3" data-line-number="3"><span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># purrr::keep()</span></a>
-<a class="sourceLine" id="cb1916-4" data-line-number="4"><span class="st">  </span><span class="kw">names</span>()</a></code></pre></div>
-<p>We used <code>purrr::keep()</code>, which retains only the elements of its input <code>.x</code> such that the <code>.f</code> function returns <code>TRUE</code>.</p>
+<a class="sourceLine" id="cb1916-3" data-line-number="3"><span class="st">  </span><span class="kw">keep</span>(is.numeric)   <span class="co"># purrr::keep()</span></a></code></pre></div>
+<p>We used <code>purrr::keep()</code>, which retains only the elements of its input <code>.x</code> such that its second argument <code>.p</code> ( a function that returns a single <code>TRUE</code> or <code>FALSE</code>) returns <code>TRUE</code>.</p>
+<p>We will also need the <em>names</em> of the numerical variables:</p>
+<div class="sourceCode" id="cb1917"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1917-1" data-line-number="1">numNames &lt;-</a>
+<a class="sourceLine" id="cb1917-2" data-line-number="2"><span class="st">  </span>numericals <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1917-3" data-line-number="3"><span class="st">  </span><span class="kw">names</span>()</a></code></pre></div>
 <p>We need a function to save the density plot of a single numerical variable:</p>
-<div class="sourceCode" id="cb1917"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1917-1" data-line-number="1">saveGraph &lt;-<span class="st"> </span><span class="cf">function</span>(var, varname) {</a>
-<a class="sourceLine" id="cb1917-2" data-line-number="2">  p &lt;-</a>
-<a class="sourceLine" id="cb1917-3" data-line-number="3"><span class="st">    </span><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x =</span> var)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1917-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_density</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1917-5" data-line-number="5"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste0</span>(<span class="st">&quot;Density plot for &quot;</span>,</a>
-<a class="sourceLine" id="cb1917-6" data-line-number="6">                        varname, <span class="st">&quot;.&quot;</span>))</a>
-<a class="sourceLine" id="cb1917-7" data-line-number="7">  <span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="kw">paste0</span>(<span class="st">&quot;plots/density_&quot;</span>, varname, <span class="st">&quot;.png&quot;</span>),</a>
-<a class="sourceLine" id="cb1917-8" data-line-number="8">         <span class="dt">plot =</span> p, <span class="dt">device =</span> <span class="st">&quot;png&quot;</span>)</a>
-<a class="sourceLine" id="cb1917-9" data-line-number="9">}</a></code></pre></div>
-<p>We also need a function to produce a summary of a single numerical variable:</p>
-<div class="sourceCode" id="cb1918"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1918-1" data-line-number="1">makeSummary &lt;-<span class="st"> </span><span class="cf">function</span>(x, varname) {</a>
-<a class="sourceLine" id="cb1918-2" data-line-number="2">  five &lt;-<span class="st"> </span><span class="kw">fivenum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1918-3" data-line-number="3">  <span class="kw">list</span>(<span class="dt">variable =</span> varname,</a>
-<a class="sourceLine" id="cb1918-4" data-line-number="4">       <span class="dt">min =</span> five[<span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb1918-5" data-line-number="5">       <span class="dt">Q1 =</span> five[<span class="dv">2</span>],</a>
-<a class="sourceLine" id="cb1918-6" data-line-number="6">       <span class="dt">median =</span> five[<span class="dv">3</span>],</a>
-<a class="sourceLine" id="cb1918-7" data-line-number="7">       <span class="dt">Q3 =</span> five[<span class="dv">4</span>],</a>
-<a class="sourceLine" id="cb1918-8" data-line-number="8">       <span class="dt">max =</span> five[<span class="dv">5</span>])</a>
+<div class="sourceCode" id="cb1918"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1918-1" data-line-number="1">saveGraph &lt;-<span class="st"> </span><span class="cf">function</span>(var, varname) {</a>
+<a class="sourceLine" id="cb1918-2" data-line-number="2">  p &lt;-</a>
+<a class="sourceLine" id="cb1918-3" data-line-number="3"><span class="st">    </span><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x =</span> var)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1918-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_density</span>(<span class="dt">fill =</span> <span class="st">&quot;burlywood&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1918-5" data-line-number="5"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste0</span>(<span class="st">&quot;Density plot for &quot;</span>,</a>
+<a class="sourceLine" id="cb1918-6" data-line-number="6">                        varname, <span class="st">&quot;.&quot;</span>))</a>
+<a class="sourceLine" id="cb1918-7" data-line-number="7">  <span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="kw">paste0</span>(<span class="st">&quot;plots/density_&quot;</span>, varname, <span class="st">&quot;.png&quot;</span>),</a>
+<a class="sourceLine" id="cb1918-8" data-line-number="8">         <span class="dt">plot =</span> p, <span class="dt">device =</span> <span class="st">&quot;png&quot;</span>)</a>
 <a class="sourceLine" id="cb1918-9" data-line-number="9">}</a></code></pre></div>
-<p>Now we walk through the process. We will actually use the function<code>walk2()</code>, which takes the following inputs:</p>
+<p>We also need a function to produce a summary of a single numerical variable:</p>
+<div class="sourceCode" id="cb1919"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1919-1" data-line-number="1">makeSummary &lt;-<span class="st"> </span><span class="cf">function</span>(x, varname) {</a>
+<a class="sourceLine" id="cb1919-2" data-line-number="2">  five &lt;-<span class="st"> </span><span class="kw">fivenum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1919-3" data-line-number="3">  <span class="kw">list</span>(<span class="dt">variable =</span> varname,</a>
+<a class="sourceLine" id="cb1919-4" data-line-number="4">       <span class="dt">min =</span> five[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb1919-5" data-line-number="5">       <span class="dt">Q1 =</span> five[<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb1919-6" data-line-number="6">       <span class="dt">median =</span> five[<span class="dv">3</span>],</a>
+<a class="sourceLine" id="cb1919-7" data-line-number="7">       <span class="dt">Q3 =</span> five[<span class="dv">4</span>],</a>
+<a class="sourceLine" id="cb1919-8" data-line-number="8">       <span class="dt">max =</span> five[<span class="dv">5</span>])</a>
+<a class="sourceLine" id="cb1919-9" data-line-number="9">}</a></code></pre></div>
+<p>Now we walk through the process. We will actually use the function<code>pwalk()</code>, which will take the following inputs:</p>
 <ul>
-<li><code>.x</code> (the data frame consisting of the numerical variables) and</li>
-<li><code>.y</code> (the names of these variables)</li>
+<li><code>.x</code> (a list with two elements: the data frame of numerical variables and the vector of the names of these variables), and</li>
 <li><code>.f</code> (the function <code>saveGraph</code>, to make and save a density plot)</li>
 </ul>
 <p>We also use <code>pmap_dfr()</code>, which takes a list consisting of the data frame and variable-names and constructs a data frame row-by-row, with each row summarizing one of the variables.</p>
-<div class="sourceCode" id="cb1919"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1919-1" data-line-number="1">m111survey <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1919-2" data-line-number="2"><span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1919-3" data-line-number="3"><span class="st">  </span><span class="kw">walk2</span>(<span class="dt">.y =</span> numNames,</a>
-<a class="sourceLine" id="cb1919-4" data-line-number="4">        <span class="dt">.f =</span> saveGraph) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># returns the df of numerical variables</span></a>
-<a class="sourceLine" id="cb1919-5" data-line-number="5"><span class="st">  </span><span class="kw">list</span>(., numNames) <span class="op">%&gt;%</span><span class="st">      </span><span class="co"># creating the list (df, numNames)</span></a>
-<a class="sourceLine" id="cb1919-6" data-line-number="6"><span class="st">  </span><span class="kw">pmap_dfr</span>(makeSummary)</a></code></pre></div>
+<div class="sourceCode" id="cb1920"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1920-1" data-line-number="1"><span class="kw">list</span>(numericals, numNames) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1920-2" data-line-number="2"><span class="st">  </span><span class="kw">pwalk</span>(saveGraph) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># returns the list</span></a>
+<a class="sourceLine" id="cb1920-3" data-line-number="3"><span class="st">  </span><span class="kw">pmap_dfr</span>(makeSummary)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 6
 ##          variable   min    Q1  median     Q3   max
 ##             &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -891,16 +890,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Use <code>map()</code> to produce a list of the squares of the whole numbers from 1 to 10.</p></li>
 <li><p>Use <code>map_dbl()</code> to produce a numerical vector of the squares of the whole numbers from 1 to 10.</p></li>
 <li><p>Use <code>map_chr</code> to state the type of each element of the following list:</p>
-<div class="sourceCode" id="cb1921"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1921-1" data-line-number="1">lst &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb1921-2" data-line-number="2">  letters,</a>
-<a class="sourceLine" id="cb1921-3" data-line-number="3">  <span class="kw">seq</span>(<span class="dv">2</span>, <span class="dv">20</span>, <span class="dt">by =</span> <span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb1921-4" data-line-number="4">  <span class="kw">c</span>(1L, 5L, 7L),</a>
-<a class="sourceLine" id="cb1921-5" data-line-number="5">  <span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="fl">5.5</span></a>
-<a class="sourceLine" id="cb1921-6" data-line-number="6">)</a></code></pre></div></li>
+<div class="sourceCode" id="cb1922"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1922-1" data-line-number="1">lst &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1922-2" data-line-number="2">  letters,</a>
+<a class="sourceLine" id="cb1922-3" data-line-number="3">  <span class="kw">seq</span>(<span class="dv">2</span>, <span class="dv">20</span>, <span class="dt">by =</span> <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb1922-4" data-line-number="4">  <span class="kw">c</span>(1L, 5L, 7L),</a>
+<a class="sourceLine" id="cb1922-5" data-line-number="5">  <span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="fl">5.5</span></a>
+<a class="sourceLine" id="cb1922-6" data-line-number="6">)</a></code></pre></div></li>
 <li><p>Here are some people:</p>
-<div class="sourceCode" id="cb1922"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1922-1" data-line-number="1">people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Bettina&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Isabella&quot;</span>, <span class="st">&quot;Khalil&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1923"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1923-1" data-line-number="1">people &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Bettina&quot;</span>, <span class="st">&quot;Raj&quot;</span>, <span class="st">&quot;Isabella&quot;</span>, <span class="st">&quot;Khalil&quot;</span>)</a></code></pre></div>
 <p>The following vector tells whether or not each person is a Grand Poo-Bah:</p>
-<div class="sourceCode" id="cb1923"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1923-1" data-line-number="1">status &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;humble&quot;</span>, <span class="st">&quot;poobah&quot;</span>, <span class="st">&quot;poobah&quot;</span>, <span class="st">&quot;humble&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1924"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1924-1" data-line-number="1">status &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;humble&quot;</span>, <span class="st">&quot;poobah&quot;</span>, <span class="st">&quot;poobah&quot;</span>, <span class="st">&quot;humble&quot;</span>)</a></code></pre></div>
 <p>Use <code>pwalk()</code> to properly greet each person. The result in the console should be as follows:</p>
 <pre><code>## Yo, dawg.
 ## Hail, O Grand Poo-Bah Raj!
@@ -912,7 +911,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">14.3.4</span> Solutions to the Practice Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Try this:</p>
-<div class="sourceCode" id="cb1925"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1925-1" data-line-number="1"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1926"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1926-1" data-line-number="1"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1
 ## 
@@ -943,7 +942,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [[10]]
 ## [1] 100</code></pre>
 <p>This is more verbose, but works just as well:</p>
-<div class="sourceCode" id="cb1927"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1927-1" data-line-number="1"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1928"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1928-1" data-line-number="1"><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1
 ## 
@@ -974,24 +973,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [[10]]
 ## [1] 100</code></pre></li>
 <li><p>Try this:</p>
-<div class="sourceCode" id="cb1929"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1929-1" data-line-number="1"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1930"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1930-1" data-line-number="1"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span>.<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
 <p>Again the more verbose approach works just as well:</p>
-<div class="sourceCode" id="cb1931"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1931-1" data-line-number="1"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1932"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1932-1" data-line-number="1"><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre></li>
 <li><p>Try this:</p>
-<div class="sourceCode" id="cb1933"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1933-1" data-line-number="1"><span class="kw">map_chr</span>(lst, typeof)</a></code></pre></div>
+<div class="sourceCode" id="cb1934"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1934-1" data-line-number="1"><span class="kw">map_chr</span>(lst, typeof)</a></code></pre></div>
 <pre><code>## [1] &quot;character&quot; &quot;double&quot;    &quot;integer&quot;   &quot;logical&quot;</code></pre></li>
 <li><p>Try this:</p>
-<div class="sourceCode" id="cb1935"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1935-1" data-line-number="1"><span class="kw">list</span>(people, status) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1935-2" data-line-number="2"><span class="st">  </span><span class="kw">pwalk</span>(<span class="cf">function</span>(person, type) {</a>
-<a class="sourceLine" id="cb1935-3" data-line-number="3">    <span class="cf">if</span> ( type <span class="op">==</span><span class="st"> &quot;poobah&quot;</span> ) {</a>
-<a class="sourceLine" id="cb1935-4" data-line-number="4">      <span class="kw">cat</span>(<span class="st">&quot;Hail, O Grand Poo-Bah &quot;</span>,</a>
-<a class="sourceLine" id="cb1935-5" data-line-number="5">          person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb1935-6" data-line-number="6">    } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb1935-7" data-line-number="7">      <span class="kw">cat</span>(<span class="st">&quot;Yo, dawg.</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
-<a class="sourceLine" id="cb1935-8" data-line-number="8">    }</a>
-<a class="sourceLine" id="cb1935-9" data-line-number="9">  })</a></code></pre></div></li>
+<div class="sourceCode" id="cb1936"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1936-1" data-line-number="1"><span class="kw">list</span>(people, status) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1936-2" data-line-number="2"><span class="st">  </span><span class="kw">pwalk</span>(<span class="cf">function</span>(person, type) {</a>
+<a class="sourceLine" id="cb1936-3" data-line-number="3">    <span class="cf">if</span> ( type <span class="op">==</span><span class="st"> &quot;poobah&quot;</span> ) {</a>
+<a class="sourceLine" id="cb1936-4" data-line-number="4">      <span class="kw">cat</span>(<span class="st">&quot;Hail, O Grand Poo-Bah &quot;</span>,</a>
+<a class="sourceLine" id="cb1936-5" data-line-number="5">          person, <span class="st">&quot;!</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb1936-6" data-line-number="6">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb1936-7" data-line-number="7">      <span class="kw">cat</span>(<span class="st">&quot;Yo, dawg.</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb1936-8" data-line-number="8">    }</a>
+<a class="sourceLine" id="cb1936-9" data-line-number="9">  })</a></code></pre></div></li>
 </ol>
 </div>
 </div>

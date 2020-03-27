@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-02-13" />
+<meta name="date" content="2020-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -582,25 +582,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The higher-order functions we have studied in this chapter are often called <em>functionals.</em> As we pointed out earlier, they deliver results that could have been produced by a writing a loop of some sort.</p>
 <p>Once you get used to functionals, you will find that they are often more “expressive” than loops—easier for others to read and to understand, and less prone to bugs. Also, many of them are optimized by the developers of R to run a bit faster than an ordinary loop written in R.</p>
 <p>For example, consider the following list. It consists of ten thousand vectors, each of which contains 100 randomly-generated numbers.</p>
-<div class="sourceCode" id="cb1979"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1979-1" data-line-number="1">lst &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="kw">rep</span>(<span class="dv">100</span>, <span class="dv">10000</span>), runif)</a></code></pre></div>
+<div class="sourceCode" id="cb1980"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1980-1" data-line-number="1">lst &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="kw">rep</span>(<span class="dv">100</span>, <span class="dv">10000</span>), runif)</a></code></pre></div>
 <p>If we want the mean of each vector, we could write a loop:</p>
-<div class="sourceCode" id="cb1980"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1980-1" data-line-number="1">means &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb1980-2" data-line-number="2"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span> ) {</a>
-<a class="sourceLine" id="cb1980-3" data-line-number="3">  means[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(lst[[i]])</a>
-<a class="sourceLine" id="cb1980-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb1981"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1981-1" data-line-number="1">means &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb1981-2" data-line-number="2"><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span> ) {</a>
+<a class="sourceLine" id="cb1981-3" data-line-number="3">  means[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(lst[[i]])</a>
+<a class="sourceLine" id="cb1981-4" data-line-number="4">}</a></code></pre></div>
 <p>Or we could use <code>map_dbl()</code>:</p>
-<div class="sourceCode" id="cb1981"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1981-1" data-line-number="1">means &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(lst, mean)</a></code></pre></div>
+<div class="sourceCode" id="cb1982"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1982-1" data-line-number="1">means &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(lst, mean)</a></code></pre></div>
 <p>Comparing the two using <code>system.time()</code> , on my machine I got:</p>
-<div class="sourceCode" id="cb1982"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1982-1" data-line-number="1"><span class="kw">system.time</span>(means &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(lst, mean))</a></code></pre></div>
+<div class="sourceCode" id="cb1983"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1983-1" data-line-number="1"><span class="kw">system.time</span>(means &lt;-<span class="st"> </span><span class="kw">map_dbl</span>(lst, mean))</a></code></pre></div>
 <pre><code>##   user  system elapsed 
 ##  1.557   0.073   1.630 </code></pre>
 <p>For the loop, I get:</p>
-<div class="sourceCode" id="cb1984"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1984-1" data-line-number="1"><span class="kw">system.time</span>({</a>
-<a class="sourceLine" id="cb1984-2" data-line-number="2">  means &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb1984-3" data-line-number="3">  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span> ) {</a>
-<a class="sourceLine" id="cb1984-4" data-line-number="4">    means[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(lst[[i]])</a>
-<a class="sourceLine" id="cb1984-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb1984-6" data-line-number="6">})</a></code></pre></div>
+<div class="sourceCode" id="cb1985"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1985-1" data-line-number="1"><span class="kw">system.time</span>({</a>
+<a class="sourceLine" id="cb1985-2" data-line-number="2">  means &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb1985-3" data-line-number="3">  <span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span> ) {</a>
+<a class="sourceLine" id="cb1985-4" data-line-number="4">    means[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(lst[[i]])</a>
+<a class="sourceLine" id="cb1985-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb1985-6" data-line-number="6">})</a></code></pre></div>
 <pre><code>##   user  system elapsed 
 ##  1.653   0.075   1.730 </code></pre>
 <p>The map-function is a bit faster, but the difference is small.</p>
