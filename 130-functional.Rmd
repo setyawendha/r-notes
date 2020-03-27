@@ -358,9 +358,9 @@ rLetters <- function(n, upper) {
     sample(letters, size = n, replace = TRUE)
   }
 }
-n <- c(3, 6, 9)                # vary number of letters to pick
-upper <- c(TRUE, FALSE, TRUE)  # vary the case (upper, lower)
-list(n, upper) %>% 
+george <- c(3, 6, 9)                # vary number of letters to pick
+bettina <- c(TRUE, FALSE, TRUE)  # vary the case (upper, lower)
+list(george, bettina) %>% 
   pmap(rLetters)
 ```
 
@@ -458,16 +458,24 @@ First we create a directory to hold the plots:
 if ( !dir.exists("plots") ) dir.create("plots")
 ```
 
-Next, we get the names of the numerical variables in `m111survey`:
+Next, we get the numerical variables in `m111survey`:
+
+```{r}
+numericals <-
+  m111survey %>% 
+  keep(is.numeric)   # purrr::keep()
+```
+
+We used `purrr::keep()`, which retains only the elements of its input `.x` such that its second argument `.p` ( a function that returns a single `TRUE` or `FALSE`) returns `TRUE`.
+
+We will also need the *names* of the numerical variables:
 
 ```{r}
 numNames <-
-  m111survey %>% 
-  keep(is.numeric) %>%   # purrr::keep()
+  numericals %>% 
   names()
 ```
 
-We used `purrr::keep()`, which retains only the elements of its input `.x` such that the `.f` function returns `TRUE`.
 
 We need a function to save the density plot of a single numerical variable:
 
@@ -497,20 +505,16 @@ makeSummary <- function(x, varname) {
 }
 ```
 
-Now we walk through the process.  We will actually use the function`walk2()`, which takes the following inputs:
+Now we walk through the process.  We will actually use the function`pwalk()`, which will take the following inputs:
 
-* `.x` (the data frame consisting of the numerical variables) and
-* `.y` (the names of these variables)
+* `.x` (a list with two elements: the data frame of numerical variables and the vector of the names of these variables), and
 * `.f` (the function `saveGraph`, to make and save a density plot)
 
 We also use `pmap_dfr()`, which takes a list consisting of the data frame and variable-names and constructs a data frame row-by-row, with each row summarizing one of the variables.
 
 ```{r eval = FALSE}
-m111survey %>% 
-  keep(is.numeric) %>% 
-  walk2(.y = numNames,
-        .f = saveGraph) %>%  # returns the df of numerical variables
-  list(., numNames) %>%      # creating the list (df, numNames)
+list(numericals, numNames) %>% 
+  pwalk(saveGraph) %>%  # returns the list
   pmap_dfr(makeSummary)
 ```
 
