@@ -550,7 +550,7 @@ Let's now write a more elaborate program in the object-oriented style.  Our prog
 * Whales have a set maximum lifetime.
 * In any given time period, it is possible for a whale to starve, causing it to die before reaches its lifespan.  The probability of starvation is low when the whale population is small (presumably there is plenty of plankton available then) but the starvation-probability increases in direct proportion to the population.
 
-From the above conditions you can see that if the whale population is small then there is low probability of starvation, but on the other hand whales are liable to be spread thinly throughout the ocean.  As a result males and females are relatively unlikely to run across each other, and hence births are less likely to occur.  With a low enough population there is a strong possibility that the whales will die off before they can reproduce.  (This is why biologists worry about some whale populations:  if the whales are hunted to the point where the population is below a certain critical threshold, then they can go extinct on their own, even if hunting ceases.)  On the other hand, if the whale population grows large then males and female meet frequently, and there are plenty of births.  On the other hand there is a general shortage of food, resulting in high starvation rates.  At some point birth and starvation balance each other out, resulting in a long-term equilibrium population-level.
+From the above conditions you can see that if the whale population is small then there is low probability of starvation, but on the other hand whales are liable to be spread thinly throughout the ocean.  As a result males and females are relatively unlikely to run across each other, and hence births are less likely to occur.  With a low enough population there is a strong possibility that the whales will die off before they can reproduce.  (This is why biologists worry about some whale populations:  if the whales are hunted to the point where the population is below a certain critical threshold, then they can go extinct on their own, even if hunting ceases.)  On the other hand, if the whale population grows large then males and female meet frequently, and there are plenty of births.  As the populations increases, however, food supplies dwindle, resulting in higher starvation rates.  At some point birth and starvation balance each other out, resulting in a long-term equilibrium population-level.
 
 We will implement our simulation with various objects:
 
@@ -929,60 +929,51 @@ We now turn to the second major type of object-oriented programming that is supp
 
 We begin by revisiting the task of *printing* to the console.
 
-Recall that whenever we type the name of an object into the console and press Enter, R interprets the input as a call to the `print()` function.  Consider, for example, printing out some portion of `m111survey` from the **bcscr** package.
+Recall that whenever we type the name of an object into the console and press Enter, R interprets the input as a call to the `print()` function.  Consider, for example, printing some portion of `m111survey` from the **bcscr** package:
 
-Thus the following two expressions accomplish the same
 
 ```{r}
-df <- bcscr::m111survey[, c("height", "weight_feel")]
+df <- bcscr::m111survey[1:5 , c("height", "weight_feel")]
 ```
 
-If we want to print `df`, either of the following two statements will suffice:
+If we want to print `df`, then either of the following two statements accomplish the same thing:
 
-```{r eval =FALSE}
-print(df)
-df         # calls print(df) implicitly
+```{r}
+print(df)  ## explicit directive to print results to Console
+df         ## R implicity calls print() at top-level
 ```
 
-Let's have a look at `df`, using either of the above two commands:
+Both expressions, as we learned long ago, involve a call to the `print()` function.
 
-```{}
-##   height   weight_feel
-## 1   76.00 1_underweight
-## 2   74.00 2_about_right
-## 3   64.00 2_about_right
-## 4   62.00 1_underweight
-## 5   72.00 1_underweight
-<further output omitted to save space>
-```
+But let's think a bit more deeply about what we *see* in the Console.
 
-It is tempting to think of the above printout as simply what the object `df` *is*.  But that's not quite right.  In truth, it merely reflects how R chose to *represent* `df` to us in the console.  R was programmed to represent `df` in spreadsheet-format---with variables along columns, individuals along rows, and with handy row-numbers supplied---because users are accustomed to viewing data frames in that way.
 
-Now let's turn `df` into a list:
+It is tempting to think of the above printouts as simply what the object `df` *is*.  But that's not quite right.  In truth, it merely reflects how R *represents* `df` to us in the console.  R was programmed to represent `df` in spreadsheet-format---with variables along columns, individuals along rows, and with handy row-numbers supplied---because human users are accustomed to viewing data tables in that way.
+
+But now let us turn `df` into a list:
 
 ```{r}
 lst <- as.list(df)
 str(lst)
 ```
 
-Now let's print `lst`:
+And let's print `lst`:
 
-```{r eval =FALSE}
+```{r}
 lst   # same as print(lst)
 ```
 
-```
-## $height
-##  [1] 76.00 74.00 64.00 62.00 72.00 70.80 70.00 79.00 59.00 67.00 65.00 62.00
-## [13] 59.00 78.00 69.00 68.00 73.00 73.00 65.00 65.00 66.00 67.75 63.00 66.00
-<further output omitted to save space>
-```
 
 We get the familiar output for a list whose elements are named.  Users don't expect lists to be represented in the console in spreadsheet-style format, even if the elements of the list happen to be vectors that are all of the same length.  They expect a more "neutral" representation, and R delivers one.
 
-Printing to the console is a common task.  It appears, however, that the method by which that task is performed depends on the type of object that is input to the `print()` function.  If your object is a data frame, `print()` behaves one way.  If your object is a list, print does something else.  Since the behavior of `print()` depends on the type of object involved in the operation of printing, you could say that it exhibits polymorphism. \index{polymorphism}.
+Printing to the console is a common task.  It appears, however, that the method by which that task is performed depends on the type of object that is input to the `print()` function:
 
-In fact it is the *class* of the object given to `print()` that determines the method that `prints()` employs.  The class of an object in R can be accessed with the `class()` function \index{R-functions!class()@\texttt{class()}}:
+* If your object is a data frame, `print()` behaves one way.
+* If your object is a list, print does something else.
+
+Since the behavior of `print()` depends on the type of object involved in the operation of printing, you could say that it exhibits polymorphism. \index{polymorphism}.
+
+In fact it is the *class* of the object given to `print()` that determines the method that `prints()` employs.  The class of an R-object can be accessed with the `class()` function \index{R-functions!class()@\texttt{class()}}:
 
 ```{r}
 class(df)
@@ -1007,9 +998,9 @@ The body of the `print()` consists of just one expression:  `UseMethod("print")`
 1. The data frame `df` is assigned to the parameter `x` in the `print()` function.
 2. We call `UseMethod("print")`.
 3. From `help(UseMethod)` we learn that `UseMethod()` takes two parameters:
-    * `generic`:  a character string that names task we want to perform.  In this case `generic` has been set to "print".
+    * `generic`:  a character string that names the task we want to perform.  In this case `generic` has been set to "print".
     * `object`:  this is an object whose class will determine the method that will be "dispatched", i.e., the method that will be used to print the object to the console.  By default this is the first argument in the enclosing function `print()`, so `object` gets set to the data frame `df`.
-4. Control has now passed to the `UseMethod()` function, which searches for a suitable method for printing an object of class `data.frame`.  It does this by pasting together "print" (the argument to `generic`) and `data.frame` (the class of the object `df` it was given) with a period in between, getting the string "print.data.frame".  A search is now conducted for a function of the name.
+4. Control has now passed to the `UseMethod()` function, which searches for a suitable method for printing an object of class `data.frame`.  It does this by pasting together "print" (the argument to `generic`) and `data.frame` (the class of the object `df` it was given) with a period in between, getting the string "print.data.frame".  A search is now conducted for a function having that name.
 5.  The function `print.data.frame()` will be found.  We can tell because it appears on the list of available "methods" for `print()`.  The `methods()` function \index{R-functions!methods()@\texttt{methods()}} will give us the complete list of available methods, if we like
 
     ```{r eval =FALSE}
@@ -1043,7 +1034,15 @@ print      # this is equivalent to print(print)
 ## <environment: namespace:base>
 ```
 
-In the call `print(print)`, R looked at the class of `print()`, and found that it was of class `function`.  R then searched for a method called `print.function` and found one.  Note that this method give the sort of output to the console that would be helpful to a user:
+In the call `print(print)`, R looked at the class of `print()`, and found that it was of class `function`:
+
+```{r}
+class(print)
+```
+
+
+
+R then searched for a method called `print.function` and found one.  Note that this method gives the sort of output to the console that would be helpful to a user:
 
 * the code for the function;
 * the location of the function in memory:  `0x108da3d40`;
@@ -1055,14 +1054,14 @@ Things go a little bit differently in the call to `print(lst)`.  The class of `l
 
 The `print()` function is an example of a *generic* function. \index{generic function} A generic function is simply a function that performs a common task by *dispatching* its input to a particular method-function that is selected on the basis of the class of the input to the generic function.  Languages that use generic functions are said to support *generic-function OO*. \index{generic-function oo}
 
-In message-oriented OO, objects own their own methods, and the way a task is performed depends on the class of the object that is invoked to perform the task.  Generic-function OO, which is most commonly found in languages that support functional programming, puts more stress on functions:  the generic function "owns" the methods in the sense that it acts as the central dispatcher, assigning a method function to perform a given task.  In a bit of a reversal to message-passing OO, the method selected in generic-function OO depends on the class of the input-object to the generic, not on the generic that was called to perform the task.
+In message-oriented OO, objects own their own methods, and the way a task is performed depends on the class of the object that is invoked to perform the task.  Generic-function OO, which is most commonly found in languages that support functional programming, puts more stress on functions:  the generic function "owns" the methods in the sense that it acts as the central dispatcher, assigning a method function to perform a given task.  In a bit of a reversal to message-passing OO, the method selected in generic-function OO depends on the class of the input-object to the generic, not on the class of the generic that was called to perform the task.
 
 We should also mention that R actually has two ways to implement generic-function OO:
 
 * S3 classes;
 * S4 classes.
 
-S3 classes were the first to be implemented, and they are the implementation we describe here.  S4 classes were a later addition.  (They tend to be used by programmers who worry that the rules for formation of S3 classes aren't strict enough.)
+S3 classes were the first to be implemented, and to this day they are more commonly-used than S4 classes are.  Therefore they are the implementation we will study.  (S4 classes tend to be used by programmers in applications where there significant concern that the rules for formation of S3 classes aren't strict enough.)
 
 ### Common Generic Functions
 
@@ -1072,7 +1071,7 @@ There are three very commonly-used generic functions in R:
 * `summary()`; \index{R-functions!summary()@\texttt{summary()}}
 * `plot()`. \index{R-functions!plot()@\texttt{plot()}}
 
-Each of these generics is associated with a large number of method-functions.  This is a great advantage to the casual user of R:  one has to know only three R-commands in order to acquire useful information about a wide variety of R-objects.
+Each of these generics is associated with a large number of method-functions.  This is a great advantage to the casual user of R:  one has to know only a few R-commands in order to acquire useful information about a wide variety of R-objects.
 
 It is always a good idea to "try out" generic functions on objects you are using.  You never know if the authors of R, or of a contributed package you have attached, may have written methods that are precisely tailored to that object.
 
@@ -1097,7 +1096,7 @@ summary(lst)
 ```
 
 
-It is interesting also to see how `plot()` reacts to various types of input.  See the Figure \@ref(fig:xsquaregraph)
+It is interesting also to see how R's `plot()` (from package **base**) reacts to various types of input.  See the Figure \@ref(fig:xsquaregraph)
 
 ```{r xsquaregraph, width.out="60%", fig.cap="Our vector graphed as a parabola!", fig.align='center'}
 x <- seq(-3,3, by = 0.01)

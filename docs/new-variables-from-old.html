@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-03-27" />
+<meta name="date" content="2020-04-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -587,7 +587,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Another common need is to <em>recode</em> the values of a categorical variable. For example, you might want to divide people into two groups: those who prefer to sit in the back and those who don’t. This is a good time to use <code>ifelse()</code>:</p>
 <div class="sourceCode" id="cb1303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1303-1" data-line-number="1">seat2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(m111survey<span class="op">$</span>seat <span class="op">==</span><span class="st"> &quot;3_back&quot;</span>, <span class="st">&quot;Back&quot;</span>, <span class="st">&quot;Other&quot;</span>)</a>
 <a class="sourceLine" id="cb1303-2" data-line-number="2">m111survey<span class="op">$</span>seat2 &lt;-<span class="st"> </span>seat2</a></code></pre></div>
-<p>If you plan to re-code into a variable that involves more than two values, then you might want to look into the <code>mapvalues()</code> function from the <strong>plyr</strong> package <span class="citation">(Wickham <a href="#ref-R-plyr">2019</a>)</span>:</p>
+<p>If you plan to re-code into a variable that involves more than two values, then you might want to look into the <code>mapvalues()</code> function from the <strong>plyr</strong> package <span class="citation">(Wickham <a href="#ref-R-plyr">2020</a>)</span>:</p>
 <div class="sourceCode" id="cb1304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1304-1" data-line-number="1">seat3 &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(m111survey<span class="op">$</span>seat,</a>
 <a class="sourceLine" id="cb1304-2" data-line-number="2">                <span class="dt">from =</span> <span class="kw">c</span>(<span class="st">&quot;1_front&quot;</span>, <span class="st">&quot;2_middle&quot;</span>, <span class="st">&quot;3_back&quot;</span>),</a>
 <a class="sourceLine" id="cb1304-3" data-line-number="3">                <span class="dt">to =</span> <span class="kw">c</span>(<span class="st">&quot;Front&quot;</span>, <span class="st">&quot;Middle&quot;</span>, <span class="st">&quot;Back&quot;</span>))</a>
@@ -676,7 +676,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-plyr">
-<p>Wickham, Hadley. 2019. <em>Plyr: Tools for Splitting, Applying and Combining Data</em>. <a href="https://CRAN.R-project.org/package=plyr">https://CRAN.R-project.org/package=plyr</a>.</p>
+<p>Wickham, Hadley. 2020. <em>Plyr: Tools for Splitting, Applying and Combining Data</em>. <a href="https://CRAN.R-project.org/package=plyr">https://CRAN.R-project.org/package=plyr</a>.</p>
 </div>
 </div>
             </section>
