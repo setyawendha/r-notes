@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-04-08" />
+<meta name="date" content="2020-04-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -581,10 +581,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">15.5</span> Method Chaining</h2>
 <p>In this Section we will explore a concise and convenient device for calling multiple methods on an object. The device is known as <em>method chaining</em>. </p>
 <p>In order to illustrate method chaining, we’ll extend the class Lion a bit, with some new attributes and new methods. First of all, we’d like to add a data frame consisting of possible animals on which a lion might prey. The data frame will contain the name of each type of animal, and an associated weight.</p>
-<div class="sourceCode" id="cb2073"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2073-1" data-line-number="1">animal &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;zebra&quot;</span>, <span class="st">&quot;giraffe&quot;</span>, <span class="st">&quot;pig&quot;</span>, </a>
-<a class="sourceLine" id="cb2073-2" data-line-number="2">             <span class="st">&quot;cape buffalo&quot;</span>, <span class="st">&quot;antelope&quot;</span>, <span class="st">&quot;wildebeast&quot;</span>)</a>
-<a class="sourceLine" id="cb2073-3" data-line-number="3">mass &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">25</span>, <span class="dv">60</span>, <span class="dv">45</span>, <span class="dv">55</span>)</a>
-<a class="sourceLine" id="cb2073-4" data-line-number="4">prey &lt;-<span class="st"> </span><span class="kw">data.frame</span>(animal, mass, <span class="dt">stringsAsFactors =</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2073"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2073-1" data-line-number="1">animal &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb2073-2" data-line-number="2">  <span class="st">&quot;zebra&quot;</span>, <span class="st">&quot;giraffe&quot;</span>, <span class="st">&quot;pig&quot;</span>,</a>
+<a class="sourceLine" id="cb2073-3" data-line-number="3">  <span class="st">&quot;cape buffalo&quot;</span>, <span class="st">&quot;antelope&quot;</span>, <span class="st">&quot;wildebeast&quot;</span></a>
+<a class="sourceLine" id="cb2073-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb2073-5" data-line-number="5">mass &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">25</span>, <span class="dv">60</span>, <span class="dv">45</span>, <span class="dv">55</span>)</a>
+<a class="sourceLine" id="cb2073-6" data-line-number="6">prey &lt;-<span class="st"> </span><span class="kw">data.frame</span>(animal, mass, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Let’s now add <code>prey</code> as a new attribute to class Lion. We will also add an attribute <code>eaten</code>: a character vector—initially empty—that will contain a record of all the animals that the lion has eaten.</p>
 <div class="sourceCode" id="cb2074"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2074-1" data-line-number="1">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;prey&quot;</span>, prey, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb2074-2" data-line-number="2">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;eaten&quot;</span>, <span class="kw">character</span>(), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
@@ -604,7 +606,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Lions enjoy talking about what they have eaten recently, and for some reason they monitor their weight obsessively. The new method <code>report()</code> accounts for these characteristics of lions:</p>
 <div class="sourceCode" id="cb2076"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2076-1" data-line-number="1">Lion<span class="op">$</span><span class="kw">set</span>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;report&quot;</span>, <span class="cf">function</span>() {</a>
 <a class="sourceLine" id="cb2076-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">length</span>(self<span class="op">$</span>eaten)</a>
-<a class="sourceLine" id="cb2076-3" data-line-number="3">  <span class="cf">if</span> ( n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span> ) {</a>
+<a class="sourceLine" id="cb2076-3" data-line-number="3">  <span class="cf">if</span> (n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>) {</a>
 <a class="sourceLine" id="cb2076-4" data-line-number="4">    <span class="kw">cat</span>(<span class="st">&quot;My name is &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
 <a class="sourceLine" id="cb2076-5" data-line-number="5">    <span class="kw">cat</span>(<span class="st">&quot;My most recent meal consisted of: &quot;</span>, self<span class="op">$</span>eaten[n], <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
 <a class="sourceLine" id="cb2076-6" data-line-number="6">  }</a>
@@ -613,8 +615,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2076-9" data-line-number="9">}, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Note that <code>report()</code> also returns the lion invisibly.</p>
 <p>Let us now instantiate a new lion named Simba:</p>
-<div class="sourceCode" id="cb2077"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2077-1" data-line-number="1">simba &lt;-<span class="st"> </span>Lion<span class="op">$</span><span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Simba&quot;</span>, <span class="dt">age =</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb2077-2" data-line-number="2">                  <span class="dt">desire =</span> <span class="st">&quot;Hakuna Matata&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2077"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2077-1" data-line-number="1">simba &lt;-<span class="st"> </span>Lion<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb2077-2" data-line-number="2">  <span class="dt">name =</span> <span class="st">&quot;Simba&quot;</span>, <span class="dt">age =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb2077-3" data-line-number="3">  <span class="dt">desire =</span> <span class="st">&quot;Hakuna Matata&quot;</span></a>
+<a class="sourceLine" id="cb2077-4" data-line-number="4">)</a></code></pre></div>
 <pre><code>## Grr!  My name is Simba!</code></pre>
 <div class="sourceCode" id="cb2079"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2079-1" data-line-number="1">simba<span class="op">$</span><span class="kw">set_weight</span>(<span class="dv">300</span>)</a></code></pre></div>
 <pre><code>## Simba has weight:  300.</code></pre>

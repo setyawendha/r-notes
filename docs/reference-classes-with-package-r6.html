@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-04-08" />
+<meta name="date" content="2020-04-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -586,30 +586,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">15.2.1</span> Defining a Class</h3>
 <p>Construction of the object-world begins with the definition of classes. A <em>class</em> is simply a general prototype on the basis of which actual objects may be created.</p>
 <p>Let’s define the class <code>Person</code>. This is accomplished with the <code>R6Class()</code> function: </p>
-<div class="sourceCode" id="cb2005"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2005-1" data-line-number="1">Person &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="dt">classname =</span> <span class="st">&quot;Person&quot;</span>,</a>
-<a class="sourceLine" id="cb2005-2" data-line-number="2">                  <span class="dt">public =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb2005-3" data-line-number="3">                    <span class="dt">name =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2005-4" data-line-number="4">                    <span class="dt">age =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2005-5" data-line-number="5">                    <span class="dt">desire =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2005-6" data-line-number="6">                    <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">name =</span> <span class="ot">NA</span>, <span class="dt">age =</span> <span class="ot">NA</span>, <span class="dt">desire =</span> <span class="ot">NA</span>) {</a>
-<a class="sourceLine" id="cb2005-7" data-line-number="7">                      self<span class="op">$</span>name &lt;-<span class="st"> </span>name</a>
-<a class="sourceLine" id="cb2005-8" data-line-number="8">                      self<span class="op">$</span>age &lt;-<span class="st"> </span>age</a>
-<a class="sourceLine" id="cb2005-9" data-line-number="9">                      self<span class="op">$</span>desire &lt;-<span class="st"> </span>desire</a>
-<a class="sourceLine" id="cb2005-10" data-line-number="10">                      self<span class="op">$</span><span class="kw">greet</span>()</a>
-<a class="sourceLine" id="cb2005-11" data-line-number="11">                    },</a>
-<a class="sourceLine" id="cb2005-12" data-line-number="12">                    <span class="dt">set_age =</span> <span class="cf">function</span>(val) {</a>
-<a class="sourceLine" id="cb2005-13" data-line-number="13">                      self<span class="op">$</span>age &lt;-<span class="st"> </span>val</a>
-<a class="sourceLine" id="cb2005-14" data-line-number="14">                      <span class="kw">cat</span>(<span class="st">&quot;Age of &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb2005-15" data-line-number="15">                    },</a>
-<a class="sourceLine" id="cb2005-16" data-line-number="16">                    <span class="dt">set_desire =</span> <span class="cf">function</span>(val) {</a>
-<a class="sourceLine" id="cb2005-17" data-line-number="17">                      self<span class="op">$</span>desire &lt;-<span class="st"> </span>val</a>
-<a class="sourceLine" id="cb2005-18" data-line-number="18">                      <span class="kw">cat</span>(<span class="st">&quot;Desire of &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb2005-19" data-line-number="19">                    },</a>
-<a class="sourceLine" id="cb2005-20" data-line-number="20">                    <span class="dt">greet =</span> <span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb2005-21" data-line-number="21">                      <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;Hello, my name is &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>))</a>
-<a class="sourceLine" id="cb2005-22" data-line-number="22">                    }</a>
-<a class="sourceLine" id="cb2005-23" data-line-number="23">                  )</a>
-<a class="sourceLine" id="cb2005-24" data-line-number="24">)</a></code></pre></div>
+<div class="sourceCode" id="cb2005"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2005-1" data-line-number="1">Person &lt;-<span class="st"> </span><span class="kw">R6Class</span>(</a>
+<a class="sourceLine" id="cb2005-2" data-line-number="2">  <span class="dt">classname =</span> <span class="st">&quot;Person&quot;</span>,</a>
+<a class="sourceLine" id="cb2005-3" data-line-number="3">  <span class="dt">public =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb2005-4" data-line-number="4">    <span class="dt">name =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2005-5" data-line-number="5">    <span class="dt">age =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2005-6" data-line-number="6">    <span class="dt">desire =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2005-7" data-line-number="7">    <span class="dt">initialize =</span> <span class="cf">function</span>(<span class="dt">name =</span> <span class="ot">NA</span>, <span class="dt">age =</span> <span class="ot">NA</span>, <span class="dt">desire =</span> <span class="ot">NA</span>) {</a>
+<a class="sourceLine" id="cb2005-8" data-line-number="8">      self<span class="op">$</span>name &lt;-<span class="st"> </span>name</a>
+<a class="sourceLine" id="cb2005-9" data-line-number="9">      self<span class="op">$</span>age &lt;-<span class="st"> </span>age</a>
+<a class="sourceLine" id="cb2005-10" data-line-number="10">      self<span class="op">$</span>desire &lt;-<span class="st"> </span>desire</a>
+<a class="sourceLine" id="cb2005-11" data-line-number="11">      self<span class="op">$</span><span class="kw">greet</span>()</a>
+<a class="sourceLine" id="cb2005-12" data-line-number="12">    },</a>
+<a class="sourceLine" id="cb2005-13" data-line-number="13">    <span class="dt">set_age =</span> <span class="cf">function</span>(val) {</a>
+<a class="sourceLine" id="cb2005-14" data-line-number="14">      self<span class="op">$</span>age &lt;-<span class="st"> </span>val</a>
+<a class="sourceLine" id="cb2005-15" data-line-number="15">      <span class="kw">cat</span>(<span class="st">&quot;Age of &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb2005-16" data-line-number="16">    },</a>
+<a class="sourceLine" id="cb2005-17" data-line-number="17">    <span class="dt">set_desire =</span> <span class="cf">function</span>(val) {</a>
+<a class="sourceLine" id="cb2005-18" data-line-number="18">      self<span class="op">$</span>desire &lt;-<span class="st"> </span>val</a>
+<a class="sourceLine" id="cb2005-19" data-line-number="19">      <span class="kw">cat</span>(<span class="st">&quot;Desire of &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot; is:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb2005-20" data-line-number="20">    },</a>
+<a class="sourceLine" id="cb2005-21" data-line-number="21">    <span class="dt">greet =</span> <span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb2005-22" data-line-number="22">      <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;Hello, my name is &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>))</a>
+<a class="sourceLine" id="cb2005-23" data-line-number="23">    }</a>
+<a class="sourceLine" id="cb2005-24" data-line-number="24">  )</a>
+<a class="sourceLine" id="cb2005-25" data-line-number="25">)</a></code></pre></div>
 <p>Let’s analyze the above code. The function <code>R6Class()</code> has a quite a few parameters, but the two with which we will concern ourselves the most are:</p>
 <ul>
 <li><code>classname</code>: the name we propose to give to the class;</li>
@@ -630,8 +631,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">15.2.2</span> Instantiation: Initializing Objects</h3>
 <p>On its own there is not much that a class can <em>do</em>. For anything to happen we need to create a particular individual: an object of class Person. Creation of an object having a particular class is called <em>instantiation</em>. </p>
 <p>Every class comes with a method—not mentioned in the definition of the class—called <code>new()</code>. This method, when called on the Class, instantiates an object of the class by running the <code>initialize()</code> function. Let’s create a person named Dorothy and store this new object in the variable <code>dorothy</code>:</p>
-<div class="sourceCode" id="cb2006"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2006-1" data-line-number="1">dorothy &lt;-<span class="st"> </span>Person<span class="op">$</span><span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="dv">12</span>, </a>
-<a class="sourceLine" id="cb2006-2" data-line-number="2">                      <span class="dt">desire =</span> <span class="st">&quot;Kansas&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2006"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2006-1" data-line-number="1">dorothy &lt;-<span class="st"> </span>Person<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb2006-2" data-line-number="2">  <span class="dt">name =</span> <span class="st">&quot;Dorothy&quot;</span>, <span class="dt">age =</span> <span class="dv">12</span>,</a>
+<a class="sourceLine" id="cb2006-3" data-line-number="3">  <span class="dt">desire =</span> <span class="st">&quot;Kansas&quot;</span></a>
+<a class="sourceLine" id="cb2006-4" data-line-number="4">)</a></code></pre></div>
 <pre><code>## Hello, my name is Dorothy.</code></pre>
 <p>Note how the dollar-sign is used to indicate the calling of the <code>new()</code> method on the class Person. Note also that the arguments of <code>new()</code> are the arguments of <code>initialize()</code>: that’s because the <code>new()</code> method actually runs <code>initialize()</code> as part of its object-creation process.</p>
 <p>We can get a look at <code>dorothy</code> by printing her to the console:</p>
@@ -648,8 +651,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     set_desire: function (val)</code></pre>
 <p>We get the basic information on Dorothy, including also an indication that she can be cloned (copied). We’ll discuss cloning later.</p>
 <p>We can instantiate as many people as we like. The code below for example, establishes <code>scarecrow</code> as a new instance of Person:</p>
-<div class="sourceCode" id="cb2010"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2010-1" data-line-number="1">scarecrow &lt;-<span class="st"> </span>Person<span class="op">$</span><span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Scarecrow&quot;</span>, <span class="dt">age =</span> <span class="fl">0.038</span>, </a>
-<a class="sourceLine" id="cb2010-2" data-line-number="2">                      <span class="dt">desire =</span> <span class="st">&quot;Brains&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2010"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2010-1" data-line-number="1">scarecrow &lt;-<span class="st"> </span>Person<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb2010-2" data-line-number="2">  <span class="dt">name =</span> <span class="st">&quot;Scarecrow&quot;</span>, <span class="dt">age =</span> <span class="fl">0.038</span>,</a>
+<a class="sourceLine" id="cb2010-3" data-line-number="3">  <span class="dt">desire =</span> <span class="st">&quot;Brains&quot;</span></a>
+<a class="sourceLine" id="cb2010-4" data-line-number="4">)</a></code></pre></div>
 <pre><code>## Hello, my name is Scarecrow.</code></pre>
 <p>In <em>The Wizard of Oz</em>, Scarecrow is only two weeks old when Dorothy meets him, so his age is set at <span class="math inline">\(2/52 \approx 0.038\)</span> years.</p>
 </div>
@@ -690,11 +695,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can use the function <code>address()</code>  from the package <strong>pryr</strong> <span class="citation">(Wickham <a href="#ref-R-pryr">2018</a>)</span> to track what is happening behind the scenes. <code>address()</code> will tell us the current location in memory of the value corresponding to a name. Let’s repeat the above process, but use <code>address()</code> to see where the values are stored:</p>
 <div class="sourceCode" id="cb2024"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2024-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="dv">10</span></a>
 <a class="sourceLine" id="cb2024-2" data-line-number="2">pryr<span class="op">::</span><span class="kw">address</span>(a)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fd4b85cb740&quot;</code></pre>
+<pre><code>## [1] &quot;0x7febd88d02e8&quot;</code></pre>
 <p>The value 10 is stored in the memory address given above. Next, let’s create <code>b</code> by assignment from <code>a</code>:</p>
 <div class="sourceCode" id="cb2026"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2026-1" data-line-number="1">b &lt;-<span class="st"> </span>a</a>
 <a class="sourceLine" id="cb2026-2" data-line-number="2">pryr<span class="op">::</span><span class="kw">address</span>(b)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fd4b85cb740&quot;</code></pre>
+<pre><code>## [1] &quot;0x7febd88d02e8&quot;</code></pre>
 <p>For the moment <code>b</code> points to the same place in memory as <code>a</code> does, so it will yield 10:</p>
 <div class="sourceCode" id="cb2028"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2028-1" data-line-number="1">b</a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
@@ -703,14 +708,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 40</code></pre>
 <p>But for now <code>b</code> still points to the same place in memory that <code>a</code> does:</p>
 <div class="sourceCode" id="cb2032"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2032-1" data-line-number="1">pryr<span class="op">::</span><span class="kw">address</span>(b)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fd4b85cb740&quot;</code></pre>
+<pre><code>## [1] &quot;0x7febd88d02e8&quot;</code></pre>
 <p>But now let’s assign a new value to <code>b</code>:</p>
 <div class="sourceCode" id="cb2034"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2034-1" data-line-number="1">b &lt;-<span class="st"> </span><span class="dv">20</span></a>
 <a class="sourceLine" id="cb2034-2" data-line-number="2">pryr<span class="op">::</span><span class="kw">address</span>(b)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fd4a06db850&quot;</code></pre>
+<pre><code>## [1] &quot;0x7febd8b4fda8&quot;</code></pre>
 <p>Aha! <code>b</code> now points to a <strong>new</strong> location in the computer’s memory! That’s because R saw that the assignment operator was going to change the value of <code>b</code>. Since <code>b</code> has value semantics, R knows to set aside a new spot in memory to contain the value 20, and to associate the name <code>b</code> with that spot. That way, the new <code>b</code> won’t interfere with <code>a</code>, which points to the same old spot in memory and thus remains 10:</p>
 <div class="sourceCode" id="cb2036"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2036-1" data-line-number="1">pryr<span class="op">::</span><span class="kw">address</span>(a)</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fd4b85cb740&quot;</code></pre>
+<pre><code>## [1] &quot;0x7febd88d02e8&quot;</code></pre>
 <div class="sourceCode" id="cb2038"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2038-1" data-line-number="1">a</a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <p>On the other hand, R6 objects have <em>reference semantics</em>. We can see this in action with the following example. First, let’s check on <code>dorothy</code>’s age:</p>
@@ -720,7 +725,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2042"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2042-1" data-line-number="1">dorothy2 &lt;-<span class="st"> </span>dorothy</a></code></pre></div>
 <p>Let’s check the memory locations:</p>
 <div class="sourceCode" id="cb2043"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2043-1" data-line-number="1"><span class="kw">c</span>(pryr<span class="op">::</span><span class="kw">address</span>(dorothy), pryr<span class="op">::</span><span class="kw">address</span>(dorothy2))</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fd4b7d03930&quot; &quot;0x7fd4b7d03930&quot;</code></pre>
+<pre><code>## [1] &quot;0x7febe75232c8&quot; &quot;0x7febe75232c8&quot;</code></pre>
 <p>As with <code>a</code> and <code>b</code>, the two names initially point to the same place in memory.</p>
 <p>Now let’s change the age of <code>dorothy2</code> to 30:</p>
 <div class="sourceCode" id="cb2045"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2045-1" data-line-number="1">dorothy2<span class="op">$</span>age &lt;-<span class="st"> </span><span class="dv">30</span></a></code></pre></div>
@@ -729,7 +734,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 30</code></pre>
 <p>Whoa! Changing the age of <code>dorothy2</code> changed the age of <code>dorothy</code>! That’s because of the reference semantics: <code>dorothy2</code> continues to be associated with the same spot in memory as <code>dorothy</code>, <em>even after</em> we begin to make changes to it:</p>
 <div class="sourceCode" id="cb2048"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2048-1" data-line-number="1"><span class="kw">c</span>(pryr<span class="op">::</span><span class="kw">address</span>(dorothy), pryr<span class="op">::</span><span class="kw">address</span>(dorothy2))</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fd4b7d03930&quot; &quot;0x7fd4b7d03930&quot;</code></pre>
+<pre><code>## [1] &quot;0x7febe75232c8&quot; &quot;0x7febe75232c8&quot;</code></pre>
 </div>
 <div id="cloning-an-object" class="section level3">
 <h3><span class="header-section-number">15.2.6</span> Cloning an Object</h3>
@@ -749,7 +754,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     set_desire: function (val)</code></pre>
 <p><code>dorothy2</code> looks just like <code>dorothy</code>. However, the name <code>dorothy2</code> does not point to the same place in memory:</p>
 <div class="sourceCode" id="cb2052"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2052-1" data-line-number="1"><span class="kw">c</span>(pryr<span class="op">::</span><span class="kw">address</span>(dorothy), pryr<span class="op">::</span><span class="kw">address</span>(dorothy2))</a></code></pre></div>
-<pre><code>## [1] &quot;0x7fd4b7d03930&quot; &quot;0x7fd4a33520d0&quot;</code></pre>
+<pre><code>## [1] &quot;0x7febe75232c8&quot; &quot;0x7febd8e477f8&quot;</code></pre>
 <p>Accordingly, changes to <code>dorothy2</code> will no longer result in changes to <code>dorothy</code>:</p>
 <div class="sourceCode" id="cb2054"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2054-1" data-line-number="1">dorothy2<span class="op">$</span>age &lt;-<span class="st"> </span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb2054-2" data-line-number="2">dorothy<span class="op">$</span>age</a></code></pre></div>

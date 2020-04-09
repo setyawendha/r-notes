@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-04-08" />
+<meta name="date" content="2020-04-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -584,16 +584,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">15.7.1</span> Motivating Examples</h3>
 <p>We begin by revisiting the task of <em>printing</em> to the console.</p>
 <p>Recall that whenever we type the name of an object into the console and press Enter, R interprets the input as a call to the <code>print()</code> function. Consider, for example, printing some portion of <code>m111survey</code> from the <strong>bcscr</strong> package:</p>
-<div class="sourceCode" id="cb2100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2100-1" data-line-number="1">df &lt;-<span class="st"> </span>bcscr<span class="op">::</span>m111survey[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span> , <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight_feel&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb2100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2100-1" data-line-number="1">df &lt;-<span class="st"> </span>bcscr<span class="op">::</span>m111survey[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="kw">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight_feel&quot;</span>)]</a></code></pre></div>
 <p>If we want to print <code>df</code>, then either of the following two statements accomplish the same thing:</p>
-<div class="sourceCode" id="cb2101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2101-1" data-line-number="1"><span class="kw">print</span>(df)  <span class="co">## explicit directive to print results to Console</span></a></code></pre></div>
+<div class="sourceCode" id="cb2101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2101-1" data-line-number="1"><span class="kw">print</span>(df) <span class="co">## explicit directive to print results to Console</span></a></code></pre></div>
 <pre><code>##   height   weight_feel
 ## 1     76 1_underweight
 ## 2     74 2_about_right
 ## 3     64 2_about_right
 ## 4     62 1_underweight
 ## 5     72 1_underweight</code></pre>
-<div class="sourceCode" id="cb2103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2103-1" data-line-number="1">df         <span class="co">## R implicity calls print() at top-level</span></a></code></pre></div>
+<div class="sourceCode" id="cb2103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2103-1" data-line-number="1">df <span class="co">## R implicity calls print() at top-level</span></a></code></pre></div>
 <pre><code>##   height   weight_feel
 ## 1     76 1_underweight
 ## 2     74 2_about_right
@@ -610,7 +610,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ height     : num [1:5] 76 74 64 62 72
 ##  $ weight_feel: Factor w/ 3 levels &quot;1_underweight&quot;,..: 1 2 2 1 1</code></pre>
 <p>And let’s print <code>lst</code>:</p>
-<div class="sourceCode" id="cb2107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2107-1" data-line-number="1">lst   <span class="co"># same as print(lst)</span></a></code></pre></div>
+<div class="sourceCode" id="cb2107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2107-1" data-line-number="1">lst <span class="co"># same as print(lst)</span></a></code></pre></div>
 <pre><code>## $height
 ## [1] 76 74 64 62 72
 ## 
@@ -660,7 +660,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>When <code>UseMethod()</code> completes execution, it does not return control to the enclosing function <code>print()</code> from which it was called. The work of printing is done, so R arranges for control to be passed back to whomever called <code>print()</code> in the first place.</p></li>
 </ol>
 <p>It is interesting to note that the very act of “printing out” the print function, which we did earlier in order to see the code for the function, involved a search for a printing method:</p>
-<div class="sourceCode" id="cb2117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2117-1" data-line-number="1">print      <span class="co"># this is equivalent to print(print)</span></a></code></pre></div>
+<div class="sourceCode" id="cb2117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2117-1" data-line-number="1">print <span class="co"># this is equivalent to print(print)</span></a></code></pre></div>
 <pre><code>## function (x, ...) 
 ## UseMethod(&quot;print&quot;)
 ## &lt;bytecode: 0x108da3d40&gt;
@@ -706,7 +706,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2123-2" data-line-number="2"><span class="kw">summary</span>(feelings)</a></code></pre></div>
 <pre><code>## 1_underweight 2_about_right  3_overweight 
 ##             3             2             0</code></pre>
-<div class="sourceCode" id="cb2125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2125-1" data-line-number="1"><span class="kw">summary</span>(df)  <span class="co"># summarizing object of class &quot;data.frame&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2125-1" data-line-number="1"><span class="kw">summary</span>(df) <span class="co"># summarizing object of class &quot;data.frame&quot;</span></a></code></pre></div>
 <pre><code>##      height            weight_feel
 ##  Min.   :62.0   1_underweight:3   
 ##  1st Qu.:64.0   2_about_right:2   
@@ -719,7 +719,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## height      5      -none- numeric
 ## weight_feel 5      factor numeric</code></pre>
 <p>It is interesting also to see how R’s <code>plot()</code> (from package <strong>base</strong>) reacts to various types of input. See the Figure <a href="generic-function-oo.html#fig:xsquaregraph">15.2</a></p>
-<div class="sourceCode" id="cb2129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2129-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</a>
+<div class="sourceCode" id="cb2129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2129-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</a>
 <a class="sourceLine" id="cb2129-2" data-line-number="2"><span class="kw">plot</span>(x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:xsquaregraph"></span>
 <img src="r-notes_files/figure-html/xsquaregraph-1.png" alt="Our vector graphed as a parabola!" width="95%" />
@@ -730,30 +730,30 @@ Figure 15.2: Our vector graphed as a parabola!
 </div>
 <div id="writing-your-own-methods" class="section level3">
 <h3><span class="header-section-number">15.7.4</span> Writing Your Own Methods</h3>
-<p>As you advance in your programming skills, you will transition from writing to programs to help you accomplish your own tasks to writing programs that help others—who are not as proficient in programming as you are—get some of <em>their</em> work done. Since casual users of R often become accustomed to generic functions as providers of useful information about many types of R-objects, you might find yourself writing methods for one or more of the common generic functions. In this Section will we will practice the art of method-writing: we will write some method-functions to report on the results of a simulation.</p>
+<p>As you advance in your programming skills, you will transition from writing programs to help you accomplish your own tasks to writing programs that help others—who are not as proficient in programming as you are—get some of <em>their</em> work done. Since casual users of R often become accustomed to generic functions as providers of useful information about many types of R-objects, you might find yourself writing methods for one or more of the common generic functions. In this Section will we will practice the art of method-writing: we will write some method-functions to report on the results of a simulation.</p>
 <p>Recall the problem from Section <a href="simulation-number-needed.html#simulation-number-needed">6.6</a> about estimating the expected number of uniform random numbers one must create until their sum exceeds a specified target-number. Let’s rewrite the simulation function so that it returns an object of a special class. We will then write print and plot methods that permit a user to obtain information about the results of any simulation that was performed.</p>
 <p>First of all, let’s rewrite <code>numberNeededSim()</code>:</p>
-<div class="sourceCode" id="cb2130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2130-1" data-line-number="1">numberNeededSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>, </a>
+<div class="sourceCode" id="cb2130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2130-1" data-line-number="1">numberNeededSim &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">target =</span> <span class="dv">1</span>, <span class="dt">reps =</span> <span class="dv">1000</span>,</a>
 <a class="sourceLine" id="cb2130-2" data-line-number="2">                            <span class="dt">seed =</span> <span class="ot">NULL</span>) {</a>
-<a class="sourceLine" id="cb2130-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb2130-4" data-line-number="4">  <span class="co">#set the seed if none is provided</span></a>
-<a class="sourceLine" id="cb2130-5" data-line-number="5">  <span class="cf">if</span> ( <span class="op">!</span><span class="kw">is.null</span>(seed) ) {</a>
+<a class="sourceLine" id="cb2130-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2130-4" data-line-number="4">  <span class="co"># set the seed if none is provided</span></a>
+<a class="sourceLine" id="cb2130-5" data-line-number="5">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(seed)) {</a>
 <a class="sourceLine" id="cb2130-6" data-line-number="6">    <span class="kw">set.seed</span>(seed)</a>
 <a class="sourceLine" id="cb2130-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb2130-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb2130-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb2130-9" data-line-number="9">  numberNeeded &lt;-<span class="st"> </span><span class="cf">function</span>(target) {</a>
 <a class="sourceLine" id="cb2130-10" data-line-number="10">    mySum &lt;-<span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb2130-11" data-line-number="11">    count &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb2130-12" data-line-number="12">    <span class="cf">while</span>( mySum <span class="op">&lt;</span><span class="st"> </span>target ) {</a>
+<a class="sourceLine" id="cb2130-12" data-line-number="12">    <span class="cf">while</span> (mySum <span class="op">&lt;</span><span class="st"> </span>target) {</a>
 <a class="sourceLine" id="cb2130-13" data-line-number="13">      number &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb2130-14" data-line-number="14">      mySum &lt;-<span class="st"> </span>mySum <span class="op">+</span><span class="st"> </span>number</a>
 <a class="sourceLine" id="cb2130-15" data-line-number="15">      count &lt;-<span class="st"> </span>count <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb2130-16" data-line-number="16">    }</a>
 <a class="sourceLine" id="cb2130-17" data-line-number="17">    count</a>
 <a class="sourceLine" id="cb2130-18" data-line-number="18">  }</a>
-<a class="sourceLine" id="cb2130-19" data-line-number="19">  </a>
+<a class="sourceLine" id="cb2130-19" data-line-number="19"></a>
 <a class="sourceLine" id="cb2130-20" data-line-number="20">  needed &lt;-<span class="st"> </span><span class="kw">numeric</span>(reps)</a>
-<a class="sourceLine" id="cb2130-21" data-line-number="21">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps ) {</a>
+<a class="sourceLine" id="cb2130-21" data-line-number="21">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>reps) {</a>
 <a class="sourceLine" id="cb2130-22" data-line-number="22">    needed[i] &lt;-<span class="st"> </span><span class="kw">numberNeeded</span>(target)</a>
 <a class="sourceLine" id="cb2130-23" data-line-number="23">  }</a>
 <a class="sourceLine" id="cb2130-24" data-line-number="24">  results &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">target =</span> target, <span class="dt">sims =</span> needed)</a>
@@ -772,38 +772,42 @@ Figure 15.2: Our vector graphed as a parabola!
 <a class="sourceLine" id="cb2131-3" data-line-number="3">  sims &lt;-<span class="st"> </span>x<span class="op">$</span>sims</a>
 <a class="sourceLine" id="cb2131-4" data-line-number="4">  reps &lt;-<span class="st"> </span><span class="kw">length</span>(sims)</a>
 <a class="sourceLine" id="cb2131-5" data-line-number="5">  <span class="kw">cat</span>(<span class="st">&quot;Here is a table of the results, based on &quot;</span>, reps,</a>
-<a class="sourceLine" id="cb2131-6" data-line-number="6">      <span class="st">&quot; simulations.</span><span class="ch">\n\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb2131-7" data-line-number="7">  tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(sims))</a>
-<a class="sourceLine" id="cb2131-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb2131-9" data-line-number="9">  <span class="co"># for sake of pretty output,</span></a>
-<a class="sourceLine" id="cb2131-10" data-line-number="10">  <span class="co"># remove &quot;sims&quot; variable name from top of table printout</span></a>
-<a class="sourceLine" id="cb2131-11" data-line-number="11">  colNames &lt;-<span class="st"> </span><span class="kw">dimnames</span>(tab)</a>
-<a class="sourceLine" id="cb2131-12" data-line-number="12">  <span class="kw">names</span>(colNames) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb2131-13" data-line-number="13">  <span class="kw">dimnames</span>(tab) &lt;-<span class="st"> </span>colNames</a>
-<a class="sourceLine" id="cb2131-14" data-line-number="14">  </a>
-<a class="sourceLine" id="cb2131-15" data-line-number="15">  <span class="kw">print</span>(tab)</a>
-<a class="sourceLine" id="cb2131-16" data-line-number="16">  <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
-<a class="sourceLine" id="cb2131-17" data-line-number="17">  <span class="kw">cat</span>(<span class="st">&quot;The expected number needed is about &quot;</span>, </a>
-<a class="sourceLine" id="cb2131-18" data-line-number="18">      <span class="kw">mean</span>(sims), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb2131-19" data-line-number="19">}</a></code></pre></div>
+<a class="sourceLine" id="cb2131-6" data-line-number="6">    <span class="st">&quot; simulations.</span><span class="ch">\n\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb2131-7" data-line-number="7">    <span class="dt">sep =</span> <span class="st">&quot;&quot;</span></a>
+<a class="sourceLine" id="cb2131-8" data-line-number="8">  )</a>
+<a class="sourceLine" id="cb2131-9" data-line-number="9">  tab &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(sims))</a>
+<a class="sourceLine" id="cb2131-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb2131-11" data-line-number="11">  <span class="co"># for sake of pretty output,</span></a>
+<a class="sourceLine" id="cb2131-12" data-line-number="12">  <span class="co"># remove &quot;sims&quot; variable name from top of table printout</span></a>
+<a class="sourceLine" id="cb2131-13" data-line-number="13">  colNames &lt;-<span class="st"> </span><span class="kw">dimnames</span>(tab)</a>
+<a class="sourceLine" id="cb2131-14" data-line-number="14">  <span class="kw">names</span>(colNames) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb2131-15" data-line-number="15">  <span class="kw">dimnames</span>(tab) &lt;-<span class="st"> </span>colNames</a>
+<a class="sourceLine" id="cb2131-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb2131-17" data-line-number="17">  <span class="kw">print</span>(tab)</a>
+<a class="sourceLine" id="cb2131-18" data-line-number="18">  <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb2131-19" data-line-number="19">  <span class="kw">cat</span>(<span class="st">&quot;The expected number needed is about &quot;</span>,</a>
+<a class="sourceLine" id="cb2131-20" data-line-number="20">    <span class="kw">mean</span>(sims), <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb2131-21" data-line-number="21">    <span class="dt">sep =</span> <span class="st">&quot;&quot;</span></a>
+<a class="sourceLine" id="cb2131-22" data-line-number="22">  )</a>
+<a class="sourceLine" id="cb2131-23" data-line-number="23">}</a></code></pre></div>
 <p>Finally, let’s write a plot method. Its name must be <code>plot.numNeededSims</code>. This method will produce a bar graph of the results of the simulations. We’ll use the <strong>ggplot2</strong> plotting package, so we should stop if the user hasn’t installed and attached <strong>ggplot2</strong>.</p>
 <div class="sourceCode" id="cb2132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2132-1" data-line-number="1">plot.numNeededSims &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb2132-2" data-line-number="2">  <span class="cf">if</span> ( <span class="op">!</span><span class="st">&quot;package:ggplot2&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">search</span>() ) {</a>
-<a class="sourceLine" id="cb2132-3" data-line-number="3">    <span class="kw">cat</span>(<span class="st">&quot;Need to load package ggplot2 in order to plot.&quot;</span>)</a>
+<a class="sourceLine" id="cb2132-2" data-line-number="2">  <span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;package:ggplot2&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">search</span>()) {</a>
+<a class="sourceLine" id="cb2132-3" data-line-number="3">    <span class="kw">return</span>(<span class="kw">cat</span>(<span class="st">&quot;Need to load package ggplot2 in order to plot.&quot;</span>))</a>
 <a class="sourceLine" id="cb2132-4" data-line-number="4">  }</a>
-<a class="sourceLine" id="cb2132-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb2132-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb2132-6" data-line-number="6">  sims &lt;-<span class="st"> </span>x<span class="op">$</span>sims</a>
 <a class="sourceLine" id="cb2132-7" data-line-number="7">  <span class="co"># for a good bar-plot, convert numerical vector sims</span></a>
 <a class="sourceLine" id="cb2132-8" data-line-number="8">  <span class="co"># to a factor with appropriate levels</span></a>
 <a class="sourceLine" id="cb2132-9" data-line-number="9">  levels &lt;-<span class="st"> </span><span class="kw">min</span>(sims)<span class="op">:</span><span class="kw">max</span>(sims)</a>
 <a class="sourceLine" id="cb2132-10" data-line-number="10">  sims &lt;-<span class="st"> </span><span class="kw">factor</span>(sims, <span class="dt">levels =</span> levels)</a>
-<a class="sourceLine" id="cb2132-11" data-line-number="11">  </a>
+<a class="sourceLine" id="cb2132-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb2132-12" data-line-number="12">  df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(sims)</a>
 <a class="sourceLine" id="cb2132-13" data-line-number="13">  plotTitle &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Results of &quot;</span>, <span class="kw">length</span>(sims), <span class="st">&quot; Simulations&quot;</span>)</a>
 <a class="sourceLine" id="cb2132-14" data-line-number="14">  <span class="co"># in the code below, scale_x_discrete(drop = f) ensures that</span></a>
 <a class="sourceLine" id="cb2132-15" data-line-number="15">  <span class="co"># even if there are no values in sims for a particular level it</span></a>
 <a class="sourceLine" id="cb2132-16" data-line-number="16">  <span class="co"># will still appear in the plot as a zero-height bar</span></a>
-<a class="sourceLine" id="cb2132-17" data-line-number="17">  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> sims)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span><span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2132-17" data-line-number="17">  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> sims)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb2132-18" data-line-number="18"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Number Needed&quot;</span>, <span class="dt">title =</span> plotTitle)</a>
 <a class="sourceLine" id="cb2132-19" data-line-number="19">}</a></code></pre></div>
 <p>Let’s give it a try:</p>
@@ -824,7 +828,7 @@ Figure 15.2: Our vector graphed as a parabola!
 ##  $ sims  : num [1:10000] 3 2 2 2 3 3 4 2 2 5 ...
 ##  - attr(*, &quot;class&quot;)= chr &quot;numNeededSims&quot;</code></pre>
 <p>Then it’s possible for the user to recall specific features of the results, for example:</p>
-<div class="sourceCode" id="cb2137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2137-1" data-line-number="1">results<span class="op">$</span>target  <span class="co"># get just the target number</span></a></code></pre></div>
+<div class="sourceCode" id="cb2137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2137-1" data-line-number="1">results<span class="op">$</span>target <span class="co"># get just the target number</span></a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>If we wanted the printout we could just say:</p>
 <div class="sourceCode" id="cb2139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2139-1" data-line-number="1">results</a></code></pre></div>
@@ -846,24 +850,24 @@ Figure 15.3: Results of the Number-Needed simulation.
 </div>
 <div id="writing-a-generic-function" class="section level3">
 <h3><span class="header-section-number">15.7.5</span> Writing a Generic Function</h3>
-<p>Generic functions are most useful when they correspond to tasks that are so commonly performed that many methods are written for them, so that users get in the habit of “trying out” the generic on their object. As a consequence, the vast majority of method-functions are written for currently-existing, very well-known generics like <code>print()</code>, <code>summary()</code> and <code>plot()</code>. It doesn’t make a lot of sense to write generics that will have only a few methods attached to them. Nevertheless, it’s highly instructive to see how generics do their work, so as as example we’ll write a new generic, along with a couple of method functions.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></p>
-<p>First let’s create some objects with special classes. Here are two objects of class “cartesianPoint”. Our intention is that they correspond to point on the plane, represented with the standard <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> Cartesian coordinates.</p>
+<p>Generic functions are most useful when they correspond to tasks that are so commonly performed that many methods are written for them, so that users get in the habit of “trying out” the generic on their object. As a consequence, the vast majority of method-functions are written for currently-existing, very well-known generics like <code>print()</code>, <code>summary()</code> and <code>plot()</code>. It doesn’t make a lot of sense to write generics that will have only a few methods attached to them. Nevertheless, it’s highly instructive to see how generics do their work, so as an example we’ll write a new generic, along with a couple of method functions.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></p>
+<p>First let’s create some objects with special classes. Here are two objects of class “cartesianPoint”. Our intention is that they correspond to points on the plane, represented with the standard <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> Cartesian coordinates.</p>
 <div class="sourceCode" id="cb2142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2142-1" data-line-number="1">point1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb2142-2" data-line-number="2"><span class="kw">class</span>(point1) &lt;-<span class="st"> &quot;cartesianPoint&quot;</span></a>
 <a class="sourceLine" id="cb2142-3" data-line-number="3">point2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">2</span>, <span class="dt">y =</span> <span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb2142-4" data-line-number="4"><span class="kw">class</span>(point2) &lt;-<span class="st"> &quot;cartesianPoint&quot;</span></a></code></pre></div>
 <p>It is also possible to represent a point on the plan with <em>polar coordinates</em>. The elements of a polar coordinates representation are:</p>
 <ul>
-<li><span class="math inline">\(r\)</span>: a non-negative real number that the distance from the origin to the point;</li>
+<li><span class="math inline">\(r\)</span>: a non-negative real number that gives the distance from the origin to the point;</li>
 <li><span class="math inline">\(\theta\)</span>: the angle measure (in radians) between the positive <span class="math inline">\(x\)</span>-axis and ray from the origin to the point.</li>
 </ul>
-<div class="sourceCode" id="cb2143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2143-1" data-line-number="1">point3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">r =</span> <span class="dv">2</span>, <span class="dt">theta =</span> pi<span class="op">/</span><span class="dv">2</span>)</a>
+<div class="sourceCode" id="cb2143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2143-1" data-line-number="1">point3 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">r =</span> <span class="dv">2</span>, <span class="dt">theta =</span> pi <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb2143-2" data-line-number="2">point4 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">r =</span> <span class="dv">1</span>, <span class="dt">theta =</span> pi)</a>
 <a class="sourceLine" id="cb2143-3" data-line-number="3"><span class="kw">class</span>(point3) &lt;-<span class="st"> &quot;polarPoint&quot;</span></a>
 <a class="sourceLine" id="cb2143-4" data-line-number="4"><span class="kw">class</span>(point4) &lt;-<span class="st"> &quot;polarPoint&quot;</span></a></code></pre></div>
 <p>In the definition above, <code>point3</code> is the point that lies at <span class="math inline">\(\pi/2\)</span> radians (90 degrees) counter-clockwise from the positive <span class="math inline">\(x\)</span>-axis. That means that it lies along the positive <span class="math inline">\(y\)</span>-axis. It is 2 units from the origin, so in Cartesian coordinates it would be written as <span class="math inline">\((0,2)\)</span>. Similarly, <code>point4</code> would be written in Cartesian coordinates as <span class="math inline">\((-1,0)\)</span>, since it lies one unit from the origin along the negative <span class="math inline">\(x\)</span>-axis.</p>
 <p>Now let us suppose that we would like to find the <span class="math inline">\(x\)</span>-coordinate of a point. For points of class <code>cartesianPoint</code> this is pretty simple:</p>
-<div class="sourceCode" id="cb2144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2144-1" data-line-number="1">point1<span class="op">$</span>x  <span class="co"># gives x-coordinate</span></a></code></pre></div>
+<div class="sourceCode" id="cb2144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2144-1" data-line-number="1">point1<span class="op">$</span>x <span class="co"># gives x-coordinate</span></a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>If the point is given in polar coordinates, we must convert it to Cartesian coordinates. You may recall the conversion formulas from a previous trigonometry class. To get <span class="math inline">\(x\)</span>, use:</p>
 <p><span class="math display">\[x = r\cos \theta.\]</span>

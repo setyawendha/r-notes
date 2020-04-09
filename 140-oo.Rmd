@@ -89,29 +89,30 @@ Construction of the object-world begins with the definition of classes.  A *clas
 Let's define the class `Person`.  This is accomplished with the `R6Class()` function:  \index{R-functions!R6::R6Class()@\texttt{R6::R6Class()}}
 
 ```{r}
-Person <- R6Class(classname = "Person",
-                  public = list(
-                    name = NULL,
-                    age = NULL,
-                    desire = NULL,
-                    initialize = function(name = NA, age = NA, desire = NA) {
-                      self$name <- name
-                      self$age <- age
-                      self$desire <- desire
-                      self$greet()
-                    },
-                    set_age = function(val) {
-                      self$age <- val
-                      cat("Age of ", self$name, " is:  ", val, ".\n", sep = "")
-                    },
-                    set_desire = function(val) {
-                      self$desire <- val
-                      cat("Desire of ", self$name, " is:  ", val, ".\n", sep = "")
-                    },
-                    greet = function() {
-                      cat(paste0("Hello, my name is ", self$name, ".\n"))
-                    }
-                  )
+Person <- R6Class(
+  classname = "Person",
+  public = list(
+    name = NULL,
+    age = NULL,
+    desire = NULL,
+    initialize = function(name = NA, age = NA, desire = NA) {
+      self$name <- name
+      self$age <- age
+      self$desire <- desire
+      self$greet()
+    },
+    set_age = function(val) {
+      self$age <- val
+      cat("Age of ", self$name, " is:  ", val, ".\n", sep = "")
+    },
+    set_desire = function(val) {
+      self$desire <- val
+      cat("Desire of ", self$name, " is:  ", val, ".\n", sep = "")
+    },
+    greet = function() {
+      cat(paste0("Hello, my name is ", self$name, ".\n"))
+    }
+  )
 )
 ```
 
@@ -137,8 +138,10 @@ Every class comes with a method---not mentioned in the definition of the class--
 
 
 ```{r}
-dorothy <- Person$new(name = "Dorothy", age = 12, 
-                      desire = "Kansas")
+dorothy <- Person$new(
+  name = "Dorothy", age = 12,
+  desire = "Kansas"
+)
 ```
 
 Note how the dollar-sign is used to indicate the calling of the `new()` method on the class Person.  Note also that the arguments of `new()` are the arguments of `initialize()`:  that's because the `new()` method actually runs `initialize()` as part of its object-creation process.
@@ -154,8 +157,10 @@ We get the basic information on Dorothy, including also an indication that she c
 We can instantiate as many people as we like.  The code below for example, establishes `scarecrow` as a new instance of Person:
 
 ```{r}
-scarecrow <- Person$new(name = "Scarecrow", age = 0.038, 
-                      desire = "Brains")
+scarecrow <- Person$new(
+  name = "Scarecrow", age = 0.038,
+  desire = "Brains"
+)
 ```
 
 In *The Wizard of Oz*, Scarecrow is only two weeks old when Dorothy meets him, so his age is set at $2/52 \approx 0.038$ years.
@@ -347,18 +352,18 @@ Most object-oriented frameworks allow for some type of inheritance between class
 
 ```{r}
 Lion <- R6Class("Lion",
-                inherit = Person,
-                public = list(
-                  weight = NULL,
-                  set_weight = function(val) {
-                    self$weight <- val
-                    cat(self$name, " has weight:  ", val, ".\n", sep = "")
-                  },
-                  greet = function() {
-                    cat("Grr!  My name is ", self$name, "!", sep = "")
-                    }
-                  )
-                )
+  inherit = Person,
+  public = list(
+    weight = NULL,
+    set_weight = function(val) {
+      self$weight <- val
+      cat(self$name, " has weight:  ", val, ".\n", sep = "")
+    },
+    greet = function() {
+      cat("Grr!  My name is ", self$name, "!", sep = "")
+    }
+  )
+)
 ```
 
 The key to inheritance is the new argument in the code above:
@@ -373,8 +378,10 @@ The impact of this additional argument is that any instance of the class Lion wi
 Let's verify all of this by making an instance of class Lion:
 
 ```{r}
-cowardlyLion <- Lion$new(name = "Cowardly Lion", 
-                         age = 18, desire = "courage")
+cowardlyLion <- Lion$new(
+  name = "Cowardly Lion",
+  age = 18, desire = "courage"
+)
 ```
 
 Since the definition of class Lion did not specify a new method of initialization---we could have asked for this, but chose not to---the instantiation of a lion won't set its weight.  We will have to do that separately:
@@ -425,7 +432,7 @@ While we are at it. let's write a special `set_color()` method:
 Person$set("public", "set_color", function(val) {
   self$color <- val
   cat(self$name, " has favorite color: ", val, ".\n", sep = "")
-  }, overwrite = TRUE)
+}, overwrite = TRUE)
 ```
 
 You might think that we can now set a favorite color for `dorothy`:
@@ -455,10 +462,12 @@ In order to illustrate method chaining, we'll extend the class Lion a bit, with 
 
 
 ```{r}
-animal <-  c("zebra", "giraffe", "pig", 
-             "cape buffalo", "antelope", "wildebeast")
+animal <- c(
+  "zebra", "giraffe", "pig",
+  "cape buffalo", "antelope", "wildebeast"
+)
 mass <- c(50, 100, 25, 60, 45, 55)
-prey <- data.frame(animal, mass, stringsAsFactors =FALSE)
+prey <- data.frame(animal, mass, stringsAsFactors = FALSE)
 ```
 
 Let's now add `prey` as a new attribute to class Lion.  We will also add an attribute `eaten`:  a character vector---initially empty---that will contain a record of all the animals that the lion has eaten.
@@ -492,7 +501,7 @@ Lions enjoy talking about what they have eaten recently, and for some reason the
 ```{r}
 Lion$set("public", "report", function() {
   n <- length(self$eaten)
-  if ( n >= 1 ) {
+  if (n >= 1) {
     cat("My name is ", self$name, ".\n", sep = "")
     cat("My most recent meal consisted of: ", self$eaten[n], ".\n", sep = "")
   }
@@ -506,8 +515,10 @@ Note that `report()` also returns the lion invisibly.
 Let us now instantiate a new lion named Simba:
 
 ```{r}
-simba <- Lion$new(name = "Simba", age = 10, 
-                  desire = "Hakuna Matata")
+simba <- Lion$new(
+  name = "Simba", age = 10,
+  desire = "Hakuna Matata"
+)
 simba$set_weight(300)
 ```
 
@@ -564,24 +575,25 @@ We will begin by defining the class Whale:
 
 ```{r}
 Whale <- R6Class("Whale",
-                 public = list(
-                   position = NULL,
-                   age = NULL,
-                   lifespan = NULL,
-                   range = NULL,
-                   maturity = NULL,
-                   stepSize = NULL,
-                   initialize = function(position = NA, age = 3,
-                                         lifespan = 40, range = 5,
-                                         maturity = 10, stepSize = 5) {
-                     self$position <- position
-                     self$age <- age
-                     self$lifespan <- lifespan
-                     self$range <- range
-                     self$maturity <- maturity
-                     self$stepSize <- stepSize
-                   }
-                 ))
+  public = list(
+    position = NULL,
+    age = NULL,
+    lifespan = NULL,
+    range = NULL,
+    maturity = NULL,
+    stepSize = NULL,
+    initialize = function(position = NA, age = 3,
+                          lifespan = 40, range = 5,
+                          maturity = 10, stepSize = 5) {
+      self$position <- position
+      self$age <- age
+      self$lifespan <- lifespan
+      self$range <- range
+      self$maturity <- maturity
+      self$stepSize <- stepSize
+    }
+  )
+)
 ```
 
 For whales that are instances of the Whale class:
@@ -599,20 +611,22 @@ The motion of a whale is implemented in the code below for a `move()` method tha
 
 ```{r}
 Whale$set("public",
-          "move",
-          function(dims, r = self$stepSize) {
-            xMax <- dims[1]
-            yMax <- dims[2]
-            repeat {
-              theta <- runif(1, min = 0, max = 2*pi)
-              p <- self$position + r * c(cos(theta), sin(theta))
-              within <- (p[1] > 0 && p[1] < xMax) && (p[2] > 0 && p[2] < yMax)
-              if ( within ) {
-                self$position <- p
-                break
-              }
-            }
-          }, overwrite = TRUE)
+  "move",
+  function(dims, r = self$stepSize) {
+    xMax <- dims[1]
+    yMax <- dims[2]
+    repeat {
+      theta <- runif(1, min = 0, max = 2 * pi)
+      p <- self$position + r * c(cos(theta), sin(theta))
+      within <- (p[1] > 0 && p[1] < xMax) && (p[2] > 0 && p[2] < yMax)
+      if (within) {
+        self$position <- p
+        break
+      }
+    }
+  },
+  overwrite = TRUE
+)
 ```
 
 Note the parameter `dims` for the move function.  From the code we can tell that it's a vector of length 2.  In fact the parameter will contain the x and and y-dimensions (the width and breadth) of our ocean.  It's something that will have to be determined by the ocean itself.  We haven't written the class Ocean yet, so this part of the code will have to remain a bit mysterious, for now.
@@ -623,22 +637,24 @@ We need male and female whales, so we create a class for each sex.  Both classes
 
 ```{r}
 Male <- R6Class("Male",
-                inherit = Whale,
-                public = list(
-                  sex = "male"
-                ))
+  inherit = Whale,
+  public = list(
+    sex = "male"
+  )
+)
 ```
 
 A female whale is a bit more complex:  in addition to a sex attribute, she needs an attribute that specifies how long she will be infertile after giving birth, and another attribute that enables the program to keep track of the number of time-periods she must wait until she is fertile again:
 
 ```{r}
 Female <- R6Class("Female",
-                inherit = Whale,
-                public = list(
-                  sex = "female",
-                  timeToFertility = 0,
-                  infertilityPeriod = 5
-                ))
+  inherit = Whale,
+  public = list(
+    sex = "female",
+    timeToFertility = 0,
+    infertilityPeriod = 5
+  )
+)
 ```
 
 A female whale also needs a method to determine whether a mature whale is in the vicinity:
@@ -646,19 +662,21 @@ A female whale also needs a method to determine whether a mature whale is in the
 
 ```{r}
 Female$set("public",
-           "maleNear",
-           function(males, dist) {
-             foundOne <- FALSE
-             for ( male in males ) {
-               near <- dist(male$position, self$position) < self$range
-               mature <- (male$age >= male$maturity)
-               if ( near && mature ) {
-                 foundOne <- TRUE
-                 break
-               }
-             }
-             foundOne
-           }, overwrite = TRUE)
+  "maleNear",
+  function(males, dist) {
+    foundOne <- FALSE
+    for (male in males) {
+      near <- dist(male$position, self$position) < self$range
+      mature <- (male$age >= male$maturity)
+      if (near && mature) {
+        foundOne <- TRUE
+        break
+      }
+    }
+    foundOne
+  },
+  overwrite = TRUE
+)
 ```
 
 Again, note the parameters `males` and `dist`.  Values for these parameters will be provided by the ocean object.  `males` will be a list of the male whales in the population at the current time, and `dist` will be a function for computing the distance between any two points in the ocean.
@@ -667,55 +685,68 @@ A female whale also needs to be able to mate:
 
 ```{r}
 Female$set("public",
-           "mate",
-           function() {
-             babySex <- sample(c("female", "male"), size = 1)
-             self$timeToFertility <- self$infertilityPeriod
-             return(babySex)
-           }, overwrite = TRUE)
+  "mate",
+  function() {
+    babySex <- sample(c("female", "male"), size = 1)
+    self$timeToFertility <- self$infertilityPeriod
+    return(babySex)
+  },
+  overwrite = TRUE
+)
 ```
 
 Now it is time to define the Ocean class.  It's a bit of a mouthful:
 
 ```{r}
 Ocean <- R6Class("Ocean",
-                 public = list(
-                   dimensions = NULL,
-                   males = NULL,
-                   females = NULL,
-                   malePop = NULL,
-                   femalePop = NULL,
-                   starveParameter = NULL,
-                   distance = function(a, b) {
-                     sqrt((a[1] - b[1])^2 + (a[2] - b[2])^2)
-                   },
-                   initialize = function(dims = c(100, 100),
-                                         males = 10,
-                                         females = 10,
-                                         starve = 5) {
-                     self$dimensions <- dims
-                     xMax <- dims[1]
-                     yMax <- dims[2]
-                     maleWhales <- replicate(
-                       males, 
-                       Male$new(age = 10, 
-                                position = c(runif(1, 0, xMax),
-                                            runif(1, 0, yMax))))
-                     femaleWhales <- replicate(
-                       females, 
-                       Female$new(age = 10, 
-                                  position = c(runif(1, 0, xMax), 
-                                               runif(1, 0, yMax))))
-                     self$males <- maleWhales
-                     self$females <- femaleWhales
-                     self$malePop <- males
-                     self$femalePop <- females
-                     self$starveParameter <- starve
-                   },
-                   starvationProbability = function(popDensity) {
-                     self$starveParameter * popDensity
-                   }
-                 ))
+  public = list(
+    dimensions = NULL,
+    males = NULL,
+    females = NULL,
+    malePop = NULL,
+    femalePop = NULL,
+    starveParameter = NULL,
+    distance = function(a, b) {
+      sqrt((a[1] - b[1])^2 + (a[2] - b[2])^2)
+    },
+    initialize = function(dims = c(100, 100),
+                          males = 10,
+                          females = 10,
+                          starve = 5) {
+      self$dimensions <- dims
+      xMax <- dims[1]
+      yMax <- dims[2]
+      maleWhales <- replicate(
+        males,
+        Male$new(
+          age = 10,
+          position = c(
+            runif(1, 0, xMax),
+            runif(1, 0, yMax)
+          )
+        )
+      )
+      femaleWhales <- replicate(
+        females,
+        Female$new(
+          age = 10,
+          position = c(
+            runif(1, 0, xMax),
+            runif(1, 0, yMax)
+          )
+        )
+      )
+      self$males <- maleWhales
+      self$females <- femaleWhales
+      self$malePop <- males
+      self$femalePop <- females
+      self$starveParameter <- starve
+    },
+    starvationProbability = function(popDensity) {
+      self$starveParameter * popDensity
+    }
+  )
+)
 ```
 
 In an instantiation of the class Ocean:
@@ -741,128 +772,141 @@ The `advance()` method is implemented and added to Ocean with the code below:
 
 ```{r}
 Ocean$set("public",
-          "advance",
-          function() {
-            malePop <- self$malePop
-            femalePop <- self$femalePop
-            population <- malePop + femalePop
-            if ( population == 0 ) {
-              return(NULL)
-            }
-            males <- self$males
-            females <- self$females
-            babyMales <- list()
-            babyFemales <- list()
-            if ( malePop > 0 && femalePop > 0 ) {
-              for ( female in females ) {
-                if ( female$age >= female$maturity && 
-                     female$timeToFertility <= 0 && 
-                     female$maleNear(males = males,
-                                     dist = self$distance)) {
-                  outcome <- female$mate()
-                  if ( outcome == "male" ) {
-                    baby <- Male$new(age = 0, position = female$position)
-                    babyMales <- c(babyMales, baby)
-                  } else {
-                    baby <- Female$new(age = 0, position = female$position)
-                    babyFemales <- c(babyFemales, baby)
-                  }
-                }
-              }
-            }
-            
-            # augment the male and female lists if needed:
-            lmb <- length(babyMales); lfb <- length(babyFemales);
-            
-            # throw in the babies:
-            if ( lmb > 0 ) {
-              males <- c(males, babyMales)
-            }
-            if ( lfb > 0 ) {
-              females <- c(females, babyFemales)
-            }
-            
-            # revise population for new births:
-            population <- length(males) + length(females)
-            
-            # starve some of them, maybe:
-            popDen <- population/prod(self$dimensions)
-            starveProb <- self$starvationProbability(popDensity = popDen)
-            maleDead <- logical(length(males))
-            femaleDead <- logical(length(females))
-            # starve some males
-            for ( i in seq_along(maleDead) ) {
-              male <- males[[i]]
-              maleDead[i] <- (runif(1) <= starveProb)
-              male$age <- male$age + 1
-              if ( male$age >= male$lifespan ) maleDead[i] <- TRUE
-              if ( maleDead[i] ) next
-              # if whale is not dead, he should move:
-              male$move(dims = self$dimensions)
-            }
-            # starve some females
-            for ( i in seq_along(femaleDead) ) {
-              female <- females[[i]]
-              femaleDead[i] <- (runif(1) <= starveProb)
-              female$age <- female$age + 1
-              if ( female$age >= female$lifespan ) femaleDead[i] <- TRUE
-              if ( femaleDead[i] ) next
-              if ( female$sex == "female" ) {
-                female$timeToFertility <- female$timeToFertility - 1
-              }
-              # if female is not dead, she should move:
-              female$move(dims = self$dimensions)
-            }
-            
-            # revise male and female whale lists:
-            malePop <- sum(!maleDead)
-            self$malePop <- malePop
-            femalePop <- sum(!femaleDead)
-            self$femalePop <- femalePop
-            if ( malePop > 0 ) {
-              self$males <- males[!maleDead]
-            } else {
-              self$males <- list()
-            }
-            if ( femalePop > 0 ) {
-              self$females <- females[!femaleDead]
-            } else {
-              self$females <- list()
-            }
-          }, overwrite = TRUE)
+  "advance",
+  function() {
+    malePop <- self$malePop
+    femalePop <- self$femalePop
+    population <- malePop + femalePop
+    if (population == 0) {
+      return(NULL)
+    }
+    males <- self$males
+    females <- self$females
+    babyMales <- list()
+    babyFemales <- list()
+    if (malePop > 0 && femalePop > 0) {
+      for (female in females) {
+        if (female$age >= female$maturity &&
+          female$timeToFertility <= 0 &&
+          female$maleNear(
+            males = males,
+            dist = self$distance
+          )) {
+          outcome <- female$mate()
+          if (outcome == "male") {
+            baby <- Male$new(age = 0, position = female$position)
+            babyMales <- c(babyMales, baby)
+          } else {
+            baby <- Female$new(age = 0, position = female$position)
+            babyFemales <- c(babyFemales, baby)
+          }
+        }
+      }
+    }
+
+    # augment the male and female lists if needed:
+    lmb <- length(babyMales)
+    lfb <- length(babyFemales)
+
+    # throw in the babies:
+    if (lmb > 0) {
+      males <- c(males, babyMales)
+    }
+    if (lfb > 0) {
+      females <- c(females, babyFemales)
+    }
+
+    # revise population for new births:
+    population <- length(males) + length(females)
+
+    # starve some of them, maybe:
+    popDen <- population / prod(self$dimensions)
+    starveProb <- self$starvationProbability(popDensity = popDen)
+    maleDead <- logical(length(males))
+    femaleDead <- logical(length(females))
+    # starve some males
+    for (i in seq_along(maleDead)) {
+      male <- males[[i]]
+      maleDead[i] <- (runif(1) <= starveProb)
+      male$age <- male$age + 1
+      if (male$age >= male$lifespan) maleDead[i] <- TRUE
+      if (maleDead[i]) next
+      # if whale is not dead, he should move:
+      male$move(dims = self$dimensions)
+    }
+    # starve some females
+    for (i in seq_along(femaleDead)) {
+      female <- females[[i]]
+      femaleDead[i] <- (runif(1) <= starveProb)
+      female$age <- female$age + 1
+      if (female$age >= female$lifespan) femaleDead[i] <- TRUE
+      if (femaleDead[i]) next
+      if (female$sex == "female") {
+        female$timeToFertility <- female$timeToFertility - 1
+      }
+      # if female is not dead, she should move:
+      female$move(dims = self$dimensions)
+    }
+
+    # revise male and female whale lists:
+    malePop <- sum(!maleDead)
+    self$malePop <- malePop
+    femalePop <- sum(!femaleDead)
+    self$femalePop <- femalePop
+    if (malePop > 0) {
+      self$males <- males[!maleDead]
+    } else {
+      self$males <- list()
+    }
+    if (femalePop > 0) {
+      self$females <- females[!femaleDead]
+    } else {
+      self$females <- list()
+    }
+  },
+  overwrite = TRUE
+)
 ```
 
 In simulations we might enjoy looking at a picture of the ocean at any given time moment.  Hence we add a `plot()` method that enables an ocean to produce a graph of the whales within it.  In this graph males will be colored red and females green.  Mature whales will appear as larger than immature whales.  For purposes of speed we use R's base graphics system rather than **ggplot2**.
 
 ```{r}
-Ocean$set("public", 
-          "plot",
-          function() {
-            males <- self$males
-            females <- self$females
-            whales <- c(males, females)
-            if ( length(whales) == 0) {
-              plot(0,0, type = "n", main = "All Gone!")
-              box(lwd = 2)
-              return(NULL)
-            }
-            df <- purrr::map_dfr(whales, function(x) {
-              list(x = x$position[1],
-                   y = x$position[2],
-                   sex = as.numeric(x$sex == "male"),
-                   mature = as.numeric(x$age >= x$maturity))
-              })
-            # males will be red, females green:
-            df$color <- ifelse(df$sex == 1, "red", "green")
-            # mature whales have cex = 3, immature whales cex 0.7
-            df$size <- ifelse(df$mature == 1, 1.3, 0.7)
-            with(df, 
-                 plot(x, y, xlim = c(0, self$dimensions[1]),
-                 ylim = c(0, self$dimensions[1]), pch = 19, xlab = "",
-                 ylab = "", axes = FALSE, col = color, cex = size,
-                 main = paste0("Population = ", nrow(df))))
-            box(lwd = 2)
-          }, overwrite = TRUE)
+Ocean$set("public",
+  "plot",
+  function() {
+    males <- self$males
+    females <- self$females
+    whales <- c(males, females)
+    if (length(whales) == 0) {
+      plot(0, 0, type = "n", main = "All Gone!")
+      box(lwd = 2)
+      return(NULL)
+    }
+    df <- purrr::map_dfr(whales, function(x) {
+      list(
+        x = x$position[1],
+        y = x$position[2],
+        sex = as.numeric(x$sex == "male"),
+        mature = as.numeric(x$age >= x$maturity)
+      )
+    })
+    # males will be red, females green:
+    df$color <- ifelse(df$sex == 1, "red", "green")
+    # mature whales have cex = 3, immature whales cex 0.7
+    df$size <- ifelse(df$mature == 1, 1.3, 0.7)
+    with(
+      df,
+      plot(x, y,
+        xlim = c(0, self$dimensions[1]),
+        ylim = c(0, self$dimensions[1]), pch = 19, xlab = "",
+        ylab = "", axes = FALSE, col = color, cex = size,
+        main = paste0("Population = ", nrow(df))
+      )
+    )
+    box(lwd = 2)
+  },
+  overwrite = TRUE
+)
 ```
 
 
@@ -872,22 +916,26 @@ Finally, we write a simulation function.  The function allows the user to specif
 library(ggplot2)
 oceanSim <- function(steps = 100, males = 10, females = 10,
                      starve = 5, animate = TRUE, seed = NULL) {
-  if ( !is.null(seed) ) {
+  if (!is.null(seed)) {
     set.seed(seed)
   }
-  ocean <- Ocean$new(dims = c(100, 100), males = males, 
-                     females = females, starve = starve)
-  population <-numeric(steps)
-  for ( i in 1:steps ) {
+  ocean <- Ocean$new(
+    dims = c(100, 100), males = males,
+    females = females, starve = starve
+  )
+  population <- numeric(steps)
+  for (i in 1:steps) {
     population[i] <- ocean$malePop + ocean$femalePop
-    if ( animate ) ocean$plot()
-    if ( population[i] == 0 ) break
+    if (animate) ocean$plot()
+    if (population[i] == 0) break
     ocean$advance()
-    if ( animate ) Sys.sleep(0.5)
+    if (animate) Sys.sleep(0.5)
   }
   pop <- population[1:i]
-  df <- data.frame(time = 1:length(pop),
-                   pop)
+  df <- data.frame(
+    time = 1:length(pop),
+    pop
+  )
   ggplot(df, aes(x = time, y = pop)) + geom_line() +
     labs(x = "Time", y = "Whale Population")
 }
@@ -899,22 +947,28 @@ We are now ready for a simulation.  The results are graphed in Figure \@ref(fig:
 
 
 ```{r whalesimgraph, width.out="60%", fig.cap="Simulated whale population.  Sadly, they all die after about 130 days.", fig.align='center', cache =TRUE}
-oceanSim(steps = 200, males = 15, females = 15,
-         animate = FALSE, seed = 3030)
+oceanSim(
+  steps = 200, males = 15, females = 15,
+  animate = FALSE, seed = 3030
+)
 ```
 
 You should try running the simulation yourself a few times, for differing initial numbers of whales.  If you like you can watch the whales move about by setting `animate` to `TRUE`:
 
 ```{r eval =FALSE}
-oceanSim(steps = 200, males = 15, females = 15,
-         animate = TRUE)
+oceanSim(
+  steps = 200, males = 15, females = 15,
+  animate = TRUE
+)
 ```
 
 You might also wish to explore varying the `starve` parameter:  recall that the higher it is, the lower the long-term stable whale population will be.  In order to better detect long-term stable population sizes, you will want to work with more steps, and you should turn off the step-by-step-animation, thus:
 
 ```{r eval =FALSE}
-oceanSim(steps = 1000, males = 75, females = 75,
-         starve = 2.5, animate = FALSE)
+oceanSim(
+  steps = 1000, males = 75, females = 75,
+  starve = 2.5, animate = FALSE
+)
 ```
 
 The R package **bcscr** ([@R-bcscr]) includes a more flexible version of the `Ocean` class that allows the users to set custom initial populations, including characteristics that vary from whale to whale.
@@ -933,14 +987,14 @@ Recall that whenever we type the name of an object into the console and press En
 
 
 ```{r}
-df <- bcscr::m111survey[1:5 , c("height", "weight_feel")]
+df <- bcscr::m111survey[1:5, c("height", "weight_feel")]
 ```
 
 If we want to print `df`, then either of the following two statements accomplish the same thing:
 
 ```{r}
-print(df)  ## explicit directive to print results to Console
-df         ## R implicity calls print() at top-level
+print(df) ## explicit directive to print results to Console
+df ## R implicity calls print() at top-level
 ```
 
 Both expressions, as we learned long ago, involve a call to the `print()` function.
@@ -960,7 +1014,7 @@ str(lst)
 And let's print `lst`:
 
 ```{r}
-lst   # same as print(lst)
+lst # same as print(lst)
 ```
 
 
@@ -1004,7 +1058,7 @@ The body of the `print()` consists of just one expression:  `UseMethod("print")`
 5.  The function `print.data.frame()` will be found.  We can tell because it appears on the list of available "methods" for `print()`.  The `methods()` function \index{R-functions!methods()@\texttt{methods()}} will give us the complete list of available methods, if we like
 
     ```{r eval =FALSE}
-    methods("print")
+methods("print")
     ```
     
     ```
@@ -1024,7 +1078,7 @@ The body of the `print()` consists of just one expression:  `UseMethod("print")`
 It is interesting to note that the very act of "printing out" the print function, which we did earlier in order to see the code for the function, involved a search for a printing method:
 
 ```{r eval =FALSE}
-print      # this is equivalent to print(print)
+print # this is equivalent to print(print)
 ```
 
 ```
@@ -1088,7 +1142,7 @@ summary(feelings)
 ```
 
 ```{r}
-summary(df)  # summarizing object of class "data.frame"
+summary(df) # summarizing object of class "data.frame"
 ```
 
 ```{r}
@@ -1099,41 +1153,41 @@ summary(lst)
 It is interesting also to see how R's `plot()` (from package **base**) reacts to various types of input.  See the Figure \@ref(fig:xsquaregraph)
 
 ```{r xsquaregraph, width.out="60%", fig.cap="Our vector graphed as a parabola!", fig.align='center'}
-x <- seq(-3,3, by = 0.01)
+x <- seq(-3, 3, by = 0.01)
 plot(x^2)
 ```
 
 
 ### Writing Your Own Methods
 
-As you advance in your programming skills, you will transition from writing to programs to help you accomplish your own tasks to writing programs that help others---who are not as proficient in programming as you are---get some of *their* work done.  Since casual users of R often become accustomed to generic functions as providers of useful information about many types of R-objects, you might find yourself writing methods for one or more of the common generic functions.  In this Section will we will practice the art of method-writing:  we will write some method-functions to report on the results of a simulation.
+As you advance in your programming skills, you will transition from writing programs to help you accomplish your own tasks to writing programs that help others---who are not as proficient in programming as you are---get some of *their* work done.  Since casual users of R often become accustomed to generic functions as providers of useful information about many types of R-objects, you might find yourself writing methods for one or more of the common generic functions.  In this Section will we will practice the art of method-writing:  we will write some method-functions to report on the results of a simulation.
 
 Recall the problem from Section \@ref(simulation-number-needed) about estimating the expected number of uniform random numbers one must create until their sum exceeds a specified target-number.  Let's rewrite the simulation function so that it returns an object of a special class.  We will then write print and plot methods that permit a user to obtain information about the results of any simulation that was performed.
 
 First of all, let's rewrite `numberNeededSim()`:
 
 ```{r}
-numberNeededSim <- function(target = 1, reps = 1000, 
+numberNeededSim <- function(target = 1, reps = 1000,
                             seed = NULL) {
-  
-  #set the seed if none is provided
-  if ( !is.null(seed) ) {
+
+  # set the seed if none is provided
+  if (!is.null(seed)) {
     set.seed(seed)
   }
-  
+
   numberNeeded <- function(target) {
     mySum <- 0
     count <- 0
-    while( mySum < target ) {
+    while (mySum < target) {
       number <- runif(1)
       mySum <- mySum + number
       count <- count + 1
     }
     count
   }
-  
+
   needed <- numeric(reps)
-  for (i in 1:reps ) {
+  for (i in 1:reps) {
     needed[i] <- numberNeeded(target)
   }
   results <- list(target = target, sims = needed)
@@ -1157,19 +1211,23 @@ print.numNeededSims <- function(x) {
   sims <- x$sims
   reps <- length(sims)
   cat("Here is a table of the results, based on ", reps,
-      " simulations.\n\n", sep = "")
+    " simulations.\n\n",
+    sep = ""
+  )
   tab <- prop.table(table(sims))
-  
+
   # for sake of pretty output,
   # remove "sims" variable name from top of table printout
   colNames <- dimnames(tab)
   names(colNames) <- NULL
   dimnames(tab) <- colNames
-  
+
   print(tab)
   cat("\n")
-  cat("The expected number needed is about ", 
-      mean(sims), ".\n", sep = "")
+  cat("The expected number needed is about ",
+    mean(sims), ".\n",
+    sep = ""
+  )
 }
 ```
 
@@ -1177,22 +1235,22 @@ Finally, let's write a plot method.  Its name must be `plot.numNeededSims`.  Thi
 
 ```{r}
 plot.numNeededSims <- function(x) {
-  if ( !"package:ggplot2" %in% search() ) {
-    cat("Need to load package ggplot2 in order to plot.")
+  if (!"package:ggplot2" %in% search()) {
+    return(cat("Need to load package ggplot2 in order to plot."))
   }
-  
+
   sims <- x$sims
   # for a good bar-plot, convert numerical vector sims
   # to a factor with appropriate levels
   levels <- min(sims):max(sims)
   sims <- factor(sims, levels = levels)
-  
+
   df <- data.frame(sims)
   plotTitle <- paste0("Results of ", length(sims), " Simulations")
   # in the code below, scale_x_discrete(drop = f) ensures that
   # even if there are no values in sims for a particular level it
   # will still appear in the plot as a zero-height bar
-  ggplot(df, aes(x = sims)) + geom_bar() + scale_x_discrete(drop =FALSE) +
+  ggplot(df, aes(x = sims)) + geom_bar() + scale_x_discrete(drop = FALSE) +
     labs(x = "Number Needed", title = plotTitle)
 }
 ```
@@ -1215,7 +1273,7 @@ str(results)
 Then it's possible for the user to recall specific features of the results, for example:
 
 ```{r}
-results$target  # get just the target number
+results$target # get just the target number
 ```
 
 If we wanted the printout we could just say:
@@ -1233,9 +1291,9 @@ plot(results)
 
 ### Writing a Generic Function
 
-Generic functions are most useful when they correspond to tasks that are so commonly performed that many methods are written for them, so that users get in the habit of "trying out" the generic on their object.  As a consequence, the vast majority of method-functions are written for currently-existing, very well-known generics like `print()`, `summary()` and `plot()`.  It doesn't make a lot of sense to write generics that will have only a few methods attached to them.  Nevertheless, it's highly instructive to see how generics do their work, so as as example we'll write a new generic, along with a couple of method functions.^[The generic we write is drawn from an example provided in the official *R Languge Definition* (@R-definition), written by the developers of R.]
+Generic functions are most useful when they correspond to tasks that are so commonly performed that many methods are written for them, so that users get in the habit of "trying out" the generic on their object.  As a consequence, the vast majority of method-functions are written for currently-existing, very well-known generics like `print()`, `summary()` and `plot()`.  It doesn't make a lot of sense to write generics that will have only a few methods attached to them.  Nevertheless, it's highly instructive to see how generics do their work, so as an example we'll write a new generic, along with a couple of method functions.^[The generic we write is drawn from an example provided in the official *R Languge Definition* (@R-definition), written by the developers of R.]
 
-First let's create some objects with special classes.  Here are two objects of class "cartesianPoint".  Our intention is that they correspond to point on the plane, represented with the standard $x$ and $y$ Cartesian coordinates.
+First let's create some objects with special classes.  Here are two objects of class "cartesianPoint".  Our intention is that they correspond to points on the plane, represented with the standard $x$ and $y$ Cartesian coordinates.
 
 ```{r}
 point1 <- list(x = 3, y = 4)
@@ -1246,11 +1304,11 @@ class(point2) <- "cartesianPoint"
 
 It is also possible to represent a point on the plan with *polar coordinates*.  The elements of a polar coordinates representation are:
 
-* $r$:  a non-negative real number that the distance from the origin to the point;
+* $r$:  a non-negative real number that gives the distance from the origin to the point;
 * $\theta$:  the angle measure (in radians) between the positive $x$-axis and ray from the origin to the point.
 
 ```{r}
-point3 <- list(r = 2, theta = pi/2)
+point3 <- list(r = 2, theta = pi / 2)
 point4 <- list(r = 1, theta = pi)
 class(point3) <- "polarPoint"
 class(point4) <- "polarPoint"
@@ -1261,7 +1319,7 @@ In the definition above, `point3` is the point that lies at $\pi/2$ radians (90 
 Now let us suppose that we would like to find the $x$-coordinate of a point.  For points of class `cartesianPoint` this is pretty simple:
 
 ```{r}
-point1$x  # gives x-coordinate
+point1$x # gives x-coordinate
 ```
 
 If the point is given in polar coordinates, we must convert it to Cartesian coordinates.  You may recall the conversion formulas from a previous trigonometry class. To get $x$, use:
@@ -1370,17 +1428,17 @@ knitr::include_graphics("images/thinking.png")
 
 ```{r echo =FALSE}
 meetupSim <- function(reps = 10000, seed = NULL) {
-  if ( is.null(seed) ) {
+  if (is.null(seed)) {
     seed <- as.numeric(Sys.time())
   }
   set.seed(seed)
   anna <- runif(reps, 0, 60)
   raj <- runif(reps, 0, 60)
   connect <- (abs(anna - raj) < 10)
-  
+
   diffs <- abs(anna - raj)
   noMeet <- diffs[diffs > 10] - 10
-  
+
   results <- list(connect = connect, noMeet = noMeet)
   class(results) <- c("meetupSims")
   results
@@ -1390,13 +1448,15 @@ meetupSim <- function(reps = 10000, seed = NULL) {
 print.meetupSims <- function(x) {
   reps <- length(x$connect)
   cat("Here is a table of the results, based on ", reps,
-      " simulations.\n\n", sep = "")
+    " simulations.\n\n",
+    sep = ""
+  )
   tab <- prop.table(table(x$connect))
-  
+
   # remove "connect" variable name from table printout
   colNames <- list(c("Did not connect", "Connected"))
   dimnames(tab) <- colNames
-  
+
   print(tab)
   cat("\n")
   cat("Summary of how many minutes they missed by:\n\n")
@@ -1404,12 +1464,12 @@ print.meetupSims <- function(x) {
 }
 
 plot.meetupSims <- function(x) {
-  if ( !"package:ggplot2" %in% search() ) {
+  if (!"package:ggplot2" %in% search()) {
     cat("Need to load package ggplot2 in order to plot.")
   }
-  
+
   sims <- x$noMeet
-  
+
   df <- data.frame(sims)
   plotTitle <- paste0("Results of ", length(sims), " Simulations")
   ggplot(df, aes(x = sims)) + geom_density() +
@@ -1430,7 +1490,7 @@ plot.meetupSims <- function(x) {
 1. Install the package **bcscr**, if you have not done so already:
 
     ```{r eval = FALSE}
-    devtools::install.packages("homerhanumat/bcscr")
+devtools::install.packages("homerhanumat/bcscr")
     ```
 
     Study the documentation for the classes `Ocean`, `Female` and `Male`, and then write your own ocean simulation in which the initial whales have properties that you select.
@@ -1444,20 +1504,20 @@ plot.meetupSims <- function(x) {
     Make the list have class "meetupSims".  A typical example of use should look like this:
     
     ```{r meetupgnefnoo, cache =TRUE}
-    results <- meetupSim(reps = 10000, seed = 3535)
-    str(results)
+results <- meetupSim(reps = 10000, seed = 3535)
+str(results)
     ```
     
 1. Building on the previous exercise, write a method-function called `print.meetupSims()` that prints the results of a meet-up simulation to the console.  The function should provide a table that gives the proportion of times that Anna and Raj met, and a numerical summary of the simulation results when they did not meet.  (You could use the `summary()` function for this.)  A typical example of use would look like this:
 
     ```{r}
-    results   # has same effect as print(results)
+results # has same effect as print(results)
     ```
     
 1. Continuing in the same vein, write a method-function called `plot.meetupSims()` that makes a density plot showing the distribution of the number of minutes by which the latecomer misses the meeting.  It should work like this:
 
     ```{r}
-    plot(results)
+plot(results)
     ```
 
 1.  Write a generic function called `ypos()` that will return the $y$-coordinate of points of class `cartesianPoint` and  `polarPoint`.  Of course you will need to write the corresponding method functions, as well.

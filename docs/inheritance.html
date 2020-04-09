@@ -24,7 +24,7 @@
 <meta name="author" content="Homer White" />
 
 
-<meta name="date" content="2020-04-08" />
+<meta name="date" content="2020-04-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -583,18 +583,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Earlier we mentioned that in the real world an object may possess a property in virtue of being the particular kind of thing that it is, or it may possess that property in virtue of being a member of some more general class of things. Thus a dog can eat, not because it is a dog <em>per se</em>, but because it is an animal. You could say that dogs “inherit” the capacity to eat from the class Animal.</p>
 <p>Most object-oriented frameworks allow for some type of inheritance between classes, and R6 is no exception. In the <em>Wizard of Oz</em> lions appear to be a special type of person: after all, they can speak, and they have desires. Accordingly, we should create a new class Lion that inherits from the class Person:</p>
 <div class="sourceCode" id="cb2056"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2056-1" data-line-number="1">Lion &lt;-<span class="st"> </span><span class="kw">R6Class</span>(<span class="st">&quot;Lion&quot;</span>,</a>
-<a class="sourceLine" id="cb2056-2" data-line-number="2">                <span class="dt">inherit =</span> Person,</a>
-<a class="sourceLine" id="cb2056-3" data-line-number="3">                <span class="dt">public =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb2056-4" data-line-number="4">                  <span class="dt">weight =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb2056-5" data-line-number="5">                  <span class="dt">set_weight =</span> <span class="cf">function</span>(val) {</a>
-<a class="sourceLine" id="cb2056-6" data-line-number="6">                    self<span class="op">$</span>weight &lt;-<span class="st"> </span>val</a>
-<a class="sourceLine" id="cb2056-7" data-line-number="7">                    <span class="kw">cat</span>(self<span class="op">$</span>name, <span class="st">&quot; has weight:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb2056-8" data-line-number="8">                  },</a>
-<a class="sourceLine" id="cb2056-9" data-line-number="9">                  <span class="dt">greet =</span> <span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb2056-10" data-line-number="10">                    <span class="kw">cat</span>(<span class="st">&quot;Grr!  My name is &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot;!&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb2056-11" data-line-number="11">                    }</a>
-<a class="sourceLine" id="cb2056-12" data-line-number="12">                  )</a>
-<a class="sourceLine" id="cb2056-13" data-line-number="13">                )</a></code></pre></div>
+<a class="sourceLine" id="cb2056-2" data-line-number="2">  <span class="dt">inherit =</span> Person,</a>
+<a class="sourceLine" id="cb2056-3" data-line-number="3">  <span class="dt">public =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb2056-4" data-line-number="4">    <span class="dt">weight =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb2056-5" data-line-number="5">    <span class="dt">set_weight =</span> <span class="cf">function</span>(val) {</a>
+<a class="sourceLine" id="cb2056-6" data-line-number="6">      self<span class="op">$</span>weight &lt;-<span class="st"> </span>val</a>
+<a class="sourceLine" id="cb2056-7" data-line-number="7">      <span class="kw">cat</span>(self<span class="op">$</span>name, <span class="st">&quot; has weight:  &quot;</span>, val, <span class="st">&quot;.</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb2056-8" data-line-number="8">    },</a>
+<a class="sourceLine" id="cb2056-9" data-line-number="9">    <span class="dt">greet =</span> <span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb2056-10" data-line-number="10">      <span class="kw">cat</span>(<span class="st">&quot;Grr!  My name is &quot;</span>, self<span class="op">$</span>name, <span class="st">&quot;!&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb2056-11" data-line-number="11">    }</a>
+<a class="sourceLine" id="cb2056-12" data-line-number="12">  )</a>
+<a class="sourceLine" id="cb2056-13" data-line-number="13">)</a></code></pre></div>
 <p>The key to inheritance is the new argument in the code above:</p>
 <blockquote>
 <p><code>inherit = Person</code></p>
@@ -605,8 +605,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>greet</code> was already a member of Person, but the new specification of <code>greet</code> in the definition of Lion <em>overrides</em> the old one. Any instance of class Lion will greet us according to the code for <code>greet()</code> given in the definition of Lion. (Objects that are instances of the class Person, however, will go on greeting us just as they always have done.)</li>
 </ul>
 <p>Let’s verify all of this by making an instance of class Lion:</p>
-<div class="sourceCode" id="cb2057"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2057-1" data-line-number="1">cowardlyLion &lt;-<span class="st"> </span>Lion<span class="op">$</span><span class="kw">new</span>(<span class="dt">name =</span> <span class="st">&quot;Cowardly Lion&quot;</span>, </a>
-<a class="sourceLine" id="cb2057-2" data-line-number="2">                         <span class="dt">age =</span> <span class="dv">18</span>, <span class="dt">desire =</span> <span class="st">&quot;courage&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2057"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2057-1" data-line-number="1">cowardlyLion &lt;-<span class="st"> </span>Lion<span class="op">$</span><span class="kw">new</span>(</a>
+<a class="sourceLine" id="cb2057-2" data-line-number="2">  <span class="dt">name =</span> <span class="st">&quot;Cowardly Lion&quot;</span>,</a>
+<a class="sourceLine" id="cb2057-3" data-line-number="3">  <span class="dt">age =</span> <span class="dv">18</span>, <span class="dt">desire =</span> <span class="st">&quot;courage&quot;</span></a>
+<a class="sourceLine" id="cb2057-4" data-line-number="4">)</a></code></pre></div>
 <pre><code>## Grr!  My name is Cowardly Lion!</code></pre>
 <p>Since the definition of class Lion did not specify a new method of initialization—we could have asked for this, but chose not to—the instantiation of a lion won’t set its weight. We will have to do that separately:</p>
 <div class="sourceCode" id="cb2059"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2059-1" data-line-number="1">cowardlyLion<span class="op">$</span><span class="kw">set_weight</span>(<span class="dv">350</span>)</a></code></pre></div>
